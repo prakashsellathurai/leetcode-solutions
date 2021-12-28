@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>310. Minimum Height Trees · Leetcode Solutions</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Try it on &lt;a href=&#x27;https://leetcode.com/problems/minimum-height-trees&#x27;&gt;leetcode&lt;/a&gt;"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="310. Minimum Height Trees · Leetcode Solutions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://prakashsellathurai.github.io/leetcode-solutions/"/><meta property="og:description" content="Try it on &lt;a href=&#x27;https://leetcode.com/problems/minimum-height-trees&#x27;&gt;leetcode&lt;/a&gt;"/><meta property="og:image" content="https://prakashsellathurai.github.io/leetcode-solutions/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://prakashsellathurai.github.io/leetcode-solutions/img/docusaurus.png"/><link rel="shortcut icon" href="/leetcode-solutions/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="./css/custom.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/leetcode-solutions/js/scrollSpy.js"></script><link rel="stylesheet" href="/leetcode-solutions/css/main.css"/><script src="/leetcode-solutions/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/leetcode-solutions/"><img class="logo" src="/leetcode-solutions/img/docusaurus.svg" alt="Leetcode Solutions"/><h2 class="headerTitleWithLogo">Leetcode Solutions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/leetcode-solutions/docs/insertion-sort-list" target="_self">Problems</a></li><li class=""><a href="https://github.com/prakashsellathurai/leetcode-solutions" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Problems</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Problems</h3><ul class=""><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/insertion-sort-list">147. Insertion Sort List</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/path-sum">112. Path Sum</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/4sum-ii">454. 4Sum II</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/fibonacci-number">509. Fibonacci Number</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/nth-magical-number">878. Nth Magical Number</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/range-sum-of-bst">938. Range Sum of BST</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/serialize-and-deserialize-binary-tree">297. Serialize and Deserialize Binary Tree</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/k-closest-points-to-origin">973. K Closest Points to Origin</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/reorder-list">143. Reorder List</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/maximum-depth-of-n-ary-tree">559. Maximum Depth of N-ary Tree</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/path-sum-ii">113. Path Sum II</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/number-complement">476. Number Complement</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/decode-string">394. Decode String</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/basic-calculator-ii">227. Basic Calculator II</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/power-of-two">231. Power of Two</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/numbers-at-most-n-given-digit-set">902. Numbers At Most N Given Digit Set</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/leetcode-solutions/docs/minimum-height-trees">310. Minimum Height Trees</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/maximal-square">221. Maximal Square</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/middle-of-the-linked-list">876. Middle of the Linked List</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/reverse-words-in-a-string">151. Reverse Words in a String</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/path-sum-iii">437. Path Sum III</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/minimum-absolute-difference">1200. Minimum Absolute Difference</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/merge-intervals">56. Merge Intervals</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/partition-equal-subset-sum">416. Partition Equal Subset Sum</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/two-sum">1. Two Sum</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/partition-to-k-equal-sum-subsets">698. Partition to K Equal Sum Subsets</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/reverse-linked-list">206. Reverse Linked List</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/perfect-squares">279. Perfect Squares</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/course-schedule-ii">210. Course Schedule II</a></li><li class="navListItem"><a class="navItem" href="/leetcode-solutions/docs/consecutive-characters">1446. Consecutive Characters</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">310. Minimum Height Trees</h1></header><article><div><span><p>Try it on <a href='https://leetcode.com/problems/minimum-height-trees'>leetcode</a></p>
+<h2><a class="anchor" aria-hidden="true" id="description"></a><a href="#description" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Description</h2>
+<div class="description">
+<h2>310. Minimum Height Trees</h2><h3>Medium</h3><hr><div><p>A tree is an undirected graph in which any two vertices are connected by&nbsp;<i>exactly</i>&nbsp;one path. In other words, any connected graph without simple cycles is a tree.</p>
+<p>Given a tree of <code>n</code> nodes&nbsp;labelled from <code>0</code> to <code>n - 1</code>, and an array of&nbsp;<code>n - 1</code>&nbsp;<code>edges</code> where <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> indicates that there is an undirected edge between the two nodes&nbsp;<code>a<sub>i</sub></code> and&nbsp;<code>b<sub>i</sub></code> in the tree,&nbsp;you can choose any node of the tree as the root. When you select a node <code>x</code> as the root, the result tree has height <code>h</code>. Among all possible rooted trees, those with minimum height (i.e. <code>min(h)</code>)&nbsp; are called <strong>minimum height trees</strong> (MHTs).</p>
+<p>Return <em>a list of all <strong>MHTs'</strong> root labels</em>.&nbsp;You can return the answer in <strong>any order</strong>.</p>
+<p>The <strong>height</strong> of a rooted tree is the number of edges on the longest downward path between the root and a leaf.</p>
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/09/01/e1.jpg" style="width: 800px; height: 213px;">
+<pre><strong>Input:</strong> n = 4, edges = [[1,0],[1,2],[1,3]]
+<strong>Output:</strong> [1]
+<strong>Explanation:</strong> As shown, the height of the tree is 1 when the root is the node with label 1 which is the only MHT.
+</pre>
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/09/01/e2.jpg" style="width: 800px; height: 321px;">
+<pre><strong>Input:</strong> n = 6, edges = [[3,0],[3,1],[3,2],[3,4],[5,4]]
+<strong>Output:</strong> [3,4]
+</pre>
+<p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> n = 1, edges = []
+<strong>Output:</strong> [0]
+</pre>
+<p><strong>Example 4:</strong></p>
+<pre><strong>Input:</strong> n = 2, edges = [[0,1]]
+<strong>Output:</strong> [0,1]
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+<ul>
+    <li><code>1 &lt;= n &lt;= 2 * 10<sup>4</sup></code></li>
+    <li><code>edges.length == n - 1</code></li>
+    <li><code>0 &lt;= a<sub>i</sub>, b<sub>i</sub> &lt; n</code></li>
+    <li><code>a<sub>i</sub> != b<sub>i</sub></code></li>
+    <li>All the pairs <code>(a<sub>i</sub>, b<sub>i</sub>)</code> are distinct.</li>
+    <li>The given input is <strong>guaranteed</strong> to be a tree and there will be <strong>no repeated</strong> edges.</li>
+</ul>
+</div>
+</div>
+<h2><a class="anchor" aria-hidden="true" id="solutionpython"></a><a href="#solutionpython" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Solution(Python)</h2>
+<pre><code class="hljs css language-Python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findMinHeightTrees</span><span class="hljs-params">(self, n: int, edges: List[List[int]])</span> -&gt; List[int]:</span>
+        <span class="hljs-comment"># base cases</span>
+        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">2</span>:
+            <span class="hljs-keyword">return</span> [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n)]
+        
+        <span class="hljs-comment"># Build the graph with the adjacency list</span>
+        neighbours = [set() <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n)]
+        <span class="hljs-keyword">for</span> start,end <span class="hljs-keyword">in</span> edges:
+            neighbours[start].add(end)
+            neighbours[end].add(start)
+            
+        <span class="hljs-comment"># Initialize the first layer of leaves</span>
+        leaves = []
+        
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n):
+            <span class="hljs-keyword">if</span> len(neighbours[i]) == <span class="hljs-number">1</span>:
+                leaves.append(i)
+                
+        <span class="hljs-comment"># trim leaves until reaching the centroids</span>
+        remaning_nodes = n
+        <span class="hljs-keyword">while</span> remaning_nodes &gt; <span class="hljs-number">2</span>:
+            remaning_nodes -= len(leaves)
+            newleaves = []
+            
+            <span class="hljs-keyword">while</span> leaves:
+                leaf = leaves.pop()
+                neighbour = neighbours[leaf].pop()
+                neighbours[neighbour].remove(leaf)
+                <span class="hljs-keyword">if</span> len(neighbours[neighbour]) == <span class="hljs-number">1</span>:
+                    newleaves.append(neighbour)
+            leaves = newleaves
+        <span class="hljs-keyword">return</span> leaves
+            
+        
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/leetcode-solutions/docs/numbers-at-most-n-given-digit-set"><span class="arrow-prev">← </span><span>902. Numbers At Most N Given Digit Set</span></a><a class="docs-next button" href="/leetcode-solutions/docs/maximal-square"><span>221. Maximal Square</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#description">Description</a></li><li><a href="#solutionpython">Solution(Python)</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright"> copyright © <a href="https://leetcode.com">leetcode.com</a></section></footer></div></body></html>
