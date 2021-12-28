@@ -28,7 +28,7 @@ const siteConfig = {
   title: 'Leetcode Solutions', // Title for your website.
   tagline: 'My solutions for the  problems in leetcode',
   url: 'https://prakashsellathurai.github.io', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  baseUrl: '/leetcode-solutions/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
