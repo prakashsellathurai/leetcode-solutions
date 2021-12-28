@@ -27,10 +27,14 @@ jobs:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@v2
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
-            submodules: 'true'
-            token: ${{ secrets.LT_SUB }}
+          token: ${{ secrets.LT_SUB }}
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
