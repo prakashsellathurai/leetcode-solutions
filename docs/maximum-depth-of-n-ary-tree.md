@@ -7,7 +7,7 @@ sidebar_label: 559. Maximum Depth of N-ary Tree
 Try it on <a href='https://leetcode.com/problems/maximum-depth-of-n-ary-tree'>leetcode</a>
 ## Description
 <div class="description">
-<h2>559. Maximum Depth of N-ary Tree</h2><h3>Easy</h3><hr><div><p>Given a n-ary tree, find its maximum depth.</p>
+<div><p>Given a n-ary tree, find its maximum depth.</p>
 
 <p>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
 

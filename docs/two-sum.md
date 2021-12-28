@@ -7,7 +7,7 @@ sidebar_label: 1. Two Sum
 Try it on <a href='https://leetcode.com/problems/two-sum'>leetcode</a>
 ## Description
 <div class="description">
-<h2>1. Two Sum</h2><h3>Easy</h3><hr><div><p>Given an array of integers <code>nums</code>&nbsp;and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+<div><p>Given an array of integers <code>nums</code>&nbsp;and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
 
 <p>You may assume that each input would have <strong><em>exactly</em> one solution</strong>, and you may not use the <em>same</em> element twice.</p>
 

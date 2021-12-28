@@ -7,7 +7,7 @@ sidebar_label: 1200. Minimum Absolute Difference
 Try it on <a href='https://leetcode.com/problems/minimum-absolute-difference'>leetcode</a>
 ## Description
 <div class="description">
-<h2>1200. Minimum Absolute Difference</h2><h3>Easy</h3><hr><div><p>Given an&nbsp;array&nbsp;of <strong>distinct</strong>&nbsp;integers <code>arr</code>, find all pairs of elements with the minimum absolute difference of any two elements.&nbsp;</p>
+<div><p>Given an&nbsp;array&nbsp;of <strong>distinct</strong>&nbsp;integers <code>arr</code>, find all pairs of elements with the minimum absolute difference of any two elements.&nbsp;</p>
 
 <p>Return a list of pairs in ascending order(with respect to pairs), each pair <code>[a, b]</code> follows</p>
 

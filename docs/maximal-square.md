@@ -7,7 +7,7 @@ sidebar_label: 221. Maximal Square
 Try it on <a href='https://leetcode.com/problems/maximal-square'>leetcode</a>
 ## Description
 <div class="description">
-<h2>221. Maximal Square</h2><h3>Medium</h3><hr><div><p>Given an <code>m x n</code> binary <code>matrix</code> filled with <code>0</code>'s and <code>1</code>'s, <em>find the largest square containing only</em> <code>1</code>'s <em>and return its area</em>.</p>
+<div><p>Given an <code>m x n</code> binary <code>matrix</code> filled with <code>0</code>'s and <code>1</code>'s, <em>find the largest square containing only</em> <code>1</code>'s <em>and return its area</em>.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>

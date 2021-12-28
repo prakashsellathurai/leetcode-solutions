@@ -29,6 +29,7 @@ for titleSlug in os.listdir(SUBMISSION_FOLDER_PATH):
     tag_list = soup.findAll('h2') # Specify the tag
     title = tag_list[0].string
     leetcodeurl = "https://leetcode.com/problems/"+titleSlug
+    Readmefilecontents = Readmefilecontents.split('<hr>', 1)[-1]
     problems.append({'title':title,'titleSlug':titleSlug,'leetcodeurl':leetcodeurl,'lang':lang,'code':code,'content':Readmefilecontents})
 
 

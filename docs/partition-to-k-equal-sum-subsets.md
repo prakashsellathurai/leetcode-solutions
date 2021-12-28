@@ -7,7 +7,7 @@ sidebar_label: 698. Partition to K Equal Sum Subsets
 Try it on <a href='https://leetcode.com/problems/partition-to-k-equal-sum-subsets'>leetcode</a>
 ## Description
 <div class="description">
-<h2>698. Partition to K Equal Sum Subsets</h2><h3>Medium</h3><hr><div><p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> if it is possible to divide this array into <code>k</code> non-empty subsets whose sums are all equal.</p>
+<div><p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> if it is possible to divide this array into <code>k</code> non-empty subsets whose sums are all equal.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>

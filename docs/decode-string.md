@@ -7,7 +7,7 @@ sidebar_label: 394. Decode String
 Try it on <a href='https://leetcode.com/problems/decode-string'>leetcode</a>
 ## Description
 <div class="description">
-<h2>394. Decode String</h2><h3>Medium</h3><hr><div><p>Given an encoded string, return its decoded string.</p>
+<div><p>Given an encoded string, return its decoded string.</p>
 
 <p>The encoding rule is: <code>k[encoded_string]</code>, where the <code>encoded_string</code> inside the square brackets is being repeated exactly <code>k</code> times. Note that <code>k</code> is guaranteed to be a positive integer.</p>
 

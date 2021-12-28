@@ -2,7 +2,7 @@
   "scripts": {
     "generate-docs": "node ./scripts/generateDocs.js",
     "clear": "node ./scripts/clear.js",
-    "start": "docusaurus-start",
+    "start": "yarn generate-docs && docusaurus-start",
     "build": "yarn generate-docs && docusaurus-build",
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",

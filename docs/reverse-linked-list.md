@@ -7,7 +7,7 @@ sidebar_label: 206. Reverse Linked List
 Try it on <a href='https://leetcode.com/problems/reverse-linked-list'>leetcode</a>
 ## Description
 <div class="description">
-<h2>206. Reverse Linked List</h2><h3>Easy</h3><hr><div><p>Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.</p>
+<div><p>Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>

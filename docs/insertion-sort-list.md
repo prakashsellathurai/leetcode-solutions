@@ -7,7 +7,7 @@ sidebar_label: 147. Insertion Sort List
 Try it on <a href='https://leetcode.com/problems/insertion-sort-list'>leetcode</a>
 ## Description
 <div class="description">
-<h2>147. Insertion Sort List</h2><h3>Medium</h3><hr><div><p>Given the <code>head</code> of a singly linked list, sort the list using <strong>insertion sort</strong>, and return <em>the sorted list's head</em>.</p>
+<div><p>Given the <code>head</code> of a singly linked list, sort the list using <strong>insertion sort</strong>, and return <em>the sorted list's head</em>.</p>
 
 <p>The steps of the <strong>insertion sort</strong> algorithm:</p>
 

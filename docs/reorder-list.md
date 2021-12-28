@@ -7,7 +7,7 @@ sidebar_label: 143. Reorder List
 Try it on <a href='https://leetcode.com/problems/reorder-list'>leetcode</a>
 ## Description
 <div class="description">
-<h2>143. Reorder List</h2><h3>Medium</h3><hr><div><p>You are given the head of a singly linked-list. The list can be represented as:</p>
+<div><p>You are given the head of a singly linked-list. The list can be represented as:</p>
 
 <pre>L<sub>0</sub> → L<sub>1</sub> → … → L<sub>n - 1</sub> → L<sub>n</sub>
 </pre>

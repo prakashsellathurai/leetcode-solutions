@@ -7,7 +7,7 @@ sidebar_label: 509. Fibonacci Number
 Try it on <a href='https://leetcode.com/problems/fibonacci-number'>leetcode</a>
 ## Description
 <div class="description">
-<h2>509. Fibonacci Number</h2><h3>Easy</h3><hr><div><p>The <b>Fibonacci numbers</b>, commonly denoted <code>F(n)</code> form a sequence, called the <b>Fibonacci sequence</b>, such that each number is the sum of the two preceding ones, starting from <code>0</code> and <code>1</code>. That is,</p>
+<div><p>The <b>Fibonacci numbers</b>, commonly denoted <code>F(n)</code> form a sequence, called the <b>Fibonacci sequence</b>, such that each number is the sum of the two preceding ones, starting from <code>0</code> and <code>1</code>. That is,</p>
 
 <pre>F(0) = 0, F(1) = 1
 F(n) = F(n - 1) + F(n - 2), for n &gt; 1.

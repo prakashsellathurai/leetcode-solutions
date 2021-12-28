@@ -7,7 +7,7 @@ sidebar_label: 227. Basic Calculator II
 Try it on <a href='https://leetcode.com/problems/basic-calculator-ii'>leetcode</a>
 ## Description
 <div class="description">
-<h2>227. Basic Calculator II</h2><h3>Medium</h3><hr><div><p>Given a string <code>s</code> which represents an expression, <em>evaluate this expression and return its value</em>.&nbsp;</p>
+<div><p>Given a string <code>s</code> which represents an expression, <em>evaluate this expression and return its value</em>.&nbsp;</p>
 
 <p>The integer division should truncate toward zero.</p>
 

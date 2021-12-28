@@ -7,7 +7,7 @@ sidebar_label: 878. Nth Magical Number
 Try it on <a href='https://leetcode.com/problems/nth-magical-number'>leetcode</a>
 ## Description
 <div class="description">
-<h2>878. Nth Magical Number</h2><h3>Hard</h3><hr><div><p>A positive integer is <em>magical</em> if it is divisible by either <code>a</code> or <code>b</code>.</p>
+<div><p>A positive integer is <em>magical</em> if it is divisible by either <code>a</code> or <code>b</code>.</p>
 
 <p>Given the three integers <code>n</code>, <code>a</code>, and <code>b</code>, return the <code>n<sup>th</sup></code> magical number. Since the answer may be very large, <strong>return it modulo </strong><code>10<sup>9</sup> + 7</code>.</p>
 

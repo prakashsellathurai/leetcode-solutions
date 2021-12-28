@@ -7,7 +7,7 @@ sidebar_label: 938. Range Sum of BST
 Try it on <a href='https://leetcode.com/problems/range-sum-of-bst'>leetcode</a>
 ## Description
 <div class="description">
-<h2>938. Range Sum of BST</h2><h3>Easy</h3><hr><div><p>Given the <code>root</code> node of a binary search tree and two integers <code>low</code> and <code>high</code>, return <em>the sum of values of all nodes with a value in the <strong>inclusive</strong> range </em><code>[low, high]</code>.</p>
+<div><p>Given the <code>root</code> node of a binary search tree and two integers <code>low</code> and <code>high</code>, return <em>the sum of values of all nodes with a value in the <strong>inclusive</strong> range </em><code>[low, high]</code>.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
