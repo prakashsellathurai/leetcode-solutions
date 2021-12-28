@@ -17,7 +17,7 @@ class Footer extends React.Component {
   render() {
     return (
       <footer className="nav-footer" id="footer">
-        <section className="copyright"> copyright © <a href='https://leetcode.com'>leetcode.com</a></section>
+        <section className="copyright"> </section>
       </footer>
     );
   }
