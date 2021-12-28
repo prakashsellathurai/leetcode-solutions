@@ -1,4 +1,4 @@
-SUBMISSION_FOLDER = "./leetcode-submissions"
+SUBMISSION_FOLDER = "../leetcode-submissions"
 
 import os
 from bs4 import BeautifulSoup
@@ -32,7 +32,7 @@ for titleSlug in os.listdir(SUBMISSION_FOLDER_PATH):
     problems.append({'title':title,'titleSlug':titleSlug,'leetcodeurl':leetcodeurl,'lang':lang,'code':code,'content':Readmefilecontents})
 
 
-file='./website/problems.json' 
+file='problems.json' 
 import json
 with open(file, 'w') as filetowrite:
     filetowrite.write(json.dumps( problems))
