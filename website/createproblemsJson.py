@@ -3,7 +3,7 @@ SUBMISSION_FOLDER = "../leetcode-submissions"
 import os
 from bs4 import BeautifulSoup
 SUBMISSION_FOLDER_PATH =  os.path.join(os.getcwd(),SUBMISSION_FOLDER)
-IGNORED_PATHS = ['.git']
+IGNORED_PATHS = ['.git','.github']
 
 problems = []
 
@@ -19,6 +19,7 @@ for titleSlug in os.listdir(SUBMISSION_FOLDER_PATH):
         continue
     
     lang,codefilename = getLang(SUBMISSION_FOLDER_PATH,titleSlug)
+
     with open(codefilename) as f:
         code = f.read()
     Readmefilename =  os.path.join(SUBMISSION_FOLDER_PATH,titleSlug,'README.md')
