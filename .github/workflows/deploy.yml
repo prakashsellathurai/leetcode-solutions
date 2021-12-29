@@ -4,19 +4,10 @@ name: Page Build
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the $default-branch branch
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/deploy.yml'
-      - 'website/**'
-      
-  repository_dispatch:
-    types: [new-leetcode-submissions]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Update Submodule"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -33,6 +24,7 @@ jobs:
         with:
           token: ${{ secrets.LT_SUB }}
           submodules: recursive
+          
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
