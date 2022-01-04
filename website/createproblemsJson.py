@@ -31,8 +31,10 @@ for titleSlug in os.listdir(SUBMISSION_FOLDER_PATH):
     title = tag_list[0].string
     leetcodeurl = "https://leetcode.com/problems/"+titleSlug
     Readmefilecontents = Readmefilecontents.split('<hr>', 1)[-1]
-    problems.append({'title':title,'titleSlug':titleSlug,'leetcodeurl':leetcodeurl,'lang':lang,'code':code,'content':Readmefilecontents})
+    id =  int(str(tag_list[0].string ).split('.')[0])
+    problems.append({'title':title,'titleSlug':titleSlug,'leetcodeurl':leetcodeurl,'lang':lang,'code':code,'content':Readmefilecontents,'id':id})
 
+problems.sort(key=lambda x:x['id'])
 
 file='problems.json' 
 import json
