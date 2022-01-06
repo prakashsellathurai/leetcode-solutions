@@ -25,38 +25,40 @@ jobs:
           token: ${{ secrets.LT_SUB }}
           submodules: recursive
           
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: create problems.json
+      - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-      - run: |
-          pip install BeautifulSoup4
-          python createproblemsJson.py 
+          python-version: '3.8'
 
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Upgrade pip
+        run: |
+          # install pip=>20.1 to use "pip cache dir"
+          python3 -m pip install --upgrade pip
+
+      - name: Get pip cache dir
+        id: pip-cache
+        run: echo "::set-output name=dir::$(pip cache dir)"
 
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-website-
+            ${{ runner.os }}-pip-
 
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
+      - name: Install dependencies
+        run: python3 -m pip install -r ./requirements.txt
+
+      - name: Update .md files
+        run: python ./scripts/createdocs.py
+
+      - name: Generate Docs
+        run: sphinx-build -b html ./source/ ./docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/build
+          publish_dir: ./docs
