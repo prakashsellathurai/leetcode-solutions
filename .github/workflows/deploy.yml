@@ -34,7 +34,7 @@ jobs:
         run: python ./scripts/createdocs.py
 
       - name: Generate Docs
-        run: sphinx-build -b html ./source/ ./docs
+        run: sphinx-build -b dirhtml ./source/ ./docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
