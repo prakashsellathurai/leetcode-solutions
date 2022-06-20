@@ -1,0 +1,112 @@
+# 410-split-array-largest-sum
+
+
+Try it on <a href='https://leetcode.com/problems/410-split-array-largest-sum'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an array <code>nums</code> which consists of non-negative integers and an integer <code>m</code>, you can split the array into <code>m</code> non-empty continuous subarrays.</p>
+
+<p>Write an algorithm to minimize the largest sum among these <code>m</code> subarrays.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> nums = [7,2,5,10,8], m = 2
+<strong>Output:</strong> 18
+<strong>Explanation:</strong>
+There are four ways to split nums into two subarrays.
+The best way is to split it into [7,2,5] and [10,8],
+where the largest sum among the two subarrays is only 18.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> nums = [1,2,3,4,5], m = 2
+<strong>Output:</strong> 9
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> nums = [1,4,4], m = 3
+<strong>Output:</strong> 4
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
+	<li><code>0 &lt;= nums[i] &lt;= 10<sup>6</sup></code></li>
+	<li><code>1 &lt;= m &lt;= min(50, nums.length)</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def splitArray(self, nums: List[int], m: int) -> int:
+        return self.binarySearch(nums, m)
+
+    # Time Complexity: O(n^2*m)
+    # Space Complexity: O(n*m)
+    def topDownDp(self, nums: List[int], m: int) -> int:
+        n = len(nums)
+
+        prefix_sum = [0] + list(itertools.accumulate(nums))
+
+        @functools.lru_cache(None)
+        def get_min_largest_split_sum(cur_index, sub_arr_cnt):
+            if sub_arr_cnt == 1:
+                return prefix_sum[n] - prefix_sum[cur_index]
+            min_largst_sum = prefix_sum[n]
+
+            for i in range(cur_index, n - sub_arr_cnt + 1):
+                first_split_sum = prefix_sum[i + 1] - prefix_sum[cur_index]
+
+                largest_split_sum = max(
+                    first_split_sum, get_min_largest_split_sum(
+                        i + 1, sub_arr_cnt - 1)
+                )
+
+                min_largst_sum = min(largest_split_sum, min_largst_sum)
+
+                if first_split_sum >= min_largst_sum:
+                    break
+
+            return min_largst_sum
+
+        return get_min_largest_split_sum(0, m)
+
+    # Time Complexity: O(nlog(S))
+    # Space Complexity: O(1)
+    def binarySearch(self, nums: List[int], m: int) -> int:
+        def min_subarrays_required(max_sum_allowed):
+            cur_sum = 0
+            split_req = 0
+
+            for ele in nums:
+                if cur_sum + ele <= max_sum_allowed:
+                    cur_sum += ele
+                else:
+                    cur_sum = ele
+                    split_req += 1
+
+            return split_req + 1
+
+        left = max(nums)
+        right = sum(nums)
+
+        while left <= right:
+            max_sum_allowed = (left + right) >> 1
+
+            if min_subarrays_required(max_sum_allowed) <= m:
+                right = max_sum_allowed - 1
+                minimum_largest_split_sum = max_sum_allowed
+            else:
+                left = max_sum_allowed + 1
+
+        return minimum_largest_split_sum
+
+```

@@ -1,0 +1,154 @@
+# 23-merge-k-sorted-lists
+
+
+Try it on <a href='https://leetcode.com/problems/23-merge-k-sorted-lists'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given an array of <code>k</code> linked-lists <code>lists</code>, each linked-list is sorted in ascending order.</p>
+
+<p><em>Merge all the linked-lists into one sorted linked-list and return it.</em></p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> lists = [[1,4,5],[1,3,4],[2,6]]
+<strong>Output:</strong> [1,1,2,3,4,4,5,6]
+<strong>Explanation:</strong> The linked-lists are:
+[
+  1-&gt;4-&gt;5,
+  1-&gt;3-&gt;4,
+  2-&gt;6
+]
+merging them into one sorted list:
+1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> lists = []
+<strong>Output:</strong> []
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> lists = [[]]
+<strong>Output:</strong> []
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>k == lists.length</code></li>
+	<li><code>0 &lt;= k &lt;= 10^4</code></li>
+	<li><code>0 &lt;= lists[i].length &lt;= 500</code></li>
+	<li><code>-10^4 &lt;= lists[i][j] &lt;= 10^4</code></li>
+	<li><code>lists[i]</code> is sorted in <strong>ascending order</strong>.</li>
+	<li>The sum of <code>lists[i].length</code> won't exceed <code>10^4</code>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+from queue import PriorityQueue
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        return self.spaceoptmized(lists)
+
+    """
+    traverse all nodes and store them in array
+    sort the array 
+    create the sorted linkedlist
+    Time Complexity: O(n log n)
+    Space Complexity: O(n)
+    """
+
+    def bruteforce(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        sortedvals = []
+        for list in lists:
+            while list:
+                sortedvals.append(list.val)
+                list = list.next
+
+        DummyNode = cur = ListNode(-1)
+        sortedvals.sort()
+        for val in sortedvals:
+            cur.next = ListNode(val)
+            cur = cur.next
+        return DummyNode.next
+
+    """
+    we can optmize bruteforce approach if we put our kth node with prioirty of its value in a priority queue and we can access the smallest value in O(1)
+    
+    Time Complexity: O(nlogk)
+    Space Complexity: O(n)
+    """
+
+    def timeoptmized(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        ListNode.__lt__ = lambda self, other: self.val < other.val
+        Res = cur = ListNode(-1)
+        q = PriorityQueue()
+        for lst in lists:
+            if lst:
+                q.put((lst.val, lst))
+
+        while not q.empty():
+            val, node = q.get()
+            cur.next = ListNode(val)
+            cur = cur.next
+            node = node.next
+            if node:
+                q.put((node.val, node))
+
+        return Res.next
+
+    """
+    merging  a two sorted list can be done with constant space
+    
+    what if we keep on merging the adjacent pairs until it becomes a single sorted lists
+    at each step the count of lists reduced into half atnost atmost log2k of such iterations need for each interation we got n values to traverse 
+    
+    Time Complexity: O(nlogk)
+    Space Complexity: O(1)
+    
+     """
+
+    def spaceoptmized(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        k = len(lists)
+        interval = 1
+
+        while interval < k:
+            for i in range(0, k - interval, 2 * interval):
+                lists[i] = self.mergeTwoLists(lists[i], lists[i + interval])
+            interval *= 2
+
+        return lists[0] if k > 0 else None
+
+    def mergeTwoLists(self, lst1, lst2):
+        sortedlst = cur = ListNode(-1)
+
+        while lst1 and lst2:
+            if lst1.val <= lst2.val:
+                cur.next = lst1
+                lst1 = lst1.next
+            else:
+                cur.next = lst2
+                lst2 = lst2.next
+            cur = cur.next
+        if not lst1:
+            cur.next = lst2
+        else:
+            cur.next = lst1
+        return sortedlst.next
+
+```

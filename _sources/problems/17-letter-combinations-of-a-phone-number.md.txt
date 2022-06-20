@@ -1,0 +1,114 @@
+# 17-letter-combinations-of-a-phone-number
+
+
+Try it on <a href='https://leetcode.com/problems/17-letter-combinations-of-a-phone-number'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent. Return the answer in <strong>any order</strong>.</p>
+
+<p>A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Telephone-keypad2.svg/200px-Telephone-keypad2.svg.png" style="width: 200px; height: 162px;"></p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> digits = "23"
+<strong>Output:</strong> ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> digits = ""
+<strong>Output:</strong> []
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> digits = "2"
+<strong>Output:</strong> ["a","b","c"]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= digits.length &lt;= 4</code></li>
+	<li><code>digits[i]</code> is a digit in the range <code>['2', '9']</code>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.hashTable = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz",
+        }
+        self.hashList = [
+            "0",
+            "1",
+            "abc",
+            "def",
+            "ghi",
+            "jkl",
+            "mno",
+            "pqrs",
+            "tuv",
+            "wxyz",
+        ]
+
+    def letterCombinations(self, digits: str) -> List[str]:
+        return self.dfs(digits)
+
+    # Time Complexity: O(4^n)
+    # Space Complexity: O(4^n)
+    def bfs(self, digits: str) -> List[str]:
+        n = len(digits)
+        if n == 0:
+            return []
+        res = []
+        queue = deque([""])
+
+        while queue:
+            s = queue.popleft()
+
+            if len(s) == n:
+                res.append(s)
+            else:
+                for letter in self.hashList[int(digits[len(s)])]:
+                    queue.append(s + letter)
+
+        return res
+
+    # Time Complexity: O(4^n*n)
+    # Space Complexity: O(n)
+    def dfs(self, digits: str) -> List[str]:
+        n = len(digits)
+        if n == 0:
+            return []
+        res = []
+
+        def backtrack(candidate, i):
+            if len(candidate) == n:
+                res.append(candidate)
+                return
+            for j in range(i, n):
+                for code in self.hashTable[digits[j]]:
+                    candidate += code
+                    backtrack(candidate, j + 1)
+                    candidate = candidate[:-1]
+
+        backtrack("", 0)
+        return res
+
+```

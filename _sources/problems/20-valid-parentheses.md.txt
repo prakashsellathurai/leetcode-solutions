@@ -1,0 +1,106 @@
+# 20-valid-parentheses
+
+
+Try it on <a href='https://leetcode.com/problems/20-valid-parentheses'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given a string <code>s</code> containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
+
+<p>An input string is valid if:</p>
+
+<ol>
+	<li>Open brackets must be closed by the same type of brackets.</li>
+	<li>Open brackets must be closed in the correct order.</li>
+</ol>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> s = "()"
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> s = "()[]{}"
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> s = "(]"
+<strong>Output:</strong> false
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>s</code> consists of parentheses only <code>'()[]{}'</code>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.hashmap = {"}": "{", ")": "(", "]": "["}
+
+    def isValid(self, s: str) -> bool:
+        return self.constantspace(s)
+
+    # Time Complexity: O(n)
+    # Space Comeplxity: O(n)
+    def stacksolution(self, s: str) -> bool:
+        stack = []
+
+        for c in s:
+            if c in self.hashmap.values():
+                stack.append(c)
+            elif c in self.hashmap.keys():
+                if stack and self.hashmap[c] == stack[-1]:
+                    stack.pop()
+                else:
+                    return False
+            else:
+                return False
+
+        return len(stack) == 0
+
+    # Time Complexity: O(n^2)
+    # Space Comeplxity: O(1)
+    def constantspace(self, s: str) -> bool:
+        def findmatching(s, expected_open_bracket):
+            nonlocal i, j, count
+            if j > -1 and s[j] == expected_open_bracket:
+                s[i] = "#"
+                s[j] = "#"
+                while j >= 0 and s[j] == "#":
+                    j -= 1
+                return True
+            else:
+                return False
+
+        count = 0  # count of open braces
+        i = 0  # cur index
+        j = -1  # open bracket index
+        s = list(s)
+        if len(s) == 0:
+            return True
+        else:
+            while i < len(s):
+                if s[i] in self.hashmap.keys():
+                    ismatched = findmatching(s, self.hashmap[s[i]])
+                    if not ismatched:
+                        return False
+                    count -= 1
+                else:
+                    j = i
+                    count += 1
+                i += 1
+            return count == 0
+
+```

@@ -1,0 +1,135 @@
+# 32-longest-valid-parentheses
+
+
+Try it on <a href='https://leetcode.com/problems/32-longest-valid-parentheses'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given a string containing just the characters <code>'('</code> and <code>')'</code>, find the length of the longest valid (well-formed) parentheses substring.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> s = "(()"
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> The longest valid parentheses substring is "()".
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> s = ")()())"
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> The longest valid parentheses substring is "()()".
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> s = ""
+<strong>Output:</strong> 0
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= s.length &lt;= 3 * 10<sup>4</sup></code></li>
+	<li><code>s[i]</code> is <code>'('</code>, or <code>')'</code>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        return self.optimal(s)
+
+    # Time Complexity: O(n^3)
+    # Space Complexity: O(n)
+    def bruteforce(self, s: str) -> int:
+        n = len(s)
+        maxlen = 0
+        for i in range(n):
+            for j in range(i + 2, n + 1, 2):
+                if self.isvalid(s[i:j]):
+                    if j - i > maxlen:
+                        maxlen = j - i
+        return maxlen
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def dynamicprogramming(self, s: str) -> int:
+        maxlen = 0
+        n = len(s)
+        dp = [0] * n
+        for i in range(1, n):
+            if s[i] == ")":
+                if s[i - 1] == "(":
+                    dp[i] = (dp[i - 2] if i >= 2 else 0) + 2
+                elif i - dp[i - 1] and s[i - dp[i - 1] - 1] == "(":
+                    dp[i] = (
+                        dp[i - 1] + (dp[i - dp[i - 1] - 2]
+                                     if dp[i - 1] >= 2 else 0) + 2
+                    )
+                if dp[i] > maxlen:
+                    maxlen = dp[i]
+        return maxlen
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def stack(self, s: str) -> int:
+        stack = [-1]
+        maxlen = 0
+        for i, c in enumerate(s):
+            if c == "(":
+                stack.append(i)
+            else:
+                stack.pop()
+                if not stack:
+                    stack.append(i)
+                else:
+                    maxlen = max(maxlen, i - stack[-1])
+        return maxlen
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def optimal(self, s: str) -> int:
+        left = 0
+        right = 0
+        maxlen = 0
+        for c in s:
+            if c == "(":
+                left += 1
+            else:
+                right += 1
+
+            if left == right:
+                maxlen = max(maxlen, left + right)
+            elif right >= left:
+                left = right = 0
+        left = right = 0
+        for c in s[::-1]:
+            if c == "(":
+                left += 1
+            else:
+                right += 1
+
+            if left == right:
+                maxlen = max(maxlen, left + right)
+            elif left >= right:
+                left = right = 0
+
+        return maxlen
+
+    def isvalid(self, s):
+        stack = []
+        for c in s:
+            if c == "(":
+                stack.append("(")
+            elif len(stack) > 0 and stack[-1] == "(":
+                stack.pop()
+            else:
+                return False
+        return len(stack) > 0
+
+```

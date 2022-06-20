@@ -1,0 +1,135 @@
+# 211-design-add-and-search-words-data-structure
+
+
+Try it on <a href='https://leetcode.com/problems/211-design-add-and-search-words-data-structure'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Design a data structure that supports adding new words and finding if a string matches any previously added string.</p>
+
+<p>Implement the <code>WordDictionary</code> class:</p>
+
+<ul>
+	<li><code>WordDictionary()</code>&nbsp;Initializes the object.</li>
+	<li><code>void addWord(word)</code> Adds <code>word</code> to the data structure, it can be matched later.</li>
+	<li><code>bool search(word)</code>&nbsp;Returns <code>true</code> if there is any string in the data structure that matches <code>word</code>&nbsp;or <code>false</code> otherwise. <code>word</code> may contain dots <code>'.'</code> where dots can be matched with any letter.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Example:</strong></p>
+
+<pre><strong>Input</strong>
+["WordDictionary","addWord","addWord","addWord","search","search","search","search"]
+[[],["bad"],["dad"],["mad"],["pad"],["bad"],[".ad"],["b.."]]
+<strong>Output</strong>
+[null,null,null,null,false,true,true,true]
+
+<strong>Explanation</strong>
+WordDictionary wordDictionary = new WordDictionary();
+wordDictionary.addWord("bad");
+wordDictionary.addWord("dad");
+wordDictionary.addWord("mad");
+wordDictionary.search("pad"); // return False
+wordDictionary.search("bad"); // return True
+wordDictionary.search(".ad"); // return True
+wordDictionary.search("b.."); // return True
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= word.length &lt;= 500</code></li>
+	<li><code>word</code> in <code>addWord</code> consists lower-case English letters.</li>
+	<li><code>word</code> in <code>search</code> consist of&nbsp; <code>'.'</code> or lower-case English letters.</li>
+	<li>At most <code>50000</code>&nbsp;calls will be made to <code>addWord</code>&nbsp;and <code>search</code>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+"""
+Trie Data structure has 
+    key - denotes current char
+    children = set of next values (for contant time lookup)
+    isEnd = boolean to mark end of the word
+"""
+
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
+
+
+class WordDictionary:
+    """
+    intialize empty trie and store in memory
+    """
+
+    def __init__(self):
+        self.trie = TrieNode()
+
+    """
+    algorithm
+        initialize curr trie node
+        iterate char in word
+            check if children has char 
+                if true:
+                    set curr node as that node
+                else:
+                    create a trienode with char
+                    set curr node as new node
+        set curr node isEnd as true
+                    
+    """
+
+    def addWord(self, word: str) -> None:
+        curr = self.trie
+
+        for ch in word:
+            if ch not in curr.children:
+                curr.children[ch] = TrieNode()
+            curr = curr.children[ch]
+        curr.isEnd = True
+
+    """
+    algorithm
+        initialize curr trie node
+        fun dfs(index)
+            iterate char in word
+                if index reaches n:
+                return True
+                if char is .
+                    for all children
+                    if dfs(children): return True
+                elif char in children:
+                    dfs(children of char)
+            return  false
+                
+        return curr.isEnd
+            
+    """
+
+    def search(self, word: str) -> bool:
+        return self.dfs(self.trie, word, 0, len(word))
+
+    def dfs(self, root, word, i, n):
+        if i == n:
+            return root.isEnd
+        if word[i] == ".":
+            for child in root.children:
+                if self.dfs(root.children[child], word, i + 1, n):
+                    return True
+        elif word[i] in root.children:
+            return self.dfs(root.children[word[i]], word, i + 1, n)
+        return False
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
+
+```

@@ -1,0 +1,118 @@
+# 99-recover-binary-search-tree
+
+
+Try it on <a href='https://leetcode.com/problems/99-recover-binary-search-tree'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given the <code>root</code> of a binary search tree (BST), where the values of <strong>exactly</strong> two nodes of the tree were swapped by mistake. <em>Recover the tree without changing its structure</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/28/recover1.jpg" style="width: 422px; height: 302px;">
+<pre><strong>Input:</strong> root = [1,3,null,null,2]
+<strong>Output:</strong> [3,1,null,null,2]
+<strong>Explanation:</strong> 3 cannot be a left child of 1 because 3 &gt; 1. Swapping 1 and 3 makes the BST valid.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/28/recover2.jpg" style="width: 581px; height: 302px;">
+<pre><strong>Input:</strong> root = [3,1,4,null,null,2]
+<strong>Output:</strong> [2,1,4,null,null,3]
+<strong>Explanation:</strong> 2 cannot be in the right subtree of 3 because 2 &lt; 3. Swapping 2 and 3 makes the BST valid.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[2, 1000]</code>.</li>
+	<li><code>-2<sup>31</sup> &lt;= Node.val &lt;= 2<sup>31</sup> - 1</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<strong>Follow up:</strong> A solution using <code>O(n)</code> space is pretty straight-forward. Could you devise a constant <code>O(1)</code> space solution?</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        self.better(root)
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def naive(self, root):
+        def traversal(node):
+            return (
+                traversal(node.left) + [node.val] + traversal(node.right)
+                if node
+                else []
+            )
+
+        inorder = traversal(root)
+
+        n = len(inorder)
+
+        for i in range(n):
+            key = inorder[i]
+            j = i - 1
+            while j >= 0 and inorder[j] >= key:
+                inorder[j + 1] = inorder[j]
+                j -= 1
+            inorder[j + 1] = key
+
+        def update(node):
+            nonlocal i
+            if node:
+                update(node.left)
+                node.val = inorder[i]
+                i += 1
+                update(node.right)
+
+        i = 0
+        update(root)
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def better(self, root):
+        cur, prev, First, Second = root, TreeNode(-float("inf")), None, None
+        i = 0
+
+        while cur:
+
+            if cur.left:
+                pre = cur.left
+                while pre.right and pre.right != cur:
+                    pre = pre.right
+
+                if pre.right is None:
+                    pre.right = cur
+                    cur = cur.left
+                else:
+                    if cur.val < prev.val:
+                        if First is None:
+                            First = prev
+                        Second = cur
+                    pre.right = None
+                    prev = cur
+                    cur = cur.right
+            else:
+                if cur.val < prev.val:
+                    if First is None:
+                        First = prev
+                    Second = cur
+                prev = cur
+                cur = cur.right
+        First.val, Second.val = Second.val, First.val
+
+```

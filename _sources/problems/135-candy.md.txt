@@ -1,0 +1,135 @@
+# 135-candy
+
+
+Try it on <a href='https://leetcode.com/problems/135-candy'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>There are <code>n</code> children standing in a line. Each child is assigned a rating value given in the integer array <code>ratings</code>.</p>
+
+<p>You are giving candies to these children subjected to the following requirements:</p>
+
+<ul>
+	<li>Each child must have at least one candy.</li>
+	<li>Children with a higher rating get more candies than their neighbors.</li>
+</ul>
+
+<p>Return <em>the minimum number of candies you need to have to distribute the candies to the children</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> ratings = [1,0,2]
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> You can allocate to the first, second and third child with 2, 1, 2 candies respectively.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> ratings = [1,2,2]
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
+The third child gets 1 candy because it satisfies the above two conditions.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>n == ratings.length</code></li>
+	<li><code>1 &lt;= n &lt;= 2 * 10<sup>4</sup></code></li>
+	<li><code>0 &lt;= ratings[i] &lt;= 2 * 10<sup>4</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        return self.SinglePassConstantSpace(ratings)
+
+    # Time Complexity: O(n^2)
+    # Space Complexity: O(n)
+    def bruteforce(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [1] * n
+        hasChanged = True
+
+        while hasChanged:
+            hasChanged = False
+
+            for i in range(n):
+                if (
+                    i != n - 1
+                    and ratings[i] > ratings[i + 1]
+                    and candies[i] <= candies[i + 1]
+                ):
+                    candies[i] = candies[i + 1] + 1
+                    hasChanged = True
+                if (
+                    i >= 0
+                    and ratings[i] > ratings[i - 1]
+                    and candies[i] <= candies[i - 1]
+                ):
+                    candies[i] = candies[i - 1] + 1
+                    hashChanged = True
+        return sum(candies)
+
+    # Time Complexity:O(n)
+    # Space Complexity: O(n)
+    def presum(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [1] * n
+
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1]:
+                candies[i] = candies[i - 1] + 1
+
+        for i in range(n - 2, -1, -1):
+            if ratings[i] > ratings[i + 1]:
+                candies[i] = max(candies[i + 1] + 1, candies[i])
+
+        return sum(candies)
+
+    # Time Complexity:O(n)
+    # Space Complexity: O(1)
+    def SinglePassConstantSpace(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        if n <= 1:
+            return n
+
+        def summateN(n):
+            return (n * (n + 1)) // 2
+
+        candies = 0
+        up = 0
+        down = 0
+        oldSlope = 0
+
+        for i in range(1, n):
+            newSlope = (
+                1
+                if ratings[i] > ratings[i - 1]
+                else -1
+                if ratings[i] < ratings[i - 1]
+                else 0
+            )
+
+            if oldSlope > 0 and newSlope == 0 or (oldSlope < 0 and newSlope >= 0):
+                candies += summateN(up) + summateN(down) + max(up, down)
+                up = 0
+                down = 0
+
+            if newSlope > 0:
+                up += 1
+            elif newSlope < 0:
+                down += 1
+            else:
+                candies += 1
+            oldSlope = newSlope
+
+        candies += summateN(up) + summateN(down) + max(up, down) + 1
+        return candies
+
+```

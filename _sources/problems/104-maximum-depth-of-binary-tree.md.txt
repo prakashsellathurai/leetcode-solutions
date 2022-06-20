@@ -1,0 +1,62 @@
+# 104-maximum-depth-of-binary-tree
+
+
+Try it on <a href='https://leetcode.com/problems/104-maximum-depth-of-binary-tree'>leetcode</a>
+
+## Description
+<div class="description">
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        return self.morrisinorder(root)
+    
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def dfs(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+        return max(left,right)+1
+    
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def morrisinorder(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        depth = 1
+        maxdepth = depth
+        while root:
+            if not root.left:
+                maxdepth = max(maxdepth, depth)
+                root = root.right
+            else:
+                pre = root.left
+                preDepth = 1
+
+                while pre.right and pre.right is not root:
+                    preDepth += 1
+                    pre = pre.right
+
+                if pre.right is root:
+                    pre.right = None
+                    depth -= preDepth+1
+                    maxdepth = max(maxdepth, depth)
+                    root = root.right
+                else:
+                    pre.right = root
+                    root = root.left
+            depth += 1
+        return maxdepth 
+
+```

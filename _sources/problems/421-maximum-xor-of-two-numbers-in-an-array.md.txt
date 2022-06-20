@@ -1,0 +1,137 @@
+# 421-maximum-xor-of-two-numbers-in-an-array
+
+
+Try it on <a href='https://leetcode.com/problems/421-maximum-xor-of-two-numbers-in-an-array'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an integer array <code>nums</code>, return <em>the maximum result of </em><code>nums[i] XOR nums[j]</code>, where <code>0 &lt;= i &lt;= j &lt; n</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> nums = [3,10,5,25,2,8]
+<strong>Output:</strong> 28
+<strong>Explanation:</strong> The maximum result is 5 XOR 25 = 28.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> nums = [14,70,53,83,49,91,36,80,92,51,66,70]
+<strong>Output:</strong> 127
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 2 * 10<sup>5</sup></code></li>
+	<li><code>0 &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class TrieNode:
+    def __init__(self):
+        self.left = None
+        self.right = None
+
+    def insert(self, x):
+        curr = self
+
+        for i in range(30, -1, -1):
+            val = (x >> i) & 1
+            if val == 0:
+                if curr.left is None:
+                    curr.left = TrieNode()
+                curr = curr.left
+            else:
+                if curr.right is None:
+                    curr.right = TrieNode()
+                curr = curr.right
+
+
+class Solution:
+    def findMaximumXOR(self, nums: List[int]) -> int:
+        return self.trie(nums)
+
+    """
+    Time Comnplexity: O(n^2)
+    Space Complexity: O(1)
+    """
+
+    def bruteforce(self, nums: List[int]) -> int:
+        n = len(nums)
+        res = float("-INF")
+
+        for i in range(n):
+            for j in range(i, n):
+                if nums[i] ^ nums[j] > res:
+                    res = nums[i] ^ nums[j]
+        return res
+
+    """
+    Time Comnplexity: O(n *log U)
+    Space Complexity: O(log U)
+    """
+
+    def bitmanipul(self, nums: List[int]) -> int:
+        n = len(nums)
+        res = 0
+        mask = 0
+
+        s = set()
+        for i in range(30, -1, -1):
+            mask |= 1 << i
+            tempMax = res | (1 << i)
+
+            for num in nums:
+                s.add(num & mask)
+
+            for prefix in s:
+                if tempMax ^ prefix in s:
+                    res = tempMax
+                    break
+
+            s.clear()
+        return res
+
+        return res
+
+    """
+    Time Comnplexity: O(n)
+    Space Complexity: O(n)
+    """
+
+    def trie(self, nums: List[int]) -> int:
+        root = TrieNode()
+        n = len(nums)
+        for i in range(n):
+            root.insert(nums[i])
+        max_xor = 0
+        for num in nums:
+            curr_xor = 0
+            M = pow(2, 30)
+            curr = root
+            for j in range(30, -1, -1):
+                val = (num >> j) & 1
+                if val == 0:
+                    if curr.right is not None:
+                        curr_xor += M
+                        curr = curr.right
+                    else:
+                        curr = curr.left
+                else:
+                    if curr.left is not None:
+                        curr_xor += M
+                        curr = curr.left
+                    else:
+                        curr = curr.right
+                M /= 2
+            if curr_xor > max_xor:
+                max_xor = curr_xor
+        return int(max_xor)
+
+```

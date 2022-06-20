@@ -1,0 +1,153 @@
+# 1202-smallest-string-with-swaps
+
+
+Try it on <a href='https://leetcode.com/problems/1202-smallest-string-with-swaps'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given a string <code>s</code>, and an array of pairs of indices in the string&nbsp;<code>pairs</code>&nbsp;where&nbsp;<code>pairs[i] =&nbsp;[a, b]</code>&nbsp;indicates 2 indices(0-indexed) of the string.</p>
+
+<p>You can&nbsp;swap the characters at any pair of indices in the given&nbsp;<code>pairs</code>&nbsp;<strong>any number of times</strong>.</p>
+
+<p>Return the&nbsp;lexicographically smallest string that <code>s</code>&nbsp;can be changed to after using the swaps.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> s = "dcab", pairs = [[0,3],[1,2]]
+<strong>Output:</strong> "bacd"
+<strong>Explaination:</strong> 
+Swap s[0] and s[3], s = "bcad"
+Swap s[1] and s[2], s = "bacd"
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> s = "dcab", pairs = [[0,3],[1,2],[0,2]]
+<strong>Output:</strong> "abcd"
+<strong>Explaination: </strong>
+Swap s[0] and s[3], s = "bcad"
+Swap s[0] and s[2], s = "acbd"
+Swap s[1] and s[2], s = "abcd"</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> s = "cba", pairs = [[0,1],[1,2]]
+<strong>Output:</strong> "abc"
+<strong>Explaination: </strong>
+Swap s[0] and s[1], s = "bca"
+Swap s[1] and s[2], s = "bac"
+Swap s[0] and s[1], s = "abc"
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10^5</code></li>
+	<li><code>0 &lt;= pairs.length &lt;= 10^5</code></li>
+	<li><code>0 &lt;= pairs[i][0], pairs[i][1] &lt;&nbsp;s.length</code></li>
+	<li><code>s</code>&nbsp;only contains lower case English letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.N = 100001
+        self.adj = [[] for _ in range(self.N)]
+        self.visited = [False] * self.N
+
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        return self.UnionFind_approach(s, pairs)
+
+    # Time Complexity: O(E+Vlog(V))
+    # Space Complexity: O(E+V)
+    def dfs_approach(self, s: str, pairs: List[List[int]]) -> str:
+        s = list(s)
+        for edge in pairs:
+            source = edge[0]
+            destination = edge[1]
+
+            self.adj[source].append(destination)
+            self.adj[destination].append(source)
+
+        for vertex in range(len(s)):
+            if not self.visited[vertex]:
+                characters = []
+                indices = []
+                self.dfs(s, vertex, characters, indices)
+
+                characters.sort()
+                indices.sort()
+
+                for i in range(len(indices)):
+                    s[indices[i]] = characters[i]
+        return "".join(s)
+
+    def dfs(self, s, vertex, characters, indices):
+        characters.append(s[vertex])
+        indices.append(vertex)
+
+        self.visited[vertex] = True
+
+        for adjacent in self.adj[vertex]:
+            if not self.visited[adjacent]:
+                self.dfs(s, adjacent, characters, indices)
+
+    # Time Complexity: O((E+V).αV+VlogV)
+    # Space Complexity: O(V)
+    def UnionFind_approach(self, s: str, pairs: List[List[int]]) -> str:
+        uf = UnionFind(len(s))
+        s = list(s)
+        for (source, dest) in pairs:
+            uf.union(source, dest)
+
+        hashmap = defaultdict(lambda: [])
+        for v in range(len(s)):
+            root = uf.find(v)
+            hashmap[root].append(v)
+
+        smallestString = [" "] * len(s)
+        for component in hashmap:
+            indices = hashmap[component]
+            characters = [s[index] for index in indices]
+            characters.sort()
+
+            for i in range(len(indices)):
+                smallestString[indices[i]] = characters[i]
+
+        return "".join(smallestString)
+
+
+class UnionFind:
+    def __init__(self, n):
+        self.n = n
+        self.root = [i for i in range(n)]
+        self.rank = [0] * n
+
+    # Time Complexity: O(αn)
+    def find(self, a):
+        while a != self.root[a]:
+            a = self.root[a]
+        return self.root[a]
+
+    # Time Complexity: O(αn)
+    def union(self, a, b):
+        groupA = self.find(a)
+        groupB = self.find(b)
+
+        if groupA != groupB:
+            if self.rank[groupA] >= self.rank[groupB]:
+                self.root[groupB] = groupA
+                self.rank[groupA] += 1
+            elif self.rank[groupA] < self.rank[groupB]:
+                self.root[groupA] = groupB
+                self.rank[groupB] += 1
+
+    def isconnected(self, a, b):
+        return self.find(a) == self.find(b)
+
+```

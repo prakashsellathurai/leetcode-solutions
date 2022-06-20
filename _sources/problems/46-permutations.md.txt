@@ -1,0 +1,92 @@
+# 46-permutations
+
+
+Try it on <a href='https://leetcode.com/problems/46-permutations'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an array <code>nums</code> of distinct integers, return <em>all the possible permutations</em>. You can return the answer in <strong>any order</strong>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> nums = [1,2,3]
+<strong>Output:</strong> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = [0,1]
+<strong>Output:</strong> [[0,1],[1,0]]
+</pre><p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> nums = [1]
+<strong>Output:</strong> [[1]]
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 6</code></li>
+	<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+	<li>All the integers of <code>nums</code> are <strong>unique</strong>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    #     def permute(self, nums: List[int]) -> List[List[int]]:
+    #         res = []
+
+    #         def backtrack(nums,k):
+    #             if k == len(nums):
+    #                 res.append(nums[:])
+    #                 return
+
+    #             for i in range(k,len(nums)):
+    #                 nums[i],nums[k] = nums[k],nums[i]
+    #                 backtrack(nums,k+1)
+    #                 nums[k],nums[i] = nums[i],nums[k]
+
+    #         backtrack(nums,0)
+
+    #         return res
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        n = len(nums)
+
+        times = 1
+        for i in range(1, n + 1):
+            times *= i
+
+        for i in range(1, times + 1):
+            nums = self.nextperm(nums)
+            res.append(nums[:])
+        return res
+
+    def nextperm(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+
+        i = n - 2
+
+        while i >= 0 and nums[i + 1] <= nums[i]:
+            i -= 1
+
+        if i >= 0:
+            j = n - 1
+
+            while j >= 0 and nums[i] >= nums[j]:
+                j -= 1
+
+            nums[i], nums[j] = nums[j], nums[i]
+
+        # reverse from i+1
+
+        s = i + 1
+        e = n - 1
+
+        while s < e:
+            nums[s], nums[e] = nums[e], nums[s]
+            s += 1
+            e -= 1
+
+        return nums
+
+```

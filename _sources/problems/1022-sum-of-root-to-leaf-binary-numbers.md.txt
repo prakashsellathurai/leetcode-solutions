@@ -1,0 +1,127 @@
+# 1022-sum-of-root-to-leaf-binary-numbers
+
+
+Try it on <a href='https://leetcode.com/problems/1022-sum-of-root-to-leaf-binary-numbers'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given the <code>root</code> of a binary tree where each node has a value <code>0</code> or <code>1</code>. Each root-to-leaf path represents a binary number starting with the most significant bit.</p>
+
+<ul>
+	<li>For example, if the path is <code>0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1</code>, then this could represent <code>01101</code> in binary, which is <code>13</code>.</li>
+</ul>
+
+<p>For all leaves in the tree, consider the numbers represented by the path from the root to that leaf. Return <em>the sum of these numbers</em>.</p>
+
+<p>The test cases are generated so that the answer fits in a <strong>32-bits</strong> integer.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2019/04/04/sum-of-root-to-leaf-binary-numbers.png" style="width: 400px; height: 263px;">
+<pre><strong>Input:</strong> root = [1,0,1,0,1,0,1]
+<strong>Output:</strong> 22
+<strong>Explanation: </strong>(100) + (101) + (110) + (111) = 4 + 5 + 6 + 7 = 22
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> root = [0]
+<strong>Output:</strong> 0
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[1, 1000]</code>.</li>
+	<li><code>Node.val</code> is <code>0</code> or <code>1</code>.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        return self.preorderMorrisTraversal(root)
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(H)
+    def preorderIterativeTraversal(self, root) -> int:
+        res = 0
+        s = []
+        s.append((root, 0))
+
+        while s:
+            node, curr = s.pop()
+            if node is not None:
+                curr = (curr << 1) | node.val
+
+                if node.left is None and node.right is None:
+                    res += curr
+                else:
+                    s.append((node.right, curr))
+                    s.append((node.left, curr))
+
+        return res
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(H)
+    def preorderRecursiveTraversal(self, root) -> int:
+        res = 0
+
+        def dfs(node, cur):
+            nonlocal res
+            cur = (cur << 1) | node.val
+
+            if node.left is None and node.right is None:
+                res += cur
+            if node.right is not None:
+                dfs(node.right, cur)
+            if node.left is not None:
+                dfs(node.left, cur)
+
+        dfs(root, 0)
+        return res
+
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def preorderMorrisTraversal(self, root) -> int:
+        res = 0
+
+        node = root
+        cur = 0
+
+        while node:
+            if node.left:
+                pred = node.left
+                steps = 1
+                while pred.right and pred.right is not node:
+                    pred = pred.right
+                    steps += 1
+
+                if pred.right is None:
+                    cur = (cur << 1) | node.val
+                    pred.right = node
+                    node = node.left
+                else:
+                    if pred.left is None:
+                        res += cur
+                    for _ in range(steps):
+                        cur >>= 1
+                    pred.right = None
+                    node = node.right
+            else:
+                cur = (cur << 1) | node.val
+                if node.right is None:
+                    res += cur
+                node = node.right
+        return res
+
+```

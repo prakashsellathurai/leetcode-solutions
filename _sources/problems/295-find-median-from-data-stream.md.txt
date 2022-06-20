@@ -1,0 +1,109 @@
+# 295-find-median-from-data-stream
+
+
+Try it on <a href='https://leetcode.com/problems/295-find-median-from-data-stream'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>The <strong>median</strong> is the middle value in an ordered integer list. If the size of the list is even, there is no middle value and the median is the mean of the two middle values.</p>
+
+<ul>
+	<li>For example, for <code>arr = [2,3,4]</code>, the median is <code>3</code>.</li>
+	<li>For example, for <code>arr = [2,3]</code>, the median is <code>(2 + 3) / 2 = 2.5</code>.</li>
+</ul>
+
+<p>Implement the MedianFinder class:</p>
+
+<ul>
+	<li><code>MedianFinder()</code> initializes the <code>MedianFinder</code> object.</li>
+	<li><code>void addNum(int num)</code> adds the integer <code>num</code> from the data stream to the data structure.</li>
+	<li><code>double findMedian()</code> returns the median of all elements so far. Answers within <code>10<sup>-5</sup></code> of the actual answer will be accepted.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input</strong>
+["MedianFinder", "addNum", "addNum", "findMedian", "addNum", "findMedian"]
+[[], [1], [2], [], [3], []]
+<strong>Output</strong>
+[null, null, null, 1.5, null, 2.0]
+
+<strong>Explanation</strong>
+MedianFinder medianFinder = new MedianFinder();
+medianFinder.addNum(1);    // arr = [1]
+medianFinder.addNum(2);    // arr = [1, 2]
+medianFinder.findMedian(); // return 1.5 (i.e., (1 + 2) / 2)
+medianFinder.addNum(3);    // arr[1, 2, 3]
+medianFinder.findMedian(); // return 2.0
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>-10<sup>5</sup> &lt;= num &lt;= 10<sup>5</sup></code></li>
+	<li>There will be at least one element in the data structure before calling <code>findMedian</code>.</li>
+	<li>At most <code>5 * 10<sup>4</sup></code> calls will be made to <code>addNum</code> and <code>findMedian</code>.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong></p>
+
+<ul>
+	<li>If all integer numbers from the stream are in the range <code>[0, 100]</code>, how would you optimize your solution?</li>
+	<li>If <code>99%</code> of all integer numbers from the stream are in the range <code>[0, 100]</code>, how would you optimize your solution?</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+from heapq import heappush, heappop, heapify
+
+
+class MedianFinder:
+    def __init__(self):
+        self.minHeap = []
+        self.maxHeap = []
+
+    def addNum(self, num: int) -> None:
+        if len(self.minHeap) != len(self.maxHeap):
+            heappush(self.minHeap, -heappushpop(self.maxHeap, -num))
+        else:
+            heappush(self.maxHeap, -heappushpop(self.minHeap, num))
+
+    def findMedian(self) -> float:
+        if len(self.minHeap) != len(self.maxHeap):
+            return -self.maxHeap[0]
+        else:
+            return (self.minHeap[0] - self.maxHeap[0]) / 2
+
+
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
+
+
+#
+#
+# bruteforce:
+#  we need to maintain the sorted list of n integers
+#  in addnum we do  insertion sort  O(nlog n)
+#  find median is O(1)
+#
+# Augumented self-balanced binary search tree
+# every node of BST have numbers of arr
+# left side or numbers less than current nide right side for numbers greater than node
+# only problem is bst gives us sorted data which is extra info not needed
+#
+# Heaps:
+# since the problem needs an online algorithm and median is the essential info
+# we can use max heap on the left side to represent values less than effective mean
+# right heap to maintain values greater than effective mea
+# after incoming input when bot heaps have same number of values take averahe=ge of heap root
+# when they are not balanced we take take effective mean from largest heap
+# Time Complexity: O(logn) for insertion and O(1) for get median
+
+```

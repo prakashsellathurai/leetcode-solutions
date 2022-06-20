@@ -1,0 +1,88 @@
+# 1641-count-sorted-vowel-strings
+
+
+Try it on <a href='https://leetcode.com/problems/1641-count-sorted-vowel-strings'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an integer <code>n</code>, return <em>the number of strings of length </em><code>n</code><em> that consist only of vowels (</em><code>a</code><em>, </em><code>e</code><em>, </em><code>i</code><em>, </em><code>o</code><em>, </em><code>u</code><em>) and are <strong>lexicographically sorted</strong>.</em></p>
+
+<p>A string <code>s</code> is <strong>lexicographically sorted</strong> if for all valid <code>i</code>, <code>s[i]</code> is the same as or comes before <code>s[i+1]</code> in the alphabet.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> n = 1
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> The 5 sorted strings that consist of vowels only are <code>["a","e","i","o","u"].</code>
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> n = 2
+<strong>Output:</strong> 15
+<strong>Explanation:</strong> The 15 sorted strings that consist of vowels only are
+["aa","ae","ai","ao","au","ee","ei","eo","eu","ii","io","iu","oo","ou","uu"].
+Note that "ea" is not a valid string since 'e' comes after 'a' in the alphabet.
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> n = 33
+<strong>Output:</strong> 66045
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 50</code>&nbsp;</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def countVowelStrings(self, n: int) -> int:
+        return self.math(n)
+
+    # Time Complexity: O(5^n)
+    def backtrack(self, n, last=0):
+        if n == 0:
+            return 1
+        else:
+            nb = 0
+            for vowel in ["a", "e", "i", "o", "u"]:
+                if last == "" or str(last) <= str(vowel):
+                    nb += self.backtrack(n - 1, vowel)
+            return nb
+
+    # Time Complexity: O(n)
+    @cache
+    def topdowndp(self, n, last=0):
+        if n == 0:
+            return 1
+        else:
+            nb = 0
+            for vowel in ["a", "e", "i", "o", "u"]:
+                if last == "" or str(last) <= str(vowel):
+                    nb += self.backtrack(n - 1, vowel)
+            return nb
+
+    # Time Complexity: O(n)
+    def bottomup(self, n):
+        dp = [[0] * 5 for _ in range(n)]
+        dp[0] = [1] * 5
+
+        for i in range(1, n):
+            for j in range(5):
+                for k in range(j, 5):
+                    dp[i][j] += dp[i - 1][k]
+        return sum(dp[-1])
+
+    # Time Complexity: O(1)
+    def math(self, n):
+        return (n + 4) * (n + 3) * (n + 2) * (n + 1) // 24
+
+```
