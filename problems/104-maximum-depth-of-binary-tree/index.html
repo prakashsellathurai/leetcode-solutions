@@ -410,7 +410,7 @@
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">maxDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">morrisinorder</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-    
+
     <span class="c1"># Time Complexity: O(n)</span>
     <span class="c1"># Space Complexity: O(n)</span>
     <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -418,8 +418,8 @@
             <span class="k">return</span> <span class="mi">0</span>
         <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
         <span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
-    
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
     <span class="c1"># Time Complexity: O(n)</span>
     <span class="c1"># Space Complexity: O(1)</span>
     <span class="k">def</span> <span class="nf">morrisinorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -441,14 +441,14 @@
 
                 <span class="k">if</span> <span class="n">pre</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="n">root</span><span class="p">:</span>
                     <span class="n">pre</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
-                    <span class="n">depth</span> <span class="o">-=</span> <span class="n">preDepth</span><span class="o">+</span><span class="mi">1</span>
+                    <span class="n">depth</span> <span class="o">-=</span> <span class="n">preDepth</span> <span class="o">+</span> <span class="mi">1</span>
                     <span class="n">maxdepth</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxdepth</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>
                     <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">pre</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">root</span>
                     <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span>
             <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">maxdepth</span> 
+        <span class="k">return</span> <span class="n">maxdepth</span>
 </pre></div>
 </div>
 </section>

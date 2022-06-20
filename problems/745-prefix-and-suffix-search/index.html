@@ -424,15 +424,19 @@ wordFilter.f("a", "e"); // return 0, because the word at index 0 has prefix = "a
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Trie</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">Trie</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Trie</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">Trie</span><span class="p">)</span>
+
+
 <span class="n">WEIGHT</span> <span class="o">=</span> <span class="kc">False</span>
+
 
 <span class="k">class</span> <span class="nc">WordFilter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">weight</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
-            <span class="n">word</span> <span class="o">+=</span> <span class="s1">'#'</span>
+            <span class="n">word</span> <span class="o">+=</span> <span class="s2">"#"</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
                 <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trie</span>
                 <span class="n">cur</span><span class="p">[</span><span class="n">WEIGHT</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
@@ -442,7 +446,7 @@ wordFilter.f("a", "e"); // return 0, because the word at index 0 has prefix = "a
 
     <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">suffix</span><span class="p">):</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trie</span>
-        <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">suffix</span> <span class="o">+</span> <span class="s1">'#'</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">suffix</span> <span class="o">+</span> <span class="s2">"#"</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">:</span>
                 <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>

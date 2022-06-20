@@ -447,36 +447,37 @@ Explanation: The two lists do not intersect, so return null.
 <span class="c1">#         self.val = x</span>
 <span class="c1">#         self.next = None</span>
 
+
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">getIntersectionNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headA</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">,</span> <span class="n">headB</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">getIntersectionNode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">headA</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">,</span> <span class="n">headB</span><span class="p">:</span> <span class="n">ListNode</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
         <span class="n">Alth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getlength</span><span class="p">(</span><span class="n">headA</span><span class="p">)</span>
         <span class="n">Blth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getlength</span><span class="p">(</span><span class="n">headB</span><span class="p">)</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Alth</span><span class="o">-</span><span class="n">Blth</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Alth</span> <span class="o">-</span> <span class="n">Blth</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Blth</span> <span class="o">&gt;</span> <span class="n">Alth</span><span class="p">:</span>
             <span class="n">headA</span><span class="p">,</span> <span class="n">headB</span> <span class="o">=</span> <span class="n">headB</span><span class="p">,</span> <span class="n">headA</span>
 
         <span class="n">curA</span> <span class="o">=</span> <span class="n">headA</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">diff</span><span class="p">):</span>
             <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span><span class="o">.</span><span class="n">next</span>
-        
+
         <span class="n">curB</span> <span class="o">=</span> <span class="n">headB</span>
-        
+
         <span class="k">while</span> <span class="n">curB</span> <span class="ow">and</span> <span class="n">curA</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">curA</span> <span class="ow">is</span> <span class="n">curB</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">curA</span>
             <span class="n">curB</span> <span class="o">=</span> <span class="n">curB</span><span class="o">.</span><span class="n">next</span>
             <span class="n">curA</span> <span class="o">=</span> <span class="n">curA</span><span class="o">.</span><span class="n">next</span>
         <span class="k">return</span> <span class="kc">None</span>
-            
-    
-    <span class="k">def</span> <span class="nf">getlength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">getlength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="n">lth</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span>
         <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
             <span class="n">lth</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">lth</span>
-        
 </pre></div>
 </div>
 </section>

@@ -419,36 +419,36 @@
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">coinChange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span><span class="n">amount</span><span class="p">)</span>
-    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+
     <span class="c1"># Time Complexity: O(S^n)</span>
     <span class="c1"># Space Complexity: O(n)</span>
     <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        
         <span class="k">def</span> <span class="nf">coinchange</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mi">0</span>
-            
-            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">coins</span><span class="p">)</span> <span class="ow">and</span> <span class="n">amount</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-                <span class="n">maxVal</span> <span class="o">=</span> <span class="n">amount</span><span class="o">/</span><span class="n">coins</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-                <span class="n">mincost</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
-                
-                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxVal</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">*</span><span class="n">coins</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
-                        <span class="n">res</span> <span class="o">=</span> <span class="n">coinchange</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">coins</span><span class="p">,</span> <span class="n">amount</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">coins</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-                        <span class="k">if</span> <span class="n">res</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                            <span class="n">mincost</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">mincost</span><span class="p">,</span> <span class="n">res</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
 
-                <span class="k">return</span> <span class="n">mincost</span>  <span class="k">if</span> <span class="n">mincost</span> <span class="o">&lt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-                
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">coins</span><span class="p">)</span> <span class="ow">and</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">maxVal</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">/</span> <span class="n">coins</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">mincost</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxVal</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">coins</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
+                        <span class="n">res</span> <span class="o">=</span> <span class="n">coinchange</span><span class="p">(</span>
+                            <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">coins</span><span class="p">,</span> <span class="n">amount</span> <span class="o">-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">coins</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="n">res</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="n">mincost</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">mincost</span><span class="p">,</span> <span class="n">res</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">mincost</span> <span class="k">if</span> <span class="n">mincost</span> <span class="o">&lt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-        
-        <span class="k">return</span> <span class="n">coinchange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">coins</span><span class="p">,</span><span class="n">amount</span><span class="p">)</span>
-    
+
+        <span class="k">return</span> <span class="n">coinchange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+
     <span class="c1"># Time Complexity: O(S*n)</span>
     <span class="c1"># Space Complexity: O(S)</span>
     <span class="nd">@cache</span>
-    <span class="k">def</span> <span class="nf">topdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">topdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">if</span> <span class="n">amount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -456,23 +456,22 @@
 
         <span class="n">min_</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
         <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coins</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topdown</span><span class="p">(</span><span class="n">amount</span><span class="o">-</span><span class="n">coin</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">res</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="n">min_</span><span class="p">:</span>
-                <span class="n">min_</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span><span class="mi">1</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topdown</span><span class="p">(</span><span class="n">amount</span> <span class="o">-</span> <span class="n">coin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="n">min_</span><span class="p">:</span>
+                <span class="n">min_</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">min_</span> <span class="o">==</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="k">else</span> <span class="n">min_</span>
-    
+
     <span class="c1"># Time Complexity: O(S*n)</span>
     <span class="c1"># Space Complexity: O(S)</span>
     <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)]</span> <span class="o">*</span> <span class="p">(</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)]</span> <span class="o">*</span> <span class="p">(</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-        
+
         <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coin</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="n">coin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>  
-    
+        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
 </section>

@@ -19,7 +19,7 @@ Try it on <a href='https://leetcode.com/problems/104-maximum-depth-of-binary-tre
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         return self.morrisinorder(root)
-    
+
     # Time Complexity: O(n)
     # Space Complexity: O(n)
     def dfs(self, root: Optional[TreeNode]) -> int:
@@ -27,8 +27,8 @@ class Solution:
             return 0
         left = self.maxDepth(root.left)
         right = self.maxDepth(root.right)
-        return max(left,right)+1
-    
+        return max(left, right) + 1
+
     # Time Complexity: O(n)
     # Space Complexity: O(1)
     def morrisinorder(self, root: Optional[TreeNode]) -> int:
@@ -50,13 +50,13 @@ class Solution:
 
                 if pre.right is root:
                     pre.right = None
-                    depth -= preDepth+1
+                    depth -= preDepth + 1
                     maxdepth = max(maxdepth, depth)
                     root = root.right
                 else:
                     pre.right = root
                     root = root.left
             depth += 1
-        return maxdepth 
+        return maxdepth
 
 ```

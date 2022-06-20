@@ -43,15 +43,19 @@ wordFilter.f("a", "e"); // return 0, because the word at index 0 has prefix = "a
 
 ## Solution(Python)
 ```Python
-Trie = lambda: collections.defaultdict(Trie)
+def Trie():
+    return collections.defaultdict(Trie)
+
+
 WEIGHT = False
+
 
 class WordFilter(object):
     def __init__(self, words):
         self.trie = Trie()
 
         for weight, word in enumerate(words):
-            word += '#'
+            word += "#"
             for i in range(len(word)):
                 cur = self.trie
                 cur[WEIGHT] = weight
@@ -61,9 +65,10 @@ class WordFilter(object):
 
     def f(self, prefix, suffix):
         cur = self.trie
-        for letter in suffix + '#' + prefix:
+        for letter in suffix + "#" + prefix:
             if letter not in cur:
                 return -1
             cur = cur[letter]
         return cur[WEIGHT]
+
 ```

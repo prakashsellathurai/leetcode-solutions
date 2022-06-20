@@ -41,7 +41,7 @@ Try it on <a href='https://leetcode.com/problems/1695-maximum-erasure-value'>lee
 class Solution:
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
         return self.optimal(nums)
-    
+
     # time complexity: O(n^2)
     # Space complexity: O(n)
     def bruteforce(self, nums: List[int]) -> int:
@@ -51,15 +51,15 @@ class Solution:
         for i in range(n):
             seen.clear()
             cur_sum = 0
-            
-            for j in range(i,n):
+
+            for j in range(i, n):
                 if nums[j] in seen:
                     break
                 cur_sum += nums[j]
                 seen.add(nums[j])
-            max_sum = max(max_sum,cur_sum)
+            max_sum = max(max_sum, cur_sum)
         return max_sum
-    
+
     # time complexity: O(n)
     # Space complexity: O(n)
     def optimal(self, nums: List[int]) -> int:
@@ -72,12 +72,10 @@ class Solution:
             while num in seen:
                 seen.remove(nums[l])
                 cur_sum -= nums[l]
-                l+=1
+                l += 1
             cur_sum += num
             seen.add(num)
-            max_sum = max(max_sum,cur_sum)
+            max_sum = max(max_sum, cur_sum)
         return max_sum
-                
-        
-                    
+
 ```

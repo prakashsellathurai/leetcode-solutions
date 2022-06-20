@@ -43,41 +43,39 @@ Try it on <a href='https://leetcode.com/problems/29-divide-two-integers'>leetcod
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         return self.bitmanipulation(dividend, divisor)
-        
+
     # Time Complexity: O(N/M)
     def naive(self, dividend: int, divisor: int) -> int:
         quo = 0
-        
-        sign = -1 if (dividend <0) ^(divisor < 0) else 1
-        
-        dividend,divisor = abs(dividend),abs(divisor)
-        
+
+        sign = -1 if (dividend < 0) ^ (divisor < 0) else 1
+
+        dividend, divisor = abs(dividend), abs(divisor)
+
         while dividend >= divisor:
             dividend -= divisor
             quo += 1
-        
-        
-        if quo < -2**31:
-            return -2**31
-        if quo > (2**31)-1:
-            return (2**31)-1
+
+        if quo < -(2**31):
+            return -(2**31)
+        if quo > (2**31) - 1:
+            return (2**31) - 1
         return sign * quo
-    
+
     # Time Complexity: O(log(N))
     def bitmanipulation(self, dividend: int, divisor: int) -> int:
-        sign = -1 if (dividend <0) ^(divisor < 0) else 1
-        dividend,divisor = abs(dividend),abs(divisor)
-        
+        sign = -1 if (dividend < 0) ^ (divisor < 0) else 1
+        dividend, divisor = abs(dividend), abs(divisor)
+
         quotient = 0
         temp = 0
-        
-        for i in range(31,-1,-1):
+
+        for i in range(31, -1, -1):
             if dividend >= temp + (divisor << i):
-                temp +=  (divisor << i)
-                quotient |= (1 << i) 
+                temp += divisor << i
+                quotient |= 1 << i
         if sign == -1:
-            quotient = sign*quotient
-        return min(max(quotient,-2**31),2**31-1)
-        
-    
+            quotient = sign * quotient
+        return min(max(quotient, -(2**31)), 2**31 - 1)
+
 ```

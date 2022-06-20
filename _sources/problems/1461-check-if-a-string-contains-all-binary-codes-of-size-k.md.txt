@@ -44,29 +44,29 @@ Try it on <a href='https://leetcode.com/problems/1461-check-if-a-string-contains
 ```Python
 class Solution:
     def hasAllCodes(self, s: str, k: int) -> bool:
-        return self.optimal(s,k)
-    
+        return self.optimal(s, k)
+
     # Time Complexity: O(n*k)
     # Space Complexity: O(n*k)
     def bruteforce(self, s: str, k: int) -> bool:
-        subsets = {s[i:i+k] for i in range(len(s)-k+1)}
+        subsets = {s[i: i + k] for i in range(len(s) - k + 1)}
         return len(subsets) == 1 << k
-                
+
     # Time Complexity: O(n)
-    # Space Complexity: O(2^k) 
+    # Space Complexity: O(2^k)
     def optimal(self, s: str, k: int) -> bool:
         need = 1 << k
-        got = [False]*need
+        got = [False] * need
         all_one = need - 1
         hash_val = 0
-        
+
         for i in range(len(s)):
-            hash_val = (((hash_val << 1) & all_one) | int(s[i]))
-            if i >= k-1 and got[hash_val] is False:
+            hash_val = ((hash_val << 1) & all_one) | int(s[i])
+            if i >= k - 1 and got[hash_val] is False:
                 got[hash_val] = True
                 need -= 1
                 if need == 0:
                     return True
         return False
-                
+
 ```

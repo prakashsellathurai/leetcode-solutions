@@ -78,34 +78,36 @@ Explanation: The two lists do not intersect, so return null.
 #         self.val = x
 #         self.next = None
 
+
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+    def getIntersectionNode(
+        self, headA: ListNode, headB: ListNode
+    ) -> Optional[ListNode]:
         Alth = self.getlength(headA)
         Blth = self.getlength(headB)
-        diff = abs(Alth-Blth)
+        diff = abs(Alth - Blth)
         if Blth > Alth:
             headA, headB = headB, headA
 
         curA = headA
         for _ in range(diff):
             curA = curA.next
-        
+
         curB = headB
-        
+
         while curB and curA:
             if curA is curB:
                 return curA
             curB = curB.next
             curA = curA.next
         return None
-            
-    
-    def getlength(self,root):
+
+    def getlength(self, root):
         lth = 0
         cur = root
         while cur:
             cur = cur.next
             lth += 1
         return lth
-        
+
 ```

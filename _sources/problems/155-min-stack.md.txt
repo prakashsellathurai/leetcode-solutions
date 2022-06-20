@@ -52,7 +52,6 @@ minStack.getMin(); // return -2
 ## Solution(Python)
 ```Python
 class MinStack:
-
     def __init__(self):
         self.stack = []
         self.min = None
@@ -62,26 +61,25 @@ class MinStack:
             self.min = val
             self.stack.append(val)
         elif val < self.min:
-                y = (2*val)-self.min
-                self.min = val
-                self.stack.append(y)
+            y = (2 * val) - self.min
+            self.min = val
+            self.stack.append(y)
         else:
-                self.stack.append(val)
+            self.stack.append(val)
 
     def pop(self) -> None:
-       
+
         if self.stack:
             y = self.stack[-1]
             if y < self.min:
-                self.min = (2*self.min)-y
+                self.min = (2 * self.min) - y
             self.stack.pop()
 
     def top(self) -> int:
-        if  self.stack[-1] < self.min:
+        if self.stack[-1] < self.min:
             return self.min
         else:
-            return self.stack[-1] 
-        
+            return self.stack[-1]
 
     def getMin(self) -> int:
         return self.min
@@ -93,4 +91,5 @@ class MinStack:
 # obj.pop()
 # param_3 = obj.top()
 # param_4 = obj.getMin()
+
 ```

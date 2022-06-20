@@ -45,62 +45,64 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         return self.optimal(s)
-        
+
     # Time Complexity: O(n^3)
     # Space Complexity: O(n)
     def bruteforce(self, s: str) -> int:
         n = len(s)
         long_sub_len = 0
-        
+
         def isUnique(st):
             return len(st) == len(set(st))
-        
+
         for i in range(n):
-            for j in range(i,n):
+            for j in range(i, n):
                 if isUnique(s[i:j]):
-                    cur_len = j-i
+                    cur_len = j - i
                     if cur_len > long_sub_len:
                         long_sub_len = cur_len
         return long_sub_len
-    
+
     # Time Complexity: O(n)
     # Space Complexity: O(min(m,n))
     def better(self, s: str) -> int:
         n = len(s)
         left = right = 0
-        hashmap = defaultdict(lambda : 0)
+        hashmap = defaultdict(lambda: 0)
         res = 0
-        
+
         while right < n:
             hashmap[s[right]] += 1
-            
-            while hashmap[s[right]]  > 1:
+
+            while hashmap[s[right]] > 1:
                 hashmap[s[left]] -= 1
                 left += 1
-                
-            cur_width = right - left + 1 
-            
+
+            cur_width = right - left + 1
+
             if cur_width > res:
                 res = cur_width
-            
+
             right += 1
-            
+
         return res
-    
+
     # Time Complexity: O(n)
     # Space Complexity: O(m)
     def optimal(self, s: str) -> int:
         window = set()
         beg, end, ans, n = 0, 0, 0, len(s)
-        
+
         while beg < n and end < n:
             if s[end] not in window:
-                if end + 1 < n: window.add(s[end])
+                if end + 1 < n:
+                    window.add(s[end])
                 end += 1
                 ans = max(ans, end - beg)
             else:
                 window.remove(s[beg])
                 beg += 1
-                
+
         return ans
+
 ```

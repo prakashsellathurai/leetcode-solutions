@@ -43,74 +43,83 @@ Try it on <a href='https://leetcode.com/problems/354-russian-doll-envelopes'>lee
 class Solution:
     def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
         return self.binarysearch(envelopes)
-    
+
     # Time Complexity: O(2^n)
-    # Space Complexity: O(n)  
+    # Space Complexity: O(n)
     def bruteforce(self, envelopes: List[List[int]]) -> int:
         envelopes.sort()
         n = len(envelopes)
+
         def dfs(i):
             res = 1
             for j in range(i):
-                if envelopes[i][0] > envelopes[j][0] and envelopes[i][1] > envelopes[j][1]:
-                    res = max(res,1+dfs(j))
+                if (
+                    envelopes[i][0] > envelopes[j][0]
+                    and envelopes[i][1] > envelopes[j][1]
+                ):
+                    res = max(res, 1 + dfs(j))
             return res
-        
+
         maxlen = 0
         for i in range(n):
             maxlen = max(maxlen, dfs(i))
         return maxlen
-        
+
     # Time Complexity: O(n^2)
     # Space Complexity: O(n)
     # H[j] = i<j{max(H(i))}+1
     def dynamicprogramming(self, envelopes: List[List[int]]) -> int:
         envelopes.sort()
-        
+
         n = len(envelopes)
-        dp = [1]*n
+        dp = [1] * n
         for i in range(n):
             for j in range(i):
-                if envelopes[i][0] > envelopes[j][0] and envelopes[i][1] > envelopes[j][1]:
-                    dp[i] = max(dp[i],dp[j]+1)
+                if (
+                    envelopes[i][0] > envelopes[j][0]
+                    and envelopes[i][1] > envelopes[j][1]
+                ):
+                    dp[i] = max(dp[i], dp[j] + 1)
 
         return max(dp)
-    
+
     # Time Complexity: O(n^2)
     # Space Complexity: O(n)
     def sortingwithmemoize(self, envelopes: List[List[int]]) -> int:
         envelopes.sort()
         n = len(envelopes)
-        dp = [-1]*n
-        
+        dp = [-1] * n
+
         def dfs(i):
             if dp[i] != -1:
                 return dp[i]
             res = 1
             for j in range(i):
-                if envelopes[i][0] > envelopes[j][0] and envelopes[i][1] > envelopes[j][1]:
-                    res = max(res,1+dfs(j))
+                if (
+                    envelopes[i][0] > envelopes[j][0]
+                    and envelopes[i][1] > envelopes[j][1]
+                ):
+                    res = max(res, 1 + dfs(j))
             dp[i] = res
             return dp[i]
-        
+
         maxlen = 0
         for i in range(n):
             maxlen = max(maxlen, dfs(i))
         return maxlen
-    
+
     # Time Complexity: O(nlogn)
     # Space Complexity: O(n)
     def binarysearch(self, envelopes: List[List[int]]) -> int:
-        envelopes.sort(key=lambda x:(x[0],-x[1]))
+        envelopes.sort(key=lambda x: (x[0], -x[1]))
         dp = []
         for envelope in envelopes:
-            pos = bisect.bisect_left(dp,envelope[1])
+            pos = bisect.bisect_left(dp, envelope[1])
             if pos == len(dp):
                 dp.append(envelope[1])
             else:
                 dp[pos] = envelope[1]
-                
+
         return len(dp)
-        
-        
+
 ```

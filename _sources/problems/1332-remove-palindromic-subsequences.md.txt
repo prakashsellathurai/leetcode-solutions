@@ -52,7 +52,7 @@ Remove palindromic subsequence "baab" then "b".
 class Solution:
     # Given the string of size n  0 < n < 1000
     # return minimum number of steps to make the given string empty
-    # 
+    #
     def removePalindromeSub(self, s: str) -> int:
         if not s:
             return 0
@@ -60,4 +60,5 @@ class Solution:
             return 1
         else:
             return 2
+
 ```

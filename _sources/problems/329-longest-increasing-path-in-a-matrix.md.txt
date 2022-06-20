@@ -46,31 +46,32 @@ Try it on <a href='https://leetcode.com/problems/329-longest-increasing-path-in-
 ```Python
 class Solution:
     def __init__(self):
-        self.neighbours = [(1,0) ,(-1,0),(0,1),(0,-1)]
-        
+        self.neighbours = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
         return self.topdown(matrix)
-    
+
     # Time Complexity: O(m*n)
     # Space Complexity: O(m*n)
     def topdown(self, matrix: List[List[int]]) -> int:
         # determine m,n
-        self.m,self.n = len(matrix),len(matrix[0])
+        self.m, self.n = len(matrix), len(matrix[0])
         self.max_len = 0
         self.matrix = matrix
 
-        return max( self.dfs(i,j) for j in range(self.n) for i in range(self.m))
-    
+        return max(self.dfs(i, j) for j in range(self.n) for i in range(self.m))
+
     @cache
-    def dfs(self,i,j):
+    def dfs(self, i, j):
 
-            val = self.matrix[i][j]
-            return 1 + max(
-                self.dfs(i - 1, j) if i and val > self.matrix[i - 1][j] else 0,
-                self.dfs(i + 1, j) if i < self.m - 1 and val > self.matrix[i + 1][j] else 0,
-                self.dfs(i, j - 1) if j and val > self.matrix[i][j - 1] else 0,
-                self.dfs(i, j + 1) if j < self.n - 1 and val > self.matrix[i][j + 1] else 0)
+        val = self.matrix[i][j]
+        return 1 + max(
+            self.dfs(i - 1, j) if i and val > self.matrix[i - 1][j] else 0,
+            self.dfs(i + 1, j) if i < self.m -
+            1 and val > self.matrix[i + 1][j] else 0,
+            self.dfs(i, j - 1) if j and val > self.matrix[i][j - 1] else 0,
+            self.dfs(i, j + 1) if j < self.n -
+            1 and val > self.matrix[i][j + 1] else 0,
+        )
 
-
-    
 ```
