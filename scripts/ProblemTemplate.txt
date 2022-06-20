@@ -1,0 +1,14 @@
+# $title_slug
+
+
+Try it on <a href='$leetcodeurl'>leetcode</a>
+
+## Description
+<div class="description">
+$content
+</div>
+
+## Solution($lang)
+```$lang
+$code
+```

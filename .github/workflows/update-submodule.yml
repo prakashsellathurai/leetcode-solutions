@@ -1,0 +1,40 @@
+name: Update Submodule
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the $default-branch branch
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/deploy.yml'
+      - 'website/**'
+      
+  repository_dispatch:
+    types: [new-leetcode-submissions]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  UpdateSubmodule:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.1
+        with:
+          token: ${{ secrets.LT_SUB }}
+          submodules: recursive
+          
+      - name: Pull submodule
+        run: |
+          git pull --recurse-submodules
+          git submodule update --init --recursive --remote
+      - name: Push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          
