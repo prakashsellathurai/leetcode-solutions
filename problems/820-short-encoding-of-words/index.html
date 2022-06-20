@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="1345-jump-game-iv" href="../1345-jump-game-iv/" /><link rel="prev" title="134-gas-station" href="../134-gas-station/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="84-largest-rectangle-in-histogram" href="../84-largest-rectangle-in-histogram/" /><link rel="prev" title="80-remove-duplicates-from-sorted-array-ii" href="../80-remove-duplicates-from-sorted-array-ii/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>1342-number-of-steps-to-reduce-a-number-to-zero - Leetcode Solutions</title>
+        <title>820-short-encoding-of-words - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -186,7 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../131-palindrome-partitioning/">131-palindrome-partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1332-remove-palindromic-subsequences/">1332-remove-palindromic-subsequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../134-gas-station/">134-gas-station</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1342-number-of-steps-to-reduce-a-number-to-zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1342-number-of-steps-to-reduce-a-number-to-zero/">1342-number-of-steps-to-reduce-a-number-to-zero</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1345-jump-game-iv/">1345-jump-game-iv</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../135-candy/">135-candy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/">1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree</a></li>
@@ -313,7 +313,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../785-is-graph-bipartite/">785-is-graph-bipartite</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../8-string-to-integer-atoi/">8-string-to-integer-atoi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../80-remove-duplicates-from-sorted-array-ii/">80-remove-duplicates-from-sorted-array-ii</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../820-short-encoding-of-words/">820-short-encoding-of-words</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">820-short-encoding-of-words</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../84-largest-rectangle-in-histogram/">84-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../844-backspace-string-compare/">844-backspace-string-compare</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../849-maximize-distance-to-closest-person/">849-maximize-distance-to-closest-person</a></li>
@@ -395,49 +395,59 @@
           </label>
         </div>
         <article role="main">
-          <section id="number-of-steps-to-reduce-a-number-to-zero">
-<h1>1342-number-of-steps-to-reduce-a-number-to-zero<a class="headerlink" href="#number-of-steps-to-reduce-a-number-to-zero" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/1342-number-of-steps-to-reduce-a-number-to-zero">leetcode</a></p>
+          <section id="short-encoding-of-words">
+<h1>820-short-encoding-of-words<a class="headerlink" href="#short-encoding-of-words" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/820-short-encoding-of-words">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given an integer <code>num</code>, return <em>the number of steps to reduce it to zero</em>.</p><p>In one step, if the current number is even, you have to divide it by <code>2</code>, otherwise, you have to subtract <code>1</code> from it.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> num = 14
-<strong>Output:</strong> 6
-<strong>Explanation:</strong> 
-Step 1) 14 is even; divide by 2 and obtain 7. 
-Step 2) 7 is odd; subtract 1 and obtain 6.
-Step 3) 6 is even; divide by 2 and obtain 3. 
-Step 4) 3 is odd; subtract 1 and obtain 2. 
-Step 5) 2 is even; divide by 2 and obtain 1. 
-Step 6) 1 is odd; subtract 1 and obtain 0.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> num = 8
-<strong>Output:</strong> 4
-<strong>Explanation:</strong> 
-Step 1) 8 is even; divide by 2 and obtain 4. 
-Step 2) 4 is even; divide by 2 and obtain 2. 
-Step 3) 2 is even; divide by 2 and obtain 1. 
-Step 4) 1 is odd; subtract 1 and obtain 0.
-</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> num = 123
-<strong>Output:</strong> 12
+<div><p>A <strong>valid encoding</strong> of an array of <code>words</code> is any reference string <code>s</code> and array of indices <code>indices</code> such that:</p><ul>
+<li><code>words.length == indices.length</code></li>
+<li>The reference string <code>s</code> ends with the <code>'#'</code> character.</li>
+<li>For each index <code>indices[i]</code>, the <strong>substring</strong> of <code>s</code> starting from <code>indices[i]</code> and up to (but not including) the next <code>'#'</code> character is equal to <code>words[i]</code>.</li>
+</ul><p>Given an array of <code>words</code>, return <em>the <strong>length of the shortest reference string</strong> </em><code>s</code><em> possible of any <strong>valid encoding</strong> of </em><code>words</code><em>.</em></p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> words = ["time", "me", "bell"]
+<strong>Output:</strong> 10
+<strong>Explanation:</strong> A valid encoding would be s = <code>"time#bell#" and indices = [0, 2, 5</code>].
+words[0] = "time", the substring of s starting from indices[0] = 0 to the next '#' is underlined in "<u>time</u>#bell#"
+words[1] = "me", the substring of s starting from indices[1] = 2 to the next '#' is underlined in "ti<u>me</u>#bell#"
+words[2] = "bell", the substring of s starting from indices[2] = 5 to the next '#' is underlined in "time#<u>bell</u>#"
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> words = ["t"]
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> A valid encoding would be s = "t#" and indices = [0].
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>0 &lt;= num &lt;= 10<sup>6</sup></code></li>
+<li><code>1 &lt;= words.length &lt;= 2000</code></li>
+<li><code>1 &lt;= words[i].length &lt;= 7</code></li>
+<li><code>words[i]</code> consists of only lowercase letters.</li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">numberOfSteps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">num</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">num</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">num</span> <span class="o">//=</span> <span class="mi">2</span>
-            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">cnt</span>
+    <span class="k">def</span> <span class="nf">minimumLengthEncoding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">triesolution</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        
+    <span class="c1"># Time Complexity: O(Σw^2)</span>
+    <span class="c1"># Space complexity: O(Σw)</span>
+    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">good</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
+                <span class="n">good</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">k</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">good</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Time Complexity: O(Σw)</span>
+    <span class="c1"># Space complexity: O(Σw)</span>
+    <span class="k">def</span> <span class="nf">triesolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">))</span> <span class="c1">#remove duplicates</span>
+        <span class="n">Trie</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">Trie</span><span class="p">)</span>
+        <span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">()</span>
+        
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">reduce</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">,</span><span class="n">word</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">trie</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -448,23 +458,23 @@ Step 4) 1 is odd; subtract 1 and obtain 0.
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../1345-jump-game-iv/">
+          <a class="next-page" href="../84-largest-rectangle-in-histogram/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">1345-jump-game-iv</div>
+                <div class="title">84-largest-rectangle-in-histogram</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../134-gas-station/">
+          <a class="prev-page" href="../80-remove-duplicates-from-sorted-array-ii/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">134-gas-station</div>
+                <div class="title">80-remove-duplicates-from-sorted-array-ii</div>
                 
               </div>
             </a>
@@ -474,7 +484,7 @@ Step 4) 1 is odd; subtract 1 and obtain 0.
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/1342-number-of-steps-to-reduce-a-number-to-zero.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/820-short-encoding-of-words.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -494,7 +504,7 @@ Step 4) 1 is odd; subtract 1 and obtain 0.
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">1342-number-of-steps-to-reduce-a-number-to-zero</a><ul>
+<li><a class="reference internal" href="#">820-short-encoding-of-words</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
