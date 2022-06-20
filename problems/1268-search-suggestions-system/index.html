@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="60-permutation-sequence" href="../60-permutation-sequence/" /><link rel="prev" title="583-delete-operation-for-two-strings" href="../583-delete-operation-for-two-strings/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="127-word-ladder" href="../127-word-ladder/" /><link rel="prev" title="121-best-time-to-buy-and-sell-stock" href="../121-best-time-to-buy-and-sell-stock/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>59-spiral-matrix-ii - Leetcode Solutions</title>
+        <title>1268-search-suggestions-system - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -178,7 +178,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../1202-smallest-string-with-swaps/">1202-smallest-string-with-swaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1209-remove-all-adjacent-duplicates-in-string-ii/">1209-remove-all-adjacent-duplicates-in-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../121-best-time-to-buy-and-sell-stock/">121-best-time-to-buy-and-sell-stock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1268-search-suggestions-system/">1268-search-suggestions-system</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1268-search-suggestions-system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../127-word-ladder/">127-word-ladder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1291-sequential-digits/">1291-sequential-digits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1302-deepest-leaves-sum/">1302-deepest-leaves-sum</a></li>
@@ -287,7 +287,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../567-permutation-in-string/">567-permutation-in-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../581-shortest-unsorted-continuous-subarray/">581-shortest-unsorted-continuous-subarray</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../583-delete-operation-for-two-strings/">583-delete-operation-for-two-strings</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">59-spiral-matrix-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../59-spiral-matrix-ii/">59-spiral-matrix-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../60-permutation-sequence/">60-permutation-sequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../605-can-place-flowers/">605-can-place-flowers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../63-unique-paths-ii/">63-unique-paths-ii</a></li>
@@ -394,41 +394,77 @@
           </label>
         </div>
         <article role="main">
-          <section id="spiral-matrix-ii">
-<h1>59-spiral-matrix-ii<a class="headerlink" href="#spiral-matrix-ii" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/59-spiral-matrix-ii">leetcode</a></p>
+          <section id="search-suggestions-system">
+<h1>1268-search-suggestions-system<a class="headerlink" href="#search-suggestions-system" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/1268-search-suggestions-system">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given a positive integer <code>n</code>, generate an <code>n x n</code> <code>matrix</code> filled with elements from <code>1</code> to <code>n<sup>2</sup></code> in spiral order.</p><p> </p>
-<p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/11/13/spiraln.jpg" style="width: 242px; height: 242px;"/>
-<pre><strong>Input:</strong> n = 3
-<strong>Output:</strong> [[1,2,3],[8,9,4],[7,6,5]]
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> n = 1
-<strong>Output:</strong> [[1]]
+<div><p>You are given an array of strings <code>products</code> and a string <code>searchWord</code>.</p><p>Design a system that suggests at most three product names from <code>products</code> after each character of <code>searchWord</code> is typed. Suggested products should have common prefix with <code>searchWord</code>. If there are more than three products with a common prefix return the three lexicographically minimums products.</p><p>Return <em>a list of lists of the suggested products after each character of </em><code>searchWord</code><em> is typed</em>.</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
+<strong>Output:</strong> [
+["mobile","moneypot","monitor"],
+["mobile","moneypot","monitor"],
+["mouse","mousepad"],
+["mouse","mousepad"],
+["mouse","mousepad"]
+]
+<strong>Explanation:</strong> products sorted lexicographically = ["mobile","moneypot","monitor","mouse","mousepad"]
+After typing m and mo all products match and we show user ["mobile","moneypot","monitor"]
+After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> products = ["havana"], searchWord = "havana"
+<strong>Output:</strong> [["havana"],["havana"],["havana"],["havana"],["havana"],["havana"]]
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> products = ["bags","baggage","banner","box","cloths"], searchWord = "bags"
+<strong>Output:</strong> [["baggage","bags","banner"],["baggage","bags","banner"],["baggage","bags"],["bags"]]
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= n &lt;= 20</code></li>
+<li><code>1 &lt;= products.length &lt;= 1000</code></li>
+<li><code>1 &lt;= products[i].length &lt;= 3000</code></li>
+<li><code>1 &lt;= sum(products[i].length) &lt;= 2 * 10<sup>4</sup></code></li>
+<li>All the strings of <code>products</code> are <strong>unique</strong>.</li>
+<li><code>products[i]</code> consists of lowercase English letters.</li>
+<li><code>1 &lt;= searchWord.length &lt;= 1000</code></li>
+<li><code>searchWord</code> consists of lowercase English letters.</li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">generateMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">):</span>
-            <span class="n">matrix</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="n">n</span>
-                <span class="ow">or</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">&lt;</span> <span class="n">n</span>
-                <span class="ow">or</span> <span class="n">matrix</span><span class="p">[</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span><span class="p">][</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
-            <span class="p">):</span>
-                <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
-        <span class="k">return</span> <span class="n">matrix</span>
+    <span class="k">def</span> <span class="nf">suggestedProducts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">binarysearch</span><span class="p">(</span><span class="n">products</span><span class="p">,</span> <span class="n">searchWord</span><span class="p">)</span>
+     
+    <span class="c1"># Time complexity: O(n log n+nm)</span>
+    <span class="c1"># Space complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">products</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">searchWord</span><span class="p">)):</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">searchWord</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">products</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">cur</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+                    <span class="k">break</span>
+
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    
+    <span class="c1"># Time complexity: O(n log n+mlogn)</span>
+    <span class="c1"># Space complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">binarysearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">products</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">searchWord</span><span class="p">)):</span>   
+            <span class="n">prefix</span> <span class="o">+=</span> <span class="n">searchWord</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            
+            <span class="n">start</span> <span class="o">=</span> <span class="n">bisect_left</span><span class="p">(</span><span class="n">products</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="p">[</span><span class="n">products</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">))</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">start</span><span class="o">+</span><span class="mi">3</span> <span class="ow">and</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">products</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>
 </section>
@@ -439,23 +475,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../60-permutation-sequence/">
+          <a class="next-page" href="../127-word-ladder/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">60-permutation-sequence</div>
+                <div class="title">127-word-ladder</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../583-delete-operation-for-two-strings/">
+          <a class="prev-page" href="../121-best-time-to-buy-and-sell-stock/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">583-delete-operation-for-two-strings</div>
+                <div class="title">121-best-time-to-buy-and-sell-stock</div>
                 
               </div>
             </a>
@@ -465,7 +501,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/59-spiral-matrix-ii.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/1268-search-suggestions-system.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -485,7 +521,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">59-spiral-matrix-ii</a><ul>
+<li><a class="reference internal" href="#">1268-search-suggestions-system</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>

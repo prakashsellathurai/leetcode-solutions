@@ -1,0 +1,94 @@
+# 1268-search-suggestions-system
+
+
+Try it on <a href='https://leetcode.com/problems/1268-search-suggestions-system'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given an array of strings <code>products</code> and a string <code>searchWord</code>.</p>
+
+<p>Design a system that suggests at most three product names from <code>products</code> after each character of <code>searchWord</code> is typed. Suggested products should have common prefix with <code>searchWord</code>. If there are more than three products with a common prefix return the three lexicographically minimums products.</p>
+
+<p>Return <em>a list of lists of the suggested products after each character of </em><code>searchWord</code><em> is typed</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
+<strong>Output:</strong> [
+["mobile","moneypot","monitor"],
+["mobile","moneypot","monitor"],
+["mouse","mousepad"],
+["mouse","mousepad"],
+["mouse","mousepad"]
+]
+<strong>Explanation:</strong> products sorted lexicographically = ["mobile","moneypot","monitor","mouse","mousepad"]
+After typing m and mo all products match and we show user ["mobile","moneypot","monitor"]
+After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> products = ["havana"], searchWord = "havana"
+<strong>Output:</strong> [["havana"],["havana"],["havana"],["havana"],["havana"],["havana"]]
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> products = ["bags","baggage","banner","box","cloths"], searchWord = "bags"
+<strong>Output:</strong> [["baggage","bags","banner"],["baggage","bags","banner"],["baggage","bags"],["bags"]]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= products.length &lt;= 1000</code></li>
+	<li><code>1 &lt;= products[i].length &lt;= 3000</code></li>
+	<li><code>1 &lt;= sum(products[i].length) &lt;= 2 * 10<sup>4</sup></code></li>
+	<li>All the strings of <code>products</code> are <strong>unique</strong>.</li>
+	<li><code>products[i]</code> consists of lowercase English letters.</li>
+	<li><code>1 &lt;= searchWord.length &lt;= 1000</code></li>
+	<li><code>searchWord</code> consists of lowercase English letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        return self.binarysearch(products, searchWord)
+     
+    # Time complexity: O(n log n+nm)
+    # Space complexity: O(n)
+    def bruteforce(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+
+        res = []
+        for i in range(len(searchWord)):
+            cur = []
+            prefix = searchWord[:i+1]
+            for i in range(len(products)):
+                if prefix in products[i]:
+                    cur = products[i:i+3]
+                    break
+
+            res.append(cur)
+        return res
+    
+    # Time complexity: O(n log n+mlogn)
+    # Space complexity: O(n)
+    def binarysearch(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+
+        res = []
+        prefix = ""
+        for i in range(len(searchWord)):   
+            prefix += searchWord[i]
+            
+            start = bisect_left(products, prefix)
+            cur = [products[j] for j in range(start,len(products)) if j < start+3 and prefix in products[j]]
+            res.append(cur)
+        return res
+```
