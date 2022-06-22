@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="347-top-k-frequent-elements" href="../347-top-k-frequent-elements/" /><link rel="prev" title="341-flatten-nested-list-iterator" href="../341-flatten-nested-list-iterator/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="167-two-sum-ii-input-array-is-sorted" href="../167-two-sum-ii-input-array-is-sorted/" /><link rel="prev" title="1641-count-sorted-vowel-strings" href="../1641-count-sorted-vowel-strings/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>344-reverse-string - Leetcode Solutions</title>
+        <title>1642-furthest-building-you-can-reach - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -208,7 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../160-intersection-of-two-linked-lists/">160-intersection-of-two-linked-lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1631-path-with-minimum-effort/">1631-path-with-minimum-effort</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1641-count-sorted-vowel-strings/">1641-count-sorted-vowel-strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1642-furthest-building-you-can-reach/">1642-furthest-building-you-can-reach</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1642-furthest-building-you-can-reach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../167-two-sum-ii-input-array-is-sorted/">167-two-sum-ii-input-array-is-sorted</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1672-richest-customer-wealth/">1672-richest-customer-wealth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1679-max-number-of-k-sum-pairs/">1679-max-number-of-k-sum-pairs</a></li>
@@ -251,7 +251,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../329-longest-increasing-path-in-a-matrix/">329-longest-increasing-path-in-a-matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../338-counting-bits/">338-counting-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../341-flatten-nested-list-iterator/">341-flatten-nested-list-iterator</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">344-reverse-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../344-reverse-string/">344-reverse-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../347-top-k-frequent-elements/">347-top-k-frequent-elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../354-russian-doll-envelopes/">354-russian-doll-envelopes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../382-linked-list-random-node/">382-linked-list-random-node</a></li>
@@ -396,38 +396,56 @@
           </label>
         </div>
         <article role="main">
-          <section id="reverse-string">
-<h1>344-reverse-string<a class="headerlink" href="#reverse-string" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/344-reverse-string">leetcode</a></p>
+          <section id="furthest-building-you-can-reach">
+<h1>1642-furthest-building-you-can-reach<a class="headerlink" href="#furthest-building-you-can-reach" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/1642-furthest-building-you-can-reach">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Write a function that reverses a string. The input string is given as an array of characters <code>s</code>.</p><p>You must do this by modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">in-place</a> with <code>O(1)</code> extra memory.</p><p> </p>
+<div><p>You are given an integer array <code>heights</code> representing the heights of buildings, some <code>bricks</code>, and some <code>ladders</code>.</p><p>You start your journey from building <code>0</code> and move to the next building by possibly using bricks or ladders.</p><p>While moving from building <code>i</code> to building <code>i+1</code> (<strong>0-indexed</strong>),</p><ul>
+<li>If the current building's height is <strong>greater than or equal</strong> to the next building's height, you do <strong>not</strong> need a ladder or bricks.</li>
+<li>If the current building's height is <b>less than</b> the next building's height, you can either use <strong>one ladder</strong> or <code>(h[i+1] - h[i])</code> <strong>bricks</strong>.</li>
+</ul><p><em>Return the furthest building index (0-indexed) you can reach if you use the given ladders and bricks optimally.</em></p><p> </p>
 <p><strong>Example 1:</strong></p>
-<pre><strong>Input:</strong> s = ["h","e","l","l","o"]
-<strong>Output:</strong> ["o","l","l","e","h"]
-</pre><p><strong>Example 2:</strong></p>
-<pre><strong>Input:</strong> s = ["H","a","n","n","a","h"]
-<strong>Output:</strong> ["h","a","n","n","a","H"]
-</pre>
-<p> </p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/27/q4.gif" style="width: 562px; height: 561px;"/>
+<pre><strong>Input:</strong> heights = [4,2,7,6,9,14,12], bricks = 5, ladders = 1
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> Starting at building 0, you can follow these steps:
+- Go to building 1 without using ladders nor bricks since 4 &gt;= 2.
+- Go to building 2 using 5 bricks. You must use either bricks or ladders because 2 &lt; 7.
+- Go to building 3 without using ladders nor bricks since 7 &gt;= 6.
+- Go to building 4 using your only ladder. You must use either bricks or ladders because 6 &lt; 9.
+It is impossible to go beyond building 4 because you do not have any more bricks or ladders.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> heights = [4,12,2,7,3,18,20,3,19], bricks = 10, ladders = 2
+<strong>Output:</strong> 7
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> heights = [14,3,19,3], bricks = 17, ladders = 0
+<strong>Output:</strong> 3
+</pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
-<li><code>s[i]</code> is a <a href="https://en.wikipedia.org/wiki/ASCII#Printable_characters" target="_blank">printable ascii character</a>.</li>
+<li><code>1 &lt;= heights.length &lt;= 10<sup>5</sup></code></li>
+<li><code>1 &lt;= heights[i] &lt;= 10<sup>6</sup></code></li>
+<li><code>0 &lt;= bricks &lt;= 10<sup>9</sup></code></li>
+<li><code>0 &lt;= ladders &lt;= heights.length</code></li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">reverseString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">"""</span>
-<span class="sd">        Do not return anything, modify s in-place instead.</span>
-<span class="sd">        """</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
-            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">furthestBuilding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">heights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">bricks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ladders</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">heights</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">heights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ladders</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">diff</span><span class="p">)</span>
+                    <span class="n">ladders</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">heap</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">diff</span><span class="p">)</span>
+                    <span class="n">bricks</span> <span class="o">-=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">bricks</span> <span class="o">-=</span> <span class="n">diff</span>
+                <span class="k">if</span> <span class="n">bricks</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </section>
@@ -438,23 +456,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../347-top-k-frequent-elements/">
+          <a class="next-page" href="../167-two-sum-ii-input-array-is-sorted/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">347-top-k-frequent-elements</div>
+                <div class="title">167-two-sum-ii-input-array-is-sorted</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../341-flatten-nested-list-iterator/">
+          <a class="prev-page" href="../1641-count-sorted-vowel-strings/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">341-flatten-nested-list-iterator</div>
+                <div class="title">1641-count-sorted-vowel-strings</div>
                 
               </div>
             </a>
@@ -464,7 +482,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/344-reverse-string.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/1642-furthest-building-you-can-reach.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -484,7 +502,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">344-reverse-string</a><ul>
+<li><a class="reference internal" href="#">1642-furthest-building-you-can-reach</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
