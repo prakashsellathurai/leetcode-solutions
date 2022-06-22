@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="29-divide-two-integers" href="../29-divide-two-integers/" /><link rel="prev" title="284-peeking-iterator" href="../284-peeking-iterator/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="216-combination-sum-iii" href="../216-combination-sum-iii/" /><link rel="prev" title="2138-divide-a-string-into-groups-of-size-k" href="../2138-divide-a-string-into-groups-of-size-k/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>289-game-of-life - Leetcode Solutions</title>
+        <title>215-kth-largest-element-in-an-array - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -227,7 +227,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../21-merge-two-sorted-lists/">21-merge-two-sorted-lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../211-design-add-and-search-words-data-structure/">211-design-add-and-search-words-data-structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2138-divide-a-string-into-groups-of-size-k/">2138-divide-a-string-into-groups-of-size-k</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../215-kth-largest-element-in-an-array/">215-kth-largest-element-in-an-array</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../216-combination-sum-iii/">216-combination-sum-iii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../224-basic-calculator/">224-basic-calculator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../225-implement-stack-using-queues/">225-implement-stack-using-queues</a></li>
@@ -239,7 +239,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../26-remove-duplicates-from-sorted-array/">26-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../268-missing-number/">268-missing-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../284-peeking-iterator/">284-peeking-iterator</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">289-game-of-life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../289-game-of-life/">289-game-of-life</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../29-divide-two-integers/">29-divide-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../290-word-pattern/">290-word-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../295-find-median-from-data-stream/">295-find-median-from-data-stream</a></li>
@@ -397,93 +397,41 @@
           </label>
         </div>
         <article role="main">
-          <section id="game-of-life">
-<h1>289-game-of-life<a class="headerlink" href="#game-of-life" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/289-game-of-life">leetcode</a></p>
+          <section id="kth-largest-element-in-an-array">
+<h1>215-kth-largest-element-in-an-array<a class="headerlink" href="#kth-largest-element-in-an-array" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/215-kth-largest-element-in-an-array">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>According to <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">Wikipedia's article</a>: "The <b>Game of Life</b>, also known simply as <b>Life</b>, is a cellular automaton devised by the British mathematician John Horton Conway in 1970."</p><p>The board is made up of an <code>m x n</code> grid of cells, where each cell has an initial state: <b>live</b> (represented by a <code>1</code>) or <b>dead</b> (represented by a <code>0</code>). Each cell interacts with its <a href="https://en.wikipedia.org/wiki/Moore_neighborhood" target="_blank">eight neighbors</a> (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):</p><ol>
-<li>Any live cell with fewer than two live neighbors dies as if caused by under-population.</li>
-<li>Any live cell with two or three live neighbors lives on to the next generation.</li>
-<li>Any live cell with more than three live neighbors dies, as if by over-population.</li>
-<li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
-</ol><p><span>The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the <code>m x n</code> grid <code>board</code>, return <em>the next state</em>.</span></p><p> </p>
+<div><p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <em>the</em> <code>k<sup>th</sup></code> <em>largest element in the array</em>.</p><p>Note that it is the <code>k<sup>th</sup></code> largest element in the sorted order, not the <code>k<sup>th</sup></code> distinct element.</p><p> </p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/12/26/grid1.jpg" style="width: 562px; height: 322px;"/>
-<pre><strong>Input:</strong> board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
-<strong>Output:</strong> [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
+<pre><strong>Input:</strong> nums = [3,2,1,5,6,4], k = 2
+<strong>Output:</strong> 5
 </pre><p><strong>Example 2:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2020/12/26/grid2.jpg" style="width: 402px; height: 162px;"/>
-<pre><strong>Input:</strong> board = [[1,1],[1,0]]
-<strong>Output:</strong> [[1,1],[1,1]]
-</pre><p> </p>
+<pre><strong>Input:</strong> nums = [3,2,3,1,2,4,5,5,6], k = 4
+<strong>Output:</strong> 4
+</pre>
+<p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>m == board.length</code></li>
-<li><code>n == board[i].length</code></li>
-<li><code>1 &lt;= m, n &lt;= 25</code></li>
-<li><code>board[i][j]</code> is <code>0</code> or <code>1</code>.</li>
-</ul><p> </p>
-<p><strong>Follow up:</strong></p><ul>
-<li>Could you solve it in-place? Remember that the board needs to be updated simultaneously: You cannot update some cells first and then use their updated values to update other cells.</li>
-<li>In this question, we represent the board using a 2D array. In principle, the board is infinite, which would cause problems when the active area encroaches upon the border of the array (i.e., live cells reach the border). How would you address these problems?</li>
+<li><code>1 &lt;= k &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="c1">#     def gameOfLife(self, board: List[List[int]]) -&gt; None:</span>
-    <span class="c1">#         """</span>
-    <span class="c1">#         Do not return anything, modify board in-place instead.</span>
-    <span class="c1">#         """</span>
-    <span class="c1">#         if board is None or len(board) == 0:</span>
-    <span class="c1">#             return</span>
-
-    <span class="c1">#         m = len(board)</span>
-    <span class="c1">#         n = len(board[0])</span>
-
-    <span class="c1">#         for i in range(m):</span>
-    <span class="c1">#             for j in range(n):</span>
-    <span class="c1">#                 lives = self.count_live_neighours(i,j,m,n,board)</span>
-
-    <span class="c1">#                 if board[i][j] == 1  and lives &gt;= 2 and lives &lt;= 3:</span>
-    <span class="c1">#                     board[i][j] = 3</span>
-    <span class="c1">#                 if  board[i][j] == 0 and lives == 3:</span>
-    <span class="c1">#                     board[i][j] = 2</span>
-
-    <span class="c1">#         for i in range(m):</span>
-    <span class="c1">#             for j in range(n):</span>
-    <span class="c1">#                 board[i][j]  &gt;&gt;= 1</span>
-
-    <span class="c1">#     def count_live_neighours(self,i,j,m,n,board):</span>
-    <span class="c1">#         lives = 0</span>
-
-    <span class="c1">#         for x in  range(max(i-1,0),min(i+1,m-1)+1):</span>
-    <span class="c1">#             for y in range(max(j-1,0),min(j+1,n-1)+1):</span>
-    <span class="c1">#                 lives+=board[x][y]&amp;1</span>
-    <span class="c1">#         lives -= board[i][j]&amp;1</span>
-
-    <span class="c1">#         return lives</span>
-
-    <span class="k">def</span> <span class="nf">gameOfLifeInfinite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">live</span><span class="p">):</span>
-        <span class="n">ctr</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">live</span>
-            <span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">J</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">I</span> <span class="o">!=</span> <span class="n">i</span> <span class="ow">or</span> <span class="n">J</span> <span class="o">!=</span> <span class="n">j</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">ij</span> <span class="k">for</span> <span class="n">ij</span> <span class="ow">in</span> <span class="n">ctr</span> <span class="k">if</span> <span class="n">ctr</span><span class="p">[</span><span class="n">ij</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">ctr</span><span class="p">[</span><span class="n">ij</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">ij</span> <span class="ow">in</span> <span class="n">live</span><span class="p">}</span>
-
-    <span class="k">def</span> <span class="nf">gameOfLife</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">):</span>
-        <span class="n">live</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">board</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">live</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">if</span> <span class="n">live</span>
-        <span class="p">}</span>
-        <span class="n">live</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gameOfLifeInfinite</span><span class="p">(</span><span class="n">live</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
-                <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">live</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">findKthLargest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappushpop</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
 </pre></div>
 </div>
 </section>
@@ -494,23 +442,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../29-divide-two-integers/">
+          <a class="next-page" href="../216-combination-sum-iii/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">29-divide-two-integers</div>
+                <div class="title">216-combination-sum-iii</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../284-peeking-iterator/">
+          <a class="prev-page" href="../2138-divide-a-string-into-groups-of-size-k/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">284-peeking-iterator</div>
+                <div class="title">2138-divide-a-string-into-groups-of-size-k</div>
                 
               </div>
             </a>
@@ -520,7 +468,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/289-game-of-life.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/215-kth-largest-element-in-an-array.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -540,7 +488,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">289-game-of-life</a><ul>
+<li><a class="reference internal" href="#">215-kth-largest-element-in-an-array</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
