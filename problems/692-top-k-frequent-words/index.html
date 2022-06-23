@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="131-palindrome-partitioning" href="../131-palindrome-partitioning/" /><link rel="prev" title="1302-deepest-leaves-sum" href="../1302-deepest-leaves-sum/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="697-degree-of-an-array" href="../697-degree-of-an-array/" /><link rel="prev" title="682-baseball-game" href="../682-baseball-game/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>1305-all-elements-in-two-binary-search-trees - Leetcode Solutions</title>
+        <title>692-top-k-frequent-words - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -182,7 +182,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../127-word-ladder/">127-word-ladder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1291-sequential-digits/">1291-sequential-digits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1302-deepest-leaves-sum/">1302-deepest-leaves-sum</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1305-all-elements-in-two-binary-search-trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1305-all-elements-in-two-binary-search-trees/">1305-all-elements-in-two-binary-search-trees</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../131-palindrome-partitioning/">131-palindrome-partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1332-remove-palindromic-subsequences/">1332-remove-palindromic-subsequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../134-gas-station/">134-gas-station</a></li>
@@ -301,7 +301,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../68-text-justification/">68-text-justification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../680-valid-palindrome-ii/">680-valid-palindrome-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../682-baseball-game/">682-baseball-game</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../692-top-k-frequent-words/">692-top-k-frequent-words</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">692-top-k-frequent-words</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../697-degree-of-an-array/">697-degree-of-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../7-reverse-integer/">7-reverse-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../700-search-in-a-binary-search-tree/">700-search-in-a-binary-search-tree</a></li>
@@ -399,87 +399,71 @@
           </label>
         </div>
         <article role="main">
-          <section id="all-elements-in-two-binary-search-trees">
-<h1>1305-all-elements-in-two-binary-search-trees<a class="headerlink" href="#all-elements-in-two-binary-search-trees" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/1305-all-elements-in-two-binary-search-trees">leetcode</a></p>
+          <section id="top-k-frequent-words">
+<h1>692-top-k-frequent-words<a class="headerlink" href="#top-k-frequent-words" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/692-top-k-frequent-words">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given two binary search trees <code>root1</code> and <code>root2</code>, return <em>a list containing all the integers from both trees sorted in <strong>ascending</strong> order</em>.</p><p> </p>
-<p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2019/12/18/q2-e1.png" style="width: 457px; height: 207px;"/>
-<pre><strong>Input:</strong> root1 = [2,1,4], root2 = [1,0,3]
-<strong>Output:</strong> [0,1,1,2,3,4]
-</pre><p><strong>Example 2:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2019/12/18/q2-e5-.png" style="width: 352px; height: 197px;"/>
-<pre><strong>Input:</strong> root1 = [1,null,8], root2 = [8,1]
-<strong>Output:</strong> [1,1,8,8]
+<div><p>Given an array of strings <code>words</code> and an integer <code>k</code>, return <em>the </em><code>k</code><em> most frequent strings</em>.</p><p>Return the answer <strong>sorted</strong> by <strong>the frequency</strong> from highest to lowest. Sort the words with the same frequency by their <strong>lexicographical order</strong>.</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> words = ["i","love","leetcode","i","love","coding"], k = 2
+<strong>Output:</strong> ["i","love"]
+<strong>Explanation:</strong> "i" and "love" are the two most frequent words.
+Note that "i" comes before "love" due to a lower alphabetical order.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> words = ["the","day","is","sunny","the","the","the","sunny","is","is"], k = 4
+<strong>Output:</strong> ["the","is","sunny","day"]
+<strong>Explanation:</strong> "the", "is", "sunny" and "day" are the four most frequent words, with the number of occurrence being 4, 3, 2 and 1 respectively.
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li>The number of nodes in each tree is in the range <code>[0, 5000]</code>.</li>
-<li><code>-10<sup>5</sup> &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
-</ul>
+<li><code>1 &lt;= words.length &lt;= 500</code></li>
+<li><code>1 &lt;= words[i] &lt;= 10</code></li>
+<li><code>words[i]</code> consists of lowercase English letters.</li>
+<li><code>k</code> is in the range <code>[1, The number of <strong>unique</strong> words[i]]</code></li>
+</ul><p> </p>
+<p><strong>Follow-up:</strong> Could you solve it in <code>O(n log(k))</code> time and <code>O(n)</code> extra space?</p>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for a binary tree node.</span>
-<span class="c1"># class TreeNode:</span>
-<span class="c1">#     def __init__(self, val=0, left=None, right=None):</span>
-<span class="c1">#         self.val = val</span>
-<span class="c1">#         self.left = left</span>
-<span class="c1">#         self.right = right</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Comparator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
+        
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">word</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">count</span>
+    
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">count</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">word</span>
+
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">inorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">lst</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
-        <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">getAllElements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root1</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">root2</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">root1</span><span class="p">,</span> <span class="n">root2</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    Time Complexity: O((m+n)*log(m+n))</span>
-<span class="sd">    Space Complexity: O(max(m,n))</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root1</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">root2</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">topKFrequent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">priorityqueue</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+        
+    <span class="c1"># Time Complexity: O(nmlogn)</span>
+    <span class="c1"># Space Compexlity: O(n*m)</span>
+    <span class="k">def</span> <span class="nf">sorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="n">counter</span><span class="o">.</span><span class="n">get</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">counter</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+   
+    <span class="c1"># Time Complexity: O(nmlogk)</span>
+    <span class="c1"># Space Compexlity: O(k)</span>
+    <span class="k">def</span> <span class="nf">priorityqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">heap</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">:</span>
+            <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,(</span><span class="n">Comparator</span><span class="p">(</span><span class="n">counter</span><span class="p">[</span><span class="n">word</span><span class="p">],</span><span class="n">word</span><span class="p">),</span><span class="n">word</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+                
         <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">root1</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">root2</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
-
-        <span class="n">res</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">res</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    Time Complexity: O(m+n)</span>
-<span class="sd">    Space Complexity: O(m+n)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">Linear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root1</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">root2</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="n">lst1</span><span class="p">,</span> <span class="n">lst2</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">root1</span><span class="p">,</span> <span class="n">lst1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inorder</span><span class="p">(</span><span class="n">root2</span><span class="p">,</span> <span class="n">lst2</span><span class="p">)</span>
-
-        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst2</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lst2</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst1</span><span class="p">):</span>
-            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst2</span><span class="p">):</span>
-            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">res</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -490,23 +474,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../131-palindrome-partitioning/">
+          <a class="next-page" href="../697-degree-of-an-array/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">131-palindrome-partitioning</div>
+                <div class="title">697-degree-of-an-array</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../1302-deepest-leaves-sum/">
+          <a class="prev-page" href="../682-baseball-game/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">1302-deepest-leaves-sum</div>
+                <div class="title">682-baseball-game</div>
                 
               </div>
             </a>
@@ -516,7 +500,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/1305-all-elements-in-two-binary-search-trees.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/692-top-k-frequent-words.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -536,7 +520,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">1305-all-elements-in-two-binary-search-trees</a><ul>
+<li><a class="reference internal" href="#">692-top-k-frequent-words</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
