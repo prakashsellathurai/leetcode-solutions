@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="543-diameter-of-binary-tree" href="../543-diameter-of-binary-tree/" /><link rel="prev" title="535-encode-and-decode-tinyurl" href="../535-encode-and-decode-tinyurl/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="647-palindromic-substrings" href="../647-palindromic-substrings/" /><link rel="prev" title="63-unique-paths-ii" href="../63-unique-paths-ii/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>538-convert-bst-to-greater-tree - Leetcode Solutions</title>
+        <title>630-course-schedule-iii - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -283,7 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../53-maximum-subarray/">53-maximum-subarray</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../532-k-diff-pairs-in-an-array/">532-k-diff-pairs-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../535-encode-and-decode-tinyurl/">535-encode-and-decode-tinyurl</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">538-convert-bst-to-greater-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../538-convert-bst-to-greater-tree/">538-convert-bst-to-greater-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../543-diameter-of-binary-tree/">543-diameter-of-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../560-subarray-sum-equals-k/">560-subarray-sum-equals-k</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../567-permutation-in-string/">567-permutation-in-string</a></li>
@@ -293,7 +293,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../60-permutation-sequence/">60-permutation-sequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../605-can-place-flowers/">605-can-place-flowers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../63-unique-paths-ii/">63-unique-paths-ii</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../630-course-schedule-iii/">630-course-schedule-iii</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">630-course-schedule-iii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../647-palindromic-substrings/">647-palindromic-substrings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../661-image-smoother/">661-image-smoother</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../669-trim-a-binary-search-tree/">669-trim-a-binary-search-tree</a></li>
@@ -398,81 +398,90 @@
           </label>
         </div>
         <article role="main">
-          <section id="convert-bst-to-greater-tree">
-<h1>538-convert-bst-to-greater-tree<a class="headerlink" href="#convert-bst-to-greater-tree" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/538-convert-bst-to-greater-tree">leetcode</a></p>
+          <section id="course-schedule-iii">
+<h1>630-course-schedule-iii<a class="headerlink" href="#course-schedule-iii" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/630-course-schedule-iii">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given the <code>root</code> of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus the sum of all keys greater than the original key in BST.</p><p>As a reminder, a <em>binary search tree</em> is a tree that satisfies these constraints:</p><ul>
-<li>The left subtree of a node contains only nodes with keys <strong>less than</strong> the node's key.</li>
-<li>The right subtree of a node contains only nodes with keys <strong>greater than</strong> the node's key.</li>
-<li>Both the left and right subtrees must also be binary search trees.</li>
-</ul><p> </p>
-<p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2019/05/02/tree.png" style="width: 500px; height: 341px;"/>
-<pre><strong>Input:</strong> root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
-<strong>Output:</strong> [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> root = [0,null,1]
-<strong>Output:</strong> [1,null,1]
+<div><p>There are <code>n</code> different online courses numbered from <code>1</code> to <code>n</code>. You are given an array <code>courses</code> where <code>courses[i] = [duration<sub>i</sub>, lastDay<sub>i</sub>]</code> indicate that the <code>i<sup>th</sup></code> course should be taken <b>continuously</b> for <code>duration<sub>i</sub></code> days and must be finished before or on <code>lastDay<sub>i</sub></code>.</p><p>You will start on the <code>1<sup>st</sup></code> day and you cannot take two or more courses simultaneously.</p><p>Return <em>the maximum number of courses that you can take</em>.</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> courses = [[100,200],[200,1300],[1000,1250],[2000,3200]]
+<strong>Output:</strong> 3
+Explanation: 
+There are totally 4 courses, but you can take 3 courses at most:
+First, take the 1<sup>st</sup> course, it costs 100 days so you will finish it on the 100<sup>th</sup> day, and ready to take the next course on the 101<sup>st</sup> day.
+Second, take the 3<sup>rd</sup> course, it costs 1000 days so you will finish it on the 1100<sup>th</sup> day, and ready to take the next course on the 1101<sup>st</sup> day. 
+Third, take the 2<sup>nd</sup> course, it costs 200 days so you will finish it on the 1300<sup>th</sup> day. 
+The 4<sup>th</sup> course cannot be taken now, since you will finish it on the 3300<sup>th</sup> day, which exceeds the closed date.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> courses = [[1,2]]
+<strong>Output:</strong> 1
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> courses = [[3,2],[4,3]]
+<strong>Output:</strong> 0
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li>The number of nodes in the tree is in the range <code>[0, 10<sup>4</sup>]</code>.</li>
-<li><code>-10<sup>4</sup> &lt;= Node.val &lt;= 10<sup>4</sup></code></li>
-<li>All the values in the tree are <strong>unique</strong>.</li>
-<li><code>root</code> is guaranteed to be a valid binary search tree.</li>
-</ul><p> </p>
-<p><strong>Note:</strong> This question is the same as 1038: <a href="https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/" target="_blank">https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/</a></p>
+<li><code>1 &lt;= courses.length &lt;= 10<sup>4</sup></code></li>
+<li><code>1 &lt;= duration<sub>i</sub>, lastDay<sub>i</sub> &lt;= 10<sup>4</sup></code></li>
+</ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definition for a binary tree node.</span>
-<span class="c1"># class TreeNode:</span>
-<span class="c1">#     def __init__(self, val=0, left=None, right=None):</span>
-<span class="c1">#         self.val = val</span>
-<span class="c1">#         self.left = left</span>
-<span class="c1">#         self.right = right</span>
-<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">convertBST</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverseInorderMorris</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">recursive</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">+=</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span>
-            <span class="n">root</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">recursive</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">root</span>
-
-    <span class="k">def</span> <span class="nf">reverseInorderMorris</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]:</span>
-        <span class="k">def</span> <span class="nf">get_succ</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-            <span class="n">succ</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span>
-            <span class="k">while</span> <span class="n">succ</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">succ</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
-                <span class="n">succ</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="n">left</span>
-            <span class="k">return</span> <span class="n">succ</span>
-
-        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">root</span>
-        <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">total</span> <span class="o">+=</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span>
-                <span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">total</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">scheduleCourse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pq</span><span class="p">(</span><span class="n">courses</span><span class="p">)</span>
+    
+    <span class="c1"># Time Complexity: O(n*d)</span>
+    <span class="c1"># Space Complexity: O(n*d)</span>
+    <span class="k">def</span> <span class="nf">iterative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">courses</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">course</span><span class="p">:</span> <span class="n">course</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nd">@cache</span>
+        <span class="k">def</span> <span class="nf">schedule</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">courses</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">taken</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">time</span> <span class="o">+</span> <span class="n">courses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">courses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">taken</span> <span class="o">=</span><span class="mi">1</span> <span class="o">+</span> <span class="n">schedule</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">time</span><span class="o">+</span><span class="n">courses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">not_taken</span> <span class="o">=</span> <span class="n">schedule</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">time</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">taken</span><span class="p">,</span> <span class="n">not_taken</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">schedule</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        
+    
+    <span class="c1"># Time Complexity: O(n*k)</span>
+    <span class="c1"># Space Complexity: O(1)</span>
+    <span class="k">def</span> <span class="nf">iterative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">courses</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">course</span><span class="p">:</span> <span class="n">course</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">schedule</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">course</span> <span class="ow">in</span> <span class="n">courses</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span> <span class="o">+</span> <span class="n">course</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">course</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">time</span> <span class="o">+=</span> <span class="n">course</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">schedule</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">course</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">succ</span> <span class="o">=</span> <span class="n">get_succ</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">succ</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">succ</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">node</span>
-                    <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">succ</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
-                    <span class="n">total</span> <span class="o">+=</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span>
-                    <span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">total</span>
-                    <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span>
-        <span class="k">return</span> <span class="n">root</span>
+                <span class="n">max_i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">schedule</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">schedule</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">schedule</span><span class="p">[</span><span class="n">max_i</span><span class="p">]:</span>
+                        <span class="n">max_i</span> <span class="o">=</span> <span class="n">i</span>
+
+                <span class="k">if</span> <span class="n">schedule</span><span class="p">[</span><span class="n">max_i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">course</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">time</span> <span class="o">+=</span> <span class="n">course</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span><span class="n">schedule</span><span class="p">[</span><span class="n">max_i</span><span class="p">]</span> 
+                    <span class="n">schedule</span><span class="p">[</span><span class="n">max_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">course</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">schedule</span><span class="p">)</span>
+    
+    <span class="c1"># Time Complexity: O(nlogn)</span>
+    <span class="c1"># Space Complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">pq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">courses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">heap</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="p">[],</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">courses</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">time</span> <span class="o">+=</span> <span class="n">t</span>
+            <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">time</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+                <span class="n">nt</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+                <span class="n">time</span> <span class="o">+=</span> <span class="n">nt</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -483,23 +492,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../543-diameter-of-binary-tree/">
+          <a class="next-page" href="../647-palindromic-substrings/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">543-diameter-of-binary-tree</div>
+                <div class="title">647-palindromic-substrings</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../535-encode-and-decode-tinyurl/">
+          <a class="prev-page" href="../63-unique-paths-ii/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">535-encode-and-decode-tinyurl</div>
+                <div class="title">63-unique-paths-ii</div>
                 
               </div>
             </a>
@@ -509,7 +518,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/538-convert-bst-to-greater-tree.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/630-course-schedule-iii.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -529,7 +538,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">538-convert-bst-to-greater-tree</a><ul>
+<li><a class="reference internal" href="#">630-course-schedule-iii</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
