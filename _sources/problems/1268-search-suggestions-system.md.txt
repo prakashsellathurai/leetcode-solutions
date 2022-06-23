@@ -57,9 +57,11 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
 ## Solution(Python)
 ```Python
 class Solution:
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+    def suggestedProducts(
+        self, products: List[str], searchWord: str
+    ) -> List[List[str]]:
         return self.trie_search(products, searchWord)
-     
+
     # Time complexity: O(n log n+nm)
     # Space complexity: O(n)
     def bruteforce(self, products: List[str], searchWord: str) -> List[List[str]]:
@@ -68,15 +70,15 @@ class Solution:
         res = []
         for i in range(len(searchWord)):
             cur = []
-            prefix = searchWord[:i+1]
+            prefix = searchWord[: i + 1]
             for i in range(len(products)):
                 if prefix in products[i]:
-                    cur = products[i:i+3]
+                    cur = products[i: i + 3]
                     break
 
             res.append(cur)
         return res
-    
+
     # Time complexity: O(n log n+mlogn)
     # Space complexity: O(n)
     def binarysearch(self, products: List[str], searchWord: str) -> List[List[str]]:
@@ -84,38 +86,43 @@ class Solution:
 
         res = []
         prefix = ""
-        for i in range(len(searchWord)):   
+        for i in range(len(searchWord)):
             prefix += searchWord[i]
-            
+
             start = bisect_left(products, prefix)
-            cur = [products[j] for j in range(start,len(products)) if j < start+3 and prefix in products[j]]
+            cur = [
+                products[j]
+                for j in range(start, len(products))
+                if j < start + 3 and prefix in products[j]
+            ]
             res.append(cur)
         return res
-    
+
     # Time complexity: O(nlogn +nm+s)
     # Space complexity: O(nkm)
     def trie_search(self, products: List[str], searchWord: str) -> List[List[str]]:
-        
         class TrieNode:
             def __init__(self):
                 self.children = collections.defaultdict(TrieNode)
                 self.suggestion = []
-            
+
             def add_suggestion(self, product):
                 if len(self.suggestion) < 3:
-                    self.suggestion.append(product)        
+                    self.suggestion.append(product)
+
         products = sorted(products)
         root = TrieNode()
-        
+
         for product in products:
             node = root
             for c in product:
                 node = node.children[c]
                 node.add_suggestion(product)
         res, node = [], root
-        
+
         for c in searchWord:
             node = node.children[c]
             res.append(node.suggestion)
         return res
+
 ```

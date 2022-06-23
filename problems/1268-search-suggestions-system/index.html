@@ -434,9 +434,11 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">suggestedProducts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">def</span> <span class="nf">suggestedProducts</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trie_search</span><span class="p">(</span><span class="n">products</span><span class="p">,</span> <span class="n">searchWord</span><span class="p">)</span>
-     
+
     <span class="c1"># Time complexity: O(n log n+nm)</span>
     <span class="c1"># Space complexity: O(n)</span>
     <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
@@ -445,15 +447,15 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
         <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">searchWord</span><span class="p">)):</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">prefix</span> <span class="o">=</span> <span class="n">searchWord</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">searchWord</span><span class="p">[:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">products</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                    <span class="n">cur</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+                    <span class="n">cur</span> <span class="o">=</span> <span class="n">products</span><span class="p">[</span><span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
                     <span class="k">break</span>
 
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span>
-    
+
     <span class="c1"># Time complexity: O(n log n+mlogn)</span>
     <span class="c1"># Space complexity: O(n)</span>
     <span class="k">def</span> <span class="nf">binarysearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
@@ -461,36 +463,40 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
 
         <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">searchWord</span><span class="p">)):</span>   
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">searchWord</span><span class="p">)):</span>
             <span class="n">prefix</span> <span class="o">+=</span> <span class="n">searchWord</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            
+
             <span class="n">start</span> <span class="o">=</span> <span class="n">bisect_left</span><span class="p">(</span><span class="n">products</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="p">[</span><span class="n">products</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">))</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">start</span><span class="o">+</span><span class="mi">3</span> <span class="ow">and</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">products</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">products</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">products</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="p">]</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span>
-    
+
     <span class="c1"># Time complexity: O(nlogn +nm+s)</span>
     <span class="c1"># Space complexity: O(nkm)</span>
     <span class="k">def</span> <span class="nf">trie_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">products</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">searchWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-        
         <span class="k">class</span> <span class="nc">TrieNode</span><span class="p">:</span>
             <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">TrieNode</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">suggestion</span> <span class="o">=</span> <span class="p">[]</span>
-            
+
             <span class="k">def</span> <span class="nf">add_suggestion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">suggestion</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">suggestion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>        
+                    <span class="bp">self</span><span class="o">.</span><span class="n">suggestion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+
         <span class="n">products</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">products</span><span class="p">)</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">TrieNode</span><span class="p">()</span>
-        
+
         <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">root</span>
             <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">product</span><span class="p">:</span>
                 <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
                 <span class="n">node</span><span class="o">.</span><span class="n">add_suggestion</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
         <span class="n">res</span><span class="p">,</span> <span class="n">node</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">root</span>
-        
+
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">searchWord</span><span class="p">:</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">suggestion</span><span class="p">)</span>
