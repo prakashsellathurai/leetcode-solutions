@@ -51,48 +51,48 @@ The 4<sup>th</sup> course cannot be taken now, since you will finish it on the 3
 class Solution:
     def scheduleCourse(self, courses: List[List[int]]) -> int:
         return self.pq(courses)
-    
+
     # Time Complexity: O(n*d)
     # Space Complexity: O(n*d)
     def iterative(self, courses: List[List[int]]) -> int:
-        courses.sort(key= lambda course: course[1])
+        courses.sort(key=lambda course: course[1])
+
         @cache
-        def schedule(i,time):
+        def schedule(i, time):
             if i == len(courses):
                 return 0
             taken = 0
             if time + courses[i][0] <= courses[i][1]:
-                taken =1 + schedule(i+1,time+courses[i][0])
-            not_taken = schedule(i+1,time)
+                taken = 1 + schedule(i + 1, time + courses[i][0])
+            not_taken = schedule(i + 1, time)
             return max(taken, not_taken)
-            
-        return schedule(0,0)
-        
-    
+
+        return schedule(0, 0)
+
     # Time Complexity: O(n*k)
     # Space Complexity: O(1)
     def iterative(self, courses: List[List[int]]) -> int:
-        courses.sort(key= lambda course: course[1])
+        courses.sort(key=lambda course: course[1])
         time = 0
         cnt = 0
         schedule = []
-        
+
         for course in courses:
             if time + course[0] <= course[1]:
                 time += course[0]
                 schedule.append(course[0])
             else:
                 max_i = 0
-                for i in range(1,len(schedule)):
+                for i in range(1, len(schedule)):
                     if schedule[i] > schedule[max_i]:
                         max_i = i
 
                 if schedule[max_i] > course[0]:
-                    time += course[0] -schedule[max_i] 
+                    time += course[0] - schedule[max_i]
                     schedule[max_i] = course[0]
-        
+
         return len(schedule)
-    
+
     # Time Complexity: O(nlogn)
     # Space Complexity: O(n)
     def pq(self, courses: List[List[int]]) -> int:
@@ -104,4 +104,5 @@ class Solution:
                 nt = heapq.heappop(heap)
                 time += nt
         return len(heap)
+
 ```
