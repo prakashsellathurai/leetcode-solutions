@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="numbers-at-most-n-given-digit-set" href="../numbers-at-most-n-given-digit-set/" /><link rel="prev" title="nth-magical-number" href="../nth-magical-number/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree" href="../1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/" /><link rel="prev" title="135-candy" href="../135-candy/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>number-complement - Leetcode Solutions</title>
+        <title>1354-construct-target-array-with-multiple-sums - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -189,7 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../1342-number-of-steps-to-reduce-a-number-to-zero/">1342-number-of-steps-to-reduce-a-number-to-zero</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1345-jump-game-iv/">1345-jump-game-iv</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../135-candy/">135-candy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1354-construct-target-array-with-multiple-sums/">1354-construct-target-array-with-multiple-sums</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1354-construct-target-array-with-multiple-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/">1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../138-copy-list-with-random-pointer/">138-copy-list-with-random-pointer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1396-design-underground-system/">1396-design-underground-system</a></li>
@@ -355,7 +355,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../minimum-absolute-difference/">minimum-absolute-difference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../minimum-height-trees/">minimum-height-trees</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nth-magical-number/">nth-magical-number</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">number-complement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../number-complement/">number-complement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../numbers-at-most-n-given-digit-set/">numbers-at-most-n-given-digit-set</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pairs-of-songs-with-total-durations-divisible-by-60/">pairs-of-songs-with-total-durations-divisible-by-60</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../partition-equal-subset-sum/">partition-equal-subset-sum</a></li>
@@ -400,34 +400,57 @@
           </label>
         </div>
         <article role="main">
-          <section id="number-complement">
-<h1>number-complement<a class="headerlink" href="#number-complement" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/number-complement">leetcode</a></p>
+          <section id="construct-target-array-with-multiple-sums">
+<h1>1354-construct-target-array-with-multiple-sums<a class="headerlink" href="#construct-target-array-with-multiple-sums" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/1354-construct-target-array-with-multiple-sums">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>The <strong>complement</strong> of an integer is the integer you get when you flip all the <code>0</code>'s to <code>1</code>'s and all the <code>1</code>'s to <code>0</code>'s in its binary representation.</p><ul>
-<li>For example, The integer <code>5</code> is <code>"101"</code> in binary and its <strong>complement</strong> is <code>"010"</code> which is the integer <code>2</code>.</li>
-</ul><p>Given an integer <code>num</code>, return <em>its complement</em>.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> num = 5
-<strong>Output:</strong> 2
-<strong>Explanation:</strong> The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> num = 1
-<strong>Output:</strong> 0
-<strong>Explanation:</strong> The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
+<div><p>You are given an array <code>target</code> of n integers. From a starting array <code>arr</code> consisting of <code>n</code> 1's, you may perform the following procedure :</p><ul>
+<li>let <code>x</code> be the sum of all elements currently in your array.</li>
+<li>choose index <code>i</code>, such that <code>0 &lt;= i &lt; n</code> and set the value of <code>arr</code> at index <code>i</code> to <code>x</code>.</li>
+<li>You may repeat this procedure as many times as needed.</li>
+</ul><p>Return <code>true</code> <em>if it is possible to construct the</em> <code>target</code> <em>array from</em> <code>arr</code><em>, otherwise, return</em> <code>false</code>.</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> target = [9,3,5]
+<strong>Output:</strong> true
+<strong>Explanation:</strong> Start with arr = [1, 1, 1] 
+[1, 1, 1], sum = 3 choose index 1
+[1, 3, 1], sum = 5 choose index 2
+[1, 3, 5], sum = 9 choose index 0
+[9, 3, 5] Done
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> target = [1,1,1,2]
+<strong>Output:</strong> false
+<strong>Explanation:</strong> Impossible to create target array from [1,1,1,1].
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> target = [8,5]
+<strong>Output:</strong> true
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= num &lt; 2<sup>31</sup></code></li>
-</ul><p> </p>
-<p><strong>Note:</strong> This question is the same as 1009: <a href="https://leetcode.com/problems/complement-of-base-10-integer/" target="_blank">https://leetcode.com/problems/complement-of-base-10-integer/</a></p>
+<li><code>n == target.length</code></li>
+<li><code>1 &lt;= n &lt;= 5 * 10<sup>4</sup></code></li>
+<li><code>1 &lt;= target[i] &lt;= 10<sup>9</sup></code></li>
+</ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">findComplement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">num</span> <span class="o">^</span> <span class="n">mask</span>
+    <span class="k">def</span> <span class="nf">isPossible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">target</span><span class="p">]</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">-=</span> <span class="n">a</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">total</span> <span class="ow">or</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">%</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">a</span> <span class="o">%=</span> <span class="n">total</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">a</span>
+            <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">)</span>
+        
+        
+        
+            
 </pre></div>
 </div>
 </section>
@@ -438,23 +461,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../numbers-at-most-n-given-digit-set/">
+          <a class="next-page" href="../1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">numbers-at-most-n-given-digit-set</div>
+                <div class="title">1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../nth-magical-number/">
+          <a class="prev-page" href="../135-candy/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">nth-magical-number</div>
+                <div class="title">135-candy</div>
                 
               </div>
             </a>
@@ -464,7 +487,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/number-complement.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/1354-construct-target-array-with-multiple-sums.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -484,7 +507,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">number-complement</a><ul>
+<li><a class="reference internal" href="#">1354-construct-target-array-with-multiple-sums</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
