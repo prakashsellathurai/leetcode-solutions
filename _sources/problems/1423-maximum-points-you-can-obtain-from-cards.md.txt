@@ -50,13 +50,12 @@ Try it on <a href='https://leetcode.com/problems/1423-maximum-points-you-can-obt
 ```Python
 class Solution:
     def maxScore(self, cardPoints: List[int], k: int) -> int:
-        currentScore = sum(cardPoints[:k])
-        maxScore = currentScore
-        size = len(cardPoints)
-        for i in range(k):
-            currentScore += cardPoints[size - 1 - i]
-            currentScore -= cardPoints[k - 1 - i]
-            maxScore = max(maxScore, currentScore)
-        
-        return maxScore 
+        n = len(cardPoints)
+        max_sum = cur_sum = sum(cardPoints[:n-k])
+        total_sum = cur_sum
+        for i in range(n-k,n):
+            cur_sum += (cardPoints[i] - cardPoints[i-(n-k)])
+            total_sum += cardPoints[i] 
+            max_sum = min(max_sum, cur_sum)
+        return total_sum-max_sum
 ```
