@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="serialize-and-deserialize-binary-tree" href="../serialize-and-deserialize-binary-tree/" /><link rel="prev" title="reverse-linked-list" href="../reverse-linked-list/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="1461-check-if-a-string-contains-all-binary-codes-of-size-k" href="../1461-check-if-a-string-contains-all-binary-codes-of-size-k/" /><link rel="prev" title="142-linked-list-cycle-ii" href="../142-linked-list-cycle-ii/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>reverse-words-in-a-string - Leetcode Solutions</title>
+        <title>1423-maximum-points-you-can-obtain-from-cards - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -194,7 +194,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../138-copy-list-with-random-pointer/">138-copy-list-with-random-pointer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1396-design-underground-system/">1396-design-underground-system</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../142-linked-list-cycle-ii/">142-linked-list-cycle-ii</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1423-maximum-points-you-can-obtain-from-cards/">1423-maximum-points-you-can-obtain-from-cards</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1423-maximum-points-you-can-obtain-from-cards</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1461-check-if-a-string-contains-all-binary-codes-of-size-k/">1461-check-if-a-string-contains-all-binary-codes-of-size-k</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1463-cherry-pickup-ii/">1463-cherry-pickup-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1472-design-browser-history/">1472-design-browser-history</a></li>
@@ -371,7 +371,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../range-sum-of-bst/">range-sum-of-bst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reorder-list/">reorder-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reverse-linked-list/">reverse-linked-list</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">reverse-words-in-a-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reverse-words-in-a-string/">reverse-words-in-a-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../serialize-and-deserialize-binary-tree/">serialize-and-deserialize-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../smallest-integer-divisible-by-k/">smallest-integer-divisible-by-k</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../two-sum/">two-sum</a></li>
@@ -402,59 +402,43 @@
           </label>
         </div>
         <article role="main">
-          <section id="reverse-words-in-a-string">
-<h1>reverse-words-in-a-string<a class="headerlink" href="#reverse-words-in-a-string" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/reverse-words-in-a-string">leetcode</a></p>
+          <section id="maximum-points-you-can-obtain-from-cards">
+<h1>1423-maximum-points-you-can-obtain-from-cards<a class="headerlink" href="#maximum-points-you-can-obtain-from-cards" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/1423-maximum-points-you-can-obtain-from-cards">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given an input string <code>s</code>, reverse the order of the <strong>words</strong>.</p><p>A <strong>word</strong> is defined as a sequence of non-space characters. The <strong>words</strong> in <code>s</code> will be separated by at least one space.</p><p>Return <em>a string of the words in reverse order concatenated by a single space.</em></p><p><b>Note</b> that <code>s</code> may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> s = "the sky is blue"
-<strong>Output:</strong> "blue is sky the"
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> s = "  hello world  "
-<strong>Output:</strong> "world hello"
-<strong>Explanation:</strong> Your reversed string should not contain leading or trailing spaces.
-</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> s = "a good   example"
-<strong>Output:</strong> "example good a"
-<strong>Explanation:</strong> You need to reduce multiple spaces between two words to a single space in the reversed string.
-</pre><p><strong>Example 4:</strong></p><pre><strong>Input:</strong> s = "  Bob    Loves  Alice   "
-<strong>Output:</strong> "Alice Loves Bob"
-</pre><p><strong>Example 5:</strong></p><pre><strong>Input:</strong> s = "Alice does not even like bob"
-<strong>Output:</strong> "bob like even not does Alice"
+<div><p>There are several cards <strong>arranged in a row</strong>, and each card has an associated number of points. The points are given in the integer array <code>cardPoints</code>.</p><p>In one step, you can take one card from the beginning or from the end of the row. You have to take exactly <code>k</code> cards.</p><p>Your score is the sum of the points of the cards you have taken.</p><p>Given the integer array <code>cardPoints</code> and the integer <code>k</code>, return the <em>maximum score</em> you can obtain.</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> cardPoints = [1,2,3,4,5,6,1], k = 3
+<strong>Output:</strong> 12
+<strong>Explanation:</strong> After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score. The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 = 12.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> cardPoints = [2,2,2], k = 2
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> Regardless of which two cards you take, your score will always be 4.
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> cardPoints = [9,7,7,9,7,7,9], k = 7
+<strong>Output:</strong> 55
+<strong>Explanation:</strong> You have to take all the cards. Your score is the sum of points of all cards.
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
-<li><code>s</code> contains English letters (upper-case and lower-case), digits, and spaces <code>' '</code>.</li>
-<li>There is <strong>at least one</strong> word in <code>s</code>.</li>
-</ul><p> </p>
-<p><b data-stringify-type="bold">Follow-up: </b>If the string data type is mutable in your language, can you solve it <b data-stringify-type="bold">in-place</b> with <code data-stringify-type="code">O(1)</code> extra space?</p>
+<li><code>1 &lt;= cardPoints.length &lt;= 10<sup>5</sup></code></li>
+<li><code>1 &lt;= cardPoints[i] &lt;= 10<sup>4</sup></code></li>
+<li><code>1 &lt;= k &lt;= cardPoints.length</code></li>
+</ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">""</span>
-        <span class="n">current</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-
-        <span class="k">while</span> <span class="n">current</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c1"># move to the start of word</span>
-            <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">current</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="k">while</span> <span class="n">current</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">" "</span><span class="p">:</span>
-                <span class="n">current</span> <span class="o">-=</span> <span class="mi">1</span>
-
-            <span class="k">for</span> <span class="n">temporal</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">current</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">checkpoint</span><span class="p">):</span>
-                <span class="n">result</span> <span class="o">+=</span> <span class="n">message</span><span class="p">[</span><span class="n">temporal</span><span class="p">]</span>
-
-            <span class="c1"># move spaces</span>
-            <span class="k">while</span> <span class="n">current</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">==</span> <span class="s2">" "</span><span class="p">:</span>
-                <span class="n">current</span> <span class="o">-=</span> <span class="mi">1</span>
-
-            <span class="c1"># add spaces</span>
-            <span class="k">if</span> <span class="n">current</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-                <span class="n">result</span> <span class="o">+=</span> <span class="s2">" "</span>
-
-        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">def</span> <span class="nf">maxScore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cardPoints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">currentScore</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cardPoints</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">maxScore</span> <span class="o">=</span> <span class="n">currentScore</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cardPoints</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">currentScore</span> <span class="o">+=</span> <span class="n">cardPoints</span><span class="p">[</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">currentScore</span> <span class="o">-=</span> <span class="n">cardPoints</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">maxScore</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxScore</span><span class="p">,</span> <span class="n">currentScore</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">maxScore</span> 
 </pre></div>
 </div>
 </section>
@@ -465,23 +449,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../serialize-and-deserialize-binary-tree/">
+          <a class="next-page" href="../1461-check-if-a-string-contains-all-binary-codes-of-size-k/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">serialize-and-deserialize-binary-tree</div>
+                <div class="title">1461-check-if-a-string-contains-all-binary-codes-of-size-k</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../reverse-linked-list/">
+          <a class="prev-page" href="../142-linked-list-cycle-ii/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">reverse-linked-list</div>
+                <div class="title">142-linked-list-cycle-ii</div>
                 
               </div>
             </a>
@@ -491,7 +475,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/reverse-words-in-a-string.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/1423-maximum-points-you-can-obtain-from-cards.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -511,7 +495,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">reverse-words-in-a-string</a><ul>
+<li><a class="reference internal" href="#">1423-maximum-points-you-can-obtain-from-cards</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
