@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="1192-critical-connections-in-a-network" href="../1192-critical-connections-in-a-network/" /><link rel="prev" title="116-populating-next-right-pointers-in-each-node" href="../116-populating-next-right-pointers-in-each-node/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="1695-maximum-erasure-value" href="../1695-maximum-erasure-value/" /><link rel="prev" title="1679-max-number-of-k-sum-pairs" href="../1679-max-number-of-k-sum-pairs/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>117-populating-next-right-pointers-in-each-node-ii - Leetcode Solutions</title>
+        <title>1689-partitioning-into-minimum-number-of-deci-binary-numbers - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -171,7 +171,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../11-container-with-most-water/">11-container-with-most-water</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1115-print-foobar-alternately/">1115-print-foobar-alternately</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../116-populating-next-right-pointers-in-each-node/">116-populating-next-right-pointers-in-each-node</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">117-populating-next-right-pointers-in-each-node-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../117-populating-next-right-pointers-in-each-node-ii/">117-populating-next-right-pointers-in-each-node-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1192-critical-connections-in-a-network/">1192-critical-connections-in-a-network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12-integer-to-roman/">12-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../120-triangle/">120-triangle</a></li>
@@ -214,7 +214,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../167-two-sum-ii-input-array-is-sorted/">167-two-sum-ii-input-array-is-sorted</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1672-richest-customer-wealth/">1672-richest-customer-wealth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1679-max-number-of-k-sum-pairs/">1679-max-number-of-k-sum-pairs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1689-partitioning-into-minimum-number-of-deci-binary-numbers/">1689-partitioning-into-minimum-number-of-deci-binary-numbers</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1689-partitioning-into-minimum-number-of-deci-binary-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1695-maximum-erasure-value/">1695-maximum-erasure-value</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../17-letter-combinations-of-a-phone-number/">17-letter-combinations-of-a-phone-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1711-count-good-meals/">1711-count-good-meals</a></li>
@@ -403,94 +403,33 @@
           </label>
         </div>
         <article role="main">
-          <section id="populating-next-right-pointers-in-each-node-ii">
-<h1>117-populating-next-right-pointers-in-each-node-ii<a class="headerlink" href="#populating-next-right-pointers-in-each-node-ii" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/117-populating-next-right-pointers-in-each-node-ii">leetcode</a></p>
+          <section id="partitioning-into-minimum-number-of-deci-binary-numbers">
+<h1>1689-partitioning-into-minimum-number-of-deci-binary-numbers<a class="headerlink" href="#partitioning-into-minimum-number-of-deci-binary-numbers" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/1689-partitioning-into-minimum-number-of-deci-binary-numbers">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given a binary tree</p><pre>struct Node {
-  int val;
-  Node *left;
-  Node *right;
-  Node *next;
-}
-</pre><p>Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to <code>NULL</code>.</p><p>Initially, all next pointers are set to <code>NULL</code>.</p><p> </p>
-<p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2019/02/15/117_sample.png" style="width: 500px; height: 171px;"/>
-<pre><strong>Input:</strong> root = [1,2,3,4,5,null,7]
-<strong>Output:</strong> [1,#,2,3,#,4,5,7,#]
-<strong>Explanation: </strong>Given the above binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> root = []
-<strong>Output:</strong> []
+<div><p>A decimal number is called <strong>deci-binary</strong> if each of its digits is either <code>0</code> or <code>1</code> without any leading zeros. For example, <code>101</code> and <code>1100</code> are <strong>deci-binary</strong>, while <code>112</code> and <code>3001</code> are not.</p><p>Given a string <code>n</code> that represents a positive decimal integer, return <em>the <strong>minimum</strong> number of positive <strong>deci-binary</strong> numbers needed so that they sum up to </em><code>n</code><em>.</em></p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> n = "32"
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> 10 + 11 + 11 = 32
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> n = "82734"
+<strong>Output:</strong> 8
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> n = "27346209830709182346"
+<strong>Output:</strong> 9
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li>The number of nodes in the tree is in the range <code>[0, 6000]</code>.</li>
-<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
-</ul><p> </p>
-<p><strong>Follow-up:</strong></p><ul>
-<li>You may only use constant extra space.</li>
-<li>The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.</li>
+<li><code>1 &lt;= n.length &lt;= 10<sup>5</sup></code></li>
+<li><code>n</code> consists of only digits.</li>
+<li><code>n</code> does not contain any leading zeros and represents a positive integer.</li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
-<span class="sd"># Definition for a Node.</span>
-<span class="sd">class Node:</span>
-<span class="sd">    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):</span>
-<span class="sd">        self.val = val</span>
-<span class="sd">        self.left = left</span>
-<span class="sd">        self.right = right</span>
-<span class="sd">        self.next = next</span>
-<span class="sd">"""</span>
-
-
-<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="s2">"Node"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Node"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">constantspace</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-
-    <span class="c1"># Time Complexity: O(n)</span>
-    <span class="c1"># Space Complexity: O(n)</span>
-    <span class="k">def</span> <span class="nf">levelordertraversal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="s2">"Node"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Node"</span><span class="p">:</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([])</span>
-        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
-            <span class="n">qsize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qsize</span><span class="p">):</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">qsize</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-                    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
-                        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
-                        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">root</span>
-
-    <span class="c1"># Time Complexity: O(n)</span>
-    <span class="c1"># Space Complexity: O(1)</span>
-    <span class="k">def</span> <span class="nf">constantspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="s2">"Node"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Node"</span><span class="p">:</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">root</span>
-        <span class="k">while</span> <span class="n">node</span><span class="p">:</span>
-            <span class="n">curr</span> <span class="o">=</span> <span class="n">sentinel</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="k">while</span> <span class="n">node</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
-                    <span class="n">curr</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span>
-                    <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">.</span><span class="n">next</span>
-                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
-                    <span class="n">curr</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span>
-                    <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">.</span><span class="n">next</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
-
-            <span class="n">node</span> <span class="o">=</span> <span class="n">sentinel</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">sentinel</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">return</span> <span class="n">root</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minPartitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -501,23 +440,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../1192-critical-connections-in-a-network/">
+          <a class="next-page" href="../1695-maximum-erasure-value/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">1192-critical-connections-in-a-network</div>
+                <div class="title">1695-maximum-erasure-value</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../116-populating-next-right-pointers-in-each-node/">
+          <a class="prev-page" href="../1679-max-number-of-k-sum-pairs/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">116-populating-next-right-pointers-in-each-node</div>
+                <div class="title">1679-max-number-of-k-sum-pairs</div>
                 
               </div>
             </a>
@@ -527,7 +466,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/117-populating-next-right-pointers-in-each-node-ii.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/1689-partitioning-into-minimum-number-of-deci-binary-numbers.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -547,7 +486,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">117-populating-next-right-pointers-in-each-node-ii</a><ul>
+<li><a class="reference internal" href="#">1689-partitioning-into-minimum-number-of-deci-binary-numbers</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
