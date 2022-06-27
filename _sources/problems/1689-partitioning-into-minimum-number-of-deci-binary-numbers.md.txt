@@ -45,4 +45,5 @@ Try it on <a href='https://leetcode.com/problems/1689-partitioning-into-minimum-
 class Solution:
     def minPartitions(self, n: str) -> int:
         return max(list(n))
+
 ```
