@@ -89,7 +89,7 @@ class Solution:
             
         return delete
     
-    # Time Complexity: O(n+KlogK)
+    # Time Complexity: O(n)
     # space complexity: O(K)
     def sorting(self, s: str) -> int:
         frequency = [0]*26
