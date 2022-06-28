@@ -52,57 +52,59 @@ The XOR values for queries are:
 class segmentTree:
     def __init__(self, arr, n):
         self.n = n
-        self.tree = [0]*((4*n)+1)
-        self.build(arr,1, 0, n-1)
-    
-    def build(self, arr,v, lt, rt):
+        self.tree = [0] * ((4 * n) + 1)
+        self.build(arr, 1, 0, n - 1)
+
+    def build(self, arr, v, lt, rt):
         if lt == rt:
             self.tree[v] = arr[lt]
         else:
             mt = (lt + rt) >> 1
-            self.build(arr, 2*v, lt, mt)
-            self.build(arr, 2*v+1, mt+1, rt)
-            self.tree[v] = self.tree[2*v] ^ self.tree[2*v+1]  
-            
+            self.build(arr, 2 * v, lt, mt)
+            self.build(arr, 2 * v + 1, mt + 1, rt)
+            self.tree[v] = self.tree[2 * v] ^ self.tree[2 * v + 1]
+
     def query(self, l, r):
-        return self.__query(1, 0, self.n-1, l, r)
-        
+        return self.__query(1, 0, self.n - 1, l, r)
+
     def __query(self, v, lt, rt, l, r):
         if l > r:
             return 0
         if l == lt and r == rt:
             return self.tree[v]
         mt = (lt + rt) >> 1
-        return self.__query(2*v, lt, mt, l, min(mt, r)) ^ self.__query(2*v+1, mt+1 ,rt, max(mt+1, l), r)
-        
+        return self.__query(2 * v, lt, mt, l, min(mt, r)) ^ self.__query(
+            2 * v + 1, mt + 1, rt, max(mt + 1, l), r
+        )
+
 
 class Solution:
     def xorQueries(self, arr: List[int], queries: List[List[int]]) -> List[int]:
         return self.sTree(arr, queries)
-    
+
     # Time Complexoty: O(n)
     # space Complexity: O(n)
     def prexor(self, arr: List[int], queries: List[List[int]]) -> List[int]:
         n = len(arr)
         if not n:
             return []
-        prefXOR = [0]*n
+        prefXOR = [0] * n
         prefXOR[0] = arr[0]
-        for i in range(1,n):
-            prefXOR[i] = prefXOR[i-1] ^ arr[i]
+        for i in range(1, n):
+            prefXOR[i] = prefXOR[i - 1] ^ arr[i]
         res = []
-        for l,r in queries:
-            if l  > 0:
-                res.append(prefXOR[l-1]^prefXOR[r])
+        for l, r in queries:
+            if l > 0:
+                res.append(prefXOR[l - 1] ^ prefXOR[r])
             else:
                 res.append(prefXOR[r])
         return res
-    
+
     # Time Complexoty: O(n)
     # space Complexity: O(n)
     def sTree(self, arr: List[int], queries: List[List[int]]) -> List[int]:
         n = len(arr)
         st = segmentTree(arr, n)
-        return [st.query(l,r) for l,r in queries]
-            
+        return [st.query(l, r) for l, r in queries]
+
 ```
