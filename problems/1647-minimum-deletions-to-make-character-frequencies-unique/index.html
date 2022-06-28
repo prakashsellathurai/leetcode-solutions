@@ -433,6 +433,11 @@ Note that we only care about characters that are still in the string at the end 
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">minDeletions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="c1"># Time Complexity: O(n+K^2)</span>
+    <span class="c1"># Space Complexity: O(K)</span>
+    <span class="k">def</span> <span class="nf">naive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">frequency</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">26</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
             <span class="n">frequency</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -446,6 +451,49 @@ Note that we only care about characters that are still in the string at the end 
             <span class="n">seenFrequencies</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">frequency</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">delete</span>
         
+    <span class="c1"># Time Complexity: O(n+K^2logK)</span>
+    <span class="c1"># Space Complexity: O(K)</span>
+    <span class="k">def</span> <span class="nf">maxheap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> 
+        
+        <span class="n">frequency</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">26</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">frequency</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+        <span class="n">pq</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">freq</span> <span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequency</span> <span class="k">if</span> <span class="n">freq</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">delete</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span><span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="o">-</span><span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">top</span> <span class="o">==</span> <span class="o">-</span><span class="n">pq</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">top</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">top</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span> <span class="o">-</span><span class="n">top</span><span class="p">)</span>
+                <span class="n">delete</span><span class="o">+=</span><span class="mi">1</span>
+            
+            
+        <span class="k">return</span> <span class="n">delete</span>
+    
+    <span class="c1"># Time Complexity: O(n+KlogK)</span>
+    <span class="c1"># space complexity: O(K)</span>
+    <span class="k">def</span> <span class="nf">sorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">frequency</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">26</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">frequency</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="n">frequency</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">max_freq_allowed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">delete_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequency</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">freq</span> <span class="o">&gt;</span>  <span class="n">max_freq_allowed</span><span class="p">:</span>
+                <span class="n">delete_count</span> <span class="o">+=</span> <span class="n">freq</span><span class="o">-</span><span class="n">max_freq_allowed</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="n">max_freq_allowed</span>
+            <span class="n">max_freq_allowed</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">delete_count</span>
+        
+            
+            
+            
 </pre></div>
 </div>
 </section>
