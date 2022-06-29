@@ -53,10 +53,10 @@ class Solution:
     # Time Complexity: O(n+K^2)
     # Space Complexity: O(K)
     def naive(self, s: str) -> int:
-        frequency = [0]*26
+        frequency = [0] * 26
         for c in s:
-            frequency[ord(c)-ord('a')] += 1
-            
+            frequency[ord(c) - ord("a")] += 1
+
         delete = 0
         seenFrequencies = set()
         for i in range(26):
@@ -65,48 +65,44 @@ class Solution:
                 delete += 1
             seenFrequencies.add(frequency[i])
         return delete
-        
+
     # Time Complexity: O(n+K^2logK)
     # Space Complexity: O(K)
-    def maxheap(self, s: str) -> int: 
-        
-        frequency = [0]*26
+    def maxheap(self, s: str) -> int:
+
+        frequency = [0] * 26
         for c in s:
-            frequency[ord(c)-ord('a')] += 1
-            
+            frequency[ord(c) - ord("a")] += 1
+
         pq = [-freq for freq in frequency if freq != 0]
         delete = 0
         heapq.heapify(pq)
-        while len(pq)> 1:
+        while len(pq) > 1:
             top = -heapq.heappop(pq)
-            
+
             if top == -pq[0]:
-                if top-1 > 0:
+                if top - 1 > 0:
                     top -= 1
                     heapq.heappush(pq, -top)
-                delete+=1
-            
-            
+                delete += 1
+
         return delete
-    
+
     # Time Complexity: O(n)
     # space complexity: O(K)
     def sorting(self, s: str) -> int:
-        frequency = [0]*26
+        frequency = [0] * 26
         for c in s:
-            frequency[ord(c)-ord('a')] += 1
-        
+            frequency[ord(c) - ord("a")] += 1
+
         frequency.sort(reverse=True)
         max_freq_allowed = len(s)
         delete_count = 0
         for freq in frequency:
-            if freq >  max_freq_allowed:
-                delete_count += freq-max_freq_allowed
+            if freq > max_freq_allowed:
+                delete_count += freq - max_freq_allowed
                 freq = max_freq_allowed
-            max_freq_allowed = max(0, freq-1)
+            max_freq_allowed = max(0, freq - 1)
         return delete_count
-        
-            
-            
-            
+
 ```
