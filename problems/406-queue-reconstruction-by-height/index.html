@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="474-ones-and-zeroes" href="../474-ones-and-zeroes/" /><link rel="prev" title="47-permutations-ii" href="../47-permutations-ii/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="410-split-array-largest-sum" href="../410-split-array-largest-sum/" /><link rel="prev" title="4-median-of-two-sorted-arrays" href="../4-median-of-two-sorted-arrays/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>473-matchsticks-to-square - Leetcode Solutions</title>
+        <title>406-queue-reconstruction-by-height - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -267,7 +267,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../39-combination-sum/">39-combination-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../399-evaluate-division/">399-evaluate-division</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4-median-of-two-sorted-arrays/">4-median-of-two-sorted-arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../406-queue-reconstruction-by-height/">406-queue-reconstruction-by-height</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">406-queue-reconstruction-by-height</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../410-split-array-largest-sum/">410-split-array-largest-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../416-partition-equal-subset-sum/">416-partition-equal-subset-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../421-maximum-xor-of-two-numbers-in-an-array/">421-maximum-xor-of-two-numbers-in-an-array</a></li>
@@ -277,7 +277,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../456-132-pattern/">456-132-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../46-permutations/">46-permutations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../47-permutations-ii/">47-permutations-ii</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">473-matchsticks-to-square</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../473-matchsticks-to-square/">473-matchsticks-to-square</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../474-ones-and-zeroes/">474-ones-and-zeroes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../494-target-sum/">494-target-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../4sum-ii/">4sum-ii</a></li>
@@ -407,114 +407,49 @@
           </label>
         </div>
         <article role="main">
-          <section id="matchsticks-to-square">
-<h1>473-matchsticks-to-square<a class="headerlink" href="#matchsticks-to-square" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/473-matchsticks-to-square">leetcode</a></p>
+          <section id="queue-reconstruction-by-height">
+<h1>406-queue-reconstruction-by-height<a class="headerlink" href="#queue-reconstruction-by-height" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/406-queue-reconstruction-by-height">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>You are given an integer array <code>matchsticks</code> where <code>matchsticks[i]</code> is the length of the <code>i<sup>th</sup></code> matchstick. You want to use <strong>all the matchsticks</strong> to make one square. You <strong>should not break</strong> any stick, but you can link them up, and each matchstick must be used <strong>exactly one time</strong>.</p><p>Return <code>true</code> if you can make this square and <code>false</code> otherwise.</p><p> </p>
-<p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/04/09/matchsticks1-grid.jpg" style="width: 253px; height: 253px;"/>
-<pre><strong>Input:</strong> matchsticks = [1,1,2,2,2]
-<strong>Output:</strong> true
-<strong>Explanation:</strong> You can form a square with length 2, one side of the square came two sticks with length 1.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> matchsticks = [3,3,3,3,4]
-<strong>Output:</strong> false
-<strong>Explanation:</strong> You cannot find a way to form a square with all the matchsticks.
+<div><p>You are given an array of people, <code>people</code>, which are the attributes of some people in a queue (not necessarily in order). Each <code>people[i] = [h<sub>i</sub>, k<sub>i</sub>]</code> represents the <code>i<sup>th</sup></code> person of height <code>h<sub>i</sub></code> with <strong>exactly</strong> <code>k<sub>i</sub></code> other people in front who have a height greater than or equal to <code>h<sub>i</sub></code>.</p><p>Reconstruct and return <em>the queue that is represented by the input array </em><code>people</code>. The returned queue should be formatted as an array <code>queue</code>, where <code>queue[j] = [h<sub>j</sub>, k<sub>j</sub>]</code> is the attributes of the <code>j<sup>th</sup></code> person in the queue (<code>queue[0]</code> is the person at the front of the queue).</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]
+<strong>Output:</strong> [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]
+<strong>Explanation:</strong>
+Person 0 has height 5 with no other people taller or the same height in front.
+Person 1 has height 7 with no other people taller or the same height in front.
+Person 2 has height 5 with two persons taller or the same height in front, which is person 0 and 1.
+Person 3 has height 6 with one person taller or the same height in front, which is person 1.
+Person 4 has height 4 with four people taller or the same height in front, which are people 0, 1, 2, and 3.
+Person 5 has height 7 with one person taller or the same height in front, which is person 1.
+Hence [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] is the reconstructed queue.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> people = [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]
+<strong>Output:</strong> [[4,0],[5,0],[2,2],[3,2],[1,4],[6,0]]
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= matchsticks.length &lt;= 15</code></li>
-<li><code>1 &lt;= matchsticks[i] &lt;= 10<sup>8</sup></code></li>
+<li><code>1 &lt;= people.length &lt;= 2000</code></li>
+<li><code>0 &lt;= h<sub>i</sub> &lt;= 10<sup>6</sup></code></li>
+<li><code>0 &lt;= k<sub>i</sub> &lt; people.length</code></li>
+<li>It is guaranteed that the queue can be reconstructed.</li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">makesquare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matchsticks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">(</span><span class="n">matchsticks</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    Time Complexity: O(4^n)</span>
-<span class="sd">    Space Complexity: O(n)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matchsticks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">matchsticks</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="n">length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">matchsticks</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span>
-
-        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">matchsticks</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">!=</span> <span class="n">length</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="n">matchsticks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">sides</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
-
-        <span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">matchsticks</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">True</span>
-
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">sides</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">matchsticks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">:</span>
-                    <span class="n">sides</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">matchsticks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">backtrack</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                        <span class="k">return</span> <span class="kc">True</span>
-                    <span class="n">sides</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">matchsticks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="k">return</span> <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    Time Complexity: O(n*2^n)</span>
-<span class="sd">    Space Complexity: O(n+2^n)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matchsticks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">matchsticks</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="n">lth</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matchsticks</span><span class="p">)</span>
-
-        <span class="n">perimeter</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">matchsticks</span><span class="p">)</span>
-        <span class="n">side</span> <span class="o">=</span> <span class="n">perimeter</span> <span class="o">//</span> <span class="mi">4</span>
-
-        <span class="k">if</span> <span class="n">side</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">!=</span> <span class="n">perimeter</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-
-        <span class="n">dp</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">sidesfilledsofar</span><span class="p">):</span>
-            <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)):</span>
-                    <span class="n">total</span> <span class="o">+=</span> <span class="n">matchsticks</span><span class="p">[</span><span class="n">lth</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span>
-
-            <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">total</span> <span class="o">%</span> <span class="n">side</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">sidesfilledsofar</span> <span class="o">+=</span> <span class="mi">1</span>
-
-            <span class="k">if</span> <span class="n">sidesfilledsofar</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">True</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">sidesfilledsofar</span><span class="p">)</span> <span class="ow">in</span> <span class="n">dp</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">dp</span><span class="p">[(</span><span class="n">mask</span><span class="p">,</span> <span class="n">sidesfilledsofar</span><span class="p">)]</span>
-
-            <span class="n">ans</span> <span class="o">=</span> <span class="kc">False</span>
-
-            <span class="n">remainingspace</span> <span class="o">=</span> <span class="n">side</span> <span class="o">*</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">total</span> <span class="o">/</span> <span class="n">side</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">total</span>
-
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">matchsticks</span><span class="p">[</span><span class="n">lth</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">remainingspace</span> <span class="ow">and</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">recur</span><span class="p">(</span><span class="n">mask</span> <span class="o">^</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">),</span> <span class="n">sidesfilledsofar</span><span class="p">):</span>
-                        <span class="n">ans</span> <span class="o">=</span> <span class="kc">True</span>
-                        <span class="k">break</span>
-            <span class="n">dp</span><span class="p">[(</span><span class="n">mask</span><span class="p">,</span> <span class="n">sidesfilledsofar</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ans</span>
-            <span class="k">return</span> <span class="n">ans</span>
-
-        <span class="k">return</span> <span class="n">recur</span><span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">lth</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]</span>
+    <span class="c1"># 0 : 7,5 # size =1</span>
+    <span class="c1"># 1: 7,6</span>
+    <span class="c1"># 2: 5</span>
+    <span class="c1"># 4: 4</span>
+    <span class="k">def</span> <span class="nf">reconstructQueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">people</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="n">people</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">people</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+        
 </pre></div>
 </div>
 </section>
@@ -525,23 +460,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../474-ones-and-zeroes/">
+          <a class="next-page" href="../410-split-array-largest-sum/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">474-ones-and-zeroes</div>
+                <div class="title">410-split-array-largest-sum</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../47-permutations-ii/">
+          <a class="prev-page" href="../4-median-of-two-sorted-arrays/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">47-permutations-ii</div>
+                <div class="title">4-median-of-two-sorted-arrays</div>
                 
               </div>
             </a>
@@ -551,7 +486,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/473-matchsticks-to-square.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/406-queue-reconstruction-by-height.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -571,7 +506,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">473-matchsticks-to-square</a><ul>
+<li><a class="reference internal" href="#">406-queue-reconstruction-by-height</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
