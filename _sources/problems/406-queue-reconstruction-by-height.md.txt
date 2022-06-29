@@ -45,49 +45,50 @@ Hence [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] is the reconstructed queue.
 ## Solution(Python)
 ```Python
 class Node:
-	def __init__(self, p):
-		self.person = p
-		self.count = 1
-		self.left = None
-		self.right = None
-    
+    def __init__(self, p):
+        self.person = p
+        self.count = 1
+        self.left = None
+        self.right = None
+
+
 class Solution:
-	def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
 
-		ln = len(people)
-		if ln == 0:
-			return []
+        ln = len(people)
+        if ln == 0:
+            return []
 
-		people = sorted(people, key = lambda x: (-x[0], x[1]))
+        people = sorted(people, key=lambda x: (-x[0], x[1]))
 
-		root = Node(people[0])
-		for p in people[1:]:
-			self.insert(root, p, p[1])
+        root = Node(people[0])
+        for p in people[1:]:
+            self.insert(root, p, p[1])
 
-		res = []
-		self.inorder(root, res) 
-		return res
+        res = []
+        self.inorder(root, res)
+        return res
 
-	def insert(self, root, p, count):
-		# insert to the left
-		if root.count > count:
-			if not root.left:
-				root.left = Node(p)
-			else:
-				self.insert(root.left, p, count)
-			#because I have now one more node on the left
-			root.count += 1 
-		else:
-			if not root.right:
-				root.right = Node(p)
-			else:
-			   # I already have count - root.count nodes on the left
-				self.insert(root.right, p, count - root.count)
+    def insert(self, root, p, count):
+        # insert to the left
+        if root.count > count:
+            if not root.left:
+                root.left = Node(p)
+            else:
+                self.insert(root.left, p, count)
+            # because I have now one more node on the left
+            root.count += 1
+        else:
+            if not root.right:
+                root.right = Node(p)
+            else:
+                # I already have count - root.count nodes on the left
+                self.insert(root.right, p, count - root.count)
 
+    def inorder(self, root, res):
+        if root:
+            self.inorder(root.left, res)
+            res.append(root.person)
+            self.inorder(root.right, res)
 
-	def inorder(self, root, res):
-		if root:
-			self.inorder(root.left, res)
-			res.append(root.person)
-			self.inorder(root.right, res)
 ```
