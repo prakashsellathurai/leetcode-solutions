@@ -43,15 +43,16 @@ Only two moves are needed (remember each move increments or decrements one eleme
 class Solution:
     def minMoves2(self, nums: List[int]) -> int:
         return self.sorting(nums)
-    
+
     # Time Complexity: O(nlogn)
     # Space Complexity: O(1)
     def sorting(self, nums: List[int]) -> int:
         nums.sort()
         n = len(nums)
-        median = nums[n//2]
+        median = nums[n // 2]
         steps = 0
         for num in nums:
-            steps += abs(median-num)
+            steps += abs(median - num)
         return steps
+
 ```
