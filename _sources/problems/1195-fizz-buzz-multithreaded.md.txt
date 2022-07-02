@@ -61,55 +61,72 @@ Try it on <a href='https://leetcode.com/problems/1195-fizz-buzz-multithreaded'>l
 
 ## Solution(Python)
 ```Python
-class FizzBuzz:
-    def __init__(self, n: int):
-        self.done = False        
-        self.n = n
-        self.fSem = threading.Semaphore(0)
-        self.bSem = threading.Semaphore(0)
-        self.fbSem = threading.Semaphore(0)
-        self.nSem = threading.Semaphore(1)
+import threading
+
+
+class FizzBuzz(object):
+    def __init__(self, n):
+        self.__n = n
+        self.__curr = 0
+        self.__cv = threading.Condition()
 
     # printFizz() outputs "fizz"
-    def fizz(self, printFizz: 'Callable[[], None]') -> None:
-        while True:
-            self.fSem.acquire()
-            if self.done: break
-            printFizz()
-            self.nSem.release()
+    def fizz(self, printFizz):
+        """
+        :type printFizz: method
+        :rtype: void
+        """
+        for i in range(1, self.__n+1):
+            with self.__cv:
+                while self.__curr % 4 != 0:
+                    self.__cv.wait()
+                self.__curr += 1
+                if i % 3 == 0 and i % 5 != 0:
+                    printFizz()
+                self.__cv.notify_all()
 
     # printBuzz() outputs "buzz"
-    def buzz(self, printBuzz: 'Callable[[], None]') -> None:
-        while True:
-            self.bSem.acquire()
-            if self.done: break
-            printBuzz()
-            self.nSem.release()
+    def buzz(self, printBuzz):
+        """
+        :type printBuzz: method
+        :rtype: void
+        """
+        for i in range(1, self.__n+1):
+            with self.__cv:
+                while self.__curr % 4 != 1:
+                    self.__cv.wait()
+                self.__curr += 1
+                if i % 3 != 0 and i % 5 == 0:
+                    printBuzz()
+                self.__cv.notify_all()
 
     # printFizzBuzz() outputs "fizzbuzz"
-    def fizzbuzz(self, printFizzBuzz: 'Callable[[], None]') -> None:
-        while True:
-            self.fbSem.acquire()
-            if self.done: break
-            printFizzBuzz()
-            self.nSem.release()
+    def fizzbuzz(self, printFizzBuzz):
+        """
+        :type printFizzBuzz: method
+        :rtype: void
+        """
+        for i in range(1, self.__n+1):
+            with self.__cv:
+                while self.__curr % 4 != 2:
+                    self.__cv.wait()
+                self.__curr += 1
+                if i % 3 == 0 and i % 5 == 0:
+                    printFizzBuzz()
+                self.__cv.notify_all()
 
     # printNumber(x) outputs "x", where x is an integer.
-    def number(self, printNumber: 'Callable[[int], None]') -> None:
-        for i in range(1, self.n+1):
-            self.nSem.acquire()
-            if i % 15 == 0:
-                self.fbSem.release()
-            elif i % 3 == 0:
-                self.fSem.release()
-            elif i % 5 == 0:
-                self.bSem.release()
-            else:
-                printNumber(i)
-                self.nSem.release()
-        self.nSem.acquire() # needed so this thread waits to set done flag only when other threads are done with printing
-        self.done = True
-        self.fSem.release()  # let all other threads to break and finish
-        self.bSem.release()  #
-        self.fbSem.release() #
+    def number(self, printNumber):
+        """
+        :type printNumber: method
+        :rtype: void
+        """
+        for i in range(1, self.__n+1):
+            with self.__cv:
+                while self.__curr % 4 != 3:
+                    self.__cv.wait()
+                self.__curr += 1
+                if i % 3 != 0 and i % 5 != 0:
+                    printNumber(i)
+                self.__cv.notify_all()
 ```
