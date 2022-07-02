@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="88-merge-sorted-array" href="../88-merge-sorted-array/" /><link rel="prev" title="867-transpose-matrix" href="../867-transpose-matrix/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="12-integer-to-roman" href="../12-integer-to-roman/" /><link rel="prev" title="1192-critical-connections-in-a-network" href="../1192-critical-connections-in-a-network/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>875-koko-eating-bananas - Leetcode Solutions</title>
+        <title>1195-fizz-buzz-multithreaded - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -173,7 +173,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../116-populating-next-right-pointers-in-each-node/">116-populating-next-right-pointers-in-each-node</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../117-populating-next-right-pointers-in-each-node-ii/">117-populating-next-right-pointers-in-each-node-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1192-critical-connections-in-a-network/">1192-critical-connections-in-a-network</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1195-fizz-buzz-multithreaded/">1195-fizz-buzz-multithreaded</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1195-fizz-buzz-multithreaded</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12-integer-to-roman/">12-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../120-triangle/">120-triangle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1202-smallest-string-with-swaps/">1202-smallest-string-with-swaps</a></li>
@@ -335,7 +335,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../844-backspace-string-compare/">844-backspace-string-compare</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../849-maximize-distance-to-closest-person/">849-maximize-distance-to-closest-person</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../867-transpose-matrix/">867-transpose-matrix</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">875-koko-eating-bananas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../875-koko-eating-bananas/">875-koko-eating-bananas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../88-merge-sorted-array/">88-merge-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../897-increasing-order-search-tree/">897-increasing-order-search-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../9-palindrome-number/">9-palindrome-number</a></li>
@@ -412,78 +412,100 @@
           </label>
         </div>
         <article role="main">
-          <section id="koko-eating-bananas">
-<h1>875-koko-eating-bananas<a class="headerlink" href="#koko-eating-bananas" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/875-koko-eating-bananas">leetcode</a></p>
+          <section id="fizz-buzz-multithreaded">
+<h1>1195-fizz-buzz-multithreaded<a class="headerlink" href="#fizz-buzz-multithreaded" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/1195-fizz-buzz-multithreaded">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Koko loves to eat bananas. There are <code>n</code> piles of bananas, the <code>i<sup>th</sup></code> pile has <code>piles[i]</code> bananas. The guards have gone and will come back in <code>h</code> hours.</p><p>Koko can decide her bananas-per-hour eating speed of <code>k</code>. Each hour, she chooses some pile of bananas and eats <code>k</code> bananas from that pile. If the pile has less than <code>k</code> bananas, she eats all of them instead and will not eat any more bananas during this hour.</p><p>Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.</p><p>Return <em>the minimum integer</em> <code>k</code> <em>such that she can eat all the bananas within</em> <code>h</code> <em>hours</em>.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> piles = [3,6,7,11], h = 8
-<strong>Output:</strong> 4
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> piles = [30,11,23,4,20], h = 5
-<strong>Output:</strong> 30
-</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> piles = [30,11,23,4,20], h = 6
-<strong>Output:</strong> 23
-</pre><p> </p>
+<div><p>You have the four functions:</p><ul>
+<li><code>printFizz</code> that prints the word <code>"fizz"</code> to the console,</li>
+<li><code>printBuzz</code> that prints the word <code>"buzz"</code> to the console,</li>
+<li><code>printFizzBuzz</code> that prints the word <code>"fizzbuzz"</code> to the console, and</li>
+<li><code>printNumber</code> that prints a given integer to the console.</li>
+</ul><p>You are given an instance of the class <code>FizzBuzz</code> that has four functions: <code>fizz</code>, <code>buzz</code>, <code>fizzbuzz</code> and <code>number</code>. The same instance of <code>FizzBuzz</code> will be passed to four different threads:</p><ul>
+<li><strong>Thread A:</strong> calls <code>fizz()</code> that should output the word <code>"fizz"</code>.</li>
+<li><strong>Thread B:</strong> calls <code>buzz()</code> that should output the word <code>"buzz"</code>.</li>
+<li><strong>Thread C:</strong> calls <code>fizzbuzz()</code> that should output the word <code>"fizzbuzz"</code>.</li>
+<li><strong>Thread D:</strong> calls <code>number()</code> that should only output the integers.</li>
+</ul><p>Modify the given class to output the series <code>[1, 2, "fizz", 4, "buzz", ...]</code> where the <code>i<sup>th</sup></code> token (<strong>1-indexed</strong>) of the series is:</p><ul>
+<li><code>"fizzbuzz"</code> if <code>i</code> is divisible by <code>3</code> and <code>5</code>,</li>
+<li><code>"fizz"</code> if <code>i</code> is divisible by <code>3</code> and not <code>5</code>,</li>
+<li><code>"buzz"</code> if <code>i</code> is divisible by <code>5</code> and not <code>3</code>, or</li>
+<li><code>i</code> if <code>i</code> is not divisible by <code>3</code> or <code>5</code>.</li>
+</ul><p>Implement the <code>FizzBuzz</code> class:</p><ul>
+<li><code>FizzBuzz(int n)</code> Initializes the object with the number <code>n</code> that represents the length of the sequence that should be printed.</li>
+<li><code>void fizz(printFizz)</code> Calls <code>printFizz</code> to output <code>"fizz"</code>.</li>
+<li><code>void buzz(printBuzz)</code> Calls <code>printBuzz</code> to output <code>"buzz"</code>.</li>
+<li><code>void fizzbuzz(printFizzBuzz)</code> Calls <code>printFizzBuzz</code> to output <code>"fizzbuzz"</code>.</li>
+<li><code>void number(printNumber)</code> Calls <code>printnumber</code> to output the numbers.</li>
+</ul><p> </p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> n = 15
+<strong>Output:</strong> [1,2,"fizz",4,"buzz","fizz",7,8,"fizz","buzz",11,"fizz",13,14,"fizzbuzz"]
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> n = 5
+<strong>Output:</strong> [1,2,"fizz",4,"buzz"]
+</pre>
+<p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= piles.length &lt;= 10<sup>4</sup></code></li>
-<li><code>piles.length &lt;= h &lt;= 10<sup>9</sup></code></li>
-<li><code>1 &lt;= piles[i] &lt;= 10<sup>9</sup></code></li>
+<li><code>1 &lt;= n &lt;= 50</code></li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">minEatingSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">binarySearch</span><span class="p">(</span><span class="n">piles</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FizzBuzz</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fSem</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bSem</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fbSem</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># minimum possible speed will be 1</span>
-    <span class="c1"># maximum possible speed will be m largest pile size</span>
-    <span class="c1"># which gives us range</span>
-    <span class="c1"># then try every possible speed values starting from lowest speed</span>
-    <span class="c1"># until condition is met</span>
-    <span class="c1">#</span>
-    <span class="c1"># Time Complexity: O(mn)</span>
-    <span class="c1"># Space Complexity: O(1)</span>
-    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span>
-
+    <span class="c1"># printFizz() outputs "fizz"</span>
+    <span class="k">def</span> <span class="nf">fizz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printFizz</span><span class="p">:</span> <span class="s1">'Callable[[], None]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">hour_spend</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">pile</span> <span class="ow">in</span> <span class="n">piles</span><span class="p">:</span>
-                <span class="n">hour_spent</span> <span class="o">+=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">pile</span> <span class="o">/</span> <span class="n">speed</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">hour_spent</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">speed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fSem</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span> <span class="k">break</span>
+            <span class="n">printFizz</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="c1"># printBuzz() outputs "buzz"</span>
+    <span class="k">def</span> <span class="nf">buzz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printBuzz</span><span class="p">:</span> <span class="s1">'Callable[[], None]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bSem</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span> <span class="k">break</span>
+            <span class="n">printBuzz</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="c1"># printFizzBuzz() outputs "fizzbuzz"</span>
+    <span class="k">def</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printFizzBuzz</span><span class="p">:</span> <span class="s1">'Callable[[], None]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fbSem</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span> <span class="k">break</span>
+            <span class="n">printFizzBuzz</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="c1"># printNumber(x) outputs "x", where x is an integer.</span>
+    <span class="k">def</span> <span class="nf">number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printNumber</span><span class="p">:</span> <span class="s1">'Callable[[int], None]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">15</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fbSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">speed</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="c1"># since bruteforce searches on the range of increasing list</span>
-    <span class="c1"># binary search will halves the  search space by log m</span>
-    <span class="c1">#</span>
-    <span class="c1"># binary search control relies on finding the condition of spearater</span>
-    <span class="c1"># line between the search space</span>
-    <span class="c1"># if x banana per second satisfies means x+1 banana per second also</span>
-    <span class="c1"># satisfies the time criteria so ignore x+1</span>
-    <span class="c1"># if x bps doesnot satifies then ignore x-1</span>
-    <span class="c1"># Time Complexity: O(nlogM)</span>
-    <span class="c1"># Space Complexity:O(1)</span>
-    <span class="k">def</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">piles</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">left</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">right</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">piles</span><span class="p">)</span>
-
-        <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="n">hour_spend</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">pile</span> <span class="ow">in</span> <span class="n">piles</span><span class="p">:</span>
-                <span class="n">hour_spend</span> <span class="o">+=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">pile</span> <span class="o">/</span> <span class="n">mid</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">hour_spend</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">:</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">left</span>
+                <span class="n">printNumber</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nSem</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="c1"># needed so this thread waits to set done flag only when other threads are done with printing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  <span class="c1"># let all other threads to break and finish</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fbSem</span><span class="o">.</span><span class="n">release</span><span class="p">()</span> <span class="c1">#</span>
 </pre></div>
 </div>
 </section>
@@ -494,23 +516,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../88-merge-sorted-array/">
+          <a class="next-page" href="../12-integer-to-roman/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">88-merge-sorted-array</div>
+                <div class="title">12-integer-to-roman</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../867-transpose-matrix/">
+          <a class="prev-page" href="../1192-critical-connections-in-a-network/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">867-transpose-matrix</div>
+                <div class="title">1192-critical-connections-in-a-network</div>
                 
               </div>
             </a>
@@ -520,7 +542,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/875-koko-eating-bananas.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/1195-fizz-buzz-multithreaded.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -540,7 +562,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">875-koko-eating-bananas</a><ul>
+<li><a class="reference internal" href="#">1195-fizz-buzz-multithreaded</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
