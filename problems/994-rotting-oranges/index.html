@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="535-encode-and-decode-tinyurl" href="../535-encode-and-decode-tinyurl/" /><link rel="prev" title="53-maximum-subarray" href="../53-maximum-subarray/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="basic-calculator-ii" href="../basic-calculator-ii/" /><link rel="prev" title="992-subarrays-with-k-different-integers" href="../992-subarrays-with-k-different-integers/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>532-k-diff-pairs-in-an-array - Leetcode Solutions</title>
+        <title>994-rotting-oranges - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -294,7 +294,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../520-detect-capital/">520-detect-capital</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../525-contiguous-array/">525-contiguous-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../53-maximum-subarray/">53-maximum-subarray</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">532-k-diff-pairs-in-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../532-k-diff-pairs-in-an-array/">532-k-diff-pairs-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../535-encode-and-decode-tinyurl/">535-encode-and-decode-tinyurl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../538-convert-bst-to-greater-tree/">538-convert-bst-to-greater-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../543-diameter-of-binary-tree/">543-diameter-of-binary-tree</a></li>
@@ -350,7 +350,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../979-distribute-coins-in-binary-tree/">979-distribute-coins-in-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-recover-binary-search-tree/">99-recover-binary-search-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../992-subarrays-with-k-different-integers/">992-subarrays-with-k-different-integers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../994-rotting-oranges/">994-rotting-oranges</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">994-rotting-oranges</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic-calculator-ii/">basic-calculator-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../burst-balloons/">burst-balloons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../consecutive-characters/">consecutive-characters</a></li>
@@ -414,104 +414,73 @@
           </label>
         </div>
         <article role="main">
-          <section id="k-diff-pairs-in-an-array">
-<h1>532-k-diff-pairs-in-an-array<a class="headerlink" href="#k-diff-pairs-in-an-array" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/532-k-diff-pairs-in-an-array">leetcode</a></p>
+          <section id="rotting-oranges">
+<h1>994-rotting-oranges<a class="headerlink" href="#rotting-oranges" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/994-rotting-oranges">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given an array of integers <code>nums</code> and an integer <code>k</code>, return <em>the number of <b>unique</b> k-diff pairs in the array</em>.</p><p>A <strong>k-diff</strong> pair is an integer pair <code>(nums[i], nums[j])</code>, where the following are true:</p><ul>
-<li><code>0 &lt;= i &lt; j &lt; nums.length</code></li>
-<li><code>|nums[i] - nums[j]| == k</code></li>
-</ul><p><strong>Notice</strong> that <code>|val|</code> denotes the absolute value of <code>val</code>.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> nums = [3,1,4,1,5], k = 2
-<strong>Output:</strong> 2
-<strong>Explanation:</strong> There are two 2-diff pairs in the array, (1, 3) and (3, 5).
-Although we have two 1s in the input, we should only return the number of <strong>unique</strong> pairs.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> nums = [1,2,3,4,5], k = 1
+<div><p>You are given an <code>m x n</code> <code>grid</code> where each cell can have one of three values:</p><ul>
+<li><code>0</code> representing an empty cell,</li>
+<li><code>1</code> representing a fresh orange, or</li>
+<li><code>2</code> representing a rotten orange.</li>
+</ul><p>Every minute, any fresh orange that is <strong>4-directionally adjacent</strong> to a rotten orange becomes rotten.</p><p>Return <em>the minimum number of minutes that must elapse until no cell has a fresh orange</em>. If <em>this is impossible, return</em> <code>-1</code>.</p><p> </p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2019/02/16/oranges.png" style="width: 650px; height: 137px;"/>
+<pre><strong>Input:</strong> grid = [[2,1,1],[1,1,0],[0,1,1]]
 <strong>Output:</strong> 4
-<strong>Explanation:</strong> There are four 1-diff pairs in the array, (1, 2), (2, 3), (3, 4) and (4, 5).
-</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> nums = [1,3,1,5,4], k = 0
-<strong>Output:</strong> 1
-<strong>Explanation:</strong> There is one 0-diff pair in the array, (1, 1).
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> grid = [[2,1,1],[0,1,1],[1,0,1]]
+<strong>Output:</strong> -1
+<strong>Explanation:</strong> The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> grid = [[0,2]]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> Since there are already no fresh oranges at minute 0, the answer is just 0.
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
-<li><code>-10<sup>7</sup> &lt;= nums[i] &lt;= 10<sup>7</sup></code></li>
-<li><code>0 &lt;= k &lt;= 10<sup>7</sup></code></li>
+<li><code>m == grid.length</code></li>
+<li><code>n == grid[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 10</code></li>
+<li><code>grid[i][j]</code> is <code>0</code>, <code>1</code>, or <code>2</code>.</li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">findPairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">HashingSolution</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    bruteforce solution is to try all possible n(n-1)/2 pairs from the array of size n</span>
-<span class="sd">    keep a set with unique difference of value == k</span>
-<span class="sd">    </span>
-<span class="sd">    </span>
-<span class="sd">    Time Complexity: O(n^2)</span>
-<span class="sd">    Space Complexity: O(n)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">bruteforceSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
-                    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    Time Complexity: O(n^2)</span>
-<span class="sd">    Space Complexity: O(1)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">bruteforceConstantSpaceSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">kdiff</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
-                    <span class="n">kdiff</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="n">kdiff</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    similar to two sum problem if we hash num1  in hashmap and look for num2+k for the second time we could increment the kidff counter</span>
-<span class="sd">    </span>
-<span class="sd">    </span>
-<span class="sd">    Time Complexity: O(n)</span>
-<span class="sd">    Space Complexity: O(n)</span>
-<span class="sd">    </span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">HashingSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">hashmap</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">num</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-                <span class="n">hashmap</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">hashmap</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">kdiff</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">hashmap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">kdiff</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">num</span> <span class="o">+</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-                    <span class="n">kdiff</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="n">kdiff</span>
+    <span class="k">def</span> <span class="nf">orangesRotting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="n">fresh</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([])</span>
+        
+        <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">days</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>  <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">fresh</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fresh</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">time</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+                <span class="n">days</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="n">time</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">neigh_x</span><span class="p">,</span><span class="n">neigh_y</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">),(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)]:</span>
+                    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">neigh_x</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">neigh_y</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">neigh_x</span><span class="p">,</span><span class="n">neigh_y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span> <span class="ow">and</span> <span class="n">grid</span><span class="p">[</span><span class="n">neigh_x</span><span class="p">][</span><span class="n">neigh_y</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">fresh</span><span class="o">-=</span><span class="mi">1</span>
+                            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">neigh_x</span><span class="p">,</span><span class="n">neigh_y</span><span class="p">))</span>
+                            <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">neigh_x</span><span class="p">,</span><span class="n">neigh_y</span><span class="p">,</span><span class="n">time</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                        
+                
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">fresh</span> <span class="k">else</span> <span class="n">days</span>
 </pre></div>
 </div>
 </section>
@@ -522,23 +491,23 @@ Although we have two 1s in the input, we should only return the number of <stron
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../535-encode-and-decode-tinyurl/">
+          <a class="next-page" href="../basic-calculator-ii/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">535-encode-and-decode-tinyurl</div>
+                <div class="title">basic-calculator-ii</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../53-maximum-subarray/">
+          <a class="prev-page" href="../992-subarrays-with-k-different-integers/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">53-maximum-subarray</div>
+                <div class="title">992-subarrays-with-k-different-integers</div>
                 
               </div>
             </a>
@@ -548,7 +517,7 @@ Although we have two 1s in the input, we should only return the number of <stron
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/532-k-diff-pairs-in-an-array.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/994-rotting-oranges.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -568,7 +537,7 @@ Although we have two 1s in the input, we should only return the number of <stron
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">532-k-diff-pairs-in-an-array</a><ul>
+<li><a class="reference internal" href="#">994-rotting-oranges</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
