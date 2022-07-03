@@ -56,45 +56,47 @@ One is [1, 17, 10, 13, 10, 16, 8] with differences (16, -7, 3, -3, 6, -8).
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
         return self.spaceoptimizeddp(nums)
-        
+
     # Time Complexity: O(n!)
     # Space Complexity: O(n)
     def bruteforce(self, nums: List[int]) -> int:
-        
         def recur(nums, index, isUp):
             maxcnt = 0
-            for i in range(index+1,len(nums)):
-                if (isUp and nums[i] > nums[i+1]) or (not isUp and nums[i] < nums[i+1]):
-                    cnt = 1 + recur(nums,i,not isUp)
-                    if cnt > maxcnt :
+            for i in range(index + 1, len(nums)):
+                if (isUp and nums[i] > nums[i + 1]) or (
+                    not isUp and nums[i] < nums[i + 1]
+                ):
+                    cnt = 1 + recur(nums, i, not isUp)
+                    if cnt > maxcnt:
                         maxcnt = cnt
             return maxcnt
+
         if len(nums) < 2:
             return len(nums)
-        
-        return 1 + max(recur(nums,0,True),recur(nums,0,False))
-    
+
+        return 1 + max(recur(nums, 0, True), recur(nums, 0, False))
+
     # Time Complexity: O(n)
     # Space Complexity: O(n)
     def dp(self, nums: List[int]) -> int:
         n = len(nums)
-        up = [0]*n
-        down = [0]*n
+        up = [0] * n
+        down = [0] * n
         up[0] = 1
         down[0] = 1
-        for i in range(1,n):
-            if nums[i] > nums[i-1]:
-                up[i] = down[i-1]+1
-                down[i] = down[i-1]
-            elif nums[i] < nums[i-1]:
-                down[i] = up[i-1]+1
-                up[i] = up[i-1]
+        for i in range(1, n):
+            if nums[i] > nums[i - 1]:
+                up[i] = down[i - 1] + 1
+                down[i] = down[i - 1]
+            elif nums[i] < nums[i - 1]:
+                down[i] = up[i - 1] + 1
+                up[i] = up[i - 1]
             else:
-                up[i] = up[i-1]
-                down[i] = down[i-1]
-                
-        return max(up[n-1],down[n-1])
-    
+                up[i] = up[i - 1]
+                down[i] = down[i - 1]
+
+        return max(up[n - 1], down[n - 1])
+
     # Time Complexity: O(n)
     # Space Complexity: O(1)
     def spaceoptimizeddp(self, nums: List[int]) -> int:
@@ -103,25 +105,23 @@ class Solution:
         curDown = 0
         prevUp = 1
         prevDown = 1
-        
+
         if n == 1:
             return 1
-        
-        for i in range(1,n):
-            if nums[i] > nums[i-1]:
-                curUp = prevDown+1
+
+        for i in range(1, n):
+            if nums[i] > nums[i - 1]:
+                curUp = prevDown + 1
                 curDown = prevDown
-            elif nums[i] < nums[i-1]:
-                curDown = prevUp+1
+            elif nums[i] < nums[i - 1]:
+                curDown = prevUp + 1
                 curUp = prevUp
             else:
                 curUp = prevUp
                 curDown = prevDown
-            
+
             prevDown = curDown
             prevUp = curUp
         return max(curUp, curDown)
-    
-    
-                    
+
 ```
