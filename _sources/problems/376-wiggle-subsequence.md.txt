@@ -55,7 +55,7 @@ One is [1, 17, 10, 13, 10, 16, 8] with differences (16, -7, 3, -3, 6, -8).
 ```Python
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
-        return self.dp(nums)
+        return self.spaceoptimizeddp(nums)
         
     # Time Complexity: O(n!)
     # Space Complexity: O(n)
@@ -95,6 +95,32 @@ class Solution:
                 
         return max(up[n-1],down[n-1])
     
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def spaceoptimizeddp(self, nums: List[int]) -> int:
+        n = len(nums)
+        curUp = 0
+        curDown = 0
+        prevUp = 1
+        prevDown = 1
+        
+        if n == 1:
+            return 1
+        
+        for i in range(1,n):
+            if nums[i] > nums[i-1]:
+                curUp = prevDown+1
+                curDown = prevDown
+            elif nums[i] < nums[i-1]:
+                curDown = prevUp+1
+                curUp = prevUp
+            else:
+                curUp = prevUp
+                curDown = prevDown
+            
+            prevDown = curDown
+            prevUp = curUp
+        return max(curUp, curDown)
     
     
                     
