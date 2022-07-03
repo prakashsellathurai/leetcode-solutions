@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="535-encode-and-decode-tinyurl" href="../535-encode-and-decode-tinyurl/" /><link rel="prev" title="53-maximum-subarray" href="../53-maximum-subarray/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="382-linked-list-random-node" href="../382-linked-list-random-node/" /><link rel="prev" title="354-russian-doll-envelopes" href="../354-russian-doll-envelopes/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>532-k-diff-pairs-in-an-array - Leetcode Solutions</title>
+        <title>376-wiggle-subsequence - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -264,7 +264,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../344-reverse-string/">344-reverse-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../347-top-k-frequent-elements/">347-top-k-frequent-elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../354-russian-doll-envelopes/">354-russian-doll-envelopes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../376-wiggle-subsequence/">376-wiggle-subsequence</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">376-wiggle-subsequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../382-linked-list-random-node/">382-linked-list-random-node</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../388-longest-absolute-file-path/">388-longest-absolute-file-path</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../389-find-the-difference/">389-find-the-difference</a></li>
@@ -294,7 +294,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../520-detect-capital/">520-detect-capital</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../525-contiguous-array/">525-contiguous-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../53-maximum-subarray/">53-maximum-subarray</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">532-k-diff-pairs-in-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../532-k-diff-pairs-in-an-array/">532-k-diff-pairs-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../535-encode-and-decode-tinyurl/">535-encode-and-decode-tinyurl</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../538-convert-bst-to-greater-tree/">538-convert-bst-to-greater-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../543-diameter-of-binary-tree/">543-diameter-of-binary-tree</a></li>
@@ -413,104 +413,80 @@
           </label>
         </div>
         <article role="main">
-          <section id="k-diff-pairs-in-an-array">
-<h1>532-k-diff-pairs-in-an-array<a class="headerlink" href="#k-diff-pairs-in-an-array" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/532-k-diff-pairs-in-an-array">leetcode</a></p>
+          <section id="wiggle-subsequence">
+<h1>376-wiggle-subsequence<a class="headerlink" href="#wiggle-subsequence" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/376-wiggle-subsequence">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given an array of integers <code>nums</code> and an integer <code>k</code>, return <em>the number of <b>unique</b> k-diff pairs in the array</em>.</p><p>A <strong>k-diff</strong> pair is an integer pair <code>(nums[i], nums[j])</code>, where the following are true:</p><ul>
-<li><code>0 &lt;= i &lt; j &lt; nums.length</code></li>
-<li><code>|nums[i] - nums[j]| == k</code></li>
-</ul><p><strong>Notice</strong> that <code>|val|</code> denotes the absolute value of <code>val</code>.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> nums = [3,1,4,1,5], k = 2
+<div><p>A <strong>wiggle sequence</strong> is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A sequence with one element and a sequence with two non-equal elements are trivially wiggle sequences.</p><ul>
+<li>For example, <code>[1, 7, 4, 9, 2, 5]</code> is a <strong>wiggle sequence</strong> because the differences <code>(6, -3, 5, -7, 3)</code> alternate between positive and negative.</li>
+<li>In contrast, <code>[1, 4, 7, 2, 5]</code> and <code>[1, 7, 4, 5, 5]</code> are not wiggle sequences. The first is not because its first two differences are positive, and the second is not because its last difference is zero.</li>
+</ul><p>A <strong>subsequence</strong> is obtained by deleting some elements (possibly zero) from the original sequence, leaving the remaining elements in their original order.</p><p>Given an integer array <code>nums</code>, return <em>the length of the longest <strong>wiggle subsequence</strong> of </em><code>nums</code>.</p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> nums = [1,7,4,9,2,5]
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> The entire sequence is a wiggle sequence with differences (6, -3, 5, -7, 3).
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> nums = [1,17,5,10,13,15,10,5,16,8]
+<strong>Output:</strong> 7
+<strong>Explanation:</strong> There are several subsequences that achieve this length.
+One is [1, 17, 10, 13, 10, 16, 8] with differences (16, -7, 3, -3, 6, -8).
+</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> nums = [1,2,3,4,5,6,7,8,9]
 <strong>Output:</strong> 2
-<strong>Explanation:</strong> There are two 2-diff pairs in the array, (1, 3) and (3, 5).
-Although we have two 1s in the input, we should only return the number of <strong>unique</strong> pairs.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> nums = [1,2,3,4,5], k = 1
-<strong>Output:</strong> 4
-<strong>Explanation:</strong> There are four 1-diff pairs in the array, (1, 2), (2, 3), (3, 4) and (4, 5).
-</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> nums = [1,3,1,5,4], k = 0
-<strong>Output:</strong> 1
-<strong>Explanation:</strong> There is one 0-diff pair in the array, (1, 1).
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
-<li><code>-10<sup>7</sup> &lt;= nums[i] &lt;= 10<sup>7</sup></code></li>
-<li><code>0 &lt;= k &lt;= 10<sup>7</sup></code></li>
-</ul>
+<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 1000</code></li>
+</ul><p> </p>
+<p><strong>Follow up:</strong> Could you solve this in <code>O(n)</code> time?</p>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">findPairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">HashingSolution</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    bruteforce solution is to try all possible n(n-1)/2 pairs from the array of size n</span>
-<span class="sd">    keep a set with unique difference of value == k</span>
-<span class="sd">    </span>
-<span class="sd">    </span>
-<span class="sd">    Time Complexity: O(n^2)</span>
-<span class="sd">    Space Complexity: O(n)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">bruteforceSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">wiggleMaxLength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        
+    <span class="c1"># Time Complexity: O(n!)</span>
+    <span class="c1"># Space Complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        
+        <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">isUp</span><span class="p">):</span>
+            <span class="n">maxcnt</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">isUp</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">isUp</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">recur</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="ow">not</span> <span class="n">isUp</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">cnt</span> <span class="o">&gt;</span> <span class="n">maxcnt</span> <span class="p">:</span>
+                        <span class="n">maxcnt</span> <span class="o">=</span> <span class="n">cnt</span>
+            <span class="k">return</span> <span class="n">maxcnt</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">recur</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="kc">True</span><span class="p">),</span><span class="n">recur</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="kc">False</span><span class="p">))</span>
+    
+    <span class="c1"># Time Complexity: O(n)</span>
+    <span class="c1"># Space Complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
-                    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    Time Complexity: O(n^2)</span>
-<span class="sd">    Space Complexity: O(1)</span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">bruteforceConstantSpaceSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">kdiff</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
-                    <span class="n">kdiff</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="n">kdiff</span>
-
-    <span class="sd">"""</span>
-<span class="sd">    similar to two sum problem if we hash num1  in hashmap and look for num2+k for the second time we could increment the kidff counter</span>
-<span class="sd">    </span>
-<span class="sd">    </span>
-<span class="sd">    Time Complexity: O(n)</span>
-<span class="sd">    Space Complexity: O(n)</span>
-<span class="sd">    </span>
-<span class="sd">    """</span>
-
-    <span class="k">def</span> <span class="nf">HashingSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">hashmap</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">num</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-                <span class="n">hashmap</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+        <span class="n">down</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+        <span class="n">up</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">down</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">down</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">down</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">down</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">down</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">hashmap</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">kdiff</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">hashmap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">kdiff</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">num</span> <span class="o">+</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-                    <span class="n">kdiff</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="n">kdiff</span>
+                <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">down</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">down</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">up</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">down</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+    
+    
+                    
 </pre></div>
 </div>
 </section>
@@ -521,23 +497,23 @@ Although we have two 1s in the input, we should only return the number of <stron
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../535-encode-and-decode-tinyurl/">
+          <a class="next-page" href="../382-linked-list-random-node/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">535-encode-and-decode-tinyurl</div>
+                <div class="title">382-linked-list-random-node</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../53-maximum-subarray/">
+          <a class="prev-page" href="../354-russian-doll-envelopes/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">53-maximum-subarray</div>
+                <div class="title">354-russian-doll-envelopes</div>
                 
               </div>
             </a>
@@ -547,7 +523,7 @@ Although we have two 1s in the input, we should only return the number of <stron
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/532-k-diff-pairs-in-an-array.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/376-wiggle-subsequence.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -567,7 +543,7 @@ Although we have two 1s in the input, we should only return the number of <stron
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">532-k-diff-pairs-in-an-array</a><ul>
+<li><a class="reference internal" href="#">376-wiggle-subsequence</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
