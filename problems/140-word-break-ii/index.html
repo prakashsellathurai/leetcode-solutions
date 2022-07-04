@@ -448,6 +448,11 @@
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">wordBreak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamicprogramming</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">wordDict</span><span class="p">)</span>
+        
+    <span class="c1"># Time Complexity: O(n*2^n)</span>
+    <span class="c1"># Space Complexity: O(n*2^n)</span>
+    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="n">output</span><span class="p">,</span> <span class="n">words</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">wordDict</span><span class="p">:</span>
             <span class="n">words</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
@@ -465,6 +470,29 @@
        
         <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
         <span class="k">return</span> <span class="n">output</span>
+    
+    <span class="c1"># Time Complexity: O(n*2)</span>
+    <span class="c1"># Space Complexity: O(n*2)</span>
+    <span class="k">def</span> <span class="nf">dynamicprogramming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">wordSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">wordDict</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">dp_solution</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[[</span><span class="s2">""</span><span class="p">]]</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">:</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wordSet</span><span class="p">:</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">:</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wordSet</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">dp_solution</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">dp_solution</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">:</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                        
+        <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">dp_solution</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
 </pre></div>
 </div>
 </section>
