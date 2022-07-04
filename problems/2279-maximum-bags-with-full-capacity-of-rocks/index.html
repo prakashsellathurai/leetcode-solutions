@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="1209-remove-all-adjacent-duplicates-in-string-ii" href="../1209-remove-all-adjacent-duplicates-in-string-ii/" /><link rel="prev" title="120-triangle" href="../120-triangle/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="23-merge-k-sorted-lists" href="../23-merge-k-sorted-lists/" /><link rel="prev" title="225-implement-stack-using-queues" href="../225-implement-stack-using-queues/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>1202-smallest-string-with-swaps - Leetcode Solutions</title>
+        <title>2279-maximum-bags-with-full-capacity-of-rocks - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -176,7 +176,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../1195-fizz-buzz-multithreaded/">1195-fizz-buzz-multithreaded</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12-integer-to-roman/">12-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../120-triangle/">120-triangle</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1202-smallest-string-with-swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1202-smallest-string-with-swaps/">1202-smallest-string-with-swaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1209-remove-all-adjacent-duplicates-in-string-ii/">1209-remove-all-adjacent-duplicates-in-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../121-best-time-to-buy-and-sell-stock/">121-best-time-to-buy-and-sell-stock</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1268-search-suggestions-system/">1268-search-suggestions-system</a></li>
@@ -239,7 +239,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../216-combination-sum-iii/">216-combination-sum-iii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../224-basic-calculator/">224-basic-calculator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../225-implement-stack-using-queues/">225-implement-stack-using-queues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2279-maximum-bags-with-full-capacity-of-rocks/">2279-maximum-bags-with-full-capacity-of-rocks</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">2279-maximum-bags-with-full-capacity-of-rocks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../23-merge-k-sorted-lists/">23-merge-k-sorted-lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../230-kth-smallest-element-in-a-bst/">230-kth-smallest-element-in-a-bst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../232-implement-queue-using-stacks/">232-implement-queue-using-stacks</a></li>
@@ -418,135 +418,51 @@
           </label>
         </div>
         <article role="main">
-          <section id="smallest-string-with-swaps">
-<h1>1202-smallest-string-with-swaps<a class="headerlink" href="#smallest-string-with-swaps" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/1202-smallest-string-with-swaps">leetcode</a></p>
+          <section id="maximum-bags-with-full-capacity-of-rocks">
+<h1>2279-maximum-bags-with-full-capacity-of-rocks<a class="headerlink" href="#maximum-bags-with-full-capacity-of-rocks" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/2279-maximum-bags-with-full-capacity-of-rocks">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>You are given a string <code>s</code>, and an array of pairs of indices in the string <code>pairs</code> where <code>pairs[i] = [a, b]</code> indicates 2 indices(0-indexed) of the string.</p><p>You can swap the characters at any pair of indices in the given <code>pairs</code> <strong>any number of times</strong>.</p><p>Return the lexicographically smallest string that <code>s</code> can be changed to after using the swaps.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> s = "dcab", pairs = [[0,3],[1,2]]
-<strong>Output:</strong> "bacd"
-<strong>Explaination:</strong> 
-Swap s[0] and s[3], s = "bcad"
-Swap s[1] and s[2], s = "bacd"
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> s = "dcab", pairs = [[0,3],[1,2],[0,2]]
-<strong>Output:</strong> "abcd"
-<strong>Explaination: </strong>
-Swap s[0] and s[3], s = "bcad"
-Swap s[0] and s[2], s = "acbd"
-Swap s[1] and s[2], s = "abcd"</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> s = "cba", pairs = [[0,1],[1,2]]
-<strong>Output:</strong> "abc"
-<strong>Explaination: </strong>
-Swap s[0] and s[1], s = "bca"
-Swap s[1] and s[2], s = "bac"
-Swap s[0] and s[1], s = "abc"
+<div><p>You have <code>n</code> bags numbered from <code>0</code> to <code>n - 1</code>. You are given two <strong>0-indexed</strong> integer arrays <code>capacity</code> and <code>rocks</code>. The <code>i<sup>th</sup></code> bag can hold a maximum of <code>capacity[i]</code> rocks and currently contains <code>rocks[i]</code> rocks. You are also given an integer <code>additionalRocks</code>, the number of additional rocks you can place in <strong>any</strong> of the bags.</p><p>Return<em> the <strong>maximum</strong> number of bags that could have full capacity after placing the additional rocks in some bags.</em></p><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> capacity = [2,3,4,5], rocks = [1,2,4,4], additionalRocks = 2
+<strong>Output:</strong> 3
+<strong>Explanation:</strong>
+Place 1 rock in bag 0 and 1 rock in bag 1.
+The number of rocks in each bag are now [2,3,4,4].
+Bags 0, 1, and 2 have full capacity.
+There are 3 bags at full capacity, so we return 3.
+It can be shown that it is not possible to have more than 3 bags at full capacity.
+Note that there may be other ways of placing the rocks that result in an answer of 3.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> capacity = [10,2,2], rocks = [2,2,0], additionalRocks = 100
+<strong>Output:</strong> 3
+<strong>Explanation:</strong>
+Place 8 rocks in bag 0 and 2 rocks in bag 2.
+The number of rocks in each bag are now [10,2,2].
+Bags 0, 1, and 2 have full capacity.
+There are 3 bags at full capacity, so we return 3.
+It can be shown that it is not possible to have more than 3 bags at full capacity.
+Note that we did not use all of the additional rocks.
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= s.length &lt;= 10^5</code></li>
-<li><code>0 &lt;= pairs.length &lt;= 10^5</code></li>
-<li><code>0 &lt;= pairs[i][0], pairs[i][1] &lt; s.length</code></li>
-<li><code>s</code> only contains lower case English letters.</li>
+<li><code>n == capacity.length == rocks.length</code></li>
+<li><code>1 &lt;= n &lt;= 5 * 10<sup>4</sup></code></li>
+<li><code>1 &lt;= capacity[i] &lt;= 10<sup>9</sup></code></li>
+<li><code>0 &lt;= rocks[i] &lt;= capacity[i]</code></li>
+<li><code>1 &lt;= additionalRocks &lt;= 10<sup>9</sup></code></li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="mi">100001</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span>
-
-    <span class="k">def</span> <span class="nf">smallestStringWithSwaps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pairs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">UnionFind_approach</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pairs</span><span class="p">)</span>
-
-    <span class="c1"># Time Complexity: O(E+Vlog(V))</span>
-    <span class="c1"># Space Complexity: O(E+V)</span>
-    <span class="k">def</span> <span class="nf">dfs_approach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pairs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
-            <span class="n">source</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">destination</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">source</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
-                <span class="n">characters</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">characters</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
-
-                <span class="n">characters</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-                <span class="n">indices</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)):</span>
-                    <span class="n">s</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">characters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vertex</span><span class="p">,</span> <span class="n">characters</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
-        <span class="n">characters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">vertex</span><span class="p">])</span>
-        <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="p">[</span><span class="n">vertex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="k">for</span> <span class="n">adjacent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">vertex</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="p">[</span><span class="n">adjacent</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">adjacent</span><span class="p">,</span> <span class="n">characters</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
-
-    <span class="c1"># Time Complexity: O((E+V).αV+VlogV)</span>
-    <span class="c1"># Space Complexity: O(V)</span>
-    <span class="k">def</span> <span class="nf">UnionFind_approach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pairs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">uf</span> <span class="o">=</span> <span class="n">UnionFind</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
-            <span class="n">uf</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
-
-        <span class="n">hashmap</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[])</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
-            <span class="n">root</span> <span class="o">=</span> <span class="n">uf</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-            <span class="n">hashmap</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-
-        <span class="n">smallestString</span> <span class="o">=</span> <span class="p">[</span><span class="s2">" "</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="p">:</span>
-            <span class="n">indices</span> <span class="o">=</span> <span class="n">hashmap</span><span class="p">[</span><span class="n">component</span><span class="p">]</span>
-            <span class="n">characters</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
-            <span class="n">characters</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)):</span>
-                <span class="n">smallestString</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">characters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">smallestString</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">UnionFind</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
-
-    <span class="c1"># Time Complexity: O(αn)</span>
-    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="k">while</span> <span class="n">a</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">a</span><span class="p">]:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
-
-    <span class="c1"># Time Complexity: O(αn)</span>
-    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="n">groupA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="n">groupB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">groupA</span> <span class="o">!=</span> <span class="n">groupB</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">groupA</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">groupB</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">groupB</span><span class="p">]</span> <span class="o">=</span> <span class="n">groupA</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">groupA</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">groupA</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">groupB</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">[</span><span class="n">groupA</span><span class="p">]</span> <span class="o">=</span> <span class="n">groupB</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">groupB</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">isconnected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">maximumBags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">rocks</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">r</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">rocks</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">count</span> <span class="ow">and</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">count</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">-=</span> <span class="n">count</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">cnt</span>
 </pre></div>
 </div>
 </section>
@@ -557,23 +473,23 @@ Swap s[0] and s[1], s = "abc"
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../1209-remove-all-adjacent-duplicates-in-string-ii/">
+          <a class="next-page" href="../23-merge-k-sorted-lists/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">1209-remove-all-adjacent-duplicates-in-string-ii</div>
+                <div class="title">23-merge-k-sorted-lists</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../120-triangle/">
+          <a class="prev-page" href="../225-implement-stack-using-queues/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">120-triangle</div>
+                <div class="title">225-implement-stack-using-queues</div>
                 
               </div>
             </a>
@@ -583,7 +499,7 @@ Swap s[0] and s[1], s = "abc"
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/1202-smallest-string-with-swaps.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/2279-maximum-bags-with-full-capacity-of-rocks.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -603,7 +519,7 @@ Swap s[0] and s[1], s = "abc"
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">1202-smallest-string-with-swaps</a><ul>
+<li><a class="reference internal" href="#">2279-maximum-bags-with-full-capacity-of-rocks</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
