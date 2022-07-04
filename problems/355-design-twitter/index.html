@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="120-triangle" href="../120-triangle/" /><link rel="prev" title="1195-fizz-buzz-multithreaded" href="../1195-fizz-buzz-multithreaded/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="376-wiggle-subsequence" href="../376-wiggle-subsequence/" /><link rel="prev" title="354-russian-doll-envelopes" href="../354-russian-doll-envelopes/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>12-integer-to-roman - Leetcode Solutions</title>
+        <title>355-design-twitter - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../117-populating-next-right-pointers-in-each-node-ii/">117-populating-next-right-pointers-in-each-node-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1192-critical-connections-in-a-network/">1192-critical-connections-in-a-network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1195-fizz-buzz-multithreaded/">1195-fizz-buzz-multithreaded</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">12-integer-to-roman</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-integer-to-roman/">12-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../120-triangle/">120-triangle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1202-smallest-string-with-swaps/">1202-smallest-string-with-swaps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1209-remove-all-adjacent-duplicates-in-string-ii/">1209-remove-all-adjacent-duplicates-in-string-ii</a></li>
@@ -268,7 +268,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../344-reverse-string/">344-reverse-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../347-top-k-frequent-elements/">347-top-k-frequent-elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../354-russian-doll-envelopes/">354-russian-doll-envelopes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../355-design-twitter/">355-design-twitter</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">355-design-twitter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../376-wiggle-subsequence/">376-wiggle-subsequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../382-linked-list-random-node/">382-linked-list-random-node</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../388-longest-absolute-file-path/">388-longest-absolute-file-path</a></li>
@@ -422,63 +422,64 @@
           </label>
         </div>
         <article role="main">
-          <section id="integer-to-roman">
-<h1>12-integer-to-roman<a class="headerlink" href="#integer-to-roman" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/12-integer-to-roman">leetcode</a></p>
+          <section id="design-twitter">
+<h1>355-design-twitter<a class="headerlink" href="#design-twitter" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/355-design-twitter">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p><pre><strong>Symbol</strong>       <strong>Value</strong>
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000</pre><p>For example, <code>2</code> is written as <code>II</code> in Roman numeral, just two one's added together. <code>12</code> is written as <code>XII</code>, which is simply <code>X + II</code>. The number <code>27</code> is written as <code>XXVII</code>, which is <code>XX + V + II</code>.</p><p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p><ul>
-<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9. </li>
-<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90. </li>
-<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
-</ul><p>Given an integer, convert it to a roman numeral.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> num = 3
-<strong>Output:</strong> "III"
-<strong>Explanation:</strong> 3 is represented as 3 ones.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> num = 58
-<strong>Output:</strong> "LVIII"
-<strong>Explanation:</strong> L = 50, V = 5, III = 3.
-</pre><p><strong>Example 3:</strong></p><pre><strong>Input:</strong> num = 1994
-<strong>Output:</strong> "MCMXCIV"
-<strong>Explanation:</strong> M = 1000, CM = 900, XC = 90 and IV = 4.
+<div><p>Design a simplified version of Twitter where users can post tweets, follow/unfollow another user, and is able to see the <code>10</code> most recent tweets in the user's news feed.</p><p>Implement the <code>Twitter</code> class:</p><ul>
+<li><code>Twitter()</code> Initializes your twitter object.</li>
+<li><code>void postTweet(int userId, int tweetId)</code> Composes a new tweet with ID <code>tweetId</code> by the user <code>userId</code>. Each call to this function will be made with a unique <code>tweetId</code>.</li>
+<li><code>List&lt;Integer&gt; getNewsFeed(int userId)</code> Retrieves the <code>10</code> most recent tweet IDs in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user themself. Tweets must be <strong>ordered from most recent to least recent</strong>.</li>
+<li><code>void follow(int followerId, int followeeId)</code> The user with ID <code>followerId</code> started following the user with ID <code>followeeId</code>.</li>
+<li><code>void unfollow(int followerId, int followeeId)</code> The user with ID <code>followerId</code> started unfollowing the user with ID <code>followeeId</code>.</li>
+</ul><p> </p>
+<p><strong>Example 1:</strong></p><pre><strong>Input</strong>
+["Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"]
+[[], [1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]]
+<strong>Output</strong>
+[null, null, [5], null, null, [6, 5], null, [5]]
+
+<strong>Explanation</strong>
+Twitter twitter = new Twitter();
+twitter.postTweet(1, 5); // User 1 posts a new tweet (id = 5).
+twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet id -&gt; [5]. return [5]
+twitter.follow(1, 2);    // User 1 follows user 2.
+twitter.postTweet(2, 6); // User 2 posts a new tweet (id = 6).
+twitter.getNewsFeed(1);  // User 1's news feed should return a list with 2 tweet ids -&gt; [6, 5]. Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
+twitter.unfollow(1, 2);  // User 1 unfollows user 2.
+twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet id -&gt; [5], since user 1 is no longer following user 2.
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= num &lt;= 3999</code></li>
+<li><code>1 &lt;= userId, followerId, followeeId &lt;= 500</code></li>
+<li><code>0 &lt;= tweetId &lt;= 10<sup>4</sup></code></li>
+<li>All the tweets have <strong>unique</strong> IDs.</li>
+<li>At most <code>3 * 10<sup>4</sup></code> calls will be made to <code>postTweet</code>, <code>getNewsFeed</code>, <code>follow</code>, and <code>unfollow</code>.</li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">intToRoman</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">hashmap</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="mi">1000</span><span class="p">:</span> <span class="s2">"M"</span><span class="p">,</span>
-            <span class="mi">900</span><span class="p">:</span> <span class="s2">"CM"</span><span class="p">,</span>
-            <span class="mi">500</span><span class="p">:</span> <span class="s2">"D"</span><span class="p">,</span>
-            <span class="mi">400</span><span class="p">:</span> <span class="s2">"CD"</span><span class="p">,</span>
-            <span class="mi">100</span><span class="p">:</span> <span class="s2">"C"</span><span class="p">,</span>
-            <span class="mi">90</span><span class="p">:</span> <span class="s2">"XC"</span><span class="p">,</span>
-            <span class="mi">50</span><span class="p">:</span> <span class="s2">"L"</span><span class="p">,</span>
-            <span class="mi">40</span><span class="p">:</span> <span class="s2">"XL"</span><span class="p">,</span>
-            <span class="mi">10</span><span class="p">:</span> <span class="s2">"X"</span><span class="p">,</span>
-            <span class="mi">9</span><span class="p">:</span> <span class="s2">"IX"</span><span class="p">,</span>
-            <span class="mi">5</span><span class="p">:</span> <span class="s2">"V"</span><span class="p">,</span>
-            <span class="mi">4</span><span class="p">:</span> <span class="s2">"IV"</span><span class="p">,</span>
-            <span class="mi">1</span><span class="p">:</span> <span class="s2">"I"</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">hashmap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">N</span> <span class="o">//</span> <span class="n">val</span> <span class="o">*</span> <span class="n">sym</span><span class="p">)</span>
-            <span class="n">N</span> <span class="o">%=</span> <span class="n">val</span>
-        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Twitter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">step</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tweets</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">followees</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">postTweet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">,</span> <span class="n">tweetId</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tweets</span><span class="p">[</span><span class="n">userId</span><span class="p">]</span><span class="o">.</span><span class="n">appendleft</span><span class="p">((</span><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">),</span> <span class="n">tweetId</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">getNewsFeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">):</span>
+        <span class="n">tweets</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tweets</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">followees</span><span class="p">[</span><span class="n">userId</span><span class="p">]</span> <span class="o">|</span> <span class="p">{</span><span class="n">userId</span><span class="p">}))</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">follow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">followerId</span><span class="p">,</span> <span class="n">followeeId</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">followees</span><span class="p">[</span><span class="n">followerId</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">followeeId</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unfollow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">followerId</span><span class="p">,</span> <span class="n">followeeId</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">followees</span><span class="p">[</span><span class="n">followerId</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">followeeId</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -489,23 +490,23 @@ M             1000</pre><p>For example, <code>2</code> is written as <code>II</
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../120-triangle/">
+          <a class="next-page" href="../376-wiggle-subsequence/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">120-triangle</div>
+                <div class="title">376-wiggle-subsequence</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../1195-fizz-buzz-multithreaded/">
+          <a class="prev-page" href="../354-russian-doll-envelopes/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">1195-fizz-buzz-multithreaded</div>
+                <div class="title">354-russian-doll-envelopes</div>
                 
               </div>
             </a>
@@ -515,7 +516,7 @@ M             1000</pre><p>For example, <code>2</code> is written as <code>II</
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/12-integer-to-roman.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/355-design-twitter.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -535,7 +536,7 @@ M             1000</pre><p>For example, <code>2</code> is written as <code>II</
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">12-integer-to-roman</a><ul>
+<li><a class="reference internal" href="#">355-design-twitter</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
