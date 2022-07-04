@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="406-queue-reconstruction-by-height" href="../406-queue-reconstruction-by-height/" /><link rel="prev" title="399-evaluate-division" href="../399-evaluate-division/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="669-trim-a-binary-search-tree" href="../669-trim-a-binary-search-tree/" /><link rel="prev" title="665-non-decreasing-array" href="../665-non-decreasing-array/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>4-median-of-two-sorted-arrays - Leetcode Solutions</title>
+        <title>668-kth-smallest-number-in-multiplication-table - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -271,7 +271,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../389-find-the-difference/">389-find-the-difference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../39-combination-sum/">39-combination-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../399-evaluate-division/">399-evaluate-division</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">4-median-of-two-sorted-arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-median-of-two-sorted-arrays/">4-median-of-two-sorted-arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../406-queue-reconstruction-by-height/">406-queue-reconstruction-by-height</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../410-split-array-largest-sum/">410-split-array-largest-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../412-fizz-buzz/">412-fizz-buzz</a></li>
@@ -311,7 +311,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../647-palindromic-substrings/">647-palindromic-substrings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../661-image-smoother/">661-image-smoother</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../665-non-decreasing-array/">665-non-decreasing-array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../668-kth-smallest-number-in-multiplication-table/">668-kth-smallest-number-in-multiplication-table</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">668-kth-smallest-number-in-multiplication-table</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../669-trim-a-binary-search-tree/">669-trim-a-binary-search-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../67-add-binary/">67-add-binary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../68-text-justification/">68-text-justification</a></li>
@@ -416,132 +416,48 @@
           </label>
         </div>
         <article role="main">
-          <section id="median-of-two-sorted-arrays">
-<h1>4-median-of-two-sorted-arrays<a class="headerlink" href="#median-of-two-sorted-arrays" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/4-median-of-two-sorted-arrays">leetcode</a></p>
+          <section id="kth-smallest-number-in-multiplication-table">
+<h1>668-kth-smallest-number-in-multiplication-table<a class="headerlink" href="#kth-smallest-number-in-multiplication-table" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/668-kth-smallest-number-in-multiplication-table">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given two sorted arrays <code>nums1</code> and <code>nums2</code> of size <code>m</code> and <code>n</code> respectively, return <strong>the median</strong> of the two sorted arrays.</p><p>The overall run time complexity should be <code>O(log (m+n))</code>.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> nums1 = [1,3], nums2 = [2]
-<strong>Output:</strong> 2.00000
-<strong>Explanation:</strong> merged array = [1,2,3] and median is 2.
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> nums1 = [1,2], nums2 = [3,4]
-<strong>Output:</strong> 2.50000
-<strong>Explanation:</strong> merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+<div><p>Nearly everyone has used the <a href="https://en.wikipedia.org/wiki/Multiplication_table" target="_blank">Multiplication Table</a>. The multiplication table of size <code>m x n</code> is an integer matrix <code>mat</code> where <code>mat[i][j] == i * j</code> (<strong>1-indexed</strong>).</p><p>Given three integers <code>m</code>, <code>n</code>, and <code>k</code>, return <em>the </em><code>k<sup>th</sup></code><em> smallest element in the </em><code>m x n</code><em> multiplication table</em>.</p><p> </p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/05/02/multtable1-grid.jpg" style="width: 500px; height: 254px;"/>
+<pre><strong>Input:</strong> m = 3, n = 3, k = 5
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> The 5<sup>th</sup> smallest number is 3.
+</pre><p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/05/02/multtable2-grid.jpg" style="width: 493px; height: 293px;"/>
+<pre><strong>Input:</strong> m = 2, n = 3, k = 6
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> The 6<sup>th</sup> smallest number is 6.
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>nums1.length == m</code></li>
-<li><code>nums2.length == n</code></li>
-<li><code>0 &lt;= m &lt;= 1000</code></li>
-<li><code>0 &lt;= n &lt;= 1000</code></li>
-<li><code>1 &lt;= m + n &lt;= 2000</code></li>
-<li><code>-10<sup>6</sup> &lt;= nums1[i], nums2[i] &lt;= 10<sup>6</sup></code></li>
+<li><code>1 &lt;= m, n &lt;= 3 * 10<sup>4</sup></code></li>
+<li><code>1 &lt;= k &lt;= m * n</code></li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">findMedianSortedArrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">nums2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OptmialbinarySeach</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">findKthNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">enough</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span> <span class="o">//</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">k</span>
 
-    <span class="c1"># Time Complexity: O(m+n)</span>
-    <span class="c1"># Space Complexity: O(m+n)</span>
-    <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">nums2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span>
-
-        <span class="n">nums1</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">[:]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span>
-
-        <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
-
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                <span class="n">nums1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
-
+        <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
+            <span class="n">mi</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">enough</span><span class="p">(</span><span class="n">mi</span><span class="p">):</span>
+                <span class="n">lo</span> <span class="o">=</span> <span class="n">mi</span> <span class="o">+</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">nums1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">nums1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span>
-
-        <span class="n">l</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums1</span><span class="p">[</span><span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">nums1</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span>
-
-    <span class="c1"># Time Complexity: O(log(m+n))</span>
-    <span class="k">def</span> <span class="nf">binarySeach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span>
-
-    <span class="k">def</span> <span class="nf">kth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">b</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="n">ia</span><span class="p">,</span> <span class="n">ib</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="n">ma</span><span class="p">,</span> <span class="n">mb</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span>
-
-        <span class="c1"># when k is bigger than the sum of a and b's median indices</span>
-        <span class="k">if</span> <span class="n">ia</span> <span class="o">+</span> <span class="n">ib</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
-            <span class="c1"># if a's median is bigger than b's, b's first half doesn't include k</span>
-            <span class="k">if</span> <span class="n">ma</span> <span class="o">&gt;</span> <span class="n">mb</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="n">ib</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">k</span> <span class="o">-</span> <span class="n">ib</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">ia</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">ia</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="c1"># when k is smaller than the sum of a and b's indices</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># if a's median is bigger than b's, a's second half doesn't include k</span>
-            <span class="k">if</span> <span class="n">ma</span> <span class="o">&gt;</span> <span class="n">mb</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="n">ia</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[:</span><span class="n">ib</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span>
-
-    <span class="c1"># Time Complexity: O(min(log(m),log(n))))</span>
-    <span class="k">def</span> <span class="nf">OptmialbinarySeach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">l</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span>
-
-    <span class="k">def</span> <span class="nf">kth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">b</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-        <span class="n">ia</span><span class="p">,</span> <span class="n">ib</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="n">ma</span><span class="p">,</span> <span class="n">mb</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">ib</span><span class="p">]</span>
-
-        <span class="c1"># when k is bigger than the sum of a and b's median indices</span>
-        <span class="k">if</span> <span class="n">ia</span> <span class="o">+</span> <span class="n">ib</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
-            <span class="c1"># if a's median is bigger than b's, b's first half doesn't include k</span>
-            <span class="k">if</span> <span class="n">ma</span> <span class="o">&gt;</span> <span class="n">mb</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[</span><span class="n">ib</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">k</span> <span class="o">-</span> <span class="n">ib</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">ia</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">ia</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="c1"># when k is smaller than the sum of a and b's indices</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># if a's median is bigger than b's, a's second half doesn't include k</span>
-            <span class="k">if</span> <span class="n">ma</span> <span class="o">&gt;</span> <span class="n">mb</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="n">ia</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kth</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">[:</span><span class="n">ib</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">hi</span> <span class="o">=</span> <span class="n">mi</span>
+        <span class="k">return</span> <span class="n">lo</span>
 </pre></div>
 </div>
 </section>
@@ -552,23 +468,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../406-queue-reconstruction-by-height/">
+          <a class="next-page" href="../669-trim-a-binary-search-tree/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">406-queue-reconstruction-by-height</div>
+                <div class="title">669-trim-a-binary-search-tree</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../399-evaluate-division/">
+          <a class="prev-page" href="../665-non-decreasing-array/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">399-evaluate-division</div>
+                <div class="title">665-non-decreasing-array</div>
                 
               </div>
             </a>
@@ -578,7 +494,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/4-median-of-two-sorted-arrays.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/668-kth-smallest-number-in-multiplication-table.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -598,7 +514,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">4-median-of-two-sorted-arrays</a><ul>
+<li><a class="reference internal" href="#">668-kth-smallest-number-in-multiplication-table</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
