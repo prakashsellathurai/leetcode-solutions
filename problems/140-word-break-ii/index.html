@@ -474,6 +474,7 @@
     <span class="c1"># Time Complexity: O(n*2)</span>
     <span class="c1"># Space Complexity: O(n*2)</span>
     <span class="k">def</span> <span class="nf">dynamicprogramming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="nd">@cache</span>
         <span class="k">def</span> <span class="nf">wordsEndingIn</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
                 <span class="k">return</span> <span class="p">[</span><span class="s2">""</span><span class="p">]</span>

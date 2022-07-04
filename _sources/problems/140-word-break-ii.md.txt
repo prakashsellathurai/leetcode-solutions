@@ -72,6 +72,7 @@ class Solution:
     # Time Complexity: O(n*2)
     # Space Complexity: O(n*2)
     def dynamicprogramming(self, s: str, wordDict: List[str]) -> List[str]:
+        @cache
         def wordsEndingIn(i):
             if i == len(s):
                 return [""]
