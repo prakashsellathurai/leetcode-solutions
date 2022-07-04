@@ -46,7 +46,7 @@ Try it on <a href='https://leetcode.com/problems/140-word-break-ii'>leetcode</a>
 ```Python
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        return self.dynamicprogramming(s,wordDict)
+        return self.memo(s,wordDict)
         
     # Time Complexity: O(n*2^n)
     # Space Complexity: O(n*2^n)
@@ -71,20 +71,33 @@ class Solution:
     
     # Time Complexity: O(n*2)
     # Space Complexity: O(n*2)
-    def dynamicprogramming(self, s: str, wordDict: List[str]) -> List[str]:
-        @cache
-        def wordsEndingIn(i):
-            if i == len(s):
-                return [""]
-            ans = []
-            for j in range(i+1, len(s)+1):
-                if s[i:j] in wordDict:
-                    for tail in wordsEndingIn(j):
-                        if tail != '':
-                            ans.append(s[i:j] + " " + tail) 
-                        else:
-                            ans.append(s[i:j])
-            return ans
-        return wordsEndingIn(0)
+    def memo(self, s: str, wordDict: List[str]) -> List[str]:
+        wordDict = set(wordDict)
+        memo = {}
+        
+        def search(string):
+            if string in memo:
+                return memo[string]
+            else:
+                paths = []
+                
+                # base case
+                # we include this in here in the case a word
+                # that exists in the dictionary can be further decomposed
+                if string in wordDict:
+                    paths.append(string)
+                
+                for i in range(len(string)):
+                    # if a prefix exists, then see if remainder can be decomposed
+                    if string[:i] in wordDict:
+                        path = search(string[i:])
+                        # if it can't be decomposed, then it will be empty
+                        # for each decomposition, prepend the prefix
+                        for p in path:
+                            paths.append(string[:i] + " " + "".join(p))
+                memo[string] = paths
+                return memo[string]
+        
+        return search(s)
 
 ```

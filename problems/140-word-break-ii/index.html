@@ -448,7 +448,7 @@
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">wordBreak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamicprogramming</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">wordDict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">memo</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">wordDict</span><span class="p">)</span>
         
     <span class="c1"># Time Complexity: O(n*2^n)</span>
     <span class="c1"># Space Complexity: O(n*2^n)</span>
@@ -473,21 +473,34 @@
     
     <span class="c1"># Time Complexity: O(n*2)</span>
     <span class="c1"># Space Complexity: O(n*2)</span>
-    <span class="k">def</span> <span class="nf">dynamicprogramming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="nd">@cache</span>
-        <span class="k">def</span> <span class="nf">wordsEndingIn</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-                <span class="k">return</span> <span class="p">[</span><span class="s2">""</span><span class="p">]</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wordDict</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">tail</span> <span class="ow">in</span> <span class="n">wordsEndingIn</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">tail</span> <span class="o">!=</span> <span class="s1">''</span><span class="p">:</span>
-                            <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="n">tail</span><span class="p">)</span> 
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">ans</span>
-        <span class="k">return</span> <span class="n">wordsEndingIn</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">memo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordDict</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">wordDict</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">wordDict</span><span class="p">)</span>
+        <span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">memo</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">string</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+                
+                <span class="c1"># base case</span>
+                <span class="c1"># we include this in here in the case a word</span>
+                <span class="c1"># that exists in the dictionary can be further decomposed</span>
+                <span class="k">if</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">wordDict</span><span class="p">:</span>
+                    <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+                
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)):</span>
+                    <span class="c1"># if a prefix exists, then see if remainder can be decomposed</span>
+                    <span class="k">if</span> <span class="n">string</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wordDict</span><span class="p">:</span>
+                        <span class="n">path</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+                        <span class="c1"># if it can't be decomposed, then it will be empty</span>
+                        <span class="c1"># for each decomposition, prepend the prefix</span>
+                        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                            <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+                <span class="n">memo</span><span class="p">[</span><span class="n">string</span><span class="p">]</span> <span class="o">=</span> <span class="n">paths</span>
+                <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">string</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
