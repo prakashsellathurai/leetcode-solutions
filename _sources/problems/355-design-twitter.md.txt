@@ -53,6 +53,8 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
 ```Python
 from heapq import *
 from collections import defaultdict, deque
+
+
 class Twitter:
 
     # Each user has a separate min heap
@@ -75,7 +77,6 @@ class Twitter:
         tweets.append(((self.post), tweetId))
         if len(tweets) > 10:
             tweets.popleft()
-        
 
     def getNewsFeed(self, userId):
         """
@@ -109,5 +110,6 @@ class Twitter:
         Follower unfollows a followee. If the operation is invalid, it should be a no-op.
         """
         if followerId != followeeId:
-                self.following[followerId].discard(followeeId)
+            self.following[followerId].discard(followeeId)
+
 ```

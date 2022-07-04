@@ -464,6 +464,8 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
+
+
 <span class="k">class</span> <span class="nc">Twitter</span><span class="p">:</span>
 
     <span class="c1"># Each user has a separate min heap</span>
@@ -486,7 +488,6 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
         <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">),</span> <span class="n">tweetId</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
             <span class="n">tweets</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
-        
 
     <span class="k">def</span> <span class="nf">getNewsFeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -520,7 +521,7 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
 <span class="sd">        Follower unfollows a followee. If the operation is invalid, it should be a no-op.</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="n">followerId</span> <span class="o">!=</span> <span class="n">followeeId</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">following</span><span class="p">[</span><span class="n">followerId</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">followeeId</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">following</span><span class="p">[</span><span class="n">followerId</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">followeeId</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

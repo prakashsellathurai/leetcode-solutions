@@ -50,7 +50,6 @@ timeMap.get("foo", 5);         // return "bar2"
 ## Solution(Python)
 ```Python
 class TimeMap:
-
     def __init__(self):
         self.times = collections.defaultdict(list)
         self.values = collections.defaultdict(list)
@@ -61,6 +60,6 @@ class TimeMap:
 
     def get(self, key: str, timestamp: int) -> str:
         i = bisect.bisect(self.times[key], timestamp)
-        return self.values[key][i - 1] if i else ''
+        return self.values[key][i - 1] if i else ""
 
 ```
