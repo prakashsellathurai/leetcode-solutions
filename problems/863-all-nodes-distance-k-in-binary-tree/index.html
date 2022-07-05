@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="59-spiral-matrix-ii" href="../59-spiral-matrix-ii/" /><link rel="prev" title="581-shortest-unsorted-continuous-subarray" href="../581-shortest-unsorted-continuous-subarray/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="867-transpose-matrix" href="../867-transpose-matrix/" /><link rel="prev" title="849-maximize-distance-to-closest-person" href="../849-maximize-distance-to-closest-person/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
-        <title>583-delete-operation-for-two-strings - Leetcode Solutions</title>
+        <title>863-all-nodes-distance-k-in-binary-tree - Leetcode Solutions</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -307,7 +307,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../560-subarray-sum-equals-k/">560-subarray-sum-equals-k</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../567-permutation-in-string/">567-permutation-in-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../581-shortest-unsorted-continuous-subarray/">581-shortest-unsorted-continuous-subarray</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">583-delete-operation-for-two-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../583-delete-operation-for-two-strings/">583-delete-operation-for-two-strings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../59-spiral-matrix-ii/">59-spiral-matrix-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../60-permutation-sequence/">60-permutation-sequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../605-can-place-flowers/">605-can-place-flowers</a></li>
@@ -344,7 +344,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../84-largest-rectangle-in-histogram/">84-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../844-backspace-string-compare/">844-backspace-string-compare</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../849-maximize-distance-to-closest-person/">849-maximize-distance-to-closest-person</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../863-all-nodes-distance-k-in-binary-tree/">863-all-nodes-distance-k-in-binary-tree</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">863-all-nodes-distance-k-in-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../867-transpose-matrix/">867-transpose-matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../875-koko-eating-bananas/">875-koko-eating-bananas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../88-merge-sorted-array/">88-merge-sorted-array</a></li>
@@ -425,45 +425,54 @@
           </label>
         </div>
         <article role="main">
-          <section id="delete-operation-for-two-strings">
-<h1>583-delete-operation-for-two-strings<a class="headerlink" href="#delete-operation-for-two-strings" title="Permalink to this headline">¶</a></h1>
-<p>Try it on <a href="https://leetcode.com/problems/583-delete-operation-for-two-strings">leetcode</a></p>
+          <section id="all-nodes-distance-k-in-binary-tree">
+<h1>863-all-nodes-distance-k-in-binary-tree<a class="headerlink" href="#all-nodes-distance-k-in-binary-tree" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/863-all-nodes-distance-k-in-binary-tree">leetcode</a></p>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="description">
-<div><p>Given two strings <code>word1</code> and <code>word2</code>, return <em>the minimum number of <strong>steps</strong> required to make</em> <code>word1</code> <em>and</em> <code>word2</code> <em>the same</em>.</p><p>In one <strong>step</strong>, you can delete exactly one character in either string.</p><p> </p>
-<p><strong>Example 1:</strong></p><pre><strong>Input:</strong> word1 = "sea", word2 = "eat"
-<strong>Output:</strong> 2
-<strong>Explanation:</strong> You need one step to make "sea" to "ea" and another step to make "eat" to "ea".
-</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> word1 = "leetcode", word2 = "etco"
-<strong>Output:</strong> 4
+<div><p>Given the <code>root</code> of a binary tree, the value of a target node <code>target</code>, and an integer <code>k</code>, return <em>an array of the values of all nodes that have a distance </em><code>k</code><em> from the target node.</em></p><p>You can return the answer in <strong>any order</strong>.</p><p> </p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/06/28/sketch0.png" style="width: 500px; height: 429px;"/>
+<pre><strong>Input:</strong> root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, k = 2
+<strong>Output:</strong> [7,4,1]
+Explanation: The nodes that are a distance 2 from the target node (with value 5) have values 7, 4, and 1.
+</pre><p><strong>Example 2:</strong></p><pre><strong>Input:</strong> root = [1], target = 1, k = 3
+<strong>Output:</strong> []
 </pre><p> </p>
 <p><strong>Constraints:</strong></p><ul>
-<li><code>1 &lt;= word1.length, word2.length &lt;= 500</code></li>
-<li><code>word1</code> and <code>word2</code> consist of only lowercase English letters.</li>
+<li>The number of nodes in the tree is in the range <code>[1, 500]</code>.</li>
+<li><code>0 &lt;= Node.val &lt;= 500</code></li>
+<li>All the values <code>Node.val</code> are <strong>unique</strong>.</li>
+<li><code>target</code> is the value of one of the nodes in the tree.</li>
+<li><code>0 &lt;= k &lt;= 1000</code></li>
 </ul>
 </div>
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">minDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">distanceK</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">par</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">par</span> <span class="o">=</span> <span class="n">par</span>
+                <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+                <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
 
-        <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
-                <span class="k">elif</span> <span class="n">word1</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">word2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
-                    <span class="n">temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
-            <span class="n">dp</span> <span class="o">=</span> <span class="n">temp</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">([(</span><span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="p">{</span><span class="n">target</span><span class="p">}</span>
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">K</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">queue</span><span class="p">]</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">nei</span> <span class="ow">in</span> <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">par</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">nei</span> <span class="ow">and</span> <span class="n">nei</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nei</span><span class="p">)</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nei</span><span class="p">,</span> <span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">[]</span>
 </pre></div>
 </div>
 </section>
@@ -474,23 +483,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../59-spiral-matrix-ii/">
+          <a class="next-page" href="../867-transpose-matrix/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">59-spiral-matrix-ii</div>
+                <div class="title">867-transpose-matrix</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../581-shortest-unsorted-continuous-subarray/">
+          <a class="prev-page" href="../849-maximize-distance-to-closest-person/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">581-shortest-unsorted-continuous-subarray</div>
+                <div class="title">849-maximize-distance-to-closest-person</div>
                 
               </div>
             </a>
@@ -500,7 +509,7 @@
               Copyright &#169; 2022, Prakash Sellathurai |
           Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
           <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            | <a class="muted-link" href="../../_sources/problems/583-delete-operation-for-two-strings.md.txt"
+            | <a class="muted-link" href="../../_sources/problems/863-all-nodes-distance-k-in-binary-tree.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -520,7 +529,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">583-delete-operation-for-two-strings</a><ul>
+<li><a class="reference internal" href="#">863-all-nodes-distance-k-in-binary-tree</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
 </ul>
