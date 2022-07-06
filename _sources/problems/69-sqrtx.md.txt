@@ -46,6 +46,6 @@ class Solution:
             if mi*mi > x:
                 hi = mi
             else:
-                lo = mi +1
-        return lo-1
+                lo = mi + 1
+        return lo - 1
 ```
