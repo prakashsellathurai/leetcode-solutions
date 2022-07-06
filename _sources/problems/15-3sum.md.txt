@@ -35,7 +35,7 @@ Try it on <a href='https://leetcode.com/problems/15-3sum'>leetcode</a>
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        n, result = len(nums), []
+        n, result = len(nums), set()
 
         for i in range(n):
             if i > 0 and nums[i] == nums[i-1]: continue
@@ -49,9 +49,9 @@ class Solution:
                 elif nums[beg] + nums[end] > target:
                     end -= 1
                 else:
-                    result.append((nums[i], nums[beg], nums[end]))
+                    result.add((nums[i], nums[beg], nums[end]))
                     beg += 1
                     end -= 1
 
-        return set(result)
+        return result
 ```
