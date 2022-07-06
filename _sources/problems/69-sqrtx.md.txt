@@ -43,6 +43,10 @@ class Solution:
         hi = x
         while lo < hi:
             mi = (lo + hi) >> 1
+            
+            if mi * mi == x:
+                return mi
+            
             if mi*mi > x:
                 hi = mi
             else:
