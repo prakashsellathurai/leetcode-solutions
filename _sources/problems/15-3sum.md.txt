@@ -1,0 +1,57 @@
+# 15-3sum
+
+
+Try it on <a href='https://leetcode.com/problems/15-3sum'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an integer array nums, return all the triplets <code>[nums[i], nums[j], nums[k]]</code> such that <code>i != j</code>, <code>i != k</code>, and <code>j != k</code>, and <code>nums[i] + nums[j] + nums[k] == 0</code>.</p>
+
+<p>Notice that the solution set must not contain duplicate triplets.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> nums = [-1,0,1,2,-1,-4]
+<strong>Output:</strong> [[-1,-1,2],[-1,0,1]]
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = []
+<strong>Output:</strong> []
+</pre><p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> nums = [0]
+<strong>Output:</strong> []
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= nums.length &lt;= 3000</code></li>
+	<li><code>-10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        n, result = len(nums), []
+
+        for i in range(n):
+            if i > 0 and nums[i] == nums[i-1]: continue
+
+            target = -nums[i]
+            beg, end = i + 1, n - 1
+
+            while beg < end:
+                if nums[beg] + nums[end] < target:
+                    beg += 1
+                elif nums[beg] + nums[end] > target:
+                    end -= 1
+                else:
+                    result.append((nums[i], nums[beg], nums[end]))
+                    beg += 1
+                    end -= 1
+
+        return set(result)
+```
