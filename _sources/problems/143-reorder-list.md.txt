@@ -52,19 +52,59 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        cur = head
-        st = []
-        while cur:
-            st.append(cur)
-            cur = cur.next
-        cur = head
-        for i in range(len(st)//2):
-            nxt = cur.next
-            cur.next = st.pop()
-            cur = cur.next
-            cur.next = nxt
-            cur = cur.next
-
-        if cur != None:
-            cur.next = None
+        def findmiddle(head):
+            slow = head
+            fast = head
+            
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow.next, slow
+        
+        first = head
+        second_half_start,first_end = findmiddle(first)
+        
+        def reverse(head):
+            cur = head
+            prev = None
+            while cur:
+                nxt = cur.next
+                cur.next = prev
+                prev = cur
+                cur = nxt
+            return prev
+        
+        if first_end is None:
+            return head
+        first_end.next = None
+        
+        second_half_start = reverse(second_half_start)
+        
+        def merge(head1, head2):
+            res = cur = ListNode(None)
+            
+            while head1 or head2:
+                if head1:
+                    res.next = head1
+                    head1 = head1.next
+                    res = res.next
+                if head2:
+                    res.next = head2
+                    head2 = head2.next
+                    res = res.next
+                
+            while head1:
+                res.next = head1
+                head1 = head1.next
+                res = res.next
+            while head2:
+                res.next = head2
+                head2 = head2.next
+                res = res.next
+            
+            return res.next
+            
+            
+        head = merge(first, second_half_start)
+        
 ```

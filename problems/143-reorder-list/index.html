@@ -468,21 +468,61 @@
         <span class="sd">"""</span>
 <span class="sd">        Do not return anything, modify head in-place instead.</span>
 <span class="sd">        """</span>
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
-        <span class="n">st</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
-            <span class="n">st</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">st</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
-            <span class="n">nxt</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nxt</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
-
-        <span class="k">if</span> <span class="n">cur</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">def</span> <span class="nf">findmiddle</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
+            
+            <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+                <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+            <span class="k">return</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span><span class="p">,</span> <span class="n">slow</span>
+        
+        <span class="n">first</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="n">second_half_start</span><span class="p">,</span><span class="n">first_end</span> <span class="o">=</span> <span class="n">findmiddle</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+        
+        <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
+                <span class="n">nxt</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span>
+                <span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">nxt</span>
+            <span class="k">return</span> <span class="n">prev</span>
+        
+        <span class="k">if</span> <span class="n">first_end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">head</span>
+        <span class="n">first_end</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="n">second_half_start</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">second_half_start</span><span class="p">)</span>
+        
+        <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">head1</span><span class="p">,</span> <span class="n">head2</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            
+            <span class="k">while</span> <span class="n">head1</span> <span class="ow">or</span> <span class="n">head2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">head1</span><span class="p">:</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">head1</span>
+                    <span class="n">head1</span> <span class="o">=</span> <span class="n">head1</span><span class="o">.</span><span class="n">next</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">next</span>
+                <span class="k">if</span> <span class="n">head2</span><span class="p">:</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">head2</span>
+                    <span class="n">head2</span> <span class="o">=</span> <span class="n">head2</span><span class="o">.</span><span class="n">next</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">next</span>
+                
+            <span class="k">while</span> <span class="n">head1</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">head1</span>
+                <span class="n">head1</span> <span class="o">=</span> <span class="n">head1</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">next</span>
+            <span class="k">while</span> <span class="n">head2</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">head2</span>
+                <span class="n">head2</span> <span class="o">=</span> <span class="n">head2</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">next</span>
+            
+            <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">next</span>
+            
+            
+        <span class="n">head</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second_half_start</span><span class="p">)</span>
+        
 </pre></div>
 </div>
 </section>
