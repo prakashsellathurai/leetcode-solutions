@@ -40,7 +40,7 @@ Explanation: The nodes that are a distance 2 from the target node (with value 5)
 ```Python
 class Solution(object):
     def distanceK(self, root, target, K):
-        def dfs(node, par = None):
+        def dfs(node, par=None):
             if node:
                 node.par = par
                 dfs(node.left, node)
@@ -57,7 +57,8 @@ class Solution(object):
             for nei in (node.left, node.right, node.par):
                 if nei and nei not in seen:
                     seen.add(nei)
-                    queue.append((nei, d+1))
+                    queue.append((nei, d + 1))
 
         return []
+
 ```
