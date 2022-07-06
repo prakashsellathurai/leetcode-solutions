@@ -35,25 +35,49 @@ Try it on <a href='https://leetcode.com/problems/15-3sum'>leetcode</a>
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        n, result = len(nums), set()
-
+        return self.KSum(nums, 0, 3)
+    
+    def KSum(self, nums, target, k):
+        
+        n = len(nums)
+        
+        if not n:
+            return []
+        
+        average = target // k
+        
+        if average < nums[0] or average > nums[-1]:
+            return []
+        
+        if k == 2:
+            return self.twosum(nums, target)
+        
+        res = []
+        
         for i in range(n):
-            if i > 0 and nums[i] == nums[i-1]: continue
-
-            target = -nums[i]
-            beg, end = i + 1, n - 1
-
-            while beg < end:
-                if nums[beg] + nums[end] < target:
-                    beg += 1
-                elif nums[beg] + nums[end] > target:
-                    end -= 1
-                else:
-                    match = (nums[i], nums[beg], nums[end])
-                    if match not in result:
-                        result.add((nums[i], nums[beg], nums[end]))
-                    beg += 1
-                    end -= 1
-
-        return result
+            if i == 0 or nums[i] != nums[i-1]:
+                for subset in  self.KSum(nums[i+1:], target-nums[i],k-1):
+                    res.append([nums[i]]+subset)
+        
+        return res
+        
+    def twosum(self, nums, target):
+        lo = 0
+        n = len(nums)
+        hi = n-1
+        res = []
+        
+        while lo < hi:
+            curr_sum = nums[lo] + nums[hi]
+            if curr_sum < target or (lo > 0 and nums[lo] == nums[lo - 1]):
+                lo += 1
+            elif curr_sum > target or (hi < len(nums) - 1 and nums[hi] == nums[hi + 1]):
+                hi -= 1
+            else:
+                res.append([nums[lo], nums[hi]])
+                lo += 1
+                hi -= 1
+        return res
+                
+        
 ```
