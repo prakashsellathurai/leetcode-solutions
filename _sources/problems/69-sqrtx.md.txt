@@ -37,19 +37,20 @@ Try it on <a href='https://leetcode.com/problems/69-sqrtx'>leetcode</a>
 ```Python
 class Solution:
     def mySqrt(self, x: int) -> int:
-        if x ==  0 or x== 1:
+        if x == 0 or x == 1:
             return x
         lo = 1
         hi = x
         while lo < hi:
             mi = (lo + hi) >> 1
-            
+
             if mi * mi == x:
                 return mi
-            
-            if mi*mi > x:
+
+            if mi * mi > x:
                 hi = mi
             else:
                 lo = mi + 1
         return lo - 1
+
 ```
