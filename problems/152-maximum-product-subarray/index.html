@@ -462,16 +462,31 @@
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">maxProduct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span>  <span class="ow">or</span> <span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">def</span> <span class="nf">maxProduct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># max positive product</span>
+        <span class="c1"># ending at the current position</span>
+        <span class="n">max_ending_here</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+        <span class="c1"># min negative product ending</span>
+        <span class="c1"># at the current position</span>
+        <span class="n">min_ending_here</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Initialize overall max product</span>
+        <span class="n">max_so_far</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># /* Traverse through the array.</span>
+        <span class="c1"># the maximum product subarray ending at an index</span>
+        <span class="c1"># will be the maximum of the element itself,</span>
+        <span class="c1"># the product of element and max product ending previously</span>
+        <span class="c1"># and the min product ending previously. */</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">max_ending_here</span><span class="p">),</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">min_ending_here</span><span class="p">)</span>
+            <span class="n">min_ending_here</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">max_ending_here</span><span class="p">),</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">min_ending_here</span><span class="p">)</span>
+            <span class="n">max_ending_here</span> <span class="o">=</span> <span class="n">temp</span>
+            <span class="n">max_so_far</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_so_far</span><span class="p">,</span> <span class="n">max_ending_here</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">max_so_far</span>
 </pre></div>
 </div>
 </section>
