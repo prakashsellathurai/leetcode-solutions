@@ -41,13 +41,18 @@ Try it on <a href='https://leetcode.com/problems/234-palindrome-linked-list'>lee
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        return self.naive(head)
+    
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def naive(self, head: Optional[ListNode]) -> bool:
         slow = head
         fast = head
         s = []
         while fast:
             s.append(fast.val)
             fast = fast.next
-            
-
         return s == s[::-1]
+    
+    
 ```

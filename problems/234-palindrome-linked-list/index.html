@@ -479,15 +479,20 @@
 <span class="c1">#         self.next = next</span>
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">naive</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+    
+    <span class="c1"># Time Complexity: O(n)</span>
+    <span class="c1"># Space Complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">naive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">while</span> <span class="n">fast</span><span class="p">:</span>
             <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fast</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
             <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
-            
-
         <span class="k">return</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    
 </pre></div>
 </div>
 </section>
