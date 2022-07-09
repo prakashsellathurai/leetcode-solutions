@@ -474,7 +474,7 @@
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">maxResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottomup</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
     
     <span class="c1"># Time Complexity: O(n*k)</span>
     <span class="c1"># Space Complexity: O(n*k)</span>
@@ -496,7 +496,7 @@
     
     <span class="c1"># Time Complexity: O(nlogk)</span>
     <span class="c1"># Space Complexity: O(n)</span>
-    <span class="k">def</span> <span class="nf">bottomup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">better</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
         <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">q</span> <span class="o">=</span> <span class="p">[]</span>
@@ -510,6 +510,21 @@
             <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">sum_so_far</span> <span class="k">if</span> <span class="n">sum_so_far</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'-inf'</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">q</span><span class="p">,(</span><span class="o">-</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">i</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    
+        
+    <span class="c1"># Time Complexity: O(n)</span>
+    <span class="c1"># Space Complexity: O(n)</span>
+    <span class="k">def</span> <span class="nf">optimal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">deq</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">while</span> <span class="n">deq</span> <span class="ow">and</span> <span class="n">deq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">-</span> <span class="n">k</span><span class="p">:</span> <span class="n">deq</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">deq</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>   
+            <span class="k">while</span> <span class="n">deq</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">deq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]:</span> <span class="n">deq</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">deq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         
 </pre></div>
 </div>
