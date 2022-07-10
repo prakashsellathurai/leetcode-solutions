@@ -473,18 +473,20 @@
     <span class="k">def</span> <span class="nf">generateTrees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">]]:</span>
         <span class="nd">@lru_cache</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">:</span> <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="n">right</span><span class="p">:</span> <span class="k">return</span> <span class="p">[</span><span class="n">TreeNode</span><span class="p">(</span><span class="n">left</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="n">right</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">TreeNode</span><span class="p">(</span><span class="n">left</span><span class="p">)]</span>
             <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="n">leftNodes</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">root</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="n">rightNodes</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+                <span class="n">rightNodes</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">leftNode</span> <span class="ow">in</span> <span class="n">leftNodes</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">rightNode</span> <span class="ow">in</span> <span class="n">rightNodes</span><span class="p">:</span>
                         <span class="n">rootNode</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">leftNode</span><span class="p">,</span> <span class="n">rightNode</span><span class="p">)</span>
                         <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rootNode</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">ans</span>
-        
+
         <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
