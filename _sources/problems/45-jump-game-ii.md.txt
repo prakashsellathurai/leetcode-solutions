@@ -43,13 +43,14 @@ class Solution:
     def jump(self, nums: List[int]) -> int:
         steps = 0
         cur_End = 0
-        maxReach = 0;
+        maxReach = 0
         for i in range(len(nums)):
-            if(i>cur_End):
-                steps+=1
-                cur_End = maxReach;
-             
-            maxReach = max(maxReach, i+nums[i]);
+            if i > cur_End:
+                steps += 1
+                cur_End = maxReach
 
-        return steps;
+            maxReach = max(maxReach, i + nums[i])
+
+        return steps
+
 ```
