@@ -1,0 +1,24 @@
+# 746-min-cost-climbing-stairs
+
+
+Try it on <a href='https://leetcode.com/problems/746-min-cost-climbing-stairs'>leetcode</a>
+
+## Description
+<div class="description">
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        n = len(cost)
+        @cache
+        def dfs(i):
+            if i>=n:
+                return 0
+            if i == -1:
+                return  min(dfs(i+1),dfs(i+2))
+            return cost[i] + min(dfs(i+1),dfs(i+2))
+        return dfs(-1)
+```
