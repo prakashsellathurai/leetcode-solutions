@@ -483,20 +483,9 @@
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">findDuplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">):</span>
         <span class="c1"># Find the intersection point of the two runners.</span>
-        <span class="n">tortoise</span> <span class="o">=</span> <span class="n">hare</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">tortoise</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">tortoise</span><span class="p">]</span>
-            <span class="n">hare</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">hare</span><span class="p">]]</span>
-            <span class="k">if</span> <span class="n">tortoise</span> <span class="o">==</span> <span class="n">hare</span><span class="p">:</span>
-                <span class="k">break</span>
-        
-        <span class="c1"># Find the "entrance" to the cycle.</span>
-        <span class="n">tortoise</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">while</span> <span class="n">tortoise</span> <span class="o">!=</span> <span class="n">hare</span><span class="p">:</span>
-            <span class="n">tortoise</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">tortoise</span><span class="p">]</span>
-            <span class="n">hare</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">hare</span><span class="p">]</span>
-        
-        <span class="k">return</span> <span class="n">hare</span>
+        <span class="k">while</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]]:</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>  <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
