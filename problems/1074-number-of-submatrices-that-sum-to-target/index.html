@@ -493,72 +493,77 @@
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">numSubmatrixSumTarget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-    
+
     <span class="c1"># Time Complexity: O((m*n)^3)</span>
     <span class="c1"># Space Complexity: O(1)</span>
     <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        
+
         <span class="k">def</span> <span class="nf">submatrixSum</span><span class="p">(</span><span class="n">rowStart</span><span class="p">,</span> <span class="n">rowSize</span><span class="p">,</span> <span class="n">colStart</span><span class="p">,</span> <span class="n">colSize</span><span class="p">):</span>
             <span class="n">subMatrixSum</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rowStart</span><span class="p">,</span> <span class="n">rowstart</span><span class="o">+</span><span class="n">rowSize</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colStart</span><span class="p">,</span> <span class="n">colStart</span><span class="o">+</span><span class="n">colSize</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rowStart</span><span class="p">,</span> <span class="n">rowstart</span> <span class="o">+</span> <span class="n">rowSize</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colStart</span><span class="p">,</span> <span class="n">colStart</span> <span class="o">+</span> <span class="n">colSize</span><span class="p">):</span>
                     <span class="n">subMatrixSum</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">subMatrixSum</span>
-        
+
         <span class="k">for</span> <span class="n">rowStart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">rowSize</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">rowSize</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">colStart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">colSize</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">colSize</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
                         <span class="k">if</span> <span class="n">submatrixSum</span><span class="p">(</span><span class="n">rowStart</span><span class="p">,</span> <span class="n">rowSize</span><span class="p">,</span> <span class="n">colStart</span><span class="p">,</span> <span class="n">colSize</span><span class="p">)</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
                             <span class="n">res</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">res</span>
-    
+
     <span class="c1"># Time Complexity: O((m*n)^2)</span>
     <span class="c1"># Space Complexity: O(m*n)</span>
     <span class="k">def</span> <span class="nf">better</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        
+
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-                <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
         <span class="k">for</span> <span class="n">colstart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">colend</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colstart</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">rowstart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
                     <span class="n">sub_sum</span> <span class="o">=</span> <span class="mi">0</span>
                     <span class="k">for</span> <span class="n">rowend</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rowstart</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-                        <span class="n">sub_sum</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">rowend</span><span class="p">][</span><span class="n">colend</span><span class="p">]</span> <span class="o">-</span> <span class="n">matrix</span><span class="p">[</span><span class="n">rowend</span><span class="p">][</span><span class="n">colstart</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">colstart</span> <span class="k">else</span> <span class="mi">0</span>
+                        <span class="n">sub_sum</span> <span class="o">+=</span> <span class="p">(</span>
+                            <span class="n">matrix</span><span class="p">[</span><span class="n">rowend</span><span class="p">][</span><span class="n">colend</span><span class="p">]</span> <span class="o">-</span>
+                            <span class="n">matrix</span><span class="p">[</span><span class="n">rowend</span><span class="p">][</span><span class="n">colstart</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">colstart</span>
+                            <span class="k">else</span> <span class="mi">0</span>
+                        <span class="p">)</span>
                         <span class="k">if</span> <span class="n">sub_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
                             <span class="n">res</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">res</span>
-    
+
     <span class="c1"># Time Complexity: O((m^2*n))</span>
     <span class="c1"># Space Complexity: O(m*n)</span>
     <span class="k">def</span> <span class="nf">optimal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        
+
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-                <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        
-        
-        
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
         <span class="k">for</span> <span class="n">colstart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">colend</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colstart</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
                 <span class="n">cur_sum</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">hash_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
                 <span class="k">for</span> <span class="n">rowstart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-                    <span class="n">cur_sum</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">rowstart</span><span class="p">][</span><span class="n">colend</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">rowstart</span><span class="p">][</span><span class="n">colstart</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">colstart</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
-                    <span class="n">res</span> <span class="o">+=</span> <span class="n">hash_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cur_sum</span> <span class="o">-</span> <span class="n">target</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-                    <span class="n">hash_map</span><span class="p">[</span><span class="n">cur_sum</span><span class="p">]</span> <span class="o">=</span> <span class="n">hash_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cur_sum</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-                    
+                    <span class="n">cur_sum</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">rowstart</span><span class="p">][</span><span class="n">colend</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span>
+                        <span class="n">matrix</span><span class="p">[</span><span class="n">rowstart</span><span class="p">][</span><span class="n">colstart</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">colstart</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                    <span class="p">)</span>
+                    <span class="n">res</span> <span class="o">+=</span> <span class="n">hash_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cur_sum</span> <span class="o">-</span> <span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                    <span class="n">hash_map</span><span class="p">[</span><span class="n">cur_sum</span><span class="p">]</span> <span class="o">=</span> <span class="n">hash_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cur_sum</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
         <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>

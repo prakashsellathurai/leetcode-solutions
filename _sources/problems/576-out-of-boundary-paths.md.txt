@@ -37,29 +37,44 @@ Try it on <a href='https://leetcode.com/problems/576-out-of-boundary-paths'>leet
 ## Solution(Python)
 ```Python
 class Solution:
-    def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+    def findPaths(
+        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int
+    ) -> int:
         return self.topdown(m, n, maxMove, startRow, startColumn)
-        
-     
+
     # Time Complexity: O(4^n)
     # Space Complexity: O(n)
-    def bruteforce(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+    def bruteforce(
+        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int
+    ) -> int:
         if startRow == m or startColumn == n or startRow < 0 or startColumn < 0:
             return 1
         if maxMove == 0:
             return 0
-        
-        return self.bruteforce(m,n, maxMove - 1, startRow-1, startColumn) + self.bruteforce(m,n, maxMove - 1, startRow+1, startColumn) + self.bruteforce(m,n, maxMove - 1, startRow, startColumn-1) + self.bruteforce(m,n, maxMove - 1, startRow, startColumn+1)
-    
+
+        return (
+            self.bruteforce(m, n, maxMove - 1, startRow - 1, startColumn)
+            + self.bruteforce(m, n, maxMove - 1, startRow + 1, startColumn)
+            + self.bruteforce(m, n, maxMove - 1, startRow, startColumn - 1)
+            + self.bruteforce(m, n, maxMove - 1, startRow, startColumn + 1)
+        )
+
     # Time Complexity: O(m*n*N)
     # Space Complexity: O(m*n*N)
     @cache
-    def topdown(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+    def topdown(
+        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int
+    ) -> int:
         if startRow == m or startColumn == n or startRow < 0 or startColumn < 0:
             return 1
         if maxMove == 0:
             return 0
-        
-        return (self.topdown(m,n, maxMove - 1, startRow-1, startColumn) + self.topdown(m,n, maxMove - 1, startRow+1, startColumn) + self.topdown(m,n, maxMove - 1, startRow, startColumn-1) + self.topdown(m,n, maxMove - 1, startRow, startColumn+1)) % ((10**9) + 7)
-    
+
+        return (
+            self.topdown(m, n, maxMove - 1, startRow - 1, startColumn)
+            + self.topdown(m, n, maxMove - 1, startRow + 1, startColumn)
+            + self.topdown(m, n, maxMove - 1, startRow, startColumn - 1)
+            + self.topdown(m, n, maxMove - 1, startRow, startColumn + 1)
+        ) % ((10**9) + 7)
+
 ```

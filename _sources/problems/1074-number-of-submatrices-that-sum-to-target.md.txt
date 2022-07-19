@@ -49,72 +49,77 @@ Try it on <a href='https://leetcode.com/problems/1074-number-of-submatrices-that
 class Solution:
     def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
         return self.optimal(matrix, target)
-    
+
     # Time Complexity: O((m*n)^3)
     # Space Complexity: O(1)
     def bruteforce(self, matrix: List[List[int]], target: int) -> int:
         res = 0
         m = len(matrix)
         n = len(matrix[0])
-        
+
         def submatrixSum(rowStart, rowSize, colStart, colSize):
             subMatrixSum = 0
-            for i in range(rowStart, rowstart+rowSize):
-                for j in range(colStart, colStart+colSize):
+            for i in range(rowStart, rowstart + rowSize):
+                for j in range(colStart, colStart + colSize):
                     subMatrixSum += matrix[i][j]
             return subMatrixSum
-        
+
         for rowStart in range(m):
-            for rowSize in range(1, m+1):
+            for rowSize in range(1, m + 1):
                 for colStart in range(n):
-                    for colSize in range(1, n+1):
+                    for colSize in range(1, n + 1):
                         if submatrixSum(rowStart, rowSize, colStart, colSize) == target:
                             res += 1
         return res
-    
+
     # Time Complexity: O((m*n)^2)
     # Space Complexity: O(m*n)
     def better(self, matrix: List[List[int]], target: int) -> int:
         res = 0
         m = len(matrix)
         n = len(matrix[0])
-        
+
         for row in range(m):
-            for col in range(1,n):
-                matrix[row][col] += matrix[row][col-1]
-        
+            for col in range(1, n):
+                matrix[row][col] += matrix[row][col - 1]
+
         for colstart in range(n):
             for colend in range(colstart, n):
                 for rowstart in range(m):
                     sub_sum = 0
                     for rowend in range(rowstart, m):
-                        sub_sum += matrix[rowend][colend] - matrix[rowend][colstart-1] if colstart else 0
+                        sub_sum += (
+                            matrix[rowend][colend] -
+                            matrix[rowend][colstart - 1]
+                            if colstart
+                            else 0
+                        )
                         if sub_sum == target:
                             res += 1
         return res
-    
+
     # Time Complexity: O((m^2*n))
     # Space Complexity: O(m*n)
     def optimal(self, matrix: List[List[int]], target: int) -> int:
         res = 0
         m = len(matrix)
         n = len(matrix[0])
-        
+
         for row in range(m):
-            for col in range(1,n):
-                matrix[row][col] += matrix[row][col-1]
-        
-        
-        
+            for col in range(1, n):
+                matrix[row][col] += matrix[row][col - 1]
+
         for colstart in range(n):
             for colend in range(colstart, n):
                 cur_sum = 0
                 hash_map = {0: 1}
                 for rowstart in range(m):
-                    cur_sum += matrix[rowstart][colend] - (matrix[rowstart][colstart-1] if colstart>0 else 0)
-                    res += hash_map.get(cur_sum - target,0)
-                    hash_map[cur_sum] = hash_map.get(cur_sum,0) + 1
-                    
+                    cur_sum += matrix[rowstart][colend] - (
+                        matrix[rowstart][colstart - 1] if colstart > 0 else 0
+                    )
+                    res += hash_map.get(cur_sum - target, 0)
+                    hash_map[cur_sum] = hash_map.get(cur_sum, 0) + 1
+
         return res
 
 ```
