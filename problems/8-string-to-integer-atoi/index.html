@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="80-remove-duplicates-from-sorted-array-ii" href="../80-remove-duplicates-from-sorted-array-ii/" /><link rel="prev" title="785-is-graph-bipartite" href="../785-is-graph-bipartite/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="80-remove-duplicates-from-sorted-array-ii" href="../80-remove-duplicates-from-sorted-array-ii/" /><link rel="prev" title="792-number-of-matching-subsequences" href="../792-number-of-matching-subsequences/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
         <title>8-string-to-integer-atoi - Leetcode Solutions</title>
@@ -156,6 +156,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../1-two-sum/">1-two-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-regular-expression-matching/">10-regular-expression-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../100-same-tree/">100-same-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1009-complement-of-base-10-integer/">1009-complement-of-base-10-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../101-symmetric-tree/">101-symmetric-tree</a></li>
@@ -176,6 +177,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../114-flatten-binary-tree-to-linked-list/">114-flatten-binary-tree-to-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../116-populating-next-right-pointers-in-each-node/">116-populating-next-right-pointers-in-each-node</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../117-populating-next-right-pointers-in-each-node-ii/">117-populating-next-right-pointers-in-each-node-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../118-pascals-triangle/">118-pascals-triangle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1192-critical-connections-in-a-network/">1192-critical-connections-in-a-network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1195-fizz-buzz-multithreaded/">1195-fizz-buzz-multithreaded</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12-integer-to-roman/">12-integer-to-roman</a></li>
@@ -281,6 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../300-longest-increasing-subsequence/">300-longest-increasing-subsequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../304-range-sum-query-2d-immutable/">304-range-sum-query-2d-immutable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../31-next-permutation/">31-next-permutation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../315-count-of-smaller-numbers-after-self/">315-count-of-smaller-numbers-after-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../318-maximum-product-of-word-lengths/">318-maximum-product-of-word-lengths</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../32-longest-valid-parentheses/">32-longest-valid-parentheses</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../322-coin-change/">322-coin-change</a></li>
@@ -372,12 +375,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../746-min-cost-climbing-stairs/">746-min-cost-climbing-stairs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../78-subsets/">78-subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../785-is-graph-bipartite/">785-is-graph-bipartite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../792-number-of-matching-subsequences/">792-number-of-matching-subsequences</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">8-string-to-integer-atoi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../80-remove-duplicates-from-sorted-array-ii/">80-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../820-short-encoding-of-words/">820-short-encoding-of-words</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../84-largest-rectangle-in-histogram/">84-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../844-backspace-string-compare/">844-backspace-string-compare</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../849-maximize-distance-to-closest-person/">849-maximize-distance-to-closest-person</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../86-partition-list/">86-partition-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../863-all-nodes-distance-k-in-binary-tree/">863-all-nodes-distance-k-in-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../867-transpose-matrix/">867-transpose-matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../875-koko-eating-bananas/">875-koko-eating-bananas</a></li>
@@ -395,6 +400,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../968-binary-tree-cameras/">968-binary-tree-cameras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../97-interleaving-string/">97-interleaving-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../979-distribute-coins-in-binary-tree/">979-distribute-coins-in-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../98-validate-binary-search-tree/">98-validate-binary-search-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../981-time-based-key-value-store/">981-time-based-key-value-store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-recover-binary-search-tree/">99-recover-binary-search-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../992-subarrays-with-k-different-integers/">992-subarrays-with-k-different-integers</a></li>
@@ -575,14 +581,14 @@ Since 4193 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final resu
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../785-is-graph-bipartite/">
+          <a class="prev-page" href="../792-number-of-matching-subsequences/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">785-is-graph-bipartite</div>
+                <div class="title">792-number-of-matching-subsequences</div>
                 
               </div>
             </a>
