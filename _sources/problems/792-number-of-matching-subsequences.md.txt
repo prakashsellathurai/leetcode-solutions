@@ -43,49 +43,49 @@ Try it on <a href='https://leetcode.com/problems/792-number-of-matching-subseque
 ```Python
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        return self.optimal(s,words)
-        
+        return self.optimal(s, words)
+
     # Time Complexity: O(n*m)
     # space complexity: O(1)
     def naive(self, s: str, words: List[str]) -> int:
         cnt = 0
-        def issubsequence(s,word):
+
+        def issubsequence(s, word):
             i = 0
             if len(word) > len(s):
                 return False
             for c in s:
-                if i<len(word) and word[i] == c:
-                    i+=1
+                if i < len(word) and word[i] == c:
+                    i += 1
             return i == len(word)
+
         for word in words:
             if issubsequence(s, word):
                 cnt += 1
         return cnt
-    
+
     # Time Complexity: O(n*m)
     # space complexity: O(n)
     def better(self, s: str, words: List[str]) -> int:
-    
-        def issubseq(s,t):
+        def issubseq(s, t):
             stack = []
             for i in t:
                 stack.append(i)
-            
+
             n = len(s)
-            for i in range(n-1,-1,-1):
+            for i in range(n - 1, -1, -1):
                 if not stack:
                     return True
                 if stack[-1] == s[i]:
                     stack.pop()
             return stack == []
-        
-        
+
         hashmap = {}
-        
+
         count = 0
         for word in words:
             if word not in hashmap:
-                if issubseq(s,word):
+                if issubseq(s, word):
                     count += 1
                     hashmap[word] = True
                 else:
@@ -94,7 +94,7 @@ class Solution:
                 if hashmap[word]:
                     count += 1
         return count
-    
+
     # Time Complexity: O(nlogm)
     # space complexity: O(n)
     def optimal(self, s: str, words: List[str]) -> int:
@@ -110,16 +110,13 @@ class Solution:
                 else:
                     return False
             return True
-        
-        
-        
+
         indices = defaultdict(list)
         for i, c in enumerate(s):
             indices[c].append(i)
-        
-                
+
         hashmap = {}
-        
+
         count = 0
         for word in words:
             if word not in hashmap:
@@ -132,4 +129,5 @@ class Solution:
                 if hashmap[word]:
                     count += 1
         return count
+
 ```

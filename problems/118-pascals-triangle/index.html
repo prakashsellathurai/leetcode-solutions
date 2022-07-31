@@ -269,6 +269,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../234-palindrome-linked-list/">234-palindrome-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../239-sliding-window-maximum/">239-sliding-window-maximum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../240-search-a-2d-matrix-ii/">240-search-a-2d-matrix-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../242-valid-anagram/">242-valid-anagram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../258-add-digits/">258-add-digits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../26-remove-duplicates-from-sorted-array/">26-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../268-missing-number/">268-missing-number</a></li>
@@ -289,6 +290,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../322-coin-change/">322-coin-change</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../329-longest-increasing-path-in-a-matrix/">329-longest-increasing-path-in-a-matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../338-counting-bits/">338-counting-bits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../34-find-first-and-last-position-of-element-in-sorted-array/">34-find-first-and-last-position-of-element-in-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../341-flatten-nested-list-iterator/">341-flatten-nested-list-iterator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../344-reverse-string/">344-reverse-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../347-top-k-frequent-elements/">347-top-k-frequent-elements</a></li>
@@ -387,11 +389,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../867-transpose-matrix/">867-transpose-matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../875-koko-eating-bananas/">875-koko-eating-bananas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../88-merge-sorted-array/">88-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../890-find-and-replace-pattern/">890-find-and-replace-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../897-increasing-order-search-tree/">897-increasing-order-search-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../9-palindrome-number/">9-palindrome-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../905-sort-array-by-parity/">905-sort-array-by-parity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../907-sum-of-subarray-minimums/">907-sum-of-subarray-minimums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../91-decode-ways/">91-decode-ways</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../916-word-subsets/">916-word-subsets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../92-reverse-linked-list-ii/">92-reverse-linked-list-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../923-3sum-with-multiplicity/">923-3sum-with-multiplicity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../93-restore-ip-addresses/">93-restore-ip-addresses</a></li>
@@ -494,13 +498,12 @@
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numRows</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
-        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numRows</span><span class="p">)]</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numRows</span><span class="p">)]</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">numRows</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
-                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">numRows</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">dp</span>
-            
 </pre></div>
 </div>
 </section>

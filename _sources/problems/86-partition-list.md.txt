@@ -43,10 +43,10 @@ Try it on <a href='https://leetcode.com/problems/86-partition-list'>leetcode</a>
 class Solution:
     def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
         before_head = before = ListNode()
-        after_head = after =  ListNode()
-        
+        after_head = after = ListNode()
+
         cur = head
-        
+
         while cur:
             if cur.val < x:
                 before.next = cur
@@ -58,4 +58,5 @@ class Solution:
         after.next = None
         before.next = after_head.next
         return before_head.next
+
 ```
