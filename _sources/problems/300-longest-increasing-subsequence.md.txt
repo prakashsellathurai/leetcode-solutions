@@ -53,6 +53,7 @@ class Solution:
             else:
                 pos = bisect_left(LIS,num)
                 LIS[pos] = num
+
         return len(LIS)
 
 ```
