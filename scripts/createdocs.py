@@ -96,7 +96,7 @@ def main():
             print(f"Readme file Not found error {title_slug}")
             readme_file_contents = ""
 
-        soup = BeautifulSoup(readme_file_contents)
+        soup = BeautifulSoup(readme_file_contents, features="html.parser")
         tag_list = soup.findAll("h2")  # Specify the tag
         try:
             title = tag_list[0].string
