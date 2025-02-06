@@ -10,6 +10,7 @@ __version__ = "1.0.1"
 __email__ = "prakashsellathurai@gmail.com"
 
 import os
+import random
 import re
 
 from string import Template
@@ -116,7 +117,7 @@ def main():
         except IndexError:
             prob_id = [int(s) for s in re.findall(r"\d+", title_slug)][0]
         except ValueError:
-            prob_id = [int(s) for s in re.findall(r"\d+", title_slug)][0]
+            prob_id = generateOrPullProblemId(title_slug)
 
         if title_slug not in cache:
             problems.append(
@@ -156,6 +157,14 @@ def main():
         except Exception as e:
             print("Error writing ", problem["title_slug"], e)
     print("############ docs created ##################")
+
+def generateOrPullProblemId(title_slug):
+    try:
+        prob_id = [int(s) for s in re.findall(r"\d+", title_slug)][0]
+    except Exception as e:
+        print("error at " + str(title_slug), e)
+        prob_id = random.randint(100000, 10000000)
+    return prob_id
 
 
 if __name__ == "__main__":
