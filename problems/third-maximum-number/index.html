@@ -1,0 +1,615 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="two-sum" href="../two-sum/" /><link rel="prev" title="smallest-integer-divisible-by-k" href="../smallest-integer-divisible-by-k/" />
+
+    <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
+        <title>third-maximum-number - Leetcode Solutions</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../"><div class="brand">Leetcode Solutions</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../">
+  
+  
+  <span class="sidebar-brand-text">Leetcode Solutions</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search/" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1-two-sum/">1-two-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-regular-expression-matching/">10-regular-expression-matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../100-same-tree/">100-same-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1009-complement-of-base-10-integer/">1009-complement-of-base-10-integer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../101-symmetric-tree/">101-symmetric-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1011-capacity-to-ship-packages-within-d-days/">1011-capacity-to-ship-packages-within-d-days</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../102-binary-tree-level-order-traversal/">102-binary-tree-level-order-traversal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1022-sum-of-root-to-leaf-binary-numbers/">1022-sum-of-root-to-leaf-binary-numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../104-maximum-depth-of-binary-tree/">104-maximum-depth-of-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1041-robot-bounded-in-circle/">1041-robot-bounded-in-circle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1046-last-stone-weight/">1046-last-stone-weight</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1047-remove-all-adjacent-duplicates-in-string/">1047-remove-all-adjacent-duplicates-in-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1048-longest-string-chain/">1048-longest-string-chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../105-construct-binary-tree-from-preorder-and-inorder-traversal/">105-construct-binary-tree-from-preorder-and-inorder-traversal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1074-number-of-submatrices-that-sum-to-target/">1074-number-of-submatrices-that-sum-to-target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../108-convert-sorted-array-to-binary-search-tree/">108-convert-sorted-array-to-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1091-shortest-path-in-binary-matrix/">1091-shortest-path-in-binary-matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1094-car-pooling/">1094-car-pooling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-container-with-most-water/">11-container-with-most-water</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1115-print-foobar-alternately/">1115-print-foobar-alternately</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../114-flatten-binary-tree-to-linked-list/">114-flatten-binary-tree-to-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../116-populating-next-right-pointers-in-each-node/">116-populating-next-right-pointers-in-each-node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../117-populating-next-right-pointers-in-each-node-ii/">117-populating-next-right-pointers-in-each-node-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../118-pascals-triangle/">118-pascals-triangle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1192-critical-connections-in-a-network/">1192-critical-connections-in-a-network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1195-fizz-buzz-multithreaded/">1195-fizz-buzz-multithreaded</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-integer-to-roman/">12-integer-to-roman</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../120-triangle/">120-triangle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1202-smallest-string-with-swaps/">1202-smallest-string-with-swaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1209-remove-all-adjacent-duplicates-in-string-ii/">1209-remove-all-adjacent-duplicates-in-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../121-best-time-to-buy-and-sell-stock/">121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1220-count-vowels-permutation/">1220-count-vowels-permutation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../123-best-time-to-buy-and-sell-stock-iii/">123-best-time-to-buy-and-sell-stock-iii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../124-binary-tree-maximum-path-sum/">124-binary-tree-maximum-path-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1268-search-suggestions-system/">1268-search-suggestions-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../127-word-ladder/">127-word-ladder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../128-longest-consecutive-sequence/">128-longest-consecutive-sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1291-sequential-digits/">1291-sequential-digits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1302-deepest-leaves-sum/">1302-deepest-leaves-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1305-all-elements-in-two-binary-search-trees/">1305-all-elements-in-two-binary-search-trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../131-palindrome-partitioning/">131-palindrome-partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1310-xor-queries-of-a-subarray/">1310-xor-queries-of-a-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../132-palindrome-partitioning-ii/">132-palindrome-partitioning-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1332-remove-palindromic-subsequences/">1332-remove-palindromic-subsequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../134-gas-station/">134-gas-station</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1342-number-of-steps-to-reduce-a-number-to-zero/">1342-number-of-steps-to-reduce-a-number-to-zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1345-jump-game-iv/">1345-jump-game-iv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../135-candy/">135-candy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1354-construct-target-array-with-multiple-sums/">1354-construct-target-array-with-multiple-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/">1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../138-copy-list-with-random-pointer/">138-copy-list-with-random-pointer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1396-design-underground-system/">1396-design-underground-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../140-word-break-ii/">140-word-break-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../142-linked-list-cycle-ii/">142-linked-list-cycle-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1423-maximum-points-you-can-obtain-from-cards/">1423-maximum-points-you-can-obtain-from-cards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../143-reorder-list/">143-reorder-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../146-lru-cache/">146-lru-cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1461-check-if-a-string-contains-all-binary-codes-of-size-k/">1461-check-if-a-string-contains-all-binary-codes-of-size-k</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1463-cherry-pickup-ii/">1463-cherry-pickup-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/">1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1472-design-browser-history/">1472-design-browser-history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1480-running-sum-of-1d-array/">1480-running-sum-of-1d-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1491-average-salary-excluding-the-minimum-and-maximum-salary/">1491-average-salary-excluding-the-minimum-and-maximum-salary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-3sum/">15-3sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../150-evaluate-reverse-polish-notation/">150-evaluate-reverse-polish-notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1510-stone-game-iv/">1510-stone-game-iv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../152-maximum-product-subarray/">152-maximum-product-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1523-count-odd-numbers-in-an-interval-range/">1523-count-odd-numbers-in-an-interval-range</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../155-min-stack/">155-min-stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1584-min-cost-to-connect-all-points/">1584-min-cost-to-connect-all-points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1592-rearrange-spaces-between-words/">1592-rearrange-spaces-between-words</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1598-crawler-log-folder/">1598-crawler-log-folder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../160-intersection-of-two-linked-lists/">160-intersection-of-two-linked-lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1631-path-with-minimum-effort/">1631-path-with-minimum-effort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1641-count-sorted-vowel-strings/">1641-count-sorted-vowel-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1642-furthest-building-you-can-reach/">1642-furthest-building-you-can-reach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1647-minimum-deletions-to-make-character-frequencies-unique/">1647-minimum-deletions-to-make-character-frequencies-unique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../167-two-sum-ii-input-array-is-sorted/">167-two-sum-ii-input-array-is-sorted</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1672-richest-customer-wealth/">1672-richest-customer-wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1679-max-number-of-k-sum-pairs/">1679-max-number-of-k-sum-pairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1689-partitioning-into-minimum-number-of-deci-binary-numbers/">1689-partitioning-into-minimum-number-of-deci-binary-numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1695-maximum-erasure-value/">1695-maximum-erasure-value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1696-jump-game-vi/">1696-jump-game-vi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17-letter-combinations-of-a-phone-number/">17-letter-combinations-of-a-phone-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1710-maximum-units-on-a-truck/">1710-maximum-units-on-a-truck</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1711-count-good-meals/">1711-count-good-meals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../172-factorial-trailing-zeroes/">172-factorial-trailing-zeroes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1720-decode-xored-array/">1720-decode-xored-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1721-swapping-nodes-in-a-linked-list/">1721-swapping-nodes-in-a-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../173-binary-search-tree-iterator/">173-binary-search-tree-iterator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../179-largest-number/">179-largest-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-4sum/">18-4sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1863-sum-of-all-subset-xor-totals/">1863-sum-of-all-subset-xor-totals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../189-rotate-array/">189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../191-number-of-1-bits/">191-number-of-1-bits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1929-concatenation-of-array/">1929-concatenation-of-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../199-binary-tree-right-side-view/">199-binary-tree-right-side-view</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2-add-two-numbers/">2-add-two-numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20-valid-parentheses/">20-valid-parentheses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../206-reverse-linked-list/">206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21-merge-two-sorted-lists/">21-merge-two-sorted-lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../211-design-add-and-search-words-data-structure/">211-design-add-and-search-words-data-structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../212-word-search-ii/">212-word-search-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2138-divide-a-string-into-groups-of-size-k/">2138-divide-a-string-into-groups-of-size-k</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../215-kth-largest-element-in-an-array/">215-kth-largest-element-in-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../216-combination-sum-iii/">216-combination-sum-iii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../224-basic-calculator/">224-basic-calculator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../225-implement-stack-using-queues/">225-implement-stack-using-queues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../226-invert-binary-tree/">226-invert-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2279-maximum-bags-with-full-capacity-of-rocks/">2279-maximum-bags-with-full-capacity-of-rocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-merge-k-sorted-lists/">23-merge-k-sorted-lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../230-kth-smallest-element-in-a-bst/">230-kth-smallest-element-in-a-bst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../232-implement-queue-using-stacks/">232-implement-queue-using-stacks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../234-palindrome-linked-list/">234-palindrome-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../235-lowest-common-ancestor-of-a-binary-search-tree/">235-lowest-common-ancestor-of-a-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../236-lowest-common-ancestor-of-a-binary-tree/">236-lowest-common-ancestor-of-a-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../239-sliding-window-maximum/">239-sliding-window-maximum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../240-search-a-2d-matrix-ii/">240-search-a-2d-matrix-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../242-valid-anagram/">242-valid-anagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../258-add-digits/">258-add-digits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26-remove-duplicates-from-sorted-array/">26-remove-duplicates-from-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../268-missing-number/">268-missing-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../284-peeking-iterator/">284-peeking-iterator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../287-find-the-duplicate-number/">287-find-the-duplicate-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../289-game-of-life/">289-game-of-life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29-divide-two-integers/">29-divide-two-integers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../290-word-pattern/">290-word-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../295-find-median-from-data-stream/">295-find-median-from-data-stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../297-serialize-and-deserialize-binary-tree/">297-serialize-and-deserialize-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-longest-substring-without-repeating-characters/">3-longest-substring-without-repeating-characters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../300-longest-increasing-subsequence/">300-longest-increasing-subsequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../303-range-sum-query-immutable/">303-range-sum-query-immutable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../304-range-sum-query-2d-immutable/">304-range-sum-query-2d-immutable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../307-range-sum-query-mutable/">307-range-sum-query-mutable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31-next-permutation/">31-next-permutation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../315-count-of-smaller-numbers-after-self/">315-count-of-smaller-numbers-after-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3174-3292-414-third-maximum-number/">3174-3292-414-third-maximum-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../318-maximum-product-of-word-lengths/">318-maximum-product-of-word-lengths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../32-longest-valid-parentheses/">32-longest-valid-parentheses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../322-coin-change/">322-coin-change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../329-longest-increasing-path-in-a-matrix/">329-longest-increasing-path-in-a-matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../338-counting-bits/">338-counting-bits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../34-find-first-and-last-position-of-element-in-sorted-array/">34-find-first-and-last-position-of-element-in-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../341-flatten-nested-list-iterator/">341-flatten-nested-list-iterator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../344-reverse-string/">344-reverse-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../347-top-k-frequent-elements/">347-top-k-frequent-elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../354-russian-doll-envelopes/">354-russian-doll-envelopes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../355-design-twitter/">355-design-twitter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../376-wiggle-subsequence/">376-wiggle-subsequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../382-linked-list-random-node/">382-linked-list-random-node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../388-longest-absolute-file-path/">388-longest-absolute-file-path</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../389-find-the-difference/">389-find-the-difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../39-combination-sum/">39-combination-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../399-evaluate-division/">399-evaluate-division</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-median-of-two-sorted-arrays/">4-median-of-two-sorted-arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../406-queue-reconstruction-by-height/">406-queue-reconstruction-by-height</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../41-first-missing-positive/">41-first-missing-positive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../410-split-array-largest-sum/">410-split-array-largest-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../412-fizz-buzz/">412-fizz-buzz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../416-partition-equal-subset-sum/">416-partition-equal-subset-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../421-maximum-xor-of-two-numbers-in-an-array/">421-maximum-xor-of-two-numbers-in-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../429-n-ary-tree-level-order-traversal/">429-n-ary-tree-level-order-traversal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../438-find-all-anagrams-in-a-string/">438-find-all-anagrams-in-a-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../45-jump-game-ii/">45-jump-game-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../452-minimum-number-of-arrows-to-burst-balloons/">452-minimum-number-of-arrows-to-burst-balloons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../454-4sum-ii/">454-4sum-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../456-132-pattern/">456-132-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../46-permutations/">46-permutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../460-lfu-cache/">460-lfu-cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../462-minimum-moves-to-equal-array-elements-ii/">462-minimum-moves-to-equal-array-elements-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../463-island-perimeter/">463-island-perimeter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../47-permutations-ii/">47-permutations-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../473-matchsticks-to-square/">473-matchsticks-to-square</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../474-ones-and-zeroes/">474-ones-and-zeroes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../494-target-sum/">494-target-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4sum-ii/">4sum-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-longest-palindromic-substring/">5-longest-palindromic-substring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../509-fibonacci-number/">509-fibonacci-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../51-n-queens/">51-n-queens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../52-n-queens-ii/">52-n-queens-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../520-detect-capital/">520-detect-capital</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../525-contiguous-array/">525-contiguous-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../53-maximum-subarray/">53-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../532-k-diff-pairs-in-an-array/">532-k-diff-pairs-in-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../535-encode-and-decode-tinyurl/">535-encode-and-decode-tinyurl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../538-convert-bst-to-greater-tree/">538-convert-bst-to-greater-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../543-diameter-of-binary-tree/">543-diameter-of-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../560-subarray-sum-equals-k/">560-subarray-sum-equals-k</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../567-permutation-in-string/">567-permutation-in-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../575-distribute-candies/">575-distribute-candies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../576-out-of-boundary-paths/">576-out-of-boundary-paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../581-shortest-unsorted-continuous-subarray/">581-shortest-unsorted-continuous-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../583-delete-operation-for-two-strings/">583-delete-operation-for-two-strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../59-spiral-matrix-ii/">59-spiral-matrix-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../60-permutation-sequence/">60-permutation-sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../60133-2155-1-two-sum/">60133-2155-1-two-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../605-can-place-flowers/">605-can-place-flowers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../63-unique-paths-ii/">63-unique-paths-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../630-course-schedule-iii/">630-course-schedule-iii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../64-minimum-path-sum/">64-minimum-path-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../647-palindromic-substrings/">647-palindromic-substrings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../653-two-sum-iv-input-is-a-bst/">653-two-sum-iv-input-is-a-bst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../658-find-k-closest-elements/">658-find-k-closest-elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../661-image-smoother/">661-image-smoother</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../665-non-decreasing-array/">665-non-decreasing-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../668-kth-smallest-number-in-multiplication-table/">668-kth-smallest-number-in-multiplication-table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../669-trim-a-binary-search-tree/">669-trim-a-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../67-add-binary/">67-add-binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../68-text-justification/">68-text-justification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../680-valid-palindrome-ii/">680-valid-palindrome-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../682-baseball-game/">682-baseball-game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../69-sqrtx/">69-sqrtx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../692-top-k-frequent-words/">692-top-k-frequent-words</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../695-max-area-of-island/">695-max-area-of-island</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../697-degree-of-an-array/">697-degree-of-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7-reverse-integer/">7-reverse-integer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../700-search-in-a-binary-search-tree/">700-search-in-a-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../701-insert-into-a-binary-search-tree/">701-insert-into-a-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../703-kth-largest-element-in-a-stream/">703-kth-largest-element-in-a-stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../705-design-hashset/">705-design-hashset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../706-design-hashmap/">706-design-hashmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../707-design-linked-list/">707-design-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../719-find-k-th-smallest-pair-distance/">719-find-k-th-smallest-pair-distance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../720-longest-word-in-dictionary/">720-longest-word-in-dictionary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../733-flood-fill/">733-flood-fill</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../743-network-delay-time/">743-network-delay-time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../745-prefix-and-suffix-search/">745-prefix-and-suffix-search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../746-min-cost-climbing-stairs/">746-min-cost-climbing-stairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../78-subsets/">78-subsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../785-is-graph-bipartite/">785-is-graph-bipartite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../792-number-of-matching-subsequences/">792-number-of-matching-subsequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8-string-to-integer-atoi/">8-string-to-integer-atoi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../80-remove-duplicates-from-sorted-array-ii/">80-remove-duplicates-from-sorted-array-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../820-short-encoding-of-words/">820-short-encoding-of-words</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../823-binary-trees-with-factors/">823-binary-trees-with-factors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../84-largest-rectangle-in-histogram/">84-largest-rectangle-in-histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../844-backspace-string-compare/">844-backspace-string-compare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../849-maximize-distance-to-closest-person/">849-maximize-distance-to-closest-person</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../86-partition-list/">86-partition-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../863-all-nodes-distance-k-in-binary-tree/">863-all-nodes-distance-k-in-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../867-transpose-matrix/">867-transpose-matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../875-koko-eating-bananas/">875-koko-eating-bananas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../88-merge-sorted-array/">88-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../890-find-and-replace-pattern/">890-find-and-replace-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../897-increasing-order-search-tree/">897-increasing-order-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9-palindrome-number/">9-palindrome-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../905-sort-array-by-parity/">905-sort-array-by-parity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../907-sum-of-subarray-minimums/">907-sum-of-subarray-minimums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../91-decode-ways/">91-decode-ways</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../916-word-subsets/">916-word-subsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../92-reverse-linked-list-ii/">92-reverse-linked-list-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../923-3sum-with-multiplicity/">923-3sum-with-multiplicity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../93-restore-ip-addresses/">93-restore-ip-addresses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../941-valid-mountain-array/">941-valid-mountain-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../95-unique-binary-search-trees-ii/">95-unique-binary-search-trees-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../968-binary-tree-cameras/">968-binary-tree-cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../97-interleaving-string/">97-interleaving-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../979-distribute-coins-in-binary-tree/">979-distribute-coins-in-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../98-validate-binary-search-tree/">98-validate-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../981-time-based-key-value-store/">981-time-based-key-value-store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99-recover-binary-search-tree/">99-recover-binary-search-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../992-subarrays-with-k-different-integers/">992-subarrays-with-k-different-integers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../994-rotting-oranges/">994-rotting-oranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic-calculator-ii/">basic-calculator-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../burst-balloons/">burst-balloons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../consecutive-characters/">consecutive-characters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../course-schedule-ii/">course-schedule-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decode-string/">decode-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distinct-subsequences/">distinct-subsequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fibonacci-number/">fibonacci-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-the-town-judge/">find-the-town-judge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../insertion-sort-list/">insertion-sort-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../k-closest-points-to-origin/">k-closest-points-to-origin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maximal-square/">maximal-square</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maximum-depth-of-n-ary-tree/">maximum-depth-of-n-ary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maximum-difference-between-node-and-ancestor/">maximum-difference-between-node-and-ancestor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../merge-intervals/">merge-intervals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../middle-of-the-linked-list/">middle-of-the-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../minimum-absolute-difference/">minimum-absolute-difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../minimum-height-trees/">minimum-height-trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nth-magical-number/">nth-magical-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../number-complement/">number-complement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../numbers-at-most-n-given-digit-set/">numbers-at-most-n-given-digit-set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pairs-of-songs-with-total-durations-divisible-by-60/">pairs-of-songs-with-total-durations-divisible-by-60</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../partition-equal-subset-sum/">partition-equal-subset-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../partition-to-k-equal-sum-subsets/">partition-to-k-equal-sum-subsets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../path-sum/">path-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../path-sum-ii/">path-sum-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../path-sum-iii/">path-sum-iii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfect-squares/">perfect-squares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../populating-next-right-pointers-in-each-node/">populating-next-right-pointers-in-each-node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../power-of-two/">power-of-two</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range-sum-of-bst/">range-sum-of-bst</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reorder-list/">reorder-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reverse-linked-list/">reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reverse-words-in-a-string/">reverse-words-in-a-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serialize-and-deserialize-binary-tree/">serialize-and-deserialize-binary-tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../smallest-integer-divisible-by-k/">smallest-integer-divisible-by-k</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">third-maximum-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../two-sum/">two-sum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigzag-conversion/">zigzag-conversion</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="third-maximum-number">
+<h1>third-maximum-number<a class="headerlink" href="#third-maximum-number" title="Permalink to this headline">¶</a></h1>
+<p>Try it on <a href="https://leetcode.com/problems/third-maximum-number">leetcode</a></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="description">
+<div><p>Given an integer array <code>nums</code>, return <em>the <strong>third distinct maximum</strong> number in this array. If the third maximum does not exist, return the <strong>maximum</strong> number</em>.</p><p> </p>
+<p><strong class="example">Example 1:</strong></p><pre><strong>Input:</strong> nums = [3,2,1]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong>
+The first distinct maximum is 3.
+The second distinct maximum is 2.
+The third distinct maximum is 1.
+</pre><p><strong class="example">Example 2:</strong></p><pre><strong>Input:</strong> nums = [1,2]
+<strong>Output:</strong> 2
+<strong>Explanation:</strong>
+The first distinct maximum is 2.
+The second distinct maximum is 1.
+The third distinct maximum does not exist, so the maximum (2) is returned instead.
+</pre><p><strong class="example">Example 3:</strong></p><pre><strong>Input:</strong> nums = [2,2,3,1]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong>
+The first distinct maximum is 3.
+The second distinct maximum is 2 (both 2's are counted together since they have the same value).
+The third distinct maximum is 1.
+</pre><p> </p>
+<p><strong>Constraints:</strong></p><ul>
+<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
+</ul><p> </p>
+<strong>Follow up:</strong> Can you find an <code>O(n)</code> solution?</div>
+</div></section>
+<section id="solution-python">
+<h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">thirdMax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># Sort the array.</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">elem_counted</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">prev_elem</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="c1"># Current element is different from previous.</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_elem</span><span class="p">:</span>
+                <span class="n">elem_counted</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">prev_elem</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            
+            <span class="c1"># If we have counted 3 numbers then return current number.</span>
+            <span class="k">if</span> <span class="n">elem_counted</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        
+        <span class="c1"># We never counted 3 distinct numbers, return largest number.</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../two-sum/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">two-sum</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../smallest-integer-divisible-by-k/">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">smallest-integer-divisible-by-k</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2022, Prakash Sellathurai |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="../../_sources/problems/third-maximum-number.md.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">third-maximum-number</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    </body>
+</html>
