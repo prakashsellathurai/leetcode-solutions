@@ -25,7 +25,7 @@ SUBMISSION_FOLDER_PATH = os.path.join(os.getcwd(), SUBMISSION_FOLDER)
 DOCS_PATH = os.path.join(os.getcwd(), DOCS_FOLDER)
 PROBLEMS_FOLDER_PATH = os.path.join(os.getcwd(), "./source/problems/")
 INDEX_FILE_PATH = os.path.join(os.getcwd(), "./source/_static/index.html")
-IGNORED_PATHS = [".git", ".github"]
+IGNORED_PATHS = [".git", ".github",".deepsource.toml"]
 
 
 def to_doc(problem):
@@ -55,13 +55,21 @@ def to_doc(problem):
 def get_lang(folder_path, title_slug):
     """get lang from title_slug"""
 
-    codefilename = os.path.join(folder_path, title_slug, title_slug + ".py")
-
+    folder_path = os.path.join(folder_path, title_slug)
+    pyfiles = [file for file in os.listdir(folder_path) if file.endswith(".py")]
+    codefilename =os.path.join(folder_path, pyfiles[0]) if pyfiles else ""
     if os.path.isfile(codefilename):
         return "Python", codefilename
     else:
         return "", None
-
+    
+def getReadme(folder_path, title_slug):
+    lang, codeFilename = get_lang(folder_path, title_slug)
+    if codeFilename is None:
+        return None
+    codeFilePath = os.path.dirname(codeFilename)
+    readme_filename = os.path.join(codeFilePath, "README.md")
+    return readme_filename
 
 def main():
     """reads submissions and creates docs"""
@@ -85,18 +93,15 @@ def main():
             print("Code file Not found error " + str(title_slug))
             continue
 
-        readme_filename = os.path.join(
-            SUBMISSION_FOLDER_PATH,
-            title_slug,
-            "README.md")
+        readme_filename = getReadme(SUBMISSION_FOLDER_PATH, title_slug)
         try:
-            with open(readme_filename, 'r') as file_buff:
+            with open(readme_filename, 'r', encoding="utf-8") as file_buff:
                 readme_file_contents = file_buff.read()
         except FileNotFoundError:
             print(f"Readme file Not found error {title_slug}")
             readme_file_contents = ""
 
-        soup = BeautifulSoup(readme_file_contents, features="html.parser")
+        soup = BeautifulSoup(readme_file_contents, "html.parser")
         tag_list = soup.findAll("h2")  # Specify the tag
         try:
             title = tag_list[0].string
@@ -109,6 +114,8 @@ def main():
         try:
             prob_id = int(str(tag_list[0].string).split(".")[0])
         except IndexError:
+            prob_id = [int(s) for s in re.findall(r"\d+", title_slug)][0]
+        except ValueError:
             prob_id = [int(s) for s in re.findall(r"\d+", title_slug)][0]
 
         if title_slug not in cache:
@@ -146,6 +153,8 @@ def main():
             f.close()
         except FileNotFoundError:
             print("Error writing ", problem["title_slug"])
+        except Exception as e:
+            print("Error writing ", problem["title_slug"], e)
     print("############ docs created ##################")
 
 
