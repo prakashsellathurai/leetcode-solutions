@@ -1,0 +1,89 @@
+# sort-colors
+
+
+Try it on <a href='https://leetcode.com/problems/sort-colors'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an array <code>nums</code> with <code>n</code> objects colored red, white, or blue, sort them <strong><a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">in-place</a> </strong>so that objects of the same color are adjacent, with the colors in the order red, white, and blue.</p>
+
+<p>We will use the integers <code>0</code>, <code>1</code>, and <code>2</code> to represent the color red, white, and blue, respectively.</p>
+
+<p>You must solve this problem without using the library's sort function.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre><strong>Input:</strong> nums = [2,0,2,1,1,0]
+<strong>Output:</strong> [0,0,1,1,2,2]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre><strong>Input:</strong> nums = [2,0,1]
+<strong>Output:</strong> [0,1,2]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>n == nums.length</code></li>
+	<li><code>1 &lt;= n &lt;= 300</code></li>
+	<li><code>nums[i]</code> is either <code>0</code>, <code>1</code>, or <code>2</code>.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong>&nbsp;Could you come up with a one-pass algorithm using only&nbsp;constant extra space?</p>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        self.threePointers(nums)
+        
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def countingSort(self, nums: List[int]) -> None:
+        count = [0] * 3
+        
+        for num  in nums:
+            count[num] += 1
+        
+        starting_index = 0
+
+        for c, freq in enumerate(count):
+            count[c] = starting_index
+            starting_index += freq
+        sortedList = [0]*len(nums)
+        for num in nums:
+            sortedList[count[num]] = num
+            count[num] += 1
+        for i in range(len(nums)):
+            nums[i] = sortedList[i]
+            
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)         
+    def threePointers(self, nums: List[int]) -> None:
+        n = len(nums)
+        p1 = 0
+        p2 = n-1
+        cur = 0
+        
+        while cur <= p2:
+            num = nums[cur]
+            if num == 0:
+                nums[cur], nums[p1] = nums[p1], nums[cur]
+                cur +=1
+                p1+=1
+            elif num == 2:
+                nums[cur], nums[p2] = nums[p2], nums[cur]
+                p2-=1
+            else:
+                cur += 1
+```

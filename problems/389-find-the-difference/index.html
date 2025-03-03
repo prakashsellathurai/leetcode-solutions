@@ -155,6 +155,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0kth-largest-element-in-an-array/">0kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1-two-sum/">1-two-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-regular-expression-matching/">10-regular-expression-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../100-same-tree/">100-same-tree</a></li>
@@ -425,7 +426,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../decode-string/">decode-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distinct-subsequences/">distinct-subsequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fibonacci-number/">fibonacci-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-all-numbers-disappeared-in-an-array/">find-all-numbers-disappeared-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-the-town-judge/">find-the-town-judge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../height-checker/">height-checker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../insertion-sort-list/">insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../k-closest-points-to-origin/">k-closest-points-to-origin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maximal-square/">maximal-square</a></li>
@@ -447,12 +450,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../perfect-squares/">perfect-squares</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../populating-next-right-pointers-in-each-node/">populating-next-right-pointers-in-each-node</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../power-of-two/">power-of-two</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../query-kth-smallest-trimmed-number/">query-kth-smallest-trimmed-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../range-sum-of-bst/">range-sum-of-bst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reorder-list/">reorder-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reverse-linked-list/">reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reverse-words-in-a-string/">reverse-words-in-a-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../serialize-and-deserialize-binary-tree/">serialize-and-deserialize-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../smallest-integer-divisible-by-k/">smallest-integer-divisible-by-k</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sort-an-array/">sort-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sort-colors/">sort-colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../squares-of-a-sorted-array/">squares-of-a-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../third-maximum-number/">third-maximum-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../two-sum/">two-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zigzag-conversion/">zigzag-conversion</a></li>
@@ -508,7 +515,7 @@
     <span class="k">def</span> <span class="nf">findTheDifference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">charCode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Run Two loops check all possible chars from t in s to find odd one </span>
 <span class="sd">    Time Complexity: O(n^2)</span>
 <span class="sd">    Space Comnplexity: O(1)</span>
@@ -519,7 +526,7 @@
             <span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">ch</span>
 
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    create Hashfrequency table of chars of t  and decrement their resepective frequency for each character in s</span>
 <span class="sd">    </span>
 <span class="sd">    atlast the character with frequency 1 is the result</span>
@@ -541,7 +548,7 @@
             <span class="k">if</span> <span class="n">Hastable</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">ch</span>
 
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    since input consists of only small alphabets we could use counting sort to sort the two strings and find the odd element in  sorted strings</span>
 <span class="sd">    </span>
 <span class="sd">    This Idea is similar to the Hashtable and performance wise they are still same</span>
@@ -573,7 +580,7 @@
                 <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    xor of all characters in ordinal form form both s and t gives the result</span>
 <span class="sd">    because xor cancels the pair of same number only the additional number will be left out</span>
 
@@ -592,7 +599,7 @@
             <span class="n">res</span> <span class="o">^=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">chr</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Summate character code of all characters in s and in t separately and their difference is the character code of our result char</span>
 <span class="sd">    </span>
 

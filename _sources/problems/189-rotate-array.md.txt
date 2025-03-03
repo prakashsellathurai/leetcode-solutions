@@ -75,7 +75,7 @@ class Solution:
 
     def bruteforce(self, nums: List[int], k: int) -> None:
         for i in range(k):
-            prev = nums[len(nums) - 1]
+            prev = nums[-1]
             for j in range(len(nums)):
                 nums[j], prev = prev, nums[j]
 

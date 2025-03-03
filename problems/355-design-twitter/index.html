@@ -155,6 +155,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0kth-largest-element-in-an-array/">0kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../1-two-sum/">1-two-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-regular-expression-matching/">10-regular-expression-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../100-same-tree/">100-same-tree</a></li>
@@ -425,7 +426,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../decode-string/">decode-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distinct-subsequences/">distinct-subsequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fibonacci-number/">fibonacci-number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../find-all-numbers-disappeared-in-an-array/">find-all-numbers-disappeared-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../find-the-town-judge/">find-the-town-judge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../height-checker/">height-checker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../insertion-sort-list/">insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../k-closest-points-to-origin/">k-closest-points-to-origin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../maximal-square/">maximal-square</a></li>
@@ -447,12 +450,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../perfect-squares/">perfect-squares</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../populating-next-right-pointers-in-each-node/">populating-next-right-pointers-in-each-node</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../power-of-two/">power-of-two</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../query-kth-smallest-trimmed-number/">query-kth-smallest-trimmed-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../range-sum-of-bst/">range-sum-of-bst</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reorder-list/">reorder-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reverse-linked-list/">reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reverse-words-in-a-string/">reverse-words-in-a-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../serialize-and-deserialize-binary-tree/">serialize-and-deserialize-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../smallest-integer-divisible-by-k/">smallest-integer-divisible-by-k</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sort-an-array/">sort-an-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sort-colors/">sort-colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../squares-of-a-sorted-array/">squares-of-a-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../third-maximum-number/">third-maximum-number</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../two-sum/">two-sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zigzag-conversion/">zigzag-conversion</a></li>
@@ -531,7 +538,7 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
     <span class="c1"># if size of heap is lesser than 10 keep pushing tweets and when it's full, poppush</span>
     <span class="c1"># use a defaultdict to associate user id's to their heaps</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">"""</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize your data structure here.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">following</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
@@ -539,7 +546,7 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
         <span class="bp">self</span><span class="o">.</span><span class="n">post</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">postTweet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">,</span> <span class="n">tweetId</span><span class="p">):</span>
-        <span class="sd">"""</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Compose a new tweet.</span>
 <span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">post</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -549,7 +556,7 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
             <span class="n">tweets</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">getNewsFeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">):</span>
-        <span class="sd">"""</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.</span>
 <span class="sd">        """</span>
         <span class="n">h</span> <span class="o">=</span> <span class="p">[]</span>
@@ -569,14 +576,14 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
         <span class="k">return</span> <span class="p">[</span><span class="n">heappop</span><span class="p">(</span><span class="n">h</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">))][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">follow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">followerId</span><span class="p">,</span> <span class="n">followeeId</span><span class="p">):</span>
-        <span class="sd">"""</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Follower follows a followee. If the operation is invalid, it should be a no-op.</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="n">followerId</span> <span class="o">!=</span> <span class="n">followeeId</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">following</span><span class="p">[</span><span class="n">followerId</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">followeeId</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">unfollow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">followerId</span><span class="p">,</span> <span class="n">followeeId</span><span class="p">):</span>
-        <span class="sd">"""</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Follower unfollows a followee. If the operation is invalid, it should be a no-op.</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="n">followerId</span> <span class="o">!=</span> <span class="n">followeeId</span><span class="p">:</span>
