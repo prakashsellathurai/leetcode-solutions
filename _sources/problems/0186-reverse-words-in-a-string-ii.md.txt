@@ -1,0 +1,67 @@
+# 0186-reverse-words-in-a-string-ii
+
+
+Try it on <a href='https://leetcode.com/problems/0186-reverse-words-in-a-string-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given a character array <code>s</code>, reverse the order of the <strong>words</strong>.</p>
+
+<p>A <strong>word</strong> is defined as a sequence of non-space characters. The <strong>words</strong> in <code>s</code> will be separated by a single space.</p>
+
+<p>Your code must solve the problem&nbsp;<strong>in-place,</strong> i.e. without allocating extra space.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> s = ["t","h","e"," ","s","k","y"," ","i","s"," ","b","l","u","e"]
+<strong>Output:</strong> ["b","l","u","e"," ","i","s"," ","s","k","y"," ","t","h","e"]
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> s = ["a"]
+<strong>Output:</strong> ["a"]
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>s[i]</code> is an English letter (uppercase or lowercase), digit, or space <code>&#39; &#39;</code>.</li>
+	<li>There is <strong>at least one</strong> word in <code>s</code>.</li>
+	<li><code>s</code> does not contain leading or trailing spaces.</li>
+	<li>All the words in <code>s</code> are guaranteed to be separated by a single space.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def reverseWords(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        if s is None:
+            return
+        s.reverse()
+        
+        n = len(s)
+        i = 0
+        j = 0
+        
+        while i< n and j<n:
+            # swap word
+            while j <n and s[j] != " " :
+                j+=1
+            k = i
+            l = j - 1
+            
+            while k < l and l < n:
+                s[k],s[l] = s[l],s[k]
+                k+=1
+                l-=1
+            #next word
+            i = j +1
+            j+=2
+            
+            
+        
+```
