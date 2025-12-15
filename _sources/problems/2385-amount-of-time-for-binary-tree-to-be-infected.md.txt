@@ -1,0 +1,121 @@
+# 2385-amount-of-time-for-binary-tree-to-be-infected
+
+
+Try it on <a href='https://leetcode.com/problems/2385-amount-of-time-for-binary-tree-to-be-infected'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given the <code>root</code> of a binary tree with <strong>unique</strong> values, and an integer <code>start</code>. At minute <code>0</code>, an <strong>infection</strong> starts from the node with value <code>start</code>.</p>
+
+<p>Each minute, a node becomes infected if:</p>
+
+<ul>
+	<li>The node is currently uninfected.</li>
+	<li>The node is adjacent to an infected node.</li>
+</ul>
+
+<p>Return <em>the number of minutes needed for the entire tree to be infected.</em></p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/06/25/image-20220625231744-1.png" style="width: 400px; height: 306px;" />
+<pre>
+<strong>Input:</strong> root = [1,5,3,null,4,10,6,9,2], start = 3
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> The following nodes are infected during:
+- Minute 0: Node 3
+- Minute 1: Nodes 1, 10 and 6
+- Minute 2: Node 5
+- Minute 3: Node 4
+- Minute 4: Nodes 9 and 2
+It takes 4 minutes for the whole tree to be infected so we return 4.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/06/25/image-20220625231812-2.png" style="width: 75px; height: 66px;" />
+<pre>
+<strong>Input:</strong> root = [1], start = 1
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> At minute 0, the only node in the tree is infected so we return 0.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[1, 10<sup>5</sup>]</code>.</li>
+	<li><code>1 &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
+	<li>Each node has a <strong>unique</strong> value.</li>
+	<li>A node with a value of <code>start</code> exists in the tree.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from collections import defaultdict, deque
+class Solution:
+    def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
+        return self.onepass(root, start)
+
+    # TIme complexity: O(n)
+    # Space complexiy: O(n)
+    def twopass(self, root: Optional[TreeNode], start: int) -> int:
+        # 1 build the graph from tree make connectionfrom node -> parents
+        graph = defaultdict(list)
+        def buidlGraph(cur, parent):
+            if cur is not None and parent is not None:
+                graph[cur.val].append(parent.val)
+                graph[parent.val].append(cur.val)
+            if cur.left is not None:
+                buidlGraph(cur.left, cur)
+            if cur.right is not None:
+                buidlGraph(cur.right, cur)
+        buidlGraph(root, None)
+        # 2 run dfs from the start node and track the maximum length by a max _length variable
+        max_len = 0
+        queue = deque([(start, 0)])
+        visited = set([start])
+
+        while len(queue) > 0:
+            node, distance = queue.popleft()
+            if distance > max_len:
+                max_len = distance
+            for neighbour in graph[node]:
+                if neighbour not in visited:
+                    visited.add(neighbour)
+                    queue.append((neighbour, distance+1))
+        return max_len
+
+    # TIme complexity: O(n)
+    # Space complexiy: O(n)
+    def onepass(self, root: Optional[TreeNode], start: int) -> int:
+        max_distance = 0
+        def traverse(root, start):
+            nonlocal  max_distance
+            depth = 0
+            if root is None:
+                return depth
+            
+            left_depth = traverse(root.left, start)
+            right_depth = traverse(root.right, start)
+
+            if root.val == start:
+                max_distance = max(left_depth, right_depth)
+                depth =  -1
+            elif left_depth >= 0 and right_depth >= 0:
+                depth = max(left_depth, right_depth) + 1
+            else:
+                distance = abs(left_depth) + abs(right_depth)
+                max_distance = max(max_distance, distance)
+                depth = min(left_depth, right_depth) - 1
+            return depth
+        traverse(root,start)
+        return max_distance
+```
