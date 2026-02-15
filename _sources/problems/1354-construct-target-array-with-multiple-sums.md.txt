@@ -5,7 +5,7 @@ Try it on <a href='https://leetcode.com/problems/1354-construct-target-array-wit
 
 ## Description
 <div class="description">
-<div><p>You are given an array <code>target</code> of n integers. From a starting array <code>arr</code> consisting of <code>n</code> 1's, you may perform the following procedure :</p>
+<p>You are given an array <code>target</code> of n integers. From a starting array <code>arr</code> consisting of <code>n</code> 1&#39;s, you may perform the following procedure :</p>
 
 <ul>
 	<li>let <code>x</code> be the sum of all elements currently in your array.</li>
@@ -16,9 +16,10 @@ Try it on <a href='https://leetcode.com/problems/1354-construct-target-array-wit
 <p>Return <code>true</code> <em>if it is possible to construct the</em> <code>target</code> <em>array from</em> <code>arr</code><em>, otherwise, return</em> <code>false</code>.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> target = [9,3,5]
+<pre>
+<strong>Input:</strong> target = [9,3,5]
 <strong>Output:</strong> true
 <strong>Explanation:</strong> Start with arr = [1, 1, 1] 
 [1, 1, 1], sum = 3 choose index 1
@@ -27,16 +28,18 @@ Try it on <a href='https://leetcode.com/problems/1354-construct-target-array-wit
 [9, 3, 5] Done
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> target = [1,1,1,2]
+<pre>
+<strong>Input:</strong> target = [1,1,1,2]
 <strong>Output:</strong> false
 <strong>Explanation:</strong> Impossible to create target array from [1,1,1,1].
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
-<pre><strong>Input:</strong> target = [8,5]
+<pre>
+<strong>Input:</strong> target = [8,5]
 <strong>Output:</strong> true
 </pre>
 
@@ -48,27 +51,40 @@ Try it on <a href='https://leetcode.com/problems/1354-construct-target-array-wit
 	<li><code>1 &lt;= n &lt;= 5 * 10<sup>4</sup></code></li>
 	<li><code>1 &lt;= target[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
-</div>
+
 </div>
 
 ## Solution(Python)
 ```Python
 class Solution:
     def isPossible(self, target: List[int]) -> bool:
-        total = sum(target)
-        target = [-a for a in target]
-        heapq.heapify(target)
-        while True:
-            a = -heapq.heappop(target)
-            total -= a
-            if a == 1 or total == 1: return True
-            if a < total or total == 0 or a % total == 0:
+        if len(target) == 1:
+            return target[0] == 1
+
+        total_sum = sum(target)
+        # Use a min-heap by pushing negative values to simulate a max-heap
+        max_heap = [-num for num in target]
+        heapq.heapify(max_heap)
+
+        while -max_heap[0] > 1:
+            max_val = -heapq.heappop(max_heap)
+            rest_sum = total_sum - max_val
+
+            # Edge cases and impossibility checks
+            if rest_sum == 1:
+                return True
+            if rest_sum == 0 or max_val <= rest_sum:
                 return False
-            a %= total
-            total += a
-            heapq.heappush(target, -a)
-        
-        
-        
+
+            # Calculate the previous value using modulo
+            prev_val = max_val% rest_sum
             
+            # If prev_val is 0, it indicates an impossible state
+            if prev_val == 0:
+                return False
+
+            total_sum = rest_sum + prev_val
+            heapq.heappush(max_heap, -prev_val)
+
+        return True
 ```
