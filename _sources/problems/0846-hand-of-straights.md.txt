@@ -1,0 +1,145 @@
+# 0846-hand-of-straights
+
+
+Try it on <a href='https://leetcode.com/problems/0846-hand-of-straights'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size <code>groupSize</code>, and consists of <code>groupSize</code> consecutive cards.</p>
+
+<p>Given an integer array <code>hand</code> where <code>hand[i]</code> is the value written on the <code>i<sup>th</sup></code> card and an integer <code>groupSize</code>, return <code>true</code> if she can rearrange the cards, or <code>false</code> otherwise.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> hand = [1,2,3,6,2,3,4,7,8], groupSize = 3
+<strong>Output:</strong> true
+<strong>Explanation:</strong> Alice&#39;s hand can be rearranged as [1,2,3],[2,3,4],[6,7,8]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> hand = [1,2,3,4,5], groupSize = 4
+<strong>Output:</strong> false
+<strong>Explanation:</strong> Alice&#39;s hand can not be rearranged into groups of 4.
+
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= hand.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>0 &lt;= hand[i] &lt;= 10<sup>9</sup></code></li>
+	<li><code>1 &lt;= groupSize &lt;= hand.length</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Note:</strong> This question is the same as 1296: <a href="https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/" target="_blank">https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/</a></p>
+
+</div>
+
+## Solution(Python)
+```Python
+import heapq
+class Solution:
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        return self.most_optimal(hand, groupSize)
+    
+    # Time Complexity: O(n logn + NK)
+    # Space Complexity: O(n)
+    def map(self, hands: List[int], groupSize: int) -> bool:
+        # Attempt
+        # # 1,2,3,,6,2,3,4,7,8
+        # # groupSize = 3
+        # # if n% g != 0 False
+        # #   b = n//g
+        # #   b bcukets
+        # #  hashmap = [1,2,2,1,1]
+        # #  smallest_cur = min(hashmap)
+        # #  [[],[],[]]
+        # # smallest_cur = min(hashmap)
+        # # 
+        # #    [] 1 cur+=1
+        # #       2 , 3
+        # #      if hashmap[smallest_cur] == 0
+        # #         reryurn Fa;se
+        # #      hashmap[smallest_cur] -=1
+        # # return True
+        # #       
+        n = len(hands)
+        if n% groupSize!= 0:
+            return False
+        # no_of_buckets = n // groupSize
+        # MAX = max(hand)
+        # MIN = min(hand)
+        # counts = [0] * ( MAX -MIN  +1)
+        cardCount  = Counter(hands)
+        min_heap = list(cardCount.keys())
+        heapq.heapify(min_heap)
+        while min_heap:
+            current_card = min_heap[0]  
+            for i in range(groupSize):
+                if cardCount[current_card + i] == 0:
+                    return False
+                cardCount[current_card + i] -= 1
+                if cardCount[current_card + i] <= 0:
+                    heapq.heappop(min_heap)
+        return True
+
+    def optimal(self, hands: List[int], groupSize: int) -> bool: # hand = [1,2,3,6,2,3,4,7,8], groupSize = 3
+        cardCount  = Counter(hands) # {1:1, 2:2, 3:2, 6:1, 4:1,7:1,8:1}
+        # Sorted list of card values
+        sortedCards = sorted(cardCount.keys()) # 1 2 3 4 6 7 8
+        # Queue to keep track of the number of new groups
+        # starting with each card value
+        groupStartQueue = deque() #  []
+        lastCard = -1
+        currentOpenGroups = 0
+        for currentCard in sortedCards: # 1 2 3 4 6 7 8   -> 6
+                        # Check if there are any discrepancies in the sequence
+            # or more groups are required than available cards
+            if (
+                currentOpenGroups > 0 and currentCard > lastCard + 1 # 
+            ) or currentOpenGroups > cardCount[currentCard]: # 
+                return False
+
+            groupStartQueue.append(cardCount[currentCard] - currentOpenGroups) #  0, 0, 1 
+            lastCard = currentCard # 6
+            currentOpenGroups = cardCount[currentCard] # 1
+            # Maintain the queue size to be equal to groupSize
+            if len(groupStartQueue) == groupSize: # 
+                currentOpenGroups -= groupStartQueue.popleft() # 0
+
+        return currentOpenGroups == 0
+
+
+    def most_optimal(self, hand: List[int], groupSize: int) -> bool:
+        if len(hand) % groupSize != 0:
+            return False
+
+        # Counter to store the count of each card value
+        card_count = Counter(hand)
+
+        for card in hand:
+            start_card = card
+            # Find the start of the potential straight sequence
+            while card_count[start_card - 1]:
+                start_card -= 1
+
+            # Process the sequence starting from start_card
+            while start_card <= card:
+                while card_count[start_card]:
+                    # Check if we can form a consecutive sequence
+                    # of groupSize cards
+                    for next_card in range(start_card, start_card + groupSize):
+                        if not card_count[next_card]:
+                            return False
+                        card_count[next_card] -= 1
+                start_card += 1
+
+        return True
+
+```
