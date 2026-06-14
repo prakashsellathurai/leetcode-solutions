@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -640,7 +648,30 @@ The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above)
         <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "120. Triangle",
+    "text": "Given a triangle array, return the minimum path sum from top to bottom.\nFor each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n\u00a0\nExample 1:\nInput: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]\nOutput: 11\nExplanation: The triangle looks like:\n   2\n  3 4\n 6 5 7\n4 1 8 3\nThe minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above).\n\nExample 2:\nInput: triangle = [[-10]]\nOutput: -10\n\n\u00a0\nConstraints:\n\n1 <= triangle.length <= 200\ntriangle[0].length == 1\ntriangle[i].length == triangle[i - 1].length + 1\n-104 <= triangle[i][j] <= 104\n\n\u00a0\nFollow up: Could you\u00a0do this using only O(n) extra space, where n is the total number of rows in the triangle?",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minimumTotal(self, triangle: List[List[int]]) -> int:\n        return self.bottomupdplessspace(triangle)\n\n    # Time complexity: O(2^n)\n    # space Complexity: O(n)\n    def bruteforce(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        min_sum = 0\n\n        def dfs(i, j, sum_so_far):\n            if i == n:\n                return sum_so_far\n\n            return min(\n                dfs(i + 1, j, sum_so_far + triangle[i][j]),\n                dfs(i + 1, j + 1, sum_so_far + triangle[i][j]),\n            )\n\n        return dfs(0, 0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def topdowndp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        @cache\n        def dfs(i, j):\n            if i == n - 1:\n                return triangle[i][j]\n\n            return triangle[i][j] + min(dfs(i + 1, j), dfs(i + 1, j + 1))\n\n        return dfs(0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def bottomupdp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n        dp = [[float(\"inf\")] * (i) for i in range(1, n + 1)]\n        dp[n - 1] = triangle[n - 1]\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[i][j] = triangle[i][j] + min(dp[i + 1][j], dp[i + 1][j + 1])\n        return dp[0][0]\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n)\n    def bottomupdplessspace(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        if not n:\n            return 0\n\n        if n == 1:\n            return triangle[0][0]\n\n        dp = [float(\"inf\")] * (n - 1)\n        prev_state = triangle[n - 1]\n\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[j] = triangle[i][j] + min(prev_state[j], prev_state[j + 1])\n            prev_state = dp\n\n        return dp[0]\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

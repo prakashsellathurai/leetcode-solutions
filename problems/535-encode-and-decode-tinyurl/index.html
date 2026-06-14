@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -590,7 +598,30 @@ string ans = obj.decode(tiny); // returns the original url after deconding it.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">code2url</span><span class="p">[</span><span class="n">shortUrl</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]]</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "535. Encode and Decode TinyURL",
+    "text": "Note: This is a companion problem to the System Design problem: Design TinyURL.\nTinyURL is a URL shortening service where you enter a URL such as https://leetcode.com/problems/design-tinyurl and it returns a short URL such as http://tinyurl.com/4e9iAk. Design a class to encode a URL and decode a tiny URL.\nThere is no restriction on how your encode/decode algorithm should work. You just need to ensure that a URL can be encoded to a tiny URL and the tiny URL can be decoded to the original URL.\nImplement the Solution class:\n\nSolution() Initializes the object of the system.\nString encode(String longUrl) Returns a tiny URL for the given longUrl.\nString decode(String shortUrl) Returns the original long URL for the given shortUrl. It is guaranteed that the given shortUrl was encoded by the same object.\n\n\u00a0\nExample 1:\nInput: url = \"https://leetcode.com/problems/design-tinyurl\"\nOutput: \"https://leetcode.com/problems/design-tinyurl\"\n\nExplanation:\nSolution obj = new Solution();\nstring tiny = obj.encode(url); // returns the encoded tiny url.\nstring ans = obj.decode(tiny); // returns the original url after deconding it.\n\n\u00a0\nConstraints:\n\n1 <= url.length <= 104\nurl is guranteed to be a valid URL.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Codec:\n\n    alphabet = string.ascii_letters + \"0123456789\"\n\n    def __init__(self):\n        self.url2code = {}\n        self.code2url = {}\n\n    def encode(self, longUrl):\n        while longUrl not in self.url2code:\n            code = \"\".join(random.choice(Codec.alphabet) for _ in range(6))\n            if code not in self.code2url:\n                self.code2url[code] = longUrl\n                self.url2code[longUrl] = code\n        return \"http://tinyurl.com/\" + self.url2code[longUrl]\n\n    def decode(self, shortUrl):\n        return self.code2url[shortUrl[-6:]]\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

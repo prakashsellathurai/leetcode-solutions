@@ -45,3 +45,28 @@ class Solution:
         return "0" if largest_num[0] == "0" else largest_num
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "179. Largest Number",
+    "text": "Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.\nSince the result may be very large, so you need to return a string instead of an integer.\n\u00a0\nExample 1:\nInput: nums = [10,2]\nOutput: \"210\"\n\nExample 2:\nInput: nums = [3,30,34,5,9]\nOutput: \"9534330\"\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 100\n0 <= nums[i] <= 109\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class LargerNumKey(str):\n    def __lt__(x, y):\n        return x + y > y + x\n\n\nclass Solution:\n    def largestNumber(self, nums):\n        largest_num = \"\".join(sorted(map(str, nums), key=LargerNumKey))\n        return \"0\" if largest_num[0] == \"0\" else largest_num\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

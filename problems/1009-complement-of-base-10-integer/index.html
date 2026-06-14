@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -602,7 +610,30 @@
         <span class="k">return</span> <span class="n">mask</span> <span class="o">^</span> <span class="n">n</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1009. Complement of Base 10 Integer",
+    "text": "The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation.\n\nFor example, The integer 5 is \"101\" in binary and its complement is \"010\" which is the integer 2.\n\nGiven an integer n, return its complement.\n\u00a0\nExample 1:\nInput: n = 5\nOutput: 2\nExplanation: 5 is \"101\" in binary, with complement \"010\" in binary, which is 2 in base-10.\n\nExample 2:\nInput: n = 7\nOutput: 0\nExplanation: 7 is \"111\" in binary, with complement \"000\" in binary, which is 0 in base-10.\n\nExample 3:\nInput: n = 10\nOutput: 5\nExplanation: 10 is \"1010\" in binary, with complement \"0101\" in binary, which is 5 in base-10.\n\n\u00a0\nConstraints:\n\n0 <= n < 109\n\n\u00a0\nNote: This question is the same as 476: https://leetcode.com/problems/number-complement/\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    # Question: given n flip al it's bits\n    # For Example: for \"101\" return \"010\"\n    #\n    # Draft:\n    # we needed  a bit manipulation technique that flips the\n    # bits\n    #       1.and - not useful here\n    #       2.Or - not useful here\n    #       3. >> / << - not useful here\n    #\n    #       4.xor - 1^0 = 1 1^1 = 0 (i.e xor with 1's flips the bits)\n    #       5.~ = one' complement\n    #\n    # which gives us Xor and complement,\n    # 1.xor:\n    #       we can use a mask lets say 11111 with bit length same as n\n    #        constructing the mask of length log(n) can be done in loop\n    #       by formula mask = (2*mask+1) and then xoring with the n\n    #\n    # 2.complement:  works by invering each bit of the input\n    #\n    #\n    # Time Complexity: O(log(n))\n    # Space Complexity: O(1)\n    def bitwiseComplement(self, n: int) -> int:\n        mask = 1\n        while mask < n:\n            mask = 2 * mask + 1\n        return mask ^ n\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

@@ -79,3 +79,28 @@ class Solution:
 
         
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "482. License Key Formatting",
+    "text": "You are given a license key represented as a string s that consists of only alphanumeric characters and dashes. The string is separated into n + 1 groups by n dashes. You are also given an integer k.\nWe want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase.\nReturn the reformatted license key.\n\u00a0\nExample 1:\n\nInput: s = \"5F3Z-2e-9-w\", k = 4\nOutput: \"5F3Z-2E9W\"\nExplanation: The string s has been split into two parts, each part has 4 characters.\nNote that the two extra dashes are not needed and can be removed.\n\nExample 2:\n\nInput: s = \"2-5g-3-J\", k = 2\nOutput: \"2-5G-3J\"\nExplanation: The string s has been split into three parts, each part has 2 characters except the first part as it could be shorter as mentioned above.\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns consists of English letters, digits, and dashes '-'.\n1 <= k <= 104\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def licenseKeyFormatting(self, s: str, k: int) -> str:\n        total_character_count = sum([1 for c in s if c != '-'])\n        first_group_size = total_character_count % k\n        if first_group_size == 0:\n            first_group_size = k\n        ans = []\n        i = 0\n        count = 0\n        n = len(s)\n        while i  < n:\n            if (count == first_group_size):\n                count = 0\n\n                break\n            if s[i] != '-':\n                count +=1\n                ans.append(s[i].upper())\n            i+=1\n        if i>= n:\n            return ''.join(ans)\n        ans.append('-')\n\n        while i < n:\n            if s[i] != '-':\n                if count == k:\n                    ans.append('-')\n                    count = 0 \n                ans.append(s[i].upper())\n                count+=1\n            i+=1\n        return ''.join(ans)\n\n\n\n        ",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -133,3 +133,28 @@ class Solution:
         return len(stack) > 0
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "32. Longest Valid Parentheses",
+    "text": "Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.\n\u00a0\nExample 1:\nInput: s = \"(()\"\nOutput: 2\nExplanation: The longest valid parentheses substring is \"()\".\n\nExample 2:\nInput: s = \")()())\"\nOutput: 4\nExplanation: The longest valid parentheses substring is \"()()\".\n\nExample 3:\nInput: s = \"\"\nOutput: 0\n\n\u00a0\nConstraints:\n\n0 <= s.length <= 3 * 104\ns[i] is '(', or ')'.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def longestValidParentheses(self, s: str) -> int:\n        return self.optimal(s)\n\n    # Time Complexity: O(n^3)\n    # Space Complexity: O(n)\n    def bruteforce(self, s: str) -> int:\n        n = len(s)\n        maxlen = 0\n        for i in range(n):\n            for j in range(i + 2, n + 1, 2):\n                if self.isvalid(s[i:j]):\n                    if j - i > maxlen:\n                        maxlen = j - i\n        return maxlen\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def dynamicprogramming(self, s: str) -> int:\n        maxlen = 0\n        n = len(s)\n        dp = [0] * n\n        for i in range(1, n):\n            if s[i] == \")\":\n                if s[i - 1] == \"(\":\n                    dp[i] = (dp[i - 2] if i >= 2 else 0) + 2\n                elif i - dp[i - 1] and s[i - dp[i - 1] - 1] == \"(\":\n                    dp[i] = (\n                        dp[i - 1] + (dp[i - dp[i - 1] - 2]\n                                     if dp[i - 1] >= 2 else 0) + 2\n                    )\n                if dp[i] > maxlen:\n                    maxlen = dp[i]\n        return maxlen\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def stack(self, s: str) -> int:\n        stack = [-1]\n        maxlen = 0\n        for i, c in enumerate(s):\n            if c == \"(\":\n                stack.append(i)\n            else:\n                stack.pop()\n                if not stack:\n                    stack.append(i)\n                else:\n                    maxlen = max(maxlen, i - stack[-1])\n        return maxlen\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(1)\n    def optimal(self, s: str) -> int:\n        left = 0\n        right = 0\n        maxlen = 0\n        for c in s:\n            if c == \"(\":\n                left += 1\n            else:\n                right += 1\n\n            if left == right:\n                maxlen = max(maxlen, left + right)\n            elif right >= left:\n                left = right = 0\n        left = right = 0\n        for c in s[::-1]:\n            if c == \"(\":\n                left += 1\n            else:\n                right += 1\n\n            if left == right:\n                maxlen = max(maxlen, left + right)\n            elif left >= right:\n                left = right = 0\n\n        return maxlen\n\n    def isvalid(self, s):\n        stack = []\n        for c in s:\n            if c == \"(\":\n                stack.append(\"(\")\n            elif len(stack) > 0 and stack[-1] == \"(\":\n                stack.pop()\n            else:\n                return False\n        return len(stack) > 0\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

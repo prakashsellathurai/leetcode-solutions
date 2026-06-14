@@ -68,3 +68,28 @@ class Solution:
 # Space Complexity: O(1)
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1291. Sequential Digits",
+    "text": "An\u00a0integer has sequential digits if and only if each digit in the number is one more than the previous digit.\nReturn a sorted list of all the integers\u00a0in the range [low, high]\u00a0inclusive that have sequential digits.\n\u00a0\nExample 1:\nInput: low = 100, high = 300\nOutput: [123,234]\nExample 2:\nInput: low = 1000, high = 13000\nOutput: [1234,2345,3456,4567,5678,6789,12345]\n\n\u00a0\nConstraints:\n\n10 <= low <= high <= 10^9\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    #     def isSequential(self,num):\n    #         candidate = num\n    #         candidate,after = divmod(candidate,10)\n\n    #         while  candidate > 0:\n    #             candidate,before = divmod(candidate,10)\n\n    #             if after != before+1:\n    #                 return False\n    #             after = before\n    #         return True\n\n    #     def sequentialDigits(self, low: int, high: int) -> List[int]:\n    #         res = []\n\n    #         for num in range(low,high):\n    #             if self.isSequential(num):\n    #                 res.append(num)\n\n    #         return res\n    # Time Complexity: O(M-N)\n\n    def sequentialDigits(self, low, high):\n        out = []\n        string = \"123456789\"\n\n        for i in range(len(str(low)), len(str(high)) + 1):\n            for j in range(10 - i):\n                num = int(string[j: j + i])\n                if low <= num and num <= high:\n                    out.append(num)\n\n        return out\n\n\n# Time Complexity: O(1)\n# Space Complexity: O(1)\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -613,7 +621,30 @@ rotate 2 steps to the right: [3,99,-1,-100]
             <span class="n">end</span> <span class="o">-=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "189. Rotate Array",
+    "text": "Given an array, rotate the array to the right by k steps, where k is non-negative.\n\u00a0\nExample 1:\nInput: nums = [1,2,3,4,5,6,7], k = 3\nOutput: [5,6,7,1,2,3,4]\nExplanation:\nrotate 1 steps to the right: [7,1,2,3,4,5,6]\nrotate 2 steps to the right: [6,7,1,2,3,4,5]\nrotate 3 steps to the right: [5,6,7,1,2,3,4]\n\nExample 2:\nInput: nums = [-1,-100,3,99], k = 2\nOutput: [3,99,-1,-100]\nExplanation: \nrotate 1 steps to the right: [99,-1,-100,3]\nrotate 2 steps to the right: [3,99,-1,-100]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-231 <= nums[i] <= 231 - 1\n0 <= k <= 105\n\n\u00a0\nFollow up:\n\nTry to come up with as many solutions as you can. There are at least three different ways to solve this problem.\nCould you do it in-place with O(1) extra space?\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def rotate(self, nums: List[int], k: int) -> None:\n        \"\"\"\n        Do not return anything, modify nums in-place instead.\n        \"\"\"\n        self.usinglistcomprehension(nums, k)\n\n    def usinglistcomprehension(self, nums: List[int], k: int) -> None:\n        k %= len(nums)\n        nums[:] = nums[-k:] + nums[:-k]\n\n    def usingreverse(self, nums: List[int], k: int) -> None:\n        k %= len(nums)\n        self.reverse(nums, 0, len(nums) - 1)\n        self.reverse(nums, 0, k - 1)\n        self.reverse(nums, k, len(nums) - 1)\n\n    def usingextraArray(self, nums: List[int], k: int) -> None:\n        n = len(nums)\n        tmp = [0] * n\n        for i in range(n):\n            tmp[(i + k) % len(nums)] = nums[i]\n        for i in range(n):\n            nums[i] = tmp[i]\n\n    def bruteforce(self, nums: List[int], k: int) -> None:\n        for i in range(k):\n            prev = nums[-1]\n            for j in range(len(nums)):\n                nums[j], prev = prev, nums[j]\n\n    def reverse(self, nums, start, end):\n        while start < end:\n            nums[start], nums[end] = nums[end], nums[start]\n            start += 1\n            end -= 1\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

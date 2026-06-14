@@ -93,3 +93,28 @@ class Solution:
         return root
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "538. Convert BST to Greater Tree",
+    "text": "Given the root of a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus the sum of all keys greater than the original key in BST.\nAs a reminder, a binary search tree is a tree that satisfies these constraints:\n\nThe left subtree of a node contains only nodes with keys less than the node's key.\nThe right subtree of a node contains only nodes with keys greater than the node's key.\nBoth the left and right subtrees must also be binary search trees.\n\n\u00a0\nExample 1:\n\nInput: root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]\nOutput: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]\n\nExample 2:\nInput: root = [0,null,1]\nOutput: [1,null,1]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 104].\n-104 <= Node.val <= 104\nAll the values in the tree are unique.\nroot is guaranteed to be a valid binary search tree.\n\n\u00a0\nNote: This question is the same as 1038: https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def __init__(self):\n        self.total = 0\n\n    def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:\n        return self.reverseInorderMorris(root)\n\n    def recursive(self, root: Optional[TreeNode]) -> Optional[TreeNode]:\n        if root is not None:\n            self.recursive(root.right)\n            self.total += root.val\n            root.val = self.total\n            self.recursive(root.left)\n        return root\n\n    def reverseInorderMorris(self, root: Optional[TreeNode]) -> Optional[TreeNode]:\n        def get_succ(node):\n            succ = node.right\n            while succ.left is not None and succ.left is not node:\n                succ = succ.left\n            return succ\n\n        total = 0\n        node = root\n        while node is not None:\n            if node.right is None:\n                total += node.val\n                node.val = total\n                node = node.left\n            else:\n                succ = get_succ(node)\n                if succ.left is None:\n                    succ.left = node\n                    node = node.right\n                else:\n                    succ.left = None\n                    total += node.val\n                    node.val = total\n                    node = node.left\n        return root\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

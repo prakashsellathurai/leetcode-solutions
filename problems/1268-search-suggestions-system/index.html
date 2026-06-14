@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -649,7 +657,30 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
         <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1268. Search Suggestions System",
+    "text": "You are given an array of strings products and a string searchWord.\nDesign a system that suggests at most three product names from products after each character of searchWord is typed. Suggested products should have common prefix with searchWord. If there are more than three products with a common prefix return the three lexicographically minimums products.\nReturn a list of lists of the suggested products after each character of searchWord is typed.\n\u00a0\nExample 1:\nInput: products = [\"mobile\",\"mouse\",\"moneypot\",\"monitor\",\"mousepad\"], searchWord = \"mouse\"\nOutput: [\n[\"mobile\",\"moneypot\",\"monitor\"],\n[\"mobile\",\"moneypot\",\"monitor\"],\n[\"mouse\",\"mousepad\"],\n[\"mouse\",\"mousepad\"],\n[\"mouse\",\"mousepad\"]\n]\nExplanation: products sorted lexicographically = [\"mobile\",\"moneypot\",\"monitor\",\"mouse\",\"mousepad\"]\nAfter typing m and mo all products match and we show user [\"mobile\",\"moneypot\",\"monitor\"]\nAfter typing mou, mous and mouse the system suggests [\"mouse\",\"mousepad\"]\n\nExample 2:\nInput: products = [\"havana\"], searchWord = \"havana\"\nOutput: [[\"havana\"],[\"havana\"],[\"havana\"],[\"havana\"],[\"havana\"],[\"havana\"]]\n\nExample 3:\nInput: products = [\"bags\",\"baggage\",\"banner\",\"box\",\"cloths\"], searchWord = \"bags\"\nOutput: [[\"baggage\",\"bags\",\"banner\"],[\"baggage\",\"bags\",\"banner\"],[\"baggage\",\"bags\"],[\"bags\"]]\n\n\u00a0\nConstraints:\n\n1 <= products.length <= 1000\n1 <= products[i].length <= 3000\n1 <= sum(products[i].length) <= 2 * 104\nAll the strings of products are unique.\nproducts[i] consists of lowercase English letters.\n1 <= searchWord.length <= 1000\nsearchWord consists of lowercase English letters.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def suggestedProducts(\n        self, products: List[str], searchWord: str\n    ) -> List[List[str]]:\n        return self.trie_search(products, searchWord)\n\n    # Time complexity: O(n log n+nm)\n    # Space complexity: O(n)\n    def bruteforce(self, products: List[str], searchWord: str) -> List[List[str]]:\n        products.sort()\n\n        res = []\n        for i in range(len(searchWord)):\n            cur = []\n            prefix = searchWord[: i + 1]\n            for i in range(len(products)):\n                if prefix in products[i]:\n                    cur = products[i: i + 3]\n                    break\n\n            res.append(cur)\n        return res\n\n    # Time complexity: O(n log n+mlogn)\n    # Space complexity: O(n)\n    def binarysearch(self, products: List[str], searchWord: str) -> List[List[str]]:\n        products.sort()\n\n        res = []\n        prefix = \"\"\n        for i in range(len(searchWord)):\n            prefix += searchWord[i]\n\n            start = bisect_left(products, prefix)\n            cur = [\n                products[j]\n                for j in range(start, len(products))\n                if j < start + 3 and prefix in products[j]\n            ]\n            res.append(cur)\n        return res\n\n    # Time complexity: O(nlogn +nm+s)\n    # Space complexity: O(nkm)\n    def trie_search(self, products: List[str], searchWord: str) -> List[List[str]]:\n        class TrieNode:\n            def __init__(self):\n                self.children = collections.defaultdict(TrieNode)\n                self.suggestion = []\n\n            def add_suggestion(self, product):\n                if len(self.suggestion) < 3:\n                    self.suggestion.append(product)\n\n        products = sorted(products)\n        root = TrieNode()\n\n        for product in products:\n            node = root\n            for c in product:\n                node = node.children[c]\n                node.add_suggestion(product)\n        res, node = [], root\n\n        for c in searchWord:\n            node = node.children[c]\n            res.append(node.suggestion)\n        return res\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

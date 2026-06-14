@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -660,7 +668,30 @@ Sum is 17.
         <span class="k">return</span> <span class="n">ans</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">mod</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "907. Sum of Subarray Minimums",
+    "text": "Given an array of integers arr, find the sum of min(b), where b ranges over every (contiguous) subarray of arr. Since the answer may be large, return the answer modulo 109 + 7.\n\u00a0\nExample 1:\nInput: arr = [3,1,2,4]\nOutput: 17\nExplanation: \nSubarrays are [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2], [1,2,4], [3,1,2,4]. \nMinimums are 3, 1, 2, 4, 1, 1, 2, 1, 1, 1.\nSum is 17.\n\nExample 2:\nInput: arr = [11,81,94,43,3]\nOutput: 444\n\n\u00a0\nConstraints:\n\n1 <= arr.length <= 3 * 104\n1 <= arr[i] <= 3 * 104\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def __init__(self):\n        self.mod = (10**9) + 7\n\n    def sumSubarrayMins(self, arr: List[int]) -> int:\n        return self.dp(arr)\n\n    # Time Complexity: O(n^3)\n    # Space Complexity: O(1)\n    def bruteforce(self, arr: List[int]) -> int:\n        n = len(arr)\n        res = 0\n\n        for end in range(n):\n            for start in range(n):\n                min_ = float(\"-inf\")\n                for i in range(start, end + 1):\n                    min_ = min(min_, arr[i])\n                res += min_ & self.mod\n\n        return res\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(1)\n    def betterbruteforce(self, arr: List[int]) -> int:\n        n = len(arr)\n        res = 0\n\n        for start in range(n):\n            min_ = arr[start]\n            for i in range(start, n):\n                min_ = min(min_, arr[i])\n                res += min_ % self.mod\n\n        return res\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def monotonicstack(self, arr: List[int]) -> int:\n        n = len(arr)\n        s1 = []\n        s2 = []\n        left = [None] * n\n        right = [None] * n\n\n        for i in range(n):\n            cnt = 1\n\n            while len(s1) > 0 and s1[-1][0] > arr[i]:\n                cnt += s1[-1][1]\n                s1.pop()\n            s1.append([arr[i], cnt])\n            left[i] = cnt\n\n        for i in range(n - 1, -1, -1):\n            cnt = 1\n\n            while len(s2) > 0 and s2[-1][0] >= arr[i]:\n                cnt += s2[-1][1]\n                s2.pop()\n            s2.append([arr[i], cnt])\n            right[i] = cnt\n\n        res = 0\n        for i in range(n):\n            res += (left[i] * right[i] * arr[i]) % self.mod\n        return res % self.mod\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def dp(self, arr: List[int]) -> int:\n        n = len(arr)\n        dp = [0] * n\n\n        st = []\n\n        ans = 0\n\n        for i in range(n - 1, -1, -1):\n            while st and arr[st[-1]] >= arr[i]:\n                st.pop()\n\n            if st:\n                dp[i] = dp[st[-1]] + arr[i] * (st[-1] - i)\n\n            else:\n                dp[i] = arr[i] * (n - i)\n\n            st.append(i)\n            ans += dp[i] % self.mod\n        return ans % self.mod\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

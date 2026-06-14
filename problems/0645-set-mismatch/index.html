@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="0704-binary-search" href="../0704-binary-search/" /><link rel="prev" title="0636-exclusive-time-of-functions" href="../0636-exclusive-time-of-functions/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="0703-kth-largest-element-in-a-stream" href="../0703-kth-largest-element-in-a-stream/" /><link rel="prev" title="0636-exclusive-time-of-functions" href="../0636-exclusive-time-of-functions/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
         <title>0645-set-mismatch - Leetcode Solutions</title>
@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -615,7 +623,30 @@
             
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "645. Set Mismatch",
+    "text": "You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.\nYou are given an integer array nums representing the data status of this set after the error.\nFind the number that occurs twice and the number that is missing and return them in the form of an array.\n\u00a0\nExample 1:\nInput: nums = [1,2,2,4]\nOutput: [2,3]\nExample 2:\nInput: nums = [1,1]\nOutput: [1,2]\n\n\u00a0\nConstraints:\n\n2 <= nums.length <= 104\n1 <= nums[i] <= 104\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def findErrorNums(self, nums: List[int]) -> List[int]:\n        return self.constantspace(nums)\n        \n    def sorted(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        nums.sort()\n        dup = -1\n        missing = 1\n        for i in range(n):\n            if nums[i] == nums[i-1]:\n                dup = nums[i]\n            elif nums[i] > nums[i-1] + 1:\n                missing  = nums[i-1] + 1\n        return [dup,  n if nums[-1] != n  else missing ]\n\n    def hashmap(self, nums: List[int]) -> List[int]:\n        hashmap = {}\n\n        for num in nums:\n            if num not in hashmap:\n                hashmap[num] = 1\n            else:\n                hashmap[num] += 1\n        n = len(nums)\n        missing = 1\n        dup = -1\n        for i in range(1,n+1):\n            if i not in hashmap:\n                missing = i\n            elif hashmap[i] == 2:\n                dup = i\n        return [dup, missing]\n\n    def constantspace(self, nums: List[int]) -> List[int]:\n        dup = -1\n        missing = 1\n\n        for num in nums:# 2, -2\n            if nums[abs(num)-1] < 0:\n                dup = abs(num)  # dup = 2\n            else:\n                nums[abs(num)-1] = -nums[abs(num)-1]\n        n = len(nums)\n        for i in range(n): # 0 1   | \n            if nums[i] > 0:\n                missing = i + 1\n        return [dup,missing]\n            ",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>
@@ -623,12 +654,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../0704-binary-search/">
+          <a class="next-page" href="../0703-kth-largest-element-in-a-stream/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">0704-binary-search</div>
+                <div class="title">0703-kth-largest-element-in-a-stream</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -75,3 +75,28 @@ class Solution:
                 res += c
         return res
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "3662. Filter Characters by Frequency",
+    "text": "You are given a string s consisting of lowercase English letters and an integer k.\nYour task is to construct a new string that contains only those characters from s which appear fewer than k times in the entire string. The order of characters in the new string must be the same as their order in s.\nReturn the resulting string. If no characters qualify, return an empty string.\nNote: Every occurrence of a character that occurs fewer than k times is kept.\n\u00a0\nExample 1:\n\nInput: s = \"aadbbcccca\", k = 3\nOutput: \"dbb\"\nExplanation:\nCharacter frequencies in s:\n\n'a' appears 3 times\n'd' appears 1 time\n'b' appears 2 times\n'c' appears 4 times\n\nOnly 'd' and 'b' appear fewer than 3 times. Preserving their order, the result is \"dbb\".\n\nExample 2:\n\nInput: s = \"xyz\", k = 2\nOutput: \"xyz\"\nExplanation:\nAll characters ('x', 'y', 'z') appear exactly once, which is fewer than 2. Thus the whole string is returned.\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 100\ns consists of lowercase English letters.\n1 <= k <= s.length\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def filterCharacters(self, s: str, k: int) -> str:\n        freq = {}\n        for c in s:\n            if c not in freq:\n                freq[c] = 1\n            else:\n                freq[c] += 1\n            \n        res = ''\n        for c in s:\n            if freq[c] < k:\n                res += c\n        return res",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

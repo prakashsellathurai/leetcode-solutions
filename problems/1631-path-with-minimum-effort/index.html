@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -641,7 +649,30 @@ This is better than the route of [1,2,2,2,5], where the maximum absolute differe
         <span class="k">return</span> <span class="n">ans</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1631. Path With Minimum Effort",
+    "text": "You are a hiker preparing for an upcoming hike. You are given heights, a 2D array of size rows x columns, where heights[row][col] represents the height of cell (row, col). You are situated in the top-left cell, (0, 0), and you hope to travel to the bottom-right cell, (rows-1, columns-1) (i.e.,\u00a00-indexed). You can move up, down, left, or right, and you wish to find a route that requires the minimum effort.\nA route's effort is the maximum absolute difference in heights between two consecutive cells of the route.\nReturn the minimum effort required to travel from the top-left cell to the bottom-right cell.\n\u00a0\nExample 1:\n\nInput: heights = [[1,2,2],[3,8,2],[5,3,5]]\nOutput: 2\nExplanation: The route of [1,3,5,3,5] has a maximum absolute difference of 2 in consecutive cells.\nThis is better than the route of [1,2,2,2,5], where the maximum absolute difference is 3.\n\nExample 2:\n\nInput: heights = [[1,2,3],[3,8,4],[5,3,5]]\nOutput: 1\nExplanation: The route of [1,2,3,4,5] has a maximum absolute difference of 1 in consecutive cells, which is better than route [1,3,5,3,5].\n\nExample 3:\n\nInput: heights = [[1,2,1,1,1],[1,2,1,2,1],[1,2,1,2,1],[1,2,1,2,1],[1,1,1,2,1]]\nOutput: 0\nExplanation: This route does not require any effort.\n\n\u00a0\nConstraints:\n\nrows == heights.length\ncolumns == heights[i].length\n1 <= rows, columns <= 100\n1 <= heights[i][j] <= 106\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minimumEffortPath(self, heights: List[List[int]]) -> int:\n        return self.binarySearch(heights)\n\n    # Time Complexity: O(ElogV) = O(M*N*log(M*N))\n    # Space Complexity: O(M*N)\n    def dijisktra(self, heights: List[List[int]]) -> int:\n        m, n = len(heights), len(heights[0])\n        dist = [[math.inf] * n for _ in range(m)]\n        dist[0][0] = 0\n\n        PQ = [(0, 0, 0)]\n        DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]\n\n        while PQ:\n            w, r, c = heappop(PQ)\n\n            if w > dist[r][c]:\n                continue\n            if r == m - 1 and c == n - 1:\n                return w\n\n            for dx, dy in DIRS:\n                nr, nc = r + dx, c + dy\n                if self.isvalid(nr, nc, m, n):\n                    newDist = max(w, abs(heights[nr][nc] - heights[r][c]))\n                    if dist[nr][nc] > newDist:\n                        dist[nr][nc] = newDist\n                        heappush(PQ, (dist[nr][nc], nr, nc))\n\n    def isvalid(self, x, y, m, n):\n        return 0 <= x < m and 0 <= y < n\n\n    # Time Complexity: O(M*N log(MaxHEight))\n    # Space Complexity: O(m*n)\n    def binarySearch(self, heights: List[List[int]]) -> int:\n        m, n = len(heights), len(heights[0])\n        DIR = [0, 1, 0, -1, 0]\n\n        def dfs(r, c, visited, threadshold):\n            if r == m - 1 and c == n - 1:\n                return True  # Reach destination\n            visited[r][c] = True\n            for i in range(4):\n                nr, nc = r + DIR[i], c + DIR[i + 1]\n                if nr < 0 or nr == m or nc < 0 or nc == n or visited[nr][nc]:\n                    continue\n                if abs(heights[nr][nc] - heights[r][c]) <= threadshold and dfs(\n                    nr, nc, visited, threadshold\n                ):\n                    return True\n            return False\n\n        def canReachDestination(threadshold):\n            visited = [[False] * n for _ in range(m)]\n            return dfs(0, 0, visited, threadshold)\n\n        left = 0\n        ans = right = 10**6\n        while left <= right:\n            mid = left + (right - left) // 2\n            if canReachDestination(mid):\n                right = mid - 1  # Try to find better result on the left side\n                ans = mid\n            else:\n                left = mid + 1\n        return ans\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

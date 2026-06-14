@@ -131,3 +131,28 @@ class Solution:
         return count
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "792. Number of Matching Subsequences",
+    "text": "Given a string s and an array of strings words, return the number of words[i] that is a subsequence of s.\nA subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.\n\nFor example, \"ace\" is a subsequence of \"abcde\".\n\n\u00a0\nExample 1:\nInput: s = \"abcde\", words = [\"a\",\"bb\",\"acd\",\"ace\"]\nOutput: 3\nExplanation: There are three strings in words that are a subsequence of s: \"a\", \"acd\", \"ace\".\n\nExample 2:\nInput: s = \"dsahjpjauf\", words = [\"ahjpjau\",\"ja\",\"ahbwzgqnuk\",\"tnmlanowax\"]\nOutput: 2\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 5 * 104\n1 <= words.length <= 5000\n1 <= words[i].length <= 50\ns and words[i] consist of only lowercase English letters.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def numMatchingSubseq(self, s: str, words: List[str]) -> int:\n        return self.optimal(s, words)\n\n    # Time Complexity: O(n*m)\n    # space complexity: O(1)\n    def naive(self, s: str, words: List[str]) -> int:\n        cnt = 0\n\n        def issubsequence(s, word):\n            i = 0\n            if len(word) > len(s):\n                return False\n            for c in s:\n                if i < len(word) and word[i] == c:\n                    i += 1\n            return i == len(word)\n\n        for word in words:\n            if issubsequence(s, word):\n                cnt += 1\n        return cnt\n\n    # Time Complexity: O(n*m)\n    # space complexity: O(n)\n    def better(self, s: str, words: List[str]) -> int:\n        def issubseq(s, t):\n            stack = []\n            for i in t:\n                stack.append(i)\n\n            n = len(s)\n            for i in range(n - 1, -1, -1):\n                if not stack:\n                    return True\n                if stack[-1] == s[i]:\n                    stack.pop()\n            return stack == []\n\n        hashmap = {}\n\n        count = 0\n        for word in words:\n            if word not in hashmap:\n                if issubseq(s, word):\n                    count += 1\n                    hashmap[word] = True\n                else:\n                    hashmap[word] = False\n            else:\n                if hashmap[word]:\n                    count += 1\n        return count\n\n    # Time Complexity: O(nlogm)\n    # space complexity: O(n)\n    def optimal(self, s: str, words: List[str]) -> int:\n        def issubseq(t):\n            current_pos = -1\n            stack = []\n            for i in t:\n                if indices[i]:\n                    pos = bisect.bisect_right(indices[i], current_pos)\n                    if pos == len(indices[i]):\n                        return False\n                    current_pos = indices[i][pos]\n                else:\n                    return False\n            return True\n\n        indices = defaultdict(list)\n        for i, c in enumerate(s):\n            indices[c].append(i)\n\n        hashmap = {}\n\n        count = 0\n        for word in words:\n            if word not in hashmap:\n                if issubseq(word):\n                    count += 1\n                    hashmap[word] = True\n                else:\n                    hashmap[word] = False\n            else:\n                if hashmap[word]:\n                    count += 1\n        return count\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

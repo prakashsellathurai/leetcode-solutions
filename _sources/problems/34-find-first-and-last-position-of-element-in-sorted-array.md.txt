@@ -57,3 +57,28 @@ class Solution:
             
         return [-1,-1]
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "34. Find First and Last Position of Element in Sorted Array",
+    "text": "Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.\nIf target is not found in the array, return [-1, -1].\nYou must\u00a0write an algorithm with\u00a0O(log n) runtime complexity.\n\u00a0\nExample 1:\nInput: nums = [5,7,7,8,8,10], target = 8\nOutput: [3,4]\nExample 2:\nInput: nums = [5,7,7,8,8,10], target = 6\nOutput: [-1,-1]\nExample 3:\nInput: nums = [], target = 0\nOutput: [-1,-1]\n\n\u00a0\nConstraints:\n\n0 <= nums.length <= 105\n-109\u00a0<= nums[i]\u00a0<= 109\nnums is a non-decreasing array.\n-109\u00a0<= target\u00a0<= 109\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def searchRange(self, nums: List[int], target: int) -> List[int]:\n        lo = 0\n        hi = len(nums)-1\n        \n        while lo <= hi:\n            mid = (lo + hi) // 2\n            if nums[lo] == nums[hi] == target:\n                return [lo, hi]\n            if nums[mid] < target:\n                lo = mid + 1\n            elif nums[mid] > target:\n                hi = mid - 1\n            else:\n                if nums[lo] != target:\n                    lo += 1\n                if nums[hi] != target:\n                    hi -= 1\n            \n        return [-1,-1]",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

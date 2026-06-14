@@ -146,3 +146,28 @@ class LFUCache:
         return node.val
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "460. LFU Cache",
+    "text": "Design and implement a data structure for a Least Frequently Used (LFU) cache.\nImplement the LFUCache class:\n\nLFUCache(int capacity) Initializes the object with the capacity of the data structure.\nint get(int key) Gets the value of the key if the key exists in the cache. Otherwise, returns -1.\nvoid put(int key, int value) Update the value of the key if present, or inserts the key if not already present. When the cache reaches its capacity, it should invalidate and remove the least frequently used key before inserting a new item. For this problem, when there is a tie (i.e., two or more keys with the same frequency), the least recently used key would be invalidated.\n\nTo determine the least frequently used key, a use counter is maintained for each key in the cache. The key with the smallest use counter is the least frequently used key.\nWhen a key is first inserted into the cache, its use counter is set to 1 (due to the put operation). The use counter for a key in the cache is incremented either a get or put operation is called on it.\nThe functions\u00a0get\u00a0and\u00a0put\u00a0must each run in O(1) average time complexity.\n\u00a0\nExample 1:\nInput\n[\"LFUCache\", \"put\", \"put\", \"get\", \"put\", \"get\", \"get\", \"put\", \"get\", \"get\", \"get\"]\n[[2], [1, 1], [2, 2], [1], [3, 3], [2], [3], [4, 4], [1], [3], [4]]\nOutput\n[null, null, null, 1, null, -1, 3, null, -1, 3, 4]\n\nExplanation\n// cnt(x) = the use counter for key x\n// cache=[] will show the last used order for tiebreakers (leftmost element is  most recent)\nLFUCache lfu = new LFUCache(2);\nlfu.put(1, 1);   // cache=[1,_], cnt(1)=1\nlfu.put(2, 2);   // cache=[2,1], cnt(2)=1, cnt(1)=1\nlfu.get(1);      // return 1\n                 // cache=[1,2], cnt(2)=1, cnt(1)=2\nlfu.put(3, 3);   // 2 is the LFU key because cnt(2)=1 is the smallest, invalidate 2.\n\u00a0                // cache=[3,1], cnt(3)=1, cnt(1)=2\nlfu.get(2);      // return -1 (not found)\nlfu.get(3);      // return 3\n                 // cache=[3,1], cnt(3)=2, cnt(1)=2\nlfu.put(4, 4);   // Both 1 and 3 have the same cnt, but 1 is LRU, invalidate 1.\n                 // cache=[4,3], cnt(4)=1, cnt(3)=2\nlfu.get(1);      // return -1 (not found)\nlfu.get(3);      // return 3\n                 // cache=[3,4], cnt(4)=1, cnt(3)=3\nlfu.get(4);      // return 4\n                 // cache=[4,3], cnt(4)=2, cnt(3)=3\n\n\u00a0\nConstraints:\n\n0 <= capacity\u00a0<= 104\n0 <= key <= 105\n0 <= value <= 109\nAt most 2 * 105\u00a0calls will be made to get and put.\n\n\u00a0\n\u00a0",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\nclass ListNode:\n    def __init__(self, key, val):\n        self.key = key\n        self.val = val\n        self.freq = 1\n        self.prev = None\n        self.next = None\n        \nclass DLL:\n    def __init__(self):\n        self.head = ListNode(0, 0)\n        self.tail = ListNode(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n        self.size = 0\n        \n    def insertHead(self, node):\n        headNext = self.head.next\n        headNext.prev = node\n        self.head.next = node\n        node.prev = self.head\n        node.next = headNext\n        self.size += 1\n        \n    def removeNode(self, node):\n        node.next.prev = node.prev\n        node.prev.next = node.next\n        self.size -= 1\n        \n    def removeTail(self):\n        tail = self.tail.prev\n        self.removeNode(tail)\n        return tail\n    \n\nclass LFUCache:\n\n    def __init__(self, capacity: int):\n        self.cache = {}\n        self.freqTable = collections.defaultdict(DLL)\n        self.capacity = capacity\n        self.minFreq = 0\n        \n    \n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        return self.updateCache(self.cache[key], key, self.cache[key].val)\n        \n\n    def put(self, key: int, value: int) -> None:\n        if not self.capacity:\n            return\n        if key in self.cache:\n            self.updateCache(self.cache[key], key, value)\n        else:\n            if len(self.cache) == self.capacity:\n                prevTail = self.freqTable[self.minFreq].removeTail()\n                del self.cache[prevTail.key]\n            node = ListNode(key, value)\n            self.freqTable[1].insertHead(node)\n            self.cache[key] = node\n            self.minFreq = 1\n        \n    \n    def updateCache(self, node, key, value):\n        node = self.cache[key]\n        node.val = value\n        prevFreq = node.freq\n        node.freq += 1\n        self.freqTable[prevFreq].removeNode(node)\n        self.freqTable[node.freq].insertHead(node)\n        if prevFreq == self.minFreq and self.freqTable[prevFreq].size == 0:\n            self.minFreq += 1\n        return node.val\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -43,3 +43,28 @@ class Solution:
                 return i+1
         return len(nums)+1
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "41. First Missing Positive",
+    "text": "Given an unsorted integer array nums, return the smallest missing positive integer.\nYou must implement an algorithm that runs in O(n) time and uses constant extra space.\n\u00a0\nExample 1:\nInput: nums = [1,2,0]\nOutput: 3\nExample 2:\nInput: nums = [3,4,-1,1]\nOutput: 2\nExample 3:\nInput: nums = [7,8,9,11,12]\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 105\n-231 <= nums[i] <= 231 - 1\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def firstMissingPositive(self, nums: List[int]) -> int:\n        for i in range(len(nums)):\n            while 0 <= nums[i]-1 < len(nums) and nums[nums[i]-1] != nums[i]:\n                tmp = nums[i]-1\n                nums[i], nums[tmp] = nums[tmp], nums[i]\n        for i in range(len(nums)):\n            if nums[i] != i+1:\n                return i+1\n        return len(nums)+1",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

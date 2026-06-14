@@ -80,3 +80,28 @@ class MyCalendar:
 # obj = MyCalendar()
 # param_1 = obj.book(startTime,endTime)
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "729. My Calendar I",
+    "text": "You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a double booking.\nA double booking happens when two events have some non-empty intersection (i.e., some moment is common to both events.).\nThe event can be represented as a pair of integers startTime and endTime that represents a booking on the half-open interval [startTime, endTime), the range of real numbers x such that startTime <= x < endTime.\nImplement the MyCalendar class:\n\nMyCalendar() Initializes the calendar object.\nboolean book(int startTime, int endTime) Returns true if the event can be added to the calendar successfully without causing a double booking. Otherwise, return false and do not add the event to the calendar.\n\n\u00a0\nExample 1:\n\nInput\n[\"MyCalendar\", \"book\", \"book\", \"book\"]\n[[], [10, 20], [15, 25], [20, 30]]\nOutput\n[null, true, false, true]\n\nExplanation\nMyCalendar myCalendar = new MyCalendar();\nmyCalendar.book(10, 20); // return True\nmyCalendar.book(15, 25); // return False, It can not be booked because time 15 is already booked by another event.\nmyCalendar.book(20, 30); // return True, The event can be booked, as the first event takes every time less than 20, but not including 20.\n\u00a0\nConstraints:\n\n0 <= start < end <= 109\nAt most 1000 calls will be made to book.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from sortedcontainers import SortedList\n\nclass MyCalendar:\n    def __init__(self):\n        self.Naivecalendar = []\n        self.sortedCalnder = SortedList()\n\n    def book(self, start, end):\n        return self.sorting(start, end)\n    \n    # Time Complexity: O(N**2)\n    # Spac complexity: O(N)\n    def naive(self, start, end):\n        for s, e in self.Naivecalendar:\n            if s < end and start < e:\n                return False\n        self.Naivecalendar.append((start, end))\n        return True\n\n    # Time Complexity: O(NlogN)\n    # Spac complexity: O(N)\n    def sorting(self, start, end):\n        idx = self.sortedCalnder.bisect_right((start, end))\n        if (idx > 0 and self.sortedCalnder[idx-1][1] > start) or (idx < len(self.sortedCalnder) and self.sortedCalnder[idx][0] < end):\n            return False\n        self.sortedCalnder.add((start, end))\n        return True\n\n        \n\n# Your MyCalendar object will be instantiated and called as such:\n# obj = MyCalendar()\n# param_1 = obj.book(startTime,endTime)",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

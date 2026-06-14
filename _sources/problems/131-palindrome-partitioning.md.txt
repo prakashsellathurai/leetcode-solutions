@@ -86,3 +86,28 @@ class Solution:
         return self.res
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "131. Palindrome Partitioning",
+    "text": "Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.\nA palindrome string is a string that reads the same backward as forward.\n\u00a0\nExample 1:\nInput: s = \"aab\"\nOutput: [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]\nExample 2:\nInput: s = \"a\"\nOutput: [[\"a\"]]\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 16\ns contains only lowercase English letters.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    #  Problem Statement: Given a str s return all possible palindromic\n    #  partitions\n    #\n    #   Input: a string\n    #   Output: array of all possible palindromics substring partitions\n    #\n    #   Example:\n    #       1.for s=\"aaab\" return [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]\n    #\n    #   Constraints: 1<= s.length <= 16\n    #\n    #   Solution:\n    #       1.Bruteforce : use backtracking choose a potential candidate (i.e\n    #       palindromic substring )from the generated substring from given\n    #       constraints\n    #\n    #       Pseudo code:\n    #           fn bactrack (candidate,res,start)\n    #               if start reaches end of string\n    #                   res.push(cur)\n    #\n    #               for end=start;end<len(s);end++\n    #                   if isPalindrome(s,start,end):\n    #                       candidate.push_back(s[start:end+1])\n    #                       backtrack(candidate,res,end+1)\n    #                       candidate.pop()\n    #   Time Complexity: O(N.2^N)\n    #   (since our constraint is 1<=n<=16 This is acceptable)\n    #   SpaceComplexity: O(n)\n    def partition(self, s: str) -> List[List[str]]:\n        self.res = []\n\n        @cache\n        def isPalindrome(low, high):\n            while low < high:\n                if s[low] != s[high]:\n                    return False\n                low += 1\n                high -= 1\n            return True\n\n        def backtrack(start, cur):\n            # candidate selection\n            if start >= len(s):\n                self.res.append(cur[:])\n            # Recursive case\n            for end in range(start, len(s)):\n                if isPalindrome(start, end):\n                    cur.append(s[start: end + 1])\n                    backtrack(end + 1, cur)\n                    cur.pop()\n\n        backtrack(0, [])\n        return self.res\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

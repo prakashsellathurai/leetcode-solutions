@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -696,7 +704,30 @@
         <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "456. 132 Pattern",
+    "text": "Given an array\u00a0of n integers nums, a 132 pattern is a subsequence of three integers nums[i], nums[j] and nums[k] such that i < j < k and nums[i] < nums[k] < nums[j].\nReturn true if there is a 132 pattern in nums, otherwise, return false.\n\u00a0\nExample 1:\nInput: nums = [1,2,3,4]\nOutput: false\nExplanation: There is no 132 pattern in the sequence.\n\nExample 2:\nInput: nums = [3,1,4,2]\nOutput: true\nExplanation: There is a 132 pattern in the sequence: [1, 4, 2].\n\nExample 3:\nInput: nums = [-1,3,2,0]\nOutput: true\nExplanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].\n\n\u00a0\nConstraints:\n\nn == nums.length\n1 <= n <= 2 * 105\n-109 <= nums[i] <= 109\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def find132pattern(self, nums: List[int]) -> bool:\n        return self.arrayasstack(nums)\n\n    # Time Compleity :O(n^3)\n    # space Complexity: O(1)\n    def bruteforce(self, nums):\n        n = len(nums)\n\n        for i in range(n):\n            for j in range(i + 1, n):\n                for k in range(j + 1, n):\n                    if nums[i] < nums[k] < nums[j]:\n                        return True\n\n        return False\n\n    # Time Compleity :O(n^2)\n    # space Complexity: O(1)\n    def betterbruteforce(self, nums):\n        n = len(nums)\n        min_i = inf\n\n        for j in range(n):\n            if nums[j] < min_i:\n                min_i = nums[j]\n            for k in range(j + 1, n):\n                if min_i < nums[k] < nums[j]:\n                    return True\n        return False\n\n    # Time Compleity :O(n^2)\n    # space Complexity: O(n)\n    def interval(self, nums):\n        n = len(nums)\n        intervals = []\n        min_point_after_last_peak_index = 0\n        for i in range(1, n):\n            if nums[i] < nums[i - 1]:\n                if min_point_after_last_peak_index < i - 1:\n                    intervals.append(\n                        nums[min_point_after_last_peak_index], nums[i - 1])\n            min_point_after_last_peak_index = i\n            for i_num, j_num in intervals:\n                if i_num < nums[i] < j_num:\n                    return True\n        return False\n\n    # Time Compleity :O(n)\n    # space Complexity: O(n)\n    def stack(self, nums):\n        n = len(nums)\n\n        if n < 3:\n            return False\n\n        stack = []\n        min_array = [-1] * n\n\n        min_array[0] = nums[0]\n\n        for i in range(1, n):\n            min_array[i] = min(min_array[i - 1], nums[i])\n\n        for j in range(n - 1, -1, -1):\n            if nums[j] <= min_array[j]:\n                continue\n            while stack and stack[-1] <= min_array[j]:\n                stack.pop()\n\n            if stack and min_array[j] < stack[-1] < nums[j]:\n                return True\n            stack.append(nums[j])\n\n        return False\n\n    # Time Compleity :O(nlogn)\n    # space Complexity: O(n)\n    def binarysearch(self, nums):\n        n = len(nums)\n\n        if n < 3:\n            return False\n\n        min_array = [-1] * n\n        min_array[0] = nums[0]\n        min_array[0] = nums[0]\n\n        for i in range(1, n):\n            min_array[i] = min(min_array[i - 1], nums[i])\n\n        k = n\n\n        for j in range(n - 1, -1, -1):\n            if nums[j] <= min_array[j]:\n                continue\n            k = bisect_left(nums, min_array[j] + 1, k, n)\n            if k < n and min_array[j] < nums[k] < nums[j]:\n                return True\n\n            k -= 1\n            nums[k] = nums[j]\n        return False\n\n    # Time Compleity :O(n)\n    # space Complexity: O(n)\n    def arrayasstack(self, nums):\n        if len(nums) < 3:\n            return False\n        min_array = [-1] * len(nums)\n        min_array[0] = nums[0]\n        for i in range(1, len(nums)):\n            min_array[i] = min(min_array[i - 1], nums[i])\n\n        k = len(nums)\n        for j in range(len(nums) - 1, -1, -1):\n            if nums[j] <= min_array[j]:\n                continue\n            while k < len(nums) and nums[k] <= min_array[j]:\n                k += 1\n            if k < len(nums) and nums[k] < nums[j]:\n                return True\n            k -= 1\n            nums[k] = nums[j]\n        return False\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

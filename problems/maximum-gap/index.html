@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -660,7 +668,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">maxval</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": " \u00a0Maximum Gap",
+    "text": "Given an integer array nums, return the maximum difference between two successive elements in its sorted form. If the array contains less than two elements, return 0.\nYou must write an algorithm that runs in linear time and uses linear extra space.\n\u00a0\nExample 1:\nInput: nums = [3,6,9,1]\nOutput: 3\nExplanation: The sorted form of the array is [1,3,6,9], either (3,6) or (6,9) has the maximum difference 3.\n\nExample 2:\nInput: nums = [10]\nOutput: 0\nExplanation: The array contains less than 2 elements, therefore return 0.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n0 <= nums[i] <= 109\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def maximumGap(self, nums: List[int]) -> int:\n        return self.bucketSort(nums)\n    #Time Complexity: O(n^2)\n    # Space Complexity: O(1)\n    def naiveApproach(self, nums: List[int]) -> int:\n        max_diff = 0\n        nums.sort()\n        n = len(nums)\n        for i in range(1, n):\n            max_diff = max(max_diff, nums[i]-nums[i-1])\n        return max_diff\n     \n    #Time Complexity: O(n+K)\n    # Space Complexity: O(K)\n    def countingSortApproach(self, nums: List[int]) -> int:\n        min_val, max_val = min(nums), max(nums)\n        count = [0] * (max_val - min_val + 1)\n        \n        for num in nums:\n            count[num-min_val]+=1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i + min_val] * c)\n        max_diff = 0\n        n = len(nums)\n        for i in range(1, n):\n            max_diff = max(max_diff, result[i]-result[i-1])\n        return max_diff\n    \n    def radixSort(self, nums: List[int]) -> int:\n        if len(nums) < 2:\n            return 0\n\n        maxVal = max(nums)\n        exp = 1\n        radix = 10\n        aux = [0] * len(nums)\n\n        while maxVal // exp > 0:\n            count = [0] * radix\n            for num in nums:\n                count[(num // exp) % 10] += 1\n            for i in range(1, radix):\n                count[i] += count[i - 1]\n            i = len(nums) - 1\n            while i >= 0:\n                aux[count[(nums[i] // exp) % 10] - 1] = nums[i]\n                count[(nums[i] // exp) % 10] -= 1\n                i -= 1\n            for i in range(len(nums)):\n                nums[i] = aux[i]\n            exp *= 10\n\n        maxGap = 0\n        for i in range(len(nums) - 1):\n            maxGap = max(nums[i + 1] - nums[i], maxGap)\n        return maxGap\n    \n     #Time Complexity: O(n)\n    # Space Complexity: O(n)   \n    def bucketSort(self, nums):\n        if len(nums) < 2:\n            return 0\n\n        mini, maxi = min(nums), max(nums)\n\n        bucketSize = max(1, (maxi - mini) // (len(nums) - 1))\n        bucketNum = (maxi - mini) // bucketSize + 1\n        buckets = [Bucket() for _ in range(bucketNum)]\n\n        for num in nums:\n            idx = (num - mini) // bucketSize\n            buckets[idx].used = True\n            buckets[idx].minval = min(num, buckets[idx].minval)\n            buckets[idx].maxval = max(num, buckets[idx].maxval)\n\n        prevBucketMax = mini\n        maxGap = 0\n        for bucket in buckets:\n            if not bucket.used:\n                continue\n\n            maxGap = max(maxGap, bucket.minval - prevBucketMax)\n            prevBucketMax = bucket.maxval\n\n        return maxGap\n    \nclass Bucket:\n    def __init__(self):\n        self.used = False\n        self.minval = float(\"inf\")\n        self.maxval = float(\"-inf\")",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

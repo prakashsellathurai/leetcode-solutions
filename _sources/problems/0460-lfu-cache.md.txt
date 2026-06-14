@@ -1,0 +1,309 @@
+# 0460-lfu-cache
+
+
+Try it on <a href='https://leetcode.com/problems/0460-lfu-cache'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Design and implement a data structure for a <a href="https://en.wikipedia.org/wiki/Least_frequently_used" target="_blank">Least Frequently Used (LFU)</a> cache.</p>
+
+<p>Implement the <code>LFUCache</code> class:</p>
+
+<ul>
+	<li><code>LFUCache(int capacity)</code> Initializes the object with the <code>capacity</code> of the data structure.</li>
+	<li><code>int get(int key)</code> Gets the value of the <code>key</code> if the <code>key</code> exists in the cache. Otherwise, returns <code>-1</code>.</li>
+	<li><code>void put(int key, int value)</code> Update the value of the <code>key</code> if present, or inserts the <code>key</code> if not already present. When the cache reaches its <code>capacity</code>, it should invalidate and remove the <strong>least frequently used</strong> key before inserting a new item. For this problem, when there is a <strong>tie</strong> (i.e., two or more keys with the same frequency), the <strong>least recently used</strong> <code>key</code> would be invalidated.</li>
+</ul>
+
+<p>To determine the least frequently used key, a <strong>use counter</strong> is maintained for each key in the cache. The key with the smallest <strong>use counter</strong> is the least frequently used key.</p>
+
+<p>When a key is first inserted into the cache, its <strong>use counter</strong> is set to <code>1</code> (due to the <code>put</code> operation). The <strong>use counter</strong> for a key in the cache is incremented either a <code>get</code> or <code>put</code> operation is called on it.</p>
+
+<p>The functions&nbsp;<code data-stringify-type="code">get</code>&nbsp;and&nbsp;<code data-stringify-type="code">put</code>&nbsp;must each run in <code>O(1)</code> average time complexity.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input</strong>
+[&quot;LFUCache&quot;, &quot;put&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;get&quot;, &quot;get&quot;]
+[[2], [1, 1], [2, 2], [1], [3, 3], [2], [3], [4, 4], [1], [3], [4]]
+<strong>Output</strong>
+[null, null, null, 1, null, -1, 3, null, -1, 3, 4]
+
+<strong>Explanation</strong>
+// cnt(x) = the use counter for key x
+// cache=[] will show the last used order for tiebreakers (leftmost element is  most recent)
+LFUCache lfu = new LFUCache(2);
+lfu.put(1, 1);   // cache=[1,_], cnt(1)=1
+lfu.put(2, 2);   // cache=[2,1], cnt(2)=1, cnt(1)=1
+lfu.get(1);      // return 1
+                 // cache=[1,2], cnt(2)=1, cnt(1)=2
+lfu.put(3, 3);   // 2 is the LFU key because cnt(2)=1 is the smallest, invalidate 2.
+&nbsp;                // cache=[3,1], cnt(3)=1, cnt(1)=2
+lfu.get(2);      // return -1 (not found)
+lfu.get(3);      // return 3
+                 // cache=[3,1], cnt(3)=2, cnt(1)=2
+lfu.put(4, 4);   // Both 1 and 3 have the same cnt, but 1 is LRU, invalidate 1.
+                 // cache=[4,3], cnt(4)=1, cnt(3)=2
+lfu.get(1);      // return -1 (not found)
+lfu.get(3);      // return 3
+                 // cache=[3,4], cnt(4)=1, cnt(3)=3
+lfu.get(4);      // return 4
+                 // cache=[4,3], cnt(4)=2, cnt(3)=3
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= capacity&nbsp;&lt;= 10<sup>4</sup></code></li>
+	<li><code>0 &lt;= key &lt;= 10<sup>5</sup></code></li>
+	<li><code>0 &lt;= value &lt;= 10<sup>9</sup></code></li>
+	<li>At most <code>2 * 10<sup>5</sup></code>&nbsp;calls will be made to <code>get</code> and <code>put</code>.</li>
+</ul>
+
+<p>&nbsp;</p>
+<span style="display: none;">&nbsp;</span>
+</div>
+
+## Solution(Python)
+```Python
+#  LFU cache
+#   Goal -> cache
+#   eviction policy -> least frequenctly used
+#  get  (key) -> value
+#  put (key, value) updates the value if present or createds 
+#       when cache reaches its capacity in invalidate the least frequenctlt used key before inserting new item
+#  in tie -<> key  a == b then freq is compared
+# 
+# sample testcase
+# cnt(x) 
+# cache = []
+# Lfu cache(2) cache = [_,_]
+# p 1,1   cache = [1,_]  cnt(1) = 1
+# p 2,2   cache = [2,1]  cnt(2) = 1, cnt(1)
+# g 1   return 1
+#       cache = [1,2] cnt(2) = 1,cnt(1) = 2
+# p 3,3   cache = [3,1] cnt(1) = 2, cnt(3) = 1
+# 
+# g 2 return -1
+# g 3 return 3  cache = [3,1] cnt(3) = 2, cnt(1) = 2
+# p 4      here 1 is LRU  cache = [4,3] cnt(4) = 1, cnt(3) = 2
+# g 1  return -1
+# g 3   cache = [3,4] cnt(4) = 1 cnt(3) = 3
+# g 4 cache =[4,3] cnt(4) = 2, cnt(3) = 3
+# 
+#  > cache should maintain relative order whenever key is accessed > linkedlist cache -> least used ...most used
+#  > key to value,counter -> hashmap
+#  > lfucacheline -> tracks least recently used and at back
+#  
+#  edge cases 
+#  eviction strategy -> pop thefront element
+#  cache retreieval
+#  
+#  get(key)
+#    # if not found return -1
+#    # if key found
+#    increment the counter 
+#   add to cacheline
+#    # return from cache
+#
+#  put 
+#     if cursize + 1 >= size : limit exceeds 
+#           evict the least frequenctly used cache
+#           
+#     increment the counter 
+#     create value in cache if not found
+#       # insitalize counter to 1
+#   add to cacheline
+#     update cache if already found
+# 
+#  Space complexity: O(n)
+#  Time Complexity: O(1)
+#  
+# Notes:
+#  To efficiently track two things: frequency counts and order of access within frequency group
+#   group nodes by frequency
+#   within each group maintain order of access
+#   Hashmap + doubly linkedlist gives O(1) time
+#   which leads to:
+#     A hahsmap -> key  == value
+#    freqmap  -> freq == dll of nodes 
+#       in doubly linkedlist maintain nodes in lru order 
+#   min_freq -> minimum frequency level
+#   
+#   when a node is accessed :
+#     remove it from the freqmap > if freqlist becomes empty it was minimum frequency , incrment min_freq
+#   Add the node to the frequency + 1 list 
+#   Always add to the head of the new list 
+# 
+from collections import defaultdict
+from typing import Optional
+
+
+class Node:
+    """Node for doubly linked list to store cache entries."""
+  
+    def __init__(self, key: int, value: int) -> None:
+        self.key = key
+        self.value = value
+        self.freq = 1  # Frequency counter starts at 1
+        self.prev: Optional[Node] = None
+        self.next: Optional[Node] = None
+
+
+class DoublyLinkedList:
+    """Doubly linked list to maintain nodes with same frequency in LRU order."""
+  
+    def __init__(self) -> None:
+        # Create dummy head and tail nodes for easier manipulation
+        self.head = Node(-1, -1)
+        self.tail = Node(-1, -1)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def add_first(self, node: Node) -> None:
+        """Add node right after head (most recently used position)."""
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next.prev = node
+        self.head.next = node
+
+    def remove(self, node: Node) -> Node:
+        """Remove a specific node from the list."""
+        node.next.prev = node.prev
+        node.prev.next = node.next
+        node.next = None
+        node.prev = None
+        return node
+
+    def remove_last(self) -> Node:
+        """Remove and return the least recently used node (before tail)."""
+        return self.remove(self.tail.prev)
+
+    def is_empty(self) -> bool:
+        """Check if the list is empty (only contains dummy nodes)."""
+        return self.head.next == self.tail
+
+
+class LFUCache:
+    """
+    Least Frequently Used (LFU) cache implementation.
+    Evicts least frequently used items when capacity is reached.
+    For items with same frequency, evicts least recently used.
+    """
+  
+    def __init__(self, capacity: int) -> None:
+        self.capacity = capacity
+        self.min_freq = 0  # Track minimum frequency for eviction
+        self.node_map: dict[int, Node] = {}  # Map from key to node
+        self.freq_map: defaultdict[int, DoublyLinkedList] = defaultdict(DoublyLinkedList)  # Map from frequency to list of nodes
+
+    def get(self, key: int) -> int:
+        """
+        Get value for the given key.
+        Returns -1 if key doesn't exist.
+        """
+        # Handle edge cases
+        if self.capacity == 0 or key not in self.node_map:
+            return -1
+      
+        # Get node and update its frequency
+        node = self.node_map[key]
+        self._increment_frequency(node)
+        return node.value
+
+    def put(self, key: int, value: int) -> None:
+        """
+        Insert or update key-value pair in cache.
+        Evicts LFU item if cache is at capacity.
+        """
+        # Handle zero capacity
+        if self.capacity == 0:
+            return
+      
+        # Update existing key
+        if key in self.node_map:
+            node = self.node_map[key]
+            node.value = value
+            self._increment_frequency(node)
+            return
+      
+        # Evict LFU item if at capacity
+        if len(self.node_map) == self.capacity:
+            freq_list = self.freq_map[self.min_freq]
+            evicted_node = freq_list.remove_last()
+            del self.node_map[evicted_node.key]
+      
+        # Add new node
+        node = Node(key, value)
+        self._add_node(node)
+        self.node_map[key] = node
+        self.min_freq = 1  # New node has frequency 1
+
+    def _increment_frequency(self, node: Node) -> None:
+        """
+        Increment frequency of a node and move it to appropriate frequency list.
+        """
+        freq = node.freq
+        freq_list = self.freq_map[freq]
+      
+        # Remove node from current frequency list
+        freq_list.remove(node)
+      
+        # Clean up empty frequency list and update min_freq if needed
+        if freq_list.is_empty():
+            del self.freq_map[freq]
+            if freq == self.min_freq:
+                self.min_freq += 1
+      
+        # Increment frequency and add to new frequency list
+        node.freq += 1
+        self._add_node(node)
+
+    def _add_node(self, node: Node) -> None:
+        """
+        Add node to the frequency list corresponding to its frequency.
+        """
+        freq = node.freq
+        freq_list = self.freq_map[freq]
+        freq_list.add_first(node)
+
+
+# Your LFUCache object will be instantiated and called as such:
+# obj = LFUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key, value)
+
+
+# Your LFUCache object will be instantiated and called as such:
+# obj = LFUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "460. LFU Cache",
+    "text": "Design and implement a data structure for a Least Frequently Used (LFU) cache.\nImplement the LFUCache class:\n\nLFUCache(int capacity) Initializes the object with the capacity of the data structure.\nint get(int key) Gets the value of the key if the key exists in the cache. Otherwise, returns -1.\nvoid put(int key, int value) Update the value of the key if present, or inserts the key if not already present. When the cache reaches its capacity, it should invalidate and remove the least frequently used key before inserting a new item. For this problem, when there is a tie (i.e., two or more keys with the same frequency), the least recently used key would be invalidated.\n\nTo determine the least frequently used key, a use counter is maintained for each key in the cache. The key with the smallest use counter is the least frequently used key.\nWhen a key is first inserted into the cache, its use counter is set to 1 (due to the put operation). The use counter for a key in the cache is incremented either a get or put operation is called on it.\nThe functions\u00a0get\u00a0and\u00a0put\u00a0must each run in O(1) average time complexity.\n\u00a0\nExample 1:\n\nInput\n[\"LFUCache\", \"put\", \"put\", \"get\", \"put\", \"get\", \"get\", \"put\", \"get\", \"get\", \"get\"]\n[[2], [1, 1], [2, 2], [1], [3, 3], [2], [3], [4, 4], [1], [3], [4]]\nOutput\n[null, null, null, 1, null, -1, 3, null, -1, 3, 4]\n\nExplanation\n// cnt(x) = the use counter for key x\n// cache=[] will show the last used order for tiebreakers (leftmost element is  most recent)\nLFUCache lfu = new LFUCache(2);\nlfu.put(1, 1);   // cache=[1,_], cnt(1)=1\nlfu.put(2, 2);   // cache=[2,1], cnt(2)=1, cnt(1)=1\nlfu.get(1);      // return 1\n                 // cache=[1,2], cnt(2)=1, cnt(1)=2\nlfu.put(3, 3);   // 2 is the LFU key because cnt(2)=1 is the smallest, invalidate 2.\n\u00a0                // cache=[3,1], cnt(3)=1, cnt(1)=2\nlfu.get(2);      // return -1 (not found)\nlfu.get(3);      // return 3\n                 // cache=[3,1], cnt(3)=2, cnt(1)=2\nlfu.put(4, 4);   // Both 1 and 3 have the same cnt, but 1 is LRU, invalidate 1.\n                 // cache=[4,3], cnt(4)=1, cnt(3)=2\nlfu.get(1);      // return -1 (not found)\nlfu.get(3);      // return 3\n                 // cache=[3,4], cnt(4)=1, cnt(3)=3\nlfu.get(4);      // return 4\n                 // cache=[4,3], cnt(4)=2, cnt(3)=3\n\n\u00a0\nConstraints:\n\n1 <= capacity\u00a0<= 104\n0 <= key <= 105\n0 <= value <= 109\nAt most 2 * 105\u00a0calls will be made to get and put.\n\n\u00a0\n\u00a0",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "#  LFU cache\n#   Goal -> cache\n#   eviction policy -> least frequenctly used\n#  get  (key) -> value\n#  put (key, value) updates the value if present or createds \n#       when cache reaches its capacity in invalidate the least frequenctlt used key before inserting new item\n#  in tie -<> key  a == b then freq is compared\n# \n# sample testcase\n# cnt(x) \n# cache = []\n# Lfu cache(2) cache = [_,_]\n# p 1,1   cache = [1,_]  cnt(1) = 1\n# p 2,2   cache = [2,1]  cnt(2) = 1, cnt(1)\n# g 1   return 1\n#       cache = [1,2] cnt(2) = 1,cnt(1) = 2\n# p 3,3   cache = [3,1] cnt(1) = 2, cnt(3) = 1\n# \n# g 2 return -1\n# g 3 return 3  cache = [3,1] cnt(3) = 2, cnt(1) = 2\n# p 4      here 1 is LRU  cache = [4,3] cnt(4) = 1, cnt(3) = 2\n# g 1  return -1\n# g 3   cache = [3,4] cnt(4) = 1 cnt(3) = 3\n# g 4 cache =[4,3] cnt(4) = 2, cnt(3) = 3\n# \n#  > cache should maintain relative order whenever key is accessed > linkedlist cache -> least used ...most used\n#  > key to value,counter -> hashmap\n#  > lfucacheline -> tracks least recently used and at back\n#  \n#  edge cases \n#  eviction strategy -> pop thefront element\n#  cache retreieval\n#  \n#  get(key)\n#    # if not found return -1\n#    # if key found\n#    increment the counter \n#   add to cacheline\n#    # return from cache\n#\n#  put \n#     if cursize + 1 >= size : limit exceeds \n#           evict the least frequenctly used cache\n#           \n#     increment the counter \n#     create value in cache if not found\n#       # insitalize counter to 1\n#   add to cacheline\n#     update cache if already found\n# \n#  Space complexity: O(n)\n#  Time Complexity: O(1)\n#  \n# Notes:\n#  To efficiently track two things: frequency counts and order of access within frequency group\n#   group nodes by frequency\n#   within each group maintain order of access\n#   Hashmap + doubly linkedlist gives O(1) time\n#   which leads to:\n#     A hahsmap -> key  == value\n#    freqmap  -> freq == dll of nodes \n#       in doubly linkedlist maintain nodes in lru order \n#   min_freq -> minimum frequency level\n#   \n#   when a node is accessed :\n#     remove it from the freqmap > if freqlist becomes empty it was minimum frequency , incrment min_freq\n#   Add the node to the frequency + 1 list \n#   Always add to the head of the new list \n# \nfrom collections import defaultdict\nfrom typing import Optional\n\n\nclass Node:\n    \"\"\"Node for doubly linked list to store cache entries.\"\"\"\n  \n    def __init__(self, key: int, value: int) -> None:\n        self.key = key\n        self.value = value\n        self.freq = 1  # Frequency counter starts at 1\n        self.prev: Optional[Node] = None\n        self.next: Optional[Node] = None\n\n\nclass DoublyLinkedList:\n    \"\"\"Doubly linked list to maintain nodes with same frequency in LRU order.\"\"\"\n  \n    def __init__(self) -> None:\n        # Create dummy head and tail nodes for easier manipulation\n        self.head = Node(-1, -1)\n        self.tail = Node(-1, -1)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def add_first(self, node: Node) -> None:\n        \"\"\"Add node right after head (most recently used position).\"\"\"\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def remove(self, node: Node) -> Node:\n        \"\"\"Remove a specific node from the list.\"\"\"\n        node.next.prev = node.prev\n        node.prev.next = node.next\n        node.next = None\n        node.prev = None\n        return node\n\n    def remove_last(self) -> Node:\n        \"\"\"Remove and return the least recently used node (before tail).\"\"\"\n        return self.remove(self.tail.prev)\n\n    def is_empty(self) -> bool:\n        \"\"\"Check if the list is empty (only contains dummy nodes).\"\"\"\n        return self.head.next == self.tail\n\n\nclass LFUCache:\n    \"\"\"\n    Least Frequently Used (LFU) cache implementation.\n    Evicts least frequently used items when capacity is reached.\n    For items with same frequency, evicts least recently used.\n    \"\"\"\n  \n    def __init__(self, capacity: int) -> None:\n        self.capacity = capacity\n        self.min_freq = 0  # Track minimum frequency for eviction\n        self.node_map: dict[int, Node] = {}  # Map from key to node\n        self.freq_map: defaultdict[int, DoublyLinkedList] = defaultdict(DoublyLinkedList)  # Map from frequency to list of nodes\n\n    def get(self, key: int) -> int:\n        \"\"\"\n        Get value for the given key.\n        Returns -1 if key doesn't exist.\n        \"\"\"\n        # Handle edge cases\n        if self.capacity == 0 or key not in self.node_map:\n            return -1\n      \n        # Get node and update its frequency\n        node = self.node_map[key]\n        self._increment_frequency(node)\n        return node.value\n\n    def put(self, key: int, value: int) -> None:\n        \"\"\"\n        Insert or update key-value pair in cache.\n        Evicts LFU item if cache is at capacity.\n        \"\"\"\n        # Handle zero capacity\n        if self.capacity == 0:\n            return\n      \n        # Update existing key\n        if key in self.node_map:\n            node = self.node_map[key]\n            node.value = value\n            self._increment_frequency(node)\n            return\n      \n        # Evict LFU item if at capacity\n        if len(self.node_map) == self.capacity:\n            freq_list = self.freq_map[self.min_freq]\n            evicted_node = freq_list.remove_last()\n            del self.node_map[evicted_node.key]\n      \n        # Add new node\n        node = Node(key, value)\n        self._add_node(node)\n        self.node_map[key] = node\n        self.min_freq = 1  # New node has frequency 1\n\n    def _increment_frequency(self, node: Node) -> None:\n        \"\"\"\n        Increment frequency of a node and move it to appropriate frequency list.\n        \"\"\"\n        freq = node.freq\n        freq_list = self.freq_map[freq]\n      \n        # Remove node from current frequency list\n        freq_list.remove(node)\n      \n        # Clean up empty frequency list and update min_freq if needed\n        if freq_list.is_empty():\n            del self.freq_map[freq]\n            if freq == self.min_freq:\n                self.min_freq += 1\n      \n        # Increment frequency and add to new frequency list\n        node.freq += 1\n        self._add_node(node)\n\n    def _add_node(self, node: Node) -> None:\n        \"\"\"\n        Add node to the frequency list corresponding to its frequency.\n        \"\"\"\n        freq = node.freq\n        freq_list = self.freq_map[freq]\n        freq_list.add_first(node)\n\n\n# Your LFUCache object will be instantiated and called as such:\n# obj = LFUCache(capacity)\n# param_1 = obj.get(key)\n# obj.put(key, value)\n\n\n# Your LFUCache object will be instantiated and called as such:\n# obj = LFUCache(capacity)\n# param_1 = obj.get(key)\n# obj.put(key,value)",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

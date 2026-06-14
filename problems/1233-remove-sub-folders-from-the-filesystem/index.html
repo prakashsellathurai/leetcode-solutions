@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -662,7 +670,30 @@
         
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1233. Remove Sub-Folders from the Filesystem",
+    "text": "Given a list of folders folder, return the folders after removing all sub-folders in those folders. You may return the answer in any order.\nIf a folder[i] is located within another folder[j], it is called a sub-folder of it. A sub-folder of folder[j] must start with folder[j], followed by a \"/\". For example, \"/a/b\" is a sub-folder of \"/a\", but \"/b\" is not a sub-folder of \"/a/b/c\".\nThe format of a path is one or more concatenated strings of the form: '/' followed by one or more lowercase English letters.\n\nFor example, \"/leetcode\" and \"/leetcode/problems\" are valid paths while an empty string and \"/\" are not.\n\n\u00a0\nExample 1:\n\nInput: folder = [\"/a\",\"/a/b\",\"/c/d\",\"/c/d/e\",\"/c/f\"]\nOutput: [\"/a\",\"/c/d\",\"/c/f\"]\nExplanation: Folders \"/a/b\" is a subfolder of \"/a\" and \"/c/d/e\" is inside of folder \"/c/d\" in our filesystem.\n\nExample 2:\n\nInput: folder = [\"/a\",\"/a/b/c\",\"/a/b/d\"]\nOutput: [\"/a\"]\nExplanation: Folders \"/a/b/c\" and \"/a/b/d\" will be removed because they are subfolders of \"/a\".\n\nExample 3:\n\nInput: folder = [\"/a/b/c\",\"/a/b/ca\",\"/a/b/d\"]\nOutput: [\"/a/b/c\",\"/a/b/ca\",\"/a/b/d\"]\n\n\u00a0\nConstraints:\n\n1 <= folder.length <= 4 * 104\n2 <= folder[i].length <= 100\nfolder[i] contains only lowercase letters and '/'.\nfolder[i] always starts with the character '/'.\nEach folder name is unique.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.isEndOfFolder = False\n\nclass Solution:\n    def __init__(self):\n        self.root = TrieNode()\n\n    def removeSubfolders(self, folder: List[str]) -> List[str]:\n        return self.trie_(folder)\n    \n\n    # Time Complexity: O(N*L^2)\n    # Space Complexity: O(N*L)\n    def set_(self, folder: List[str]) -> List[str]:\n        folderSet = set(folder)\n        result  = []\n        for folder in folder:\n            isSubFolder = False\n            prefix = folder\n            while not prefix == \"\":\n                pos = prefix.rfind(\"/\")\n                if not pos:\n                    break\n                prefix = prefix[0:pos]\n                if prefix in folderSet:\n                    isSubFolder = True\n                    break\n            if not isSubFolder:\n                result.append(folder)\n                \n        return result\n\n    \n    # Time Complexity: O(N*L*logN)\n    # Space Complexity: O(N*L)\n    def sort_(self, folder: List[str]) -> List[str]:   \n        folder.sort()\n        result  = []\n        for f in  folder:\n            if len(result) == 0:\n                result.append(f)\n                continue\n            lastfolder = result[-1]\n            lastfolder+=\"/\"\n            if not f.startswith(lastfolder):\n                result.append(f)\n        return result\n        \n    # Time Complexity: O(N*L)\n    # Space Complexity: O(N*L)\n    def trie_(self, folder: List[str]) -> List[str]:   \n        for path in folder:\n            cur_node = self.root\n            folders = path.split(\"/\")\n            for foldername in folders:\n                if foldername == \"\":\n                    continue\n                if foldername not in cur_node.children:\n                    cur_node.children[foldername] = TrieNode()\n                cur_node = cur_node.children[foldername]\n            cur_node.isEndOfFolder = True\n        \n        result = []\n\n        for path in folder:\n            current_node = self.root\n            folders = path.split(\"/\")\n            is_subfolder = False\n\n            for i, folder_name in enumerate(folders):\n                if folder_name == \"\":\n                    continue\n                next_node = current_node.children[folder_name]\n                # Check if the current folder path is a subfolder of an existing folder\n                if next_node.isEndOfFolder and i != len(folders) - 1:\n                    is_subfolder = True\n                    break  # Found a subfolder\n                current_node = next_node\n\n            # If not a subfolder, add to the result\n            if not is_subfolder:\n                result.append(path)\n        return result\n\n        ",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

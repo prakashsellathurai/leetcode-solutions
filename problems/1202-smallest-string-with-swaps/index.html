@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -674,7 +682,30 @@ Swap s[0] and s[1], s = "abc"
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1202. Smallest String With Swaps",
+    "text": "You are given a string s, and an array of pairs of indices in the string\u00a0pairs\u00a0where\u00a0pairs[i] =\u00a0[a, b]\u00a0indicates 2 indices(0-indexed) of the string.\nYou can\u00a0swap the characters at any pair of indices in the given\u00a0pairs\u00a0any number of times.\nReturn the\u00a0lexicographically smallest string that s\u00a0can be changed to after using the swaps.\n\u00a0\nExample 1:\nInput: s = \"dcab\", pairs = [[0,3],[1,2]]\nOutput: \"bacd\"\nExplaination: \nSwap s[0] and s[3], s = \"bcad\"\nSwap s[1] and s[2], s = \"bacd\"\n\nExample 2:\nInput: s = \"dcab\", pairs = [[0,3],[1,2],[0,2]]\nOutput: \"abcd\"\nExplaination: \nSwap s[0] and s[3], s = \"bcad\"\nSwap s[0] and s[2], s = \"acbd\"\nSwap s[1] and s[2], s = \"abcd\"\nExample 3:\nInput: s = \"cba\", pairs = [[0,1],[1,2]]\nOutput: \"abc\"\nExplaination: \nSwap s[0] and s[1], s = \"bca\"\nSwap s[1] and s[2], s = \"bac\"\nSwap s[0] and s[1], s = \"abc\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 10^5\n0 <= pairs.length <= 10^5\n0 <= pairs[i][0], pairs[i][1] <\u00a0s.length\ns\u00a0only contains lower case English letters.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def __init__(self):\n        self.N = 100001\n        self.adj = [[] for _ in range(self.N)]\n        self.visited = [False] * self.N\n\n    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:\n        return self.UnionFind_approach(s, pairs)\n\n    # Time Complexity: O(E+Vlog(V))\n    # Space Complexity: O(E+V)\n    def dfs_approach(self, s: str, pairs: List[List[int]]) -> str:\n        s = list(s)\n        for edge in pairs:\n            source = edge[0]\n            destination = edge[1]\n\n            self.adj[source].append(destination)\n            self.adj[destination].append(source)\n\n        for vertex in range(len(s)):\n            if not self.visited[vertex]:\n                characters = []\n                indices = []\n                self.dfs(s, vertex, characters, indices)\n\n                characters.sort()\n                indices.sort()\n\n                for i in range(len(indices)):\n                    s[indices[i]] = characters[i]\n        return \"\".join(s)\n\n    def dfs(self, s, vertex, characters, indices):\n        characters.append(s[vertex])\n        indices.append(vertex)\n\n        self.visited[vertex] = True\n\n        for adjacent in self.adj[vertex]:\n            if not self.visited[adjacent]:\n                self.dfs(s, adjacent, characters, indices)\n\n    # Time Complexity: O((E+V).\u03b1V+VlogV)\n    # Space Complexity: O(V)\n    def UnionFind_approach(self, s: str, pairs: List[List[int]]) -> str:\n        uf = UnionFind(len(s))\n        s = list(s)\n        for (source, dest) in pairs:\n            uf.union(source, dest)\n\n        hashmap = defaultdict(lambda: [])\n        for v in range(len(s)):\n            root = uf.find(v)\n            hashmap[root].append(v)\n\n        smallestString = [\" \"] * len(s)\n        for component in hashmap:\n            indices = hashmap[component]\n            characters = [s[index] for index in indices]\n            characters.sort()\n\n            for i in range(len(indices)):\n                smallestString[indices[i]] = characters[i]\n\n        return \"\".join(smallestString)\n\n\nclass UnionFind:\n    def __init__(self, n):\n        self.n = n\n        self.root = [i for i in range(n)]\n        self.rank = [0] * n\n\n    # Time Complexity: O(\u03b1n)\n    def find(self, a):\n        while a != self.root[a]:\n            a = self.root[a]\n        return self.root[a]\n\n    # Time Complexity: O(\u03b1n)\n    def union(self, a, b):\n        groupA = self.find(a)\n        groupB = self.find(b)\n\n        if groupA != groupB:\n            if self.rank[groupA] >= self.rank[groupB]:\n                self.root[groupB] = groupA\n                self.rank[groupA] += 1\n            elif self.rank[groupA] < self.rank[groupB]:\n                self.root[groupA] = groupB\n                self.rank[groupB] += 1\n\n    def isconnected(self, a, b):\n        return self.find(a) == self.find(b)\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

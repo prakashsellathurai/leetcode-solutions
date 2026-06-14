@@ -64,3 +64,28 @@ class Solution:
             return node
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "669. Trim a Binary Search Tree",
+    "text": "Given the root of a binary search tree and the lowest and highest boundaries as low and high, trim the tree so that all its elements lies in [low, high]. Trimming the tree should not change the relative structure of the elements that will remain in the tree (i.e., any node's descendant should remain a descendant). It can be proven that there is a unique answer.\nReturn the root of the trimmed binary search tree. Note that the root may change depending on the given bounds.\n\u00a0\nExample 1:\n\nInput: root = [1,0,2], low = 1, high = 2\nOutput: [1,null,2]\n\nExample 2:\n\nInput: root = [3,0,4,null,2,null,null,1], low = 1, high = 3\nOutput: [3,2,null,1]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree in the range [1, 104].\n0 <= Node.val <= 104\nThe value of each node in the tree is unique.\nroot is guaranteed to be a valid binary search tree.\n0 <= low <= high <= 104\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def trimBST(\n        self, root: Optional[TreeNode], low: int, high: int\n    ) -> Optional[TreeNode]:\n        return self.recursive(root, low, high)\n\n    def recursive(\n        self, node: Optional[TreeNode], low: int, high: int\n    ) -> Optional[TreeNode]:\n        if not node:\n            return None\n        elif node.val > high:\n            return self.recursive(node.left, low, high)\n        elif node.val < low:\n            return self.recursive(node.right, low, high)\n        else:\n            node.left = self.recursive(node.left, low, high)\n            node.right = self.recursive(node.right, low, high)\n            return node\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

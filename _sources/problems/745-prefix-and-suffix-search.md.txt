@@ -72,3 +72,28 @@ class WordFilter(object):
         return cur[WEIGHT]
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "745. Prefix and Suffix Search",
+    "text": "Design a special dictionary with some words that searchs the words in it by a prefix and a suffix.\nImplement the WordFilter class:\n\nWordFilter(string[] words) Initializes the object with the words in the dictionary.\nf(string prefix, string suffix) Returns the index of the word in the dictionary, which has the prefix prefix and the suffix suffix. If there is more than one valid index, return the largest of them. If there is no such word in the dictionary, return -1.\n\n\u00a0\nExample 1:\nInput\n[\"WordFilter\", \"f\"]\n[[[\"apple\"]], [\"a\", \"e\"]]\nOutput\n[null, 0]\n\nExplanation\nWordFilter wordFilter = new WordFilter([\"apple\"]);\nwordFilter.f(\"a\", \"e\"); // return 0, because the word at index 0 has prefix = \"a\" and suffix = 'e\".\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 15000\n1 <= words[i].length <= 10\n1 <= prefix.length, suffix.length <= 10\nwords[i], prefix and suffix consist of lower-case English letters only.\nAt most 15000 calls will be made to the function f.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "def Trie():\n    return collections.defaultdict(Trie)\n\n\nWEIGHT = False\n\n\nclass WordFilter(object):\n    def __init__(self, words):\n        self.trie = Trie()\n\n        for weight, word in enumerate(words):\n            word += \"#\"\n            for i in range(len(word)):\n                cur = self.trie\n                cur[WEIGHT] = weight\n                for j in range(i, 2 * len(word) - 1):\n                    cur = cur[word[j % len(word)]]\n                    cur[WEIGHT] = weight\n\n    def f(self, prefix, suffix):\n        cur = self.trie\n        for letter in suffix + \"#\" + prefix:\n            if letter not in cur:\n                return -1\n            cur = cur[letter]\n        return cur[WEIGHT]\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

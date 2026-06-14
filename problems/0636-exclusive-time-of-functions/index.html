@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -612,7 +620,30 @@ So function 0 spends 2 + 4 + 1 = 7 units of total time executing, and function 1
         <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "636. Exclusive Time of Functions",
+    "text": "On a single-threaded CPU, we execute a program containing n functions. Each function has a unique ID between 0 and n-1.\nFunction calls are stored in a call stack: when a function call starts, its ID is pushed onto the stack, and when a function call ends, its ID is popped off the stack. The function whose ID is at the top of the stack is the current function being executed. Each time a function starts or ends, we write a log with the ID, whether it started or ended, and the timestamp.\nYou are given a list logs, where logs[i] represents the ith log message formatted as a string \"{function_id}:{\"start\" | \"end\"}:{timestamp}\". For example, \"0:start:3\" means a function call with function ID 0 started at the beginning of timestamp 3, and \"1:end:2\" means a function call with function ID 1 ended at the end of timestamp 2. Note that a function can be called multiple times, possibly recursively.\nA function's exclusive time is the sum of execution times for all function calls in the program. For example, if a function is called twice, one call executing for 2 time units and another call executing for 1 time unit, the exclusive time is 2 + 1 = 3.\nReturn the exclusive time of each function in an array, where the value at the ith index represents the exclusive time for the function with ID i.\n\u00a0\nExample 1:\n\n\nInput: n = 2, logs = [\"0:start:0\",\"1:start:2\",\"1:end:5\",\"0:end:6\"]\nOutput: [3,4]\nExplanation:\nFunction 0 starts at the beginning of time 0, then it executes 2 for units of time and reaches the end of time 1.\nFunction 1 starts at the beginning of time 2, executes for 4 units of time, and ends at the end of time 5.\nFunction 0 resumes execution at the beginning of time 6 and executes for 1 unit of time.\nSo function 0 spends 2 + 1 = 3 units of total time executing, and function 1 spends 4 units of total time executing.\n\nExample 2:\n\nInput: n = 1, logs = [\"0:start:0\",\"0:start:2\",\"0:end:5\",\"0:start:6\",\"0:end:6\",\"0:end:7\"]\nOutput: [8]\nExplanation:\nFunction 0 starts at the beginning of time 0, executes for 2 units of time, and recursively calls itself.\nFunction 0 (recursive call) starts at the beginning of time 2 and executes for 4 units of time.\nFunction 0 (initial call) resumes execution then immediately calls itself again.\nFunction 0 (2nd recursive call) starts at the beginning of time 6 and executes for 1 unit of time.\nFunction 0 (initial call) resumes execution at the beginning of time 7 and executes for 1 unit of time.\nSo function 0 spends 2 + 4 + 1 + 1 = 8 units of total time executing.\n\nExample 3:\n\nInput: n = 2, logs = [\"0:start:0\",\"0:start:2\",\"0:end:5\",\"1:start:6\",\"1:end:6\",\"0:end:7\"]\nOutput: [7,1]\nExplanation:\nFunction 0 starts at the beginning of time 0, executes for 2 units of time, and recursively calls itself.\nFunction 0 (recursive call) starts at the beginning of time 2 and executes for 4 units of time.\nFunction 0 (initial call) resumes execution then immediately calls function 1.\nFunction 1 starts at the beginning of time 6, executes 1 unit of time, and ends at the end of time 6.\nFunction 0 resumes execution at the beginning of time 6 and executes for 2 units of time.\nSo function 0 spends 2 + 4 + 1 = 7 units of total time executing, and function 1 spends 1 unit of total time executing.\n\n\u00a0\nConstraints:\n\n1 <= n <= 100\n2 <= logs.length <= 500\n0 <= function_id < n\n0 <= timestamp <= 109\nNo two start events will happen at the same timestamp.\nNo two end events will happen at the same timestamp.\nEach function has an \"end\" log for each \"start\" log.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:\n        res = [0] * n\n        cur_func = logs[0].split(\":\")\n        stack = [int(cur_func[0])]\n        prev = int(cur_func[2])\n        for log in logs[1:]:\n            id, marker, time = log.split(\":\")\n            if marker == \"start\":\n                if stack:\n                    res[stack[-1]] += int(time) - prev\n                stack.append(int(id))\n                prev = int(time)\n            else:\n                res[stack[-1]] += int(time) - prev + 1\n                stack.pop()\n                prev = int(time)+1\n        return res\n\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

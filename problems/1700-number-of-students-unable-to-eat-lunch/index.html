@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -650,7 +658,30 @@ Hence all students are able to eat.
         <span class="k">return</span> <span class="mi">0</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1700. Number of Students Unable to Eat Lunch",
+    "text": "The school cafeteria offers circular and square sandwiches at lunch break, referred to by numbers 0 and 1 respectively. All students stand in a queue. Each student either prefers square or circular sandwiches.\nThe number of sandwiches in the cafeteria is equal to the number of students. The sandwiches are placed in a stack. At each step:\n\nIf the student at the front of the queue prefers the sandwich on the top of the stack, they will take it and leave the queue.\nOtherwise, they will leave it and go to the queue's end.\n\nThis continues until none of the queue students want to take the top sandwich and are thus unable to eat.\nYou are given two integer arrays students and sandwiches where sandwiches[i] is the type of the i\u200b\u200b\u200b\u200b\u200b\u200bth sandwich in the stack (i = 0 is the top of the stack) and students[j] is the preference of the j\u200b\u200b\u200b\u200b\u200b\u200bth student in the initial queue (j = 0 is the front of the queue). Return the number of students that are unable to eat.\n\u00a0\nExample 1:\n\nInput: students = [1,1,0,0], sandwiches = [0,1,0,1]\nOutput: 0 \nExplanation:\n- Front student leaves the top sandwich and returns to the end of the line making students = [1,0,0,1].\n- Front student leaves the top sandwich and returns to the end of the line making students = [0,0,1,1].\n- Front student takes the top sandwich and leaves the line making students = [0,1,1] and sandwiches = [1,0,1].\n- Front student leaves the top sandwich and returns to the end of the line making students = [1,1,0].\n- Front student takes the top sandwich and leaves the line making students = [1,0] and sandwiches = [0,1].\n- Front student leaves the top sandwich and returns to the end of the line making students = [0,1].\n- Front student takes the top sandwich and leaves the line making students = [1] and sandwiches = [1].\n- Front student takes the top sandwich and leaves the line making students = [] and sandwiches = [].\nHence all students are able to eat.\n\nExample 2:\n\nInput: students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]\nOutput: 3\n\n\u00a0\nConstraints:\n\n1 <= students.length, sandwiches.length <= 100\nstudents.length == sandwiches.length\nsandwiches[i] is 0 or 1.\nstudents[i] is 0 or 1.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import deque\nclass Solution:\n    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:\n        return self.counting(students, sandwiches)\n        # cafeteria -> students fifo\n        #              sandwich stack lifo\n\n        #  simulate [1,1,0,0]  [0,1,0,1] \n        #           [1001] 0101\n        #            0011  0101\n        #              011       101\n        #            110   101\n        #               10  01\n        #            01  01\n        #             1  1  \n        #             []    []\n        #     111001   100011  ]\n        #       11001  00011  \n        #       10011  00011\n        #       00111  00011\n        #       111    011\n        #  How do we know when none of the students in the queue want to take the top sandwich?\n\n# We can keep track of when we last served a student using the variable lastServed. If we are unable to serve a student, we increment lastServed. When we do serve a student, we reset lastServed to zero. When lastServed reaches the same size as the queue, we know we have offered the top sandwich to every student in the queue, so we stop the lunch process.\n\n# After serving all the sandwiches we can, the remaining students in the queue are the unserved students.\n        #  Time complexity: O(m*N)\n        # spac ecomplexity: P(m*n)     \n    def simulate(self, students: List[int], sandwiches: List[int]) -> int:\n        studentQueue = deque(students)\n        sandwichStack  = sandwiches[::-1]\n        last_served = 0\n        while len(studentQueue) >0  and last_served < len(students): \n            curr_student = studentQueue[0] # 1\n            curr_sandwich = sandwichStack[-1] # 0\n\n            if  curr_student == curr_sandwich:\n                studentQueue.popleft()\n                sandwichStack.pop()\n                last_served = 0\n            else:\n                last_served += 1\n                studentQueue.append(studentQueue.popleft())\n\n \n        return len(studentQueue)\n\n    # observation\n    #     1: every student takes the top sandiwch 0\n    #     2: rest if students who dowsn't want what is in th topm pile \n    #  If none of the students in the queue's preference matches the top sandwich, none of the remaining students can eat.\n    #   \n    def counting(self, students: List[int], sandwiches: List[int]) -> int:\n        onecount = 0\n        zerocount = 0\n        for student in students:\n            if student:\n                onecount += 1\n            else:\n                zerocount += 1\n        for sandwich in sandwiches:\n            if sandwich == 1 and  onecount == 0:\n                return zerocount\n            if  sandwich == 0 and zerocount == 0:\n                return onecount\n            if sandwich == 0:\n                zerocount -= 1\n            else:\n                onecount -= 1\n        return 0\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

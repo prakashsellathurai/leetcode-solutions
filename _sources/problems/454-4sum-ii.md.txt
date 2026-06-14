@@ -139,3 +139,28 @@ class Solution:
         return cntr
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "454. 4Sum II",
+    "text": "Given four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:\n\n0 <= i, j, k, l < n\nnums1[i] + nums2[j] + nums3[k] + nums4[l] == 0\n\n\u00a0\nExample 1:\nInput: nums1 = [1,2], nums2 = [-2,-1], nums3 = [-1,2], nums4 = [0,2]\nOutput: 2\nExplanation:\nThe two tuples are:\n1. (0, 0, 0, 1) -> nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0\n2. (1, 1, 0, 0) -> nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0\n\nExample 2:\nInput: nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]\nOutput: 1\n\n\u00a0\nConstraints:\n\nn == nums1.length\nn == nums2.length\nn == nums3.length\nn == nums4.length\n1 <= n <= 200\n-228 <= nums1[i], nums2[i], nums3[i], nums4[i] <= 228\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def fourSumCount(\n        self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]\n    ) -> int:\n        return self.optmizedapproach(nums1, nums2, nums3, nums4)\n\n    \"\"\"\n    cntr = 0\n    for all possible pairings (atmost n^4 )\n        if condition satisfies:\n            cntr+=1\n    Time Complexity: O(n^4)\n    Space Complexity: O(1)\n    \"\"\"\n\n    def bruteforce(\n        self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]\n    ) -> int:\n        n = len(nums1)\n        cntr = 0\n        for i in range(n):\n            for j in range(n):\n                for k in range(n):\n                    for l in range(n):\n                        if nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0:\n                            cntr += 1\n\n        return cntr\n\n    \"\"\"\n    cntr = 0\n    put -num4 frequency in hashmap\n    \n    for 3 loops with i,j,k\n        if num2+num3+num4 in hashmap:\n            cntr+=hashmap[num2+num3+num4]\n    Time Complexity: O(n^3)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def optmizedbruteforce(\n        self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]\n    ) -> int:\n        n = len(nums1)\n        cntr = 0\n        hashmap = {}\n        for num1 in nums1:\n            if -num1 not in hashmap:\n                hashmap[-num1] = 1\n            else:\n                hashmap[-num1] += 1\n\n        for j in range(n):\n            for k in range(n):\n                for l in range(n):\n                    if nums2[j] + nums3[k] + nums4[l] in hashmap:\n                        cntr += hashmap[nums2[j] + nums3[k] + nums4[l]]\n\n        return cntr\n\n    \"\"\"\n    cntr = 0\n    put -num1-num2 frequency in hashmap\n    \n    for 2 loops with k,l\n        if num3 + num4 in hashmap:\n            cntr+=hashmap[num3 + num4]\n            \n            \n    Time Complexity: O(n^2)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def optmizedapproach(\n        self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]\n    ) -> int:\n        n = len(nums1)\n        cntr = 0\n        hashmap = {}\n        for num1 in nums1:\n            for num2 in nums2:\n                if -num1 - num2 not in hashmap:\n                    hashmap[-num1 - num2] = 1\n                else:\n                    hashmap[-num1 - num2] += 1\n\n        for k in range(n):\n            for l in range(n):\n                if nums3[k] + nums4[l] in hashmap:\n                    cntr += hashmap[nums3[k] + nums4[l]]\n\n        return cntr\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

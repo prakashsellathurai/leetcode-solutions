@@ -119,3 +119,28 @@ class Solution:
         traverse(root,start)
         return max_distance
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "2385. Amount of Time for Binary Tree to Be Infected",
+    "text": "You are given the root of a binary tree with unique values, and an integer start. At minute 0, an infection starts from the node with value start.\nEach minute, a node becomes infected if:\n\nThe node is currently uninfected.\nThe node is adjacent to an infected node.\n\nReturn the number of minutes needed for the entire tree to be infected.\n\u00a0\nExample 1:\n\n\nInput: root = [1,5,3,null,4,10,6,9,2], start = 3\nOutput: 4\nExplanation: The following nodes are infected during:\n- Minute 0: Node 3\n- Minute 1: Nodes 1, 10 and 6\n- Minute 2: Node 5\n- Minute 3: Node 4\n- Minute 4: Nodes 9 and 2\nIt takes 4 minutes for the whole tree to be infected so we return 4.\n\nExample 2:\n\n\nInput: root = [1], start = 1\nOutput: 0\nExplanation: At minute 0, the only node in the tree is infected so we return 0.\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 105].\n1 <= Node.val <= 105\nEach node has a unique value.\nA node with a value of start exists in the tree.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nfrom collections import defaultdict, deque\nclass Solution:\n    def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:\n        return self.onepass(root, start)\n\n    # TIme complexity: O(n)\n    # Space complexiy: O(n)\n    def twopass(self, root: Optional[TreeNode], start: int) -> int:\n        # 1 build the graph from tree make connectionfrom node -> parents\n        graph = defaultdict(list)\n        def buidlGraph(cur, parent):\n            if cur is not None and parent is not None:\n                graph[cur.val].append(parent.val)\n                graph[parent.val].append(cur.val)\n            if cur.left is not None:\n                buidlGraph(cur.left, cur)\n            if cur.right is not None:\n                buidlGraph(cur.right, cur)\n        buidlGraph(root, None)\n        # 2 run dfs from the start node and track the maximum length by a max _length variable\n        max_len = 0\n        queue = deque([(start, 0)])\n        visited = set([start])\n\n        while len(queue) > 0:\n            node, distance = queue.popleft()\n            if distance > max_len:\n                max_len = distance\n            for neighbour in graph[node]:\n                if neighbour not in visited:\n                    visited.add(neighbour)\n                    queue.append((neighbour, distance+1))\n        return max_len\n\n    # TIme complexity: O(n)\n    # Space complexiy: O(n)\n    def onepass(self, root: Optional[TreeNode], start: int) -> int:\n        max_distance = 0\n        def traverse(root, start):\n            nonlocal  max_distance\n            depth = 0\n            if root is None:\n                return depth\n            \n            left_depth = traverse(root.left, start)\n            right_depth = traverse(root.right, start)\n\n            if root.val == start:\n                max_distance = max(left_depth, right_depth)\n                depth =  -1\n            elif left_depth >= 0 and right_depth >= 0:\n                depth = max(left_depth, right_depth) + 1\n            else:\n                distance = abs(left_depth) + abs(right_depth)\n                max_distance = max(max_distance, distance)\n                depth = min(left_depth, right_depth) - 1\n            return depth\n        traverse(root,start)\n        return max_distance",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

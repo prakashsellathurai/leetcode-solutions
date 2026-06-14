@@ -86,3 +86,28 @@ class Solution:
         nums.sort()
         return kSum(nums, target, 4)
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "18. 4Sum",
+    "text": "Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:\n\n0 <= a, b, c, d\u00a0< n\na, b, c, and d are distinct.\nnums[a] + nums[b] + nums[c] + nums[d] == target\n\nYou may return the answer in any order.\n\u00a0\nExample 1:\nInput: nums = [1,0,-1,0,-2,2], target = 0\nOutput: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]\n\nExample 2:\nInput: nums = [2,2,2,2,2], target = 8\nOutput: [[2,2,2,2]]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 200\n-109 <= nums[i] <= 109\n-109 <= target <= 109\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:\n\t\n        def kSum(nums: List[int], target: int, k: int) -> List[List[int]]:\n            res = []\n            \n            # If we have run out of numbers to add, return res.\n            if not nums:\n                return res\n            \n            # There are k remaining values to add to the sum. The \n            # average of these values is at least target // k.\n            average_value = target // k\n            \n            # We cannot obtain a sum of target if the smallest value\n            # in nums is greater than target // k or if the largest \n            # value in nums is smaller than target // k.\n            if average_value < nums[0] or nums[-1] < average_value:\n                return res\n            \n            if k == 2:\n                return twoSum(nums, target)\n    \n            for i in range(len(nums)):\n                if i == 0 or nums[i - 1] != nums[i]:\n                    for subset in kSum(nums[i + 1:], target - nums[i], k - 1):\n                        res.append([nums[i]] + subset)\n    \n            return res\n\n        def twoSum(nums: List[int], target: int) -> List[List[int]]:\n            res = []\n            s = set()\n    \n            for i in range(len(nums)):\n                if len(res) == 0 or res[-1][1] != nums[i]:\n                    if target - nums[i] in s:\n                        res.append([target - nums[i], nums[i]])\n                s.add(nums[i])\n    \n            return res\n\n        nums.sort()\n        return kSum(nums, target, 4)",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,141 @@
+# 0703-kth-largest-element-in-a-stream
+
+
+Try it on <a href='https://leetcode.com/problems/0703-kth-largest-element-in-a-stream'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are part of a university admissions office and need to keep track of the <code>kth</code> highest test score from applicants in real-time. This helps to determine cut-off marks for interviews and admissions dynamically as new applicants submit their scores.</p>
+
+<p>You are tasked to implement a class which, for a given integer&nbsp;<code>k</code>, maintains a stream of test scores and continuously returns the&nbsp;<code>k</code>th highest test score&nbsp;<strong>after</strong>&nbsp;a new score has been submitted. More specifically, we are looking for the <code>k</code>th highest score in the sorted list of all scores.</p>
+
+<p>Implement the&nbsp;<code>KthLargest</code> class:</p>
+
+<ul>
+	<li><code>KthLargest(int k, int[] nums)</code> Initializes the object with the integer <code>k</code> and the stream of test scores&nbsp;<code>nums</code>.</li>
+	<li><code>int add(int val)</code> Adds a new test score&nbsp;<code>val</code> to the stream and returns the element representing the <code>k<sup>th</sup></code> largest element in the pool of test scores so far.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong><br />
+<span class="example-io">[&quot;KthLargest&quot;, &quot;add&quot;, &quot;add&quot;, &quot;add&quot;, &quot;add&quot;, &quot;add&quot;]<br />
+[[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[null, 4, 5, 5, 8, 8]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);<br />
+kthLargest.add(3); // return 4<br />
+kthLargest.add(5); // return 5<br />
+kthLargest.add(10); // return 5<br />
+kthLargest.add(9); // return 8<br />
+kthLargest.add(4); // return 8</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong><br />
+<span class="example-io">[&quot;KthLargest&quot;, &quot;add&quot;, &quot;add&quot;, &quot;add&quot;, &quot;add&quot;]<br />
+[[4, [7, 7, 7, 7, 8, 3]], [2], [10], [9], [9]]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[null, 7, 7, 7, 8]</span></p>
+
+<p><strong>Explanation:</strong></p>
+KthLargest kthLargest = new KthLargest(4, [7, 7, 7, 7, 8, 3]);<br />
+kthLargest.add(2); // return 7<br />
+kthLargest.add(10); // return 7<br />
+kthLargest.add(9); // return 7<br />
+kthLargest.add(9); // return 8</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>1 &lt;= k &lt;= nums.length + 1</code></li>
+	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
+	<li><code>-10<sup>4</sup> &lt;= val &lt;= 10<sup>4</sup></code></li>
+	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>add</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# k -> [2.3.4] k =2
+# 1 2 3 4 5 
+# add (6) -> 4 [1 2 3 4 5 6]
+# add(1) -> 5 [1 1 2 3 4 5 6]
+#  > heap of size k  min heap top of heap is kths largest element every add operation is O(1)
+#  edge case if n < k return top 
+#  
+import heapq
+class KthLargest:
+
+    def __init__(self, k: int, nums: List[int]): # 3,  [4, 5, 8, 2]
+        self.heap = []
+        self.k = k
+        heapq.heapify(self.heap)
+        for num in nums: # 4 , 5, 8, 2
+            heapq.heappush(self.heap, num) # [2, 4, 5, 8]
+            if len(self.heap) > k:
+                heapq.heappop(self.heap) # [4, 5, 8]
+    
+    # invariant make sure 
+    def add(self, val: int) -> int: #[4, 5, 8] val = 10
+       # val = heap[0]
+       # val > heap[0]
+       #    heappush and pop
+       # return val
+        if len(self.heap) < self.k:
+            heapq.heappush(self.heap, val)
+        elif self.heap and val >= self.heap[0]:
+            heapq.heappush(self.heap, val) # [4,5,8, 10]
+            heapq.heappop(self.heap) # [5,8, 10]
+        return self.heap[0]
+
+# Problem:
+# Kth Largest Stream
+
+# Invariant:
+# Heap contains k largest elements.
+
+# Failed assumption:
+# Always pop before push.
+
+# Final insight:
+# Only remove an element if the new value belongs in top k.
+# Your KthLargest object will be instantiated and called as such:
+# obj = KthLargest(k, nums)
+# param_1 = obj.add(val)
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "703. Kth Largest Element in a Stream",
+    "text": "You are part of a university admissions office and need to keep track of the kth highest test score from applicants in real-time. This helps to determine cut-off marks for interviews and admissions dynamically as new applicants submit their scores.\nYou are tasked to implement a class which, for a given integer\u00a0k, maintains a stream of test scores and continuously returns the\u00a0kth highest test score\u00a0after\u00a0a new score has been submitted. More specifically, we are looking for the kth highest score in the sorted list of all scores.\nImplement the\u00a0KthLargest class:\n\nKthLargest(int k, int[] nums) Initializes the object with the integer k and the stream of test scores\u00a0nums.\nint add(int val) Adds a new test score\u00a0val to the stream and returns the element representing the kth largest element in the pool of test scores so far.\n\n\u00a0\nExample 1:\n\nInput:\n[\"KthLargest\", \"add\", \"add\", \"add\", \"add\", \"add\"]\n[[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]\nOutput: [null, 4, 5, 5, 8, 8]\nExplanation:\nKthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);\nkthLargest.add(3); // return 4\nkthLargest.add(5); // return 5\nkthLargest.add(10); // return 5\nkthLargest.add(9); // return 8\nkthLargest.add(4); // return 8\n\nExample 2:\n\nInput:\n[\"KthLargest\", \"add\", \"add\", \"add\", \"add\"]\n[[4, [7, 7, 7, 7, 8, 3]], [2], [10], [9], [9]]\nOutput: [null, 7, 7, 7, 8]\nExplanation:\nKthLargest kthLargest = new KthLargest(4, [7, 7, 7, 7, 8, 3]);\nkthLargest.add(2); // return 7\nkthLargest.add(10); // return 7\nkthLargest.add(9); // return 7\nkthLargest.add(9); // return 8\n\u00a0\nConstraints:\n\n0 <= nums.length <= 104\n1 <= k <= nums.length + 1\n-104 <= nums[i] <= 104\n-104 <= val <= 104\nAt most 104 calls will be made to add.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# k -> [2.3.4] k =2\n# 1 2 3 4 5 \n# add (6) -> 4 [1 2 3 4 5 6]\n# add(1) -> 5 [1 1 2 3 4 5 6]\n#  > heap of size k  min heap top of heap is kths largest element every add operation is O(1)\n#  edge case if n < k return top \n#  \nimport heapq\nclass KthLargest:\n\n    def __init__(self, k: int, nums: List[int]): # 3,  [4, 5, 8, 2]\n        self.heap = []\n        self.k = k\n        heapq.heapify(self.heap)\n        for num in nums: # 4 , 5, 8, 2\n            heapq.heappush(self.heap, num) # [2, 4, 5, 8]\n            if len(self.heap) > k:\n                heapq.heappop(self.heap) # [4, 5, 8]\n    \n    # invariant make sure \n    def add(self, val: int) -> int: #[4, 5, 8] val = 10\n       # val = heap[0]\n       # val > heap[0]\n       #    heappush and pop\n       # return val\n        if len(self.heap) < self.k:\n            heapq.heappush(self.heap, val)\n        elif self.heap and val >= self.heap[0]:\n            heapq.heappush(self.heap, val) # [4,5,8, 10]\n            heapq.heappop(self.heap) # [5,8, 10]\n        return self.heap[0]\n\n# Problem:\n# Kth Largest Stream\n\n# Invariant:\n# Heap contains k largest elements.\n\n# Failed assumption:\n# Always pop before push.\n\n# Final insight:\n# Only remove an element if the new value belongs in top k.\n# Your KthLargest object will be instantiated and called as such:\n# obj = KthLargest(k, nums)\n# param_1 = obj.add(val)",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

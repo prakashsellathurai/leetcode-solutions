@@ -55,3 +55,28 @@ class Solution:
         return heap[0]
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": " \u00a0Kth Largest Element in an Array",
+    "text": "Given an integer array nums and an integer k, return the kth largest element in the array.\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\nCan you solve it without sorting?\n\u00a0\nExample 1:\nInput: nums = [3,2,1,5,6,4], k = 2\nOutput: 5\nExample 2:\nInput: nums = [3,2,3,1,2,4,5,5,6], k = 4\nOutput: 4\n\n\u00a0\nConstraints:\n\n1 <= k <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        return self.HeapMethod(nums, k)\n\n    # Sorting method\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort(reverse=true)\n        return nums[k - 1]\n\n    # Heap Method\n    # Time Complexity : O(nlogk)\n    # Space Complexity: O(k)\n    def HeapMethod(self, nums: List[int], k: int) -> int:\n        heap = []\n        for num in nums:\n            heapq.heappush(heap, num)\n            if len(heap) > k:\n                heapq.heappop(heap)\n        return heap[0]\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

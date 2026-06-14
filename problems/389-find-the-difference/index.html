@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -667,7 +675,30 @@
         <span class="k">return</span> <span class="nb">chr</span><span class="p">(</span><span class="n">t_sum</span> <span class="o">-</span> <span class="n">s_sum</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "389. Find the Difference",
+    "text": "You are given two strings s and t.\nString t is generated by random shuffling string s and then add one more letter at a random position.\nReturn the letter that was added to t.\n\u00a0\nExample 1:\nInput: s = \"abcd\", t = \"abcde\"\nOutput: \"e\"\nExplanation: 'e' is the letter that was added.\n\nExample 2:\nInput: s = \"\", t = \"y\"\nOutput: \"y\"\n\n\u00a0\nConstraints:\n\n0 <= s.length <= 1000\nt.length == s.length + 1\ns and t consist of lowercase English letters.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def findTheDifference(self, s: str, t: str) -> str:\n        return self.charCode(s, t)\n\n    \"\"\"\n    Run Two loops check all possible chars from t in s to find odd one \n    Time Complexity: O(n^2)\n    Space Comnplexity: O(1)\n    \"\"\"\n\n    def bruteforce(self, s: str, t: str) -> str:\n        for ch in t:\n            if ch not in s:\n                return ch\n\n    \"\"\"\n    create Hashfrequency table of chars of t  and decrement their resepective frequency for each character in s\n    \n    atlast the character with frequency 1 is the result\n    \n    Time Complexity: O(n)\n    Space Comnplexity: O(n)\n    \"\"\"\n\n    def hashtable(self, s: str, t: str) -> str:\n        Hastable = defaultdict(lambda: 0)\n\n        for ch in t:\n            Hastable[ch] += 1\n\n        for ch in s:\n            Hastable[ch] -= 1\n\n        for ch in Hastable:\n            if Hastable[ch] == 1:\n                return ch\n\n    \"\"\"\n    since input consists of only small alphabets we could use counting sort to sort the two strings and find the odd element in  sorted strings\n    \n    This Idea is similar to the Hashtable and performance wise they are still same\n    \n    \n    Time Complexity: O(n)\n    Space Comnplexity: O(n)\n    \"\"\"\n\n    def sorting(self, s: str, t: str) -> str:\n        def countingsort(s):\n            sortedList = [0] * 26\n\n            for ch in s:\n                sortedList[ord(ch) - ord(\"a\")] += 1\n\n            res = []\n\n            for i in range(26):\n                for times in range(sortedList[i]):\n                    res.append(chr(sortedList[i] + ord(\"a\")))\n            return \"\".join(s)\n\n        s = countingsort(s)\n        t = countingsort(t)\n\n        for i in range(len(s)):\n            if s[i] != t[i]:\n                return s[i]\n        return t[-1]\n\n    \"\"\"\n    xor of all characters in ordinal form form both s and t gives the result\n    because xor cancels the pair of same number only the additional number will be left out\n\n    \n    \n    Time Complexity: O(n)\n    Space Comnplexity: O(1)\n    \"\"\"\n\n    def bitmanipul(self, s: str, t: str) -> str:\n        res = 0\n\n        for ch in s:\n            res ^= ord(ch)\n        for ch in t:\n            res ^= ord(ch)\n        return chr(res)\n\n    \"\"\"\n    Summate character code of all characters in s and in t separately and their difference is the character code of our result char\n    \n\n    Time Complexity: O(n)\n    Space Comnplexity: O(1)\n    \"\"\"\n\n    def charCode(self, s: str, t: str) -> str:\n        s_sum = sum([ord(ch) for ch in s])\n        t_sum = sum([ord(ch) for ch in t])\n        return chr(t_sum - s_sum)\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

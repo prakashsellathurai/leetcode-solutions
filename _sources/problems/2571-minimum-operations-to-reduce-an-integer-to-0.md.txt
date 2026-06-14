@@ -101,3 +101,28 @@ class Solution:
 
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "2571. Minimum Operations to Reduce an Integer to 0",
+    "text": "You are given a positive integer n, you can do the following operation any number of times:\n\nAdd or subtract a power of 2 from n.\n\nReturn the minimum number of operations to make n equal to 0.\nA number x is power of 2 if x == 2i\u00a0where i >= 0.\n\u00a0\nExample 1:\n\nInput: n = 39\nOutput: 3\nExplanation: We can do the following operations:\n- Add 20 = 1 to n, so now n = 40.\n- Subtract 23 = 8 from n, so now n = 32.\n- Subtract 25 = 32 from n, so now n = 0.\nIt can be shown that 3 is the minimum number of operations we need to make n equal to 0.\n\nExample 2:\n\nInput: n = 54\nOutput: 3\nExplanation: We can do the following operations:\n- Add 21 = 2 to n, so now n = 56.\n- Add 23 = 8 to n, so now n = 64.\n- Subtract 26 = 64 from n, so now n = 0.\nSo the minimum number of operations is 3.\n\n\u00a0\nConstraints:\n\n1 <= n <= 105\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minOperations(self, n: int) -> int:\n        return self.minOptimnalOperations(n)\n    def minOptimnalOperations(self, n: int) -> int:\n        # Initialize result counter and consecutive 1-bits counter\n        operations = 0\n        consecutive_ones = 0\n      \n        # Process each bit of n from right to left\n        while n > 0:\n            # Check if the current least significant bit is 1\n            if n & 1:\n                # Increment counter for consecutive 1-bits\n                consecutive_ones += 1\n            elif consecutive_ones > 0:\n                # We hit a 0 after seeing 1s, process the group of 1s\n                operations += 1\n                # Reset counter: if we had exactly one 1, start fresh\n                # Otherwise, carry over 1 (for cases like 11 -> 100)\n                consecutive_ones = 0 if consecutive_ones == 1 else 1\n          \n            # Right shift to check the next bit\n            n >>= 1\n      \n        # Handle any remaining consecutive 1-bits after the loop\n        if consecutive_ones == 1:\n            # Single 1-bit requires one operation\n            operations += 1\n        elif consecutive_ones > 1:\n            # Multiple consecutive 1-bits require two operations\n            operations += 2\n      \n        return operations\n\n    def mindpOperations(self, n: int) -> int:\n        @lru_cache(maxsize=None)\n        def dp(x):\n            if x == 0:\n                return 0\n            if x == 1:\n                return 1\n            if x % 2 == 0:\n                return dp(x // 2)\n            else:\n                return 1 + min(dp(x // 2), dp((x + 1) // 2))\n        \n        return dp(n)\n\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

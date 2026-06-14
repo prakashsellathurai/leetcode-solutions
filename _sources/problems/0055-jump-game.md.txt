@@ -1,0 +1,124 @@
+# 0055-jump-game
+
+
+Try it on <a href='https://leetcode.com/problems/0055-jump-game'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given an integer array <code>nums</code>. You are initially positioned at the array&#39;s <strong>first index</strong>, and each element in the array represents your maximum jump length at that position.</p>
+
+<p>Return <code>true</code><em> if you can reach the last index, or </em><code>false</code><em> otherwise</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [2,3,1,1,4]
+<strong>Output:</strong> true
+<strong>Explanation:</strong> Jump 1 step from index 0 to 1, then 3 steps to the last index.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [3,2,1,0,4]
+<strong>Output:</strong> false
+<strong>Explanation:</strong> You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>0 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+    #  [2,3,1,1,4]
+    #  i =0 :2 
+    #    0 1 2 
+    #   i = 1: 3
+    #     3 4  5
+    #  
+    # At index 0  and value 2 it can react indices 0 1 2
+
+    # at index 1 value 3 :  3 4 5 6
+
+    # at index i farthest point the value at the index 
+    #  
+    # Example 2
+    # 
+    #  nums = [3,2,1,0,4]
+    # 
+    #  i = 0 : value = 3 
+    #    1 2 3
+    #  i =3 -> i= 0 recursion
+    #  i = 2  -> i =3
+    #  i = 1 -> i=3
+    #
+    # At index i with value nums[i]  -> 1, 2, 3...nums[i]
+    # What's the one key piece of information you need to maintain as you scan through?
+    # In other words: at any point, what do you need to know about all the indices you've seen so far?
+
+    # Think about it differently: What would make an index unreachable?
+    #  As you move left to right, you only need to track: "What is the farthest index I can reach so far?"
+    #  
+    # is index i even reachable?
+    # if not reachable can we keep going
+    #  nums = [3,2,10,4]
+    # i = 0: value =3 farthest reach = 0 + 3
+    #    isreach(0) = True
+    # i =1 : value = 2 potential reach = 2+ 1 = 3
+    #   isreach(1) = true
+    #   furthest reach = max(3, 3)
+    # i =2: value =1  potentialreach = 2 + 1 = 3
+    #   isreach(2) = True
+    #  farthestreach = 3
+    #i =4: value=4
+    # isreach(4) 
+        farthest_reach = 0
+        n = len(nums)
+        if n == 1:
+            return True
+        for i, num in enumerate(nums):
+            if i > farthest_reach:
+                break
+            farthest_reach = max(farthest_reach, i + num)
+            if farthest_reach >= n - 1:
+                return True
+        return farthest_reach >= len(nums) - 1
+    #
+    # Why is the greedy approach safe here? You're always picking the maximum reach at each step—but what if a smaller jump is actually the "right" choice? Why doesn't that matter?
+    
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "55. Jump Game",
+    "text": "You are given an integer array nums. You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position.\nReturn true if you can reach the last index, or false otherwise.\n\u00a0\nExample 1:\n\nInput: nums = [2,3,1,1,4]\nOutput: true\nExplanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.\n\nExample 2:\n\nInput: nums = [3,2,1,0,4]\nOutput: false\nExplanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 104\n0 <= nums[i] <= 105\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def canJump(self, nums: List[int]) -> bool:\n    #  [2,3,1,1,4]\n    #  i =0 :2 \n    #    0 1 2 \n    #   i = 1: 3\n    #     3 4  5\n    #  \n    # At index 0\u00a0 and value 2 it can react indices 0 1 2\n\n    # at index 1 value 3 :\u00a0 3 4 5 6\n\n    # at index i farthest point the value at the index\u00a0\n    #  \n    # Example 2\n    # \n    #  nums = [3,2,1,0,4]\n    # \n    #  i = 0 : value = 3 \n    #    1 2 3\n    #  i =3 -> i= 0 recursion\n    #  i = 2  -> i =3\n    #  i = 1 -> i=3\n    #\n    # At index i with value nums[i]  -> 1, 2, 3...nums[i]\n    # What's the one key piece of information you need to maintain as you scan through?\n    # In other words: at any point, what do you need to know about all the indices you've seen so far?\n\n    # Think about it differently: What would make an index unreachable?\n    #  As you move left to right, you only need to track: \"What is the farthest index I can reach so far?\"\n    #  \n    # is index i even reachable?\n    # if not reachable can we keep going\n    #  nums = [3,2,10,4]\n    # i = 0: value =3 farthest reach = 0 + 3\n    #    isreach(0) = True\n    # i =1 : value = 2 potential reach = 2+ 1 = 3\n    #   isreach(1) = true\n    #   furthest reach = max(3, 3)\n    # i =2: value =1  potentialreach = 2 + 1 = 3\n    #   isreach(2) = True\n    #  farthestreach = 3\n    #i =4: value=4\n    # isreach(4) \n        farthest_reach = 0\n        n = len(nums)\n        if n == 1:\n            return True\n        for i, num in enumerate(nums):\n            if i > farthest_reach:\n                break\n            farthest_reach = max(farthest_reach, i + num)\n            if farthest_reach >= n - 1:\n                return True\n        return farthest_reach >= len(nums) - 1\n    #\n    # Why is the greedy approach safe here? You're always picking the maximum reach at each step\u2014but what if a smaller jump is actually the \"right\" choice? Why doesn't that matter?\n    ",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

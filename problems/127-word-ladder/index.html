@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -703,7 +711,30 @@
         <span class="k">return</span> <span class="mi">0</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "127. Word Ladder",
+    "text": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:\n\nEvery adjacent pair of words differs by a single letter.\nEvery si for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.\nsk == endWord\n\nGiven two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.\n\u00a0\nExample 1:\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\nOutput: 5\nExplanation: One shortest transformation sequence is \"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> cog\", which is 5 words long.\n\nExample 2:\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\nOutput: 0\nExplanation: The endWord \"cog\" is not in wordList, therefore there is no valid transformation sequence.\n\n\u00a0\nConstraints:\n\n1 <= beginWord.length <= 10\nendWord.length == beginWord.length\n1 <= wordList.length <= 5000\nwordList[i].length == beginWord.length\nbeginWord, endWord, and wordList[i] consist of lowercase English letters.\nbeginWord != endWord\nAll the words in wordList are unique.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import defaultdict\n\n\nclass Solution:\n    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:\n        return self.Bibfs(beginWord, endWord, wordList)\n\n    \"\"\"\n    Time Complexity: O(m^2*n)\n    Space Complexity: O(m^2*n)\n    \"\"\"\n\n    def bfs(self, beginWord, endWord, wordList):\n        \"\"\"\n        :type beginWord: str\n        :type endWord: str\n        :type wordList: List[str]\n        :rtype: int\n        \"\"\"\n\n        if endWord not in wordList or not endWord or not beginWord or not wordList:\n            return 0\n\n        # Since all words are of same length.\n        L = len(beginWord)\n\n        # Dictionary to hold combination of words that can be formed,\n        # from any given word. By changing one letter at a time.\n        all_combo_dict = defaultdict(list)\n        for word in wordList:\n            for i in range(L):\n                # Key is the generic word\n                # Value is a list of words which have the same intermediate generic word.\n                all_combo_dict[word[:i] + \"*\" + word[i + 1:]].append(word)\n\n        # Queue for BFS\n        queue = collections.deque([(beginWord, 1)])\n        # Visited to make sure we don't repeat processing same word.\n        visited = {beginWord: True}\n        while queue:\n            current_word, level = queue.popleft()\n            for i in range(L):\n                # Intermediate words for current word\n                intermediate_word = current_word[:i] + \\\n                    \"*\" + current_word[i + 1:]\n\n                # Next states are all the words which share the same intermediate state.\n                for word in all_combo_dict[intermediate_word]:\n                    # If at any point if we find what we are looking for\n                    # i.e. the end word - we can return with the answer.\n                    if word == endWord:\n                        return level + 1\n                    # Otherwise, add it to the BFS Queue. Also mark it visited\n                    if word not in visited:\n                        visited[word] = True\n                        queue.append((word, level + 1))\n                all_combo_dict[intermediate_word] = []\n        return 0\n\n    def __init__(self):\n        self.length = 0\n        # Dictionary to hold combination of words that can be formed,\n        # from any given word. By changing one letter at a time.\n        self.all_combo_dict = defaultdict(list)\n\n    def visitWordNode(self, queue, visited, others_visited):\n        queue_size = len(queue)\n        for _ in range(queue_size):\n            current_word = queue.popleft()\n            for i in range(self.length):\n                # Intermediate words for current word\n                intermediate_word = current_word[:i] + \\\n                    \"*\" + current_word[i + 1:]\n\n                # Next states are all the words which share the same intermediate state.\n                for word in self.all_combo_dict[intermediate_word]:\n                    # If the intermediate state/word has already been visited from the\n                    # other parallel traversal this means we have found the answer.\n                    if word in others_visited:\n                        return visited[current_word] + others_visited[word]\n                    if word not in visited:\n                        # Save the level as the value of the dictionary, to save number of hops.\n                        visited[word] = visited[current_word] + 1\n                        queue.append(word)\n\n        return None\n\n    \"\"\"\n    Time Complexity: O(m^2*n)\n    Space Complexity: O(m^2*n)\n    \"\"\"\n\n    def Bibfs(self, beginWord, endWord, wordList):\n        if endWord not in wordList or not endWord or not beginWord or not wordList:\n            return 0\n            # Since all words are of same length.\n        self.length = len(beginWord)\n\n        for word in wordList:\n            for i in range(self.length):\n                # Key is the generic word\n                # Value is a list of words which have the same intermediate generic word.\n                self.all_combo_dict[word[:i] + \"*\" + word[i + 1:]].append(word)\n                # Queues for birdirectional BFS\n        # BFS starting from beginWord\n        queue_begin = collections.deque([beginWord])\n        queue_end = collections.deque([endWord])  # BFS starting from endWord\n\n        # Visited to make sure we don't repeat processing same word\n        visited_begin = {beginWord: 1}\n        visited_end = {endWord: 1}\n        ans = None\n\n        # We do a birdirectional search starting one pointer from begin\n        # word and one pointer from end word. Hopping one by one.\n        while queue_begin and queue_end:\n\n            # Progress forward one step from the shorter queue\n            if len(queue_begin) <= len(queue_end):\n                ans = self.visitWordNode(\n                    queue_begin, visited_begin, visited_end)\n            else:\n                ans = self.visitWordNode(queue_end, visited_end, visited_begin)\n            if ans:\n                return ans\n\n        return 0\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

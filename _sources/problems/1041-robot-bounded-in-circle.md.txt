@@ -62,3 +62,28 @@ class Solution:
         return (x, y) == (0, 0) or (dx, dy) != (0, 1)
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1041. Robot Bounded In Circle",
+    "text": "On an infinite plane, a robot initially stands at (0, 0) and faces north. The robot can receive one of three instructions:\n\n\"G\": go straight 1 unit;\n\"L\": turn 90 degrees to the left;\n\"R\": turn 90 degrees to the right.\n\nThe robot performs the instructions given in order, and repeats them forever.\nReturn true if and only if there exists a circle in the plane such that the robot never leaves the circle.\n\u00a0\nExample 1:\nInput: instructions = \"GGLLGG\"\nOutput: true\nExplanation: The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to (0,0).\nWhen repeating these instructions, the robot remains in the circle of radius 2 centered at the origin.\nExample 2:\nInput: instructions = \"GG\"\nOutput: false\nExplanation: The robot moves north indefinitely.\nExample 3:\nInput: instructions = \"GL\"\nOutput: true\nExplanation: The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> ...\n\u00a0\nConstraints:\n\n1 <= instructions.length <= 100\ninstructions[i] is 'G', 'L' or, 'R'.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isRobotBounded(self, instructions):\n        x, y, dx, dy = 0, 0, 0, 1\n        for i in instructions:\n            if i == \"R\":\n                dx, dy = dy, -dx\n            if i == \"L\":\n                dx, dy = -dy, dx\n            if i == \"G\":\n                x, y = x + dx, y + dy\n        return (x, y) == (0, 0) or (dx, dy) != (0, 1)\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

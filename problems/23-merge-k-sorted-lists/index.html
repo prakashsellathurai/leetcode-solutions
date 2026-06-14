@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -677,7 +685,30 @@ merging them into one sorted list:
         <span class="k">return</span> <span class="n">sortedlst</span><span class="o">.</span><span class="n">next</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "23. Merge k Sorted Lists",
+    "text": "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.\nMerge all the linked-lists into one sorted linked-list and return it.\n\u00a0\nExample 1:\nInput: lists = [[1,4,5],[1,3,4],[2,6]]\nOutput: [1,1,2,3,4,4,5,6]\nExplanation: The linked-lists are:\n[\n  1->4->5,\n  1->3->4,\n  2->6\n]\nmerging them into one sorted list:\n1->1->2->3->4->4->5->6\n\nExample 2:\nInput: lists = []\nOutput: []\n\nExample 3:\nInput: lists = [[]]\nOutput: []\n\n\u00a0\nConstraints:\n\nk == lists.length\n0 <= k <= 10^4\n0 <= lists[i].length <= 500\n-10^4 <= lists[i][j] <= 10^4\nlists[i] is sorted in ascending order.\nThe sum of lists[i].length won't exceed 10^4.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from queue import PriorityQueue\n\n# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\n\n\nclass Solution:\n    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n        return self.spaceoptmized(lists)\n\n    \"\"\"\n    traverse all nodes and store them in array\n    sort the array \n    create the sorted linkedlist\n    Time Complexity: O(n log n)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def bruteforce(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n        sortedvals = []\n        for list in lists:\n            while list:\n                sortedvals.append(list.val)\n                list = list.next\n\n        DummyNode = cur = ListNode(-1)\n        sortedvals.sort()\n        for val in sortedvals:\n            cur.next = ListNode(val)\n            cur = cur.next\n        return DummyNode.next\n\n    \"\"\"\n    we can optmize bruteforce approach if we put our kth node with prioirty of its value in a priority queue and we can access the smallest value in O(1)\n    \n    Time Complexity: O(nlogk)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def timeoptmized(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n        ListNode.__lt__ = lambda self, other: self.val < other.val\n        Res = cur = ListNode(-1)\n        q = PriorityQueue()\n        for lst in lists:\n            if lst:\n                q.put((lst.val, lst))\n\n        while not q.empty():\n            val, node = q.get()\n            cur.next = ListNode(val)\n            cur = cur.next\n            node = node.next\n            if node:\n                q.put((node.val, node))\n\n        return Res.next\n\n    \"\"\"\n    merging  a two sorted list can be done with constant space\n    \n    what if we keep on merging the adjacent pairs until it becomes a single sorted lists\n    at each step the count of lists reduced into half atnost atmost log2k of such iterations need for each interation we got n values to traverse \n    \n    Time Complexity: O(nlogk)\n    Space Complexity: O(1)\n    \n     \"\"\"\n\n    def spaceoptmized(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:\n        k = len(lists)\n        interval = 1\n\n        while interval < k:\n            for i in range(0, k - interval, 2 * interval):\n                lists[i] = self.mergeTwoLists(lists[i], lists[i + interval])\n            interval *= 2\n\n        return lists[0] if k > 0 else None\n\n    def mergeTwoLists(self, lst1, lst2):\n        sortedlst = cur = ListNode(-1)\n\n        while lst1 and lst2:\n            if lst1.val <= lst2.val:\n                cur.next = lst1\n                lst1 = lst1.next\n            else:\n                cur.next = lst2\n                lst2 = lst2.next\n            cur = cur.next\n        if not lst1:\n            cur.next = lst2\n        else:\n            cur.next = lst1\n        return sortedlst.next\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

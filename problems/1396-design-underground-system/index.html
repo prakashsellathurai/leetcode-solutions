@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -645,7 +653,30 @@ undergroundSystem.getAverageTime("Leyton", "Paradise"); // return 6.66667, (5 + 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">routeTotalTime</span><span class="p">[</span><span class="n">routeName</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">routeCount</span><span class="p">[</span><span class="n">routeName</span><span class="p">]</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1396. Design Underground System",
+    "text": "An underground railway system is keeping track of customer travel times between different stations. They are using this data to calculate the average time it takes to travel from one station to another.\nImplement the UndergroundSystem class:\n\nvoid checkIn(int id, string stationName, int t)\n\nA customer with a card ID equal to id, checks in at the station stationName at time t.\nA customer can only be checked into one place at a time.\n\n\nvoid checkOut(int id, string stationName, int t)\n\nA customer with a card ID equal to id, checks out from the station stationName at time t.\n\n\ndouble getAverageTime(string startStation, string endStation)\n\nReturns the average time it takes to travel from startStation to endStation.\nThe average time is computed from all the previous traveling times from startStation to endStation that happened directly, meaning a check in at startStation followed by a check out from endStation.\nThe time it takes to travel from startStation to endStation may be different from the time it takes to travel from endStation to startStation.\nThere will be at least one customer that has traveled from startStation to endStation before getAverageTime is called.\n\n\n\nYou may assume all calls to the checkIn and checkOut methods are consistent. If a customer checks in at time t1 then checks out at time t2, then t1 < t2. All events happen in chronological order.\n\u00a0\nExample 1:\nInput\n[\"UndergroundSystem\",\"checkIn\",\"checkIn\",\"checkIn\",\"checkOut\",\"checkOut\",\"checkOut\",\"getAverageTime\",\"getAverageTime\",\"checkIn\",\"getAverageTime\",\"checkOut\",\"getAverageTime\"]\n[[],[45,\"Leyton\",3],[32,\"Paradise\",8],[27,\"Leyton\",10],[45,\"Waterloo\",15],[27,\"Waterloo\",20],[32,\"Cambridge\",22],[\"Paradise\",\"Cambridge\"],[\"Leyton\",\"Waterloo\"],[10,\"Leyton\",24],[\"Leyton\",\"Waterloo\"],[10,\"Waterloo\",38],[\"Leyton\",\"Waterloo\"]]\n\nOutput\n[null,null,null,null,null,null,null,14.00000,11.00000,null,11.00000,null,12.00000]\n\nExplanation\nUndergroundSystem undergroundSystem = new UndergroundSystem();\nundergroundSystem.checkIn(45, \"Leyton\", 3);\nundergroundSystem.checkIn(32, \"Paradise\", 8);\nundergroundSystem.checkIn(27, \"Leyton\", 10);\nundergroundSystem.checkOut(45, \"Waterloo\", 15);  // Customer 45 \"Leyton\" -> \"Waterloo\" in 15-3 = 12\nundergroundSystem.checkOut(27, \"Waterloo\", 20);  // Customer 27 \"Leyton\" -> \"Waterloo\" in 20-10 = 10\nundergroundSystem.checkOut(32, \"Cambridge\", 22); // Customer 32 \"Paradise\" -> \"Cambridge\" in 22-8 = 14\nundergroundSystem.getAverageTime(\"Paradise\", \"Cambridge\"); // return 14.00000. One trip \"Paradise\" -> \"Cambridge\", (14) / 1 = 14\nundergroundSystem.getAverageTime(\"Leyton\", \"Waterloo\");    // return 11.00000. Two trips \"Leyton\" -> \"Waterloo\", (10 + 12) / 2 = 11\nundergroundSystem.checkIn(10, \"Leyton\", 24);\nundergroundSystem.getAverageTime(\"Leyton\", \"Waterloo\");    // return 11.00000\nundergroundSystem.checkOut(10, \"Waterloo\", 38);  // Customer 10 \"Leyton\" -> \"Waterloo\" in 38-24 = 14\nundergroundSystem.getAverageTime(\"Leyton\", \"Waterloo\");    // return 12.00000. Three trips \"Leyton\" -> \"Waterloo\", (10 + 12 + 14) / 3 = 12\n\nExample 2:\nInput\n[\"UndergroundSystem\",\"checkIn\",\"checkOut\",\"getAverageTime\",\"checkIn\",\"checkOut\",\"getAverageTime\",\"checkIn\",\"checkOut\",\"getAverageTime\"]\n[[],[10,\"Leyton\",3],[10,\"Paradise\",8],[\"Leyton\",\"Paradise\"],[5,\"Leyton\",10],[5,\"Paradise\",16],[\"Leyton\",\"Paradise\"],[2,\"Leyton\",21],[2,\"Paradise\",30],[\"Leyton\",\"Paradise\"]]\n\nOutput\n[null,null,null,5.00000,null,null,5.50000,null,null,6.66667]\n\nExplanation\nUndergroundSystem undergroundSystem = new UndergroundSystem();\nundergroundSystem.checkIn(10, \"Leyton\", 3);\nundergroundSystem.checkOut(10, \"Paradise\", 8); // Customer 10 \"Leyton\" -> \"Paradise\" in 8-3 = 5\nundergroundSystem.getAverageTime(\"Leyton\", \"Paradise\"); // return 5.00000, (5) / 1 = 5\nundergroundSystem.checkIn(5, \"Leyton\", 10);\nundergroundSystem.checkOut(5, \"Paradise\", 16); // Customer 5 \"Leyton\" -> \"Paradise\" in 16-10 = 6\nundergroundSystem.getAverageTime(\"Leyton\", \"Paradise\"); // return 5.50000, (5 + 6) / 2 = 5.5\nundergroundSystem.checkIn(2, \"Leyton\", 21);\nundergroundSystem.checkOut(2, \"Paradise\", 30); // Customer 2 \"Leyton\" -> \"Paradise\" in 30-21 = 9\nundergroundSystem.getAverageTime(\"Leyton\", \"Paradise\"); // return 6.66667, (5 + 6 + 9) / 3 = 6.66667\n\n\u00a0\nConstraints:\n\n1 <= id, t <= 106\n1 <= stationName.length, startStation.length, endStation.length <= 10\nAll strings consist of uppercase and lowercase English letters and digits.\nThere will be at most 2 * 104 calls in total to checkIn, checkOut, and getAverageTime.\nAnswers within 10-5 of the actual value will be accepted.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class UndergroundSystem:\n    def __init__(self):\n        self.checkInMap = {}  # Uid - [StationName, Time]\n        self.routeTotalTime = defaultdict(int)\n        self.routeCount = defaultdict(int)\n\n    def checkIn(self, id: int, stationName: str, t: int) -> None:\n        self.checkInMap[id] = [stationName, t]\n\n    def checkOut(self, id: int, stationName: str, t: int) -> None:\n        checkIn = self.checkInMap[id]\n        self.checkInMap.pop(\n            id\n        )  # Remove after using it which will not make HashTable big\n\n        self.routeTotalTime[(checkIn[0], stationName)] += t - checkIn[1]\n        self.routeCount[(checkIn[0], stationName)] += 1\n\n    def getAverageTime(self, startStation: str, endStation: str) -> float:\n        routeName = (startStation, endStation)\n        return self.routeTotalTime[routeName] / self.routeCount[routeName]\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>

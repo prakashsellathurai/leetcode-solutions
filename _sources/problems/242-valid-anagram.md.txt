@@ -73,3 +73,28 @@ class Solution:
         return Uniqueprimehash(s) == Uniqueprimehash(t)
             
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "242. Valid Anagram",
+    "text": "Given two strings s and t, return true if t is an anagram of s, and false otherwise.\nAn Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.\n\u00a0\nExample 1:\nInput: s = \"anagram\", t = \"nagaram\"\nOutput: true\nExample 2:\nInput: s = \"rat\", t = \"car\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= s.length, t.length <= 5 * 104\ns and t consist of lowercase English letters.\n\n\u00a0\nFollow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isAnagram(self, s: str, t: str) -> bool:\n        return self.match_by_unique_primeHash(s,t)\n      \n    # Time Complexity: O(n)\n    # space complexity: O(n)\n    def sort_and_match(self, s: str, t: str) -> bool:\n        s = list(s)\n        t = list(t)\n        s.sort()\n        t.sort()\n        \n        return len(s) == len(t) and s == t \n    \n    # Time Complexity: O(n)\n    # space complexity: O(k)\n    def match_by_frequencyTable(self, s: str, t: str) -> bool:\n        return Counter(s) == Counter(t)\n    \n    # Time Complexity: O(n)\n    # space complexity: O(k)\n    def match_by_unique_primeHash(self, s: str, t: str) -> bool:\n        def primes(n):\n            from itertools import count, islice\n            primes = (n for n in count(2) if all(n % d for d in range(2, n)))\n            return islice(primes, 0, n)\n        def letters():\n            return list(map(chr, range(97, 123)))\n        def Uniqueprimehash(s):\n            prime_hash = {\n                key: val for key, val in zip(letters(), primes(26))\n            }\n            hash = 1\n            for c in s:\n                hash *= prime_hash[c]\n            return hash\n                \n            \n        return Uniqueprimehash(s) == Uniqueprimehash(t)\n            ",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script>

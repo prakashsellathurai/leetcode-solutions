@@ -162,27 +162,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0622-design-circular-queue/">0622-design-circular-queue</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0633-sum-of-square-numbers/">0633-sum-of-square-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0636-exclusive-time-of-functions/">0636-exclusive-time-of-functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0645-set-mismatch/">0645-set-mismatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0703-kth-largest-element-in-a-stream/">0703-kth-largest-element-in-a-stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0704-binary-search/">0704-binary-search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0729-my-calendar-i/">0729-my-calendar-i</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0739-daily-temperatures/">0739-daily-temperatures</a></li>
@@ -664,7 +672,30 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">disc</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
 </pre></div>
 </div>
-</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1192. Critical Connections in a Network",
+    "text": "There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. Any server can reach other servers directly or indirectly through the network.\nA critical connection is a connection that, if removed, will make some servers unable to reach some other server.\nReturn all critical connections in the network in any order.\n\u00a0\nExample 1:\n\nInput: n = 4, connections = [[0,1],[1,2],[2,0],[1,3]]\nOutput: [[1,3]]\nExplanation: [[3,1]] is also accepted.\n\nExample 2:\nInput: n = 2, connections = [[0,1]]\nOutput: [[0,1]]\n\n\u00a0\nConstraints:\n\n2 <= n <= 105\nn - 1 <= connections.length <= 105\n0 <= ai, bi <= n - 1\nai != bi\nThere are no repeated connections.\n\n",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def criticalConnections(\n        self, n: int, connections: List[List[int]]\n    ) -> List[List[int]]:\n        return self.optmial(n, connections)\n\n    # Time Complexity: O(E*(V+E))\n    # Space Complexity: O(V+E)\n    def bruteforce(self, n: int, connections: List[List[int]]) -> List[List[int]]:\n        # create graph adj list\n        adjList = defaultdict(set)\n\n        for x, y in connections:\n            adjList[x].add(y)\n            adjList[y].add(x)\n\n        res = []\n\n        # initial number of connected components\n        total_com = 0\n        visited = [False] * n\n        for i in range(n):\n            for j in range(n):\n                if visited[i] == False and i != j:\n                    total_com += 1\n                    self.dfs(adjList, i, visited)\n\n        #   remove each E and see if graph remains connected\n        for x, y in connections:\n            visited = [False] * n\n\n            adjList[x].remove(y)\n            adjList[y].remove(x)\n            cur_comp = 0\n\n            for i in range(n):\n                if visited[i] == False:\n                    cur_comp += 1\n                    self.dfs(adjList, i, visited)\n\n            # if removal of E increases number of connected compponents then it's a bridge\n            if cur_comp > total_com:\n                res.append([x, y])\n\n            adjList[x].add(y)\n            adjList[y].add(x)\n        return res\n\n    # Time Complexity: O((V+E))\n    # Space Complexity: O(V+E)\n    def dfs(self, adjList, i, visited):\n        if visited[i]:\n            return\n        visited[i] = True\n        for j in adjList[i]:\n            if not visited[j]:\n                self.dfs(adjList, j, visited)\n\n    # Time Complexity: O(V+E)\n    # Space Complexity: O(V+E)\n    def optmial(self, n: int, connections: List[List[int]]) -> List[List[int]]:\n        self.low = [0] * n\n        self.disc = [0] * n\n        self.res = []\n        self.time = 1\n\n        self.adjList = defaultdict(set)\n\n        for x, y in connections:\n            self.adjList[x].add(y)\n            self.adjList[y].add(x)\n\n        for u in range(n):\n            if not self.disc[u]:\n                self.optimal_df_util(u, u)\n\n        return self.res\n\n    def optimal_df_util(self, u, p):\n        self.time += 1\n        self.low[u] = self.disc[u] = self.time\n\n        for v in self.adjList[u]:\n            if v == p:\n                continue\n\n            if not self.disc[v]:\n                self.optimal_df_util(v, u)\n                if self.disc[u] < self.low[v]:\n                    self.res.append([u, v])\n                self.low[u] = min(self.low[u], self.low[v])\n            else:\n                self.low[u] = min(self.low[u], self.disc[v])\n",
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai"
+      }
+    }
+  }
+}
+</script></section>
 </section>
 
         </article>
