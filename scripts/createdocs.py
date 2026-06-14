@@ -9,6 +9,7 @@ __copyright__ = "Copyright 2022"
 __version__ = "1.0.1"
 __email__ = "prakashsellathurai@gmail.com"
 
+import json
 import os
 import random
 import re
@@ -38,6 +39,29 @@ def to_doc(problem):
     Returns:
         str: doc string
     """
+    json_ld = {
+        "@context": "https://schema.org",
+        "@type": "QAPage",
+        "mainEntity": {
+            "@type": "Question",
+            "name": problem["title"],
+            "text": problem["description_text"],
+            "answerCount": 1,
+            "author": {
+                "@type": "Organization",
+                "name": "LeetCode"
+            },
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": problem["code"],
+                "author": {
+                    "@type": "Person",
+                    "name": "Prakash Sellathurai"
+                }
+            }
+        }
+    }
+
     file_buffer = open(PROBLEM_TEMPLATE_PATH, "r")
     template_string = file_buffer.read()
     file_buffer.close()
@@ -49,6 +73,7 @@ def to_doc(problem):
             "content": problem["content"],
             "lang": problem["lang"],
             "code": problem["code"],
+            "structured_data": json.dumps(json_ld, indent=2),
         }
     )
 
@@ -120,6 +145,7 @@ def main():
             prob_id = generateOrPullProblemId(title_slug)
 
         if title_slug not in cache:
+            description_text = BeautifulSoup(readme_file_contents, "html.parser").get_text()
             problems.append(
                 {
                     "title": title,
@@ -128,6 +154,7 @@ def main():
                     "lang": lang,
                     "code": code,
                     "content": readme_file_contents,
+                    "description_text": description_text,
                     "id": prob_id,
                 }
             )
