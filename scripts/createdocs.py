@@ -12,6 +12,7 @@ __email__ = "prakashsellathurai@gmail.com"
 import datetime
 import json
 import os
+import sys
 import random
 import re
 import subprocess
@@ -127,21 +128,23 @@ def main():
 
     problems = []
     cache = {}
-    for title_slug in os.listdir(SUBMISSION_FOLDER_PATH):
+    slugs = os.listdir(SUBMISSION_FOLDER_PATH)
+    total_items = len(slugs)
+    for i,title_slug in enumerate(slugs):
         if title_slug in IGNORED_PATHS:
             continue
 
         lang, codefilename = get_lang(SUBMISSION_FOLDER_PATH, title_slug)
 
         if codefilename is None:
-            print(f"No code file found for {title_slug}")
+            # print(f"No code file found for {title_slug}")
             continue
 
         try:
             with open(codefilename, 'r') as file_buff:
                 code = file_buff.read()
         except FileNotFoundError:
-            print("Code file Not found error " + str(title_slug))
+            # print("Code file Not found error " + str(title_slug))
             continue
 
         readme_filename = getReadme(SUBMISSION_FOLDER_PATH, title_slug)
@@ -149,7 +152,7 @@ def main():
             with open(readme_filename, 'r', encoding="utf-8") as file_buff:
                 readme_file_contents = file_buff.read()
         except FileNotFoundError:
-            print(f"Readme file Not found error {title_slug}")
+            # print(f"Readme file Not found error {title_slug}")
             readme_file_contents = ""
 
         soup = BeautifulSoup(readme_file_contents, "html.parser")
@@ -157,7 +160,7 @@ def main():
         try:
             title = tag_list[0].string
         except IndexError:
-            print("error at " + str(title_slug))
+            # print("error at " + str(title_slug))
             title = title_slug
 
         leetcodeurl = "https://leetcode.com/problems/" + title_slug
@@ -185,14 +188,14 @@ def main():
                 }
             )
         cache[title_slug] = True
+        update_progress(i + 1, total_items, message="Collecting problems")
+        
     problems.sort(key=lambda x: x["id"])
-
     today = datetime.date.today().isoformat()
-    for problem in problems:
+    for i, problem in enumerate(problems):
         git_date = get_git_date(SUBMISSION_FOLDER_PATH, problem["codefilename"])
         problem["datePublished"] = git_date if git_date else today
-
-    print("############ problems collected ##################")
+        update_progress(i + 1, len(problems), message="Fetching submission dates")
 
     print("total Problems : ", len(cache))
     print("ignored : ", len(os.listdir(SUBMISSION_FOLDER_PATH)) - len(cache))
@@ -202,8 +205,8 @@ def main():
     for file_name in os.listdir(PROBLEMS_FOLDER_PATH):
         os.remove(os.path.join(PROBLEMS_FOLDER_PATH, file_name))
 
-    print("############ old docs cleared ##################")
-    for problem in problems:
+
+    for i,problem in enumerate(problems):
         filename = problem["title_slug"] + ".md"
         filepath = os.path.join(PROBLEMS_FOLDER_PATH, filename)
         try:
@@ -214,16 +217,32 @@ def main():
             print("Error writing ", problem["title_slug"])
         except Exception as e:
             print("Error writing ", problem["title_slug"], e)
-    print("############ docs created ##################")
+        update_progress(i + 1, len(problems), message="updating docs")
+
 
 def generateOrPullProblemId(title_slug):
     try:
         prob_id = [int(s) for s in re.findall(r"\d+", title_slug)][0]
     except Exception as e:
-        print("error at " + str(title_slug), e)
+        # print("error at " + str(title_slug), e)
         prob_id = random.randint(100000, 10000000)
     return prob_id
 
+
+def update_progress(current, total, bar_length=20, message="Progress"):
+    """Updates a text progress bar based on current step vs total steps."""
+    fraction = current / total
+    percent = fraction * 100
+    filled = "█" * int(fraction * bar_length)
+    empty = "-" * (bar_length - len(filled))
+
+    # \r moves the cursor back to the start of the line to overwrite it
+    sys.stdout.write(f"\r{message}: |{filled}{empty}| {percent:.1f}% Complete")
+    sys.stdout.flush()
+
+    # Print a new line only when completely finished
+    if current >= total:
+        print()
 
 if __name__ == "__main__":
     main()
