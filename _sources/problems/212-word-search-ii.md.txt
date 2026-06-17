@@ -97,17 +97,24 @@ class Solution:
     "@type": "Question",
     "name": "212. Word Search II",
     "text": "Given an m x n board\u00a0of characters and a list of strings words, return all words on the board.\nEach word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.\n\u00a0\nExample 1:\n\nInput: board = [[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]], words = [\"oath\",\"pea\",\"eat\",\"rain\"]\nOutput: [\"eat\",\"oath\"]\n\nExample 2:\n\nInput: board = [[\"a\",\"b\"],[\"c\",\"d\"]], words = [\"abcb\"]\nOutput: []\n\n\u00a0\nConstraints:\n\nm == board.length\nn == board[i].length\n1 <= m, n <= 12\nboard[i][j] is a lowercase English letter.\n1 <= words.length <= 3 * 104\n1 <= words[i].length <= 10\nwords[i] consists of lowercase English letters.\nAll the strings of words are unique.\n\n",
+    "url": "https://leetcode.com/problems/212-word-search-ii",
     "answerCount": 1,
+    "datePublished": "2022-07-10T19:25:39+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Trie:\n    def __init__(self):\n        self.root = {}\n\n    def insert(self, word):\n        node = self.root\n        for w in word:\n            if w not in node:\n                node[w] = {}\n            node = node[w]\n        node['#'] = word\n\n\nclass Solution:\n    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:\n        trie = Trie()\n        for word in words:\n            trie.insert(word)\n\n        m, n = len(board), len(board[0])\n        dirs = [[-1, 0], [1, 0], [0, 1], [0, -1]]\n        res = []\n\n        def dfs(root, i, j):\n            c = board[i][j]\n            if c not in root:\n                return\n            child = root[c]\n            word = child.pop('#', None)\n            if word:\n                res.append(word)\n            if not child:\n                root.pop(c)\n\n            board[i][j] = '#'\n            for dx, dy in dirs:\n                x = i + dx\n                y = j + dy\n                if 0 <= x < m and 0 <= y < n:\n                    dfs(child, x, y)\n            board[i][j] = c\n\n        for i in range(m):\n            for j in range(n):\n                dfs(trie.root, i, j)\n\n        return res",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/212-word-search-ii/",
+      "datePublished": "2022-07-10T19:25:39+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

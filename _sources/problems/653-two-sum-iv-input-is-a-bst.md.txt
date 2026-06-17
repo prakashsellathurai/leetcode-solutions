@@ -84,17 +84,24 @@ class Solution:
     "@type": "Question",
     "name": "653. Two Sum IV - Input is a BST",
     "text": "Given the root of a Binary Search Tree and a target number k, return true if there exist two elements in the BST such that their sum is equal to the given target.\n\u00a0\nExample 1:\n\nInput: root = [5,3,6,2,4,null,7], k = 9\nOutput: true\n\nExample 2:\n\nInput: root = [5,3,6,2,4,null,7], k = 28\nOutput: false\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 104].\n-104\u00a0<= Node.val <= 104\nroot is guaranteed to be a valid binary search tree.\n-105\u00a0<= k <= 105\n\n",
+    "url": "https://leetcode.com/problems/653-two-sum-iv-input-is-a-bst",
     "answerCount": 1,
+    "datePublished": "2022-07-07T01:14:29+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:\n        def pushLeft(st, root):\n            while root:\n                st.append(root)\n                root = root.left\n\n        def pushRight(st, root):\n            while root:\n                st.append(root)\n                root = root.right\n\n        def nextLeft(st):\n            node = st.pop()\n            pushLeft(st, node.right)\n            return node.val\n\n        def nextRight(st):\n            node = st.pop()\n            pushRight(st, node.left)\n            return node.val\n\n        stLeft, stRight = [], []\n        pushLeft(stLeft, root)\n        pushRight(stRight, root)\n\n        left, right = nextLeft(stLeft), nextRight(stRight)\n        while left < right:\n            if left + right == k: return True\n            if left + right < k:\n                left = nextLeft(stLeft)\n            else:\n                right = nextRight(stRight)\n        return False",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/653-two-sum-iv-input-is-a-bst/",
+      "datePublished": "2022-07-07T01:14:29+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

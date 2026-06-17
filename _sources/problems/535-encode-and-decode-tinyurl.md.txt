@@ -72,17 +72,24 @@ class Codec:
     "@type": "Question",
     "name": "535. Encode and Decode TinyURL",
     "text": "Note: This is a companion problem to the System Design problem: Design TinyURL.\nTinyURL is a URL shortening service where you enter a URL such as https://leetcode.com/problems/design-tinyurl and it returns a short URL such as http://tinyurl.com/4e9iAk. Design a class to encode a URL and decode a tiny URL.\nThere is no restriction on how your encode/decode algorithm should work. You just need to ensure that a URL can be encoded to a tiny URL and the tiny URL can be decoded to the original URL.\nImplement the Solution class:\n\nSolution() Initializes the object of the system.\nString encode(String longUrl) Returns a tiny URL for the given longUrl.\nString decode(String shortUrl) Returns the original long URL for the given shortUrl. It is guaranteed that the given shortUrl was encoded by the same object.\n\n\u00a0\nExample 1:\nInput: url = \"https://leetcode.com/problems/design-tinyurl\"\nOutput: \"https://leetcode.com/problems/design-tinyurl\"\n\nExplanation:\nSolution obj = new Solution();\nstring tiny = obj.encode(url); // returns the encoded tiny url.\nstring ans = obj.decode(tiny); // returns the original url after deconding it.\n\n\u00a0\nConstraints:\n\n1 <= url.length <= 104\nurl is guranteed to be a valid URL.\n\n",
+    "url": "https://leetcode.com/problems/535-encode-and-decode-tinyurl",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Codec:\n\n    alphabet = string.ascii_letters + \"0123456789\"\n\n    def __init__(self):\n        self.url2code = {}\n        self.code2url = {}\n\n    def encode(self, longUrl):\n        while longUrl not in self.url2code:\n            code = \"\".join(random.choice(Codec.alphabet) for _ in range(6))\n            if code not in self.code2url:\n                self.code2url[code] = longUrl\n                self.url2code[longUrl] = code\n        return \"http://tinyurl.com/\" + self.url2code[longUrl]\n\n    def decode(self, shortUrl):\n        return self.code2url[shortUrl[-6:]]\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/535-encode-and-decode-tinyurl/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

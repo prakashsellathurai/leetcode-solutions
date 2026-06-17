@@ -87,17 +87,24 @@ class Solution:
     "@type": "Question",
     "name": "338. Counting Bits",
     "text": "Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.\n\u00a0\nExample 1:\nInput: n = 2\nOutput: [0,1,1]\nExplanation:\n0 --> 0\n1 --> 1\n2 --> 10\n\nExample 2:\nInput: n = 5\nOutput: [0,1,1,2,1,2]\nExplanation:\n0 --> 0\n1 --> 1\n2 --> 10\n3 --> 11\n4 --> 100\n5 --> 101\n\n\u00a0\nConstraints:\n\n0 <= n <= 105\n\n\u00a0\nFollow up:\n\nIt is very easy to come up with a solution with a runtime of O(n log n). Can you do it in linear time O(n) and possibly in a single pass?\nCan you do it without using any built-in function (i.e., like __builtin_popcount in C++)?\n\n",
+    "url": "https://leetcode.com/problems/338-counting-bits",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def countBits(self, n: int) -> List[int]:\n        return self.dynamicprogramming(n)\n\n    # Time Complexity :O(nlogn)\n    # Space Complexity: O(n)\n    def naive(self, n: int) -> List[int]:\n        return [self.countones(num) for num in range(0, n + 1)]\n\n    # Time Complexity :O(n)\n    # Space Complexity: O(n)\n    def dynamicprogramming(self, n: int) -> List[int]:\n        dp = [0] * (n + 1)\n        offset = 1\n        for index in range(1, n + 1):\n            if index == offset * 2:\n                offset *= 2\n            dp[index] = dp[index - offset] + 1\n        return dp\n\n    def countones(self, num):\n        cnt = 0\n        while num:\n            cnt += 1\n            num &= num - 1\n        return cnt\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/338-counting-bits/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

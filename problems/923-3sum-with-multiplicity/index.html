@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -648,17 +649,24 @@ and two 2s from [2,2,2,2] in 6 ways.
     "@type": "Question",
     "name": "923. 3Sum With Multiplicity",
     "text": "Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == target.\nAs the answer can be very large, return it modulo 109 + 7.\n\u00a0\nExample 1:\nInput: arr = [1,1,2,2,3,3,4,4,5,5], target = 8\nOutput: 20\nExplanation: \nEnumerating by the values (arr[i], arr[j], arr[k]):\n(1, 2, 5) occurs 8 times;\n(1, 3, 4) occurs 8 times;\n(2, 2, 4) occurs 2 times;\n(2, 3, 3) occurs 2 times.\n\nExample 2:\nInput: arr = [1,1,2,2,2,2], target = 5\nOutput: 12\nExplanation: \narr[i] = 1, arr[j] = arr[k] = 2 occurs 12 times:\nWe choose one 1 from [1,1] in 2 ways,\nand two 2s from [2,2,2,2] in 6 ways.\n\n\u00a0\nConstraints:\n\n3 <= arr.length <= 3000\n0 <= arr[i] <= 100\n0 <= target <= 300\n\n",
+    "url": "https://leetcode.com/problems/923-3sum-with-multiplicity",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.modulo = 10**9 + 7\n\n    def threeSumMulti(self, arr: List[int], target: int) -> int:\n        return self.threepointer(arr, target)\n\n    # run three  nested loops with indcies i,j,k ,i<j,k  and cnt it\n    # Time Complexity: O(n^3)\n    # Space Complexity: O(1)\n    def bruteforce(self, arr: List[int], target: int) -> int:\n        cnt = 0\n        n = len(arr)\n\n        for i in range(n):\n            for j in range(i + 1, n):\n                for k in range(j + 1, n):\n                    if arr[i] + arr[j] + arr[k] == target:\n                        cnt += 1\n        return cnt % self.modulo\n\n    def threepointer(self, arr: List[int], target: int) -> int:\n        arr.sort()\n        ans = 0\n        n = len(arr)\n        for i in range(n):\n            T = target - arr[i]\n            j, k = i + 1, n - 1\n\n            while j < k:\n                if arr[j] + arr[k] < T:\n                    j += 1\n\n                elif arr[j] + arr[k] > T:\n                    k -= 1\n\n                elif arr[j] != arr[k]:\n                    left = right = 1\n                    while j + 1 < k and arr[j] == arr[j + 1]:\n                        left += 1\n                        j += 1\n                    while k - 1 > j and arr[k] == arr[k - 1]:\n                        right += 1\n                        k -= 1\n\n                    ans += left * right\n                    ans %= self.modulo\n                    j += 1\n                    k -= 1\n\n                else:\n                    ans += (k - j + 1) * (k - j) // 2\n                    ans %= self.modulo\n                    break\n\n        return ans\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/923-3sum-with-multiplicity/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

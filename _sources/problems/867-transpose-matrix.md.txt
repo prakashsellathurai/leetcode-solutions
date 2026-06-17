@@ -69,17 +69,24 @@ class Solution:
     "@type": "Question",
     "name": "867. Transpose Matrix",
     "text": "Given a 2D integer array matrix, return the transpose of matrix.\nThe transpose of a matrix is the matrix flipped over its main diagonal, switching the matrix's row and column indices.\n\n\u00a0\nExample 1:\nInput: matrix = [[1,2,3],[4,5,6],[7,8,9]]\nOutput: [[1,4,7],[2,5,8],[3,6,9]]\n\nExample 2:\nInput: matrix = [[1,2,3],[4,5,6]]\nOutput: [[1,4],[2,5],[3,6]]\n\n\u00a0\nConstraints:\n\nm == matrix.length\nn == matrix[i].length\n1 <= m, n <= 1000\n1 <= m * n <= 105\n-109 <= matrix[i][j] <= 109\n\n",
+    "url": "https://leetcode.com/problems/867-transpose-matrix",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:\n        return self.zipit(matrix)\n\n    def naive(self, matrix: List[List[int]]) -> List[List[int]]:\n        m, n = len(matrix), len(matrix[0])\n        res = [[0 for i in range(m)] for i in range(n)]\n        for i in range(m):\n            for j in range(n):\n                res[j][i] = matrix[i][j]\n        return res\n\n    def oneline(self, matrix: List[List[int]]) -> List[List[int]]:\n        return [\n            [matrix[i][j] for i in range(len(matrix))] for j in range(len(matrix[0]))\n        ]\n\n    def zipit(self, matrix: List[List[int]]) -> List[List[int]]:\n        return zip(*matrix)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/867-transpose-matrix/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

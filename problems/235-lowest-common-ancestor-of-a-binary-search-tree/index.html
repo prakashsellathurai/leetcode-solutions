@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -615,17 +616,24 @@
     "@type": "Question",
     "name": "235. Lowest Common Ancestor of a Binary Search Tree",
     "text": "Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.\nAccording to the definition of LCA on Wikipedia: \u201cThe lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).\u201d\n\u00a0\nExample 1:\n\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8\nOutput: 6\nExplanation: The LCA of nodes 2 and 8 is 6.\n\nExample 2:\n\nInput: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4\nOutput: 2\nExplanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.\n\nExample 3:\nInput: root = [2,1], p = 2, q = 1\nOutput: 2\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [2, 105].\n-109 <= Node.val <= 109\nAll Node.val are unique.\np != q\np and q will exist in the BST.\n\n",
+    "url": "https://leetcode.com/problems/235-lowest-common-ancestor-of-a-binary-search-tree",
     "answerCount": 1,
+    "datePublished": "2022-08-12T19:53:42+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, x):\n#         self.val = x\n#         self.left = None\n#         self.right = None\n\nclass Solution:\n    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':\n        if root is None:\n            return None\n        val = root.val\n        pval = p.val\n        qval = q.val\n        \n        if val > pval and val > qval:\n            return self.lowestCommonAncestor(root.left, p, q)\n        if val < pval and val < qval:\n            return self.lowestCommonAncestor(root.right, p, q)\n        \n        return root\n        \n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/235-lowest-common-ancestor-of-a-binary-search-tree/",
+      "datePublished": "2022-08-12T19:53:42+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

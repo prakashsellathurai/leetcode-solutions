@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -680,17 +681,24 @@
     "@type": "Question",
     "name": "2044. Count Number of Maximum Bitwise-OR Subsets",
     "text": "Given an integer array nums, find the maximum possible bitwise OR of a subset of nums and return the number of different non-empty subsets with the maximum bitwise OR.\nAn array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b. Two subsets are considered different if the indices of the elements chosen are different.\nThe bitwise OR of an array a is equal to a[0] OR a[1] OR ... OR a[a.length - 1] (0-indexed).\n\u00a0\nExample 1:\n\nInput: nums = [3,1]\nOutput: 2\nExplanation: The maximum possible bitwise OR of a subset is 3. There are 2 subsets with a bitwise OR of 3:\n- [3]\n- [3,1]\n\nExample 2:\n\nInput: nums = [2,2,2]\nOutput: 7\nExplanation: All non-empty subsets of [2,2,2] have a bitwise OR of 2. There are 23 - 1 = 7 total subsets.\n\nExample 3:\n\nInput: nums = [3,2,1,5]\nOutput: 6\nExplanation: The maximum possible bitwise OR of a subset is 7. There are 6 subsets with a bitwise OR of 7:\n- [3,5]\n- [3,1,5]\n- [3,2,5]\n- [3,2,1,5]\n- [2,5]\n- [2,1,5]\n\u00a0\nConstraints:\n\n1 <= nums.length <= 16\n1 <= nums[i] <= 105\n\n",
+    "url": "https://leetcode.com/problems/2044-count-number-of-maximum-bitwise-or-subsets",
     "answerCount": 1,
+    "datePublished": "2025-07-28T20:38:53+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def countMaxOrSubsets(self, nums: List[int]) -> int:\n        return self.memoisation(nums)\n    # Time Complexity: O(2^n)\n    # Space Complexity: O(n)\n    def recursion(self, nums: List[int]) -> int:\n        max_or_value = 0\n        for num in nums:\n            max_or_value |= num\n        return self._count_recursion(nums, 0, 0, max_or_value)\n\n    def _count_recursion(\n        self, nums: List[int], index: int, current_or: int, target_or: int\n    ) -> int:\n        # Base case: reached the end of the array\n        if index == len(nums):\n            return 1 if current_or == target_or else 0\n\n        # Don't include the current number\n        count_without = self._count_recursion(\n            nums, index + 1, current_or, target_or\n        )\n\n        # Include the current number\n        count_with = self._count_recursion(\n            nums, index + 1, current_or | nums[index], target_or\n        )\n\n        # Return the sum of both cases\n        return count_without + count_with\n\n    # Time Complexity: O(m*M)\n    # Space Complexity: O(n*M)\n    def memoisation(self, nums: List[int]) -> int:\n        max_or_value = 0\n        for num in nums:\n            max_or_value |= num\n        memo = [[-1]*(max_or_value+1) for _ in range(len(nums))]\n        return self._count_memoisation(nums, 0, 0, max_or_value, memo)\n\n    def _count_memoisation(\n        self, nums: List[int], index: int, current_or: int, target_or: int,  memo: List[List[int]],\n    ) -> int:\n        # Base case: reached the end of the array\n        if index == len(nums):\n            return 1 if current_or == target_or else 0\n\n        if memo[index][current_or] != -1:\n            return memo[index][current_or]\n        # Don't include the current number\n        count_without = self._count_memoisation(\n            nums, index + 1, current_or, target_or, memo\n        )\n\n        # Include the current number\n        count_with = self._count_memoisation(\n            nums, index + 1, current_or | nums[index], target_or, memo\n        )\n\n        # Return the sum of both cases\n        memo[index][current_or] = count_without + count_with\n        return memo[index][current_or]\n\n    def bitmask(self, nums: List[int]) -> int:\n        # Calculate the maximum possible OR value\n        max_or_value = 0\n        for num in nums:\n            max_or_value |= num\n\n        total_subsets = 1 << len(nums)  # 2^n subsets\n        subsets_with_max_or = 0\n\n        # Iterate through all possible subsets\n        for subset_mask in range(total_subsets):\n            current_or_value = 0\n\n            # Calculate OR value for the current subset\n            for i in range(len(nums)):\n                if (subset_mask >> i) & 1:\n                    current_or_value |= nums[i]\n\n            # If current subset's OR equals max_or_value, increment count\n            if current_or_value == max_or_value:\n                subsets_with_max_or += 1\n\n        return subsets_with_max_or",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/2044-count-number-of-maximum-bitwise-or-subsets/",
+      "datePublished": "2025-07-28T20:38:53+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

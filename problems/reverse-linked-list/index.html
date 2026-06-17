@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -605,17 +606,24 @@
     "@type": "Question",
     "name": "206. Reverse Linked List",
     "text": "Given the head of a singly linked list, reverse the list, and return the reversed list.\n\u00a0\nExample 1:\n\nInput: head = [1,2,3,4,5]\nOutput: [5,4,3,2,1]\n\nExample 2:\n\nInput: head = [1,2]\nOutput: [2,1]\n\nExample 3:\nInput: head = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is the range [0, 5000].\n-5000 <= Node.val <= 5000\n\n\u00a0\nFollow up: A linked list can be reversed either iteratively or recursively. Could you implement both?\n",
+    "url": "https://leetcode.com/problems/reverse-linked-list",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:\n        prev = None\n        cur = head\n\n        while cur:\n            n = cur.next\n            cur.next = prev\n            prev = cur\n            cur = n\n\n        return prev\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/reverse-linked-list/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

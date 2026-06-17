@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -601,17 +602,24 @@
     "@type": "Question",
     "name": "221. Maximal Square",
     "text": "Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.\n\u00a0\nExample 1:\n\nInput: matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]\nOutput: 4\n\nExample 2:\n\nInput: matrix = [[\"0\",\"1\"],[\"1\",\"0\"]]\nOutput: 1\n\nExample 3:\nInput: matrix = [[\"0\"]]\nOutput: 0\n\n\u00a0\nConstraints:\n\nm == matrix.length\nn == matrix[i].length\n1 <= m, n <= 300\nmatrix[i][j] is '0' or '1'.\n\n",
+    "url": "https://leetcode.com/problems/maximal-square",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def maximalSquare(self, A):\n        maxSol = 0\n        for i in range(len(A)):\n            for j in range(len(A[i])):\n                A[i][j] = int(A[i][j])\n                if A[i][j] and i and j:\n                    A[i][j] = min(A[i - 1][j], A[i - 1]\n                                  [j - 1], A[i][j - 1]) + 1\n                if maxSol < A[i][j]:\n                    maxSol = A[i][j]\n        return maxSol * maxSol\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/maximal-square/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

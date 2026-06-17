@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -609,17 +610,24 @@ These are the only two combinations.
     "@type": "Question",
     "name": "39. Combination Sum",
     "text": "Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.\nThe same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.\nIt is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.\n\u00a0\nExample 1:\nInput: candidates = [2,3,6,7], target = 7\nOutput: [[2,2,3],[7]]\nExplanation:\n2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.\n7 is a candidate, and 7 = 7.\nThese are the only two combinations.\n\nExample 2:\nInput: candidates = [2,3,5], target = 8\nOutput: [[2,2,2,2],[2,3,3],[3,5]]\n\nExample 3:\nInput: candidates = [2], target = 1\nOutput: []\n\n\u00a0\nConstraints:\n\n1 <= candidates.length <= 30\n1 <= candidates[i] <= 200\nAll elements of candidates are distinct.\n1 <= target <= 500\n\n",
+    "url": "https://leetcode.com/problems/39-combination-sum",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:\n        self.res = []\n        self.candidates = candidates\n        self.backtrack([], target, 0)\n        return self.res\n\n    def backtrack(self, candidate, target, i):\n        if sum(candidate) == target:\n            self.res.append(candidate[:])\n            return\n        if sum(candidate) > target:\n            return\n\n        for j in range(i, len(self.candidates)):\n            if self.candidates[j] <= target:\n\n                candidate.append(self.candidates[j])\n                self.backtrack(candidate, target, j)\n                candidate.pop()\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/39-combination-sum/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

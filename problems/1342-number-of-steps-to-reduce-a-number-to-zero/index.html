@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -604,17 +605,24 @@ Step 4) 1 is odd; subtract 1 and obtain 0.
     "@type": "Question",
     "name": "1342. Number of Steps to Reduce a Number to Zero",
     "text": "Given an integer num, return the number of steps to reduce it to zero.\nIn one step, if the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.\n\u00a0\nExample 1:\nInput: num = 14\nOutput: 6\nExplanation:\u00a0\nStep 1) 14 is even; divide by 2 and obtain 7.\u00a0\nStep 2) 7 is odd; subtract 1 and obtain 6.\nStep 3) 6 is even; divide by 2 and obtain 3.\u00a0\nStep 4) 3 is odd; subtract 1 and obtain 2.\u00a0\nStep 5) 2 is even; divide by 2 and obtain 1.\u00a0\nStep 6) 1 is odd; subtract 1 and obtain 0.\n\nExample 2:\nInput: num = 8\nOutput: 4\nExplanation:\u00a0\nStep 1) 8 is even; divide by 2 and obtain 4.\u00a0\nStep 2) 4 is even; divide by 2 and obtain 2.\u00a0\nStep 3) 2 is even; divide by 2 and obtain 1.\u00a0\nStep 4) 1 is odd; subtract 1 and obtain 0.\n\nExample 3:\nInput: num = 123\nOutput: 12\n\n\u00a0\nConstraints:\n\n0 <= num <= 106\n\n",
+    "url": "https://leetcode.com/problems/1342-number-of-steps-to-reduce-a-number-to-zero",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def numberOfSteps(self, num: int) -> int:\n        cnt = 0\n        while num:\n            if num & 1:\n                num -= 1\n            else:\n                num //= 2\n            cnt += 1\n        return cnt\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1342-number-of-steps-to-reduce-a-number-to-zero/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

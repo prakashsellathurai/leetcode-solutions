@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -653,17 +654,24 @@ myCircularQueue.Rear();     // return 4
     "@type": "Question",
     "name": "622. Design Circular Queue",
     "text": "Design your implementation of the circular queue. The circular queue is a linear data structure in which the operations are performed based on FIFO (First In First Out) principle, and the last position is connected back to the first position to make a circle. It is also called \"Ring Buffer\".\nOne of the benefits of the circular queue is that we can make use of the spaces in front of the queue. In a normal queue, once the queue becomes full, we cannot insert the next element even if there is a space in front of the queue. But using the circular queue, we can use the space to store new values.\nImplement the MyCircularQueue class:\n\nMyCircularQueue(k) Initializes the object with the size of the queue to be k.\nint Front() Gets the front item from the queue. If the queue is empty, return -1.\nint Rear() Gets the last item from the queue. If the queue is empty, return -1.\nboolean enQueue(int value) Inserts an element into the circular queue. Return true if the operation is successful.\nboolean deQueue() Deletes an element from the circular queue. Return true if the operation is successful.\nboolean isEmpty() Checks whether the circular queue is empty or not.\nboolean isFull() Checks whether the circular queue is full or not.\n\nYou must solve the problem without using the built-in queue data structure in your programming language.\u00a0\n\u00a0\nExample 1:\n\nInput\n[\"MyCircularQueue\", \"enQueue\", \"enQueue\", \"enQueue\", \"enQueue\", \"Rear\", \"isFull\", \"deQueue\", \"enQueue\", \"Rear\"]\n[[3], [1], [2], [3], [4], [], [], [], [4], []]\nOutput\n[null, true, true, true, false, 3, true, true, true, 4]\n\nExplanation\nMyCircularQueue myCircularQueue = new MyCircularQueue(3);\nmyCircularQueue.enQueue(1); // return True\nmyCircularQueue.enQueue(2); // return True\nmyCircularQueue.enQueue(3); // return True\nmyCircularQueue.enQueue(4); // return False\nmyCircularQueue.Rear();     // return 3\nmyCircularQueue.isFull();   // return True\nmyCircularQueue.deQueue();  // return True\nmyCircularQueue.enQueue(4); // return True\nmyCircularQueue.Rear();     // return 4\n\n\u00a0\nConstraints:\n\n1 <= k <= 1000\n0 <= value <= 1000\nAt most 3000 calls will be made to\u00a0enQueue, deQueue,\u00a0Front,\u00a0Rear,\u00a0isEmpty, and\u00a0isFull.\n\n",
+    "url": "https://leetcode.com/problems/0622-design-circular-queue",
     "answerCount": 1,
+    "datePublished": "2026-05-19T13:15:53+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class MyCircularQueue:\n\n    def __init__(self, k: int):\n        self.front = 0\n        self.arr = [-1] * k \n        self.capsize = k \n        self.size = 0\n\n    def enQueue(self, value: int) -> bool:\n        if self.size >= self.capsize:\n            return False\n        rear = (self.front + self.size) % self.capsize\n        self.arr[rear] = value\n        self.size += 1\n        return True\n\n    def deQueue(self) -> bool:\n        if self.size == 0:\n            return False\n        res = self.arr[self.front]\n        self.front = (self.front + 1) % self.capsize\n        self.size -= 1\n        return True\n\n    def Front(self) -> int:\n        if self.size == 0:\n            return -1\n        return self.arr[self.front]\n\n    def Rear(self) -> int:\n        if self.size == 0:\n            return -1\n        rear = (self.front + self.size - 1) % self.capsize\n        return self.arr[rear]\n\n    def isEmpty(self) -> bool:\n        return self.size == 0\n\n    def isFull(self) -> bool:\n        return self.size == self.capsize\n        \n\n\n# Your MyCircularQueue object will be instantiated and called as such:\n# obj = MyCircularQueue(k)\n# param_1 = obj.enQueue(value)\n# param_2 = obj.deQueue()\n# param_3 = obj.Front()\n# param_4 = obj.Rear()\n# param_5 = obj.isEmpty()\n# param_6 = obj.isFull()",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0622-design-circular-queue/",
+      "datePublished": "2026-05-19T13:15:53+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

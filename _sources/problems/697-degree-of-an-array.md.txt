@@ -69,17 +69,24 @@ class Solution:
     "@type": "Question",
     "name": "697. Degree of an Array",
     "text": "Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.\nYour task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.\n\u00a0\nExample 1:\nInput: nums = [1,2,2,3,1]\nOutput: 2\nExplanation: \nThe input array has a degree of 2 because both elements 1 and 2 appear twice.\nOf the subarrays that have the same degree:\n[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]\nThe shortest length is 2. So return 2.\n\nExample 2:\nInput: nums = [1,2,2,3,1,4,2]\nOutput: 6\nExplanation: \nThe degree is 3 because the element 2 is repeated 3 times.\nSo [2,2,3,1,4,2] is the shortest subarray, therefore returning 6.\n\n\u00a0\nConstraints:\n\nnums.length will be between 1 and 50,000.\nnums[i] will be an integer between 0 and 49,999.\n\n",
+    "url": "https://leetcode.com/problems/697-degree-of-an-array",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def findShortestSubArray(self, nums: List[int]) -> int:\n        left, right, count = {}, {}, {}\n        for i, x in enumerate(nums):\n            if x not in left:\n                left[x] = i\n            right[x] = i\n            count[x] = count.get(x, 0) + 1\n\n        ans = len(nums)\n        degree = max(count.values())\n        for x in count:\n            if count[x] == degree:\n                ans = min(ans, right[x] - left[x] + 1)\n\n        return ans\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/697-degree-of-an-array/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

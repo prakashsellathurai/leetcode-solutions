@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -597,17 +598,24 @@
     "@type": "Question",
     "name": "69. Sqrt(x)",
     "text": "Given a non-negative integer x,\u00a0compute and return the square root of x.\nSince the return type\u00a0is an integer, the decimal digits are truncated, and only the integer part of the result\u00a0is returned.\nNote:\u00a0You are not allowed to use any built-in exponent function or operator, such as pow(x, 0.5) or\u00a0x ** 0.5.\n\u00a0\nExample 1:\nInput: x = 4\nOutput: 2\n\nExample 2:\nInput: x = 8\nOutput: 2\nExplanation: The square root of 8 is 2.82842..., and since the decimal part is truncated, 2 is returned.\n\u00a0\nConstraints:\n\n0 <= x <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/69-sqrtx",
     "answerCount": 1,
+    "datePublished": "2022-07-05T19:32:36+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def mySqrt(self, x: int) -> int:\n        if x == 0 or x == 1:\n            return x\n        lo = 1\n        hi = x\n        while lo < hi:\n            mi = (lo + hi) >> 1\n\n            if mi * mi == x:\n                return mi\n\n            if mi * mi > x:\n                hi = mi\n            else:\n                lo = mi + 1\n        return lo - 1\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/69-sqrtx/",
+      "datePublished": "2022-07-05T19:32:36+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

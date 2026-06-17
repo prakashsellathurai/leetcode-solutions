@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -622,17 +623,24 @@
     "@type": "Question",
     "name": "1695. Maximum Erasure Value",
     "text": "You are given an array of positive integers nums and want to erase a subarray containing\u00a0unique elements. The score you get by erasing the subarray is equal to the sum of its elements.\nReturn the maximum score you can get by erasing exactly one subarray.\nAn array b is called to be a subarray of a if it forms a contiguous subsequence of a, that is, if it is equal to a[l],a[l+1],...,a[r] for some (l,r).\n\u00a0\nExample 1:\nInput: nums = [4,2,4,5,6]\nOutput: 17\nExplanation: The optimal subarray here is [2,4,5,6].\n\nExample 2:\nInput: nums = [5,2,1,2,5,2,1,2,5]\nOutput: 8\nExplanation: The optimal subarray here is [5,2,1] or [1,2,5].\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 104\n\n",
+    "url": "https://leetcode.com/problems/1695-maximum-erasure-value",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def maximumUniqueSubarray(self, nums: List[int]) -> int:\n        return self.optimal(nums)\n\n    # time complexity: O(n^2)\n    # Space complexity: O(n)\n    def bruteforce(self, nums: List[int]) -> int:\n        n = len(nums)\n        max_sum = 0\n        seen = set()\n        for i in range(n):\n            seen.clear()\n            cur_sum = 0\n\n            for j in range(i, n):\n                if nums[j] in seen:\n                    break\n                cur_sum += nums[j]\n                seen.add(nums[j])\n            max_sum = max(max_sum, cur_sum)\n        return max_sum\n\n    # time complexity: O(n)\n    # Space complexity: O(n)\n    def optimal(self, nums: List[int]) -> int:\n        n = len(nums)\n        max_sum = 0\n        cur_sum = 0\n        seen = set()\n        l = 0\n        for num in nums:\n            while num in seen:\n                seen.remove(nums[l])\n                cur_sum -= nums[l]\n                l += 1\n            cur_sum += num\n            seen.add(num)\n            max_sum = max(max_sum, cur_sum)\n        return max_sum\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1695-maximum-erasure-value/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

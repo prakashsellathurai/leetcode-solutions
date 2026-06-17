@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -612,17 +613,24 @@ peekingIterator.hasNext(); // return False
     "@type": "Question",
     "name": "284. Peeking Iterator",
     "text": "Design an iterator that supports the peek operation on an existing iterator in addition to the hasNext and the next operations.\nImplement the PeekingIterator class:\n\nPeekingIterator(Iterator<int> nums) Initializes the object with the given integer iterator iterator.\nint next() Returns the next element in the array and moves the pointer to the next element.\nboolean hasNext() Returns true if there are still elements in the array.\nint peek() Returns the next element in the array without moving the pointer.\n\nNote: Each language may have a different implementation of the constructor and Iterator, but they all support the int next() and boolean hasNext() functions.\n\u00a0\nExample 1:\nInput\n[\"PeekingIterator\", \"next\", \"peek\", \"next\", \"next\", \"hasNext\"]\n[[[1, 2, 3]], [], [], [], [], []]\nOutput\n[null, 1, 2, 2, 3, false]\n\nExplanation\nPeekingIterator peekingIterator = new PeekingIterator([1, 2, 3]); // [1,2,3]\npeekingIterator.next();    // return 1, the pointer moves to the next element [1,2,3].\npeekingIterator.peek();    // return 2, the pointer does not move [1,2,3].\npeekingIterator.next();    // return 2, the pointer moves to the next element [1,2,3]\npeekingIterator.next();    // return 3, the pointer moves to the next element [1,2,3]\npeekingIterator.hasNext(); // return False\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 1000\n1 <= nums[i] <= 1000\nAll the calls to next and peek are valid.\nAt most 1000 calls will be made to next, hasNext, and peek.\n\n\u00a0\nFollow up: How would you extend your design to be generic and work with all types, not just integer?",
+    "url": "https://leetcode.com/problems/284-peeking-iterator",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class PeekingIterator:\n    def __init__(self, iterator):\n        self.iterator = iterator\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n\n    def peek(self):\n        return self.buffer\n\n    def next(self):\n        tmp = self.buffer\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n        return tmp\n\n    def hasNext(self):\n        return self.buffer != None\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/284-peeking-iterator/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

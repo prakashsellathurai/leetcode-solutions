@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -604,17 +605,24 @@
     "@type": "Question",
     "name": "463. Island Perimeter",
     "text": "You are given row x col grid representing a map where grid[i][j] = 1 represents\u00a0land and grid[i][j] = 0 represents water.\nGrid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).\nThe island doesn't have \"lakes\", meaning the water inside isn't connected to the water around the island. One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.\n\u00a0\nExample 1:\n\nInput: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]\nOutput: 16\nExplanation: The perimeter is the 16 yellow stripes in the image above.\n\nExample 2:\nInput: grid = [[1]]\nOutput: 4\n\nExample 3:\nInput: grid = [[1,0]]\nOutput: 4\n\n\u00a0\nConstraints:\n\nrow == grid.length\ncol == grid[i].length\n1 <= row, col <= 100\ngrid[i][j] is 0 or 1.\nThere is exactly one island in grid.\n\n",
+    "url": "https://leetcode.com/problems/463-island-perimeter",
     "answerCount": 1,
+    "datePublished": "2022-07-18T17:45:55+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def islandPerimeter(self, grid: List[List[int]]) -> int:\n        m, n, Perimeter = len(grid), len(grid[0]), 0\n\n        for i in range(m):\n            for j in range(n):\n                if grid[i][j]:\n                    Perimeter += 4\n                    if i > 0 and grid[i - 1][j]:\n                        Perimeter -= 2\n\n                    if j > 0 and grid[i][j - 1]:\n                        Perimeter -= 2\n\n        return Perimeter\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/463-island-perimeter/",
+      "datePublished": "2022-07-18T17:45:55+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

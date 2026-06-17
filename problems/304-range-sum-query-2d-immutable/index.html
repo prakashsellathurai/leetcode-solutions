@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -622,17 +623,24 @@ numMatrix.sumRegion(1, 2, 2, 4); // return 12 (i.e sum of the blue rectangle)
     "@type": "Question",
     "name": "304. Range Sum Query 2D - Immutable",
     "text": "Given a 2D matrix matrix, handle multiple queries of the following type:\n\nCalculate the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).\n\nImplement the NumMatrix class:\n\nNumMatrix(int[][] matrix) Initializes the object with the integer matrix matrix.\nint sumRegion(int row1, int col1, int row2, int col2) Returns the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).\n\n\u00a0\nExample 1:\n\nInput\n[\"NumMatrix\", \"sumRegion\", \"sumRegion\", \"sumRegion\"]\n[[[[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]], [2, 1, 4, 3], [1, 1, 2, 2], [1, 2, 2, 4]]\nOutput\n[null, 8, 11, 12]\n\nExplanation\nNumMatrix numMatrix = new NumMatrix([[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]);\nnumMatrix.sumRegion(2, 1, 4, 3); // return 8 (i.e sum of the red rectangle)\nnumMatrix.sumRegion(1, 1, 2, 2); // return 11 (i.e sum of the green rectangle)\nnumMatrix.sumRegion(1, 2, 2, 4); // return 12 (i.e sum of the blue rectangle)\n\n\u00a0\nConstraints:\n\nm == matrix.length\nn == matrix[i].length\n1 <= m, n <= 200\n-105 <= matrix[i][j] <= 105\n0 <= row1 <= row2 < m\n0 <= col1 <= col2 < n\nAt most 104 calls will be made to sumRegion.\n\n",
+    "url": "https://leetcode.com/problems/304-range-sum-query-2d-immutable",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class NumMatrix:\n    def __init__(self, matrix: List[List[int]]):\n        m, n = len(matrix), len(matrix[0])\n        self.dp = [[0 for _ in range(n + 1)] for _ in range(m + 1)]\n        for i in range(m):\n            for j in range(n):\n                self.dp[i + 1][j + 1] = (\n                    self.dp[i + 1][j] + self.dp[i][j + 1] +\n                    matrix[i][j] - self.dp[i][j]\n                )\n\n    def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:\n        return (\n            self.dp[row2 + 1][col2 + 1]\n            - self.dp[row2 + 1][col1]\n            - self.dp[row1][col2 + 1]\n            + self.dp[row1][col1]\n        )\n\n\n# Your NumMatrix object will be instantiated and called as such:\n# obj = NumMatrix(matrix)\n# param_1 = obj.sumRegion(row1,col1,row2,col2)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/304-range-sum-query-2d-immutable/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

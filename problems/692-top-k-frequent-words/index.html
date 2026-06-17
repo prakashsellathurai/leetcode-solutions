@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -627,17 +628,24 @@ Note that "i" comes before "love" due to a lower alphabetical order.
     "@type": "Question",
     "name": "692. Top K Frequent Words",
     "text": "Given an array of strings words and an integer k, return the k most frequent strings.\nReturn the answer sorted by the frequency from highest to lowest. Sort the words with the same frequency by their lexicographical order.\n\u00a0\nExample 1:\nInput: words = [\"i\",\"love\",\"leetcode\",\"i\",\"love\",\"coding\"], k = 2\nOutput: [\"i\",\"love\"]\nExplanation: \"i\" and \"love\" are the two most frequent words.\nNote that \"i\" comes before \"love\" due to a lower alphabetical order.\n\nExample 2:\nInput: words = [\"the\",\"day\",\"is\",\"sunny\",\"the\",\"the\",\"the\",\"sunny\",\"is\",\"is\"], k = 4\nOutput: [\"the\",\"is\",\"sunny\",\"day\"]\nExplanation: \"the\", \"is\", \"sunny\" and \"day\" are the four most frequent words, with the number of occurrence being 4, 3, 2 and 1 respectively.\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 500\n1 <= words[i] <= 10\nwords[i] consists of lowercase English letters.\nk is in the range [1, The number of unique words[i]]\n\n\u00a0\nFollow-up: Could you solve it in O(n log(k)) time and O(n) extra space?\n",
+    "url": "https://leetcode.com/problems/692-top-k-frequent-words",
     "answerCount": 1,
+    "datePublished": "2022-06-23T18:37:40+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Comparator:\n    def __init__(self, count, word):\n        self.count = count\n        self.word = word\n\n    def __lt__(self, other):\n        if self.count == other.count:\n            return self.word > other.word\n        return self.count < other.count\n\n    def __eq__(self, other):\n        return self.count == other.count and self.word == other.word\n\n\nclass Solution:\n    def topKFrequent(self, words: List[str], k: int) -> List[str]:\n        return self.priorityqueue(words, k)\n\n    # Time Complexity: O(nmlogn)\n    # Space Compexlity: O(n*m)\n    def sorting(self, words: List[str], k: int) -> List[str]:\n        counter = Counter(words)\n        counter = sorted(counter.keys(), key=counter.get, reverse=True)\n        return counter[:k]\n\n    # Time Complexity: O(nmlogk)\n    # Space Compexlity: O(k)\n    def priorityqueue(self, words: List[str], k: int) -> List[str]:\n        heap = []\n        counter = Counter(words)\n        heapq.heapify(heap)\n        for word in counter:\n            heapq.heappush(heap, (Comparator(counter[word], word), word))\n            if len(heap) > k:\n                heapq.heappop(heap)\n\n        res = []\n        for _ in range(k):\n            res.append(heapq.heappop(heap)[1])\n        return res[::-1]\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/692-top-k-frequent-words/",
+      "datePublished": "2022-06-23T18:37:40+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

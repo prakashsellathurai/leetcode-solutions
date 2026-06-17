@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -633,17 +634,24 @@
     "@type": "Question",
     "name": " \u00a0Sort an Array",
     "text": "Given an array of integers nums, sort the array in ascending order and return it.\nYou must solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the smallest space complexity possible.\n\u00a0\nExample 1:\nInput: nums = [5,2,3,1]\nOutput: [1,2,3,5]\nExplanation: After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).\n\nExample 2:\nInput: nums = [5,1,1,2,0,0]\nOutput: [0,0,1,1,2,5]\nExplanation: Note that the values of nums are not necessairly unique.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 104\n-5 * 104 <= nums[i] <= 5 * 104\n\n",
+    "url": "https://leetcode.com/problems/sort-an-array",
     "answerCount": 1,
+    "datePublished": "2025-02-11T20:37:25+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def sortArray(self, nums: List[int]) -> List[int]:\n        return self.countingSort(nums)\n\n    # merge two sorted arrays\n    # O(n) time complexity\n    # O(n) space complexity\n\n    def mergeSort(self, nums: List[int]) -> List[int]:\n        if len(nums) <= 1:\n            return nums\n        mid = len(nums) // 2\n        left = self.mergeSort(nums[:mid])\n        right = self.mergeSort(nums[mid:])\n        return self.merge(left, right)\n\n    # Heap sort\n    # O(nlogn) time complexity\n    # O(n) space complexity\n\n    def heapSort(self, nums: List[int]) -> List[int]:\n        heapq.heapify(nums)\n        return [heapq.heappop(nums) for _ in range(len(nums))]\n\n    # Counting Sort\n    # Time Complexity: O(n + k)\n    # SpaceComplexity : O(k)\n    def countingSort(self, nums: List[int]) -> List[int]:\n        min_num, max_num = min(nums), max(nums)\n        count = [0] * (max_num - min_num + 1)\n        for num in nums:\n            count[num - min_num] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i + min_num] * c)\n        return result\n\n    def merge(self, left: List[int], right: List[int]) -> List[int]:\n        result = []\n        i = j = 0\n        while i < len(left) and j < len(right):\n            if left[i] < right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/sort-an-array/",
+      "datePublished": "2025-02-11T20:37:25+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

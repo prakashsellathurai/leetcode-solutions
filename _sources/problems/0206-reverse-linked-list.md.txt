@@ -108,17 +108,24 @@ class Solution:
     "@type": "Question",
     "name": "206. Reverse Linked List",
     "text": "Given the head of a singly linked list, reverse the list, and return the reversed list.\n\u00a0\nExample 1:\n\n\nInput: head = [1,2,3,4,5]\nOutput: [5,4,3,2,1]\n\nExample 2:\n\n\nInput: head = [1,2]\nOutput: [2,1]\n\nExample 3:\n\nInput: head = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is the range [0, 5000].\n-5000 <= Node.val <= 5000\n\n\u00a0\nFollow up: A linked list can be reversed either iteratively or recursively. Could you implement both?\n",
+    "url": "https://leetcode.com/problems/0206-reverse-linked-list",
     "answerCount": 1,
+    "datePublished": "2025-11-24T13:19:10+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\n#   12345\n#   dummy -> cur\n#    while traversing list\n#          prev-> current cur -> cur.next\n#          prev <- cur <- cur.next\n#          cur.next = previous\n#          next_.next = cur\n#          prev = cur\n#          cur = cur.next\n# simulation\n#      1 2345\n#      prev = 1\n#      cur  = 2\n#       -> 2\n#           2.next = 1\n#           3.next = 2\n#           prev = 2\n#           cur = 3\n#         3\n#           3.next = 2\n#           4. next = 3\n#           prev = 3\n#           cur = 4\n#         4\n#           4.next = 3\n#          5.next = 4\n#          prev = 4\n#          cur = 5\n#  corrected\n#   1 2 3 4 5 None\n#    prev None\n#    cur \n#    prev cur next\n#      cur.next = prev\n#      prev = cur\n#      cur = next_\nclass Solution:\n    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:\n        prev = None\n        cur = head\n\n        while cur:\n            next_ = cur.next\n            cur.next = prev\n            prev = cur\n            cur = next_\n\n        return prev\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0206-reverse-linked-list/",
+      "datePublished": "2025-11-24T13:19:10+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

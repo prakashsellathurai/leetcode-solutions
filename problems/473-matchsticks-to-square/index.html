@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -669,17 +670,24 @@
     "@type": "Question",
     "name": "473. Matchsticks to Square",
     "text": "You are given an integer array matchsticks where matchsticks[i] is the length of the ith matchstick. You want to use all the matchsticks to make one square. You should not break any stick, but you can link them up, and each matchstick must be used exactly one time.\nReturn true if you can make this square and false otherwise.\n\u00a0\nExample 1:\n\nInput: matchsticks = [1,1,2,2,2]\nOutput: true\nExplanation: You can form a square with length 2, one side of the square came two sticks with length 1.\n\nExample 2:\nInput: matchsticks = [3,3,3,3,4]\nOutput: false\nExplanation: You cannot find a way to form a square with all the matchsticks.\n\n\u00a0\nConstraints:\n\n1 <= matchsticks.length <= 15\n1 <= matchsticks[i] <= 108\n\n",
+    "url": "https://leetcode.com/problems/473-matchsticks-to-square",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def makesquare(self, matchsticks: List[int]) -> bool:\n        return self.dp(matchsticks)\n\n    \"\"\"\n    Time Complexity: O(4^n)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def dfs(self, matchsticks: List[int]) -> bool:\n        if not matchsticks:\n            return False\n\n        length = sum(matchsticks) // 4\n\n        if sum(matchsticks) / 4 != length:\n            return False\n\n        matchsticks.sort(reverse=True)\n        sides = [0] * 4\n\n        def backtrack(i):\n            if i == len(matchsticks):\n                return True\n\n            for j in range(4):\n                if sides[j] + matchsticks[i] <= length:\n                    sides[j] += matchsticks[i]\n                    if backtrack(i + 1):\n                        return True\n                    sides[j] -= matchsticks[i]\n\n            return False\n\n        return backtrack(0)\n\n    \"\"\"\n    Time Complexity: O(n*2^n)\n    Space Complexity: O(n+2^n)\n    \"\"\"\n\n    def dp(self, matchsticks: List[int]) -> bool:\n        if not matchsticks:\n            return False\n\n        lth = len(matchsticks)\n\n        perimeter = sum(matchsticks)\n        side = perimeter // 4\n\n        if side * 4 != perimeter:\n            return False\n\n        dp = {}\n\n        def recur(mask, sidesfilledsofar):\n            total = 0\n\n            for i in range(lth - 1, -1, -1):\n                if not (mask & (1 << i)):\n                    total += matchsticks[lth - 1 - i]\n\n            if total > 0 and total % side == 0:\n                sidesfilledsofar += 1\n\n            if sidesfilledsofar == 3:\n                return True\n\n            if (mask, sidesfilledsofar) in dp:\n                return dp[(mask, sidesfilledsofar)]\n\n            ans = False\n\n            remainingspace = side * (int(total / side) + 1) - total\n\n            for i in range(lth - 1, -1, -1):\n                if matchsticks[lth - 1 - i] <= remainingspace and mask & (1 << i):\n                    if recur(mask ^ (1 << i), sidesfilledsofar):\n                        ans = True\n                        break\n            dp[(mask, sidesfilledsofar)] = ans\n            return ans\n\n        return recur((1 << lth) - 1, 0)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/473-matchsticks-to-square/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

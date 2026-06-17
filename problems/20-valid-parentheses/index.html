@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -643,17 +644,24 @@
     "@type": "Question",
     "name": "20. Valid Parentheses",
     "text": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\nAn input string is valid if:\n\nOpen brackets must be closed by the same type of brackets.\nOpen brackets must be closed in the correct order.\n\n\u00a0\nExample 1:\nInput: s = \"()\"\nOutput: true\n\nExample 2:\nInput: s = \"()[]{}\"\nOutput: true\n\nExample 3:\nInput: s = \"(]\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 104\ns consists of parentheses only '()[]{}'.\n\n",
+    "url": "https://leetcode.com/problems/20-valid-parentheses",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.hashmap = {\"}\": \"{\", \")\": \"(\", \"]\": \"[\"}\n\n    def isValid(self, s: str) -> bool:\n        return self.constantspace(s)\n\n    # Time Complexity: O(n)\n    # Space Comeplxity: O(n)\n    def stacksolution(self, s: str) -> bool:\n        stack = []\n\n        for c in s:\n            if c in self.hashmap.values():\n                stack.append(c)\n            elif c in self.hashmap.keys():\n                if stack and self.hashmap[c] == stack[-1]:\n                    stack.pop()\n                else:\n                    return False\n            else:\n                return False\n\n        return len(stack) == 0\n\n    # Time Complexity: O(n^2)\n    # Space Comeplxity: O(1)\n    def constantspace(self, s: str) -> bool:\n        def findmatching(s, expected_open_bracket):\n            nonlocal i, j, count\n            if j > -1 and s[j] == expected_open_bracket:\n                s[i] = \"#\"\n                s[j] = \"#\"\n                while j >= 0 and s[j] == \"#\":\n                    j -= 1\n                return True\n            else:\n                return False\n\n        count = 0  # count of open braces\n        i = 0  # cur index\n        j = -1  # open bracket index\n        s = list(s)\n        if len(s) == 0:\n            return True\n        else:\n            while i < len(s):\n                if s[i] in self.hashmap.keys():\n                    ismatched = findmatching(s, self.hashmap[s[i]])\n                    if not ismatched:\n                        return False\n                    count -= 1\n                else:\n                    j = i\n                    count += 1\n                i += 1\n            return count == 0\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/20-valid-parentheses/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

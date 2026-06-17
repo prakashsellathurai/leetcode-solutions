@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -616,17 +617,24 @@
     "@type": "Question",
     "name": "45. Jump Game II",
     "text": "You are given a 0-indexed array of integers nums of length n. You are initially positioned at\u00a0index 0.\nEach element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at index i, you can jump to any index (i + j)\u00a0where:\n\n0 <= j <= nums[i] and\ni + j < n\n\nReturn the minimum number of jumps to reach index n - 1. The test cases are generated such that you can reach index\u00a0n - 1.\n\u00a0\nExample 1:\n\nInput: nums = [2,3,1,1,4]\nOutput: 2\nExplanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.\n\nExample 2:\n\nInput: nums = [2,3,0,1,4]\nOutput: 2\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 104\n0 <= nums[i] <= 1000\nIt's guaranteed that you can reach nums[n - 1].\n\n",
+    "url": "https://leetcode.com/problems/0045-jump-game-ii",
     "answerCount": 1,
+    "datePublished": "2026-06-12T23:16:19+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def jump(self, nums: List[int]) -> int:\n        #  nums = [2,3,1,1,4]\n        #     i : jump  i +j ; o<= j <= nums[i] i + j <=n\n        #    Goal minimum number of jumps to reach index n-1 \n        #   \n        # nums =  [2,3,1,1,4]\n        #    i =   0 1 2 3 4\n        #  \n        #  i = 0  possible ->  0 1 2 \n        #    Can index 4 be reached directly from index 0?\n        #  \n        #  fathest possible jump from current location and current end\n        #   jumpss =0\n        #    farthest = 0\n        #  curEnd = 0\n        #\n        jumps = 0\n        farthest = 0\n        currentEnd = 0\n        n = len(nums)\n\n        for i in range(n-1):\n            farthest = max(farthest, i + nums[i])\n            \n            if i == currentEnd:\n                jumps+=1\n                currentEnd = farthest\n        return jumps\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0045-jump-game-ii/",
+      "datePublished": "2026-06-12T23:16:19+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

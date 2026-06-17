@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -619,17 +620,24 @@
     "@type": "Question",
     "name": "224. Basic Calculator",
     "text": "Given a string s representing a valid expression, implement a basic calculator to evaluate it, and return the result of the evaluation.\nNote: You are not allowed to use any built-in function which evaluates strings as mathematical expressions, such as eval().\n\u00a0\nExample 1:\nInput: s = \"1 + 1\"\nOutput: 2\n\nExample 2:\nInput: s = \" 2-1 + 2 \"\nOutput: 3\n\nExample 3:\nInput: s = \"(1+(4+5+2)-3)+(6+8)\"\nOutput: 23\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 3 * 105\ns consists of digits, '+', '-', '(', ')', and ' '.\ns represents a valid expression.\n'+' is not used as a unary operation (i.e., \"+1\" and \"+(2 + 3)\" is invalid).\n'-' could be used as a unary operation (i.e., \"-1\" and \"-(2 + 3)\" is valid).\nThere will be no two consecutive operators in the input.\nEvery number and running calculation will fit in a signed 32-bit integer.\n\n",
+    "url": "https://leetcode.com/problems/224-basic-calculator",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def calculate(self, s: str) -> int:\n        stack = []\n        result = 0\n        number = 0\n        sign = 1\n\n        for c in s:\n            if c.isdigit():\n                number = 10 * number + int(c)\n            elif c == \"+\":\n                result += sign * number\n                number = 0\n                sign = 1\n            elif c == \"-\":\n                result += sign * number\n                number = 0\n                sign = -1\n            elif c == \"(\":\n                stack.append(result)\n                stack.append(sign)\n                sign = 1\n                result = 0\n            elif c == \")\":\n                result += sign * number\n                number = 0\n                result *= stack.pop()\n                result += stack.pop()\n        if number != 0:\n            result += sign * number\n        return result\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/224-basic-calculator/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

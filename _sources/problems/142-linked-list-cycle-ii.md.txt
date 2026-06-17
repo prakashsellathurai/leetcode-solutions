@@ -81,17 +81,24 @@ class Solution:
     "@type": "Question",
     "name": "142. Linked List Cycle II",
     "text": "Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.\nThere is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.\nDo not modify the linked list.\n\u00a0\nExample 1:\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: tail connects to node index 1\nExplanation: There is a cycle in the linked list, where tail connects to the second node.\n\nExample 2:\n\nInput: head = [1,2], pos = 0\nOutput: tail connects to node index 0\nExplanation: There is a cycle in the linked list, where tail connects to the first node.\n\nExample 3:\n\nInput: head = [1], pos = -1\nOutput: no cycle\nExplanation: There is no cycle in the linked list.\n\n\u00a0\nConstraints:\n\nThe number of the nodes in the list is in the range [0, 104].\n-105 <= Node.val <= 105\npos is -1 or a valid index in the linked-list.\n\n\u00a0\nFollow up: Can you solve it using O(1) (i.e. constant) memory?\n",
+    "url": "https://leetcode.com/problems/142-linked-list-cycle-ii",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, x):\n#         self.val = x\n#         self.next = None\n\n\nclass Solution:\n    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:\n        slow = fast = head\n\n        while fast and fast.next:\n            slow = slow.next\n            fast = fast.next.next\n\n            if slow == fast:\n                while head != slow:\n                    head = head.next\n                    slow = slow.next\n                return head\n        return None\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/142-linked-list-cycle-ii/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

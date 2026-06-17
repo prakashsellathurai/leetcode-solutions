@@ -78,17 +78,24 @@ class Solution:
     "@type": "Question",
     "name": "230. Kth Smallest Element in a BST",
     "text": "Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.\n\u00a0\nExample 1:\n\nInput: root = [3,1,4,null,2], k = 1\nOutput: 1\n\nExample 2:\n\nInput: root = [5,3,6,2,4,null,null,1], k = 3\nOutput: 3\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is n.\n1 <= k <= n <= 104\n0 <= Node.val <= 104\n\n\u00a0\nFollow up: If the BST is modified often (i.e., we can do insert and delete operations) and you need to find the kth smallest frequently, how would you optimize?\n",
+    "url": "https://leetcode.com/problems/230-kth-smallest-element-in-a-bst",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def kthSmallest(self, root, k):\n        \"\"\"\n        :type root: TreeNode\n        :type k: int\n        :rtype: int\n        \"\"\"\n\n        cur = root\n\n        while cur:\n            if cur.left is None:\n                k -= 1\n                if k == 0:\n                    return cur.val\n                cur = cur.right\n            else:\n                pre = cur.left\n\n                while pre.right and pre.right is not cur:\n                    pre = pre.right\n\n                if pre.right is None:\n                    pre.right = cur\n                    cur = cur.left\n                else:\n                    pre.right = None\n                    k -= 1\n                    if k == 0:\n                        return cur.val\n                    cur = cur.right\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/230-kth-smallest-element-in-a-bst/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

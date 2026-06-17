@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -601,17 +602,24 @@
     "@type": "Question",
     "name": "52. N-Queens II",
     "text": "The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.\nGiven an integer n, return the number of distinct solutions to the\u00a0n-queens puzzle.\n\u00a0\nExample 1:\n\nInput: n = 4\nOutput: 2\nExplanation: There are two distinct solutions to the 4-queens puzzle as shown.\n\nExample 2:\nInput: n = 1\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= n <= 9\n\n",
+    "url": "https://leetcode.com/problems/52-n-queens-ii",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def totalNQueens(self, n: int) -> int:\n        cnt = 0\n        for sol in self.nqueens(n, 0, [], [], []):\n            cnt += 1\n        return cnt\n\n    def nqueens(self, n, i, collkup, ldlkup, rdlkup):\n        if i < n:\n            for j in range(n):\n                if j not in collkup and i + j not in ldlkup and i - j not in rdlkup:\n                    yield from self.nqueens(\n                        n, i + 1, collkup + [j], ldlkup +\n                        [i + j], rdlkup + [i - j]\n                    )\n\n        else:\n            yield collkup\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/52-n-queens-ii/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -631,17 +632,24 @@ rotate 2 steps to the right: [3,99,-1,-100]
     "@type": "Question",
     "name": "189. Rotate Array",
     "text": "Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.\n\u00a0\nExample 1:\n\nInput: nums = [1,2,3,4,5,6,7], k = 3\nOutput: [5,6,7,1,2,3,4]\nExplanation:\nrotate 1 steps to the right: [7,1,2,3,4,5,6]\nrotate 2 steps to the right: [6,7,1,2,3,4,5]\nrotate 3 steps to the right: [5,6,7,1,2,3,4]\n\nExample 2:\n\nInput: nums = [-1,-100,3,99], k = 2\nOutput: [3,99,-1,-100]\nExplanation: \nrotate 1 steps to the right: [99,-1,-100,3]\nrotate 2 steps to the right: [3,99,-1,-100]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-231 <= nums[i] <= 231 - 1\n0 <= k <= 105\n\n\u00a0\nFollow up:\n\nTry to come up with as many solutions as you can. There are at least three different ways to solve this problem.\nCould you do it in-place with O(1) extra space?\n\n",
+    "url": "https://leetcode.com/problems/0189-rotate-array",
     "answerCount": 1,
+    "datePublished": "2026-05-24T13:29:24+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def rotate(self, nums: List[int], k: int) -> None:\n        \"\"\"\n        Do not return anything, modify nums in-place instead.\n        \"\"\"\n        self.inplaceoptimal(nums, k)\n\n        \n    # poping each element and appending in front\n    # Time=complexity: O(n,k)\n    # Space complexity: O(n)\n    def bruteforce(self, nums, k):\n        k %= len(nums)\n        for _ in range(k):\n            nums.insert(0, nums.pop())\n\n    # use list com,phgrehension inspace\n    # Time=complexity: O(n)\n    # Space complexity: O(n)\n    def listcomprehension(self, nums, k):\n        k = k% len(nums)\n        nums[:] = nums[-k:] + nums[:-k]\n\n\n    # use inplace\n    # Time=complexity: O(n)\n    # Space complexity: O(1)\n    def inplaceoptimal(self, nums, k):\n        n = len(nums)\n        k %= n\n        def reverse(l ,r):\n            while l < r:\n                nums[l], nums[r] = nums[r], nums[l]\n                l+=1\n                r -= 1\n        reverse(0,n -1 )\n        reverse(0, k -1)\n        reverse(k , n-1)\n\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0189-rotate-array/",
+      "datePublished": "2026-05-24T13:29:24+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -606,17 +607,24 @@
     "@type": "Question",
     "name": "347. Top K Frequent Elements",
     "text": "Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.\n\u00a0\nExample 1:\nInput: nums = [1,1,1,2,2,3], k = 2\nOutput: [1,2]\nExample 2:\nInput: nums = [1], k = 1\nOutput: [1]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\nk is in the range [1, the number of unique elements in the array].\nIt is guaranteed that the answer is unique.\n\n\u00a0\nFollow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.\n",
+    "url": "https://leetcode.com/problems/347-top-k-frequent-elements",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\n        return self.prioirtyQueue(nums, k)\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n    def naive(self, nums: List[int], k: int) -> List[int]:\n        freqmap = Counter(nums)\n        freqmap = sorted(freqmap, key=freqmap.get, reverse=True)\n        return freqmap[:k]\n\n    # Time Complexity: O(nlogk)\n    # Space Complexity: O(n)\n    def prioirtyQueue(self, nums: List[int], k: int) -> List[int]:\n        if k == len(nums):\n            return nums\n\n        count = Counter(nums)\n\n        return heapq.nlargest(k, count.keys(), key=count.get)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/347-top-k-frequent-elements/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

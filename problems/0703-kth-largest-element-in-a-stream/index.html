@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -644,17 +645,24 @@ kthLargest.add(9); // return 8</div><p> </p>
     "@type": "Question",
     "name": "703. Kth Largest Element in a Stream",
     "text": "You are part of a university admissions office and need to keep track of the kth highest test score from applicants in real-time. This helps to determine cut-off marks for interviews and admissions dynamically as new applicants submit their scores.\nYou are tasked to implement a class which, for a given integer\u00a0k, maintains a stream of test scores and continuously returns the\u00a0kth highest test score\u00a0after\u00a0a new score has been submitted. More specifically, we are looking for the kth highest score in the sorted list of all scores.\nImplement the\u00a0KthLargest class:\n\nKthLargest(int k, int[] nums) Initializes the object with the integer k and the stream of test scores\u00a0nums.\nint add(int val) Adds a new test score\u00a0val to the stream and returns the element representing the kth largest element in the pool of test scores so far.\n\n\u00a0\nExample 1:\n\nInput:\n[\"KthLargest\", \"add\", \"add\", \"add\", \"add\", \"add\"]\n[[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]\nOutput: [null, 4, 5, 5, 8, 8]\nExplanation:\nKthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);\nkthLargest.add(3); // return 4\nkthLargest.add(5); // return 5\nkthLargest.add(10); // return 5\nkthLargest.add(9); // return 8\nkthLargest.add(4); // return 8\n\nExample 2:\n\nInput:\n[\"KthLargest\", \"add\", \"add\", \"add\", \"add\"]\n[[4, [7, 7, 7, 7, 8, 3]], [2], [10], [9], [9]]\nOutput: [null, 7, 7, 7, 8]\nExplanation:\nKthLargest kthLargest = new KthLargest(4, [7, 7, 7, 7, 8, 3]);\nkthLargest.add(2); // return 7\nkthLargest.add(10); // return 7\nkthLargest.add(9); // return 7\nkthLargest.add(9); // return 8\n\u00a0\nConstraints:\n\n0 <= nums.length <= 104\n1 <= k <= nums.length + 1\n-104 <= nums[i] <= 104\n-104 <= val <= 104\nAt most 104 calls will be made to add.\n\n",
+    "url": "https://leetcode.com/problems/0703-kth-largest-element-in-a-stream",
     "answerCount": 1,
+    "datePublished": "2026-06-12T12:38:12+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# k -> [2.3.4] k =2\n# 1 2 3 4 5 \n# add (6) -> 4 [1 2 3 4 5 6]\n# add(1) -> 5 [1 1 2 3 4 5 6]\n#  > heap of size k  min heap top of heap is kths largest element every add operation is O(1)\n#  edge case if n < k return top \n#  \nimport heapq\nclass KthLargest:\n\n    def __init__(self, k: int, nums: List[int]): # 3,  [4, 5, 8, 2]\n        self.heap = []\n        self.k = k\n        heapq.heapify(self.heap)\n        for num in nums: # 4 , 5, 8, 2\n            heapq.heappush(self.heap, num) # [2, 4, 5, 8]\n            if len(self.heap) > k:\n                heapq.heappop(self.heap) # [4, 5, 8]\n    \n    # invariant make sure \n    def add(self, val: int) -> int: #[4, 5, 8] val = 10\n       # val = heap[0]\n       # val > heap[0]\n       #    heappush and pop\n       # return val\n        if len(self.heap) < self.k:\n            heapq.heappush(self.heap, val)\n        elif self.heap and val >= self.heap[0]:\n            heapq.heappush(self.heap, val) # [4,5,8, 10]\n            heapq.heappop(self.heap) # [5,8, 10]\n        return self.heap[0]\n\n# Problem:\n# Kth Largest Stream\n\n# Invariant:\n# Heap contains k largest elements.\n\n# Failed assumption:\n# Always pop before push.\n\n# Final insight:\n# Only remove an element if the new value belongs in top k.\n# Your KthLargest object will be instantiated and called as such:\n# obj = KthLargest(k, nums)\n# param_1 = obj.add(val)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0703-kth-largest-element-in-a-stream/",
+      "datePublished": "2026-06-12T12:38:12+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

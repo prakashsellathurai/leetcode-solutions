@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -597,17 +598,24 @@
     "@type": "Question",
     "name": "41. First Missing Positive",
     "text": "Given an unsorted integer array nums, return the smallest missing positive integer.\nYou must implement an algorithm that runs in O(n) time and uses constant extra space.\n\u00a0\nExample 1:\nInput: nums = [1,2,0]\nOutput: 3\nExample 2:\nInput: nums = [3,4,-1,1]\nOutput: 2\nExample 3:\nInput: nums = [7,8,9,11,12]\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 105\n-231 <= nums[i] <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/41-first-missing-positive",
     "answerCount": 1,
+    "datePublished": "2022-07-06T20:29:46+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def firstMissingPositive(self, nums: List[int]) -> int:\n        for i in range(len(nums)):\n            while 0 <= nums[i]-1 < len(nums) and nums[nums[i]-1] != nums[i]:\n                tmp = nums[i]-1\n                nums[i], nums[tmp] = nums[tmp], nums[i]\n        for i in range(len(nums)):\n            if nums[i] != i+1:\n                return i+1\n        return len(nums)+1",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/41-first-missing-positive/",
+      "datePublished": "2022-07-06T20:29:46+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

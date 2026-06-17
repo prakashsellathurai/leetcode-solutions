@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -608,17 +609,24 @@
     "@type": "Question",
     "name": "7. Reverse Integer",
     "text": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.\nAssume the environment does not allow you to store 64-bit integers (signed or unsigned).\n\u00a0\nExample 1:\nInput: x = 123\nOutput: 321\n\nExample 2:\nInput: x = -123\nOutput: -321\n\nExample 3:\nInput: x = 120\nOutput: 21\n\n\u00a0\nConstraints:\n\n-231 <= x <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/7-reverse-integer",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.LOW = -(2**31)\n        self.HIGH = 2**31\n\n    def reverse(self, x: int) -> int:\n        rev = 0\n        isNeg = x < 0\n        if isNeg:\n            x *= -1\n        while x != 0:\n            pop = x % 10\n            x //= 10\n\n            if (rev >= self.HIGH // 10 or rev >= self.HIGH) and pop > 7:\n                return 0\n            if (rev <= self.LOW // 10 or rev <= self.LOW) and pop < -8:\n                return 0\n\n            rev = rev * 10 + pop\n        if isNeg:\n            rev *= -1\n        if self.LOW < rev < self.HIGH:\n            return rev\n        else:\n            return 0\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/7-reverse-integer/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

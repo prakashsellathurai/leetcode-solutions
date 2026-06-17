@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -589,17 +590,24 @@
     "@type": "Question",
     "name": "476. Number Complement",
     "text": "The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation.\n\nFor example, The integer 5 is \"101\" in binary and its complement is \"010\" which is the integer 2.\n\nGiven an integer num, return its complement.\n\u00a0\nExample 1:\nInput: num = 5\nOutput: 2\nExplanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.\n\nExample 2:\nInput: num = 1\nOutput: 0\nExplanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.\n\n\u00a0\nConstraints:\n\n1 <= num < 231\n\n\u00a0\nNote: This question is the same as 1009: https://leetcode.com/problems/complement-of-base-10-integer/\n",
+    "url": "https://leetcode.com/problems/number-complement",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def findComplement(self, num: int) -> int:\n        mask = (1 << (floor(log2(num) + 1))) - 1\n        return num ^ mask\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/number-complement/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

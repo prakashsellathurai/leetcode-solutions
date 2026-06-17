@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -619,17 +620,24 @@ wordFilter.f("a", "e"); // return 0, because the word at index 0 has prefix = "a
     "@type": "Question",
     "name": "745. Prefix and Suffix Search",
     "text": "Design a special dictionary with some words that searchs the words in it by a prefix and a suffix.\nImplement the WordFilter class:\n\nWordFilter(string[] words) Initializes the object with the words in the dictionary.\nf(string prefix, string suffix) Returns the index of the word in the dictionary, which has the prefix prefix and the suffix suffix. If there is more than one valid index, return the largest of them. If there is no such word in the dictionary, return -1.\n\n\u00a0\nExample 1:\nInput\n[\"WordFilter\", \"f\"]\n[[[\"apple\"]], [\"a\", \"e\"]]\nOutput\n[null, 0]\n\nExplanation\nWordFilter wordFilter = new WordFilter([\"apple\"]);\nwordFilter.f(\"a\", \"e\"); // return 0, because the word at index 0 has prefix = \"a\" and suffix = 'e\".\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 15000\n1 <= words[i].length <= 10\n1 <= prefix.length, suffix.length <= 10\nwords[i], prefix and suffix consist of lower-case English letters only.\nAt most 15000 calls will be made to the function f.\n\n",
+    "url": "https://leetcode.com/problems/745-prefix-and-suffix-search",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "def Trie():\n    return collections.defaultdict(Trie)\n\n\nWEIGHT = False\n\n\nclass WordFilter(object):\n    def __init__(self, words):\n        self.trie = Trie()\n\n        for weight, word in enumerate(words):\n            word += \"#\"\n            for i in range(len(word)):\n                cur = self.trie\n                cur[WEIGHT] = weight\n                for j in range(i, 2 * len(word) - 1):\n                    cur = cur[word[j % len(word)]]\n                    cur[WEIGHT] = weight\n\n    def f(self, prefix, suffix):\n        cur = self.trie\n        for letter in suffix + \"#\" + prefix:\n            if letter not in cur:\n                return -1\n            cur = cur[letter]\n        return cur[WEIGHT]\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/745-prefix-and-suffix-search/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

@@ -76,17 +76,24 @@ class Solution:
     "@type": "Question",
     "name": "7. Reverse Integer",
     "text": "Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.\nAssume the environment does not allow you to store 64-bit integers (signed or unsigned).\n\u00a0\nExample 1:\nInput: x = 123\nOutput: 321\n\nExample 2:\nInput: x = -123\nOutput: -321\n\nExample 3:\nInput: x = 120\nOutput: 21\n\n\u00a0\nConstraints:\n\n-231 <= x <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/7-reverse-integer",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.LOW = -(2**31)\n        self.HIGH = 2**31\n\n    def reverse(self, x: int) -> int:\n        rev = 0\n        isNeg = x < 0\n        if isNeg:\n            x *= -1\n        while x != 0:\n            pop = x % 10\n            x //= 10\n\n            if (rev >= self.HIGH // 10 or rev >= self.HIGH) and pop > 7:\n                return 0\n            if (rev <= self.LOW // 10 or rev <= self.LOW) and pop < -8:\n                return 0\n\n            rev = rev * 10 + pop\n        if isNeg:\n            rev *= -1\n        if self.LOW < rev < self.HIGH:\n            return rev\n        else:\n            return 0\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/7-reverse-integer/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

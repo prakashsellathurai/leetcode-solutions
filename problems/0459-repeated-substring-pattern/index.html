@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="0460-lfu-cache" href="../0460-lfu-cache/" /><link rel="prev" title="0373-find-k-pairs-with-smallest-sums" href="../0373-find-k-pairs-with-smallest-sums/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="0460-lfu-cache" href="../0460-lfu-cache/" /><link rel="prev" title="0380-insert-delete-getrandom-o1" href="../0380-insert-delete-getrandom-o1/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
         <title>0459-repeated-substring-pattern - Leetcode Solutions</title>
@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -614,17 +615,24 @@
     "@type": "Question",
     "name": "459. Repeated Substring Pattern",
     "text": "Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.\n\u00a0\nExample 1:\n\nInput: s = \"abab\"\nOutput: true\nExplanation: It is the substring \"ab\" twice.\n\nExample 2:\n\nInput: s = \"aba\"\nOutput: false\n\nExample 3:\n\nInput: s = \"abcabcabcabc\"\nOutput: true\nExplanation: It is the substring \"abc\" four times or the substring \"abcabc\" twice.\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 104\ns consists of lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/0459-repeated-substring-pattern",
     "answerCount": 1,
+    "datePublished": "2026-01-26T22:52:11+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def repeatedSubstringPattern(self, s: str) -> bool:\n        def computelps(s):\n            n = len(s)\n            lps = [0] *n\n            i = 1\n            len_ = 0\n            while i<n:\n                if s[i] == s[len_]:\n                    len_+=1\n                    lps[i] = len_\n                    i+=1\n                else:\n                    if len_ != 0:\n                        len_ = lps[len_ - 1]\n                    else:\n                        lps[i] = 0\n                        i+=1\n            return lps\n        lps = computelps(s)\n        n = len(s)\n        len_ = lps[n-1]\n        if len_>0 and n % (n-len_) == 0 :\n            return True\n        else:\n            return False\n        \n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0459-repeated-substring-pattern/",
+      "datePublished": "2026-01-26T22:52:11+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }
@@ -646,14 +654,14 @@
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../0373-find-k-pairs-with-smallest-sums/">
+          <a class="prev-page" href="../0380-insert-delete-getrandom-o1/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">0373-find-k-pairs-with-smallest-sums</div>
+                <div class="title">0380-insert-delete-getrandom-o1</div>
                 
               </div>
             </a>

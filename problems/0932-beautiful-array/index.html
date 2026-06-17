@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -598,17 +599,24 @@
     "@type": "Question",
     "name": "932. Beautiful Array",
     "text": "An array nums of length n is beautiful if:\n\nnums is a permutation of the integers in the range [1, n].\nFor every 0 <= i < j < n, there is no index k with i < k < j where 2 * nums[k] == nums[i] + nums[j].\n\nGiven the integer n, return any beautiful array nums of length n. There will be at least one valid answer for the given n.\n\u00a0\nExample 1:\nInput: n = 4\nOutput: [2,1,4,3]\nExample 2:\nInput: n = 5\nOutput: [3,1,2,5,4]\n\n\u00a0\nConstraints:\n\n1 <= n <= 1000\n\n",
+    "url": "https://leetcode.com/problems/0932-beautiful-array",
     "answerCount": 1,
+    "datePublished": "2026-03-17T20:09:48+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "from functools import lru_cache\n\n\nclass Solution:\n    def beautifulArray(self, N):\n        @lru_cache\n        def f(N): # 2\n            if N <= 1:\n                return [1]\n            odds = f((N+1)//2) # \n            evens = f(N//2)\n            ans = [2*x-1 for x in odds] + [2*x for x in evens]\n            return ans\n        return f(N)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0932-beautiful-array/",
+      "datePublished": "2026-03-17T20:09:48+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

@@ -110,17 +110,24 @@ class Solution:
     "@type": "Question",
     "name": "322. Coin Change",
     "text": "You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.\nReturn the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.\nYou may assume that you have an infinite number of each kind of coin.\n\u00a0\nExample 1:\nInput: coins = [1,2,5], amount = 11\nOutput: 3\nExplanation: 11 = 5 + 5 + 1\n\nExample 2:\nInput: coins = [2], amount = 3\nOutput: -1\n\nExample 3:\nInput: coins = [1], amount = 0\nOutput: 0\n\n\u00a0\nConstraints:\n\n1 <= coins.length <= 12\n1 <= coins[i] <= 231 - 1\n0 <= amount <= 104\n\n",
+    "url": "https://leetcode.com/problems/322-coin-change",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        return self.dp(coins, amount)\n\n    # Time Complexity: O(S^n)\n    # Space Complexity: O(n)\n    def bruteforce(self, coins: List[int], amount: int) -> int:\n        def coinchange(idx, coins, amount):\n            if amount == 0:\n                return 0\n\n            if idx < len(coins) and amount > 0:\n                maxVal = amount / coins[idx]\n                mincost = sys.maxsize\n\n                for x in range(maxVal + 1):\n                    if amount >= x * coins[idx]:\n                        res = coinchange(\n                            idx + 1, coins, amount - x * coins[idx])\n                        if res != -1:\n                            mincost = min(mincost, res + x)\n\n                return mincost if mincost < sys.maxsize else -1\n\n            return -1\n\n        return coinchange(0, coins, amount)\n\n    # Time Complexity: O(S*n)\n    # Space Complexity: O(S)\n    @cache\n    def topdown(self, amount: int) -> int:\n        if amount < 0:\n            return -1\n        if amount == 0:\n            return 0\n\n        min_ = sys.maxsize\n        for coin in self.coins:\n            res = self.topdown(amount - coin)\n            if res >= 0 and res < min_:\n                min_ = res + 1\n\n        return -1 if min_ == sys.maxsize else min_\n\n    # Time Complexity: O(S*n)\n    # Space Complexity: O(S)\n    def dp(self, coins: List[int], amount: int) -> int:\n        dp = [float(\"inf\")] * (amount + 1)\n        dp[0] = 0\n\n        for coin in coins:\n            for x in range(coin, amount + 1):\n                dp[x] = min(dp[x], dp[x - coin] + 1)\n        return dp[amount] if dp[amount] != float(\"inf\") else -1\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/322-coin-change/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

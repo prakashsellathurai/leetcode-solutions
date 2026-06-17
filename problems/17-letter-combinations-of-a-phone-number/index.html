@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -651,17 +652,24 @@
     "@type": "Question",
     "name": "17. Letter Combinations of a Phone Number",
     "text": "Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.\nA mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.\n\n\u00a0\nExample 1:\nInput: digits = \"23\"\nOutput: [\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]\n\nExample 2:\nInput: digits = \"\"\nOutput: []\n\nExample 3:\nInput: digits = \"2\"\nOutput: [\"a\",\"b\",\"c\"]\n\n\u00a0\nConstraints:\n\n0 <= digits.length <= 4\ndigits[i] is a digit in the range ['2', '9'].\n\n",
+    "url": "https://leetcode.com/problems/17-letter-combinations-of-a-phone-number",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.hashTable = {\n            \"2\": \"abc\",\n            \"3\": \"def\",\n            \"4\": \"ghi\",\n            \"5\": \"jkl\",\n            \"6\": \"mno\",\n            \"7\": \"pqrs\",\n            \"8\": \"tuv\",\n            \"9\": \"wxyz\",\n        }\n        self.hashList = [\n            \"0\",\n            \"1\",\n            \"abc\",\n            \"def\",\n            \"ghi\",\n            \"jkl\",\n            \"mno\",\n            \"pqrs\",\n            \"tuv\",\n            \"wxyz\",\n        ]\n\n    def letterCombinations(self, digits: str) -> List[str]:\n        return self.dfs(digits)\n\n    # Time Complexity: O(4^n)\n    # Space Complexity: O(4^n)\n    def bfs(self, digits: str) -> List[str]:\n        n = len(digits)\n        if n == 0:\n            return []\n        res = []\n        queue = deque([\"\"])\n\n        while queue:\n            s = queue.popleft()\n\n            if len(s) == n:\n                res.append(s)\n            else:\n                for letter in self.hashList[int(digits[len(s)])]:\n                    queue.append(s + letter)\n\n        return res\n\n    # Time Complexity: O(4^n*n)\n    # Space Complexity: O(n)\n    def dfs(self, digits: str) -> List[str]:\n        n = len(digits)\n        if n == 0:\n            return []\n        res = []\n\n        def backtrack(candidate, i):\n            if len(candidate) == n:\n                res.append(candidate)\n                return\n            for j in range(i, n):\n                for code in self.hashTable[digits[j]]:\n                    candidate += code\n                    backtrack(candidate, j + 1)\n                    candidate = candidate[:-1]\n\n        backtrack(\"\", 0)\n        return res\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/17-letter-combinations-of-a-phone-number/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

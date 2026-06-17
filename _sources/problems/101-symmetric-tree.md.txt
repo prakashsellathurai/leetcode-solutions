@@ -96,17 +96,24 @@ class Solution:
     "@type": "Question",
     "name": "101. Symmetric Tree",
     "text": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).\n\u00a0\nExample 1:\n\nInput: root = [1,2,2,3,4,4,3]\nOutput: true\n\nExample 2:\n\nInput: root = [1,2,2,null,3,null,3]\nOutput: false\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 1000].\n-100 <= Node.val <= 100\n\n\u00a0\nFollow up: Could you solve it both recursively and iteratively?",
+    "url": "https://leetcode.com/problems/101-symmetric-tree",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def isSymmetric(self, root: Optional[TreeNode]) -> bool:\n        return self.iterative(root)\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(h)\n    def recursive(self, root1, root2=None):\n        if root1 is None and root2 is None:\n            return True\n\n        if root1 is not None and root2 is not None:\n            if root1.val == root2.val:\n                return self.recursive(root1.left, root2.right) and self.recursive(\n                    root1.right, root2.left\n                )\n\n        return False\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def iterative(self, root):\n        q = deque([])\n        q.append(root)\n        q.append(root)\n\n        while q:\n            original_node = q.popleft()\n            mirrored_node = q.popleft()\n\n            if original_node.val != mirrored_node.val:\n                return False\n\n            if original_node.left and mirrored_node.right:\n                q.append(original_node.left)\n                q.append(mirrored_node.right)\n            elif original_node.left or mirrored_node.right:\n                return False\n\n            if original_node.right and mirrored_node.left:\n                q.append(original_node.right)\n                q.append(mirrored_node.left)\n            elif original_node.right or mirrored_node.left:\n                return False\n\n        return True\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/101-symmetric-tree/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

@@ -1,0 +1,133 @@
+# 0380-insert-delete-getrandom-o1
+
+
+Try it on <a href='https://leetcode.com/problems/0380-insert-delete-getrandom-o1'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Implement the <code>RandomizedSet</code> class:</p>
+
+<ul>
+	<li><code>RandomizedSet()</code> Initializes the <code>RandomizedSet</code> object.</li>
+	<li><code>bool insert(int val)</code> Inserts an item <code>val</code> into the set if not present. Returns <code>true</code> if the item was not present, <code>false</code> otherwise.</li>
+	<li><code>bool remove(int val)</code> Removes an item <code>val</code> from the set if present. Returns <code>true</code> if the item was present, <code>false</code> otherwise.</li>
+	<li><code>int getRandom()</code> Returns a random element from the current set of elements (it&#39;s guaranteed that at least one element exists when this method is called). Each element must have the <b>same probability</b> of being returned.</li>
+</ul>
+
+<p>You must implement the functions of the class such that each function works in&nbsp;<strong>average</strong>&nbsp;<code>O(1)</code>&nbsp;time complexity.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input</strong>
+[&quot;RandomizedSet&quot;, &quot;insert&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;]
+[[], [1], [2], [2], [], [1], [2], []]
+<strong>Output</strong>
+[null, true, false, true, 2, true, false, 2]
+
+<strong>Explanation</strong>
+RandomizedSet randomizedSet = new RandomizedSet();
+randomizedSet.insert(1); // Inserts 1 to the set. Returns true as 1 was inserted successfully.
+randomizedSet.remove(2); // Returns false as 2 does not exist in the set.
+randomizedSet.insert(2); // Inserts 2 to the set, returns true. Set now contains [1,2].
+randomizedSet.getRandom(); // getRandom() should return either 1 or 2 randomly.
+randomizedSet.remove(1); // Removes 1 from the set, returns true. Set now contains [2].
+randomizedSet.insert(2); // 2 was already in the set, so return false.
+randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom() will always return 2.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>-2<sup>31</sup> &lt;= val &lt;= 2<sup>31</sup> - 1</code></li>
+	<li>At most <code>2 *&nbsp;</code><code>10<sup>5</sup></code> calls will be made to <code>insert</code>, <code>remove</code>, and <code>getRandom</code>.</li>
+	<li>There will be <strong>at least one</strong> element in the data structure when <code>getRandom</code> is called.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Data structure
+#     for O(1) access -> hashmap
+#     for random access -> array
+#    use combination of array and hashmap
+#    hahsmap -> key -> index at array
+#    array  -> list of keys
+import random
+class RandomizedSet:
+
+    def __init__(self):
+        self.hash = {}
+        self.array = []
+
+    def insert(self, val: int) -> bool:
+        if val  in self.hash:
+            return False
+        self.array.append(val)
+        self.hash[val] = len(self.array) - 1
+        return True
+        
+
+    def remove(self, val: int) -> bool:
+        if val not in self.hash:
+            return False
+        
+        idx = self.hash[val]
+        last_idx = len(self.array) - 1
+
+        last_index_element = self.array[last_idx]
+        
+        self.array[idx] =  self.array[last_idx]
+        self.hash[last_index_element] = idx
+
+        del self.hash[val]
+        self.array.pop()
+        return True
+        
+
+    def getRandom(self) -> int:
+        return random.choice(self.array)
+        
+
+
+# Your RandomizedSet object will be instantiated and called as such:
+# obj = RandomizedSet()
+# param_1 = obj.insert(val)
+# param_2 = obj.remove(val)
+# param_3 = obj.getRandom()
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "380. Insert Delete GetRandom O(1)",
+    "text": "Implement the RandomizedSet class:\n\nRandomizedSet() Initializes the RandomizedSet object.\nbool insert(int val) Inserts an item val into the set if not present. Returns true if the item was not present, false otherwise.\nbool remove(int val) Removes an item val from the set if present. Returns true if the item was present, false otherwise.\nint getRandom() Returns a random element from the current set of elements (it's guaranteed that at least one element exists when this method is called). Each element must have the same probability of being returned.\n\nYou must implement the functions of the class such that each function works in\u00a0average\u00a0O(1)\u00a0time complexity.\n\u00a0\nExample 1:\n\nInput\n[\"RandomizedSet\", \"insert\", \"remove\", \"insert\", \"getRandom\", \"remove\", \"insert\", \"getRandom\"]\n[[], [1], [2], [2], [], [1], [2], []]\nOutput\n[null, true, false, true, 2, true, false, 2]\n\nExplanation\nRandomizedSet randomizedSet = new RandomizedSet();\nrandomizedSet.insert(1); // Inserts 1 to the set. Returns true as 1 was inserted successfully.\nrandomizedSet.remove(2); // Returns false as 2 does not exist in the set.\nrandomizedSet.insert(2); // Inserts 2 to the set, returns true. Set now contains [1,2].\nrandomizedSet.getRandom(); // getRandom() should return either 1 or 2 randomly.\nrandomizedSet.remove(1); // Removes 1 from the set, returns true. Set now contains [2].\nrandomizedSet.insert(2); // 2 was already in the set, so return false.\nrandomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom() will always return 2.\n\n\u00a0\nConstraints:\n\n-231 <= val <= 231 - 1\nAt most 2 *\u00a0105 calls will be made to insert, remove, and getRandom.\nThere will be at least one element in the data structure when getRandom is called.\n\n",
+    "url": "https://leetcode.com/problems/0380-insert-delete-getrandom-o1",
+    "answerCount": 1,
+    "datePublished": "2026-06-16T12:23:25+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Data structure\n#     for O(1) access -> hashmap\n#     for random access -> array\n#    use combination of array and hashmap\n#    hahsmap -> key -> index at array\n#    array  -> list of keys\nimport random\nclass RandomizedSet:\n\n    def __init__(self):\n        self.hash = {}\n        self.array = []\n\n    def insert(self, val: int) -> bool:\n        if val  in self.hash:\n            return False\n        self.array.append(val)\n        self.hash[val] = len(self.array) - 1\n        return True\n        \n\n    def remove(self, val: int) -> bool:\n        if val not in self.hash:\n            return False\n        \n        idx = self.hash[val]\n        last_idx = len(self.array) - 1\n\n        last_index_element = self.array[last_idx]\n        \n        self.array[idx] =  self.array[last_idx]\n        self.hash[last_index_element] = idx\n\n        del self.hash[val]\n        self.array.pop()\n        return True\n        \n\n    def getRandom(self) -> int:\n        return random.choice(self.array)\n        \n\n\n# Your RandomizedSet object will be instantiated and called as such:\n# obj = RandomizedSet()\n# param_1 = obj.insert(val)\n# param_2 = obj.remove(val)\n# param_3 = obj.getRandom()",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0380-insert-delete-getrandom-o1/",
+      "datePublished": "2026-06-16T12:23:25+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

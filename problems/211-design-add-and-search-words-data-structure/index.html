@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -680,17 +681,24 @@ wordDictionary.search("b.."); // return True
     "@type": "Question",
     "name": "211. Design Add and Search Words Data Structure",
     "text": "Design a data structure that supports adding new words and finding if a string matches any previously added string.\nImplement the WordDictionary class:\n\nWordDictionary()\u00a0Initializes the object.\nvoid addWord(word) Adds word to the data structure, it can be matched later.\nbool search(word)\u00a0Returns true if there is any string in the data structure that matches word\u00a0or false otherwise. word may contain dots '.' where dots can be matched with any letter.\n\n\u00a0\nExample:\nInput\n[\"WordDictionary\",\"addWord\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\",\"search\"]\n[[],[\"bad\"],[\"dad\"],[\"mad\"],[\"pad\"],[\"bad\"],[\".ad\"],[\"b..\"]]\nOutput\n[null,null,null,null,false,true,true,true]\n\nExplanation\nWordDictionary wordDictionary = new WordDictionary();\nwordDictionary.addWord(\"bad\");\nwordDictionary.addWord(\"dad\");\nwordDictionary.addWord(\"mad\");\nwordDictionary.search(\"pad\"); // return False\nwordDictionary.search(\"bad\"); // return True\nwordDictionary.search(\".ad\"); // return True\nwordDictionary.search(\"b..\"); // return True\n\n\u00a0\nConstraints:\n\n1 <= word.length <= 500\nword in addWord consists lower-case English letters.\nword in search consist of\u00a0 '.' or lower-case English letters.\nAt most 50000\u00a0calls will be made to addWord\u00a0and search.\n\n",
+    "url": "https://leetcode.com/problems/211-design-add-and-search-words-data-structure",
     "answerCount": 1,
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "\"\"\"\nTrie Data structure has \n    key - denotes current char\n    children = set of next values (for contant time lookup)\n    isEnd = boolean to mark end of the word\n\"\"\"\n\n\nclass TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.isEnd = False\n\n\nclass WordDictionary:\n    \"\"\"\n    intialize empty trie and store in memory\n    \"\"\"\n\n    def __init__(self):\n        self.trie = TrieNode()\n\n    \"\"\"\n    algorithm\n        initialize curr trie node\n        iterate char in word\n            check if children has char \n                if true:\n                    set curr node as that node\n                else:\n                    create a trienode with char\n                    set curr node as new node\n        set curr node isEnd as true\n                    \n    \"\"\"\n\n    def addWord(self, word: str) -> None:\n        curr = self.trie\n\n        for ch in word:\n            if ch not in curr.children:\n                curr.children[ch] = TrieNode()\n            curr = curr.children[ch]\n        curr.isEnd = True\n\n    \"\"\"\n    algorithm\n        initialize curr trie node\n        fun dfs(index)\n            iterate char in word\n                if index reaches n:\n                return True\n                if char is .\n                    for all children\n                    if dfs(children): return True\n                elif char in children:\n                    dfs(children of char)\n            return  false\n                \n        return curr.isEnd\n            \n    \"\"\"\n\n    def search(self, word: str) -> bool:\n        return self.dfs(self.trie, word, 0, len(word))\n\n    def dfs(self, root, word, i, n):\n        if i == n:\n            return root.isEnd\n        if word[i] == \".\":\n            for child in root.children:\n                if self.dfs(root.children[child], word, i + 1, n):\n                    return True\n        elif word[i] in root.children:\n            return self.dfs(root.children[word[i]], word, i + 1, n)\n        return False\n\n\n# Your WordDictionary object will be instantiated and called as such:\n# obj = WordDictionary()\n# obj.addWord(word)\n# param_2 = obj.search(word)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/211-design-add-and-search-words-data-structure/",
+      "datePublished": "2022-06-19T23:02:59+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }

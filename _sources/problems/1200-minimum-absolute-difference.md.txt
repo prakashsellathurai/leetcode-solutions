@@ -130,17 +130,24 @@ class Solution:
     "@type": "Question",
     "name": "1200. Minimum Absolute Difference",
     "text": "Given an array of distinct integers arr, find all pairs of elements with the minimum absolute difference of any two elements.\nReturn a list of pairs in ascending order(with respect to pairs), each pair [a, b] follows\n\na, b are from arr\na < b\nb - a equals to the minimum absolute difference of any two elements in arr\n\n\u00a0\nExample 1:\n\nInput: arr = [4,2,1,3]\nOutput: [[1,2],[2,3],[3,4]]\nExplanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.\nExample 2:\n\nInput: arr = [1,3,6,10,15]\nOutput: [[1,3]]\n\nExample 3:\n\nInput: arr = [3,8,-10,23,19,-4,-14,27]\nOutput: [[-14,-10],[19,23],[23,27]]\n\n\u00a0\nConstraints:\n\n2 <= arr.length <= 105\n-106 <= arr[i] <= 106\n\n",
+    "url": "https://leetcode.com/problems/1200-minimum-absolute-difference",
     "answerCount": 1,
+    "datePublished": "2026-03-01T16:15:16+05:30",
     "author": {
       "@type": "Organization",
-      "name": "LeetCode"
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
     },
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "class Solution:\n    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:\n        return self.CountingsortedSolution(arr)\n        \n        \n    # Time Complexity: O(n^2)\n    # Space COmplexity: O(1)\n    def naiveSolution(self, arr: List[int]) -> List[List[int]]:\n        n = len(arr)\n        result = []\n        min_diff = inf\n        for i in range(n):\n            pair = (i, i)\n            for j in range(i+1, n):\n                if i == j:\n                    continue\n                if arr[j]-arr[i] < min_diff:\n                    min_diff = arr[j]-arr[i]\n        for i in range(n):\n            for j in range(i+1, n):\n                if i == j:\n                    continue\n                if arr[j]-arr[i] == min_diff:  \n                    result.append((arr[i], arr[j]))\n        return result\n    \n    # Time Complexity: O(n^logn)\n    # Space COmplexity: O(1)\n    def sortedSolution(self, arr: List[int]) -> List[List[int]]:\n        arr.sort()\n        result = []\n        mindiff = inf\n        n = len(arr)\n        for i in range(1, n):\n            curdiff =  arr[i] - arr[i-1]\n\n            if curdiff < mindiff:\n                mindiff = curdiff\n                result = [[arr[i-1], arr[i]]]\n            elif curdiff == mindiff:\n                result.append([arr[i-1], arr[i]])\n        return result\n    \n    # Time Complexity: O(n+M)\n    # Space COmplexity: O(M)\n    def CountingsortedSolution(self, arr: List[int]) -> List[List[int]]:\n        arr = self.countingSort(arr)\n        result = []\n        mindiff = inf\n        n = len(arr)\n        for i in range(1, n):\n            curdiff =  arr[i] - arr[i-1]\n            \n            if curdiff < mindiff:\n                mindiff = curdiff\n                result = [[arr[i-1], arr[i]]]\n            elif curdiff == mindiff:\n                result.append([arr[i-1], arr[i]])\n        return result\n    \n    def countingSort(self, nums):\n        min_, max_ = min(nums), max(nums)\n        count = [0] * (max_-min_+1)\n        for num in nums:\n            count[num-min_] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i+min_]*c)\n        return result\n        \n    ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1200-minimum-absolute-difference/",
+      "datePublished": "2026-03-01T16:15:16+05:30",
+      "upvoteCount": 0,
       "author": {
         "@type": "Person",
-        "name": "Prakash Sellathurai"
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
       }
     }
   }
