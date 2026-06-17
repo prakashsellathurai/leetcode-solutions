@@ -1,0 +1,175 @@
+# 1233-remove-sub-folders-from-the-filesystem
+
+
+Try it on <a href='https://leetcode.com/problems/1233-remove-sub-folders-from-the-filesystem'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given a list of folders <code>folder</code>, return <em>the folders after removing all <strong>sub-folders</strong> in those folders</em>. You may return the answer in <strong>any order</strong>.</p>
+
+<p>If a <code>folder[i]</code> is located within another <code>folder[j]</code>, it is called a <strong>sub-folder</strong> of it. A sub-folder of <code>folder[j]</code> must start with <code>folder[j]</code>, followed by a <code>&quot;/&quot;</code>. For example, <code>&quot;/a/b&quot;</code> is a sub-folder of <code>&quot;/a&quot;</code>, but <code>&quot;/b&quot;</code> is not a sub-folder of <code>&quot;/a/b/c&quot;</code>.</p>
+
+<p>The format of a path is one or more concatenated strings of the form: <code>&#39;/&#39;</code> followed by one or more lowercase English letters.</p>
+
+<ul>
+	<li>For example, <code>&quot;/leetcode&quot;</code> and <code>&quot;/leetcode/problems&quot;</code> are valid paths while an empty string and <code>&quot;/&quot;</code> are not.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> folder = [&quot;/a&quot;,&quot;/a/b&quot;,&quot;/c/d&quot;,&quot;/c/d/e&quot;,&quot;/c/f&quot;]
+<strong>Output:</strong> [&quot;/a&quot;,&quot;/c/d&quot;,&quot;/c/f&quot;]
+<strong>Explanation:</strong> Folders &quot;/a/b&quot; is a subfolder of &quot;/a&quot; and &quot;/c/d/e&quot; is inside of folder &quot;/c/d&quot; in our filesystem.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> folder = [&quot;/a&quot;,&quot;/a/b/c&quot;,&quot;/a/b/d&quot;]
+<strong>Output:</strong> [&quot;/a&quot;]
+<strong>Explanation:</strong> Folders &quot;/a/b/c&quot; and &quot;/a/b/d&quot; will be removed because they are subfolders of &quot;/a&quot;.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> folder = [&quot;/a/b/c&quot;,&quot;/a/b/ca&quot;,&quot;/a/b/d&quot;]
+<strong>Output:</strong> [&quot;/a/b/c&quot;,&quot;/a/b/ca&quot;,&quot;/a/b/d&quot;]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= folder.length &lt;= 4 * 10<sup>4</sup></code></li>
+	<li><code>2 &lt;= folder[i].length &lt;= 100</code></li>
+	<li><code>folder[i]</code> contains only lowercase letters and <code>&#39;/&#39;</code>.</li>
+	<li><code>folder[i]</code> always starts with the character <code>&#39;/&#39;</code>.</li>
+	<li>Each folder name is <strong>unique</strong>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isEndOfFolder = False
+
+class Solution:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def removeSubfolders(self, folder: List[str]) -> List[str]:
+        return self.trie_(folder)
+    
+
+    # Time Complexity: O(N*L^2)
+    # Space Complexity: O(N*L)
+    def set_(self, folder: List[str]) -> List[str]:
+        folderSet = set(folder)
+        result  = []
+        for folder in folder:
+            isSubFolder = False
+            prefix = folder
+            while not prefix == "":
+                pos = prefix.rfind("/")
+                if not pos:
+                    break
+                prefix = prefix[0:pos]
+                if prefix in folderSet:
+                    isSubFolder = True
+                    break
+            if not isSubFolder:
+                result.append(folder)
+                
+        return result
+
+    
+    # Time Complexity: O(N*L*logN)
+    # Space Complexity: O(N*L)
+    def sort_(self, folder: List[str]) -> List[str]:   
+        folder.sort()
+        result  = []
+        for f in  folder:
+            if len(result) == 0:
+                result.append(f)
+                continue
+            lastfolder = result[-1]
+            lastfolder+="/"
+            if not f.startswith(lastfolder):
+                result.append(f)
+        return result
+        
+    # Time Complexity: O(N*L)
+    # Space Complexity: O(N*L)
+    def trie_(self, folder: List[str]) -> List[str]:   
+        for path in folder:
+            cur_node = self.root
+            folders = path.split("/")
+            for foldername in folders:
+                if foldername == "":
+                    continue
+                if foldername not in cur_node.children:
+                    cur_node.children[foldername] = TrieNode()
+                cur_node = cur_node.children[foldername]
+            cur_node.isEndOfFolder = True
+        
+        result = []
+
+        for path in folder:
+            current_node = self.root
+            folders = path.split("/")
+            is_subfolder = False
+
+            for i, folder_name in enumerate(folders):
+                if folder_name == "":
+                    continue
+                next_node = current_node.children[folder_name]
+                # Check if the current folder path is a subfolder of an existing folder
+                if next_node.isEndOfFolder and i != len(folders) - 1:
+                    is_subfolder = True
+                    break  # Found a subfolder
+                current_node = next_node
+
+            # If not a subfolder, add to the result
+            if not is_subfolder:
+                result.append(path)
+        return result
+
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1233. Remove Sub-Folders from the Filesystem",
+    "text": "Given a list of folders folder, return the folders after removing all sub-folders in those folders. You may return the answer in any order.\nIf a folder[i] is located within another folder[j], it is called a sub-folder of it. A sub-folder of folder[j] must start with folder[j], followed by a \"/\". For example, \"/a/b\" is a sub-folder of \"/a\", but \"/b\" is not a sub-folder of \"/a/b/c\".\nThe format of a path is one or more concatenated strings of the form: '/' followed by one or more lowercase English letters.\n\nFor example, \"/leetcode\" and \"/leetcode/problems\" are valid paths while an empty string and \"/\" are not.\n\n\u00a0\nExample 1:\n\nInput: folder = [\"/a\",\"/a/b\",\"/c/d\",\"/c/d/e\",\"/c/f\"]\nOutput: [\"/a\",\"/c/d\",\"/c/f\"]\nExplanation: Folders \"/a/b\" is a subfolder of \"/a\" and \"/c/d/e\" is inside of folder \"/c/d\" in our filesystem.\n\nExample 2:\n\nInput: folder = [\"/a\",\"/a/b/c\",\"/a/b/d\"]\nOutput: [\"/a\"]\nExplanation: Folders \"/a/b/c\" and \"/a/b/d\" will be removed because they are subfolders of \"/a\".\n\nExample 3:\n\nInput: folder = [\"/a/b/c\",\"/a/b/ca\",\"/a/b/d\"]\nOutput: [\"/a/b/c\",\"/a/b/ca\",\"/a/b/d\"]\n\n\u00a0\nConstraints:\n\n1 <= folder.length <= 4 * 104\n2 <= folder[i].length <= 100\nfolder[i] contains only lowercase letters and '/'.\nfolder[i] always starts with the character '/'.\nEach folder name is unique.\n\n",
+    "url": "https://leetcode.com/problems/1233-remove-sub-folders-from-the-filesystem",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class TrieNode:\n    def __init__(self):\n        self.children = {}\n        self.isEndOfFolder = False\n\nclass Solution:\n    def __init__(self):\n        self.root = TrieNode()\n\n    def removeSubfolders(self, folder: List[str]) -> List[str]:\n        return self.trie_(folder)\n    \n\n    # Time Complexity: O(N*L^2)\n    # Space Complexity: O(N*L)\n    def set_(self, folder: List[str]) -> List[str]:\n        folderSet = set(folder)\n        result  = []\n        for folder in folder:\n            isSubFolder = False\n            prefix = folder\n            while not prefix == \"\":\n                pos = prefix.rfind(\"/\")\n                if not pos:\n                    break\n                prefix = prefix[0:pos]\n                if prefix in folderSet:\n                    isSubFolder = True\n                    break\n            if not isSubFolder:\n                result.append(folder)\n                \n        return result\n\n    \n    # Time Complexity: O(N*L*logN)\n    # Space Complexity: O(N*L)\n    def sort_(self, folder: List[str]) -> List[str]:   \n        folder.sort()\n        result  = []\n        for f in  folder:\n            if len(result) == 0:\n                result.append(f)\n                continue\n            lastfolder = result[-1]\n            lastfolder+=\"/\"\n            if not f.startswith(lastfolder):\n                result.append(f)\n        return result\n        \n    # Time Complexity: O(N*L)\n    # Space Complexity: O(N*L)\n    def trie_(self, folder: List[str]) -> List[str]:   \n        for path in folder:\n            cur_node = self.root\n            folders = path.split(\"/\")\n            for foldername in folders:\n                if foldername == \"\":\n                    continue\n                if foldername not in cur_node.children:\n                    cur_node.children[foldername] = TrieNode()\n                cur_node = cur_node.children[foldername]\n            cur_node.isEndOfFolder = True\n        \n        result = []\n\n        for path in folder:\n            current_node = self.root\n            folders = path.split(\"/\")\n            is_subfolder = False\n\n            for i, folder_name in enumerate(folders):\n                if folder_name == \"\":\n                    continue\n                next_node = current_node.children[folder_name]\n                # Check if the current folder path is a subfolder of an existing folder\n                if next_node.isEndOfFolder and i != len(folders) - 1:\n                    is_subfolder = True\n                    break  # Found a subfolder\n                current_node = next_node\n\n            # If not a subfolder, add to the result\n            if not is_subfolder:\n                result.append(path)\n        return result\n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1233-remove-sub-folders-from-the-filesystem/",
+      "datePublished": "2024-10-31",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,121 @@
+# sort-an-array
+
+
+Try it on <a href='https://leetcode.com/problems/sort-an-array'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an array of integers <code>nums</code>, sort the array in ascending order and return it.</p>
+
+<p>You must solve the problem <strong>without using any built-in</strong> functions in <code>O(nlog(n))</code> time complexity and with the smallest space complexity possible.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre><strong>Input:</strong> nums = [5,2,3,1]
+<strong>Output:</strong> [1,2,3,5]
+<strong>Explanation:</strong> After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre><strong>Input:</strong> nums = [5,1,1,2,0,0]
+<strong>Output:</strong> [0,0,1,1,2,5]
+<strong>Explanation:</strong> Note that the values of nums are not necessairly unique.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>-5 * 10<sup>4</sup> &lt;= nums[i] &lt;= 5 * 10<sup>4</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        return self.countingSort(nums)
+
+    # merge two sorted arrays
+    # O(n) time complexity
+    # O(n) space complexity
+
+    def mergeSort(self, nums: List[int]) -> List[int]:
+        if len(nums) <= 1:
+            return nums
+        mid = len(nums) // 2
+        left = self.mergeSort(nums[:mid])
+        right = self.mergeSort(nums[mid:])
+        return self.merge(left, right)
+
+    # Heap sort
+    # O(nlogn) time complexity
+    # O(n) space complexity
+
+    def heapSort(self, nums: List[int]) -> List[int]:
+        heapq.heapify(nums)
+        return [heapq.heappop(nums) for _ in range(len(nums))]
+
+    # Counting Sort
+    # Time Complexity: O(n + k)
+    # SpaceComplexity : O(k)
+    def countingSort(self, nums: List[int]) -> List[int]:
+        min_num, max_num = min(nums), max(nums)
+        count = [0] * (max_num - min_num + 1)
+        for num in nums:
+            count[num - min_num] += 1
+        result = []
+        for i, c in enumerate(count):
+            result.extend([i + min_num] * c)
+        return result
+
+    def merge(self, left: List[int], right: List[int]) -> List[int]:
+        result = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": " \u00a0Sort an Array",
+    "text": "Given an array of integers nums, sort the array in ascending order and return it.\nYou must solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the smallest space complexity possible.\n\u00a0\nExample 1:\nInput: nums = [5,2,3,1]\nOutput: [1,2,3,5]\nExplanation: After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).\n\nExample 2:\nInput: nums = [5,1,1,2,0,0]\nOutput: [0,0,1,1,2,5]\nExplanation: Note that the values of nums are not necessairly unique.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 104\n-5 * 104 <= nums[i] <= 5 * 104\n\n",
+    "url": "https://leetcode.com/problems/sort-an-array",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def sortArray(self, nums: List[int]) -> List[int]:\n        return self.countingSort(nums)\n\n    # merge two sorted arrays\n    # O(n) time complexity\n    # O(n) space complexity\n\n    def mergeSort(self, nums: List[int]) -> List[int]:\n        if len(nums) <= 1:\n            return nums\n        mid = len(nums) // 2\n        left = self.mergeSort(nums[:mid])\n        right = self.mergeSort(nums[mid:])\n        return self.merge(left, right)\n\n    # Heap sort\n    # O(nlogn) time complexity\n    # O(n) space complexity\n\n    def heapSort(self, nums: List[int]) -> List[int]:\n        heapq.heapify(nums)\n        return [heapq.heappop(nums) for _ in range(len(nums))]\n\n    # Counting Sort\n    # Time Complexity: O(n + k)\n    # SpaceComplexity : O(k)\n    def countingSort(self, nums: List[int]) -> List[int]:\n        min_num, max_num = min(nums), max(nums)\n        count = [0] * (max_num - min_num + 1)\n        for num in nums:\n            count[num - min_num] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i + min_num] * c)\n        return result\n\n    def merge(self, left: List[int], right: List[int]) -> List[int]:\n        result = []\n        i = j = 0\n        while i < len(left) and j < len(right):\n            if left[i] < right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/sort-an-array/",
+      "datePublished": "2022-04-27",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

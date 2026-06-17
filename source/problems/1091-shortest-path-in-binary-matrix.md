@@ -1,0 +1,178 @@
+# 1091-shortest-path-in-binary-matrix
+
+
+Try it on <a href='https://leetcode.com/problems/1091-shortest-path-in-binary-matrix'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an <code>n x n</code> binary matrix <code>grid</code>, return <em>the length of the shortest <strong>clear path</strong> in the matrix</em>. If there is no clear path, return <code>-1</code>.</p>
+
+<p>A <strong>clear path</strong> in a binary matrix is a path from the <strong>top-left</strong> cell (i.e., <code>(0, 0)</code>) to the <strong>bottom-right</strong> cell (i.e., <code>(n - 1, n - 1)</code>) such that:</p>
+
+<ul>
+	<li>All the visited cells of the path are <code>0</code>.</li>
+	<li>All the adjacent cells of the path are <strong>8-directionally</strong> connected (i.e., they are different and they share an edge or a corner).</li>
+</ul>
+
+<p>The <strong>length of a clear path</strong> is the number of visited cells of this path.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/18/example1_1.png" style="width: 500px; height: 234px;">
+<pre><strong>Input:</strong> grid = [[0,1],[1,0]]
+<strong>Output:</strong> 2
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/18/example2_1.png" style="height: 216px; width: 500px;">
+<pre><strong>Input:</strong> grid = [[0,0,0],[1,1,0],[1,1,0]]
+<strong>Output:</strong> 4
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> grid = [[1,0,0],[1,1,0],[1,1,0]]
+<strong>Output:</strong> -1
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>n == grid.length</code></li>
+	<li><code>n == grid[i].length</code></li>
+	<li><code>1 &lt;= n &lt;= 100</code></li>
+	<li><code>grid[i][j] is 0 or 1</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        return self.doublebfs(grid)
+
+    # Time Complexity: O(n^2)
+    # Space Complexity: O(n^2)
+    def bfs(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        neighs = [(-1, -1), (-1, 0), (-1, 1), (0, -1),
+                  (0, 1), (1, -1), (1, 0), (1, 1)]
+        if grid[0][0]:
+            return -1
+
+        queue = deque([(1, 0, 0)])
+        visited = set()
+        visited.add((0, 0))
+
+        while queue:
+            dist, x, y = queue.popleft()
+
+            if x == n - 1 and y == n - 1:
+                return dist
+
+            for dx, dy in neighs:
+                negh_x, negh_y = x + dx, y + dy
+                if (
+                    -1 < negh_x < n
+                    and -1 < negh_y < n
+                    and not grid[negh_x][negh_y]
+                    and (negh_x, negh_y) not in visited
+                ):
+                    visited.add((negh_x, negh_y))
+                    queue.append((dist + 1, negh_x, negh_y))
+
+        return -1
+
+    # Time Complexity: O(n^2)
+    # Space Complexity: O(n^2)
+    def doublebfs(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        neighs = [(-1, -1), (-1, 0), (-1, 1), (0, -1),
+                  (0, 1), (1, -1), (1, 0), (1, 1)]
+
+        if grid[0][0] or grid[n - 1][n - 1]:
+            return -1
+
+        if n == 1:
+            return 1
+
+        queue1 = deque([(1, 0, 0)])
+        queue2 = deque([(1, n - 1, n - 1)])
+
+        visited1 = defaultdict(lambda: 0)
+        visited2 = defaultdict(lambda: 0)
+
+        visited1[(0, 0)] = 1
+        visited2[(n - 1, n - 1)] = 1
+
+        while queue1 and queue2:
+            if queue1:
+                dist, x, y = queue1.popleft()
+
+                if (x, y) in visited2:
+                    return dist + visited2[(x, y)] - 1
+
+                for dx, dy in neighs:
+                    negh_x, negh_y = x + dx, y + dy
+                    if (
+                        -1 < negh_x < n
+                        and -1 < negh_y < n
+                        and not grid[negh_x][negh_y]
+                        and (negh_x, negh_y) not in visited1
+                    ):
+                        visited1[(negh_x, negh_y)] = dist + 1
+                        queue1.append((dist + 1, negh_x, negh_y))
+
+            if queue2:
+                dist, x, y = queue2.popleft()
+
+                if (x, y) in visited1:
+                    return dist + visited1[(x, y)] - 1
+
+                for dx, dy in neighs:
+                    negh_x, negh_y = x + dx, y + dy
+                    if (
+                        -1 < negh_x < n
+                        and -1 < negh_y < n
+                        and not grid[negh_x][negh_y]
+                        and (negh_x, negh_y) not in visited2
+                    ):
+                        visited2[(negh_x, negh_y)] = dist + 1
+                        queue2.append((dist + 1, negh_x, negh_y))
+
+        return -1
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1091. Shortest Path in Binary Matrix",
+    "text": "Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. If there is no clear path, return -1.\nA clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n\nAll the visited cells of the path are 0.\nAll the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n\nThe length of a clear path is the number of visited cells of this path.\n\u00a0\nExample 1:\n\nInput: grid = [[0,1],[1,0]]\nOutput: 2\n\nExample 2:\n\nInput: grid = [[0,0,0],[1,1,0],[1,1,0]]\nOutput: 4\n\nExample 3:\nInput: grid = [[1,0,0],[1,1,0],[1,1,0]]\nOutput: -1\n\n\u00a0\nConstraints:\n\nn == grid.length\nn == grid[i].length\n1 <= n <= 100\ngrid[i][j] is 0 or 1\n\n",
+    "url": "https://leetcode.com/problems/1091-shortest-path-in-binary-matrix",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:\n        return self.doublebfs(grid)\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n^2)\n    def bfs(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        neighs = [(-1, -1), (-1, 0), (-1, 1), (0, -1),\n                  (0, 1), (1, -1), (1, 0), (1, 1)]\n        if grid[0][0]:\n            return -1\n\n        queue = deque([(1, 0, 0)])\n        visited = set()\n        visited.add((0, 0))\n\n        while queue:\n            dist, x, y = queue.popleft()\n\n            if x == n - 1 and y == n - 1:\n                return dist\n\n            for dx, dy in neighs:\n                negh_x, negh_y = x + dx, y + dy\n                if (\n                    -1 < negh_x < n\n                    and -1 < negh_y < n\n                    and not grid[negh_x][negh_y]\n                    and (negh_x, negh_y) not in visited\n                ):\n                    visited.add((negh_x, negh_y))\n                    queue.append((dist + 1, negh_x, negh_y))\n\n        return -1\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n^2)\n    def doublebfs(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        neighs = [(-1, -1), (-1, 0), (-1, 1), (0, -1),\n                  (0, 1), (1, -1), (1, 0), (1, 1)]\n\n        if grid[0][0] or grid[n - 1][n - 1]:\n            return -1\n\n        if n == 1:\n            return 1\n\n        queue1 = deque([(1, 0, 0)])\n        queue2 = deque([(1, n - 1, n - 1)])\n\n        visited1 = defaultdict(lambda: 0)\n        visited2 = defaultdict(lambda: 0)\n\n        visited1[(0, 0)] = 1\n        visited2[(n - 1, n - 1)] = 1\n\n        while queue1 and queue2:\n            if queue1:\n                dist, x, y = queue1.popleft()\n\n                if (x, y) in visited2:\n                    return dist + visited2[(x, y)] - 1\n\n                for dx, dy in neighs:\n                    negh_x, negh_y = x + dx, y + dy\n                    if (\n                        -1 < negh_x < n\n                        and -1 < negh_y < n\n                        and not grid[negh_x][negh_y]\n                        and (negh_x, negh_y) not in visited1\n                    ):\n                        visited1[(negh_x, negh_y)] = dist + 1\n                        queue1.append((dist + 1, negh_x, negh_y))\n\n            if queue2:\n                dist, x, y = queue2.popleft()\n\n                if (x, y) in visited1:\n                    return dist + visited1[(x, y)] - 1\n\n                for dx, dy in neighs:\n                    negh_x, negh_y = x + dx, y + dy\n                    if (\n                        -1 < negh_x < n\n                        and -1 < negh_y < n\n                        and not grid[negh_x][negh_y]\n                        and (negh_x, negh_y) not in visited2\n                    ):\n                        visited2[(negh_x, negh_y)] = dist + 1\n                        queue2.append((dist + 1, negh_x, negh_y))\n\n        return -1\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1091-shortest-path-in-binary-matrix/",
+      "datePublished": "2025-03-28",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

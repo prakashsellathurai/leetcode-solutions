@@ -1,0 +1,94 @@
+# 53-maximum-subarray
+
+
+Try it on <a href='https://leetcode.com/problems/53-maximum-subarray'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return <em>its sum</em>.</p>
+
+<p>A <strong>subarray</strong> is a <strong>contiguous</strong> part of an array.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> nums = [-2,1,-3,4,-1,2,1,-5,4]
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> [4,-1,2,1] has the largest sum = 6.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> nums = [1]
+<strong>Output:</strong> 1
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> nums = [5,4,-1,7,8]
+<strong>Output:</strong> 23
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution using the <strong>divide and conquer</strong> approach, which is more subtle.</p>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        max_sum = float("-inf")
+        cur_sum = 0
+
+        for num in nums:
+            if cur_sum + num > num:
+                cur_sum = cur_sum + num
+            else:
+                cur_sum = num
+
+            if cur_sum > max_sum:
+                max_sum = cur_sum
+
+        return max_sum
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "53. Maximum Subarray",
+    "text": "Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.\nA subarray is a contiguous part of an array.\n\u00a0\nExample 1:\nInput: nums = [-2,1,-3,4,-1,2,1,-5,4]\nOutput: 6\nExplanation: [4,-1,2,1] has the largest sum = 6.\n\nExample 2:\nInput: nums = [1]\nOutput: 1\n\nExample 3:\nInput: nums = [5,4,-1,7,8]\nOutput: 23\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n\u00a0\nFollow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.\n",
+    "url": "https://leetcode.com/problems/53-maximum-subarray",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def maxSubArray(self, nums: List[int]) -> int:\n        max_sum = float(\"-inf\")\n        cur_sum = 0\n\n        for num in nums:\n            if cur_sum + num > num:\n                cur_sum = cur_sum + num\n            else:\n                cur_sum = num\n\n            if cur_sum > max_sum:\n                max_sum = cur_sum\n\n        return max_sum\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/53-maximum-subarray/",
+      "datePublished": "2025-08-21",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

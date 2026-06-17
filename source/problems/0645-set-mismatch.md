@@ -1,0 +1,114 @@
+# 0645-set-mismatch
+
+
+Try it on <a href='https://leetcode.com/problems/0645-set-mismatch'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You have a set of integers <code>s</code>, which originally contains all the numbers from <code>1</code> to <code>n</code>. Unfortunately, due to some error, one of the numbers in <code>s</code> got duplicated to another number in the set, which results in <strong>repetition of one</strong> number and <strong>loss of another</strong> number.</p>
+
+<p>You are given an integer array <code>nums</code> representing the data status of this set after the error.</p>
+
+<p>Find the number that occurs twice and the number that is missing and return <em>them in the form of an array</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> nums = [1,2,2,4]
+<strong>Output:</strong> [2,3]
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = [1,1]
+<strong>Output:</strong> [1,2]
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>1 &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        return self.constantspace(nums)
+        
+    def sorted(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        nums.sort()
+        dup = -1
+        missing = 1
+        for i in range(n):
+            if nums[i] == nums[i-1]:
+                dup = nums[i]
+            elif nums[i] > nums[i-1] + 1:
+                missing  = nums[i-1] + 1
+        return [dup,  n if nums[-1] != n  else missing ]
+
+    def hashmap(self, nums: List[int]) -> List[int]:
+        hashmap = {}
+
+        for num in nums:
+            if num not in hashmap:
+                hashmap[num] = 1
+            else:
+                hashmap[num] += 1
+        n = len(nums)
+        missing = 1
+        dup = -1
+        for i in range(1,n+1):
+            if i not in hashmap:
+                missing = i
+            elif hashmap[i] == 2:
+                dup = i
+        return [dup, missing]
+
+    def constantspace(self, nums: List[int]) -> List[int]:
+        dup = -1
+        missing = 1
+
+        for num in nums:# 2, -2
+            if nums[abs(num)-1] < 0:
+                dup = abs(num)  # dup = 2
+            else:
+                nums[abs(num)-1] = -nums[abs(num)-1]
+        n = len(nums)
+        for i in range(n): # 0 1   | 
+            if nums[i] > 0:
+                missing = i + 1
+        return [dup,missing]
+            
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "645. Set Mismatch",
+    "text": "You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.\nYou are given an integer array nums representing the data status of this set after the error.\nFind the number that occurs twice and the number that is missing and return them in the form of an array.\n\u00a0\nExample 1:\nInput: nums = [1,2,2,4]\nOutput: [2,3]\nExample 2:\nInput: nums = [1,1]\nOutput: [1,2]\n\n\u00a0\nConstraints:\n\n2 <= nums.length <= 104\n1 <= nums[i] <= 104\n\n",
+    "url": "https://leetcode.com/problems/0645-set-mismatch",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def findErrorNums(self, nums: List[int]) -> List[int]:\n        return self.constantspace(nums)\n        \n    def sorted(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        nums.sort()\n        dup = -1\n        missing = 1\n        for i in range(n):\n            if nums[i] == nums[i-1]:\n                dup = nums[i]\n            elif nums[i] > nums[i-1] + 1:\n                missing  = nums[i-1] + 1\n        return [dup,  n if nums[-1] != n  else missing ]\n\n    def hashmap(self, nums: List[int]) -> List[int]:\n        hashmap = {}\n\n        for num in nums:\n            if num not in hashmap:\n                hashmap[num] = 1\n            else:\n                hashmap[num] += 1\n        n = len(nums)\n        missing = 1\n        dup = -1\n        for i in range(1,n+1):\n            if i not in hashmap:\n                missing = i\n            elif hashmap[i] == 2:\n                dup = i\n        return [dup, missing]\n\n    def constantspace(self, nums: List[int]) -> List[int]:\n        dup = -1\n        missing = 1\n\n        for num in nums:# 2, -2\n            if nums[abs(num)-1] < 0:\n                dup = abs(num)  # dup = 2\n            else:\n                nums[abs(num)-1] = -nums[abs(num)-1]\n        n = len(nums)\n        for i in range(n): # 0 1   | \n            if nums[i] > 0:\n                missing = i + 1\n        return [dup,missing]\n            ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0645-set-mismatch/",
+      "datePublished": "2024-02-10",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

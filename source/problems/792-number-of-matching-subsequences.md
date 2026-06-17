@@ -1,0 +1,164 @@
+# 792-number-of-matching-subsequences
+
+
+Try it on <a href='https://leetcode.com/problems/792-number-of-matching-subsequences'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given a string <code>s</code> and an array of strings <code>words</code>, return <em>the number of</em> <code>words[i]</code> <em>that is a subsequence of</em> <code>s</code>.</p>
+
+<p>A <strong>subsequence</strong> of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.</p>
+
+<ul>
+	<li>For example, <code>"ace"</code> is a subsequence of <code>"abcde"</code>.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> s = "abcde", words = ["a","bb","acd","ace"]
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> There are three strings in words that are a subsequence of s: "a", "acd", "ace".
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> s = "dsahjpjauf", words = ["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]
+<strong>Output:</strong> 2
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>1 &lt;= words.length &lt;= 5000</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 50</code></li>
+	<li><code>s</code> and <code>words[i]</code> consist of only lowercase English letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+        return self.optimal(s, words)
+
+    # Time Complexity: O(n*m)
+    # space complexity: O(1)
+    def naive(self, s: str, words: List[str]) -> int:
+        cnt = 0
+
+        def issubsequence(s, word):
+            i = 0
+            if len(word) > len(s):
+                return False
+            for c in s:
+                if i < len(word) and word[i] == c:
+                    i += 1
+            return i == len(word)
+
+        for word in words:
+            if issubsequence(s, word):
+                cnt += 1
+        return cnt
+
+    # Time Complexity: O(n*m)
+    # space complexity: O(n)
+    def better(self, s: str, words: List[str]) -> int:
+        def issubseq(s, t):
+            stack = []
+            for i in t:
+                stack.append(i)
+
+            n = len(s)
+            for i in range(n - 1, -1, -1):
+                if not stack:
+                    return True
+                if stack[-1] == s[i]:
+                    stack.pop()
+            return stack == []
+
+        hashmap = {}
+
+        count = 0
+        for word in words:
+            if word not in hashmap:
+                if issubseq(s, word):
+                    count += 1
+                    hashmap[word] = True
+                else:
+                    hashmap[word] = False
+            else:
+                if hashmap[word]:
+                    count += 1
+        return count
+
+    # Time Complexity: O(nlogm)
+    # space complexity: O(n)
+    def optimal(self, s: str, words: List[str]) -> int:
+        def issubseq(t):
+            current_pos = -1
+            stack = []
+            for i in t:
+                if indices[i]:
+                    pos = bisect.bisect_right(indices[i], current_pos)
+                    if pos == len(indices[i]):
+                        return False
+                    current_pos = indices[i][pos]
+                else:
+                    return False
+            return True
+
+        indices = defaultdict(list)
+        for i, c in enumerate(s):
+            indices[c].append(i)
+
+        hashmap = {}
+
+        count = 0
+        for word in words:
+            if word not in hashmap:
+                if issubseq(word):
+                    count += 1
+                    hashmap[word] = True
+                else:
+                    hashmap[word] = False
+            else:
+                if hashmap[word]:
+                    count += 1
+        return count
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "792. Number of Matching Subsequences",
+    "text": "Given a string s and an array of strings words, return the number of words[i] that is a subsequence of s.\nA subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.\n\nFor example, \"ace\" is a subsequence of \"abcde\".\n\n\u00a0\nExample 1:\nInput: s = \"abcde\", words = [\"a\",\"bb\",\"acd\",\"ace\"]\nOutput: 3\nExplanation: There are three strings in words that are a subsequence of s: \"a\", \"acd\", \"ace\".\n\nExample 2:\nInput: s = \"dsahjpjauf\", words = [\"ahjpjau\",\"ja\",\"ahbwzgqnuk\",\"tnmlanowax\"]\nOutput: 2\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 5 * 104\n1 <= words.length <= 5000\n1 <= words[i].length <= 50\ns and words[i] consist of only lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/792-number-of-matching-subsequences",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def numMatchingSubseq(self, s: str, words: List[str]) -> int:\n        return self.optimal(s, words)\n\n    # Time Complexity: O(n*m)\n    # space complexity: O(1)\n    def naive(self, s: str, words: List[str]) -> int:\n        cnt = 0\n\n        def issubsequence(s, word):\n            i = 0\n            if len(word) > len(s):\n                return False\n            for c in s:\n                if i < len(word) and word[i] == c:\n                    i += 1\n            return i == len(word)\n\n        for word in words:\n            if issubsequence(s, word):\n                cnt += 1\n        return cnt\n\n    # Time Complexity: O(n*m)\n    # space complexity: O(n)\n    def better(self, s: str, words: List[str]) -> int:\n        def issubseq(s, t):\n            stack = []\n            for i in t:\n                stack.append(i)\n\n            n = len(s)\n            for i in range(n - 1, -1, -1):\n                if not stack:\n                    return True\n                if stack[-1] == s[i]:\n                    stack.pop()\n            return stack == []\n\n        hashmap = {}\n\n        count = 0\n        for word in words:\n            if word not in hashmap:\n                if issubseq(s, word):\n                    count += 1\n                    hashmap[word] = True\n                else:\n                    hashmap[word] = False\n            else:\n                if hashmap[word]:\n                    count += 1\n        return count\n\n    # Time Complexity: O(nlogm)\n    # space complexity: O(n)\n    def optimal(self, s: str, words: List[str]) -> int:\n        def issubseq(t):\n            current_pos = -1\n            stack = []\n            for i in t:\n                if indices[i]:\n                    pos = bisect.bisect_right(indices[i], current_pos)\n                    if pos == len(indices[i]):\n                        return False\n                    current_pos = indices[i][pos]\n                else:\n                    return False\n            return True\n\n        indices = defaultdict(list)\n        for i, c in enumerate(s):\n            indices[c].append(i)\n\n        hashmap = {}\n\n        count = 0\n        for word in words:\n            if word not in hashmap:\n                if issubseq(word):\n                    count += 1\n                    hashmap[word] = True\n                else:\n                    hashmap[word] = False\n            else:\n                if hashmap[word]:\n                    count += 1\n        return count\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/792-number-of-matching-subsequences/",
+      "datePublished": "2025-12-11",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,4 +1,4 @@
-# Smallest-Integer-Divisible-by-K
+# smallest-integer-divisible-by-k
 
 
 Try it on <a href='https://leetcode.com/problems/smallest-integer-divisible-by-k'>leetcode</a>
@@ -48,17 +48,48 @@ class Solution:
     def smallestRepunitDivByK(self, k: int) -> int:
         rem = 1
         len_n = 1
-        
+
         seen = set()
-        while  rem%k != 0:
-            n = rem*10+1
-            rem = n%k
-            len_n+=1
-            
+        while rem % k != 0:
+            n = rem * 10 + 1
+            rem = n % k
+            len_n += 1
+
             if rem in seen:
                 return -1
             else:
                 seen.add(rem)
         return len_n
-            
+
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1015. Smallest Integer Divisible by K",
+    "text": "Given a positive integer k, you need to find the length of the smallest positive integer n such that n is divisible by k, and n only contains the digit 1.\nReturn the length of n. If there is no such n, return -1.\nNote: n may not fit in a 64-bit signed integer.\n\u00a0\nExample 1:\nInput: k = 1\nOutput: 1\nExplanation: The smallest answer is n = 1, which has length 1.\n\nExample 2:\nInput: k = 2\nOutput: -1\nExplanation: There is no such positive integer n divisible by 2.\n\nExample 3:\nInput: k = 3\nOutput: 3\nExplanation: The smallest answer is n = 111, which has length 3.\n\n\u00a0\nConstraints:\n\n1 <= k <= 105\n\n",
+    "url": "https://leetcode.com/problems/smallest-integer-divisible-by-k",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def smallestRepunitDivByK(self, k: int) -> int:\n        rem = 1\n        len_n = 1\n\n        seen = set()\n        while rem % k != 0:\n            n = rem * 10 + 1\n            rem = n % k\n            len_n += 1\n\n            if rem in seen:\n                return -1\n            else:\n                seen.add(rem)\n        return len_n\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/smallest-integer-divisible-by-k/",
+      "datePublished": "2023-11-13",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

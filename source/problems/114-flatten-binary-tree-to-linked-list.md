@@ -1,0 +1,102 @@
+# 114-flatten-binary-tree-to-linked-list
+
+
+Try it on <a href='https://leetcode.com/problems/114-flatten-binary-tree-to-linked-list'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given the <code>root</code> of a binary tree, flatten the tree into a "linked list":</p>
+
+<ul>
+	<li>The "linked list" should use the same <code>TreeNode</code> class where the <code>right</code> child pointer points to the next node in the list and the <code>left</code> child pointer is always <code>null</code>.</li>
+	<li>The "linked list" should be in the same order as a <a href="https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR" target="_blank"><strong>pre-order</strong><strong> traversal</strong></a> of the binary tree.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/14/flaten.jpg" style="width: 500px; height: 226px;">
+<pre><strong>Input:</strong> root = [1,2,5,3,4,null,6]
+<strong>Output:</strong> [1,null,2,null,3,null,4,null,5,null,6]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> root = []
+<strong>Output:</strong> []
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> root = [0]
+<strong>Output:</strong> [0]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.</li>
+	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<strong>Follow up:</strong> Can you flatten the tree in-place (with <code>O(1)</code> extra space)?</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        cur = root
+        while cur:
+            if cur.left:
+                pre = cur.left
+                while pre.right:
+                    pre = pre.right
+                
+                pre.right = cur.right
+                
+                cur.right = cur.left
+                cur.left = None
+            cur = cur.right 
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "114. Flatten Binary Tree to Linked List",
+    "text": "Given the root of a binary tree, flatten the tree into a \"linked list\":\n\nThe \"linked list\" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.\nThe \"linked list\" should be in the same order as a pre-order traversal of the binary tree.\n\n\u00a0\nExample 1:\n\nInput: root = [1,2,5,3,4,null,6]\nOutput: [1,null,2,null,3,null,4,null,5,null,6]\n\nExample 2:\nInput: root = []\nOutput: []\n\nExample 3:\nInput: root = [0]\nOutput: [0]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 2000].\n-100 <= Node.val <= 100\n\n\u00a0\nFollow up: Can you flatten the tree in-place (with O(1) extra space)?",
+    "url": "https://leetcode.com/problems/114-flatten-binary-tree-to-linked-list",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def flatten(self, root: Optional[TreeNode]) -> None:\n        \"\"\"\n        Do not return anything, modify root in-place instead.\n        \"\"\"\n        cur = root\n        while cur:\n            if cur.left:\n                pre = cur.left\n                while pre.right:\n                    pre = pre.right\n                \n                pre.right = cur.right\n                \n                cur.right = cur.left\n                cur.left = None\n            cur = cur.right ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/114-flatten-binary-tree-to-linked-list/",
+      "datePublished": "2025-11-03",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

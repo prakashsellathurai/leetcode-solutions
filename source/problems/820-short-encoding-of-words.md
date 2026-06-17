@@ -1,0 +1,106 @@
+# 820-short-encoding-of-words
+
+
+Try it on <a href='https://leetcode.com/problems/820-short-encoding-of-words'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>A <strong>valid encoding</strong> of an array of <code>words</code> is any reference string <code>s</code> and array of indices <code>indices</code> such that:</p>
+
+<ul>
+	<li><code>words.length == indices.length</code></li>
+	<li>The reference string <code>s</code> ends with the <code>'#'</code> character.</li>
+	<li>For each index <code>indices[i]</code>, the <strong>substring</strong> of <code>s</code> starting from <code>indices[i]</code> and up to (but not including) the next <code>'#'</code> character is equal to <code>words[i]</code>.</li>
+</ul>
+
+<p>Given an array of <code>words</code>, return <em>the <strong>length of the shortest reference string</strong> </em><code>s</code><em> possible of any <strong>valid encoding</strong> of </em><code>words</code><em>.</em></p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> words = ["time", "me", "bell"]
+<strong>Output:</strong> 10
+<strong>Explanation:</strong> A valid encoding would be s = <code>"time#bell#" and indices = [0, 2, 5</code>].
+words[0] = "time", the substring of s starting from indices[0] = 0 to the next '#' is underlined in "<u>time</u>#bell#"
+words[1] = "me", the substring of s starting from indices[1] = 2 to the next '#' is underlined in "ti<u>me</u>#bell#"
+words[2] = "bell", the substring of s starting from indices[2] = 5 to the next '#' is underlined in "time#<u>bell</u>#"
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> words = ["t"]
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> A valid encoding would be s = "t#" and indices = [0].
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= words.length &lt;= 2000</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 7</code></li>
+	<li><code>words[i]</code> consists of only lowercase letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def minimumLengthEncoding(self, words: List[str]) -> int:
+        return self.triesolution(words)
+
+    # Time Complexity: O(Σw^2)
+    # Space complexity: O(Σw)
+    def bruteforce(self, words: List[str]) -> int:
+        good = set(words)
+        for word in words:
+            for k in range(1, len(word)):
+                good.discard(word[k:])
+        return sum(len(word) + 1 for word in good)
+
+    # Time Complexity: O(Σw)
+    # Space complexity: O(Σw)
+    def triesolution(self, words: List[str]) -> int:
+        words = list(set(words))  # remove duplicates
+
+        def Trie():
+            return collections.defaultdict(Trie)
+
+        trie = Trie()
+
+        nodes = [reduce(dict.__getitem__, word[::-1], trie) for word in words]
+        return sum(len(word) + 1 for i, word in enumerate(words) if len(nodes[i]) == 0)
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "820. Short Encoding of Words",
+    "text": "A valid encoding of an array of words is any reference string s and array of indices indices such that:\n\nwords.length == indices.length\nThe reference string s ends with the '#' character.\nFor each index indices[i], the substring of s starting from indices[i] and up to (but not including) the next '#' character is equal to words[i].\n\nGiven an array of words, return the length of the shortest reference string s possible of any valid encoding of words.\n\u00a0\nExample 1:\nInput: words = [\"time\", \"me\", \"bell\"]\nOutput: 10\nExplanation: A valid encoding would be s = \"time#bell#\" and indices = [0, 2, 5].\nwords[0] = \"time\", the substring of s starting from indices[0] = 0 to the next '#' is underlined in \"time#bell#\"\nwords[1] = \"me\", the substring of s starting from indices[1] = 2 to the next '#' is underlined in \"time#bell#\"\nwords[2] = \"bell\", the substring of s starting from indices[2] = 5 to the next '#' is underlined in \"time#bell#\"\n\nExample 2:\nInput: words = [\"t\"]\nOutput: 2\nExplanation: A valid encoding would be s = \"t#\" and indices = [0].\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 2000\n1 <= words[i].length <= 7\nwords[i] consists of only lowercase letters.\n\n",
+    "url": "https://leetcode.com/problems/820-short-encoding-of-words",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minimumLengthEncoding(self, words: List[str]) -> int:\n        return self.triesolution(words)\n\n    # Time Complexity: O(\u03a3w^2)\n    # Space complexity: O(\u03a3w)\n    def bruteforce(self, words: List[str]) -> int:\n        good = set(words)\n        for word in words:\n            for k in range(1, len(word)):\n                good.discard(word[k:])\n        return sum(len(word) + 1 for word in good)\n\n    # Time Complexity: O(\u03a3w)\n    # Space complexity: O(\u03a3w)\n    def triesolution(self, words: List[str]) -> int:\n        words = list(set(words))  # remove duplicates\n\n        def Trie():\n            return collections.defaultdict(Trie)\n\n        trie = Trie()\n\n        nodes = [reduce(dict.__getitem__, word[::-1], trie) for word in words]\n        return sum(len(word) + 1 for i, word in enumerate(words) if len(nodes[i]) == 0)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/820-short-encoding-of-words/",
+      "datePublished": "2024-04-29",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

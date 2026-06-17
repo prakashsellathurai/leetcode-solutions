@@ -1,0 +1,83 @@
+# 605-can-place-flowers
+
+
+Try it on <a href='https://leetcode.com/problems/605-can-place-flowers'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in <strong>adjacent</strong> plots.</p>
+
+<p>Given an integer array <code>flowerbed</code> containing <code>0</code>'s and <code>1</code>'s, where <code>0</code> means empty and <code>1</code> means not empty, and an integer <code>n</code>, return <em>if</em> <code>n</code> new flowers can be planted in the <code>flowerbed</code> without violating the no-adjacent-flowers rule.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> flowerbed = [1,0,0,0,1], n = 1
+<strong>Output:</strong> true
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> flowerbed = [1,0,0,0,1], n = 2
+<strong>Output:</strong> false
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= flowerbed.length &lt;= 2 * 10<sup>4</sup></code></li>
+	<li><code>flowerbed[i]</code> is <code>0</code> or <code>1</code>.</li>
+	<li>There are no two adjacent flowers in <code>flowerbed</code>.</li>
+	<li><code>0 &lt;= n &lt;= flowerbed.length</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        i = 0
+        cnt = 0
+
+        while i < len(flowerbed):
+            if (
+                flowerbed[i] == 0
+                and (i == 0 or flowerbed[i - 1] == 0)
+                and (i == len(flowerbed) - 1 or flowerbed[i + 1] == 0)
+            ):
+                flowerbed[i] = 1
+                cnt += 1
+            if cnt >= n:
+                return True
+            i += 1
+        return False
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "605. Can Place Flowers",
+    "text": "You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.\nGiven an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule.\n\u00a0\nExample 1:\nInput: flowerbed = [1,0,0,0,1], n = 1\nOutput: true\nExample 2:\nInput: flowerbed = [1,0,0,0,1], n = 2\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= flowerbed.length <= 2 * 104\nflowerbed[i] is 0 or 1.\nThere are no two adjacent flowers in flowerbed.\n0 <= n <= flowerbed.length\n\n",
+    "url": "https://leetcode.com/problems/605-can-place-flowers",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:\n        i = 0\n        cnt = 0\n\n        while i < len(flowerbed):\n            if (\n                flowerbed[i] == 0\n                and (i == 0 or flowerbed[i - 1] == 0)\n                and (i == len(flowerbed) - 1 or flowerbed[i + 1] == 0)\n            ):\n                flowerbed[i] = 1\n                cnt += 1\n            if cnt >= n:\n                return True\n            i += 1\n        return False\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/605-can-place-flowers/",
+      "datePublished": "2025-03-30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

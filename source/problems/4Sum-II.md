@@ -1,4 +1,4 @@
-# 4Sum-II
+# 4sum-ii
 
 
 Try it on <a href='https://leetcode.com/problems/4sum-ii'>leetcode</a>
@@ -46,19 +46,50 @@ The two tuples are:
 ## Solution(Python)
 ```Python
 class Solution:
-    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+    def fourSumCount(
+        self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]
+    ) -> int:
         count = 0
-        hashmap = defaultdict(lambda :0)
-        
-        for i,num1 in enumerate(nums1):
-            for j,num2 in enumerate(nums2):
-                hashmap[-num1-num2] += 1
-                
-        for k,num3 in enumerate(nums3):
-            for l,num4 in enumerate(nums4):
-                    count+=hashmap[num3+num4]
+        hashmap = defaultdict(lambda: 0)
+
+        for i, num1 in enumerate(nums1):
+            for j, num2 in enumerate(nums2):
+                hashmap[-num1 - num2] += 1
+
+        for k, num3 in enumerate(nums3):
+            for l, num4 in enumerate(nums4):
+                count += hashmap[num3 + num4]
         return count
-    
-    
 
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "454. 4Sum II",
+    "text": "Given four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:\n\n0 <= i, j, k, l < n\nnums1[i] + nums2[j] + nums3[k] + nums4[l] == 0\n\n\u00a0\nExample 1:\nInput: nums1 = [1,2], nums2 = [-2,-1], nums3 = [-1,2], nums4 = [0,2]\nOutput: 2\nExplanation:\nThe two tuples are:\n1. (0, 0, 0, 1) -> nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0\n2. (1, 1, 0, 0) -> nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0\n\nExample 2:\nInput: nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]\nOutput: 1\n\n\u00a0\nConstraints:\n\nn == nums1.length\nn == nums2.length\nn == nums3.length\nn == nums4.length\n1 <= n <= 200\n-228 <= nums1[i], nums2[i], nums3[i], nums4[i] <= 228\n\n",
+    "url": "https://leetcode.com/problems/4sum-ii",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def fourSumCount(\n        self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]\n    ) -> int:\n        count = 0\n        hashmap = defaultdict(lambda: 0)\n\n        for i, num1 in enumerate(nums1):\n            for j, num2 in enumerate(nums2):\n                hashmap[-num1 - num2] += 1\n\n        for k, num3 in enumerate(nums3):\n            for l, num4 in enumerate(nums4):\n                count += hashmap[num3 + num4]\n        return count\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/4sum-ii/",
+      "datePublished": "2024-06-01",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

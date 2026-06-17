@@ -1,0 +1,67 @@
+# 1220-count-vowels-permutation
+
+
+Try it on <a href='https://leetcode.com/problems/1220-count-vowels-permutation'>leetcode</a>
+
+## Description
+<div class="description">
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    # n = 1
+    #   a ,e,i,o,u
+    # n = 2
+    # ae, ea, ei, ia,ie,io,iu,oi,ou and ua
+    # dp[1][j] = 1
+    #  dp[i][0] = dp[i-1][1] + 1 
+    #   dp[i][1] = max(dp[i-1][0],dp[i-1][2]) + 1
+    #  dp[i][2] = max(dp[i-1][0..1],dp[i-1][3..4])
+    #  dp[i][3] = max(dp[i-1][2], dp[i-1][4]) + 1
+    #  dp[i][4] = dp[i-1][1]+1
+    def countVowelPermutation(self, n: int) -> int:
+        dp = [[0]*5 for _ in range(n)]
+        dp[0] = [1 for _ in range(5)]
+        
+        for i in range(1,n):
+            dp[i][0] = dp[i-1][1]
+            dp[i][1] = dp[i-1][0] + dp[i-1][2]
+            dp[i][2] = dp[i-1][0] + dp[i-1][1] + dp[i-1][3] + dp[i-1][4]
+            dp[i][3] =  dp[i-1][2] + dp[i-1][4]
+            dp[i][4] = dp[i-1][0]
+        return sum(dp[-1]) % ((10**9)+7)
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1220-count-vowels-permutation",
+    "text": "",
+    "url": "https://leetcode.com/problems/1220-count-vowels-permutation",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    # n = 1\n    #   a ,e,i,o,u\n    # n = 2\n    # ae, ea, ei, ia,ie,io,iu,oi,ou and ua\n    # dp[1][j] = 1\n    #  dp[i][0] = dp[i-1][1] + 1 \n    #   dp[i][1] = max(dp[i-1][0],dp[i-1][2]) + 1\n    #  dp[i][2] = max(dp[i-1][0..1],dp[i-1][3..4])\n    #  dp[i][3] = max(dp[i-1][2], dp[i-1][4]) + 1\n    #  dp[i][4] = dp[i-1][1]+1\n    def countVowelPermutation(self, n: int) -> int:\n        dp = [[0]*5 for _ in range(n)]\n        dp[0] = [1 for _ in range(5)]\n        \n        for i in range(1,n):\n            dp[i][0] = dp[i-1][1]\n            dp[i][1] = dp[i-1][0] + dp[i-1][2]\n            dp[i][2] = dp[i-1][0] + dp[i-1][1] + dp[i-1][3] + dp[i-1][4]\n            dp[i][3] =  dp[i-1][2] + dp[i-1][4]\n            dp[i][4] = dp[i-1][0]\n        return sum(dp[-1]) % ((10**9)+7)\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1220-count-vowels-permutation/",
+      "datePublished": "2026-05-25",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

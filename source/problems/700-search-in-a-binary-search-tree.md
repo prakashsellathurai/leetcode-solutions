@@ -1,0 +1,107 @@
+# 700-search-in-a-binary-search-tree
+
+
+Try it on <a href='https://leetcode.com/problems/700-search-in-a-binary-search-tree'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given the <code>root</code> of a binary search tree (BST) and an integer <code>val</code>.</p>
+
+<p>Find the node in the BST that the node's value equals <code>val</code> and return the subtree rooted with that node. If such a node does not exist, return <code>null</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/12/tree1.jpg" style="width: 422px; height: 302px;">
+<pre><strong>Input:</strong> root = [4,2,7,1,3], val = 2
+<strong>Output:</strong> [2,1,3]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/12/tree2.jpg" style="width: 422px; height: 302px;">
+<pre><strong>Input:</strong> root = [4,2,7,1,3], val = 5
+<strong>Output:</strong> []
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[1, 5000]</code>.</li>
+	<li><code>1 &lt;= Node.val &lt;= 10<sup>7</sup></code></li>
+	<li><code>root</code> is a binary search tree.</li>
+	<li><code>1 &lt;= val &lt;= 10<sup>7</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        return self.iterative(root, val)
+
+    # Time Complexity: O(log n)
+    # Space Complexity: O(log n)
+    def recursive(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if root is None:
+            return None
+        if root.val == val:
+            return root
+        elif root.val > val:
+            return self.searchBST(root.left, val)
+        elif root.val < val:
+            return self.searchBST(root.right, val)
+
+    # Time Complexity: O(log n)
+    # Space Complexity: O(1)
+    def iterative(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        cur = root
+
+        while cur is not None:
+            if cur.val == val:
+                return cur
+            elif cur.val > val:
+                cur = cur.left
+            else:
+                cur = cur.right
+
+        return cur
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "700. Search in a Binary Search Tree",
+    "text": "You are given the root of a binary search tree (BST) and an integer val.\nFind the node in the BST that the node's value equals val and return the subtree rooted with that node. If such a node does not exist, return null.\n\u00a0\nExample 1:\n\nInput: root = [4,2,7,1,3], val = 2\nOutput: [2,1,3]\n\nExample 2:\n\nInput: root = [4,2,7,1,3], val = 5\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 5000].\n1 <= Node.val <= 107\nroot is a binary search tree.\n1 <= val <= 107\n\n",
+    "url": "https://leetcode.com/problems/700-search-in-a-binary-search-tree",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        return self.iterative(root, val)\n\n    # Time Complexity: O(log n)\n    # Space Complexity: O(log n)\n    def recursive(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        if root is None:\n            return None\n        if root.val == val:\n            return root\n        elif root.val > val:\n            return self.searchBST(root.left, val)\n        elif root.val < val:\n            return self.searchBST(root.right, val)\n\n    # Time Complexity: O(log n)\n    # Space Complexity: O(1)\n    def iterative(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        cur = root\n\n        while cur is not None:\n            if cur.val == val:\n                return cur\n            elif cur.val > val:\n                cur = cur.left\n            else:\n                cur = cur.right\n\n        return cur\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/700-search-in-a-binary-search-tree/",
+      "datePublished": "2025-05-02",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

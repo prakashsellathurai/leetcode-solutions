@@ -1,0 +1,99 @@
+# 1048-longest-string-chain
+
+
+Try it on <a href='https://leetcode.com/problems/1048-longest-string-chain'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given an array of <code>words</code> where each word consists of lowercase English letters.</p>
+
+<p><code>word<sub>A</sub></code> is a <strong>predecessor</strong> of <code>word<sub>B</sub></code> if and only if we can insert <strong>exactly one</strong> letter anywhere in <code>word<sub>A</sub></code> <strong>without changing the order of the other characters</strong> to make it equal to <code>word<sub>B</sub></code>.</p>
+
+<ul>
+	<li>For example, <code>"abc"</code> is a <strong>predecessor</strong> of <code>"ab<u>a</u>c"</code>, while <code>"cba"</code> is not a <strong>predecessor</strong> of <code>"bcad"</code>.</li>
+</ul>
+
+<p>A <strong>word chain</strong><em> </em>is a sequence of words <code>[word<sub>1</sub>, word<sub>2</sub>, ..., word<sub>k</sub>]</code> with <code>k &gt;= 1</code>, where <code>word<sub>1</sub></code> is a <strong>predecessor</strong> of <code>word<sub>2</sub></code>, <code>word<sub>2</sub></code> is a <strong>predecessor</strong> of <code>word<sub>3</sub></code>, and so on. A single word is trivially a <strong>word chain</strong> with <code>k == 1</code>.</p>
+
+<p>Return <em>the <strong>length</strong> of the <strong>longest possible word chain</strong> with words chosen from the given list of </em><code>words</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> words = ["a","b","ba","bca","bda","bdca"]
+<strong>Output:</strong> 4
+<strong>Explanation</strong>: One of the longest word chains is ["a","<u>b</u>a","b<u>d</u>a","bd<u>c</u>a"].
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> words = ["xbc","pcxbcf","xb","cxbc","pcxbc"]
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> All the words can be put in a word chain ["xb", "xb<u>c</u>", "<u>c</u>xbc", "<u>p</u>cxbc", "pcxbc<u>f</u>"].
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> words = ["abcd","dbqca"]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong> The trivial word chain ["abcd"] is one of the longest word chains.
+["abcd","dbqca"] is not a valid word chain because the ordering of the letters is changed.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= words.length &lt;= 1000</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 16</code></li>
+	<li><code>words[i]</code> only consists of lowercase English letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def longestStrChain(self, words):
+        set_words = set(words)
+
+        @lru_cache(None)
+        def dp(word):
+            if word not in set_words:
+                return 0
+            return max(dp(word[:i] + word[i + 1:]) for i in range(len(word))) + 1
+
+        return max(dp(word) for word in words)
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1048. Longest String Chain",
+    "text": "You are given an array of words where each word consists of lowercase English letters.\nwordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB.\n\nFor example, \"abc\" is a predecessor of \"abac\", while \"cba\" is not a predecessor of \"bcad\".\n\nA word chain is a sequence of words [word1, word2, ..., wordk] with k >= 1, where word1 is a predecessor of word2, word2 is a predecessor of word3, and so on. A single word is trivially a word chain with k == 1.\nReturn the length of the longest possible word chain with words chosen from the given list of words.\n\u00a0\nExample 1:\nInput: words = [\"a\",\"b\",\"ba\",\"bca\",\"bda\",\"bdca\"]\nOutput: 4\nExplanation: One of the longest word chains is [\"a\",\"ba\",\"bda\",\"bdca\"].\n\nExample 2:\nInput: words = [\"xbc\",\"pcxbcf\",\"xb\",\"cxbc\",\"pcxbc\"]\nOutput: 5\nExplanation: All the words can be put in a word chain [\"xb\", \"xbc\", \"cxbc\", \"pcxbc\", \"pcxbcf\"].\n\nExample 3:\nInput: words = [\"abcd\",\"dbqca\"]\nOutput: 1\nExplanation: The trivial word chain [\"abcd\"] is one of the longest word chains.\n[\"abcd\",\"dbqca\"] is not a valid word chain because the ordering of the letters is changed.\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 1000\n1 <= words[i].length <= 16\nwords[i] only consists of lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/1048-longest-string-chain",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def longestStrChain(self, words):\n        set_words = set(words)\n\n        @lru_cache(None)\n        def dp(word):\n            if word not in set_words:\n                return 0\n            return max(dp(word[:i] + word[i + 1:]) for i in range(len(word))) + 1\n\n        return max(dp(word) for word in words)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1048-longest-string-chain/",
+      "datePublished": "2026-03-10",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

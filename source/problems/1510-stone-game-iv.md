@@ -1,0 +1,101 @@
+# 1510-stone-game-iv
+
+
+Try it on <a href='https://leetcode.com/problems/1510-stone-game-iv'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Alice and Bob take turns playing a game, with Alice starting first.</p>
+
+<p>Initially, there are <code>n</code> stones in a pile. On each player's turn, that player makes a <em>move</em> consisting of removing <strong>any</strong> non-zero <strong>square number</strong> of stones in the pile.</p>
+
+<p>Also, if a player cannot make a move, he/she loses the game.</p>
+
+<p>Given a positive integer <code>n</code>, return <code>true</code> if and only if Alice wins the game otherwise return <code>false</code>, assuming both players play optimally.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> n = 1
+<strong>Output:</strong> true
+<strong>Explanation: </strong>Alice can remove 1 stone winning the game because Bob doesn't have any moves.</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> n = 2
+<strong>Output:</strong> false
+<strong>Explanation: </strong>Alice can only remove 1 stone, after that Bob removes the last one winning the game (2 -&gt; 1 -&gt; 0).
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> n = 4
+<strong>Output:</strong> true
+<strong>Explanation:</strong> n is already a perfect square, Alice can win with one move, removing 4 stones (4 -&gt; 0).
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    #     @cache
+    #     def winnerSquareGame(self, n: int) -> bool:
+    #         if n == 0:
+    #             return False
+
+    #         for i in range(1,int(pow(n,0.5)+1)):
+    #             if not self.winnerSquareGame(n-i*i):
+    #                 return True
+    #         return False
+    # Time Complexity : N^(1+1/2)
+    # Space Complexity: N
+    def winnerSquareGame(self, n: int) -> bool:
+        dp = [False] * (n + 1)
+
+        for i in range(1, n + 1):
+            for j in range(1, int(pow(i, 0.5) + 1)):
+                if not dp[i - j * j]:
+                    dp[i] = True
+                    break
+        return dp[n]
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1510. Stone Game IV",
+    "text": "Alice and Bob take turns playing a game, with Alice starting first.\nInitially, there are n stones in a pile. On each player's turn, that player makes a move consisting of removing any non-zero square number of stones in the pile.\nAlso, if a player cannot make a move, he/she loses the game.\nGiven a positive integer n, return true if and only if Alice wins the game otherwise return false, assuming both players play optimally.\n\u00a0\nExample 1:\nInput: n = 1\nOutput: true\nExplanation: Alice can remove 1 stone winning the game because Bob doesn't have any moves.\nExample 2:\nInput: n = 2\nOutput: false\nExplanation: Alice can only remove 1 stone, after that Bob removes the last one winning the game (2 -> 1 -> 0).\n\nExample 3:\nInput: n = 4\nOutput: true\nExplanation: n is already a perfect square, Alice can win with one move, removing 4 stones (4 -> 0).\n\n\u00a0\nConstraints:\n\n1 <= n <= 105\n\n",
+    "url": "https://leetcode.com/problems/1510-stone-game-iv",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    #     @cache\n    #     def winnerSquareGame(self, n: int) -> bool:\n    #         if n == 0:\n    #             return False\n\n    #         for i in range(1,int(pow(n,0.5)+1)):\n    #             if not self.winnerSquareGame(n-i*i):\n    #                 return True\n    #         return False\n    # Time Complexity : N^(1+1/2)\n    # Space Complexity: N\n    def winnerSquareGame(self, n: int) -> bool:\n        dp = [False] * (n + 1)\n\n        for i in range(1, n + 1):\n            for j in range(1, int(pow(i, 0.5) + 1)):\n                if not dp[i - j * j]:\n                    dp[i] = True\n                    break\n        return dp[n]\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1510-stone-game-iv/",
+      "datePublished": "2025-09-23",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

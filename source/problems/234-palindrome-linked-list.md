@@ -1,0 +1,147 @@
+# 234-palindrome-linked-list
+
+
+Try it on <a href='https://leetcode.com/problems/234-palindrome-linked-list'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given the <code>head</code> of a singly linked list, return <code>true</code> if it is a palindrome.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" style="width: 422px; height: 62px;">
+<pre><strong>Input:</strong> head = [1,2,2,1]
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" style="width: 182px; height: 62px;">
+<pre><strong>Input:</strong> head = [1,2]
+<strong>Output:</strong> false
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is in the range <code>[1, 10<sup>5</sup>]</code>.</li>
+	<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<strong>Follow up:</strong> Could you do it in <code>O(n)</code> time and <code>O(1)</code> space?</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        return self.optimal(head)
+    
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def naive(self, head: Optional[ListNode]) -> bool:
+        slow = head
+        fast = head
+        s = []
+        while fast:
+            s.append(fast.val)
+            fast = fast.next
+        return s == s[::-1]
+    
+    
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    def better(self, head: Optional[ListNode]) -> bool:
+        self.front_pointer = head
+
+        def recursively_check(current_node=head):
+            if current_node is not None:
+                if not recursively_check(current_node.next):
+                    return False
+                if self.front_pointer.val != current_node.val:
+                    return False
+                self.front_pointer = self.front_pointer.next
+            return True
+
+        return recursively_check()
+    
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    def optimal(self, head: Optional[ListNode]) -> bool:
+        if head is None:
+            return True
+
+        # Find the end of first half and reverse second half.
+        first_half_end = self.end_of_first_half(head)
+        second_half_start = self.reverse_list(first_half_end.next)
+
+        # Check whether or not there's a palindrome.
+        result = True
+        first_position = head
+        second_position = second_half_start
+        while result and second_position is not None:
+            if first_position.val != second_position.val:
+                result = False
+            first_position = first_position.next
+            second_position = second_position.next
+
+        # Restore the list and return the result.
+        first_half_end.next = self.reverse_list(second_half_start)
+        return result    
+
+    def end_of_first_half(self, head):
+        fast = head
+        slow = head
+        while fast.next is not None and fast.next.next is not None:
+            fast = fast.next.next
+            slow = slow.next
+        return slow
+
+    def reverse_list(self, head):
+        previous = None
+        current = head
+        while current is not None:
+            next_node = current.next
+            current.next = previous
+            previous = current
+            current = next_node
+        return previous
+    
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "234. Palindrome Linked List",
+    "text": "Given the head of a singly linked list, return true if it is a palindrome.\n\u00a0\nExample 1:\n\nInput: head = [1,2,2,1]\nOutput: true\n\nExample 2:\n\nInput: head = [1,2]\nOutput: false\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [1, 105].\n0 <= Node.val <= 9\n\n\u00a0\nFollow up: Could you do it in O(n) time and O(1) space?",
+    "url": "https://leetcode.com/problems/234-palindrome-linked-list",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def isPalindrome(self, head: Optional[ListNode]) -> bool:\n        return self.optimal(head)\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def naive(self, head: Optional[ListNode]) -> bool:\n        slow = head\n        fast = head\n        s = []\n        while fast:\n            s.append(fast.val)\n            fast = fast.next\n        return s == s[::-1]\n    \n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def better(self, head: Optional[ListNode]) -> bool:\n        self.front_pointer = head\n\n        def recursively_check(current_node=head):\n            if current_node is not None:\n                if not recursively_check(current_node.next):\n                    return False\n                if self.front_pointer.val != current_node.val:\n                    return False\n                self.front_pointer = self.front_pointer.next\n            return True\n\n        return recursively_check()\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(1)\n    def optimal(self, head: Optional[ListNode]) -> bool:\n        if head is None:\n            return True\n\n        # Find the end of first half and reverse second half.\n        first_half_end = self.end_of_first_half(head)\n        second_half_start = self.reverse_list(first_half_end.next)\n\n        # Check whether or not there's a palindrome.\n        result = True\n        first_position = head\n        second_position = second_half_start\n        while result and second_position is not None:\n            if first_position.val != second_position.val:\n                result = False\n            first_position = first_position.next\n            second_position = second_position.next\n\n        # Restore the list and return the result.\n        first_half_end.next = self.reverse_list(second_half_start)\n        return result    \n\n    def end_of_first_half(self, head):\n        fast = head\n        slow = head\n        while fast.next is not None and fast.next.next is not None:\n            fast = fast.next.next\n            slow = slow.next\n        return slow\n\n    def reverse_list(self, head):\n        previous = None\n        current = head\n        while current is not None:\n            next_node = current.next\n            current.next = previous\n            previous = current\n            current = next_node\n        return previous\n    ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/234-palindrome-linked-list/",
+      "datePublished": "2022-01-18",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,115 @@
+# 1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts
+
+
+Try it on <a href='https://leetcode.com/problems/1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given a rectangular cake of size <code>h x w</code> and two arrays of integers <code>horizontalCuts</code> and <code>verticalCuts</code> where:</p>
+
+<ul>
+	<li><code>horizontalCuts[i]</code> is the distance from the top of the rectangular cake to the <code>i<sup>th</sup></code> horizontal cut and similarly, and</li>
+	<li><code>verticalCuts[j]</code> is the distance from the left of the rectangular cake to the <code>j<sup>th</sup></code> vertical cut.</li>
+</ul>
+
+<p>Return <em>the maximum area of a piece of cake after you cut at each horizontal and vertical position provided in the arrays</em> <code>horizontalCuts</code> <em>and</em> <code>verticalCuts</code>. Since the answer can be a large number, return this <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/05/14/leetcode_max_area_2.png" style="width: 225px; height: 240px;">
+<pre><strong>Input:</strong> h = 5, w = 4, horizontalCuts = [1,2,4], verticalCuts = [1,3]
+<strong>Output:</strong> 4 
+<strong>Explanation:</strong> The figure above represents the given rectangular cake. Red lines are the horizontal and vertical cuts. After you cut the cake, the green piece of cake has the maximum area.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/05/14/leetcode_max_area_3.png" style="width: 225px; height: 240px;">
+<pre><strong>Input:</strong> h = 5, w = 4, horizontalCuts = [3,1], verticalCuts = [1]
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> The figure above represents the given rectangular cake. Red lines are the horizontal and vertical cuts. After you cut the cake, the green and yellow pieces of cake have the maximum area.
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> h = 5, w = 4, horizontalCuts = [3], verticalCuts = [3]
+<strong>Output:</strong> 9
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>2 &lt;= h, w &lt;= 10<sup>9</sup></code></li>
+	<li><code>1 &lt;= horizontalCuts.length &lt;= min(h - 1, 10<sup>5</sup>)</code></li>
+	<li><code>1 &lt;= verticalCuts.length &lt;= min(w - 1, 10<sup>5</sup>)</code></li>
+	<li><code>1 &lt;= horizontalCuts[i] &lt; h</code></li>
+	<li><code>1 &lt;= verticalCuts[i] &lt; w</code></li>
+	<li>All the elements in <code>horizontalCuts</code> are distinct.</li>
+	<li>All the elements in <code>verticalCuts</code> are distinct.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.MOD = ((10**9)+7)
+    # Time Complexity: O(hlogh+wlogw)
+    # space Complexity: O(1)
+    def maxArea(self, h: int, w: int, horizontalCuts: List[int], verticalCuts: List[int]) -> int:
+        horizontalCuts.sort()
+        verticalCuts.sort()
+        horizontalCuts = [0]+horizontalCuts+[h]
+        verticalCuts = [0]+verticalCuts+[w]
+        
+        m = len(horizontalCuts)
+        n = len(verticalCuts)
+        
+        maxlen = 0
+        maxwid = 0
+        
+        for i in range(1,m):
+            cur_len = abs(horizontalCuts[i]-horizontalCuts[i-1])
+            if cur_len > maxlen:
+                maxlen = cur_len 
+                
+        for i in range(1,n):
+            cur_width = abs(verticalCuts[i] - verticalCuts[i-1])
+            if cur_width > maxwid:
+                maxwid = cur_width
+           
+        
+        return (maxlen*maxwid) % self.MOD
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts",
+    "text": "You are given a rectangular cake of size h x w and two arrays of integers horizontalCuts and verticalCuts where:\n\nhorizontalCuts[i] is the distance from the top of the rectangular cake to the ith horizontal cut and similarly, and\nverticalCuts[j] is the distance from the left of the rectangular cake to the jth vertical cut.\n\nReturn the maximum area of a piece of cake after you cut at each horizontal and vertical position provided in the arrays horizontalCuts and verticalCuts. Since the answer can be a large number, return this modulo 109 + 7.\n\u00a0\nExample 1:\n\nInput: h = 5, w = 4, horizontalCuts = [1,2,4], verticalCuts = [1,3]\nOutput: 4 \nExplanation: The figure above represents the given rectangular cake. Red lines are the horizontal and vertical cuts. After you cut the cake, the green piece of cake has the maximum area.\n\nExample 2:\n\nInput: h = 5, w = 4, horizontalCuts = [3,1], verticalCuts = [1]\nOutput: 6\nExplanation: The figure above represents the given rectangular cake. Red lines are the horizontal and vertical cuts. After you cut the cake, the green and yellow pieces of cake have the maximum area.\n\nExample 3:\nInput: h = 5, w = 4, horizontalCuts = [3], verticalCuts = [3]\nOutput: 9\n\n\u00a0\nConstraints:\n\n2 <= h, w <= 109\n1 <= horizontalCuts.length <= min(h - 1, 105)\n1 <= verticalCuts.length <= min(w - 1, 105)\n1 <= horizontalCuts[i] < h\n1 <= verticalCuts[i] < w\nAll the elements in horizontalCuts are distinct.\nAll the elements in verticalCuts are distinct.\n\n",
+    "url": "https://leetcode.com/problems/1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def __init__(self):\n        self.MOD = ((10**9)+7)\n    # Time Complexity: O(hlogh+wlogw)\n    # space Complexity: O(1)\n    def maxArea(self, h: int, w: int, horizontalCuts: List[int], verticalCuts: List[int]) -> int:\n        horizontalCuts.sort()\n        verticalCuts.sort()\n        horizontalCuts = [0]+horizontalCuts+[h]\n        verticalCuts = [0]+verticalCuts+[w]\n        \n        m = len(horizontalCuts)\n        n = len(verticalCuts)\n        \n        maxlen = 0\n        maxwid = 0\n        \n        for i in range(1,m):\n            cur_len = abs(horizontalCuts[i]-horizontalCuts[i-1])\n            if cur_len > maxlen:\n                maxlen = cur_len \n                \n        for i in range(1,n):\n            cur_width = abs(verticalCuts[i] - verticalCuts[i-1])\n            if cur_width > maxwid:\n                maxwid = cur_width\n           \n        \n        return (maxlen*maxwid) % self.MOD",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/",
+      "datePublished": "2023-03-28",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

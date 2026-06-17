@@ -1,0 +1,184 @@
+# 1202-smallest-string-with-swaps
+
+
+Try it on <a href='https://leetcode.com/problems/1202-smallest-string-with-swaps'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given a string <code>s</code>, and an array of pairs of indices in the string&nbsp;<code>pairs</code>&nbsp;where&nbsp;<code>pairs[i] =&nbsp;[a, b]</code>&nbsp;indicates 2 indices(0-indexed) of the string.</p>
+
+<p>You can&nbsp;swap the characters at any pair of indices in the given&nbsp;<code>pairs</code>&nbsp;<strong>any number of times</strong>.</p>
+
+<p>Return the&nbsp;lexicographically smallest string that <code>s</code>&nbsp;can be changed to after using the swaps.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> s = "dcab", pairs = [[0,3],[1,2]]
+<strong>Output:</strong> "bacd"
+<strong>Explaination:</strong> 
+Swap s[0] and s[3], s = "bcad"
+Swap s[1] and s[2], s = "bacd"
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> s = "dcab", pairs = [[0,3],[1,2],[0,2]]
+<strong>Output:</strong> "abcd"
+<strong>Explaination: </strong>
+Swap s[0] and s[3], s = "bcad"
+Swap s[0] and s[2], s = "acbd"
+Swap s[1] and s[2], s = "abcd"</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> s = "cba", pairs = [[0,1],[1,2]]
+<strong>Output:</strong> "abc"
+<strong>Explaination: </strong>
+Swap s[0] and s[1], s = "bca"
+Swap s[1] and s[2], s = "bac"
+Swap s[0] and s[1], s = "abc"
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10^5</code></li>
+	<li><code>0 &lt;= pairs.length &lt;= 10^5</code></li>
+	<li><code>0 &lt;= pairs[i][0], pairs[i][1] &lt;&nbsp;s.length</code></li>
+	<li><code>s</code>&nbsp;only contains lower case English letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.N = 100001
+        self.adj = [[] for _ in range(self.N)]
+        self.visited = [False] * self.N
+
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        return self.UnionFind_approach(s, pairs)
+
+    # Time Complexity: O(E+Vlog(V))
+    # Space Complexity: O(E+V)
+    def dfs_approach(self, s: str, pairs: List[List[int]]) -> str:
+        s = list(s)
+        for edge in pairs:
+            source = edge[0]
+            destination = edge[1]
+
+            self.adj[source].append(destination)
+            self.adj[destination].append(source)
+
+        for vertex in range(len(s)):
+            if not self.visited[vertex]:
+                characters = []
+                indices = []
+                self.dfs(s, vertex, characters, indices)
+
+                characters.sort()
+                indices.sort()
+
+                for i in range(len(indices)):
+                    s[indices[i]] = characters[i]
+        return "".join(s)
+
+    def dfs(self, s, vertex, characters, indices):
+        characters.append(s[vertex])
+        indices.append(vertex)
+
+        self.visited[vertex] = True
+
+        for adjacent in self.adj[vertex]:
+            if not self.visited[adjacent]:
+                self.dfs(s, adjacent, characters, indices)
+
+    # Time Complexity: O((E+V).αV+VlogV)
+    # Space Complexity: O(V)
+    def UnionFind_approach(self, s: str, pairs: List[List[int]]) -> str:
+        uf = UnionFind(len(s))
+        s = list(s)
+        for (source, dest) in pairs:
+            uf.union(source, dest)
+
+        hashmap = defaultdict(lambda: [])
+        for v in range(len(s)):
+            root = uf.find(v)
+            hashmap[root].append(v)
+
+        smallestString = [" "] * len(s)
+        for component in hashmap:
+            indices = hashmap[component]
+            characters = [s[index] for index in indices]
+            characters.sort()
+
+            for i in range(len(indices)):
+                smallestString[indices[i]] = characters[i]
+
+        return "".join(smallestString)
+
+
+class UnionFind:
+    def __init__(self, n):
+        self.n = n
+        self.root = [i for i in range(n)]
+        self.rank = [0] * n
+
+    # Time Complexity: O(αn)
+    def find(self, a):
+        while a != self.root[a]:
+            a = self.root[a]
+        return self.root[a]
+
+    # Time Complexity: O(αn)
+    def union(self, a, b):
+        groupA = self.find(a)
+        groupB = self.find(b)
+
+        if groupA != groupB:
+            if self.rank[groupA] >= self.rank[groupB]:
+                self.root[groupB] = groupA
+                self.rank[groupA] += 1
+            elif self.rank[groupA] < self.rank[groupB]:
+                self.root[groupA] = groupB
+                self.rank[groupB] += 1
+
+    def isconnected(self, a, b):
+        return self.find(a) == self.find(b)
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1202. Smallest String With Swaps",
+    "text": "You are given a string s, and an array of pairs of indices in the string\u00a0pairs\u00a0where\u00a0pairs[i] =\u00a0[a, b]\u00a0indicates 2 indices(0-indexed) of the string.\nYou can\u00a0swap the characters at any pair of indices in the given\u00a0pairs\u00a0any number of times.\nReturn the\u00a0lexicographically smallest string that s\u00a0can be changed to after using the swaps.\n\u00a0\nExample 1:\nInput: s = \"dcab\", pairs = [[0,3],[1,2]]\nOutput: \"bacd\"\nExplaination: \nSwap s[0] and s[3], s = \"bcad\"\nSwap s[1] and s[2], s = \"bacd\"\n\nExample 2:\nInput: s = \"dcab\", pairs = [[0,3],[1,2],[0,2]]\nOutput: \"abcd\"\nExplaination: \nSwap s[0] and s[3], s = \"bcad\"\nSwap s[0] and s[2], s = \"acbd\"\nSwap s[1] and s[2], s = \"abcd\"\nExample 3:\nInput: s = \"cba\", pairs = [[0,1],[1,2]]\nOutput: \"abc\"\nExplaination: \nSwap s[0] and s[1], s = \"bca\"\nSwap s[1] and s[2], s = \"bac\"\nSwap s[0] and s[1], s = \"abc\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 10^5\n0 <= pairs.length <= 10^5\n0 <= pairs[i][0], pairs[i][1] <\u00a0s.length\ns\u00a0only contains lower case English letters.\n\n",
+    "url": "https://leetcode.com/problems/1202-smallest-string-with-swaps",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def __init__(self):\n        self.N = 100001\n        self.adj = [[] for _ in range(self.N)]\n        self.visited = [False] * self.N\n\n    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:\n        return self.UnionFind_approach(s, pairs)\n\n    # Time Complexity: O(E+Vlog(V))\n    # Space Complexity: O(E+V)\n    def dfs_approach(self, s: str, pairs: List[List[int]]) -> str:\n        s = list(s)\n        for edge in pairs:\n            source = edge[0]\n            destination = edge[1]\n\n            self.adj[source].append(destination)\n            self.adj[destination].append(source)\n\n        for vertex in range(len(s)):\n            if not self.visited[vertex]:\n                characters = []\n                indices = []\n                self.dfs(s, vertex, characters, indices)\n\n                characters.sort()\n                indices.sort()\n\n                for i in range(len(indices)):\n                    s[indices[i]] = characters[i]\n        return \"\".join(s)\n\n    def dfs(self, s, vertex, characters, indices):\n        characters.append(s[vertex])\n        indices.append(vertex)\n\n        self.visited[vertex] = True\n\n        for adjacent in self.adj[vertex]:\n            if not self.visited[adjacent]:\n                self.dfs(s, adjacent, characters, indices)\n\n    # Time Complexity: O((E+V).\u03b1V+VlogV)\n    # Space Complexity: O(V)\n    def UnionFind_approach(self, s: str, pairs: List[List[int]]) -> str:\n        uf = UnionFind(len(s))\n        s = list(s)\n        for (source, dest) in pairs:\n            uf.union(source, dest)\n\n        hashmap = defaultdict(lambda: [])\n        for v in range(len(s)):\n            root = uf.find(v)\n            hashmap[root].append(v)\n\n        smallestString = [\" \"] * len(s)\n        for component in hashmap:\n            indices = hashmap[component]\n            characters = [s[index] for index in indices]\n            characters.sort()\n\n            for i in range(len(indices)):\n                smallestString[indices[i]] = characters[i]\n\n        return \"\".join(smallestString)\n\n\nclass UnionFind:\n    def __init__(self, n):\n        self.n = n\n        self.root = [i for i in range(n)]\n        self.rank = [0] * n\n\n    # Time Complexity: O(\u03b1n)\n    def find(self, a):\n        while a != self.root[a]:\n            a = self.root[a]\n        return self.root[a]\n\n    # Time Complexity: O(\u03b1n)\n    def union(self, a, b):\n        groupA = self.find(a)\n        groupB = self.find(b)\n\n        if groupA != groupB:\n            if self.rank[groupA] >= self.rank[groupB]:\n                self.root[groupB] = groupA\n                self.rank[groupA] += 1\n            elif self.rank[groupA] < self.rank[groupB]:\n                self.root[groupA] = groupB\n                self.rank[groupB] += 1\n\n    def isconnected(self, a, b):\n        return self.find(a) == self.find(b)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1202-smallest-string-with-swaps/",
+      "datePublished": "2023-07-02",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

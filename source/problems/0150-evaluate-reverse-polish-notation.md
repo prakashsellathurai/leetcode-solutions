@@ -1,0 +1,118 @@
+# 0150-evaluate-reverse-polish-notation
+
+
+Try it on <a href='https://leetcode.com/problems/0150-evaluate-reverse-polish-notation'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given an array of strings <code>tokens</code> that represents an arithmetic expression in a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation" target="_blank">Reverse Polish Notation</a>.</p>
+
+<p>Evaluate the expression. Return <em>an integer that represents the value of the expression</em>.</p>
+
+<p><strong>Note</strong> that:</p>
+
+<ul>
+	<li>The valid operators are <code>&#39;+&#39;</code>, <code>&#39;-&#39;</code>, <code>&#39;*&#39;</code>, and <code>&#39;/&#39;</code>.</li>
+	<li>Each operand may be an integer or another expression.</li>
+	<li>The division between two integers always <strong>truncates toward zero</strong>.</li>
+	<li>There will not be any division by zero.</li>
+	<li>The input represents a valid arithmetic expression in a reverse polish notation.</li>
+	<li>The answer and all the intermediate calculations can be represented in a <strong>32-bit</strong> integer.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> tokens = [&quot;2&quot;,&quot;1&quot;,&quot;+&quot;,&quot;3&quot;,&quot;*&quot;]
+<strong>Output:</strong> 9
+<strong>Explanation:</strong> ((2 + 1) * 3) = 9
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> tokens = [&quot;4&quot;,&quot;13&quot;,&quot;5&quot;,&quot;/&quot;,&quot;+&quot;]
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> (4 + (13 / 5)) = 6
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> tokens = [&quot;10&quot;,&quot;6&quot;,&quot;9&quot;,&quot;3&quot;,&quot;+&quot;,&quot;-11&quot;,&quot;*&quot;,&quot;/&quot;,&quot;*&quot;,&quot;17&quot;,&quot;+&quot;,&quot;5&quot;,&quot;+&quot;]
+<strong>Output:</strong> 22
+<strong>Explanation:</strong> ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+= ((10 * (6 / (12 * -11))) + 17) + 5
+= ((10 * (6 / -132)) + 17) + 5
+= ((10 * 0) + 17) + 5
+= (0 + 17) + 5
+= 17 + 5
+= 22
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= tokens.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>tokens[i]</code> is either an operator: <code>&quot;+&quot;</code>, <code>&quot;-&quot;</code>, <code>&quot;*&quot;</code>, or <code>&quot;/&quot;</code>, or an integer in the range <code>[-200, 200]</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    # Time complexity: O(n)
+    # Space complexity: O(n)
+    def evalRPN(self, tokens: List[str]) -> int:
+        operations = {
+            "+": lambda a,b: a+b,
+            "-": lambda a,b: a-b,
+            "*": lambda a,b: a*b,
+            "/": lambda a,b: int(a/b),
+        }
+        stack = []
+
+        for token in tokens:
+            if token in operations:
+                num2 = stack.pop()
+                num1 = stack.pop()
+                operation = operations[token]
+                stack.append(operation(num1, num2))
+            else:
+                stack.append(int(token))
+        return stack.pop()
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "150. Evaluate Reverse Polish Notation",
+    "text": "You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.\nEvaluate the expression. Return an integer that represents the value of the expression.\nNote that:\n\nThe valid operators are '+', '-', '*', and '/'.\nEach operand may be an integer or another expression.\nThe division between two integers always truncates toward zero.\nThere will not be any division by zero.\nThe input represents a valid arithmetic expression in a reverse polish notation.\nThe answer and all the intermediate calculations can be represented in a 32-bit integer.\n\n\u00a0\nExample 1:\n\nInput: tokens = [\"2\",\"1\",\"+\",\"3\",\"*\"]\nOutput: 9\nExplanation: ((2 + 1) * 3) = 9\n\nExample 2:\n\nInput: tokens = [\"4\",\"13\",\"5\",\"/\",\"+\"]\nOutput: 6\nExplanation: (4 + (13 / 5)) = 6\n\nExample 3:\n\nInput: tokens = [\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]\nOutput: 22\nExplanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5\n= ((10 * (6 / (12 * -11))) + 17) + 5\n= ((10 * (6 / -132)) + 17) + 5\n= ((10 * 0) + 17) + 5\n= (0 + 17) + 5\n= 17 + 5\n= 22\n\n\u00a0\nConstraints:\n\n1 <= tokens.length <= 104\ntokens[i] is either an operator: \"+\", \"-\", \"*\", or \"/\", or an integer in the range [-200, 200].\n\n",
+    "url": "https://leetcode.com/problems/0150-evaluate-reverse-polish-notation",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    # Time complexity: O(n)\n    # Space complexity: O(n)\n    def evalRPN(self, tokens: List[str]) -> int:\n        operations = {\n            \"+\": lambda a,b: a+b,\n            \"-\": lambda a,b: a-b,\n            \"*\": lambda a,b: a*b,\n            \"/\": lambda a,b: int(a/b),\n        }\n        stack = []\n\n        for token in tokens:\n            if token in operations:\n                num2 = stack.pop()\n                num1 = stack.pop()\n                operation = operations[token]\n                stack.append(operation(num1, num2))\n            else:\n                stack.append(int(token))\n        return stack.pop()",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0150-evaluate-reverse-polish-notation/",
+      "datePublished": "2025-03-28",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

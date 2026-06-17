@@ -1,4 +1,4 @@
-# Power-of-Two
+# power-of-two
 
 
 Try it on <a href='https://leetcode.com/problems/power-of-two'>leetcode</a>
@@ -45,5 +45,37 @@ Try it on <a href='https://leetcode.com/problems/power-of-two'>leetcode</a>
 ```Python
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        return n > 0 and not (n & n-1)
+        return n > 0 and not (n & n - 1)
+
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "231. Power of Two",
+    "text": "Given an integer n, return true if it is a power of two. Otherwise, return false.\nAn integer n is a power of two, if there exists an integer x such that n == 2x.\n\u00a0\nExample 1:\nInput: n = 1\nOutput: true\nExplanation: 20 = 1\n\nExample 2:\nInput: n = 16\nOutput: true\nExplanation: 24 = 16\n\nExample 3:\nInput: n = 3\nOutput: false\n\n\u00a0\nConstraints:\n\n-231 <= n <= 231 - 1\n\n\u00a0\nFollow up: Could you solve it without loops/recursion?",
+    "url": "https://leetcode.com/problems/power-of-two",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isPowerOfTwo(self, n: int) -> bool:\n        return n > 0 and not (n & n - 1)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/power-of-two/",
+      "datePublished": "2025-05-23",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

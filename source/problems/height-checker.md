@@ -1,0 +1,94 @@
+# height-checker
+
+
+Try it on <a href='https://leetcode.com/problems/height-checker'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in <strong>non-decreasing order</strong> by height. Let this ordering be represented by the integer array <code>expected</code> where <code>expected[i]</code> is the expected height of the <code>i<sup>th</sup></code> student in line.</p>
+
+<p>You are given an integer array <code>heights</code> representing the <strong>current order</strong> that the students are standing in. Each <code>heights[i]</code> is the height of the <code>i<sup>th</sup></code> student in line (<strong>0-indexed</strong>).</p>
+
+<p>Return <em>the <strong>number of indices</strong> where </em><code>heights[i] != expected[i]</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre><strong>Input:</strong> heights = [1,1,4,2,1,3]
+<strong>Output:</strong> 3
+<strong>Explanation:</strong> 
+heights:  [1,1,<u>4</u>,2,<u>1</u>,<u>3</u>]
+expected: [1,1,<u>1</u>,2,<u>3</u>,<u>4</u>]
+Indices 2, 4, and 5 do not match.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre><strong>Input:</strong> heights = [5,1,2,3,4]
+<strong>Output:</strong> 5
+<strong>Explanation:</strong>
+heights:  [<u>5</u>,<u>1</u>,<u>2</u>,<u>3</u>,<u>4</u>]
+expected: [<u>1</u>,<u>2</u>,<u>3</u>,<u>4</u>,<u>5</u>]
+All indices do not match.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre><strong>Input:</strong> heights = [1,2,3,4,5]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong>
+heights:  [1,2,3,4,5]
+expected: [1,2,3,4,5]
+All indices match.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= heights.length &lt;= 100</code></li>
+	<li><code>1 &lt;= heights[i] &lt;= 100</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        expected = list(heights)
+        n = len(heights)
+        expected.sort()
+        return sum(1 for i in range(n) if expected[i] != heights[i])
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": " \u00a0Height Checker",
+    "text": "A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height. Let this ordering be represented by the integer array expected where expected[i] is the expected height of the ith student in line.\nYou are given an integer array heights representing the current order that the students are standing in. Each heights[i] is the height of the ith student in line (0-indexed).\nReturn the number of indices where heights[i] != expected[i].\n\u00a0\nExample 1:\nInput: heights = [1,1,4,2,1,3]\nOutput: 3\nExplanation: \nheights:  [1,1,4,2,1,3]\nexpected: [1,1,1,2,3,4]\nIndices 2, 4, and 5 do not match.\n\nExample 2:\nInput: heights = [5,1,2,3,4]\nOutput: 5\nExplanation:\nheights:  [5,1,2,3,4]\nexpected: [1,2,3,4,5]\nAll indices do not match.\n\nExample 3:\nInput: heights = [1,2,3,4,5]\nOutput: 0\nExplanation:\nheights:  [1,2,3,4,5]\nexpected: [1,2,3,4,5]\nAll indices match.\n\n\u00a0\nConstraints:\n\n1 <= heights.length <= 100\n1 <= heights[i] <= 100\n\n",
+    "url": "https://leetcode.com/problems/height-checker",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def heightChecker(self, heights: List[int]) -> int:\n        expected = list(heights)\n        n = len(heights)\n        expected.sort()\n        return sum(1 for i in range(n) if expected[i] != heights[i])",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/height-checker/",
+      "datePublished": "2023-10-04",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

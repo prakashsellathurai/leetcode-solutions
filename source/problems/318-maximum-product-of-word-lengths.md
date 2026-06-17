@@ -1,0 +1,111 @@
+# 318-maximum-product-of-word-lengths
+
+
+Try it on <a href='https://leetcode.com/problems/318-maximum-product-of-word-lengths'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given a string array <code>words</code>, return <em>the maximum value of</em> <code>length(word[i]) * length(word[j])</code> <em>where the two words do not share common letters</em>. If no such two words exist, return <code>0</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> words = ["abcw","baz","foo","bar","xtfn","abcdef"]
+<strong>Output:</strong> 16
+<strong>Explanation:</strong> The two words can be "abcw", "xtfn".
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> words = ["a","ab","abc","d","cd","bcd","abcd"]
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> The two words can be "ab", "cd".
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> words = ["a","aa","aaa","aaaa"]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> No such pair of words.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>2 &lt;= words.length &lt;= 1000</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 1000</code></li>
+	<li><code>words[i]</code> consists only of lowercase English letters.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def maxProduct(self, words: List[str]) -> int:
+        return self.optimal(words)
+
+    # Time Complexity: O(n^2*L)
+    # Space Complexity: O(L)
+    def bruteforce(self, words: List[str]) -> int:
+        max_value = 0
+
+        for i, word1 in enumerate(words):
+            for j, word2 in enumerate(words[i:]):
+                if set(word1) ^ set(word2) == set(word1 + word2):
+                    value = len(word1) * len(word2)
+                    if value > max_value:
+                        max_value = value
+        return max_value
+
+    # Time Complexity: O(n^2)
+    # Space Complexity: O(n)
+    def optimal(self, words: List[str]) -> int:
+        bits = [0 for i in range(len(words))]
+        max_value = 0
+
+        for i in range(len(words)):
+            for c in words[i]:
+                bits[i] |= 1 << (ord(c) - 97)
+
+        for i in range(len(bits)):
+            for j in range(i + 1, len(bits)):
+                if (bits[i] & bits[j]) == 0:
+                    value = len(words[i]) * len(words[j])
+                    if value > max_value:
+                        max_value = value
+        return max_value
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "318. Maximum Product of Word Lengths",
+    "text": "Given a string array words, return the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. If no such two words exist, return 0.\n\u00a0\nExample 1:\nInput: words = [\"abcw\",\"baz\",\"foo\",\"bar\",\"xtfn\",\"abcdef\"]\nOutput: 16\nExplanation: The two words can be \"abcw\", \"xtfn\".\n\nExample 2:\nInput: words = [\"a\",\"ab\",\"abc\",\"d\",\"cd\",\"bcd\",\"abcd\"]\nOutput: 4\nExplanation: The two words can be \"ab\", \"cd\".\n\nExample 3:\nInput: words = [\"a\",\"aa\",\"aaa\",\"aaaa\"]\nOutput: 0\nExplanation: No such pair of words.\n\n\u00a0\nConstraints:\n\n2 <= words.length <= 1000\n1 <= words[i].length <= 1000\nwords[i] consists only of lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/318-maximum-product-of-word-lengths",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def maxProduct(self, words: List[str]) -> int:\n        return self.optimal(words)\n\n    # Time Complexity: O(n^2*L)\n    # Space Complexity: O(L)\n    def bruteforce(self, words: List[str]) -> int:\n        max_value = 0\n\n        for i, word1 in enumerate(words):\n            for j, word2 in enumerate(words[i:]):\n                if set(word1) ^ set(word2) == set(word1 + word2):\n                    value = len(word1) * len(word2)\n                    if value > max_value:\n                        max_value = value\n        return max_value\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n)\n    def optimal(self, words: List[str]) -> int:\n        bits = [0 for i in range(len(words))]\n        max_value = 0\n\n        for i in range(len(words)):\n            for c in words[i]:\n                bits[i] |= 1 << (ord(c) - 97)\n\n        for i in range(len(bits)):\n            for j in range(i + 1, len(bits)):\n                if (bits[i] & bits[j]) == 0:\n                    value = len(words[i]) * len(words[j])\n                    if value > max_value:\n                        max_value = value\n        return max_value\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/318-maximum-product-of-word-lengths/",
+      "datePublished": "2026-05-19",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

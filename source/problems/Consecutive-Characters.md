@@ -1,4 +1,4 @@
-# Consecutive-Characters
+# consecutive-characters
 
 
 Try it on <a href='https://leetcode.com/problems/consecutive-characters'>leetcode</a>
@@ -61,11 +61,43 @@ class Solution:
         previous = None
         for c in s:
             if c == previous:
-                power+=1
+                power += 1
             else:
-                power =1
+                power = 1
                 previous = c
             if power > maxpower:
                 maxpower = power
         return maxpower
+
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1446. Consecutive Characters",
+    "text": "The power of the string is the maximum length of a non-empty substring that contains only one unique character.\nGiven a string s, return the power of s.\n\u00a0\nExample 1:\nInput: s = \"leetcode\"\nOutput: 2\nExplanation: The substring \"ee\" is of length 2 with the character 'e' only.\n\nExample 2:\nInput: s = \"abbcccddddeeeeedcba\"\nOutput: 5\nExplanation: The substring \"eeeee\" is of length 5 with the character 'e' only.\n\nExample 3:\nInput: s = \"triplepillooooow\"\nOutput: 5\n\nExample 4:\nInput: s = \"hooraaaaaaaaaaay\"\nOutput: 11\n\nExample 5:\nInput: s = \"tourist\"\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 500\ns consists of only lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/consecutive-characters",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def maxPower(self, s: str) -> int:\n        power = 0\n        maxpower = 0\n        previous = None\n        for c in s:\n            if c == previous:\n                power += 1\n            else:\n                power = 1\n                previous = c\n            if power > maxpower:\n                maxpower = power\n        return maxpower\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/consecutive-characters/",
+      "datePublished": "2026-02-13",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

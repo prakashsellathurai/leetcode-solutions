@@ -1,0 +1,141 @@
+# 143-reorder-list
+
+
+Try it on <a href='https://leetcode.com/problems/143-reorder-list'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given the head of a singly linked-list. The list can be represented as:</p>
+
+<pre>L<sub>0</sub> → L<sub>1</sub> → … → L<sub>n - 1</sub> → L<sub>n</sub>
+</pre>
+
+<p><em>Reorder the list to be on the following form:</em></p>
+
+<pre>L<sub>0</sub> → L<sub>n</sub> → L<sub>1</sub> → L<sub>n - 1</sub> → L<sub>2</sub> → L<sub>n - 2</sub> → …
+</pre>
+
+<p>You may not modify the values in the list's nodes. Only nodes themselves may be changed.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/03/04/reorder1linked-list.jpg" style="width: 422px; height: 222px;">
+<pre><strong>Input:</strong> head = [1,2,3,4]
+<strong>Output:</strong> [1,4,2,3]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/03/09/reorder2-linked-list.jpg" style="width: 542px; height: 222px;">
+<pre><strong>Input:</strong> head = [1,2,3,4,5]
+<strong>Output:</strong> [1,5,2,4,3]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is in the range <code>[1, 5 * 10<sup>4</sup>]</code>.</li>
+	<li><code>1 &lt;= Node.val &lt;= 1000</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        def findmiddle(head):
+            slow = head
+            fast = head
+            
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow.next, slow
+        
+        first = head
+        second_half_start,first_end = findmiddle(first)
+        
+        def reverse(head):
+            cur = head
+            prev = None
+            while cur:
+                nxt = cur.next
+                cur.next = prev
+                prev = cur
+                cur = nxt
+            return prev
+        
+        if first_end is None:
+            return head
+        first_end.next = None
+        
+        second_half_start = reverse(second_half_start)
+        
+        def merge(head1, head2):
+            res = cur = ListNode(None)
+            
+            while head1 or head2:
+                if head1:
+                    res.next = head1
+                    head1 = head1.next
+                    res = res.next
+                if head2:
+                    res.next = head2
+                    head2 = head2.next
+                    res = res.next
+                
+            while head1:
+                res.next = head1
+                head1 = head1.next
+                res = res.next
+            while head2:
+                res.next = head2
+                head2 = head2.next
+                res = res.next
+            
+            return res.next
+            
+            
+        head = merge(first, second_half_start)
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "143. Reorder List",
+    "text": "You are given the head of a singly linked-list. The list can be represented as:\nL0 \u2192 L1 \u2192 \u2026 \u2192 Ln - 1 \u2192 Ln\n\nReorder the list to be on the following form:\nL0 \u2192 Ln \u2192 L1 \u2192 Ln - 1 \u2192 L2 \u2192 Ln - 2 \u2192 \u2026\n\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.\n\u00a0\nExample 1:\n\nInput: head = [1,2,3,4]\nOutput: [1,4,2,3]\n\nExample 2:\n\nInput: head = [1,2,3,4,5]\nOutput: [1,5,2,4,3]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [1, 5 * 104].\n1 <= Node.val <= 1000\n\n",
+    "url": "https://leetcode.com/problems/143-reorder-list",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reorderList(self, head: Optional[ListNode]) -> None:\n        \"\"\"\n        Do not return anything, modify head in-place instead.\n        \"\"\"\n        def findmiddle(head):\n            slow = head\n            fast = head\n            \n            while fast and fast.next:\n                slow = slow.next\n                fast = fast.next.next\n            return slow.next, slow\n        \n        first = head\n        second_half_start,first_end = findmiddle(first)\n        \n        def reverse(head):\n            cur = head\n            prev = None\n            while cur:\n                nxt = cur.next\n                cur.next = prev\n                prev = cur\n                cur = nxt\n            return prev\n        \n        if first_end is None:\n            return head\n        first_end.next = None\n        \n        second_half_start = reverse(second_half_start)\n        \n        def merge(head1, head2):\n            res = cur = ListNode(None)\n            \n            while head1 or head2:\n                if head1:\n                    res.next = head1\n                    head1 = head1.next\n                    res = res.next\n                if head2:\n                    res.next = head2\n                    head2 = head2.next\n                    res = res.next\n                \n            while head1:\n                res.next = head1\n                head1 = head1.next\n                res = res.next\n            while head2:\n                res.next = head2\n                head2 = head2.next\n                res = res.next\n            \n            return res.next\n            \n            \n        head = merge(first, second_half_start)\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/143-reorder-list/",
+      "datePublished": "2024-12-04",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

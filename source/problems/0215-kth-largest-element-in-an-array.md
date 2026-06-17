@@ -1,0 +1,106 @@
+# 0215-kth-largest-element-in-an-array
+
+
+Try it on <a href='https://leetcode.com/problems/0215-kth-largest-element-in-an-array'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <em>the</em> <code>k<sup>th</sup></code> <em>largest element in the array</em>.</p>
+
+<p>Note that it is the <code>k<sup>th</sup></code> largest element in the sorted order, not the <code>k<sup>th</sup></code> distinct element.</p>
+
+<p>Can you solve it without sorting?</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> nums = [3,2,1,5,6,4], k = 2
+<strong>Output:</strong> 5
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = [3,2,3,1,2,4,5,5,6], k = 4
+<strong>Output:</strong> 4
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= k &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return self.HeapMethod(nums, k)
+    # Sorting method
+    # Time Complexity: O(nlogn)
+    # Space Complexity: O(n)
+    def sorting(self, nums: List[int], k: int) -> int:
+        nums.sort(reverse=true)
+        return nums[k-1]
+    
+    # Heap Method
+    # Time Complexity : O(nlogk)
+    # Space Complexity: O(k)
+    def HeapMethod(self, nums: List[int], k: int) -> int:
+        heap = []
+        for num in nums:
+            heapq.heappush(heap, num)
+            if len(heap) > k:
+                heapq.heappop(heap)
+        return heap[0]
+
+    def quick_select(nums, k):
+        pivot = random.choice(nums)
+        left, mid, right = [], [], []
+
+        for num in nums:
+            if num > pivot:
+                left.append(num)
+            elif num < pivot:
+                right.append(num)
+            else:
+                mid.append(num)
+        
+        if k <= len(left):
+            return quick_select(left, k)
+        
+        if len(left) + len(mid) < k:
+            return quick_select(right, k - len(left) - len(mid))
+        
+        return pivot
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "215. Kth Largest Element in an Array",
+    "text": "Given an integer array nums and an integer k, return the kth largest element in the array.\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\nCan you solve it without sorting?\n\u00a0\nExample 1:\nInput: nums = [3,2,1,5,6,4], k = 2\nOutput: 5\nExample 2:\nInput: nums = [3,2,3,1,2,4,5,5,6], k = 4\nOutput: 4\n\n\u00a0\nConstraints:\n\n1 <= k <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n",
+    "url": "https://leetcode.com/problems/0215-kth-largest-element-in-an-array",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        return self.HeapMethod(nums, k)\n    # Sorting method\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort(reverse=true)\n        return nums[k-1]\n    \n    # Heap Method\n    # Time Complexity : O(nlogk)\n    # Space Complexity: O(k)\n    def HeapMethod(self, nums: List[int], k: int) -> int:\n        heap = []\n        for num in nums:\n            heapq.heappush(heap, num)\n            if len(heap) > k:\n                heapq.heappop(heap)\n        return heap[0]\n\n    def quick_select(nums, k):\n        pivot = random.choice(nums)\n        left, mid, right = [], [], []\n\n        for num in nums:\n            if num > pivot:\n                left.append(num)\n            elif num < pivot:\n                right.append(num)\n            else:\n                mid.append(num)\n        \n        if k <= len(left):\n            return quick_select(left, k)\n        \n        if len(left) + len(mid) < k:\n            return quick_select(right, k - len(left) - len(mid))\n        \n        return pivot\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0215-kth-largest-element-in-an-array/",
+      "datePublished": "2025-11-28",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,118 @@
+# 10-regular-expression-matching
+
+
+Try it on <a href='https://leetcode.com/problems/10-regular-expression-matching'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an input string <code>s</code>&nbsp;and a pattern <code>p</code>, implement regular expression matching with support for <code>'.'</code> and <code>'*'</code> where:</p>
+
+<ul>
+	<li><code>'.'</code> Matches any single character.​​​​</li>
+	<li><code>'*'</code> Matches zero or more of the preceding element.</li>
+</ul>
+
+<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> s = "aa", p = "a"
+<strong>Output:</strong> false
+<strong>Explanation:</strong> "a" does not match the entire string "aa".
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> s = "aa", p = "a*"
+<strong>Output:</strong> true
+<strong>Explanation:</strong> '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> s = "ab", p = ".*"
+<strong>Output:</strong> true
+<strong>Explanation:</strong> ".*" means "zero or more (*) of any character (.)".
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length&nbsp;&lt;= 20</code></li>
+	<li><code>1 &lt;= p.length&nbsp;&lt;= 30</code></li>
+	<li><code>s</code> contains only lowercase English letters.</li>
+	<li><code>p</code> contains only lowercase English letters, <code>'.'</code>, and&nbsp;<code>'*'</code>.</li>
+	<li>It is guaranteed for each appearance of the character <code>'*'</code>, there will be a previous valid character to match.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        return self.topdown(s, p)
+
+    # Time Complexity: O((T+P)2^T+P/2)
+    # Space Complexity: O((T+P)2^T+P/2)
+    def recursion(self, s: str, p: str) -> bool:
+        if not p:
+            return not s
+
+        first_match = bool(s) and p[0] in {s[0], "."}
+
+        if len(p) >= 2 and p[1] == "*":
+            return self.isMatch(s, p[2:]) or first_match and self.isMatch(s[1:], p)
+        else:
+            return first_match and self.isMatch(s[1:], p[1:])
+
+    # Time Complexity: O((TP)
+    # Space Complexity: O((TP)
+    def topdown(self, s: str, p: str) -> bool:
+        @cache
+        def dp(i, j):
+            if j == len(p):
+                return i == len(s)
+            else:
+                first_match = i < len(s) and p[j] in {s[i], "."}
+                if j + 1 < len(p) and p[j + 1] == "*":
+                    return dp(i, j + 2) or first_match and dp(i + 1, j)
+                else:
+                    return first_match and dp(i + 1, j + 1)
+
+        return dp(0, 0)
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "10. Regular Expression Matching",
+    "text": "Given an input string s\u00a0and a pattern p, implement regular expression matching with support for '.' and '*' where:\n\n'.' Matches any single character.\u200b\u200b\u200b\u200b\n'*' Matches zero or more of the preceding element.\n\nThe matching should cover the entire input string (not partial).\n\u00a0\nExample 1:\nInput: s = \"aa\", p = \"a\"\nOutput: false\nExplanation: \"a\" does not match the entire string \"aa\".\n\nExample 2:\nInput: s = \"aa\", p = \"a*\"\nOutput: true\nExplanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes \"aa\".\n\nExample 3:\nInput: s = \"ab\", p = \".*\"\nOutput: true\nExplanation: \".*\" means \"zero or more (*) of any character (.)\".\n\n\u00a0\nConstraints:\n\n1 <= s.length\u00a0<= 20\n1 <= p.length\u00a0<= 30\ns contains only lowercase English letters.\np contains only lowercase English letters, '.', and\u00a0'*'.\nIt is guaranteed for each appearance of the character '*', there will be a previous valid character to match.\n\n",
+    "url": "https://leetcode.com/problems/10-regular-expression-matching",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isMatch(self, s: str, p: str) -> bool:\n        return self.topdown(s, p)\n\n    # Time Complexity: O((T+P)2^T+P/2)\n    # Space Complexity: O((T+P)2^T+P/2)\n    def recursion(self, s: str, p: str) -> bool:\n        if not p:\n            return not s\n\n        first_match = bool(s) and p[0] in {s[0], \".\"}\n\n        if len(p) >= 2 and p[1] == \"*\":\n            return self.isMatch(s, p[2:]) or first_match and self.isMatch(s[1:], p)\n        else:\n            return first_match and self.isMatch(s[1:], p[1:])\n\n    # Time Complexity: O((TP)\n    # Space Complexity: O((TP)\n    def topdown(self, s: str, p: str) -> bool:\n        @cache\n        def dp(i, j):\n            if j == len(p):\n                return i == len(s)\n            else:\n                first_match = i < len(s) and p[j] in {s[i], \".\"}\n                if j + 1 < len(p) and p[j + 1] == \"*\":\n                    return dp(i, j + 2) or first_match and dp(i + 1, j)\n                else:\n                    return first_match and dp(i + 1, j + 1)\n\n        return dp(0, 0)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/10-regular-expression-matching/",
+      "datePublished": "2024-03-04",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

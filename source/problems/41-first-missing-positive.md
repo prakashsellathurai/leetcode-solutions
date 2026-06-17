@@ -1,0 +1,76 @@
+# 41-first-missing-positive
+
+
+Try it on <a href='https://leetcode.com/problems/41-first-missing-positive'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an unsorted integer array <code>nums</code>, return the smallest missing positive integer.</p>
+
+<p>You must implement an algorithm that runs in <code>O(n)</code> time and uses constant extra space.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> nums = [1,2,0]
+<strong>Output:</strong> 3
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = [3,4,-1,1]
+<strong>Output:</strong> 2
+</pre><p><strong>Example 3:</strong></p>
+<pre><strong>Input:</strong> nums = [7,8,9,11,12]
+<strong>Output:</strong> 1
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 5 * 10<sup>5</sup></code></li>
+	<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        for i in range(len(nums)):
+            while 0 <= nums[i]-1 < len(nums) and nums[nums[i]-1] != nums[i]:
+                tmp = nums[i]-1
+                nums[i], nums[tmp] = nums[tmp], nums[i]
+        for i in range(len(nums)):
+            if nums[i] != i+1:
+                return i+1
+        return len(nums)+1
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "41. First Missing Positive",
+    "text": "Given an unsorted integer array nums, return the smallest missing positive integer.\nYou must implement an algorithm that runs in O(n) time and uses constant extra space.\n\u00a0\nExample 1:\nInput: nums = [1,2,0]\nOutput: 3\nExample 2:\nInput: nums = [3,4,-1,1]\nOutput: 2\nExample 3:\nInput: nums = [7,8,9,11,12]\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 105\n-231 <= nums[i] <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/41-first-missing-positive",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def firstMissingPositive(self, nums: List[int]) -> int:\n        for i in range(len(nums)):\n            while 0 <= nums[i]-1 < len(nums) and nums[nums[i]-1] != nums[i]:\n                tmp = nums[i]-1\n                nums[i], nums[tmp] = nums[tmp], nums[i]\n        for i in range(len(nums)):\n            if nums[i] != i+1:\n                return i+1\n        return len(nums)+1",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/41-first-missing-positive/",
+      "datePublished": "2022-08-11",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

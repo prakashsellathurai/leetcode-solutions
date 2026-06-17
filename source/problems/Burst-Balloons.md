@@ -1,4 +1,4 @@
-# Burst-Balloons
+# burst-balloons
 
 
 Try it on <a href='https://leetcode.com/problems/burst-balloons'>leetcode</a>
@@ -42,10 +42,47 @@ coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167</pre>
 class Solution(object):
     def maxCoins(self, nums):
         nums = [1] + nums + [1]
-        dp = [[0 ]* len(nums) for _ in nums]
+        dp = [[0] * len(nums) for _ in nums]
         n = len(nums)
-        for i in range(n-3,-1,-1):
-            for j in range(i+2,n):
-                dp[i][j] = max([dp[i][k] + dp[k][j]+ nums[i]*nums[k]*nums[j] for k in range(i+1,j)])
-        return dp[0][n-1]
+        for i in range(n - 3, -1, -1):
+            for j in range(i + 2, n):
+                dp[i][j] = max(
+                    [
+                        dp[i][k] + dp[k][j] + nums[i] * nums[k] * nums[j]
+                        for k in range(i + 1, j)
+                    ]
+                )
+        return dp[0][n - 1]
+
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "312. Burst Balloons",
+    "text": "You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons.\nIf you burst the ith balloon, you will get nums[i - 1] * nums[i] * nums[i + 1] coins. If i - 1 or i + 1 goes out of bounds of the array, then treat it as if there is a balloon with a 1 painted on it.\nReturn the maximum coins you can collect by bursting the balloons wisely.\n\u00a0\nExample 1:\nInput: nums = [3,1,5,8]\nOutput: 167\nExplanation:\nnums = [3,1,5,8] --> [3,5,8] --> [3,8] --> [8] --> []\ncoins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167\nExample 2:\nInput: nums = [1,5]\nOutput: 10\n\n\u00a0\nConstraints:\n\nn == nums.length\n1 <= n <= 500\n0 <= nums[i] <= 100\n\n",
+    "url": "https://leetcode.com/problems/burst-balloons",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution(object):\n    def maxCoins(self, nums):\n        nums = [1] + nums + [1]\n        dp = [[0] * len(nums) for _ in nums]\n        n = len(nums)\n        for i in range(n - 3, -1, -1):\n            for j in range(i + 2, n):\n                dp[i][j] = max(\n                    [\n                        dp[i][k] + dp[k][j] + nums[i] * nums[k] * nums[j]\n                        for k in range(i + 1, j)\n                    ]\n                )\n        return dp[0][n - 1]\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/burst-balloons/",
+      "datePublished": "2022-12-12",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

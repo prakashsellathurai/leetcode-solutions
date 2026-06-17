@@ -1,0 +1,86 @@
+# 67-add-binary
+
+
+Try it on <a href='https://leetcode.com/problems/67-add-binary'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given two binary strings <code>a</code> and <code>b</code>, return <em>their sum as a binary string</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> a = "11", b = "1"
+<strong>Output:</strong> "100"
+</pre><p><strong>Example 2:</strong></p>
+<pre><strong>Input:</strong> a = "1010", b = "1011"
+<strong>Output:</strong> "10101"
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= a.length, b.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>a</code> and <code>b</code> consist&nbsp;only of <code>'0'</code> or <code>'1'</code> characters.</li>
+	<li>Each string does not contain leading zeros except for the zero itself.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        max_len = max(len(a), len(b))
+
+        a = a.zfill(max_len)
+        b = b.zfill(max_len)
+
+        # initialize the result
+        result = ""
+
+        # initialize the carry
+        carry = 0
+
+        # Traverse the string
+        for i in range(max_len - 1, -1, -1):
+            digit = int((carry + int(a[i]) + int(b[i])) % 2)
+            result = str(digit) + result
+            carry = int((carry + int(a[i]) + int(b[i])) // 2)
+
+        if carry != 0:
+            result = "1" + result
+
+        return result.zfill(max_len)
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "67. Add Binary",
+    "text": "Given two binary strings a and b, return their sum as a binary string.\n\u00a0\nExample 1:\nInput: a = \"11\", b = \"1\"\nOutput: \"100\"\nExample 2:\nInput: a = \"1010\", b = \"1011\"\nOutput: \"10101\"\n\n\u00a0\nConstraints:\n\n1 <= a.length, b.length <= 104\na and b consist\u00a0only of '0' or '1' characters.\nEach string does not contain leading zeros except for the zero itself.\n\n",
+    "url": "https://leetcode.com/problems/67-add-binary",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def addBinary(self, a: str, b: str) -> str:\n        max_len = max(len(a), len(b))\n\n        a = a.zfill(max_len)\n        b = b.zfill(max_len)\n\n        # initialize the result\n        result = \"\"\n\n        # initialize the carry\n        carry = 0\n\n        # Traverse the string\n        for i in range(max_len - 1, -1, -1):\n            digit = int((carry + int(a[i]) + int(b[i])) % 2)\n            result = str(digit) + result\n            carry = int((carry + int(a[i]) + int(b[i])) // 2)\n\n        if carry != 0:\n            result = \"1\" + result\n\n        return result.zfill(max_len)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/67-add-binary/",
+      "datePublished": "2025-06-27",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

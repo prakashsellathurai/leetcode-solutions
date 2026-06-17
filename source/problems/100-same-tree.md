@@ -1,0 +1,96 @@
+# 100-same-tree
+
+
+Try it on <a href='https://leetcode.com/problems/100-same-tree'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given the roots of two binary trees <code>p</code> and <code>q</code>, write a function to check if they are the same or not.</p>
+
+<p>Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" style="width: 622px; height: 182px;">
+<pre><strong>Input:</strong> p = [1,2,3], q = [1,2,3]
+<strong>Output:</strong> true
+</pre>
+
+<p><strong>Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg" style="width: 382px; height: 182px;">
+<pre><strong>Input:</strong> p = [1,2], q = [1,null,2]
+<strong>Output:</strong> false
+</pre>
+
+<p><strong>Example 3:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg" style="width: 622px; height: 182px;">
+<pre><strong>Input:</strong> p = [1,2,1], q = [1,1,2]
+<strong>Output:</strong> false
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in both trees is in the range <code>[0, 100]</code>.</li>
+	<li><code>-10<sup>4</sup> &lt;= Node.val &lt;= 10<sup>4</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if not p and not q:
+            return True
+        if not q or not p:
+            return False
+
+        #         if p.val !=  q.val:
+        #             return False
+
+        return (
+            p.val == q.val
+            and self.isSameTree(p.right, q.right)
+            and self.isSameTree(p.left, q.left)
+        )
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "100. Same Tree",
+    "text": "Given the roots of two binary trees p and q, write a function to check if they are the same or not.\nTwo binary trees are considered the same if they are structurally identical, and the nodes have the same value.\n\u00a0\nExample 1:\n\nInput: p = [1,2,3], q = [1,2,3]\nOutput: true\n\nExample 2:\n\nInput: p = [1,2], q = [1,null,2]\nOutput: false\n\nExample 3:\n\nInput: p = [1,2,1], q = [1,1,2]\nOutput: false\n\n\u00a0\nConstraints:\n\nThe number of nodes in both trees is in the range [0, 100].\n-104 <= Node.val <= 104\n\n",
+    "url": "https://leetcode.com/problems/100-same-tree",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:\n        if not p and not q:\n            return True\n        if not q or not p:\n            return False\n\n        #         if p.val !=  q.val:\n        #             return False\n\n        return (\n            p.val == q.val\n            and self.isSameTree(p.right, q.right)\n            and self.isSameTree(p.left, q.left)\n        )\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/100-same-tree/",
+      "datePublished": "2024-04-06",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

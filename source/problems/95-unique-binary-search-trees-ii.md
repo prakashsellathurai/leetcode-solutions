@@ -1,0 +1,85 @@
+# 95-unique-binary-search-trees-ii
+
+
+Try it on <a href='https://leetcode.com/problems/95-unique-binary-search-trees-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given an integer <code>n</code>, return <em>all the structurally unique <strong>BST'</strong>s (binary search trees), which has exactly </em><code>n</code><em> nodes of unique values from</em> <code>1</code> <em>to</em> <code>n</code>. Return the answer in <strong>any order</strong>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/18/uniquebstn3.jpg" style="width: 600px; height: 148px;">
+<pre><strong>Input:</strong> n = 3
+<strong>Output:</strong> [[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,1]]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> n = 1
+<strong>Output:</strong> [[1]]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 8</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        @lru_cache(None)
+        def dfs(left, right):
+            if left > right:
+                return [None]
+            if left == right:
+                return [TreeNode(left)]
+            ans = []
+            for root in range(left, right + 1):
+                leftNodes = dfs(left, root - 1)
+                rightNodes = dfs(root + 1, right)
+                for leftNode in leftNodes:
+                    for rightNode in rightNodes:
+                        rootNode = TreeNode(root, leftNode, rightNode)
+                        ans.append(rootNode)
+            return ans
+
+        return dfs(1, n)
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "95. Unique Binary Search Trees II",
+    "text": "Given an integer n, return all the structurally unique BST's (binary search trees), which has exactly n nodes of unique values from 1 to n. Return the answer in any order.\n\u00a0\nExample 1:\n\nInput: n = 3\nOutput: [[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,1]]\n\nExample 2:\nInput: n = 1\nOutput: [[1]]\n\n\u00a0\nConstraints:\n\n1 <= n <= 8\n\n",
+    "url": "https://leetcode.com/problems/95-unique-binary-search-trees-ii",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:\n        @lru_cache(None)\n        def dfs(left, right):\n            if left > right:\n                return [None]\n            if left == right:\n                return [TreeNode(left)]\n            ans = []\n            for root in range(left, right + 1):\n                leftNodes = dfs(left, root - 1)\n                rightNodes = dfs(root + 1, right)\n                for leftNode in leftNodes:\n                    for rightNode in rightNodes:\n                        rootNode = TreeNode(root, leftNode, rightNode)\n                        ans.append(rootNode)\n            return ans\n\n        return dfs(1, n)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/95-unique-binary-search-trees-ii/",
+      "datePublished": "2026-05-03",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

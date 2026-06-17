@@ -1,0 +1,162 @@
+# 1700-number-of-students-unable-to-eat-lunch
+
+
+Try it on <a href='https://leetcode.com/problems/1700-number-of-students-unable-to-eat-lunch'>leetcode</a>
+
+## Description
+<div class="description">
+<p>The school cafeteria offers circular and square sandwiches at lunch break, referred to by numbers <code>0</code> and <code>1</code> respectively. All students stand in a queue. Each student either prefers square or circular sandwiches.</p>
+
+<p>The number of sandwiches in the cafeteria is equal to the number of students. The sandwiches are placed in a <strong>stack</strong>. At each step:</p>
+
+<ul>
+	<li>If the student at the front of the queue <strong>prefers</strong> the sandwich on the top of the stack, they will <strong>take it</strong> and leave the queue.</li>
+	<li>Otherwise, they will <strong>leave it</strong> and go to the queue&#39;s end.</li>
+</ul>
+
+<p>This continues until none of the queue students want to take the top sandwich and are thus unable to eat.</p>
+
+<p>You are given two integer arrays <code>students</code> and <code>sandwiches</code> where <code>sandwiches[i]</code> is the type of the <code>i<sup>​​​​​​th</sup></code> sandwich in the stack (<code>i = 0</code> is the top of the stack) and <code>students[j]</code> is the preference of the <code>j<sup>​​​​​​th</sup></code> student in the initial queue (<code>j = 0</code> is the front of the queue). Return <em>the number of students that are unable to eat.</em></p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> students = [1,1,0,0], sandwiches = [0,1,0,1]
+<strong>Output:</strong> 0<strong> 
+Explanation:</strong>
+- Front student leaves the top sandwich and returns to the end of the line making students = [1,0,0,1].
+- Front student leaves the top sandwich and returns to the end of the line making students = [0,0,1,1].
+- Front student takes the top sandwich and leaves the line making students = [0,1,1] and sandwiches = [1,0,1].
+- Front student leaves the top sandwich and returns to the end of the line making students = [1,1,0].
+- Front student takes the top sandwich and leaves the line making students = [1,0] and sandwiches = [0,1].
+- Front student leaves the top sandwich and returns to the end of the line making students = [0,1].
+- Front student takes the top sandwich and leaves the line making students = [1] and sandwiches = [1].
+- Front student takes the top sandwich and leaves the line making students = [] and sandwiches = [].
+Hence all students are able to eat.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]
+<strong>Output:</strong> 3
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= students.length, sandwiches.length &lt;= 100</code></li>
+	<li><code>students.length == sandwiches.length</code></li>
+	<li><code>sandwiches[i]</code> is <code>0</code> or <code>1</code>.</li>
+	<li><code>students[i]</code> is <code>0</code> or <code>1</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import deque
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        return self.counting(students, sandwiches)
+        # cafeteria -> students fifo
+        #              sandwich stack lifo
+
+        #  simulate [1,1,0,0]  [0,1,0,1] 
+        #           [1001] 0101
+        #            0011  0101
+        #              011       101
+        #            110   101
+        #               10  01
+        #            01  01
+        #             1  1  
+        #             []    []
+        #     111001   100011  ]
+        #       11001  00011  
+        #       10011  00011
+        #       00111  00011
+        #       111    011
+        #  How do we know when none of the students in the queue want to take the top sandwich?
+
+# We can keep track of when we last served a student using the variable lastServed. If we are unable to serve a student, we increment lastServed. When we do serve a student, we reset lastServed to zero. When lastServed reaches the same size as the queue, we know we have offered the top sandwich to every student in the queue, so we stop the lunch process.
+
+# After serving all the sandwiches we can, the remaining students in the queue are the unserved students.
+        #  Time complexity: O(m*N)
+        # spac ecomplexity: P(m*n)     
+    def simulate(self, students: List[int], sandwiches: List[int]) -> int:
+        studentQueue = deque(students)
+        sandwichStack  = sandwiches[::-1]
+        last_served = 0
+        while len(studentQueue) >0  and last_served < len(students): 
+            curr_student = studentQueue[0] # 1
+            curr_sandwich = sandwichStack[-1] # 0
+
+            if  curr_student == curr_sandwich:
+                studentQueue.popleft()
+                sandwichStack.pop()
+                last_served = 0
+            else:
+                last_served += 1
+                studentQueue.append(studentQueue.popleft())
+
+ 
+        return len(studentQueue)
+
+    # observation
+    #     1: every student takes the top sandiwch 0
+    #     2: rest if students who dowsn't want what is in th topm pile 
+    #  If none of the students in the queue's preference matches the top sandwich, none of the remaining students can eat.
+    #   
+    def counting(self, students: List[int], sandwiches: List[int]) -> int:
+        onecount = 0
+        zerocount = 0
+        for student in students:
+            if student:
+                onecount += 1
+            else:
+                zerocount += 1
+        for sandwich in sandwiches:
+            if sandwich == 1 and  onecount == 0:
+                return zerocount
+            if  sandwich == 0 and zerocount == 0:
+                return onecount
+            if sandwich == 0:
+                zerocount -= 1
+            else:
+                onecount -= 1
+        return 0
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "1700. Number of Students Unable to Eat Lunch",
+    "text": "The school cafeteria offers circular and square sandwiches at lunch break, referred to by numbers 0 and 1 respectively. All students stand in a queue. Each student either prefers square or circular sandwiches.\nThe number of sandwiches in the cafeteria is equal to the number of students. The sandwiches are placed in a stack. At each step:\n\nIf the student at the front of the queue prefers the sandwich on the top of the stack, they will take it and leave the queue.\nOtherwise, they will leave it and go to the queue's end.\n\nThis continues until none of the queue students want to take the top sandwich and are thus unable to eat.\nYou are given two integer arrays students and sandwiches where sandwiches[i] is the type of the i\u200b\u200b\u200b\u200b\u200b\u200bth sandwich in the stack (i = 0 is the top of the stack) and students[j] is the preference of the j\u200b\u200b\u200b\u200b\u200b\u200bth student in the initial queue (j = 0 is the front of the queue). Return the number of students that are unable to eat.\n\u00a0\nExample 1:\n\nInput: students = [1,1,0,0], sandwiches = [0,1,0,1]\nOutput: 0 \nExplanation:\n- Front student leaves the top sandwich and returns to the end of the line making students = [1,0,0,1].\n- Front student leaves the top sandwich and returns to the end of the line making students = [0,0,1,1].\n- Front student takes the top sandwich and leaves the line making students = [0,1,1] and sandwiches = [1,0,1].\n- Front student leaves the top sandwich and returns to the end of the line making students = [1,1,0].\n- Front student takes the top sandwich and leaves the line making students = [1,0] and sandwiches = [0,1].\n- Front student leaves the top sandwich and returns to the end of the line making students = [0,1].\n- Front student takes the top sandwich and leaves the line making students = [1] and sandwiches = [1].\n- Front student takes the top sandwich and leaves the line making students = [] and sandwiches = [].\nHence all students are able to eat.\n\nExample 2:\n\nInput: students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]\nOutput: 3\n\n\u00a0\nConstraints:\n\n1 <= students.length, sandwiches.length <= 100\nstudents.length == sandwiches.length\nsandwiches[i] is 0 or 1.\nstudents[i] is 0 or 1.\n\n",
+    "url": "https://leetcode.com/problems/1700-number-of-students-unable-to-eat-lunch",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import deque\nclass Solution:\n    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:\n        return self.counting(students, sandwiches)\n        # cafeteria -> students fifo\n        #              sandwich stack lifo\n\n        #  simulate [1,1,0,0]  [0,1,0,1] \n        #           [1001] 0101\n        #            0011  0101\n        #              011       101\n        #            110   101\n        #               10  01\n        #            01  01\n        #             1  1  \n        #             []    []\n        #     111001   100011  ]\n        #       11001  00011  \n        #       10011  00011\n        #       00111  00011\n        #       111    011\n        #  How do we know when none of the students in the queue want to take the top sandwich?\n\n# We can keep track of when we last served a student using the variable lastServed. If we are unable to serve a student, we increment lastServed. When we do serve a student, we reset lastServed to zero. When lastServed reaches the same size as the queue, we know we have offered the top sandwich to every student in the queue, so we stop the lunch process.\n\n# After serving all the sandwiches we can, the remaining students in the queue are the unserved students.\n        #  Time complexity: O(m*N)\n        # spac ecomplexity: P(m*n)     \n    def simulate(self, students: List[int], sandwiches: List[int]) -> int:\n        studentQueue = deque(students)\n        sandwichStack  = sandwiches[::-1]\n        last_served = 0\n        while len(studentQueue) >0  and last_served < len(students): \n            curr_student = studentQueue[0] # 1\n            curr_sandwich = sandwichStack[-1] # 0\n\n            if  curr_student == curr_sandwich:\n                studentQueue.popleft()\n                sandwichStack.pop()\n                last_served = 0\n            else:\n                last_served += 1\n                studentQueue.append(studentQueue.popleft())\n\n \n        return len(studentQueue)\n\n    # observation\n    #     1: every student takes the top sandiwch 0\n    #     2: rest if students who dowsn't want what is in th topm pile \n    #  If none of the students in the queue's preference matches the top sandwich, none of the remaining students can eat.\n    #   \n    def counting(self, students: List[int], sandwiches: List[int]) -> int:\n        onecount = 0\n        zerocount = 0\n        for student in students:\n            if student:\n                onecount += 1\n            else:\n                zerocount += 1\n        for sandwich in sandwiches:\n            if sandwich == 1 and  onecount == 0:\n                return zerocount\n            if  sandwich == 0 and zerocount == 0:\n                return onecount\n            if sandwich == 0:\n                zerocount -= 1\n            else:\n                onecount -= 1\n        return 0\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1700-number-of-students-unable-to-eat-lunch/",
+      "datePublished": "2022-04-01",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

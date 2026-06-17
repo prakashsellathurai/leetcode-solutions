@@ -1,0 +1,156 @@
+# 0912-sort-an-array
+
+
+Try it on <a href='https://leetcode.com/problems/0912-sort-an-array'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an array of integers <code>nums</code>, sort the array in ascending order and return it.</p>
+
+<p>You must solve the problem <strong>without using any built-in</strong> functions in <code>O(nlog(n))</code> time complexity and with the smallest space complexity possible.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [5,2,3,1]
+<strong>Output:</strong> [1,2,3,5]
+<strong>Explanation:</strong> After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [5,1,1,2,0,0]
+<strong>Output:</strong> [0,0,1,1,2,5]
+<strong>Explanation:</strong> Note that the values of nums are not necessarily unique.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>-5 * 10<sup>4</sup> &lt;= nums[i] &lt;= 5 * 10<sup>4</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from random import randint
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        return self.quicksort(nums)
+    # merge two sorted arrays
+    # O(n LOGN) time complexity
+    # O(n) space complexity
+    def mergeSort(self, nums: List[int]) -> List[int]:
+        if len(nums) <= 1:
+            return nums
+        mid = len(nums) // 2
+        left = self.mergeSort(nums[:mid])
+        right = self.mergeSort(nums[mid:])
+        return self.merge(left, right)
+
+
+    # Heap sort
+    # O(nlogn) time complexity
+    # O(n) space complexity
+    def heapSort(self, nums: List[int]) -> List[int]:
+        heapq.heapify(nums)
+        return [heapq.heappop(nums) for _ in range(len(nums))]
+
+    # Counting Sort
+    # Time Complexity: O(n + k)
+    # SpaceComplexity : O(k)
+    def countingSort(self, nums: List[int]) -> List[int]:
+        min_num, max_num = min(nums), max(nums)
+        count = [0] * (max_num - min_num + 1)
+        for num in nums:
+            count[num - min_num] += 1
+        result = []
+        for i, c in enumerate(count):
+            result.extend([i + min_num] * c)
+        return result
+        
+    def merge(self, left: List[int], right: List[int]) -> List[int]:
+        result = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+
+    # Counting Sort
+    # Time Complexity: O(n ^ 2)
+    # SpaceComplexity : O(logn)
+    def quicksort(self, nums: List[int]) -> List[int]:
+        def quick_sort(left ,right):
+            if left >= right:
+                return
+            pivot = nums[randint(left,right)]
+            i = left -1
+            j = right + 1
+            k = left
+
+            while k < j:
+                if nums[k] < pivot:
+                    i += 1
+                    nums[i], nums[k] = nums[k], nums[i]
+                    k += 1
+                elif nums[k] > pivot:
+                    # Move element to the "greater than" region
+                    j -= 1
+                    nums[j], nums[k] = nums[k], nums[j]
+                    # Don't increment k as we need to examine the swapped element
+                else:
+                    # Element equals pivot, just move to next element
+                    k += 1
+            # Recursively sort the "less than" and "greater than" regions
+            # Elements equal to pivot are already in correct position
+            quick_sort(left, i)      # Sort elements < pivot
+            quick_sort(j, right)     # Sort elements > pivot
+      
+        # Sort the entire array in-place
+        quick_sort(0, len(nums) - 1)
+        return nums      
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "912. Sort an Array",
+    "text": "Given an array of integers nums, sort the array in ascending order and return it.\nYou must solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the smallest space complexity possible.\n\u00a0\nExample 1:\n\nInput: nums = [5,2,3,1]\nOutput: [1,2,3,5]\nExplanation: After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).\n\nExample 2:\n\nInput: nums = [5,1,1,2,0,0]\nOutput: [0,0,1,1,2,5]\nExplanation: Note that the values of nums are not necessarily unique.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 104\n-5 * 104 <= nums[i] <= 5 * 104\n\n",
+    "url": "https://leetcode.com/problems/0912-sort-an-array",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from random import randint\nclass Solution:\n    def sortArray(self, nums: List[int]) -> List[int]:\n        return self.quicksort(nums)\n    # merge two sorted arrays\n    # O(n LOGN) time complexity\n    # O(n) space complexity\n    def mergeSort(self, nums: List[int]) -> List[int]:\n        if len(nums) <= 1:\n            return nums\n        mid = len(nums) // 2\n        left = self.mergeSort(nums[:mid])\n        right = self.mergeSort(nums[mid:])\n        return self.merge(left, right)\n\n\n    # Heap sort\n    # O(nlogn) time complexity\n    # O(n) space complexity\n    def heapSort(self, nums: List[int]) -> List[int]:\n        heapq.heapify(nums)\n        return [heapq.heappop(nums) for _ in range(len(nums))]\n\n    # Counting Sort\n    # Time Complexity: O(n + k)\n    # SpaceComplexity : O(k)\n    def countingSort(self, nums: List[int]) -> List[int]:\n        min_num, max_num = min(nums), max(nums)\n        count = [0] * (max_num - min_num + 1)\n        for num in nums:\n            count[num - min_num] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i + min_num] * c)\n        return result\n        \n    def merge(self, left: List[int], right: List[int]) -> List[int]:\n        result = []\n        i = j = 0\n        while i < len(left) and j < len(right):\n            if left[i] < right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    # Counting Sort\n    # Time Complexity: O(n ^ 2)\n    # SpaceComplexity : O(logn)\n    def quicksort(self, nums: List[int]) -> List[int]:\n        def quick_sort(left ,right):\n            if left >= right:\n                return\n            pivot = nums[randint(left,right)]\n            i = left -1\n            j = right + 1\n            k = left\n\n            while k < j:\n                if nums[k] < pivot:\n                    i += 1\n                    nums[i], nums[k] = nums[k], nums[i]\n                    k += 1\n                elif nums[k] > pivot:\n                    # Move element to the \"greater than\" region\n                    j -= 1\n                    nums[j], nums[k] = nums[k], nums[j]\n                    # Don't increment k as we need to examine the swapped element\n                else:\n                    # Element equals pivot, just move to next element\n                    k += 1\n            # Recursively sort the \"less than\" and \"greater than\" regions\n            # Elements equal to pivot are already in correct position\n            quick_sort(left, i)      # Sort elements < pivot\n            quick_sort(j, right)     # Sort elements > pivot\n      \n        # Sort the entire array in-place\n        quick_sort(0, len(nums) - 1)\n        return nums      \n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0912-sort-an-array/",
+      "datePublished": "2024-02-27",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

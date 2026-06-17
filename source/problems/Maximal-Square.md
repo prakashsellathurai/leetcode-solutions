@@ -1,4 +1,4 @@
-# Maximal-Square
+# maximal-square
 
 
 Try it on <a href='https://leetcode.com/problems/maximal-square'>leetcode</a>
@@ -47,8 +47,41 @@ class Solution:
             for j in range(len(A[i])):
                 A[i][j] = int(A[i][j])
                 if A[i][j] and i and j:
-                    A[i][j] = min(A[i-1][j], A[i-1][j-1], A[i][j-1]) + 1
+                    A[i][j] = min(A[i - 1][j], A[i - 1]
+                                  [j - 1], A[i][j - 1]) + 1
                 if maxSol < A[i][j]:
                     maxSol = A[i][j]
-        return  maxSol *maxSol
+        return maxSol * maxSol
+
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "221. Maximal Square",
+    "text": "Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.\n\u00a0\nExample 1:\n\nInput: matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]\nOutput: 4\n\nExample 2:\n\nInput: matrix = [[\"0\",\"1\"],[\"1\",\"0\"]]\nOutput: 1\n\nExample 3:\nInput: matrix = [[\"0\"]]\nOutput: 0\n\n\u00a0\nConstraints:\n\nm == matrix.length\nn == matrix[i].length\n1 <= m, n <= 300\nmatrix[i][j] is '0' or '1'.\n\n",
+    "url": "https://leetcode.com/problems/maximal-square",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def maximalSquare(self, A):\n        maxSol = 0\n        for i in range(len(A)):\n            for j in range(len(A[i])):\n                A[i][j] = int(A[i][j])\n                if A[i][j] and i and j:\n                    A[i][j] = min(A[i - 1][j], A[i - 1]\n                                  [j - 1], A[i][j - 1]) + 1\n                if maxSol < A[i][j]:\n                    maxSol = A[i][j]\n        return maxSol * maxSol\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/maximal-square/",
+      "datePublished": "2024-01-28",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

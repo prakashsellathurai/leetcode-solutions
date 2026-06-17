@@ -1,0 +1,113 @@
+# 0729-my-calendar-i
+
+
+Try it on <a href='https://leetcode.com/problems/0729-my-calendar-i'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a <strong>double booking</strong>.</p>
+
+<p>A <strong>double booking</strong> happens when two events have some non-empty intersection (i.e., some moment is common to both events.).</p>
+
+<p>The event can be represented as a pair of integers <code>startTime</code> and <code>endTime</code> that represents a booking on the half-open interval <code>[startTime, endTime)</code>, the range of real numbers <code>x</code> such that <code>startTime &lt;= x &lt; endTime</code>.</p>
+
+<p>Implement the <code>MyCalendar</code> class:</p>
+
+<ul>
+	<li><code>MyCalendar()</code> Initializes the calendar object.</li>
+	<li><code>boolean book(int startTime, int endTime)</code> Returns <code>true</code> if the event can be added to the calendar successfully without causing a <strong>double booking</strong>. Otherwise, return <code>false</code> and do not add the event to the calendar.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input</strong>
+[&quot;MyCalendar&quot;, &quot;book&quot;, &quot;book&quot;, &quot;book&quot;]
+[[], [10, 20], [15, 25], [20, 30]]
+<strong>Output</strong>
+[null, true, false, true]
+
+<strong>Explanation</strong>
+MyCalendar myCalendar = new MyCalendar();
+myCalendar.book(10, 20); // return True
+myCalendar.book(15, 25); // return False, It can not be booked because time 15 is already booked by another event.
+myCalendar.book(20, 30); // return True, The event can be booked, as the first event takes every time less than 20, but not including 20.</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= start &lt; end &lt;= 10<sup>9</sup></code></li>
+	<li>At most <code>1000</code> calls will be made to <code>book</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from sortedcontainers import SortedList
+
+class MyCalendar:
+    def __init__(self):
+        self.Naivecalendar = []
+        self.sortedCalnder = SortedList()
+
+    def book(self, start, end):
+        return self.sorting(start, end)
+    
+    # Time Complexity: O(N**2)
+    # Spac complexity: O(N)
+    def naive(self, start, end):
+        for s, e in self.Naivecalendar:
+            if s < end and start < e:
+                return False
+        self.Naivecalendar.append((start, end))
+        return True
+
+    # Time Complexity: O(NlogN)
+    # Spac complexity: O(N)
+    def sorting(self, start, end):
+        idx = self.sortedCalnder.bisect_right((start, end))
+        if (idx > 0 and self.sortedCalnder[idx-1][1] > start) or (idx < len(self.sortedCalnder) and self.sortedCalnder[idx][0] < end):
+            return False
+        self.sortedCalnder.add((start, end))
+        return True
+
+        
+
+# Your MyCalendar object will be instantiated and called as such:
+# obj = MyCalendar()
+# param_1 = obj.book(startTime,endTime)
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "729. My Calendar I",
+    "text": "You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a double booking.\nA double booking happens when two events have some non-empty intersection (i.e., some moment is common to both events.).\nThe event can be represented as a pair of integers startTime and endTime that represents a booking on the half-open interval [startTime, endTime), the range of real numbers x such that startTime <= x < endTime.\nImplement the MyCalendar class:\n\nMyCalendar() Initializes the calendar object.\nboolean book(int startTime, int endTime) Returns true if the event can be added to the calendar successfully without causing a double booking. Otherwise, return false and do not add the event to the calendar.\n\n\u00a0\nExample 1:\n\nInput\n[\"MyCalendar\", \"book\", \"book\", \"book\"]\n[[], [10, 20], [15, 25], [20, 30]]\nOutput\n[null, true, false, true]\n\nExplanation\nMyCalendar myCalendar = new MyCalendar();\nmyCalendar.book(10, 20); // return True\nmyCalendar.book(15, 25); // return False, It can not be booked because time 15 is already booked by another event.\nmyCalendar.book(20, 30); // return True, The event can be booked, as the first event takes every time less than 20, but not including 20.\n\u00a0\nConstraints:\n\n0 <= start < end <= 109\nAt most 1000 calls will be made to book.\n\n",
+    "url": "https://leetcode.com/problems/0729-my-calendar-i",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from sortedcontainers import SortedList\n\nclass MyCalendar:\n    def __init__(self):\n        self.Naivecalendar = []\n        self.sortedCalnder = SortedList()\n\n    def book(self, start, end):\n        return self.sorting(start, end)\n    \n    # Time Complexity: O(N**2)\n    # Spac complexity: O(N)\n    def naive(self, start, end):\n        for s, e in self.Naivecalendar:\n            if s < end and start < e:\n                return False\n        self.Naivecalendar.append((start, end))\n        return True\n\n    # Time Complexity: O(NlogN)\n    # Spac complexity: O(N)\n    def sorting(self, start, end):\n        idx = self.sortedCalnder.bisect_right((start, end))\n        if (idx > 0 and self.sortedCalnder[idx-1][1] > start) or (idx < len(self.sortedCalnder) and self.sortedCalnder[idx][0] < end):\n            return False\n        self.sortedCalnder.add((start, end))\n        return True\n\n        \n\n# Your MyCalendar object will be instantiated and called as such:\n# obj = MyCalendar()\n# param_1 = obj.book(startTime,endTime)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0729-my-calendar-i/",
+      "datePublished": "2026-06-15",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

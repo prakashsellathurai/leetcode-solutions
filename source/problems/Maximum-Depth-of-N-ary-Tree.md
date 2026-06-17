@@ -1,4 +1,4 @@
-# Maximum-Depth-of-N-ary-Tree
+# maximum-depth-of-n-ary-tree
 
 
 Try it on <a href='https://leetcode.com/problems/maximum-depth-of-n-ary-tree'>leetcode</a>
@@ -48,12 +48,45 @@ class Node:
         self.children = children
 """
 
+
 class Solution:
-    def maxDepth(self, root: 'Node') -> int:
+    def maxDepth(self, root: "Node") -> int:
         height = 0
         if not root:
             return 0
         for child in root.children:
-            height  = max(height,self.maxDepth(child))
-        return height+1
+            height = max(height, self.maxDepth(child))
+        return height + 1
+
 ```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "559. Maximum Depth of N-ary Tree",
+    "text": "Given a n-ary tree, find its maximum depth.\nThe maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.\nNary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).\n\u00a0\nExample 1:\n\nInput: root = [1,null,3,2,4,null,5,6]\nOutput: 3\n\nExample 2:\n\nInput: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]\nOutput: 5\n\n\u00a0\nConstraints:\n\nThe total number of nodes is in the range [0, 104].\nThe depth of the n-ary tree is less than or equal to 1000.\n\n",
+    "url": "https://leetcode.com/problems/maximum-depth-of-n-ary-tree",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "\"\"\"\n# Definition for a Node.\nclass Node:\n    def __init__(self, val=None, children=None):\n        self.val = val\n        self.children = children\n\"\"\"\n\n\nclass Solution:\n    def maxDepth(self, root: \"Node\") -> int:\n        height = 0\n        if not root:\n            return 0\n        for child in root.children:\n            height = max(height, self.maxDepth(child))\n        return height + 1\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/maximum-depth-of-n-ary-tree/",
+      "datePublished": "2023-12-12",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,80 @@
+# 59-spiral-matrix-ii
+
+
+Try it on <a href='https://leetcode.com/problems/59-spiral-matrix-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Given a positive integer <code>n</code>, generate an <code>n x n</code> <code>matrix</code> filled with elements from <code>1</code> to <code>n<sup>2</sup></code> in spiral order.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/11/13/spiraln.jpg" style="width: 242px; height: 242px;">
+<pre><strong>Input:</strong> n = 3
+<strong>Output:</strong> [[1,2,3],[8,9,4],[7,6,5]]
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> n = 1
+<strong>Output:</strong> [[1]]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 20</code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def generateMatrix(self, n):
+        matrix = [[0] * n for _ in range(n)]
+        x, y, dx, dy = 0, 0, 1, 0
+        for i in range(n * n):
+            matrix[y][x] = i + 1
+            if (
+                not 0 <= x + dx < n
+                or not 0 <= y + dy < n
+                or matrix[y + dy][x + dx] != 0
+            ):
+                dx, dy = -dy, dx
+            x, y = x + dx, y + dy
+        return matrix
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "59. Spiral Matrix II",
+    "text": "Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.\n\u00a0\nExample 1:\n\nInput: n = 3\nOutput: [[1,2,3],[8,9,4],[7,6,5]]\n\nExample 2:\nInput: n = 1\nOutput: [[1]]\n\n\u00a0\nConstraints:\n\n1 <= n <= 20\n\n",
+    "url": "https://leetcode.com/problems/59-spiral-matrix-ii",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def generateMatrix(self, n):\n        matrix = [[0] * n for _ in range(n)]\n        x, y, dx, dy = 0, 0, 1, 0\n        for i in range(n * n):\n            matrix[y][x] = i + 1\n            if (\n                not 0 <= x + dx < n\n                or not 0 <= y + dy < n\n                or matrix[y + dy][x + dx] != 0\n            ):\n                dx, dy = -dy, dx\n            x, y = x + dx, y + dy\n        return matrix\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/59-spiral-matrix-ii/",
+      "datePublished": "2023-01-07",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

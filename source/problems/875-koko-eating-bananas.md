@@ -1,0 +1,129 @@
+# 875-koko-eating-bananas
+
+
+Try it on <a href='https://leetcode.com/problems/875-koko-eating-bananas'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>Koko loves to eat bananas. There are <code>n</code> piles of bananas, the <code>i<sup>th</sup></code> pile has <code>piles[i]</code> bananas. The guards have gone and will come back in <code>h</code> hours.</p>
+
+<p>Koko can decide her bananas-per-hour eating speed of <code>k</code>. Each hour, she chooses some pile of bananas and eats <code>k</code> bananas from that pile. If the pile has less than <code>k</code> bananas, she eats all of them instead and will not eat any more bananas during this hour.</p>
+
+<p>Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.</p>
+
+<p>Return <em>the minimum integer</em> <code>k</code> <em>such that she can eat all the bananas within</em> <code>h</code> <em>hours</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+
+<pre><strong>Input:</strong> piles = [3,6,7,11], h = 8
+<strong>Output:</strong> 4
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> piles = [30,11,23,4,20], h = 5
+<strong>Output:</strong> 30
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> piles = [30,11,23,4,20], h = 6
+<strong>Output:</strong> 23
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= piles.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>piles.length &lt;= h &lt;= 10<sup>9</sup></code></li>
+	<li><code>1 &lt;= piles[i] &lt;= 10<sup>9</sup></code></li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        return self.binarySearch(piles, h)
+
+    # minimum possible speed will be 1
+    # maximum possible speed will be m largest pile size
+    # which gives us range
+    # then try every possible speed values starting from lowest speed
+    # until condition is met
+    #
+    # Time Complexity: O(mn)
+    # Space Complexity: O(1)
+    def bruteforce(self, piles: List[int], h: int) -> int:
+        speed = 1
+
+        while True:
+            hour_spend = 0
+            for pile in piles:
+                hour_spent += ceil(pile / speed)
+            if hour_spent <= h:
+                return speed
+            else:
+                speed += 1
+
+    # since bruteforce searches on the range of increasing list
+    # binary search will halves the  search space by log m
+    #
+    # binary search control relies on finding the condition of spearater
+    # line between the search space
+    # if x banana per second satisfies means x+1 banana per second also
+    # satisfies the time criteria so ignore x+1
+    # if x bps doesnot satifies then ignore x-1
+    # Time Complexity: O(nlogM)
+    # Space Complexity:O(1)
+    def binarySearch(self, piles: List[int], h: int) -> int:
+        left = 1
+        right = max(piles)
+
+        while left < right:
+            mid = (left + right) // 2
+            hour_spend = 0
+            for pile in piles:
+                hour_spend += ceil(pile / mid)
+
+            if hour_spend <= h:
+                right = mid
+            else:
+                left = mid + 1
+        return left
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "875. Koko Eating Bananas",
+    "text": "Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas. The guards have gone and will come back in h hours.\nKoko can decide her bananas-per-hour eating speed of k. Each hour, she chooses some pile of bananas and eats k bananas from that pile. If the pile has less than k bananas, she eats all of them instead and will not eat any more bananas during this hour.\nKoko likes to eat slowly but still wants to finish eating all the bananas before the guards return.\nReturn the minimum integer k such that she can eat all the bananas within h hours.\n\u00a0\nExample 1:\nInput: piles = [3,6,7,11], h = 8\nOutput: 4\n\nExample 2:\nInput: piles = [30,11,23,4,20], h = 5\nOutput: 30\n\nExample 3:\nInput: piles = [30,11,23,4,20], h = 6\nOutput: 23\n\n\u00a0\nConstraints:\n\n1 <= piles.length <= 104\npiles.length <= h <= 109\n1 <= piles[i] <= 109\n\n",
+    "url": "https://leetcode.com/problems/875-koko-eating-bananas",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minEatingSpeed(self, piles: List[int], h: int) -> int:\n        return self.binarySearch(piles, h)\n\n    # minimum possible speed will be 1\n    # maximum possible speed will be m largest pile size\n    # which gives us range\n    # then try every possible speed values starting from lowest speed\n    # until condition is met\n    #\n    # Time Complexity: O(mn)\n    # Space Complexity: O(1)\n    def bruteforce(self, piles: List[int], h: int) -> int:\n        speed = 1\n\n        while True:\n            hour_spend = 0\n            for pile in piles:\n                hour_spent += ceil(pile / speed)\n            if hour_spent <= h:\n                return speed\n            else:\n                speed += 1\n\n    # since bruteforce searches on the range of increasing list\n    # binary search will halves the  search space by log m\n    #\n    # binary search control relies on finding the condition of spearater\n    # line between the search space\n    # if x banana per second satisfies means x+1 banana per second also\n    # satisfies the time criteria so ignore x+1\n    # if x bps doesnot satifies then ignore x-1\n    # Time Complexity: O(nlogM)\n    # Space Complexity:O(1)\n    def binarySearch(self, piles: List[int], h: int) -> int:\n        left = 1\n        right = max(piles)\n\n        while left < right:\n            mid = (left + right) // 2\n            hour_spend = 0\n            for pile in piles:\n                hour_spend += ceil(pile / mid)\n\n            if hour_spend <= h:\n                right = mid\n            else:\n                left = mid + 1\n        return left\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/875-koko-eating-bananas/",
+      "datePublished": "2023-06-16",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

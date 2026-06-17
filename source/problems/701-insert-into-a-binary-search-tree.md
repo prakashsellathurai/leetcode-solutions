@@ -1,0 +1,106 @@
+# 701-insert-into-a-binary-search-tree
+
+
+Try it on <a href='https://leetcode.com/problems/701-insert-into-a-binary-search-tree'>leetcode</a>
+
+## Description
+<div class="description">
+<div><p>You are given the <code>root</code> node of a binary search tree (BST) and a <code>value</code> to insert into the tree. Return <em>the root node of the BST after the insertion</em>. It is <strong>guaranteed</strong> that the new value does not exist in the original BST.</p>
+
+<p><strong>Notice</strong>&nbsp;that there may exist&nbsp;multiple valid ways for the&nbsp;insertion, as long as the tree remains a BST after insertion. You can return <strong>any of them</strong>.</p>
+
+<p>&nbsp;</p>
+<p><strong>Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/05/insertbst.jpg" style="width: 752px; height: 221px;">
+<pre><strong>Input:</strong> root = [4,2,7,1,3], val = 5
+<strong>Output:</strong> [4,2,7,1,3,5]
+<strong>Explanation:</strong> Another accepted tree is:
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/05/bst.jpg" style="width: 352px; height: 301px;">
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre><strong>Input:</strong> root = [40,20,60,10,30,50,70], val = 25
+<strong>Output:</strong> [40,20,60,10,30,50,70,null,null,25]
+</pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre><strong>Input:</strong> root = [4,2,7,1,3,null,null,null,null,null,null], val = 5
+<strong>Output:</strong> [4,2,7,1,3,5]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in&nbsp;the tree will be in the range <code>[0,&nbsp;10<sup>4</sup>]</code>.</li>
+	<li><code>-10<sup>8</sup> &lt;= Node.val &lt;= 10<sup>8</sup></code></li>
+	<li>All the values <code>Node.val</code> are <strong>unique</strong>.</li>
+	<li><code>-10<sup>8</sup> &lt;= val &lt;= 10<sup>8</sup></code></li>
+	<li>It's <strong>guaranteed</strong> that <code>val</code> does not exist in the original BST.</li>
+</ul>
+</div>
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            return TreeNode(val)
+
+        pred, cur = None, root
+        while cur or pred:
+            if cur is None:
+                if pred.left is None and pred.val > val:
+                    pred.left = TreeNode(val)
+                elif pred.right is None and pred.val < val:
+                    pred.right = TreeNode(val)
+                break
+            else:
+                if cur.val < val:
+                    pred, cur = cur, cur.right
+                elif cur.val > val:
+                    pred, cur = cur, cur.left
+
+        return root
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "701. Insert into a Binary Search Tree",
+    "text": "You are given the root node of a binary search tree (BST) and a value to insert into the tree. Return the root node of the BST after the insertion. It is guaranteed that the new value does not exist in the original BST.\nNotice\u00a0that there may exist\u00a0multiple valid ways for the\u00a0insertion, as long as the tree remains a BST after insertion. You can return any of them.\n\u00a0\nExample 1:\n\nInput: root = [4,2,7,1,3], val = 5\nOutput: [4,2,7,1,3,5]\nExplanation: Another accepted tree is:\n\n\nExample 2:\nInput: root = [40,20,60,10,30,50,70], val = 25\nOutput: [40,20,60,10,30,50,70,null,null,25]\n\nExample 3:\nInput: root = [4,2,7,1,3,null,null,null,null,null,null], val = 5\nOutput: [4,2,7,1,3,5]\n\n\u00a0\nConstraints:\n\nThe number of nodes in\u00a0the tree will be in the range [0,\u00a0104].\n-108 <= Node.val <= 108\nAll the values Node.val are unique.\n-108 <= val <= 108\nIt's guaranteed that val does not exist in the original BST.\n\n",
+    "url": "https://leetcode.com/problems/701-insert-into-a-binary-search-tree",
+    "answerCount": 1,
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        if not root:\n            return TreeNode(val)\n\n        pred, cur = None, root\n        while cur or pred:\n            if cur is None:\n                if pred.left is None and pred.val > val:\n                    pred.left = TreeNode(val)\n                elif pred.right is None and pred.val < val:\n                    pred.right = TreeNode(val)\n                break\n            else:\n                if cur.val < val:\n                    pred, cur = cur, cur.right\n                elif cur.val > val:\n                    pred, cur = cur, cur.left\n\n        return root\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/701-insert-into-a-binary-search-tree/",
+      "datePublished": "2023-09-13",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

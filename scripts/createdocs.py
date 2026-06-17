@@ -9,6 +9,7 @@ __copyright__ = "Copyright 2022"
 __version__ = "1.0.1"
 __email__ = "prakashsellathurai@gmail.com"
 
+import datetime
 import json
 import os
 import random
@@ -28,6 +29,20 @@ DOCS_PATH = os.path.join(os.getcwd(), DOCS_FOLDER)
 PROBLEMS_FOLDER_PATH = os.path.join(os.getcwd(), "./source/problems/")
 INDEX_FILE_PATH = os.path.join(os.getcwd(), "./source/_static/index.html")
 IGNORED_PATHS = [".git", ".github",".deepsource.toml"]
+STATE_FILE_PATH = os.path.join(os.getcwd(), "./scripts/problem_dates.json")
+
+
+def load_dates():
+    try:
+        with open(STATE_FILE_PATH, "r") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_dates(dates):
+    with open(STATE_FILE_PATH, "w") as f:
+        json.dump(dates, f, indent=2)
 
 
 def to_doc(problem):
@@ -39,6 +54,7 @@ def to_doc(problem):
     Returns:
         str: doc string
     """
+    site_base = "https://prakashsellathurai.com/leetcode-solutions/"
     json_ld = {
         "@context": "https://schema.org",
         "@type": "QAPage",
@@ -46,17 +62,23 @@ def to_doc(problem):
             "@type": "Question",
             "name": problem["title"],
             "text": problem["description_text"],
+            "url": problem["leetcodeurl"],
             "answerCount": 1,
             "author": {
                 "@type": "Organization",
-                "name": "LeetCode"
+                "name": "LeetCode",
+                "url": "https://leetcode.com"
             },
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": problem["code"],
+                "url": f"{site_base}/{problem['title_slug']}/",
+                "datePublished": problem["datePublished"],
+                "upvoteCount": 0,
                 "author": {
                     "@type": "Person",
-                    "name": "Prakash Sellathurai"
+                    "name": "Prakash Sellathurai",
+                    "url": "https://github.com/prakashsellathurai"
                 }
             }
         }
@@ -160,6 +182,15 @@ def main():
             )
         cache[title_slug] = True
     problems.sort(key=lambda x: x["id"])
+
+    dates = load_dates()
+    today = datetime.date.today().isoformat()
+    for problem in problems:
+        slug = problem["title_slug"]
+        if slug not in dates:
+            dates[slug] = today
+        problem["datePublished"] = dates[slug]
+    save_dates(dates)
 
     print("############ problems collected ##################")
 
