@@ -94,6 +94,7 @@ class Solution:
     "text": "You are given an array of variable pairs equations and an array of real numbers values, where equations[i] = [Ai, Bi] and values[i] represent the equation Ai / Bi = values[i]. Each Ai or Bi is a string that represents a single variable.\nYou are also given some queries, where queries[j] = [Cj, Dj] represents the jth query where you must find the answer for Cj / Dj = ?.\nReturn the answers to all queries. If a single answer cannot be determined, return -1.0.\nNote: The input is always valid. You may assume that evaluating the queries will not result in division by zero and that there is no contradiction.\n\u00a0\nExample 1:\nInput: equations = [[\"a\",\"b\"],[\"b\",\"c\"]], values = [2.0,3.0], queries = [[\"a\",\"c\"],[\"b\",\"a\"],[\"a\",\"e\"],[\"a\",\"a\"],[\"x\",\"x\"]]\nOutput: [6.00000,0.50000,-1.00000,1.00000,-1.00000]\nExplanation: \nGiven: a / b = 2.0, b / c = 3.0\nqueries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?\nreturn: [6.0, 0.5, -1.0, 1.0, -1.0 ]\n\nExample 2:\nInput: equations = [[\"a\",\"b\"],[\"b\",\"c\"],[\"bc\",\"cd\"]], values = [1.5,2.5,5.0], queries = [[\"a\",\"c\"],[\"c\",\"b\"],[\"bc\",\"cd\"],[\"cd\",\"bc\"]]\nOutput: [3.75000,0.40000,5.00000,0.20000]\n\nExample 3:\nInput: equations = [[\"a\",\"b\"]], values = [0.5], queries = [[\"a\",\"b\"],[\"b\",\"a\"],[\"a\",\"c\"],[\"x\",\"y\"]]\nOutput: [0.50000,2.00000,-1.00000,-1.00000]\n\n\u00a0\nConstraints:\n\n1 <= equations.length <= 20\nequations[i].length == 2\n1 <= Ai.length, Bi.length <= 5\nvalues.length == equations.length\n0.0 < values[i] <= 20.0\n1 <= queries.length <= 20\nqueries[i].length == 2\n1 <= Cj.length, Dj.length <= 5\nAi, Bi, Cj, Dj consist of lower case English letters and digits.\n\n",
     "url": "https://leetcode.com/problems/399-evaluate-division",
     "answerCount": 1,
+    "datePublished": "2022-05-21T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -103,7 +104,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def calcEquation(\n        self, equations: List[List[str]], values: List[float], queries: List[List[str]]\n    ) -> List[float]:\n        G = defaultdict(dict)\n        for (x, y), value in zip(equations, values):\n            G[x][y] = value\n            G[y][x] = 1 / value\n\n        def bfs(s, e):\n            product = 1.0\n            q = deque([])\n            q.append((s, product))\n            seen = set()\n            while q:\n                u, product = q.popleft()\n                seen.add(u)\n                for v in G[u]:\n                    if v == e:\n                        return product * G[u][v]\n                    if v not in seen:\n                        q.append((v, product * G[u][v]))\n\n            return -1.0\n\n        return [bfs(s, e) for s, e in queries]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/399-evaluate-division/",
-      "datePublished": "2022-05-21",
+      "datePublished": "2022-05-21T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

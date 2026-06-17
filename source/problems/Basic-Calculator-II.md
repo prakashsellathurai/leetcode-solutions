@@ -73,6 +73,7 @@ class Solution:
     "text": "Given a string s which represents an expression, evaluate this expression and return its value.\u00a0\nThe integer division should truncate toward zero.\nYou may assume that the given expression is always valid. All intermediate results will be in the range of [-231, 231 - 1].\nNote: You are not allowed to use any built-in function which evaluates strings as mathematical expressions, such as eval().\n\u00a0\nExample 1:\nInput: s = \"3+2*2\"\nOutput: 7\nExample 2:\nInput: s = \" 3/2 \"\nOutput: 1\nExample 3:\nInput: s = \" 3+5 / 2 \"\nOutput: 5\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 3 * 105\ns consists of integers and operators ('+', '-', '*', '/') separated by some number of spaces.\ns represents a valid expression.\nAll the integers in the expression are non-negative integers in the range [0, 231 - 1].\nThe answer is guaranteed to fit in a 32-bit integer.\n\n",
     "url": "https://leetcode.com/problems/basic-calculator-ii",
     "answerCount": 1,
+    "datePublished": "2024-03-14T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -82,7 +83,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def calculate(self, s: str) -> int:\n        inner, outer, result, opt = 0, 0, 0, \"+\"\n        for c in s + \"+\":\n            if c == \" \":\n                continue\n            if c.isdigit():\n                inner = 10 * inner + int(c)\n                continue\n            if opt == \"+\":\n                result += outer\n                outer = inner\n            elif opt == \"-\":\n                result += outer\n                outer = -inner\n            elif opt == \"*\":\n                outer = outer * inner\n            elif opt == \"/\":\n                outer = int(outer / inner)\n            inner, opt = 0, c\n        return result + outer\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/basic-calculator-ii/",
-      "datePublished": "2024-03-14",
+      "datePublished": "2024-03-14T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -68,6 +68,7 @@ class Solution(object):
     "text": "You are given the root of a binary tree. We install cameras on the tree nodes where each camera at a node can monitor its parent, itself, and its immediate children.\nReturn the minimum number of cameras needed to monitor all nodes of the tree.\n\u00a0\nExample 1:\n\nInput: root = [0,0,null,0,0]\nOutput: 1\nExplanation: One camera is enough to monitor all nodes if placed as shown.\n\nExample 2:\n\nInput: root = [0,0,null,0,null,0,null,null,0]\nOutput: 2\nExplanation: At least two cameras are needed to monitor all nodes of the tree. The above image shows one of the valid configurations of camera placement.\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 1000].\nNode.val == 0\n\n",
     "url": "https://leetcode.com/problems/968-binary-tree-cameras",
     "answerCount": 1,
+    "datePublished": "2022-08-13T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -77,7 +78,7 @@ class Solution(object):
       "@type": "Answer",
       "text": "class Solution(object):\n    def minCameraCover(self, root):\n        def solve(node):\n            # 0: Strict ST; All nodes below this are covered, but not this one\n            # 1: Normal ST; All nodes below and incl this are covered - no camera\n            # 2: Placed camera; All nodes below this are covered, plus camera here\n\n            if not node:\n                return 0, 0, float(\"inf\")\n            L = solve(node.left)\n            R = solve(node.right)\n\n            dp0 = L[1] + R[1]\n            dp1 = min(L[2] + min(R[1:]), R[2] + min(L[1:]))\n            dp2 = 1 + min(L) + min(R)\n\n            return dp0, dp1, dp2\n\n        return min(solve(root)[1:])\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/968-binary-tree-cameras/",
-      "datePublished": "2022-08-13",
+      "datePublished": "2022-08-13T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

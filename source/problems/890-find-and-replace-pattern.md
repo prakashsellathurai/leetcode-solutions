@@ -80,6 +80,7 @@ class Solution:
     "text": "Given a list of strings words and a string pattern, return a list of words[i] that match pattern. You may return the answer in any order.\nA word matches the pattern if there exists a permutation of letters p so that after replacing every letter x in the pattern with p(x), we get the desired word.\nRecall that a permutation of letters is a bijection from letters to letters: every letter maps to another letter, and no two letters map to the same letter.\n\u00a0\nExample 1:\nInput: words = [\"abc\",\"deq\",\"mee\",\"aqq\",\"dkd\",\"ccc\"], pattern = \"abb\"\nOutput: [\"mee\",\"aqq\"]\nExplanation: \"mee\" matches the pattern because there is a permutation {a -> m, b -> e, ...}. \n\"ccc\" does not match the pattern because {a -> c, b -> c, ...} is not a permutation, since a and b map to the same letter.\n\nExample 2:\nInput: words = [\"a\",\"b\",\"c\"], pattern = \"a\"\nOutput: [\"a\",\"b\",\"c\"]\n\n\u00a0\nConstraints:\n\n1 <= pattern.length <= 20\n1 <= words.length <= 50\nwords[i].length == pattern.length\npattern and words[i] are lowercase English letters.\n\n",
     "url": "https://leetcode.com/problems/890-find-and-replace-pattern",
     "answerCount": 1,
+    "datePublished": "2022-06-26T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -89,7 +90,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:\n        \n        def is_pattern(s, t):\n            s_map = {}\n            t_map = {}\n            \n            n= len(s)\n            if n != len(t):\n                return False\n            \n            for i in range(n):\n                if s[i] not in s_map:\n                    s_map[s[i]] = t[i]\n                elif s_map[s[i]] != t[i]:\n                        return False\n                    \n                if t[i] not in t_map:\n                    t_map[t[i]] = s[i]\n                elif t_map[t[i]] != s[i]:\n                    return False\n            return True\n        \n        res = []\n        for word in words:\n            if is_pattern(word, pattern):\n                res.append(word)\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/890-find-and-replace-pattern/",
-      "datePublished": "2022-06-26",
+      "datePublished": "2022-06-26T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

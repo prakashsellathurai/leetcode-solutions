@@ -64,6 +64,7 @@ def to_doc(problem):
             "text": problem["description_text"],
             "url": problem["leetcodeurl"],
             "answerCount": 1,
+            "datePublished": problem["datePublished"],
             "author": {
                 "@type": "Organization",
                 "name": "LeetCode",

@@ -75,6 +75,7 @@ class Solution:
     "text": "There is a broken calculator that has the integer startValue on its display initially. In one operation, you can:\n\nmultiply the number on display by 2, or\nsubtract 1 from the number on display.\n\nGiven two integers startValue and target, return the minimum number of operations needed to display target on the calculator.\n\u00a0\nExample 1:\n\nInput: startValue = 2, target = 3\nOutput: 2\nExplanation: Use double operation and then decrement operation {2 -> 4 -> 3}.\n\nExample 2:\n\nInput: startValue = 5, target = 8\nOutput: 2\nExplanation: Use decrement and then double {5 -> 4 -> 8}.\n\nExample 3:\n\nInput: startValue = 3, target = 10\nOutput: 3\nExplanation: Use double, decrement and double {3 -> 6 -> 5 -> 10}.\n\n\u00a0\nConstraints:\n\n1 <= startValue, target <= 109\n\n",
     "url": "https://leetcode.com/problems/0991-broken-calculator",
     "answerCount": 1,
+    "datePublished": "2022-08-16T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -84,7 +85,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def brokenCalc(self, startValue: int, target: int) -> int:\n        cnt = 0\n        while target > startValue:\n            if startValue == target:\n                break\n            if not target % 2:\n                target//=2\n            else:\n                target+=1\n            cnt+=1\n\n        return cnt + startValue -target",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0991-broken-calculator/",
-      "datePublished": "2022-08-16",
+      "datePublished": "2022-08-16T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

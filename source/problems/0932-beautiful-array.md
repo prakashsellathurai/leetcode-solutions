@@ -59,6 +59,7 @@ class Solution:
     "text": "An array nums of length n is beautiful if:\n\nnums is a permutation of the integers in the range [1, n].\nFor every 0 <= i < j < n, there is no index k with i < k < j where 2 * nums[k] == nums[i] + nums[j].\n\nGiven the integer n, return any beautiful array nums of length n. There will be at least one valid answer for the given n.\n\u00a0\nExample 1:\nInput: n = 4\nOutput: [2,1,4,3]\nExample 2:\nInput: n = 5\nOutput: [3,1,2,5,4]\n\n\u00a0\nConstraints:\n\n1 <= n <= 1000\n\n",
     "url": "https://leetcode.com/problems/0932-beautiful-array",
     "answerCount": 1,
+    "datePublished": "2026-02-08T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -68,7 +69,7 @@ class Solution:
       "@type": "Answer",
       "text": "from functools import lru_cache\n\n\nclass Solution:\n    def beautifulArray(self, N):\n        @lru_cache\n        def f(N): # 2\n            if N <= 1:\n                return [1]\n            odds = f((N+1)//2) # \n            evens = f(N//2)\n            ans = [2*x-1 for x in odds] + [2*x for x in evens]\n            return ans\n        return f(N)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0932-beautiful-array/",
-      "datePublished": "2026-02-08",
+      "datePublished": "2026-02-08T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -66,6 +66,7 @@ class Solution:
     "text": "Given an array of strings words representing an English Dictionary, return the longest word in words that can be built one character at a time by other words in words.\nIf there is more than one possible answer, return the longest word with the smallest lexicographical order. If there is no answer, return the empty string.\n\u00a0\nExample 1:\nInput: words = [\"w\",\"wo\",\"wor\",\"worl\",\"world\"]\nOutput: \"world\"\nExplanation: The word \"world\" can be built one character at a time by \"w\", \"wo\", \"wor\", and \"worl\".\n\nExample 2:\nInput: words = [\"a\",\"banana\",\"app\",\"appl\",\"ap\",\"apply\",\"apple\"]\nOutput: \"apple\"\nExplanation: Both \"apply\" and \"apple\" can be built from other words in the dictionary. However, \"apple\" is lexicographically smaller than \"apply\".\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 1000\n1 <= words[i].length <= 30\nwords[i] consists of lowercase English letters.\n\n",
     "url": "https://leetcode.com/problems/720-longest-word-in-dictionary",
     "answerCount": 1,
+    "datePublished": "2024-05-26T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -75,7 +76,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def longestWord(self, words: List[str]) -> str:\n        return self.bruteforce(words)\n\n    def bruteforce(self, words: List[str]) -> str:\n        ans = \"\"\n        wordset = set(words)\n\n        for word in words:\n            if len(word) > len(ans) or len(word) == len(ans) and word < ans:\n                if all(word[:k] in wordset for k in range(1, len(word))):\n                    ans = word\n        return ans\n\n    def trie(self, words: List[str]) -> str:\n        pass\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/720-longest-word-in-dictionary/",
-      "datePublished": "2024-05-26",
+      "datePublished": "2024-05-26T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

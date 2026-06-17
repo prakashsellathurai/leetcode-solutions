@@ -63,6 +63,7 @@ class Solution:
     "text": "Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.\nYou must write an algorithm that runs in\u00a0O(n)\u00a0time.\n\u00a0\nExample 1:\nInput: nums = [100,4,200,1,3,2]\nOutput: 4\nExplanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.\n\nExample 2:\nInput: nums = [0,3,7,2,5,8,4,6,0,1]\nOutput: 9\n\n\u00a0\nConstraints:\n\n0 <= nums.length <= 105\n-109 <= nums[i] <= 109\n\n",
     "url": "https://leetcode.com/problems/128-longest-consecutive-sequence",
     "answerCount": 1,
+    "datePublished": "2025-01-27T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -72,7 +73,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def longestConsecutive(self, nums):\n\n        longest_streak = 0\n        num_set = set(nums)\n\n        for num in nums:\n            if num-1 not in num_set:\n                current_streak = 1\n                cur_num = num\n                while cur_num+1 in num_set:\n                    cur_num += 1\n                    current_streak += 1\n                longest_streak = max(longest_streak,current_streak)\n\n        return longest_streak",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/128-longest-consecutive-sequence/",
-      "datePublished": "2025-01-27",
+      "datePublished": "2025-01-27T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -65,6 +65,7 @@ class Solution:
     "text": "Given a string s, return the longest palindromic substring in s.\n\u00a0\nExample 1:\n\nInput: s = \"babad\"\nOutput: \"bab\"\nExplanation: \"aba\" is also a valid answer.\n\nExample 2:\n\nInput: s = \"cbbd\"\nOutput: \"bb\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 1000\ns consist of only digits and English letters.\n\n",
     "url": "https://leetcode.com/problems/0005-longest-palindromic-substring",
     "answerCount": 1,
+    "datePublished": "2025-06-21T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -74,7 +75,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def longestPalindrome(self, s: str) -> str:\n        n = len(s)\n        dp = [[False] * n for _ in range(n)]\n        for i in range(n):\n            dp[i][i] = True\n        left, right = 0, 1\n\n        for end in range(0, n):\n            for start in range(end - 1, -1, -1):\n                if s[start] == s[end]:\n                    if end - start == 1 or dp[start + 1][end - 1]:\n                        dp[start][end] = True\n                        palindrome_len = end - start + 1\n                        if right - left < palindrome_len:\n                            left = start\n                            right = left + palindrome_len\n        return s[left: right]",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0005-longest-palindromic-substring/",
-      "datePublished": "2025-06-21",
+      "datePublished": "2025-06-21T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

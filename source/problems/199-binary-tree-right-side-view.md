@@ -95,6 +95,7 @@ class Solution:
     "text": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.\n\u00a0\nExample 1:\n\nInput: root = [1,2,3,null,5,null,4]\nOutput: [1,3,4]\n\nExample 2:\nInput: root = [1,null,3]\nOutput: [1,3]\n\nExample 3:\nInput: root = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 100].\n-100 <= Node.val <= 100\n\n",
     "url": "https://leetcode.com/problems/199-binary-tree-right-side-view",
     "answerCount": 1,
+    "datePublished": "2025-05-19T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -104,7 +105,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:\n        return self.dfs(root)\n        \n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def levelorder(self, root: Optional[TreeNode]) -> List[int]:\n        res = []\n        q = deque([root])\n        while q:\n            n = len(q)\n            for i in range(n):\n                node = q.popleft()\n                if  i== n-1:\n                    res.append(node.val)\n                if node.left:\n                    q.append(node.left)\n                if node.right:\n                    q.append(node.right)\n        return res\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(H)\n    def dfs(self, root: Optional[TreeNode]) -> List[int]:\n        res = []\n        heights = {}\n        def preorder(node, h):\n            if node:\n                if h not in heights:\n                    heights[h] = True\n                    res.append(node.val)\n                preorder(node.right, h+1)\n                preorder(node.left, h+1)\n                \n                \n        preorder(root,0)\n        return res\n        \n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/199-binary-tree-right-side-view/",
-      "datePublished": "2025-05-19",
+      "datePublished": "2025-05-19T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -80,6 +80,7 @@ class MyHashSet:
     "text": "Design a HashSet without using any built-in hash table libraries.\nImplement MyHashSet class:\n\nvoid add(key) Inserts the value key into the HashSet.\nbool contains(key) Returns whether the value key exists in the HashSet or not.\nvoid remove(key) Removes the value key in the HashSet. If key does not exist in the HashSet, do nothing.\n\n\u00a0\nExample 1:\nInput\n[\"MyHashSet\", \"add\", \"add\", \"contains\", \"contains\", \"add\", \"contains\", \"remove\", \"contains\"]\n[[], [1], [2], [1], [3], [2], [2], [2], [2]]\nOutput\n[null, null, null, true, false, null, true, null, false]\n\nExplanation\nMyHashSet myHashSet = new MyHashSet();\nmyHashSet.add(1);      // set = [1]\nmyHashSet.add(2);      // set = [1, 2]\nmyHashSet.contains(1); // return True\nmyHashSet.contains(3); // return False, (not found)\nmyHashSet.add(2);      // set = [1, 2]\nmyHashSet.contains(2); // return True\nmyHashSet.remove(2);   // set = [1]\nmyHashSet.contains(2); // return False, (already removed)\n\u00a0\nConstraints:\n\n0 <= key <= 106\nAt most 104 calls will be made to add, remove, and contains.\n\n",
     "url": "https://leetcode.com/problems/705-design-hashset",
     "answerCount": 1,
+    "datePublished": "2026-05-13T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -89,7 +90,7 @@ class MyHashSet:
       "@type": "Answer",
       "text": "class MyHashSet:\n    def eval_hash(self, key):\n        return key % (1 << 15)\n\n    def __init__(self):\n        self.arr = [[] for _ in range(1 << 15)]\n\n    def add(self, key: int) -> None:\n        t = self.eval_hash(key)\n        if key not in self.arr[t]:\n            self.arr[t].append(key)\n\n    def remove(self, key: int) -> None:\n        t = self.eval_hash(key)\n        if key in self.arr[t]:\n            self.arr[t].remove(key)\n\n    def contains(self, key: int) -> bool:\n        t = self.eval_hash(key)\n        return key in self.arr[t]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/705-design-hashset/",
-      "datePublished": "2026-05-13",
+      "datePublished": "2026-05-13T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

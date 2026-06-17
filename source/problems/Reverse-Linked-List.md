@@ -71,6 +71,7 @@ class Solution:
     "text": "Given the head of a singly linked list, reverse the list, and return the reversed list.\n\u00a0\nExample 1:\n\nInput: head = [1,2,3,4,5]\nOutput: [5,4,3,2,1]\n\nExample 2:\n\nInput: head = [1,2]\nOutput: [2,1]\n\nExample 3:\nInput: head = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is the range [0, 5000].\n-5000 <= Node.val <= 5000\n\n\u00a0\nFollow up: A linked list can be reversed either iteratively or recursively. Could you implement both?\n",
     "url": "https://leetcode.com/problems/reverse-linked-list",
     "answerCount": 1,
+    "datePublished": "2022-01-24T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -80,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:\n        prev = None\n        cur = head\n\n        while cur:\n            n = cur.next\n            cur.next = prev\n            prev = cur\n            cur = n\n\n        return prev\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/reverse-linked-list/",
-      "datePublished": "2022-01-24",
+      "datePublished": "2022-01-24T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -78,6 +78,7 @@ class Solution:
     "text": "You are given an array prices where prices[i] is the price of a given stock on the ith day.\nFind the maximum profit you can achieve. You may complete at most two transactions.\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).\n\u00a0\nExample 1:\nInput: prices = [3,3,5,0,0,3,1,4]\nOutput: 6\nExplanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.\nThen buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.\nExample 2:\nInput: prices = [1,2,3,4,5]\nOutput: 4\nExplanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.\nNote that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again.\n\nExample 3:\nInput: prices = [7,6,4,3,1]\nOutput: 0\nExplanation: In this case, no transaction is done, i.e. max profit = 0.\n\n\u00a0\nConstraints:\n\n1 <= prices.length <= 105\n0 <= prices[i] <= 105\n\n",
     "url": "https://leetcode.com/problems/123-best-time-to-buy-and-sell-stock-iii",
     "answerCount": 1,
+    "datePublished": "2024-08-27T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -87,7 +88,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxProfit(self, prices: List[int]) -> int:\n        if len(prices) <= 1: return 0\n        n, k = len(prices), 2\n\n        B = [prices[i+1] - prices[i] for i in range(len(prices) - 1)]\n        if k > len(prices)//2: return sum(x for x in B if x > 0)\n        \n        dp = [[0]*(k+1) for _ in range(n-1)] \n        mp = [[0]*(k+1) for _ in range(n-1)] \n\n        dp[0][1], mp[0][1] = B[0], B[0]\n\n        for i in range(1, n-1):\n            for j in range(1, k+1):\n                dp[i][j] = max(mp[i-1][j-1], dp[i-1][j]) + B[i]\n                mp[i][j] = max(dp[i][j], mp[i-1][j])\n\n        return max(mp[-1])\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/123-best-time-to-buy-and-sell-stock-iii/",
-      "datePublished": "2024-08-27",
+      "datePublished": "2024-08-27T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

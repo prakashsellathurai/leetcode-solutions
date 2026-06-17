@@ -80,6 +80,7 @@ class Solution:
     "text": "The distance of a pair of integers a and b is defined as the absolute difference between a and b.\nGiven an integer array nums and an integer k, return the kth smallest distance among all the pairs nums[i] and nums[j] where 0 <= i < j < nums.length.\n\u00a0\nExample 1:\nInput: nums = [1,3,1], k = 1\nOutput: 0\nExplanation: Here are all the pairs:\n(1,3) -> 2\n(1,1) -> 0\n(3,1) -> 2\nThen the 1st smallest distance pair is (1,1), and its distance is 0.\n\nExample 2:\nInput: nums = [1,1,1], k = 2\nOutput: 0\n\nExample 3:\nInput: nums = [1,6,1], k = 3\nOutput: 5\n\n\u00a0\nConstraints:\n\nn == nums.length\n2 <= n <= 104\n0 <= nums[i] <= 106\n1 <= k <= n * (n - 1) / 2\n\n",
     "url": "https://leetcode.com/problems/719-find-k-th-smallest-pair-distance",
     "answerCount": 1,
+    "datePublished": "2023-09-07T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -89,7 +90,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def smallestDistancePair(self, nums: List[int], k: int) -> int:\n        def enough(distance) -> bool:  # two pointers\n            count, i, j = 0, 0, 0\n            while i < n or j < n:\n                while j < n and nums[j] - nums[i] <= distance:\n                    j += 1\n                count += j - i - 1\n                i += 1\n            return count >= k\n\n        nums.sort()\n        n = len(nums)\n        left, right = 0, nums[-1] - nums[0]\n        while left < right:\n            mid = left + (right - left) // 2\n            if not enough(mid):\n                left = mid + 1\n            else:\n                right = mid\n        return left",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/719-find-k-th-smallest-pair-distance/",
-      "datePublished": "2023-09-07",
+      "datePublished": "2023-09-07T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

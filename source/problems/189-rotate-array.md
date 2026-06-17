@@ -97,6 +97,7 @@ class Solution:
     "text": "Given an array, rotate the array to the right by k steps, where k is non-negative.\n\u00a0\nExample 1:\nInput: nums = [1,2,3,4,5,6,7], k = 3\nOutput: [5,6,7,1,2,3,4]\nExplanation:\nrotate 1 steps to the right: [7,1,2,3,4,5,6]\nrotate 2 steps to the right: [6,7,1,2,3,4,5]\nrotate 3 steps to the right: [5,6,7,1,2,3,4]\n\nExample 2:\nInput: nums = [-1,-100,3,99], k = 2\nOutput: [3,99,-1,-100]\nExplanation: \nrotate 1 steps to the right: [99,-1,-100,3]\nrotate 2 steps to the right: [3,99,-1,-100]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-231 <= nums[i] <= 231 - 1\n0 <= k <= 105\n\n\u00a0\nFollow up:\n\nTry to come up with as many solutions as you can. There are at least three different ways to solve this problem.\nCould you do it in-place with O(1) extra space?\n\n",
     "url": "https://leetcode.com/problems/189-rotate-array",
     "answerCount": 1,
+    "datePublished": "2023-07-15T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -106,7 +107,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def rotate(self, nums: List[int], k: int) -> None:\n        \"\"\"\n        Do not return anything, modify nums in-place instead.\n        \"\"\"\n        self.usinglistcomprehension(nums, k)\n\n    def usinglistcomprehension(self, nums: List[int], k: int) -> None:\n        k %= len(nums)\n        nums[:] = nums[-k:] + nums[:-k]\n\n    def usingreverse(self, nums: List[int], k: int) -> None:\n        k %= len(nums)\n        self.reverse(nums, 0, len(nums) - 1)\n        self.reverse(nums, 0, k - 1)\n        self.reverse(nums, k, len(nums) - 1)\n\n    def usingextraArray(self, nums: List[int], k: int) -> None:\n        n = len(nums)\n        tmp = [0] * n\n        for i in range(n):\n            tmp[(i + k) % len(nums)] = nums[i]\n        for i in range(n):\n            nums[i] = tmp[i]\n\n    def bruteforce(self, nums: List[int], k: int) -> None:\n        for i in range(k):\n            prev = nums[-1]\n            for j in range(len(nums)):\n                nums[j], prev = prev, nums[j]\n\n    def reverse(self, nums, start, end):\n        while start < end:\n            nums[start], nums[end] = nums[end], nums[start]\n            start += 1\n            end -= 1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/189-rotate-array/",
-      "datePublished": "2023-07-15",
+      "datePublished": "2023-07-15T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

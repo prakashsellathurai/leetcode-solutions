@@ -63,6 +63,7 @@ class Solution:
     "text": "Given an array\u00a0of intervals\u00a0where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.\n\u00a0\nExample 1:\nInput: intervals = [[1,3],[2,6],[8,10],[15,18]]\nOutput: [[1,6],[8,10],[15,18]]\nExplanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].\n\nExample 2:\nInput: intervals = [[1,4],[4,5]]\nOutput: [[1,5]]\nExplanation: Intervals [1,4] and [4,5] are considered overlapping.\n\n\u00a0\nConstraints:\n\n1 <= intervals.length <= 104\nintervals[i].length == 2\n0 <= starti <= endi <= 104\n\n",
     "url": "https://leetcode.com/problems/merge-intervals",
     "answerCount": 1,
+    "datePublished": "2024-10-17T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -72,7 +73,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def merge(self, intervals: List[List[int]]) -> List[List[int]]:\n        intervals.sort(key=lambda x: x[0])\n\n        res = []\n        for interval in intervals:\n            if not res or res[-1][1] < interval[0]:\n                res.append(interval)\n            else:\n                res[-1][1] = max(res[-1][1], interval[1])\n\n        return res\n\n    # Time: O(nlogn)\n    # space: O(n)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/merge-intervals/",
-      "datePublished": "2024-10-17",
+      "datePublished": "2024-10-17T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

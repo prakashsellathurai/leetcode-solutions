@@ -51,6 +51,7 @@ class Solution:
     "text": "Write a function that reverses a string. The input string is given as an array of characters s.\nYou must do this by modifying the input array in-place with O(1) extra memory.\n\u00a0\nExample 1:\nInput: s = [\"h\",\"e\",\"l\",\"l\",\"o\"]\nOutput: [\"o\",\"l\",\"l\",\"e\",\"h\"]\nExample 2:\nInput: s = [\"H\",\"a\",\"n\",\"n\",\"a\",\"h\"]\nOutput: [\"h\",\"a\",\"n\",\"n\",\"a\",\"H\"]\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns[i] is a printable ascii character.\n\n",
     "url": "https://leetcode.com/problems/344-reverse-string",
     "answerCount": 1,
+    "datePublished": "2023-01-12T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -60,7 +61,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def reverseString(self, s: List[str]) -> None:\n        \"\"\"\n        Do not return anything, modify s in-place instead.\n        \"\"\"\n        n = len(s)\n\n        for i in range(n // 2):\n            s[i], s[n - i - 1] = s[n - i - 1], s[i]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/344-reverse-string/",
-      "datePublished": "2023-01-12",
+      "datePublished": "2023-01-12T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

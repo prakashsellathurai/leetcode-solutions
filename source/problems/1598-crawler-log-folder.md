@@ -86,6 +86,7 @@ class Solution:
     "text": "The Leetcode file system keeps a log each time some user performs a change folder operation.\nThe operations are described below:\n\n\"../\" : Move to the parent folder of the current folder. (If you are already in the main folder, remain in the same folder).\n\"./\" : Remain in the same folder.\n\"x/\" : Move to the child folder named x (This folder is guaranteed to always exist).\n\nYou are given a list of strings logs where logs[i] is the operation performed by the user at the ith step.\nThe file system starts in the main folder, then the operations in logs are performed.\nReturn the minimum number of operations needed to go back to the main folder after the change folder operations.\n\u00a0\nExample 1:\n\nInput: logs = [\"d1/\",\"d2/\",\"../\",\"d21/\",\"./\"]\nOutput: 2\nExplanation: Use this change folder operation \"../\" 2 times and go back to the main folder.\n\nExample 2:\n\nInput: logs = [\"d1/\",\"d2/\",\"./\",\"d3/\",\"../\",\"d31/\"]\nOutput: 3\n\nExample 3:\nInput: logs = [\"d1/\",\"../\",\"../\",\"../\"]\nOutput: 0\n\n\u00a0\nConstraints:\n\n1 <= logs.length <= 103\n2 <= logs[i].length <= 10\nlogs[i] contains lowercase English letters, digits, '.', and '/'.\nlogs[i] follows the format described in the statement.\nFolder names consist of lowercase English letters and digits.\n\n",
     "url": "https://leetcode.com/problems/1598-crawler-log-folder",
     "answerCount": 1,
+    "datePublished": "2024-03-31T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -95,7 +96,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minOperations(self, logs: List[str]) -> int:\n        level = 0\n        for log in logs:\n            if log.find(\"../\") != -1:\n                if level > 0:\n                    level -= 1\n            elif log.find(\"./\") != -1:\n                continue\n            else:\n                level += 1\n\n        return level\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1598-crawler-log-folder/",
-      "datePublished": "2024-03-31",
+      "datePublished": "2024-03-31T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

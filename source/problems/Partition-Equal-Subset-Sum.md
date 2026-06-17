@@ -71,6 +71,7 @@ class Solution:
     "text": "Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.\n\u00a0\nExample 1:\nInput: nums = [1,5,11,5]\nOutput: true\nExplanation: The array can be partitioned as [1, 5, 5] and [11].\n\nExample 2:\nInput: nums = [1,2,3,5]\nOutput: false\nExplanation: The array cannot be partitioned into equal sum subsets.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 200\n1 <= nums[i] <= 100\n\n",
     "url": "https://leetcode.com/problems/partition-equal-subset-sum",
     "answerCount": 1,
+    "datePublished": "2023-02-05T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -80,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def canPartition(self, nums: List[int]) -> bool:\n        if sum(nums) & 1:\n            return False\n        total = sum(nums) // 2\n        n = len(nums)\n        memo = {}\n\n        def dfs(t, index):\n            if t in memo:\n                return memo[t]\n            if t < 0:\n                return 0\n            elif t == 0:\n                return 1\n            for i in range(index, n):\n                if dfs(t - nums[i], i + 1):\n                    memo[t] = 1\n                    return 1\n            memo[t] = 0\n            return 0\n\n        ans = dfs(total, 0)\n        return ans\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/partition-equal-subset-sum/",
-      "datePublished": "2023-02-05",
+      "datePublished": "2023-02-05T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -78,6 +78,7 @@ class Solution:
     "text": "Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.\nReturn the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.\nThe tests are generated such that there is exactly one solution. You may not use the same element twice.\nYour solution must use only constant extra space.\n\u00a0\nExample 1:\nInput: numbers = [2,7,11,15], target = 9\nOutput: [1,2]\nExplanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].\n\nExample 2:\nInput: numbers = [2,3,4], target = 6\nOutput: [1,3]\nExplanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].\n\nExample 3:\nInput: numbers = [-1,0], target = -1\nOutput: [1,2]\nExplanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].\n\n\u00a0\nConstraints:\n\n2 <= numbers.length <= 3 * 104\n-1000 <= numbers[i] <= 1000\nnumbers is sorted in non-decreasing order.\n-1000 <= target <= 1000\nThe tests are generated such that there is exactly one solution.\n\n",
     "url": "https://leetcode.com/problems/167-two-sum-ii-input-array-is-sorted",
     "answerCount": 1,
+    "datePublished": "2022-09-28T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -87,7 +88,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def twoSum(self, numbers: List[int], target: int) -> List[int]:\n        n = len(numbers)\n\n        i, j = 0, n - 1\n\n        while i < j:\n            T = numbers[i] + numbers[j]\n\n            if T == target:\n                return [i + 1, j + 1]\n            elif T > target:\n                j -= 1\n            else:\n                i += 1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/167-two-sum-ii-input-array-is-sorted/",
-      "datePublished": "2022-09-28",
+      "datePublished": "2022-09-28T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

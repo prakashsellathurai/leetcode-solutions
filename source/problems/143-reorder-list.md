@@ -119,6 +119,7 @@ class Solution:
     "text": "You are given the head of a singly linked-list. The list can be represented as:\nL0 \u2192 L1 \u2192 \u2026 \u2192 Ln - 1 \u2192 Ln\n\nReorder the list to be on the following form:\nL0 \u2192 Ln \u2192 L1 \u2192 Ln - 1 \u2192 L2 \u2192 Ln - 2 \u2192 \u2026\n\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.\n\u00a0\nExample 1:\n\nInput: head = [1,2,3,4]\nOutput: [1,4,2,3]\n\nExample 2:\n\nInput: head = [1,2,3,4,5]\nOutput: [1,5,2,4,3]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [1, 5 * 104].\n1 <= Node.val <= 1000\n\n",
     "url": "https://leetcode.com/problems/143-reorder-list",
     "answerCount": 1,
+    "datePublished": "2024-12-04T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -128,7 +129,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reorderList(self, head: Optional[ListNode]) -> None:\n        \"\"\"\n        Do not return anything, modify head in-place instead.\n        \"\"\"\n        def findmiddle(head):\n            slow = head\n            fast = head\n            \n            while fast and fast.next:\n                slow = slow.next\n                fast = fast.next.next\n            return slow.next, slow\n        \n        first = head\n        second_half_start,first_end = findmiddle(first)\n        \n        def reverse(head):\n            cur = head\n            prev = None\n            while cur:\n                nxt = cur.next\n                cur.next = prev\n                prev = cur\n                cur = nxt\n            return prev\n        \n        if first_end is None:\n            return head\n        first_end.next = None\n        \n        second_half_start = reverse(second_half_start)\n        \n        def merge(head1, head2):\n            res = cur = ListNode(None)\n            \n            while head1 or head2:\n                if head1:\n                    res.next = head1\n                    head1 = head1.next\n                    res = res.next\n                if head2:\n                    res.next = head2\n                    head2 = head2.next\n                    res = res.next\n                \n            while head1:\n                res.next = head1\n                head1 = head1.next\n                res = res.next\n            while head2:\n                res.next = head2\n                head2 = head2.next\n                res = res.next\n            \n            return res.next\n            \n            \n        head = merge(first, second_half_start)\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/143-reorder-list/",
-      "datePublished": "2024-12-04",
+      "datePublished": "2024-12-04T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -70,6 +70,7 @@ class Solution:
     "text": "Given a n-ary tree, find its maximum depth.\nThe maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.\nNary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).\n\u00a0\nExample 1:\n\nInput: root = [1,null,3,2,4,null,5,6]\nOutput: 3\n\nExample 2:\n\nInput: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]\nOutput: 5\n\n\u00a0\nConstraints:\n\nThe total number of nodes is in the range [0, 104].\nThe depth of the n-ary tree is less than or equal to 1000.\n\n",
     "url": "https://leetcode.com/problems/maximum-depth-of-n-ary-tree",
     "answerCount": 1,
+    "datePublished": "2023-12-12T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -79,7 +80,7 @@ class Solution:
       "@type": "Answer",
       "text": "\"\"\"\n# Definition for a Node.\nclass Node:\n    def __init__(self, val=None, children=None):\n        self.val = val\n        self.children = children\n\"\"\"\n\n\nclass Solution:\n    def maxDepth(self, root: \"Node\") -> int:\n        height = 0\n        if not root:\n            return 0\n        for child in root.children:\n            height = max(height, self.maxDepth(child))\n        return height + 1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/maximum-depth-of-n-ary-tree/",
-      "datePublished": "2023-12-12",
+      "datePublished": "2023-12-12T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

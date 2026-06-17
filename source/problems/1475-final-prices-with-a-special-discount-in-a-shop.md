@@ -93,6 +93,7 @@ class Solution:
     "text": "You are given an integer array prices where prices[i] is the price of the ith item in a shop.\nThere is a special discount for items in the shop. If you buy the ith item, then you will receive a discount equivalent to prices[j] where j is the minimum index such that j > i and prices[j] <= prices[i]. Otherwise, you will not receive any discount at all.\nReturn an integer array answer where answer[i] is the final price you will pay for the ith item of the shop, considering the special discount.\n\u00a0\nExample 1:\n\nInput: prices = [8,4,6,2,3]\nOutput: [4,2,4,2,3]\nExplanation: \nFor item 0 with price[0]=8 you will receive a discount equivalent to prices[1]=4, therefore, the final price you will pay is 8 - 4 = 4.\nFor item 1 with price[1]=4 you will receive a discount equivalent to prices[3]=2, therefore, the final price you will pay is 4 - 2 = 2.\nFor item 2 with price[2]=6 you will receive a discount equivalent to prices[3]=2, therefore, the final price you will pay is 6 - 2 = 4.\nFor items 3 and 4 you will not receive any discount at all.\n\nExample 2:\n\nInput: prices = [1,2,3,4,5]\nOutput: [1,2,3,4,5]\nExplanation: In this case, for all items, you will not receive any discount at all.\n\nExample 3:\n\nInput: prices = [10,1,1,6]\nOutput: [9,0,1,6]\n\n\u00a0\nConstraints:\n\n1 <= prices.length <= 500\n1 <= prices[i] <= 1000\n\n",
     "url": "https://leetcode.com/problems/1475-final-prices-with-a-special-discount-in-a-shop",
     "answerCount": 1,
+    "datePublished": "2024-03-18T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -102,7 +103,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def finalPrices(self, prices: List[int]) -> List[int]:\n        return self.monotonicstack(prices)\n\n    # Time complexity: O(n^2)\n    # spac ecomplexity: O(n)\n    def bruteforce(self, prices: List[int]) -> List[int]:\n        n = len(prices)\n        for i in range(n):\n            for j in range(i+1, n):\n                if prices[j] <= prices[i]:\n                    prices[i] -= prices[j]\n                    break\n                else:\n                    continue\n        return prices\n\n    # Time complexity: O(n)\n    # spac ecomplexity: O(n)\n    def monotonicstack(self, prices: List[int]) -> List[int]:\n        n = len(prices)\n        stack = []\n        for i in range(n): # 10 1 1 6\n            while stack and prices[stack[-1]] >= prices[i]: # \n                prices[stack[-1]] -= prices[i] # 9 0 0 0\n                stack.pop()\n            stack.append(i) # stack -> 1\n\n        return prices\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1475-final-prices-with-a-special-discount-in-a-shop/",
-      "datePublished": "2024-03-18",
+      "datePublished": "2024-03-18T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

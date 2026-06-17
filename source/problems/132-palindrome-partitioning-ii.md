@@ -76,6 +76,7 @@ class Solution:
     "text": "Given a string s, partition s such that every substring of the partition is a palindrome.\nReturn the minimum cuts needed for a palindrome partitioning of s.\n\u00a0\nExample 1:\nInput: s = \"aab\"\nOutput: 1\nExplanation: The palindrome partitioning [\"aa\",\"b\"] could be produced using 1 cut.\n\nExample 2:\nInput: s = \"a\"\nOutput: 0\n\nExample 3:\nInput: s = \"ab\"\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 2000\ns consists of lowercase English letters only.\n\n",
     "url": "https://leetcode.com/problems/132-palindrome-partitioning-ii",
     "answerCount": 1,
+    "datePublished": "2024-09-22T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -85,7 +86,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minCut(self, s: str) -> int:\n        n = len(s)\n        @cache\n        def isPlaindrome(i,j):\n            if i >= j:\n                return True\n            if s[i] != s[j]:\n                return False\n            return isPlaindrome(i+1,j-1)\n        @cache\n        def dfs(i):\n            if i == n:\n                return 0\n            \n            res = float('inf')\n            \n            for j in range(i,n):\n                if isPlaindrome(i,j):\n                    res = min(res, 1+dfs(j+1))\n            return res\n        return dfs(0) - 1\n            ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/132-palindrome-partitioning-ii/",
-      "datePublished": "2024-09-22",
+      "datePublished": "2024-09-22T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

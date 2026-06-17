@@ -81,6 +81,7 @@ class Solution:
     "text": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum\u00a0as a linked list.\nYou may assume the two numbers do not contain any leading zero, except the number 0 itself.\n\u00a0\nExample 1:\n\nInput: l1 = [2,4,3], l2 = [5,6,4]\nOutput: [7,0,8]\nExplanation: 342 + 465 = 807.\n\nExample 2:\nInput: l1 = [0], l2 = [0]\nOutput: [0]\n\nExample 3:\nInput: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]\nOutput: [8,9,9,9,0,0,0,1]\n\n\u00a0\nConstraints:\n\nThe number of nodes in each linked list is in the range [1, 100].\n0 <= Node.val <= 9\nIt is guaranteed that the list represents a number that does not have leading zeros.\n\n",
     "url": "https://leetcode.com/problems/2-add-two-numbers",
     "answerCount": 1,
+    "datePublished": "2022-07-18T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -90,7 +91,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def addTwoNumbers(\n        self, l1: Optional[ListNode], l2: Optional[ListNode]\n    ) -> Optional[ListNode]:\n        res = ListNode()\n        cur = res\n        carry = 0\n        while l1 or l2:\n            x = l1.val if l1 else 0\n            y = l2.val if l2 else 0\n            sum = x + y + carry\n            carry = sum // 10\n            cur.next = ListNode(sum % 10)\n            cur = cur.next\n            if l1:\n                l1 = l1.next\n            if l2:\n                l2 = l2.next\n        if carry:\n            cur.next = ListNode(carry)\n        return res.next\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/2-add-two-numbers/",
-      "datePublished": "2022-07-18",
+      "datePublished": "2022-07-18T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

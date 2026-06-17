@@ -51,6 +51,7 @@ class Solution:
     "text": "Given an array nums of n integers where nums[i] is in the range [1, n], return an array of all the integers in the range [1, n] that do not appear in nums.\n\u00a0\nExample 1:\nInput: nums = [4,3,2,7,8,2,3,1]\nOutput: [5,6]\nExample 2:\nInput: nums = [1,1]\nOutput: [2]\n\n\u00a0\nConstraints:\n\nn == nums.length\n1 <= n <= 105\n1 <= nums[i] <= n\n\n\u00a0\nFollow up: Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.\n",
     "url": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array",
     "answerCount": 1,
+    "datePublished": "2023-12-28T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -60,7 +61,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:\n        integers = set(i+1 for i in range(len(nums)))\n        for num in nums:\n            if num in integers:\n                integers.remove(num)\n        return list(integers)\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/find-all-numbers-disappeared-in-an-array/",
-      "datePublished": "2023-12-28",
+      "datePublished": "2023-12-28T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

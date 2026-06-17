@@ -64,6 +64,7 @@ class Solution:
     "text": "Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.\n\u00a0\nExample 1:\nInput: nums = [1,1,1,2,2,3], k = 2\nOutput: [1,2]\nExample 2:\nInput: nums = [1], k = 1\nOutput: [1]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\nk is in the range [1, the number of unique elements in the array].\nIt is guaranteed that the answer is unique.\n\n\u00a0\nFollow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.\n",
     "url": "https://leetcode.com/problems/347-top-k-frequent-elements",
     "answerCount": 1,
+    "datePublished": "2024-10-17T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -73,7 +74,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\n        return self.prioirtyQueue(nums, k)\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n    def naive(self, nums: List[int], k: int) -> List[int]:\n        freqmap = Counter(nums)\n        freqmap = sorted(freqmap, key=freqmap.get, reverse=True)\n        return freqmap[:k]\n\n    # Time Complexity: O(nlogk)\n    # Space Complexity: O(n)\n    def prioirtyQueue(self, nums: List[int], k: int) -> List[int]:\n        if k == len(nums):\n            return nums\n\n        count = Counter(nums)\n\n        return heapq.nlargest(k, count.keys(), key=count.get)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/347-top-k-frequent-elements/",
-      "datePublished": "2024-10-17",
+      "datePublished": "2024-10-17T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

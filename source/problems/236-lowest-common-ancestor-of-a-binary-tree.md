@@ -95,6 +95,7 @@ class Solution:
     "text": "Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.\nAccording to the definition of LCA on Wikipedia: \u201cThe lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).\u201d\n\u00a0\nExample 1:\n\nInput: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1\nOutput: 3\nExplanation: The LCA of nodes 5 and 1 is 3.\n\nExample 2:\n\nInput: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4\nOutput: 5\nExplanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.\n\nExample 3:\nInput: root = [1,2], p = 1, q = 2\nOutput: 1\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [2, 105].\n-109 <= Node.val <= 109\nAll Node.val are unique.\np != q\np and q will exist in the tree.\n\n",
     "url": "https://leetcode.com/problems/236-lowest-common-ancestor-of-a-binary-tree",
     "answerCount": 1,
+    "datePublished": "2026-05-23T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -104,7 +105,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n\n    def __init__(self):\n        # Variable to store LCA node.\n        self.ans = None\n\n    def lowestCommonAncestor(self, root, p, q):\n        \"\"\"\n        :type root: TreeNode\n        :type p: TreeNode\n        :type q: TreeNode\n        :rtype: TreeNode\n        \"\"\"\n        def recurse_tree(current_node):\n\n            # If reached the end of a branch, return False.\n            if not current_node:\n                return False\n\n            # Left Recursion\n            left = recurse_tree(current_node.left)\n\n            # Right Recursion\n            right = recurse_tree(current_node.right)\n\n            # If the current node is one of p or q\n            mid = current_node == p or current_node == q\n\n            # If any two of the three flags left, right or mid become True.\n            if mid + left + right >= 2:\n                self.ans = current_node\n\n            # Return True if either of the three bool values is True.\n            return mid or left or right\n\n        # Traverse the tree\n        recurse_tree(root)\n        return self.ans",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/236-lowest-common-ancestor-of-a-binary-tree/",
-      "datePublished": "2026-05-23",
+      "datePublished": "2026-05-23T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

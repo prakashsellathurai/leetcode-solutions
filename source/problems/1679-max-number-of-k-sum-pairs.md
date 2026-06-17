@@ -120,6 +120,7 @@ class Solution:
     "text": "You are given an integer array nums and an integer k.\nIn one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.\nReturn the maximum number of operations you can perform on the array.\n\u00a0\nExample 1:\nInput: nums = [1,2,3,4], k = 5\nOutput: 2\nExplanation: Starting with nums = [1,2,3,4]:\n- Remove numbers 1 and 4, then nums = [2,3]\n- Remove numbers 2 and 3, then nums = []\nThere are no more pairs that sum up to 5, hence a total of 2 operations.\nExample 2:\nInput: nums = [3,1,3,4,3], k = 6\nOutput: 1\nExplanation: Starting with nums = [3,1,3,4,3]:\n- Remove the first two 3's, then nums = [1,4,3]\nThere are no more pairs that sum up to 6, hence a total of 1 operation.\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 109\n1 <= k <= 109\n\n",
     "url": "https://leetcode.com/problems/1679-max-number-of-k-sum-pairs",
     "answerCount": 1,
+    "datePublished": "2026-05-21T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -129,7 +130,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxOperations(self, nums: List[int], k: int) -> int:\n        return self.hashing(nums, k)\n\n    # Time Complexity: O(n^2*OP)\n    # Space Comeplxity: O(n)\n    def bruteforce(self, nums, k):\n        s = Counter(nums)\n        cnt = 0\n        print(s)\n        while True:\n            change = 0\n            for key in list(s):\n                if change:\n                    break\n                if k - key in s:\n                    s[key] -= 1\n                    s[k - key] -= 1\n                    if s[key] <= 0:\n                        del s[key]\n                    if s[k - key] <= 0:\n                        del s[k - key]\n                    change += 1\n            print(s, cnt)\n            if change > 0:\n                cnt += change\n            else:\n                return cnt\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(1)\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort()\n        i, j = 0, len(nums) - 1\n\n        cnt = 0\n\n        while i < j:\n            if nums[i] + nums[j] == k:\n                cnt += 1\n                i += 1\n                j -= 1\n\n            elif nums[i] + nums[j] > k:\n                j -= 1\n            else:\n                i += 1\n        return cnt\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def hashing(self, nums: List[int], k: int) -> int:\n        hash = defaultdict(int)\n        cnt = 0\n\n        for num in nums:\n            target = k - num\n\n            if hash[target] > 0:\n                hash[target] -= 1\n                cnt += 1\n            else:\n                hash[num] += 1\n\n        return cnt\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1679-max-number-of-k-sum-pairs/",
-      "datePublished": "2026-05-21",
+      "datePublished": "2026-05-21T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

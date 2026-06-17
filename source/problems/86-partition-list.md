@@ -71,6 +71,7 @@ class Solution:
     "text": "Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.\nYou should preserve the original relative order of the nodes in each of the two partitions.\n\u00a0\nExample 1:\n\nInput: head = [1,4,3,2,5,2], x = 3\nOutput: [1,2,2,4,3,5]\n\nExample 2:\nInput: head = [2,1], x = 2\nOutput: [1,2]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [0, 200].\n-100 <= Node.val <= 100\n-200 <= x <= 200\n\n",
     "url": "https://leetcode.com/problems/86-partition-list",
     "answerCount": 1,
+    "datePublished": "2023-08-17T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -80,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:\n        before_head = before = ListNode()\n        after_head = after = ListNode()\n\n        cur = head\n\n        while cur:\n            if cur.val < x:\n                before.next = cur\n                before = before.next\n            else:\n                after.next = cur\n                after = after.next\n            cur = cur.next\n        after.next = None\n        before.next = after_head.next\n        return before_head.next\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/86-partition-list/",
-      "datePublished": "2023-08-17",
+      "datePublished": "2023-08-17T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

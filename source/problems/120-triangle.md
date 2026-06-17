@@ -124,6 +124,7 @@ class Solution:
     "text": "Given a triangle array, return the minimum path sum from top to bottom.\nFor each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n\u00a0\nExample 1:\nInput: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]\nOutput: 11\nExplanation: The triangle looks like:\n   2\n  3 4\n 6 5 7\n4 1 8 3\nThe minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above).\n\nExample 2:\nInput: triangle = [[-10]]\nOutput: -10\n\n\u00a0\nConstraints:\n\n1 <= triangle.length <= 200\ntriangle[0].length == 1\ntriangle[i].length == triangle[i - 1].length + 1\n-104 <= triangle[i][j] <= 104\n\n\u00a0\nFollow up: Could you\u00a0do this using only O(n) extra space, where n is the total number of rows in the triangle?",
     "url": "https://leetcode.com/problems/120-triangle",
     "answerCount": 1,
+    "datePublished": "2022-02-16T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -133,7 +134,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minimumTotal(self, triangle: List[List[int]]) -> int:\n        return self.bottomupdplessspace(triangle)\n\n    # Time complexity: O(2^n)\n    # space Complexity: O(n)\n    def bruteforce(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        min_sum = 0\n\n        def dfs(i, j, sum_so_far):\n            if i == n:\n                return sum_so_far\n\n            return min(\n                dfs(i + 1, j, sum_so_far + triangle[i][j]),\n                dfs(i + 1, j + 1, sum_so_far + triangle[i][j]),\n            )\n\n        return dfs(0, 0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def topdowndp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        @cache\n        def dfs(i, j):\n            if i == n - 1:\n                return triangle[i][j]\n\n            return triangle[i][j] + min(dfs(i + 1, j), dfs(i + 1, j + 1))\n\n        return dfs(0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def bottomupdp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n        dp = [[float(\"inf\")] * (i) for i in range(1, n + 1)]\n        dp[n - 1] = triangle[n - 1]\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[i][j] = triangle[i][j] + min(dp[i + 1][j], dp[i + 1][j + 1])\n        return dp[0][0]\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n)\n    def bottomupdplessspace(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        if not n:\n            return 0\n\n        if n == 1:\n            return triangle[0][0]\n\n        dp = [float(\"inf\")] * (n - 1)\n        prev_state = triangle[n - 1]\n\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[j] = triangle[i][j] + min(prev_state[j], prev_state[j + 1])\n            prev_state = dp\n\n        return dp[0]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/120-triangle/",
-      "datePublished": "2022-02-16",
+      "datePublished": "2022-02-16T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

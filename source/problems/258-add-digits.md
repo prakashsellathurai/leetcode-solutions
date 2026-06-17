@@ -73,6 +73,7 @@ class Solution:
     "text": "Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.\n\u00a0\nExample 1:\nInput: num = 38\nOutput: 2\nExplanation: The process is\n38 --> 3 + 8 --> 11\n11 --> 1 + 1 --> 2 \nSince 2 has only one digit, return it.\n\nExample 2:\nInput: num = 0\nOutput: 0\n\n\u00a0\nConstraints:\n\n0 <= num <= 231 - 1\n\n\u00a0\nFollow up: Could you do it without any loop/recursion in O(1) runtime?\n",
     "url": "https://leetcode.com/problems/258-add-digits",
     "answerCount": 1,
+    "datePublished": "2022-09-08T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -82,7 +83,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def addDigits(self, num: int) -> int:\n        return self.math(num)\n\n    def trivialSolution(self, num: int) -> int:\n        digital_root = 0\n        while num > 0:\n            digital_root += num % 10\n            num = num // 10\n\n            if num == 0 and digital_root > 9:\n                num = digital_root\n                digital_root = 0\n        return digital_root\n\n    def math(self, num: int) -> int:\n        if num == 0:\n            return num\n        elif num % 9 == 0:\n            return 9\n        else:\n            return num % 9\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/258-add-digits/",
-      "datePublished": "2022-09-08",
+      "datePublished": "2022-09-08T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

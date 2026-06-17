@@ -73,6 +73,7 @@ class Solution:
     "text": "You are given the heads of two sorted linked lists list1 and list2.\nMerge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.\nReturn the head of the merged linked list.\n\u00a0\nExample 1:\n\nInput: list1 = [1,2,4], list2 = [1,3,4]\nOutput: [1,1,2,3,4,4]\n\nExample 2:\nInput: list1 = [], list2 = []\nOutput: []\n\nExample 3:\nInput: list1 = [], list2 = [0]\nOutput: [0]\n\n\u00a0\nConstraints:\n\nThe number of nodes in both lists is in the range [0, 50].\n-100 <= Node.val <= 100\nBoth list1 and list2 are sorted in non-decreasing order.\n\n",
     "url": "https://leetcode.com/problems/21-merge-two-sorted-lists",
     "answerCount": 1,
+    "datePublished": "2024-10-27T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -82,7 +83,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def mergeTwoLists(\n        self, l1: Optional[ListNode], l2: Optional[ListNode]\n    ) -> Optional[ListNode]:\n        if not l1 or not l2:\n            return l1 or l2\n        if l1.val < l2.val:\n            l1.next = self.mergeTwoLists(l1.next, l2)\n            return l1\n        else:\n            l2.next = self.mergeTwoLists(l1, l2.next)\n            return l2\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/21-merge-two-sorted-lists/",
-      "datePublished": "2024-10-27",
+      "datePublished": "2024-10-27T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

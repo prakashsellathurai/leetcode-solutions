@@ -70,6 +70,7 @@ class Solution:
     "text": "Given the root of a binary tree, find the maximum value v for which there exist different nodes a and b where v = |a.val - b.val| and a is an ancestor of b.\nA node a is an ancestor of b if either: any child of a is equal to b\u00a0or any child of a is an ancestor of b.\n\u00a0\nExample 1:\n\nInput: root = [8,3,10,1,6,null,14,null,null,4,7,13]\nOutput: 7\nExplanation: We have various ancestor-node differences, some of which are given below :\n|8 - 3| = 5\n|3 - 7| = 4\n|8 - 1| = 7\n|10 - 13| = 3\nAmong all possible differences, the maximum value of 7 is obtained by |8 - 1| = 7.\nExample 2:\n\nInput: root = [1,null,2,null,0,3]\nOutput: 3\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [2, 5000].\n0 <= Node.val <= 105\n\n",
     "url": "https://leetcode.com/problems/maximum-difference-between-node-and-ancestor",
     "answerCount": 1,
+    "datePublished": "2025-04-19T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -79,7 +80,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxAncestorDiff(self, root, curMin=inf, curMax=-inf):\n        if not root:\n            return curMax - curMin\n\n        if root.val < curMin:\n            curMin = root.val\n\n        if root.val > curMax:\n            curMax = root.val\n\n        left = self.maxAncestorDiff(root.left, curMin, curMax)\n        right = self.maxAncestorDiff(root.right, curMin, curMax)\n\n        if left > right:\n            return left\n        else:\n            return right\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/maximum-difference-between-node-and-ancestor/",
-      "datePublished": "2025-04-19",
+      "datePublished": "2025-04-19T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

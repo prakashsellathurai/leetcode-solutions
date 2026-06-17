@@ -65,6 +65,7 @@ class Solution:
     "text": "Given a non-negative integer x,\u00a0compute and return the square root of x.\nSince the return type\u00a0is an integer, the decimal digits are truncated, and only the integer part of the result\u00a0is returned.\nNote:\u00a0You are not allowed to use any built-in exponent function or operator, such as pow(x, 0.5) or\u00a0x ** 0.5.\n\u00a0\nExample 1:\nInput: x = 4\nOutput: 2\n\nExample 2:\nInput: x = 8\nOutput: 2\nExplanation: The square root of 8 is 2.82842..., and since the decimal part is truncated, 2 is returned.\n\u00a0\nConstraints:\n\n0 <= x <= 231 - 1\n\n",
     "url": "https://leetcode.com/problems/69-sqrtx",
     "answerCount": 1,
+    "datePublished": "2026-03-07T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -74,7 +75,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def mySqrt(self, x: int) -> int:\n        if x == 0 or x == 1:\n            return x\n        lo = 1\n        hi = x\n        while lo < hi:\n            mi = (lo + hi) >> 1\n\n            if mi * mi == x:\n                return mi\n\n            if mi * mi > x:\n                hi = mi\n            else:\n                lo = mi + 1\n        return lo - 1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/69-sqrtx/",
-      "datePublished": "2026-03-07",
+      "datePublished": "2026-03-07T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

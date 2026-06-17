@@ -77,6 +77,7 @@ class Solution:
     "text": "Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.\n\u00a0\nExample 1:\n\nInput: head = [1,2,3,4,5], left = 2, right = 4\nOutput: [1,4,3,2,5]\n\nExample 2:\nInput: head = [5], left = 1, right = 1\nOutput: [5]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is n.\n1 <= n <= 500\n-500 <= Node.val <= 500\n1 <= left <= right <= n\n\n\u00a0\nFollow up: Could you do it in one pass?",
     "url": "https://leetcode.com/problems/92-reverse-linked-list-ii",
     "answerCount": 1,
+    "datePublished": "2022-12-19T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -86,7 +87,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reverseBetween(\n        self, head: Optional[ListNode], left: int, right: int\n    ) -> Optional[ListNode]:\n        return self.recursion(head, left, right)\n\n    # Time Complexity: O(N)\n    # Space Complexity: O(N)\n    def recursion(self, head: Optional[ListNode], m: int, n: int) -> Optional[ListNode]:\n        if m == n:\n            return head\n\n        if m > 1:\n            newHead = head\n            newHead.next = self.recursion(head.next, m - 1, n - 1)\n            return newHead\n        else:\n            next_ = head.next\n            newHead = self.recursion(next_, 1, n - 1)\n            nextnext_ = next_.next\n            next_.next = head\n            head.next = nextnext_\n            return newHead\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/92-reverse-linked-list-ii/",
-      "datePublished": "2022-12-19",
+      "datePublished": "2022-12-19T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -66,6 +66,7 @@ class Solution:
     "text": "Given an integer array nums and an integer k, return the kth largest element in the array.\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\nCan you solve it without sorting?\n\u00a0\nExample 1:\nInput: nums = [3,2,1,5,6,4], k = 2\nOutput: 5\nExample 2:\nInput: nums = [3,2,3,1,2,4,5,5,6], k = 4\nOutput: 4\n\n\u00a0\nConstraints:\n\n1 <= k <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n",
     "url": "https://leetcode.com/problems/0kth-largest-element-in-an-array",
     "answerCount": 1,
+    "datePublished": "2022-08-23T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -75,7 +76,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        return self.HeapMethod(nums, k)\n\n    # Sorting method\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort(reverse=true)\n        return nums[k - 1]\n\n    # Heap Method\n    # Time Complexity : O(nlogk)\n    # Space Complexity: O(k)\n    def HeapMethod(self, nums: List[int], k: int) -> int:\n        heap = []\n        for num in nums:\n            heapq.heappush(heap, num)\n            if len(heap) > k:\n                heapq.heappop(heap)\n        return heap[0]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0kth-largest-element-in-an-array/",
-      "datePublished": "2022-08-23",
+      "datePublished": "2022-08-23T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

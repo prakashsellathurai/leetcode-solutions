@@ -76,6 +76,7 @@ class Solution:
     "text": "Given a character array s, reverse the order of the words.\nA word is defined as a sequence of non-space characters. The words in s will be separated by a single space.\nYour code must solve the problem\u00a0in-place, i.e. without allocating extra space.\n\u00a0\nExample 1:\nInput: s = [\"t\",\"h\",\"e\",\" \",\"s\",\"k\",\"y\",\" \",\"i\",\"s\",\" \",\"b\",\"l\",\"u\",\"e\"]\nOutput: [\"b\",\"l\",\"u\",\"e\",\" \",\"i\",\"s\",\" \",\"s\",\"k\",\"y\",\" \",\"t\",\"h\",\"e\"]\nExample 2:\nInput: s = [\"a\"]\nOutput: [\"a\"]\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns[i] is an English letter (uppercase or lowercase), digit, or space ' '.\nThere is at least one word in s.\ns does not contain leading or trailing spaces.\nAll the words in s are guaranteed to be separated by a single space.\n\n",
     "url": "https://leetcode.com/problems/0186-reverse-words-in-a-string-ii",
     "answerCount": 1,
+    "datePublished": "2023-02-13T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -85,7 +86,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def reverseWords(self, s: List[str]) -> None:\n        \"\"\"\n        Do not return anything, modify s in-place instead.\n        \"\"\"\n        if s is None:\n            return\n        s.reverse()\n        \n        n = len(s)\n        i = 0\n        j = 0\n        \n        while i< n and j<n:\n            # swap word\n            while j <n and s[j] != \" \" :\n                j+=1\n            k = i\n            l = j - 1\n            \n            while k < l and l < n:\n                s[k],s[l] = s[l],s[k]\n                k+=1\n                l-=1\n            #next word\n            i = j +1\n            j+=2\n            \n            \n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0186-reverse-words-in-a-string-ii/",
-      "datePublished": "2023-02-13",
+      "datePublished": "2023-02-13T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

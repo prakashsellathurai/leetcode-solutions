@@ -62,6 +62,7 @@ class Solution:
     "text": "Given an integer n, return a string array answer (1-indexed) where:\n\nanswer[i] == \"FizzBuzz\" if i is divisible by 3 and 5.\nanswer[i] == \"Fizz\" if i is divisible by 3.\nanswer[i] == \"Buzz\" if i is divisible by 5.\nanswer[i] == i (as a string) if none of the above conditions are true.\n\n\u00a0\nExample 1:\nInput: n = 3\nOutput: [\"1\",\"2\",\"Fizz\"]\nExample 2:\nInput: n = 5\nOutput: [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\"]\nExample 3:\nInput: n = 15\nOutput: [\"1\",\"2\",\"Fizz\",\"4\",\"Buzz\",\"Fizz\",\"7\",\"8\",\"Fizz\",\"Buzz\",\"11\",\"Fizz\",\"13\",\"14\",\"FizzBuzz\"]\n\n\u00a0\nConstraints:\n\n1 <= n <= 104\n\n",
     "url": "https://leetcode.com/problems/412-fizz-buzz",
     "answerCount": 1,
+    "datePublished": "2023-11-26T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -71,7 +72,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def fizzBuzz(self, n: int) -> List[str]:\n        res = []\n        for i in range(1,n+1):\n            if i % 3 ==0 and  i%5 == 0:\n                res.append(\"FizzBuzz\")\n            elif i % 3 ==0 :\n                res.append(\"Fizz\")\n            elif i % 5 ==0 :\n                res.append(\"Buzz\")\n            else:\n                res.append(str(i))\n        return res\n                ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/412-fizz-buzz/",
-      "datePublished": "2023-11-26",
+      "datePublished": "2023-11-26T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

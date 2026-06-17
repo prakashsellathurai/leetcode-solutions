@@ -101,6 +101,7 @@ class Solution:
     "text": "You are given the head of a linked list, and an integer k.\nReturn the head of the linked list after swapping the values of the kth node from the beginning and the kth node from the end (the list is 1-indexed).\n\u00a0\nExample 1:\n\nInput: head = [1,2,3,4,5], k = 2\nOutput: [1,4,3,2,5]\n\nExample 2:\nInput: head = [7,9,6,6,7,8,3,0,9,5], k = 5\nOutput: [7,9,6,6,8,7,3,0,9,5]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is n.\n1 <= k <= n <= 105\n0 <= Node.val <= 100\n\n",
     "url": "https://leetcode.com/problems/1721-swapping-nodes-in-a-linked-list",
     "answerCount": 1,
+    "datePublished": "2022-11-02T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -110,7 +111,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:\n        return self.constantspace(head, k)\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def extraspace(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:\n        arr = []\n        cur = head\n\n        while cur:\n            arr.append(cur.val)\n            cur = cur.next\n\n        n = len(arr)\n        arr[k - 1], arr[n - k] = arr[n - k], arr[k - 1]\n\n        newHead = ListNode()\n        cur = newHead\n        for i in range(n):\n            cur.next = ListNode(arr[i])\n            cur = cur.next\n\n        return newHead.next\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(1)\n    def constantspace(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:\n        cur = head\n        N1 = None\n        n = 0\n        while cur is not None:\n            if n == k - 1:\n                N1 = cur\n            cur = cur.next\n            n += 1\n\n        cur = head\n        i = 0\n        while cur is not None:\n            if i == n - k:\n                N2 = cur\n                break\n            cur = cur.next\n            i += 1\n        N1.val, N2.val = N2.val, N1.val\n\n        return head\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1721-swapping-nodes-in-a-linked-list/",
-      "datePublished": "2022-11-02",
+      "datePublished": "2022-11-02T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

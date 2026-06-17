@@ -114,6 +114,7 @@ class Solution:
     "text": "Given a string s, find the length of the longest substring without duplicate characters.\n\u00a0\nExample 1:\n\nInput: s = \"abcabcbb\"\nOutput: 3\nExplanation: The answer is \"abc\", with the length of 3. Note that \"bca\" and \"cab\" are also correct answers.\n\nExample 2:\n\nInput: s = \"bbbbb\"\nOutput: 1\nExplanation: The answer is \"b\", with the length of 1.\n\nExample 3:\n\nInput: s = \"pwwkew\"\nOutput: 3\nExplanation: The answer is \"wke\", with the length of 3.\nNotice that the answer must be a substring, \"pwke\" is a subsequence and not a substring.\n\n\u00a0\nConstraints:\n\n0 <= s.length <= 5 * 104\ns consists of English letters, digits, symbols and spaces.\n\n",
     "url": "https://leetcode.com/problems/0003-longest-substring-without-repeating-characters",
     "answerCount": 1,
+    "datePublished": "2023-09-30T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -123,7 +124,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        return self.optimal(s)\n        \n    # Time Complexity: O(n^3)\n    # Space Complexity: O(n)\n    def bruteforce(self, s: str) -> int:\n        n = len(s)\n        long_sub_len = 0\n        \n        def isUnique(st):\n            return len(st) == len(set(st))\n        \n        for i in range(n):\n            for j in range(i,n):\n                if isUnique(s[i:j]):\n                    cur_len = j-i\n                    if cur_len > long_sub_len:\n                        long_sub_len = cur_len\n        return long_sub_len\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(min(m,n))\n    def better(self, s: str) -> int:\n        n = len(s)\n        left = right = 0\n        hashmap = defaultdict(lambda : 0)\n        res = 0\n        \n        while right < n:\n            hashmap[s[right]] += 1\n            \n            while hashmap[s[right]]  > 1:\n                hashmap[s[left]] -= 1\n                left += 1\n                \n            cur_width = right - left + 1 \n            \n            if cur_width > res:\n                res = cur_width\n            \n            right += 1\n            \n        return res\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(m)\n    def optimal(self, s: str) -> int:\n        seen = {}\n        start = 0\n        res = 0\n        for end,c in enumerate(s):\n            if c in seen:\n                start = max(start,seen[c]+1)\n            seen[c] = end\n            res = max(res ,end-start+1)\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0003-longest-substring-without-repeating-characters/",
-      "datePublished": "2023-09-30",
+      "datePublished": "2023-09-30T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

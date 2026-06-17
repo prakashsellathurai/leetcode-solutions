@@ -74,6 +74,7 @@ class Solution:
     "text": "Given two strings s and t, return the number of distinct subsequences of s which equals t.\nA string's subsequence is a new string formed from the original string by deleting some (can be none) of the characters without disturbing the remaining characters' relative positions. (i.e., \"ACE\" is a subsequence of \"ABCDE\" while \"AEC\" is not).\nThe test cases are generated so that the answer fits on a 32-bit signed integer.\n\u00a0\nExample 1:\nInput: s = \"rabbbit\", t = \"rabbit\"\nOutput: 3\nExplanation:\nAs shown below, there are 3 ways you can generate \"rabbit\" from S.\nrabbbit\nrabbbit\nrabbbit\n\nExample 2:\nInput: s = \"babgbag\", t = \"bag\"\nOutput: 5\nExplanation:\nAs shown below, there are 5 ways you can generate \"bag\" from S.\nbabgbag\nbabgbag\nbabgbag\nbabgbag\nbabgbag\n\u00a0\nConstraints:\n\n1 <= s.length, t.length <= 1000\ns and t consist of English letters.\n\n",
     "url": "https://leetcode.com/problems/distinct-subsequences",
     "answerCount": 1,
+    "datePublished": "2024-10-15T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -83,7 +84,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    @cache\n    def numDistinct(self, s: str, t: str) -> int:\n        if len(t) == 0:\n            return 1\n\n        elif len(s) == 0:\n            return 0\n\n        elif s[-1] == t[-1]:\n            return self.numDistinct(s[:-1], t[:-1]) + self.numDistinct(s[:-1], t)\n\n        else:\n            return self.numDistinct(s[:-1], t)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/distinct-subsequences/",
-      "datePublished": "2024-10-15",
+      "datePublished": "2024-10-15T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

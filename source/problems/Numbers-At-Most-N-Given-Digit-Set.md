@@ -78,6 +78,7 @@ class Solution:
     "text": "Given an array of digits which is sorted in non-decreasing order. You can write numbers using each digits[i] as many times as we want. For example, if digits = ['1','3','5'], we may write numbers such as '13', '551', and '1351315'.\nReturn the number of positive integers that can be generated that are less than or equal to a given integer n.\n\u00a0\nExample 1:\nInput: digits = [\"1\",\"3\",\"5\",\"7\"], n = 100\nOutput: 20\nExplanation: \nThe 20 numbers that can be written are:\n1, 3, 5, 7, 11, 13, 15, 17, 31, 33, 35, 37, 51, 53, 55, 57, 71, 73, 75, 77.\n\nExample 2:\nInput: digits = [\"1\",\"4\",\"9\"], n = 1000000000\nOutput: 29523\nExplanation: \nWe can write 3 one digit numbers, 9 two digit numbers, 27 three digit numbers,\n81 four digit numbers, 243 five digit numbers, 729 six digit numbers,\n2187 seven digit numbers, 6561 eight digit numbers, and 19683 nine digit numbers.\nIn total, this is 29523 integers that can be written using the digits array.\n\nExample 3:\nInput: digits = [\"7\"], n = 8\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= digits.length <= 9\ndigits[i].length == 1\ndigits[i] is a digit from\u00a0'1'\u00a0to '9'.\nAll the values in\u00a0digits are unique.\ndigits is sorted in\u00a0non-decreasing order.\n1 <= n <= 109\n\n",
     "url": "https://leetcode.com/problems/numbers-at-most-n-given-digit-set",
     "answerCount": 1,
+    "datePublished": "2025-03-11T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -87,7 +88,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def atMostNGivenDigitSet(self, digits: List[str], n: int) -> int:\n        S = str(n)\n        K = len(S)\n        dp = [0] * K + [1]\n\n        for i in range(K - 1, -1, -1):\n            for digit in digits:\n                if digit < S[i]:\n                    dp[i] += len(digits) ** (K - i - 1)\n                elif digit == S[i]:\n                    dp[i] += dp[i + 1]\n        return dp[0] + sum(len(digits) ** i for i in range(1, K))\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/numbers-at-most-n-given-digit-set/",
-      "datePublished": "2025-03-11",
+      "datePublished": "2025-03-11T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

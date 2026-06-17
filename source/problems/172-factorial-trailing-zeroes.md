@@ -93,6 +93,7 @@ class Solution:
     "text": "Given an integer n, return the number of trailing zeroes in n!.\nNote that n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1.\n\u00a0\nExample 1:\nInput: n = 3\nOutput: 0\nExplanation: 3! = 6, no trailing zero.\n\nExample 2:\nInput: n = 5\nOutput: 1\nExplanation: 5! = 120, one trailing zero.\n\nExample 3:\nInput: n = 0\nOutput: 0\n\n\u00a0\nConstraints:\n\n0 <= n <= 104\n\n\u00a0\nFollow up: Could you write a solution that works in logarithmic time complexity?\n",
     "url": "https://leetcode.com/problems/172-factorial-trailing-zeroes",
     "answerCount": 1,
+    "datePublished": "2025-05-25T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -102,7 +103,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def trailingZeroes(self, n: int) -> int:\n        return self.math(n)\n\n    # Time Complexity1: O(n)\n    # space Complexity: O(1)\n    # overflow error for n > 20\n    def bruteforce(self, n):\n        # generate factorial of number\n        fact = 1\n        for i in range(2, n + 1):\n            fact *= i\n        # calculate trailing zeros\n        cnt = 0\n        rem = 0\n        while fact >= 0 and rem == 0:\n            rem = fact % 10\n            fact = fact // 10\n            if rem == 0:\n                cnt += 1\n        return cnt\n\n    # prime factor of 10 = 2 aND 5\n    # even numbers has 2 and onlyconsider 5\n    # trailing zeros = n/5 + n/25 + n/125\n    # Time Complexity: O(log_5_n )\n    def math(self, n):\n        if n <= 0:\n            return 0\n\n        cnt = 0\n\n        while n >= 5:\n            n //= 5\n            cnt += n\n        return cnt\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/172-factorial-trailing-zeroes/",
-      "datePublished": "2025-05-25",
+      "datePublished": "2025-05-25T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

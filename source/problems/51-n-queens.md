@@ -67,6 +67,7 @@ class Solution:
     "text": "The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.\nGiven an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.\nEach solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.\n\u00a0\nExample 1:\n\nInput: n = 4\nOutput: [[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]\nExplanation: There exist two distinct solutions to the 4-queens puzzle as shown above\n\nExample 2:\nInput: n = 1\nOutput: [[\"Q\"]]\n\n\u00a0\nConstraints:\n\n1 <= n <= 9\n\n",
     "url": "https://leetcode.com/problems/51-n-queens",
     "answerCount": 1,
+    "datePublished": "2023-03-08T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -76,7 +77,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def solveNQueens(self, n: int) -> List[List[str]]:\n        res = []\n        for solution in self.queens(n, 0, [], [], []):\n            board = [\n                \"\".join(\"Q\" if i == j else \".\" for i in range(len(solution)))\n                for j in solution\n            ]\n            res.append(board)\n        return res\n\n    def queens(self, n, i, a, b, c):\n        if i < n:\n            for j in range(n):\n                if j not in a and i + j not in b and i - j not in c:\n                    yield from self.queens(n, i + 1, a + [j], b + [i + j], c + [i - j])\n        else:\n            yield a\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/51-n-queens/",
-      "datePublished": "2023-03-08",
+      "datePublished": "2023-03-08T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

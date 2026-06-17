@@ -83,6 +83,7 @@ class Solution:
     "text": "You are given an integer array nums.\nYou are allowed to delete any number of elements from nums without making it empty. After performing the deletions, select a subarray of nums such that:\n\nAll elements in the subarray are unique.\nThe sum of the elements in the subarray is maximized.\n\nReturn the maximum sum of such a subarray.\n\u00a0\nExample 1:\n\nInput: nums = [1,2,3,4,5]\nOutput: 15\nExplanation:\nSelect the entire array without deleting any element to obtain the maximum sum.\n\nExample 2:\n\nInput: nums = [1,1,0,1,1]\nOutput: 1\nExplanation:\nDelete the element nums[0] == 1, nums[1] == 1, nums[2] == 0, and nums[3] == 1. Select the entire array [1] to obtain the maximum sum.\n\nExample 3:\n\nInput: nums = [1,2,-1,-2,1,0,-1]\nOutput: 3\nExplanation:\nDelete the elements nums[2] == -1 and nums[3] == -2, and select the subarray [2, 1] from [1, 2, 1, 0, -1] to obtain the maximum sum.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 100\n-100 <= nums[i] <= 100\n\n",
     "url": "https://leetcode.com/problems/3487-maximum-unique-subarray-sum-after-deletion",
     "answerCount": 1,
+    "datePublished": "2023-09-07T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -92,7 +93,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def maxSum(self, nums: List[int]) -> int:\n        positiveSet = set([num for num in nums if num > 0])\n        return max(nums) if len(positiveSet) == 0 else sum(positiveSet)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/3487-maximum-unique-subarray-sum-after-deletion/",
-      "datePublished": "2023-09-07",
+      "datePublished": "2023-09-07T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

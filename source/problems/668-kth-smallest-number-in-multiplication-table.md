@@ -64,6 +64,7 @@ class Solution(object):
     "text": "Nearly everyone has used the Multiplication Table. The multiplication table of size m x n is an integer matrix mat where mat[i][j] == i * j (1-indexed).\nGiven three integers m, n, and k, return the kth smallest element in the m x n multiplication table.\n\u00a0\nExample 1:\n\nInput: m = 3, n = 3, k = 5\nOutput: 3\nExplanation: The 5th smallest number is 3.\n\nExample 2:\n\nInput: m = 2, n = 3, k = 6\nOutput: 6\nExplanation: The 6th smallest number is 6.\n\n\u00a0\nConstraints:\n\n1 <= m, n <= 3 * 104\n1 <= k <= m * n\n\n",
     "url": "https://leetcode.com/problems/668-kth-smallest-number-in-multiplication-table",
     "answerCount": 1,
+    "datePublished": "2025-05-17T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -73,7 +74,7 @@ class Solution(object):
       "@type": "Answer",
       "text": "class Solution(object):\n    def findKthNumber(self, m, n, k):\n        def enough(x):\n            count = 0\n            for i in range(1, m+1):\n                count += min(x // i, n)\n            return count >= k\n\n        lo, hi = 1, m * n\n        while lo < hi:\n            mi = (lo + hi) // 2\n            if not enough(mi):\n                lo = mi + 1\n            else:\n                hi = mi\n        return lo",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/668-kth-smallest-number-in-multiplication-table/",
-      "datePublished": "2025-05-17",
+      "datePublished": "2025-05-17T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

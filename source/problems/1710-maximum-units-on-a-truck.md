@@ -72,6 +72,7 @@ class Solution:
     "text": "You are assigned to put some amount of boxes onto one truck. You are given a 2D array boxTypes, where boxTypes[i] = [numberOfBoxesi, numberOfUnitsPerBoxi]:\n\nnumberOfBoxesi is the number of boxes of type i.\nnumberOfUnitsPerBoxi is the number of units in each box of the type i.\n\nYou are also given an integer truckSize, which is the maximum number of boxes that can be put on the truck. You can choose any boxes to put on the truck as long as the number\u00a0of boxes does not exceed truckSize.\nReturn the maximum total number of units that can be put on the truck.\n\u00a0\nExample 1:\nInput: boxTypes = [[1,3],[2,2],[3,1]], truckSize = 4\nOutput: 8\nExplanation: There are:\n- 1 box of the first type that contains 3 units.\n- 2 boxes of the second type that contain 2 units each.\n- 3 boxes of the third type that contain 1 unit each.\nYou can take all the boxes of the first and second types, and one box of the third type.\nThe total number of units will be = (1 * 3) + (2 * 2) + (1 * 1) = 8.\n\nExample 2:\nInput: boxTypes = [[5,10],[2,5],[4,7],[3,9]], truckSize = 10\nOutput: 91\n\n\u00a0\nConstraints:\n\n1 <= boxTypes.length <= 1000\n1 <= numberOfBoxesi, numberOfUnitsPerBoxi <= 1000\n1 <= truckSize <= 106\n\n",
     "url": "https://leetcode.com/problems/1710-maximum-units-on-a-truck",
     "answerCount": 1,
+    "datePublished": "2026-05-25T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +82,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:\n        boxTypes.sort(key=lambda x: -x[1])\n        boxes = 0\n        for box, units in boxTypes:\n            if truckSize > box:\n                truckSize -= box\n                boxes += box * units\n            else:\n                boxes += truckSize * units\n                return boxes\n        return boxes",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1710-maximum-units-on-a-truck/",
-      "datePublished": "2026-05-25",
+      "datePublished": "2026-05-25T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

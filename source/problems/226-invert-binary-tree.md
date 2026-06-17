@@ -64,6 +64,7 @@ class Solution:
     "text": "Given the root of a binary tree, invert the tree, and return its root.\n\u00a0\nExample 1:\n\nInput: root = [4,2,7,1,3,6,9]\nOutput: [4,7,2,9,6,3,1]\n\nExample 2:\n\nInput: root = [2,1,3]\nOutput: [2,3,1]\n\nExample 3:\nInput: root = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 100].\n-100 <= Node.val <= 100\n\n",
     "url": "https://leetcode.com/problems/226-invert-binary-tree",
     "answerCount": 1,
+    "datePublished": "2026-03-03T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -73,7 +74,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:\n        if root:\n            left = self.invertTree(root.left)\n            right = self.invertTree(root.right)\n            root.right = left\n            root.left = right\n        return root",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/226-invert-binary-tree/",
-      "datePublished": "2026-03-03",
+      "datePublished": "2026-03-03T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

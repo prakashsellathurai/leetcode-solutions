@@ -101,6 +101,7 @@ class Solution:
     "text": "\n",
     "url": "https://leetcode.com/problems/560-subarray-sum-equals-k",
     "answerCount": 1,
+    "datePublished": "2025-08-23T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -110,7 +111,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def subarraySum(self, nums: List[int], k: int) -> int:\n        return self.hashingCumulativeSumFrequecny(nums, k)\n\n    \"\"\"\n    Time Complexity: O(n^3)\n    Space Complexity: O(1)\n    \"\"\"\n\n    def bruteforce(self, nums: List[int], k: int) -> int:\n        cnt = 0\n\n        for i in range(len(nums)):\n            for j in range(i, len(nums)):\n                if sum(nums[i: j + 1]) == k:\n                    cnt += 1\n\n        return cnt\n\n    \"\"\"\n    Time Complexity: O(n^2)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def CumulativeSum(self, nums: List[int], k: int) -> int:\n        cnt = 0\n        n = len(nums)\n        CumSum = [0] * (n + 1)\n        CumSum[0] = 0\n        for i in range(1, n + 1):\n            CumSum[i] = CumSum[i - 1] + nums[i - 1]\n\n        for i in range(n):\n            for j in range(i + 1, len(nums) + 1):\n                if CumSum[j] - CumSum[i] == k:\n                    cnt += 1\n        return cnt\n\n    \"\"\"\n    Time Complexity: O(n^2)\n    Space Complexity: O(1)\n    \"\"\"\n\n    def ConsecutiveSumOnthefly(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        cnt = 0\n\n        for i in range(n):\n            curSum = 0\n            for j in range(i, n):\n                curSum += nums[j]\n                if curSum == k:\n                    cnt += 1\n\n        return cnt\n\n    \"\"\"\n    Time Complexity: O(n)\n    Space Complexity: O(n) \n    \"\"\"\n\n    def hashingCumulativeSumFrequecny(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n\n        CumSum = 0\n        CumSumFreq = defaultdict(lambda: 0)\n        CumSumFreq[0] = 1  # by default sum with 0 is always going to  be there\n        cnt = 0\n\n        for i in range(n):\n            CumSum += nums[i]\n            if CumSum - k in CumSumFreq:\n                cnt += CumSumFreq[CumSum - k]\n            CumSumFreq[CumSum] += 1\n\n        return cnt\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/560-subarray-sum-equals-k/",
-      "datePublished": "2025-08-23",
+      "datePublished": "2025-08-23T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

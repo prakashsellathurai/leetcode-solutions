@@ -67,6 +67,7 @@ class Solution:
     "text": "Given an integer array nums of size n, return the minimum number of moves required to make all array elements equal.\nIn one move, you can increment or decrement an element of the array by 1.\nTest cases are designed so that the answer will fit in a 32-bit integer.\n\u00a0\nExample 1:\nInput: nums = [1,2,3]\nOutput: 2\nExplanation:\nOnly two moves are needed (remember each move increments or decrements one element):\n[1,2,3]  =>  [2,2,3]  =>  [2,2,2]\n\nExample 2:\nInput: nums = [1,10,2,9]\nOutput: 16\n\n\u00a0\nConstraints:\n\nn == nums.length\n1 <= nums.length <= 105\n-109 <= nums[i] <= 109\n\n",
     "url": "https://leetcode.com/problems/462-minimum-moves-to-equal-array-elements-ii",
     "answerCount": 1,
+    "datePublished": "2024-07-12T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -76,7 +77,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minMoves2(self, nums: List[int]) -> int:\n        return self.sorting(nums)\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(1)\n    def sorting(self, nums: List[int]) -> int:\n        nums.sort()\n        n = len(nums)\n        median = nums[n // 2]\n        steps = 0\n        for num in nums:\n            steps += abs(median - num)\n        return steps\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/462-minimum-moves-to-equal-array-elements-ii/",
-      "datePublished": "2024-07-12",
+      "datePublished": "2024-07-12T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

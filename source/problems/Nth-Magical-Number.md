@@ -69,6 +69,7 @@ class Solution(object):
     "text": "A positive integer is magical if it is divisible by either a or b.\nGiven the three integers n, a, and b, return the nth magical number. Since the answer may be very large, return it modulo 109 + 7.\n\u00a0\nExample 1:\nInput: n = 1, a = 2, b = 3\nOutput: 2\nExample 2:\nInput: n = 4, a = 2, b = 3\nOutput: 6\nExample 3:\nInput: n = 5, a = 2, b = 4\nOutput: 10\nExample 4:\nInput: n = 3, a = 6, b = 4\nOutput: 8\n\n\u00a0\nConstraints:\n\n1 <= n <= 109\n2 <= a, b <= 4 * 104\n\n",
     "url": "https://leetcode.com/problems/nth-magical-number",
     "answerCount": 1,
+    "datePublished": "2025-03-07T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -78,7 +79,7 @@ class Solution(object):
       "@type": "Answer",
       "text": "class Solution(object):\n    def nthMagicalNumber(self, N, A, B):\n        from math import gcd\n\n        MOD = 10**9 + 7\n\n        L = A // gcd(A, B) * B\n        M = L // A + L // B - 1\n        q, r = divmod(N, M)\n\n        if r == 0:\n            return q * L % MOD\n\n        heads = [A, B]\n        for _ in range(int(r) - 1):\n            if heads[0] <= heads[1]:\n                heads[0] += A\n            else:\n                heads[1] += B\n\n        return (q * L + min(heads)) % MOD\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/nth-magical-number/",
-      "datePublished": "2025-03-07",
+      "datePublished": "2025-03-07T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

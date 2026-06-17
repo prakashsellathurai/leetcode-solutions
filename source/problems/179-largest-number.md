@@ -56,6 +56,7 @@ class Solution:
     "text": "Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.\nSince the result may be very large, so you need to return a string instead of an integer.\n\u00a0\nExample 1:\nInput: nums = [10,2]\nOutput: \"210\"\n\nExample 2:\nInput: nums = [3,30,34,5,9]\nOutput: \"9534330\"\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 100\n0 <= nums[i] <= 109\n\n",
     "url": "https://leetcode.com/problems/179-largest-number",
     "answerCount": 1,
+    "datePublished": "2025-04-23T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -65,7 +66,7 @@ class Solution:
       "@type": "Answer",
       "text": "class LargerNumKey(str):\n    def __lt__(x, y):\n        return x + y > y + x\n\n\nclass Solution:\n    def largestNumber(self, nums):\n        largest_num = \"\".join(sorted(map(str, nums), key=LargerNumKey))\n        return \"0\" if largest_num[0] == \"0\" else largest_num\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/179-largest-number/",
-      "datePublished": "2025-04-23",
+      "datePublished": "2025-04-23T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

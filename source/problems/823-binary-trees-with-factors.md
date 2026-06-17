@@ -66,6 +66,7 @@ class Solution(object):
     "text": "Given an array of unique integers, arr, where each integer arr[i] is strictly greater than 1.\nWe make a binary tree using these integers, and each number may be used for any number of times. Each non-leaf node's value should be equal to the product of the values of its children.\nReturn the number of binary trees we can make. The answer may be too large so return the answer modulo 109 + 7.\n\u00a0\nExample 1:\nInput: arr = [2,4]\nOutput: 3\nExplanation: We can make these trees: [2], [4], [4, 2, 2]\nExample 2:\nInput: arr = [2,4,5,10]\nOutput: 7\nExplanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5], [10, 5, 2].\n\u00a0\nConstraints:\n\n1 <= arr.length <= 1000\n2 <= arr[i] <= 109\nAll the values of arr are unique.\n\n",
     "url": "https://leetcode.com/problems/823-binary-trees-with-factors",
     "answerCount": 1,
+    "datePublished": "2022-06-27T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -75,7 +76,7 @@ class Solution(object):
       "@type": "Answer",
       "text": "class Solution(object):\n    def numFactoredBinaryTrees(self, A):\n        MOD = 10**9 + 7\n        N = len(A)\n        A.sort()\n        dp = [1] * N\n        index = {x: i for i, x in enumerate(A)}\n        for i, x in enumerate(A):\n            for j in range(i):\n                if x % A[j] == 0:  # A[j] will be left child\n                    right = x / A[j]\n                    if right in index:\n                        dp[i] += dp[j] * dp[index[right]]\n                        dp[i] %= MOD\n\n        return sum(dp) % MOD\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/823-binary-trees-with-factors/",
-      "datePublished": "2022-06-27",
+      "datePublished": "2022-06-27T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

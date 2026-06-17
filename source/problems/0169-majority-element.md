@@ -58,6 +58,7 @@ class Solution:
     "text": "Given an array nums of size n, return the majority element.\nThe majority element is the element that appears more than \u230an / 2\u230b times. You may assume that the majority element always exists in the array.\n\u00a0\nExample 1:\nInput: nums = [3,2,3]\nOutput: 3\nExample 2:\nInput: nums = [2,2,1,1,1,2,2]\nOutput: 2\n\n\u00a0\nConstraints:\n\nn == nums.length\n1 <= n <= 5 * 104\n-109 <= nums[i] <= 109\nThe input is generated such that a majority element will exist in the array.\n\n\u00a0\nFollow-up: Could you solve the problem in linear time and in O(1) space?",
     "url": "https://leetcode.com/problems/0169-majority-element",
     "answerCount": 1,
+    "datePublished": "2025-12-03T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -67,7 +68,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def majorityElement(self, nums: List[int]) -> int:\n        res = None\n        cnt = 0\n        for num in nums:\n            if res is None or cnt == 0:\n                res = num\n                cnt = 1\n            elif res == num:\n                cnt += 1\n            else:\n                cnt -= 1\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0169-majority-element/",
-      "datePublished": "2025-12-03",
+      "datePublished": "2025-12-03T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

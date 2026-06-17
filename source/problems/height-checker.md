@@ -72,6 +72,7 @@ class Solution:
     "text": "A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height. Let this ordering be represented by the integer array expected where expected[i] is the expected height of the ith student in line.\nYou are given an integer array heights representing the current order that the students are standing in. Each heights[i] is the height of the ith student in line (0-indexed).\nReturn the number of indices where heights[i] != expected[i].\n\u00a0\nExample 1:\nInput: heights = [1,1,4,2,1,3]\nOutput: 3\nExplanation: \nheights:  [1,1,4,2,1,3]\nexpected: [1,1,1,2,3,4]\nIndices 2, 4, and 5 do not match.\n\nExample 2:\nInput: heights = [5,1,2,3,4]\nOutput: 5\nExplanation:\nheights:  [5,1,2,3,4]\nexpected: [1,2,3,4,5]\nAll indices do not match.\n\nExample 3:\nInput: heights = [1,2,3,4,5]\nOutput: 0\nExplanation:\nheights:  [1,2,3,4,5]\nexpected: [1,2,3,4,5]\nAll indices match.\n\n\u00a0\nConstraints:\n\n1 <= heights.length <= 100\n1 <= heights[i] <= 100\n\n",
     "url": "https://leetcode.com/problems/height-checker",
     "answerCount": 1,
+    "datePublished": "2023-10-04T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +82,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def heightChecker(self, heights: List[int]) -> int:\n        expected = list(heights)\n        n = len(heights)\n        expected.sort()\n        return sum(1 for i in range(n) if expected[i] != heights[i])",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/height-checker/",
-      "datePublished": "2023-10-04",
+      "datePublished": "2023-10-04T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

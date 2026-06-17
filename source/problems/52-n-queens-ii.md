@@ -65,6 +65,7 @@ class Solution:
     "text": "The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.\nGiven an integer n, return the number of distinct solutions to the\u00a0n-queens puzzle.\n\u00a0\nExample 1:\n\nInput: n = 4\nOutput: 2\nExplanation: There are two distinct solutions to the 4-queens puzzle as shown.\n\nExample 2:\nInput: n = 1\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= n <= 9\n\n",
     "url": "https://leetcode.com/problems/52-n-queens-ii",
     "answerCount": 1,
+    "datePublished": "2025-04-27T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -74,7 +75,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def totalNQueens(self, n: int) -> int:\n        cnt = 0\n        for sol in self.nqueens(n, 0, [], [], []):\n            cnt += 1\n        return cnt\n\n    def nqueens(self, n, i, collkup, ldlkup, rdlkup):\n        if i < n:\n            for j in range(n):\n                if j not in collkup and i + j not in ldlkup and i - j not in rdlkup:\n                    yield from self.nqueens(\n                        n, i + 1, collkup + [j], ldlkup +\n                        [i + j], rdlkup + [i - j]\n                    )\n\n        else:\n            yield collkup\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/52-n-queens-ii/",
-      "datePublished": "2025-04-27",
+      "datePublished": "2025-04-27T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

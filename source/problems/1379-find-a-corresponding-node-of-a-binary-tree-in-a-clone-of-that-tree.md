@@ -83,6 +83,7 @@ class Solution:
     "text": "Given two binary trees original and cloned and given a reference to a node target in the original tree.\nThe cloned tree is a copy of the original tree.\nReturn a reference to the same node in the cloned tree.\nNote that you are not allowed to change any of the two trees or the target node and the answer must be a reference to a node in the cloned tree.\n\u00a0\nExample 1:\n\nInput: tree = [7,4,3,null,null,6,19], target = 3\nOutput: 3\nExplanation: In all examples the original and cloned trees are shown. The target node is a green node from the original tree. The answer is the yellow node from the cloned tree.\n\nExample 2:\n\nInput: tree = [7], target =  7\nOutput: 7\n\nExample 3:\n\nInput: tree = [8,null,6,null,5,null,4,null,3,null,2,null,1], target = 4\nOutput: 4\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 104].\nThe values of the nodes of the tree are unique.\ntarget node is a node from the original tree and is not null.\n\n\u00a0\nFollow up: Could you solve the problem if repeated values on the tree are allowed?\n",
     "url": "https://leetcode.com/problems/1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree",
     "answerCount": 1,
+    "datePublished": "2022-01-04T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -92,7 +93,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, x):\n#         self.val = x\n#         self.left = None\n#         self.right = None\n\n\nclass Solution:\n    def getTargetCopy(\n        self, original: TreeNode, cloned: TreeNode, target: TreeNode\n    ) -> TreeNode:\n        def inorder(o: TreeNode, c: TreeNode):\n            if o:\n                inorder(o.left, c.left)\n                if o is target:\n                    self.ans = c\n                inorder(o.right, c.right)\n\n        inorder(original, cloned)\n        return self.ans\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/",
-      "datePublished": "2022-01-04",
+      "datePublished": "2022-01-04T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

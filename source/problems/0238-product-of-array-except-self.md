@@ -100,6 +100,7 @@ class Solution:
     "text": "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].\nThe product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.\nYou must write an algorithm that runs in\u00a0O(n)\u00a0time and without using the division operation.\n\u00a0\nExample 1:\nInput: nums = [1,2,3,4]\nOutput: [24,12,8,6]\nExample 2:\nInput: nums = [-1,1,0,-3,3]\nOutput: [0,0,9,0,0]\n\n\u00a0\nConstraints:\n\n2 <= nums.length <= 105\n-30 <= nums[i] <= 30\nThe input is generated such that answer[i] is guaranteed to fit in a 32-bit integer.\n\n\u00a0\nFollow up:\u00a0Can you solve the problem in O(1)\u00a0extra\u00a0space complexity? (The output array does not count as extra space for space complexity analysis.)\n",
     "url": "https://leetcode.com/problems/0238-product-of-array-except-self",
     "answerCount": 1,
+    "datePublished": "2023-06-30T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -109,7 +110,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def productExceptSelf(self, nums: List[int]) -> List[int]:\n        return self.presum_lessspace(nums)\n    \n    # Time Complexity: O(n^2)\n    # Space COmplexity: O(1)\n    def bruteforce(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        res = [0] * n\n        for i in range(n):\n            curEle = 1\n            for j in range(i):\n                curEle*=nums[j]\n            for j in range(i+1, n):\n                curEle*=nums[j]\n            res[i] = curEle\n        return res\n    \n    # Time Complexity: O(n)\n    # Space COmplexity: O(n)\n    def presum(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        presum = [1] * n\n        postsum = [1] * n\n        presum[0] = 1\n        presum[1] = nums[0] \n        for i in range(2, n):\n            presum[i] = presum[i-1] * nums[i-1]\n        postsum[n-1] = 1\n        postsum[n-2] = nums[n-1]\n        for i in range(n-2, -1, -1):\n            postsum[i] = postsum[i+1] * nums[i+1]\n\n        res = [1] *n\n\n        for i in range(n):\n            res[i] = presum[i] * postsum[i]\n        return res\n\n    # Time Complexity: O(n)\n    # Space COmplexity: O(1)\n    def presum_lessspace(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        res = [0] *n\n        res[0] = 1\n        for i in range(1, n):\n            res[i] = res[i-1] * nums[i-1]\n        rightMul= 1\n        for i in range(n-1, -1, -1):\n            res[i] = res[i] * rightMul\n            rightMul*=nums[i]\n\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0238-product-of-array-except-self/",
-      "datePublished": "2023-06-30",
+      "datePublished": "2023-06-30T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

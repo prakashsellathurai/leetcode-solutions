@@ -96,6 +96,7 @@ class MyStack:
     "text": "Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).\nImplement the MyStack class:\n\nvoid push(int x) Pushes element x to the top of the stack.\nint pop() Removes the element on the top of the stack and returns it.\nint top() Returns the element on the top of the stack.\nboolean empty() Returns true if the stack is empty, false otherwise.\n\nNotes:\n\nYou must use only standard operations of a queue, which means that only push to back, peek/pop from front, size and is empty operations are valid.\nDepending on your language, the queue may not be supported natively. You may simulate a queue using a list or deque (double-ended queue) as long as you use only a queue's standard operations.\n\n\u00a0\nExample 1:\nInput\n[\"MyStack\", \"push\", \"push\", \"top\", \"pop\", \"empty\"]\n[[], [1], [2], [], [], []]\nOutput\n[null, null, null, 2, 2, false]\n\nExplanation\nMyStack myStack = new MyStack();\nmyStack.push(1);\nmyStack.push(2);\nmyStack.top(); // return 2\nmyStack.pop(); // return 2\nmyStack.empty(); // return False\n\n\u00a0\nConstraints:\n\n1 <= x <= 9\nAt most 100 calls will be made to push, pop, top, and empty.\nAll the calls to pop and top are valid.\n\n\u00a0\nFollow-up: Can you implement the stack using only one queue?\n",
     "url": "https://leetcode.com/problems/225-implement-stack-using-queues",
     "answerCount": 1,
+    "datePublished": "2024-12-29T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -105,7 +106,7 @@ class MyStack:
       "@type": "Answer",
       "text": "class MyStack:\n    def __init__(self):\n        self._queue = collections.deque()\n\n    def push(self, x):\n        q = self._queue\n        q.append(x)\n        for _ in range(len(q) - 1):\n            q.append(q.popleft())\n\n    def pop(self):\n        return self._queue.popleft()\n\n    def top(self):\n        return self._queue[0]\n\n    def empty(self):\n        return not len(self._queue)\n\n\n# Your MyStack object will be instantiated and called as such:\n# obj = MyStack()\n# obj.push(x)\n# param_2 = obj.pop()\n# param_3 = obj.top()\n# param_4 = obj.empty()\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/225-implement-stack-using-queues/",
-      "datePublished": "2024-12-29",
+      "datePublished": "2024-12-29T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

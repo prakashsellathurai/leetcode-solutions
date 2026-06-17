@@ -89,6 +89,7 @@ class Solution:
     "text": "There is an m x n grid with a ball. The ball is initially at the position [startRow, startColumn]. You are allowed to move the ball to one of the four adjacent cells in the grid (possibly out of the grid crossing the grid boundary). You can apply at most maxMove moves to the ball.\nGiven the five integers m, n, maxMove, startRow, startColumn, return the number of paths to move the ball out of the grid boundary. Since the answer can be very large, return it modulo 109 + 7.\n\u00a0\nExample 1:\n\nInput: m = 2, n = 2, maxMove = 2, startRow = 0, startColumn = 0\nOutput: 6\n\nExample 2:\n\nInput: m = 1, n = 3, maxMove = 3, startRow = 0, startColumn = 1\nOutput: 12\n\n\u00a0\nConstraints:\n\n1 <= m, n <= 50\n0 <= maxMove <= 50\n0 <= startRow < m\n0 <= startColumn < n\n\n",
     "url": "https://leetcode.com/problems/576-out-of-boundary-paths",
     "answerCount": 1,
+    "datePublished": "2022-03-09T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -98,7 +99,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findPaths(\n        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int\n    ) -> int:\n        return self.topdown(m, n, maxMove, startRow, startColumn)\n\n    # Time Complexity: O(4^n)\n    # Space Complexity: O(n)\n    def bruteforce(\n        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int\n    ) -> int:\n        if startRow == m or startColumn == n or startRow < 0 or startColumn < 0:\n            return 1\n        if maxMove == 0:\n            return 0\n\n        return (\n            self.bruteforce(m, n, maxMove - 1, startRow - 1, startColumn)\n            + self.bruteforce(m, n, maxMove - 1, startRow + 1, startColumn)\n            + self.bruteforce(m, n, maxMove - 1, startRow, startColumn - 1)\n            + self.bruteforce(m, n, maxMove - 1, startRow, startColumn + 1)\n        )\n\n    # Time Complexity: O(m*n*N)\n    # Space Complexity: O(m*n*N)\n    @cache\n    def topdown(\n        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int\n    ) -> int:\n        if startRow == m or startColumn == n or startRow < 0 or startColumn < 0:\n            return 1\n        if maxMove == 0:\n            return 0\n\n        return (\n            self.topdown(m, n, maxMove - 1, startRow - 1, startColumn)\n            + self.topdown(m, n, maxMove - 1, startRow + 1, startColumn)\n            + self.topdown(m, n, maxMove - 1, startRow, startColumn - 1)\n            + self.topdown(m, n, maxMove - 1, startRow, startColumn + 1)\n        ) % ((10**9) + 7)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/576-out-of-boundary-paths/",
-      "datePublished": "2022-03-09",
+      "datePublished": "2022-03-09T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

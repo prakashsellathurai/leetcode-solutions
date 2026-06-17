@@ -72,6 +72,7 @@ class Solution:
     "text": "You are given the root of a binary tree with n nodes where each node in the tree has node.val coins. There are n coins in total throughout the whole tree.\nIn one move, we may choose two adjacent nodes and move one coin from one node to another. A move may be from parent to child, or from child to parent.\nReturn the minimum number of moves required to make every node have exactly one coin.\n\u00a0\nExample 1:\n\nInput: root = [3,0,0]\nOutput: 2\nExplanation: From the root of the tree, we move one coin to its left child, and one coin to its right child.\n\nExample 2:\n\nInput: root = [0,3,0]\nOutput: 3\nExplanation: From the left child of the root, we move two coins to the root [taking two moves]. Then, we move one coin from the root of the tree to the right child.\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is n.\n1 <= n <= 100\n0 <= Node.val <= n\nThe sum of all Node.val is n.\n\n",
     "url": "https://leetcode.com/problems/979-distribute-coins-in-binary-tree",
     "answerCount": 1,
+    "datePublished": "2022-06-05T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +82,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def distributeCoins(self, root: Optional[TreeNode]) -> int:\n        self.ans = 0\n\n        def dfs(node):\n            if not node:\n                return 0\n            L, R = dfs(node.left), dfs(node.right)\n            self.ans += abs(L) + abs(R)\n            return node.val + L + R - 1\n\n        dfs(root)\n        return self.ans\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/979-distribute-coins-in-binary-tree/",
-      "datePublished": "2022-06-05",
+      "datePublished": "2022-06-05T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

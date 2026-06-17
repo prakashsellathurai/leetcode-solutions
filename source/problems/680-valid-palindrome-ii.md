@@ -74,6 +74,7 @@ class Solution:
     "text": "Given a string s, return true if the s can be palindrome after deleting at most one character from it.\n\u00a0\nExample 1:\nInput: s = \"aba\"\nOutput: true\n\nExample 2:\nInput: s = \"abca\"\nOutput: true\nExplanation: You could delete the character 'c'.\n\nExample 3:\nInput: s = \"abc\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns consists of lowercase English letters.\n\n",
     "url": "https://leetcode.com/problems/680-valid-palindrome-ii",
     "answerCount": 1,
+    "datePublished": "2024-04-25T00:00:00Z",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -83,7 +84,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def validPalindrome(self, s: str) -> bool:\n        i = 0\n        j = len(s) - 1\n\n        while i < j:\n            if s[i] != s[j]:\n                return self.checkPalindrome(s, i + 1, j) or self.checkPalindrome(\n                    s, i, j - 1\n                )\n            i += 1\n            j -= 1\n        return True\n\n    def checkPalindrome(self, s, i, j):\n        while i < j:\n            if s[i] != s[j]:\n                return False\n\n            i += 1\n            j -= 1\n        return True\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/680-valid-palindrome-ii/",
-      "datePublished": "2024-04-25",
+      "datePublished": "2024-04-25T00:00:00Z",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",
