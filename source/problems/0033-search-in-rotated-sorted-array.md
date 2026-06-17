@@ -88,7 +88,7 @@ class Solution:
     "text": "There is an integer array nums sorted in ascending order (with distinct values).\nPrior to being passed to your function, nums is possibly left rotated at an unknown index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be left rotated by\u00a03\u00a0indices and become [4,5,6,7,0,1,2].\nGiven the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.\nYou must write an algorithm with O(log n) runtime complexity.\n\u00a0\nExample 1:\nInput: nums = [4,5,6,7,0,1,2], target = 0\nOutput: 4\nExample 2:\nInput: nums = [4,5,6,7,0,1,2], target = 3\nOutput: -1\nExample 3:\nInput: nums = [1], target = 0\nOutput: -1\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5000\n-104 <= nums[i] <= 104\nAll values of nums are unique.\nnums is an ascending array that is possibly rotated.\n-104 <= target <= 104\n\n",
     "url": "https://leetcode.com/problems/0033-search-in-rotated-sorted-array",
     "answerCount": 1,
-    "datePublished": "2024-01-03T00:00:00Z",
+    "datePublished": "2026-03-16T12:45:21+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -98,7 +98,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def search(self, nums: List[int], target: int) -> int:\n        # 4 5 6 7 0 1 2\n        #      7 > 0\n        #  l r 4 2\n        #  mid 7 mid + 1 0 7 > 0 return mid + 1\n        #  l = mid + 1\n        # 456012\n        def findpivot(l,r):\n            while l < r:\n                mid = (l + r) // 2\n                if nums[r] < nums[mid]:\n                    l = mid + 1\n                else:\n                    r = mid\n            return r\n        def binarysearch(l ,r):\n            while l <= r:\n                mid = (l + r) // 2\n                if nums[mid] == target:\n                    return mid\n                elif nums[mid] > target:\n                    r = mid -1\n                else:\n                    l = mid + 1\n            return -1\n\n        n = len(nums)\n        if n == 1:\n            return 0 if nums[0] == target else -1\n        k = findpivot(0, n - 1)\n        if k == -1:\n            k = n -1\n        if nums[k] <= target <= nums[n-1]:\n            return binarysearch(k, n-1)\n        else:\n            return binarysearch(0, k-1)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0033-search-in-rotated-sorted-array/",
-      "datePublished": "2024-01-03T00:00:00Z",
+      "datePublished": "2026-03-16T12:45:21+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

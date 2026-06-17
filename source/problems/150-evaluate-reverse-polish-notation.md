@@ -101,7 +101,7 @@ class Solution:
     "text": "Evaluate the value of an arithmetic expression in Reverse Polish Notation.\nValid operators are +, -, *, and /. Each operand may be an integer or another expression.\nNote that division between two integers should truncate toward zero.\nIt is guaranteed that the given RPN expression is always valid. That means the expression would always evaluate to a result, and there will not be any division by zero operation.\n\u00a0\nExample 1:\nInput: tokens = [\"2\",\"1\",\"+\",\"3\",\"*\"]\nOutput: 9\nExplanation: ((2 + 1) * 3) = 9\n\nExample 2:\nInput: tokens = [\"4\",\"13\",\"5\",\"/\",\"+\"]\nOutput: 6\nExplanation: (4 + (13 / 5)) = 6\n\nExample 3:\nInput: tokens = [\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]\nOutput: 22\nExplanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5\n= ((10 * (6 / (12 * -11))) + 17) + 5\n= ((10 * (6 / -132)) + 17) + 5\n= ((10 * 0) + 17) + 5\n= (0 + 17) + 5\n= 17 + 5\n= 22\n\n\u00a0\nConstraints:\n\n1 <= tokens.length <= 104\ntokens[i] is either an operator: \"+\", \"-\", \"*\", or \"/\", or an integer in the range [-200, 200].\n\n",
     "url": "https://leetcode.com/problems/150-evaluate-reverse-polish-notation",
     "answerCount": 1,
-    "datePublished": "2025-05-04T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -111,7 +111,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    \"\"\"\n    refer https://en.wikipedia.org/wiki/Shunting-yard_algorithm\n\n    iterate through the array if numbers are found push them to stack\n    if an operator is found pop last two elements from stack and do that op\n\n    last standing number is the vealuated result\n\n    Time Complexity: O(n)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def evalRPN(self, tokens: List[str]) -> int:\n        s = []\n\n        for token in tokens:\n            if token in \"+-*/\":\n                op1 = s.pop()\n                op2 = s.pop()\n                s.append(self.eval(op1, op2, token))\n            else:\n                s.append(int(token))\n        return s[-1]\n\n    def eval(self, op1, op2, op):\n        print(op1, op2, op)\n        if op == \"+\":\n            return op1 + op2\n        elif op == \"-\":\n            return op2 - op1\n        elif op == \"*\":\n            return op1 * op2\n        elif op == \"/\":\n            return int(op2 / op1)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/150-evaluate-reverse-polish-notation/",
-      "datePublished": "2025-05-04T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -60,7 +60,7 @@ class Solution:
     "text": "You are given a list of songs where the ith song has a duration of time[i] seconds.\nReturn the number of pairs of songs for which their total duration in seconds is divisible by 60. Formally, we want the number of indices i, j such that i < j with (time[i] + time[j]) % 60 == 0.\n\u00a0\nExample 1:\nInput: time = [30,20,150,100,40]\nOutput: 3\nExplanation: Three pairs have a total duration divisible by 60:\n(time[0] = 30, time[2] = 150): total duration 180\n(time[1] = 20, time[3] = 100): total duration 120\n(time[1] = 20, time[4] = 40): total duration 60\n\nExample 2:\nInput: time = [60,60,60]\nOutput: 3\nExplanation: All three pairs have a total duration of 120, which is divisible by 60.\n\n\u00a0\nConstraints:\n\n1 <= time.length <= 6 * 104\n1 <= time[i] <= 500\n\n",
     "url": "https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60",
     "answerCount": 1,
-    "datePublished": "2022-07-03T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -70,7 +70,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def numPairsDivisibleBy60(self, time: List[int]) -> int:\n        ans, cnt = 0, collections.Counter()\n        for t in time:\n            theOther = -t % 60\n            ans += cnt[theOther]\n            cnt[t % 60] += 1\n        return ans\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/pairs-of-songs-with-total-durations-divisible-by-60/",
-      "datePublished": "2022-07-03T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

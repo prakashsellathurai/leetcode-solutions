@@ -121,7 +121,7 @@ class Solution:
     "text": "Given a binary tree\nstruct Node {\n  int val;\n  Node *left;\n  Node *right;\n  Node *next;\n}\n\nPopulate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.\nInitially, all next pointers are set to NULL.\n\u00a0\nExample 1:\n\nInput: root = [1,2,3,4,5,null,7]\nOutput: [1,#,2,3,#,4,5,7,#]\nExplanation: Given the above binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.\n\nExample 2:\nInput: root = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 6000].\n-100 <= Node.val <= 100\n\n\u00a0\nFollow-up:\n\nYou may only use constant extra space.\nThe recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.\n\n",
     "url": "https://leetcode.com/problems/117-populating-next-right-pointers-in-each-node-ii",
     "answerCount": 1,
-    "datePublished": "2022-06-01T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -131,7 +131,7 @@ class Solution:
       "@type": "Answer",
       "text": "\"\"\"\n# Definition for a Node.\nclass Node:\n    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):\n        self.val = val\n        self.left = left\n        self.right = right\n        self.next = next\n\"\"\"\n\n\nclass Solution:\n    def connect(self, root: \"Node\") -> \"Node\":\n        return self.constantspace(root)\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def levelordertraversal(self, root: \"Node\") -> \"Node\":\n        q = deque([])\n        q.append(root)\n        while q:\n            qsize = len(q)\n            for i in range(qsize):\n                node = q.popleft()\n                if node:\n                    if i == qsize - 1:\n                        node.next = None\n                    else:\n                        node.next = q[0]\n\n                    if node.left:\n                        q.append(node.left)\n                    if node.right:\n                        q.append(node.right)\n        return root\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(1)\n    def constantspace(self, root: \"Node\") -> \"Node\":\n        node = root\n        while node:\n            curr = sentinel = Node(-1)\n            while node:\n                if node.left:\n                    curr.next = node.left\n                    curr = curr.next\n                if node.right:\n                    curr.next = node.right\n                    curr = curr.next\n                node = node.next\n\n            node = sentinel.next\n            sentinel.next = None\n\n        return root\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/117-populating-next-right-pointers-in-each-node-ii/",
-      "datePublished": "2022-06-01T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

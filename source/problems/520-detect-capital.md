@@ -51,7 +51,7 @@ class Solution:
     "text": "We define the usage of capitals in a word to be right when one of the following cases holds:\n\nAll letters in this word are capitals, like \"USA\".\nAll letters in this word are not capitals, like \"leetcode\".\nOnly the first letter in this word is capital, like \"Google\".\n\nGiven a string word, return true if the usage of capitals in it is right.\n\u00a0\nExample 1:\nInput: word = \"USA\"\nOutput: true\nExample 2:\nInput: word = \"FlaG\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= word.length <= 100\nword consists of lowercase and uppercase English letters.\n\n",
     "url": "https://leetcode.com/problems/520-detect-capital",
     "answerCount": 1,
-    "datePublished": "2025-05-29T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -61,7 +61,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def detectCapitalUse(self, word: str) -> bool:\n        return word.isupper() or word.islower() or word.istitle()\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/520-detect-capital/",
-      "datePublished": "2025-05-29T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

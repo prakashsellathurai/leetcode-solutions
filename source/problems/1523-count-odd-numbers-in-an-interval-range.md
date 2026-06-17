@@ -46,7 +46,7 @@ class Solution:
     "text": "Given two non-negative integers low and high. Return the count of odd numbers between low and high\u00a0(inclusive).\n\u00a0\nExample 1:\nInput: low = 3, high = 7\nOutput: 3\nExplanation: The odd numbers between 3 and 7 are [3,5,7].\nExample 2:\nInput: low = 8, high = 10\nOutput: 1\nExplanation: The odd numbers between 8 and 10 are [9].\n\u00a0\nConstraints:\n\n0 <= low <= high\u00a0<= 10^9\n",
     "url": "https://leetcode.com/problems/1523-count-odd-numbers-in-an-interval-range",
     "answerCount": 1,
-    "datePublished": "2025-01-25T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -56,7 +56,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def countOdds(self, low: int, high: int) -> int:\n        return ((high + 1) >> 1) - (low >> 1)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1523-count-odd-numbers-in-an-interval-range/",
-      "datePublished": "2025-01-25T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

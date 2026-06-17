@@ -91,7 +91,7 @@ class Solution:
     "text": "Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.\nNote that after backspacing an empty text, the text will continue empty.\n\u00a0\nExample 1:\nInput: s = \"ab#c\", t = \"ad#c\"\nOutput: true\nExplanation: Both s and t become \"ac\".\n\nExample 2:\nInput: s = \"ab##\", t = \"c#d#\"\nOutput: true\nExplanation: Both s and t become \"\".\n\nExample 3:\nInput: s = \"a#c\", t = \"b\"\nOutput: false\nExplanation: s becomes \"c\" while t becomes \"b\".\n\n\u00a0\nConstraints:\n\n1 <= s.length, t.length <= 200\ns and t only contain lowercase letters and '#' characters.\n\n\u00a0\nFollow up: Can you solve it in O(n) time and O(1) space?\n",
     "url": "https://leetcode.com/problems/844-backspace-string-compare",
     "answerCount": 1,
-    "datePublished": "2024-01-23T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -101,7 +101,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def backspaceCompare(self, s: str, t: str) -> bool:\n        return self.twopointers(s, t)\n\n    # Time Complexity: O(n+m)\n    # Space Complexity: O(n+m)\n    def stack(self, s, t):\n        def build(string):\n            ans = []\n            for c in string:\n                if c == \"#\":\n                    ans.pop()\n                else:\n                    ans.append(c)\n            return \"\".join(ans)\n\n        return build(s) == build(t)\n\n    # Time Complexity: O(n+m)\n    # Space Complexity: O(1)\n    def twopointers(self, s, t):\n        def build(string):\n            skip = 0\n            for x in reversed(string):\n                if x == \"#\":\n                    skip += 1\n                elif skip:\n                    skip -= 1\n                else:\n                    yield x\n\n        return all(x == y for x, y in zip_longest(build(s), build(t)))\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/844-backspace-string-compare/",
-      "datePublished": "2024-01-23T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

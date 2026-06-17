@@ -84,7 +84,7 @@ class Solution:
     "text": "Given an integer array nums and an integer k, return the kth largest element in the array.\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\nCan you solve it without sorting?\n\u00a0\nExample 1:\nInput: nums = [3,2,1,5,6,4], k = 2\nOutput: 5\nExample 2:\nInput: nums = [3,2,3,1,2,4,5,5,6], k = 4\nOutput: 4\n\n\u00a0\nConstraints:\n\n1 <= k <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n",
     "url": "https://leetcode.com/problems/0215-kth-largest-element-in-an-array",
     "answerCount": 1,
-    "datePublished": "2025-11-28T00:00:00Z",
+    "datePublished": "2026-03-03T19:32:04+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -94,7 +94,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        return self.HeapMethod(nums, k)\n    # Sorting method\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort(reverse=true)\n        return nums[k-1]\n    \n    # Heap Method\n    # Time Complexity : O(nlogk)\n    # Space Complexity: O(k)\n    def HeapMethod(self, nums: List[int], k: int) -> int:\n        heap = []\n        for num in nums:\n            heapq.heappush(heap, num)\n            if len(heap) > k:\n                heapq.heappop(heap)\n        return heap[0]\n\n    def quick_select(nums, k):\n        pivot = random.choice(nums)\n        left, mid, right = [], [], []\n\n        for num in nums:\n            if num > pivot:\n                left.append(num)\n            elif num < pivot:\n                right.append(num)\n            else:\n                mid.append(num)\n        \n        if k <= len(left):\n            return quick_select(left, k)\n        \n        if len(left) + len(mid) < k:\n            return quick_select(right, k - len(left) - len(mid))\n        \n        return pivot\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0215-kth-largest-element-in-an-array/",
-      "datePublished": "2025-11-28T00:00:00Z",
+      "datePublished": "2026-03-03T19:32:04+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

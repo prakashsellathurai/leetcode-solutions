@@ -111,7 +111,7 @@ class Solution:
     "text": "There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.\n\nFor example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.\n\nReturn the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.\n\u00a0\nExample 1:\nInput: numCourses = 2, prerequisites = [[1,0]]\nOutput: [0,1]\nExplanation: There are a total of 2 courses to take. To take course 1 you should have finished course 0. So the correct course order is [0,1].\n\nExample 2:\nInput: numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]\nOutput: [0,2,1,3]\nExplanation: There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0.\nSo one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3].\n\nExample 3:\nInput: numCourses = 1, prerequisites = []\nOutput: [0]\n\n\u00a0\nConstraints:\n\n1 <= numCourses <= 2000\n0 <= prerequisites.length <= numCourses * (numCourses - 1)\nprerequisites[i].length == 2\n0 <= ai, bi < numCourses\nai != bi\nAll the pairs [ai, bi] are distinct.\n\n",
     "url": "https://leetcode.com/problems/course-schedule-ii",
     "answerCount": 1,
-    "datePublished": "2023-06-22T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -121,7 +121,7 @@ class Solution:
       "@type": "Answer",
       "text": "from collections import defaultdict, deque\n\n\nclass Solution:\n    def findOrder(self, numCourses, prerequisites):\n        \"\"\"\n        :type numCourses: int\n        :type prerequisites: List[List[int]]\n        :rtype: List[int]\n        \"\"\"\n\n        # Prepare the graph\n        adj_list = defaultdict(list)\n        indegree = {}\n        for dest, src in prerequisites:\n            adj_list[src].append(dest)\n\n            # Record each node's in-degree\n            indegree[dest] = indegree.get(dest, 0) + 1\n\n        # Queue for maintainig list of nodes that have 0 in-degree\n        zero_indegree_queue = deque(\n            [k for k in range(numCourses) if k not in indegree])\n\n        topological_sorted_order = []\n\n        # Until there are nodes in the Q\n        while zero_indegree_queue:\n\n            # Pop one node with 0 in-degree\n            vertex = zero_indegree_queue.popleft()\n            topological_sorted_order.append(vertex)\n\n            # Reduce in-degree for all the neighbors\n            if vertex in adj_list:\n                for neighbor in adj_list[vertex]:\n                    indegree[neighbor] -= 1\n\n                    # Add neighbor to Q if in-degree becomes 0\n                    if indegree[neighbor] == 0:\n                        zero_indegree_queue.append(neighbor)\n\n        return (\n            topological_sorted_order\n            if len(topological_sorted_order) == numCourses\n            else []\n        )\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/course-schedule-ii/",
-      "datePublished": "2023-06-22T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

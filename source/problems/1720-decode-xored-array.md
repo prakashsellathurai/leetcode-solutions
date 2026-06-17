@@ -60,7 +60,7 @@ class Solution:
     "text": "There is a hidden integer array arr that consists of n non-negative integers.\nIt was encoded into another integer array encoded of length n - 1, such that encoded[i] = arr[i] XOR arr[i + 1]. For example, if arr = [1,0,2,1], then encoded = [1,2,3].\nYou are given the encoded array. You are also given an integer first, that is the first element of arr, i.e. arr[0].\nReturn the original array arr. It can be proved that the answer exists and is unique.\n\u00a0\nExample 1:\nInput: encoded = [1,2,3], first = 1\nOutput: [1,0,2,1]\nExplanation: If arr = [1,0,2,1], then first = 1 and encoded = [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]\n\nExample 2:\nInput: encoded = [6,2,7,3], first = 4\nOutput: [4,2,0,7,4]\n\n\u00a0\nConstraints:\n\n2 <= n <= 104\nencoded.length == n - 1\n0 <= encoded[i] <= 105\n0 <= first <= 105\n\n",
     "url": "https://leetcode.com/problems/1720-decode-xored-array",
     "answerCount": 1,
-    "datePublished": "2025-08-27T00:00:00Z",
+    "datePublished": "2022-07-13T11:15:17+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -70,7 +70,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def decode(self, encoded: List[int], first: int) -> List[int]:\n        res = [first]\n        for i in range(len(encoded)):\n            cur = encoded[i] ^ res[-1]\n            res.append(cur)\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1720-decode-xored-array/",
-      "datePublished": "2025-08-27T00:00:00Z",
+      "datePublished": "2022-07-13T11:15:17+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

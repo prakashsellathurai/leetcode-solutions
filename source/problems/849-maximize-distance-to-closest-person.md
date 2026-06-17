@@ -75,7 +75,7 @@ class Solution:
     "text": "You are given an array representing a row of seats where seats[i] = 1 represents a person sitting in the ith seat, and seats[i] = 0 represents that the ith seat is empty (0-indexed).\nThere is at least one empty seat, and at least one person sitting.\nAlex wants to sit in the seat such that the distance between him and the closest person to him is maximized.\u00a0\nReturn that maximum distance to the closest person.\n\u00a0\nExample 1:\n\nInput: seats = [1,0,0,0,1,0,1]\nOutput: 2\nExplanation: \nIf Alex sits in the second open seat (i.e. seats[2]), then the closest person has distance 2.\nIf Alex sits in any other open seat, the closest person has distance 1.\nThus, the maximum distance to the closest person is 2.\n\nExample 2:\nInput: seats = [1,0,0,0]\nOutput: 3\nExplanation: \nIf Alex sits in the last seat (i.e. seats[3]), the closest person is 3 seats away.\nThis is the maximum distance possible, so the answer is 3.\n\nExample 3:\nInput: seats = [0,1]\nOutput: 1\n\n\u00a0\nConstraints:\n\n2 <= seats.length <= 2 * 104\nseats[i]\u00a0is 0 or\u00a01.\nAt least one seat is empty.\nAt least one seat is occupied.\n\n",
     "url": "https://leetcode.com/problems/849-maximize-distance-to-closest-person",
     "answerCount": 1,
-    "datePublished": "2023-11-27T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -85,7 +85,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxDistToClosest(self, seats):\n        out = max(seats[::-1].index(1), seats.index(1))\n        for seat, group in groupby(seats):\n            if seat:\n                continue\n            out = max(out, (len(list(group)) + 1) // 2)\n\n        return out\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/849-maximize-distance-to-closest-person/",
-      "datePublished": "2023-11-27T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

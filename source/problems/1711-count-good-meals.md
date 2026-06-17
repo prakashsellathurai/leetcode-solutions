@@ -93,7 +93,7 @@ class Solution:
     "text": "A good meal is a meal that contains exactly two different food items with a sum of deliciousness equal to a power of two.\nYou can pick any two different foods to make a good meal.\nGiven an array of integers deliciousness where deliciousness[i] is the deliciousness of the i\u200b\u200b\u200b\u200b\u200b\u200bth\u200b\u200b\u200b\u200b\u200b\u200b\u200b\u200b item of food, return the number of different good meals you can make from this list modulo 109 + 7.\nNote that items with different indices are considered different even if they have the same deliciousness value.\n\u00a0\nExample 1:\nInput: deliciousness = [1,3,5,7,9]\nOutput: 4\nExplanation: The good meals are (1,3), (1,7), (3,5) and, (7,9).\nTheir respective sums are 4, 8, 8, and 16, all of which are powers of 2.\n\nExample 2:\nInput: deliciousness = [1,1,1,3,3,3,7]\nOutput: 15\nExplanation: The good meals are (1,1) with 3 ways, (1,3) with 9 ways, and (1,7) with 3 ways.\n\u00a0\nConstraints:\n\n1 <= deliciousness.length <= 105\n0 <= deliciousness[i] <= 220\n\n",
     "url": "https://leetcode.com/problems/1711-count-good-meals",
     "answerCount": 1,
-    "datePublished": "2026-04-17T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -103,7 +103,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.mod = (10**9) + 7\n        self.targets = [2**i for i in range(22)]\n\n    def countPairs(self, deliciousness: List[int]) -> int:\n        return self.hashing(deliciousness)\n\n    # Time Complexity: O(n^2)\n    # space Complexity: O(1)\n    def bruteforce(self, deliciousness: List[int]) -> int:\n        n = len(deliciousness)\n        cnt = 0\n\n        for i in range(n):\n            for j in range(i + 1, n):\n                target = deliciousness[i] + deliciousness[j]\n                if self.isPowerOfTwo(target):\n                    cnt = cnt % self.mod + 1\n\n        return cnt % self.mod\n\n    def isPowerOfTwo(self, x):\n        return x != 0 and not (x & x - 1)\n\n    # Time Complexity: O(n)\n    # space Complexity: O(n)\n    def hashing(self, deliciousness: List[int]) -> int:\n        n = len(deliciousness)\n        cnt = 0\n        FreqhashTable = defaultdict(int)\n\n        for i in range(n):\n            for target in self.targets:\n                exp_deliciousness = target - deliciousness[i]\n                if exp_deliciousness in FreqhashTable:\n                    cnt += FreqhashTable[exp_deliciousness]\n            FreqhashTable[deliciousness[i]] += 1\n\n        return cnt % self.mod\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1711-count-good-meals/",
-      "datePublished": "2026-04-17T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

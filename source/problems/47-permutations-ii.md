@@ -67,7 +67,7 @@ class Solution:
     "text": "Given a collection of numbers, nums,\u00a0that might contain duplicates, return all possible unique permutations in any order.\n\u00a0\nExample 1:\nInput: nums = [1,1,2]\nOutput:\n[[1,1,2],\n [1,2,1],\n [2,1,1]]\n\nExample 2:\nInput: nums = [1,2,3]\nOutput: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 8\n-10 <= nums[i] <= 10\n\n",
     "url": "https://leetcode.com/problems/47-permutations-ii",
     "answerCount": 1,
-    "datePublished": "2022-11-25T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -77,7 +77,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def permuteUnique(self, nums: List[int]) -> List[List[int]]:\n        res = []\n\n        def backtrack(comb, counter):\n            if len(comb) == len(nums):\n                res.append(list(comb))\n                return\n\n            for num in counter:\n                if counter[num] > 0:\n                    comb.append(num)\n                    counter[num] -= 1\n                    backtrack(comb, counter)\n                    counter[num] += 1\n                    comb.pop()\n\n        backtrack([], Counter(nums))\n        return res\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/47-permutations-ii/",
-      "datePublished": "2022-11-25T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

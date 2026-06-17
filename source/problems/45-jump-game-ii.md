@@ -65,7 +65,7 @@ class Solution:
     "text": "Given an array of non-negative integers nums, you are initially positioned at the first index of the array.\nEach element in the array represents your maximum jump length at that position.\nYour goal is to reach the last index in the minimum number of jumps.\nYou can assume that you can always reach the last index.\n\u00a0\nExample 1:\nInput: nums = [2,3,1,1,4]\nOutput: 2\nExplanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.\n\nExample 2:\nInput: nums = [2,3,0,1,4]\nOutput: 2\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 104\n0 <= nums[i] <= 1000\n\n",
     "url": "https://leetcode.com/problems/45-jump-game-ii",
     "answerCount": 1,
-    "datePublished": "2024-11-28T00:00:00Z",
+    "datePublished": "2022-07-07T12:22:29+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -75,7 +75,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def jump(self, nums: List[int]) -> int:\n        steps = 0\n        cur_End = 0\n        maxReach = 0\n        for i in range(len(nums)):\n            if i > cur_End:\n                steps += 1\n                cur_End = maxReach\n\n            maxReach = max(maxReach, i + nums[i])\n\n        return steps\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/45-jump-game-ii/",
-      "datePublished": "2024-11-28T00:00:00Z",
+      "datePublished": "2022-07-07T12:22:29+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

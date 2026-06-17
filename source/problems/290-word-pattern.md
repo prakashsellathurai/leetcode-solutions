@@ -75,7 +75,7 @@ class Solution:
     "text": "Given a pattern and a string s, find if s\u00a0follows the same pattern.\nHere follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.\n\u00a0\nExample 1:\nInput: pattern = \"abba\", s = \"dog cat cat dog\"\nOutput: true\n\nExample 2:\nInput: pattern = \"abba\", s = \"dog cat cat fish\"\nOutput: false\n\nExample 3:\nInput: pattern = \"aaaa\", s = \"dog cat cat dog\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= pattern.length <= 300\npattern contains only lower-case English letters.\n1 <= s.length <= 3000\ns contains only lowercase English letters and spaces ' '.\ns does not contain any leading or trailing spaces.\nAll the words in s are separated by a single space.\n\n",
     "url": "https://leetcode.com/problems/290-word-pattern",
     "answerCount": 1,
-    "datePublished": "2025-07-12T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -85,7 +85,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def wordPattern(self, pattern: str, s: str) -> bool:\n        s = s.split(\" \")\n        wordhashmap = {}\n        charhashmap = {}\n        if len(s) != len(pattern):\n            return False\n        for ch, word in zip(pattern, s):\n            if word not in wordhashmap:\n                wordhashmap[word] = ch\n            elif wordhashmap[word] != ch:\n                return False\n\n            if ch not in charhashmap:\n                charhashmap[ch] = word\n            elif charhashmap[ch] != word:\n                return False\n        return True\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/290-word-pattern/",
-      "datePublished": "2025-07-12T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

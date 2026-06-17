@@ -58,7 +58,7 @@ class Solution:
     "text": "Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).\nSpecifically, ans is the concatenation of two nums arrays.\nReturn the array ans.\n\u00a0\nExample 1:\nInput: nums = [1,2,1]\nOutput: [1,2,1,1,2,1]\nExplanation: The array ans is formed as follows:\n- ans = [nums[0],nums[1],nums[2],nums[0],nums[1],nums[2]]\n- ans = [1,2,1,1,2,1]\nExample 2:\nInput: nums = [1,3,2,1]\nOutput: [1,3,2,1,1,3,2,1]\nExplanation: The array ans is formed as follows:\n- ans = [nums[0],nums[1],nums[2],nums[3],nums[0],nums[1],nums[2],nums[3]]\n- ans = [1,3,2,1,1,3,2,1]\n\n\u00a0\nConstraints:\n\nn == nums.length\n1 <= n <= 1000\n1 <= nums[i] <= 1000\n\n",
     "url": "https://leetcode.com/problems/1929-concatenation-of-array",
     "answerCount": 1,
-    "datePublished": "2025-03-12T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -68,7 +68,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def getConcatenation(self, nums: List[int]) -> List[int]:\n        return nums + nums\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1929-concatenation-of-array/",
-      "datePublished": "2025-03-12T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

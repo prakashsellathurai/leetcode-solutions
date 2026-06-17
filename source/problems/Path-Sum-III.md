@@ -77,7 +77,7 @@ class Solution(object):
     "text": "Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values\u00a0along the path equals\u00a0targetSum.\nThe path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).\n\u00a0\nExample 1:\n\nInput: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8\nOutput: 3\nExplanation: The paths that sum to 8 are shown.\n\nExample 2:\nInput: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22\nOutput: 3\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 1000].\n-109 <= Node.val <= 109\n-1000 <= targetSum <= 1000\n\n",
     "url": "https://leetcode.com/problems/path-sum-iii",
     "answerCount": 1,
-    "datePublished": "2024-10-03T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -87,7 +87,7 @@ class Solution(object):
       "@type": "Answer",
       "text": "class Solution(object):\n    def pathSum(self, root, sum):\n        def dfs(sumHash, prefixSum, node):\n\n            if not node:\n                return 0\n\n            # Sum of current path\n            prefixSum += node.val\n\n            # number of paths that ends at current node\n            path = sumHash[prefixSum - sum]\n\n            # add currentSum to prefixSum Hash\n            sumHash[prefixSum] += 1\n\n            # traverse left and right of tree\n            path += dfs(sumHash, prefixSum, node.left) + dfs(\n                sumHash, prefixSum, node.right\n            )\n\n            # remove currentSum from prefixSum Hash\n            sumHash[prefixSum] -= 1\n\n            return path\n\n        # depth first search, initialize sumHash with prefix sum of 0, occurring once\n        return dfs(collections.defaultdict(int, {0: 1}), 0, root)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/path-sum-iii/",
-      "datePublished": "2024-10-03T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

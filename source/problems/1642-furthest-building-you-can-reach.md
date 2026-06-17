@@ -87,7 +87,7 @@ class Solution:
     "text": "You are given an integer array heights representing the heights of buildings, some bricks, and some ladders.\nYou start your journey from building 0 and move to the next building by possibly using bricks or ladders.\nWhile moving from building i to building i+1 (0-indexed),\n\nIf the current building's height is greater than or equal to the next building's height, you do not need a ladder or bricks.\nIf the current building's height is less than the next building's height, you can either use one ladder or (h[i+1] - h[i]) bricks.\n\nReturn the furthest building index (0-indexed) you can reach if you use the given ladders and bricks optimally.\n\u00a0\nExample 1:\n\nInput: heights = [4,2,7,6,9,14,12], bricks = 5, ladders = 1\nOutput: 4\nExplanation: Starting at building 0, you can follow these steps:\n- Go to building 1 without using ladders nor bricks since 4 >= 2.\n- Go to building 2 using 5 bricks. You must use either bricks or ladders because 2 < 7.\n- Go to building 3 without using ladders nor bricks since 7 >= 6.\n- Go to building 4 using your only ladder. You must use either bricks or ladders because 6 < 9.\nIt is impossible to go beyond building 4 because you do not have any more bricks or ladders.\n\nExample 2:\nInput: heights = [4,12,2,7,3,18,20,3,19], bricks = 10, ladders = 2\nOutput: 7\n\nExample 3:\nInput: heights = [14,3,19,3], bricks = 17, ladders = 0\nOutput: 3\n\n\u00a0\nConstraints:\n\n1 <= heights.length <= 105\n1 <= heights[i] <= 106\n0 <= bricks <= 109\n0 <= ladders <= heights.length\n\n",
     "url": "https://leetcode.com/problems/1642-furthest-building-you-can-reach",
     "answerCount": 1,
-    "datePublished": "2025-05-11T00:00:00Z",
+    "datePublished": "2022-06-22T10:26:19+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -97,7 +97,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:\n        heap = []\n        for i in range(len(heights) - 1):\n            diff = heights[i + 1] - heights[i]\n            if diff > 0:\n                if ladders > 0:\n                    heappush(heap, diff)\n                    ladders -= 1\n                elif heap and diff > heap[0]:\n                    heappush(heap, diff)\n                    bricks -= heappop(heap)\n                else:\n                    bricks -= diff\n                if bricks < 0:\n                    return i\n        return len(heights) - 1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1642-furthest-building-you-can-reach/",
-      "datePublished": "2025-05-11T00:00:00Z",
+      "datePublished": "2022-06-22T10:26:19+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

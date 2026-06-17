@@ -73,7 +73,7 @@ class Solution:
     "text": "Given an\u00a0array\u00a0of distinct\u00a0integers arr, find all pairs of elements with the minimum absolute difference of any two elements.\u00a0\nReturn a list of pairs in ascending order(with respect to pairs), each pair [a, b] follows\n\na, b are from arr\na < b\nb - a\u00a0equals to the minimum absolute difference of any two elements in arr\n\n\u00a0\nExample 1:\nInput: arr = [4,2,1,3]\nOutput: [[1,2],[2,3],[3,4]]\nExplanation: The minimum absolute difference is 1. List all pairs with difference equal to 1 in ascending order.\nExample 2:\nInput: arr = [1,3,6,10,15]\nOutput: [[1,3]]\n\nExample 3:\nInput: arr = [3,8,-10,23,19,-4,-14,27]\nOutput: [[-14,-10],[19,23],[23,27]]\n\n\u00a0\nConstraints:\n\n2 <= arr.length <= 10^5\n-10^6 <= arr[i] <= 10^6\n\n",
     "url": "https://leetcode.com/problems/minimum-absolute-difference",
     "answerCount": 1,
-    "datePublished": "2022-08-05T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -83,7 +83,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:\n        arr.sort()\n        res = []\n        min_diff = float(\"INF\")\n        for i in range(len(arr) - 1):\n            diff = arr[i + 1] - arr[i]\n            if diff == min_diff:\n                res.append([arr[i], arr[i + 1]])\n            elif diff < min_diff:\n                min_diff = diff\n                res = [[arr[i], arr[i + 1]]]\n\n        return res\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/minimum-absolute-difference/",
-      "datePublished": "2022-08-05T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

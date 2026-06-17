@@ -85,7 +85,7 @@ class Solution:
     "text": "You are given the root of a binary search tree (BST) and an integer val.\nFind the node in the BST that the node's value equals val and return the subtree rooted with that node. If such a node does not exist, return null.\n\u00a0\nExample 1:\n\nInput: root = [4,2,7,1,3], val = 2\nOutput: [2,1,3]\n\nExample 2:\n\nInput: root = [4,2,7,1,3], val = 5\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 5000].\n1 <= Node.val <= 107\nroot is a binary search tree.\n1 <= val <= 107\n\n",
     "url": "https://leetcode.com/problems/700-search-in-a-binary-search-tree",
     "answerCount": 1,
-    "datePublished": "2025-05-02T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -95,7 +95,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        return self.iterative(root, val)\n\n    # Time Complexity: O(log n)\n    # Space Complexity: O(log n)\n    def recursive(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        if root is None:\n            return None\n        if root.val == val:\n            return root\n        elif root.val > val:\n            return self.searchBST(root.left, val)\n        elif root.val < val:\n            return self.searchBST(root.right, val)\n\n    # Time Complexity: O(log n)\n    # Space Complexity: O(1)\n    def iterative(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:\n        cur = root\n\n        while cur is not None:\n            if cur.val == val:\n                return cur\n            elif cur.val > val:\n                cur = cur.left\n            else:\n                cur = cur.right\n\n        return cur\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/700-search-in-a-binary-search-tree/",
-      "datePublished": "2025-05-02T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

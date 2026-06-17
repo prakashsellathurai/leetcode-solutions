@@ -58,7 +58,7 @@ class Solution:
     "text": "A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros. For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.\nGiven a string n that represents a positive decimal integer, return the minimum number of positive deci-binary numbers needed so that they sum up to n.\n\u00a0\nExample 1:\nInput: n = \"32\"\nOutput: 3\nExplanation: 10 + 11 + 11 = 32\n\nExample 2:\nInput: n = \"82734\"\nOutput: 8\n\nExample 3:\nInput: n = \"27346209830709182346\"\nOutput: 9\n\n\u00a0\nConstraints:\n\n1 <= n.length <= 105\nn consists of only digits.\nn does not contain any leading zeros and represents a positive integer.\n\n",
     "url": "https://leetcode.com/problems/1689-partitioning-into-minimum-number-of-deci-binary-numbers",
     "answerCount": 1,
-    "datePublished": "2023-05-02T00:00:00Z",
+    "datePublished": "2022-06-27T08:50:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -68,7 +68,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minPartitions(self, n: str) -> int:\n        return max(list(n))\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1689-partitioning-into-minimum-number-of-deci-binary-numbers/",
-      "datePublished": "2023-05-02T00:00:00Z",
+      "datePublished": "2022-06-27T08:50:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

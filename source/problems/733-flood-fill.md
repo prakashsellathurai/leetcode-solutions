@@ -77,7 +77,7 @@ class Solution:
     "text": "An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.\nYou are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc].\nTo perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with color.\nReturn the modified image after performing the flood fill.\n\u00a0\nExample 1:\n\nInput: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2\nOutput: [[2,2,2],[2,2,0],[2,0,1]]\nExplanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.\nNote the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.\n\nExample 2:\nInput: image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0\nOutput: [[0,0,0],[0,0,0]]\nExplanation: The starting pixel is already colored 0, so no changes are made to the image.\n\n\u00a0\nConstraints:\n\nm == image.length\nn == image[i].length\n1 <= m, n <= 50\n0 <= image[i][j], color < 216\n0 <= sr < m\n0 <= sc < n\n\n",
     "url": "https://leetcode.com/problems/733-flood-fill",
     "answerCount": 1,
-    "datePublished": "2023-05-07T00:00:00Z",
+    "datePublished": "2022-07-18T12:55:40+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -87,7 +87,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:\n        m,n = len(image),len(image[0])\n        color = image[sr][sc]\n        visited = set()\n        if color == newColor: return image\n        \n        def dfs(r,c):\n            if (r,c) in visited:\n                return\n            visited.add((r,c))\n            if image[r][c] == color:\n                image[r][c] = newColor\n                if r>=1: dfs(r-1,c)\n                if r+1 < m: dfs(r+1,c)\n                if c>=1: dfs(r,c-1)\n                if c+1<n: dfs(r,c+1) \n\n        dfs(sr,sc)\n        return image",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/733-flood-fill/",
-      "datePublished": "2023-05-07T00:00:00Z",
+      "datePublished": "2022-07-18T12:55:40+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

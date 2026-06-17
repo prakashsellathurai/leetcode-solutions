@@ -81,7 +81,7 @@ class Solution:
     "text": "Given the root of a binary tree, determine if it is a valid binary search tree (BST).\nA valid BST is defined as follows:\n\nThe left subtree of a node contains only nodes with keys less than the node's key.\nThe right subtree of a node contains only nodes with keys greater than the node's key.\nBoth the left and right subtrees must also be binary search trees.\n\n\u00a0\nExample 1:\n\nInput: root = [2,1,3]\nOutput: true\n\nExample 2:\n\nInput: root = [5,1,4,null,null,3,6]\nOutput: false\nExplanation: The root node's value is 5 but its right child's value is 4.\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 104].\n-231 <= Node.val <= 231 - 1\n\n",
     "url": "https://leetcode.com/problems/98-validate-binary-search-tree",
     "answerCount": 1,
-    "datePublished": "2025-08-23T00:00:00Z",
+    "datePublished": "2022-07-20T20:58:12+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -91,7 +91,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def isValidBST(self, root: Optional[TreeNode]) -> bool:\n        return self.naive(root)\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(h)\n    def naive(self, root: Optional[TreeNode]) -> bool:\n        def inorder(node):\n            if node:\n                inorder(node.left)\n                res.append(node.val)\n                inorder(node.right)\n\n        res = []\n        inorder(root)\n        if len(res) == 2:\n            return res[0] < res[1]\n        for i in range(1, len(res) - 1):\n            if not (res[i - 1] < res[i] < res[i + 1]):\n                return False\n        return True\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/98-validate-binary-search-tree/",
-      "datePublished": "2025-08-23T00:00:00Z",
+      "datePublished": "2022-07-20T20:58:12+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

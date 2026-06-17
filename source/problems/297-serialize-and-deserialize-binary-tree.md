@@ -97,7 +97,7 @@ class Codec:
     "text": "Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.\nDesign an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.\nClarification: The input/output format is the same as how LeetCode serializes a binary tree. You do not necessarily need to follow this format, so please be creative and come up with different approaches yourself.\n\u00a0\nExample 1:\n\nInput: root = [1,2,3,null,null,4,5]\nOutput: [1,2,3,null,null,4,5]\n\nExample 2:\nInput: root = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 104].\n-1000 <= Node.val <= 1000\n\n",
     "url": "https://leetcode.com/problems/297-serialize-and-deserialize-binary-tree",
     "answerCount": 1,
-    "datePublished": "2022-05-23T00:00:00Z",
+    "datePublished": "2022-07-04T00:54:33+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -107,7 +107,7 @@ class Codec:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode(object):\n#     def __init__(self, x):\n#         self.val = x\n#         self.left = None\n#         self.right = None\n\n\nclass Codec:\n    def __init__(self):\n        self.i = 0\n\n    def serialize(self, root):\n        \"\"\"Encodes a tree to a single string.\n\n        :type root: TreeNode\n        :rtype: str\n        \"\"\"\n        if root is None:\n            return \"#\"\n        left = self.serialize(root.left)\n        right = self.serialize(root.right)\n        return str(root.val) + \",\" + left + \",\" + right\n\n    def deserialize(self, data):\n        \"\"\"Decodes your encoded data to tree.\n\n        :type data: str\n        :rtype: TreeNode\n        \"\"\"\n\n        def recur():\n            val = next(vals)\n            if val == \"#\":\n                return None\n            node = TreeNode(int(val))\n            node.left = recur()\n            node.right = recur()\n            return node\n\n        vals = iter(data.split(\",\"))\n        return recur()\n\n\n# Your Codec object will be instantiated and called as such:\n# ser = Codec()\n# deser = Codec()\n# ans = deser.deserialize(ser.serialize(root))\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/297-serialize-and-deserialize-binary-tree/",
-      "datePublished": "2022-05-23T00:00:00Z",
+      "datePublished": "2022-07-04T00:54:33+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

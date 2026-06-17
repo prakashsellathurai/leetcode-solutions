@@ -14,6 +14,7 @@ import json
 import os
 import random
 import re
+import subprocess
 
 from string import Template
 from bs4 import BeautifulSoup
@@ -29,20 +30,6 @@ DOCS_PATH = os.path.join(os.getcwd(), DOCS_FOLDER)
 PROBLEMS_FOLDER_PATH = os.path.join(os.getcwd(), "./source/problems/")
 INDEX_FILE_PATH = os.path.join(os.getcwd(), "./source/_static/index.html")
 IGNORED_PATHS = [".git", ".github",".deepsource.toml"]
-STATE_FILE_PATH = os.path.join(os.getcwd(), "./source/problem_dates.json")
-
-
-def load_dates():
-    try:
-        with open(STATE_FILE_PATH, "r") as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
-
-
-def save_dates(dates):
-    with open(STATE_FILE_PATH, "w") as f:
-        json.dump(dates, f, indent=2)
 
 
 def to_doc(problem):
@@ -120,6 +107,21 @@ def getReadme(folder_path, title_slug):
     readme_filename = os.path.join(codeFilePath, "README.md")
     return readme_filename
 
+def get_git_date(submodule_path, file_path):
+    try:
+        relative_path = os.path.relpath(file_path, submodule_path)
+        result = subprocess.run(
+            ["git", "-C", submodule_path, "log", "--reverse", "--format=%cI",
+             "--follow", "--", relative_path],
+            capture_output=True, text=True, timeout=30
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip().split('\n')[0]
+    except Exception:
+        pass
+    return None
+
+
 def main():
     """reads submissions and creates docs"""
 
@@ -179,19 +181,16 @@ def main():
                     "content": readme_file_contents,
                     "description_text": description_text,
                     "id": prob_id,
+                    "codefilename": codefilename,
                 }
             )
         cache[title_slug] = True
     problems.sort(key=lambda x: x["id"])
 
-    dates = load_dates()
     today = datetime.date.today().isoformat()
     for problem in problems:
-        slug = problem["title_slug"]
-        if slug not in dates:
-            dates[slug] = today
-        problem["datePublished"] = dates[slug]
-    save_dates(dates)
+        git_date = get_git_date(SUBMISSION_FOLDER_PATH, problem["codefilename"])
+        problem["datePublished"] = git_date if git_date else today
 
     print("############ problems collected ##################")
 

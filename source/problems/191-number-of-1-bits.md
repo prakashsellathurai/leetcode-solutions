@@ -91,7 +91,7 @@ class Solution:
     "text": "Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).\nNote:\n\nNote that in some languages, such as Java, there is no unsigned integer type. In this case, the input will be given as a signed integer type. It should not affect your implementation, as the integer's internal binary representation is the same, whether it is signed or unsigned.\nIn Java, the compiler represents the signed integers using 2's complement notation. Therefore, in Example 3, the input represents the signed integer. -3.\n\n\u00a0\nExample 1:\nInput: n = 00000000000000000000000000001011\nOutput: 3\nExplanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits.\n\nExample 2:\nInput: n = 00000000000000000000000010000000\nOutput: 1\nExplanation: The input binary string 00000000000000000000000010000000 has a total of one '1' bit.\n\nExample 3:\nInput: n = 11111111111111111111111111111101\nOutput: 31\nExplanation: The input binary string 11111111111111111111111111111101 has a total of thirty one '1' bits.\n\n\u00a0\nConstraints:\n\nThe input must be a binary string of length 32.\n\n\u00a0\nFollow up: If this function is called many times, how would you optimize it?",
     "url": "https://leetcode.com/problems/191-number-of-1-bits",
     "answerCount": 1,
-    "datePublished": "2024-07-13T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -101,7 +101,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def hammingWeight(self, n: int) -> int:\n        return self.bitmanipulation(n)\n\n    # Time Complexity: O(2^logn)\n    # Space Complexity: O(logn)\n    def bruteforce(self, n):\n        n = bin(n)\n\n        def recur(n):\n            if not n:\n                return 0\n            return recur(n[1:]) + 1 if n[0] == \"1\" else recur(n[1:])\n\n        return recur(n)\n\n    # Time Complexity: O(log(n))\n    # Space Complexity: O(logn)\n    def naive(self, n):\n        return bin(n).count(\"1\")\n\n    # Time Complexity: O(log(n))\n    # Space Complexity: O(1)\n    def bitmanipulation(self, n):\n        cnt = 0\n        while n:\n            n &= n - 1\n            cnt += 1\n        return cnt\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/191-number-of-1-bits/",
-      "datePublished": "2024-07-13T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

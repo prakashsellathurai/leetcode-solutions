@@ -111,7 +111,7 @@ class Solution:
     "text": "Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.\n\u00a0\nExample 1:\n\nInput: root = [5,3,6,2,4,null,8,1,null,null,null,7,9]\nOutput: [1,null,2,null,3,null,4,null,5,null,6,null,7,null,8,null,9]\n\nExample 2:\n\nInput: root = [5,1,7]\nOutput: [1,null,5,null,7]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the given tree will be in the range [1, 100].\n0 <= Node.val <= 1000\n",
     "url": "https://leetcode.com/problems/897-increasing-order-search-tree",
     "answerCount": 1,
-    "datePublished": "2023-02-06T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -121,7 +121,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def increasingBST(self, root: TreeNode) -> TreeNode:\n        return self.morrisTraversal(root)\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def recursiveInorderTraversal(self, root):\n        def inorder(node):\n            if node:\n                yield from inorder(node.left)\n                yield node.val\n                yield from inorder(node.right)\n\n        ans = cur = TreeNode(None)\n\n        for v in inorder(root):\n            cur.right = TreeNode(v)\n            cur = cur.right\n        return ans.right\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(H)\n    def relink(self, root):\n        def inorder(node):\n            if node:\n                inorder(node.left)\n                node.left = None\n                self.cur.right = node\n                self.cur = node\n                inorder(node.right)\n\n        ans = self.cur = TreeNode(None)\n        inorder(root)\n        return ans.right\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(1)\n    def morrisTraversal(self, root):\n        dummy = TreeNode(0)\n        node = dummy\n        curr = root\n        while curr:\n            if not curr.left:\n                node.right = TreeNode(curr.val)\n                # print(curr.val)\n                node = node.right\n                curr = curr.right\n            else:\n                pre = curr.left\n                while pre and pre.right and pre.right != curr:\n                    pre = pre.right\n                if not pre.right:\n                    pre.right = curr\n                    curr = curr.left\n                else:\n                    pre.right = None\n                    node.right = TreeNode(curr.val)\n                    # print(curr.val)\n                    node = node.right\n                    curr = curr.right\n        return dummy.right\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/897-increasing-order-search-tree/",
-      "datePublished": "2023-02-06T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

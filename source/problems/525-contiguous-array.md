@@ -110,7 +110,7 @@ class Solution:
     "text": "Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.\n\u00a0\nExample 1:\nInput: nums = [0,1]\nOutput: 2\nExplanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.\n\nExample 2:\nInput: nums = [0,1,0]\nOutput: 2\nExplanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\nnums[i] is either 0 or 1.\n\n",
     "url": "https://leetcode.com/problems/525-contiguous-array",
     "answerCount": 1,
-    "datePublished": "2023-03-27T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -120,7 +120,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findMaxLength(self, nums: List[int]) -> int:\n        return self.optimized(nums)\n\n    \"\"\"\n    Idea:\n    lets take a subarray of index between [i:j] in nums\n    \n    how do we find the whether it contains equal number of 0 and 1?\n    \n    we need Hashtable storing the frequency of 0 and 1 if they are same then it's a possible solution we could use a separate counter for 1 and 0\n    \n    \n    Brutforce solution is to generate all possible contiguos subarray and check if it is valid and whether it is maximum or not is so store them in separate variable\n    \n    Time Complexity: O(n^2)\n    Space Complexity: O(1) \n    \"\"\"\n\n    def bruteforce(self, nums: List[int]) -> int:\n        n = len(nums)\n        maxLen = 0\n\n        for i in range(n):\n            zeroCount = 0\n            oneCount = 0\n            for j in range(i, n):\n\n                if nums[j]:\n                    oneCount += 1\n                else:\n                    zeroCount += 1\n\n                if oneCount == zeroCount and zeroCount + oneCount > maxLen:\n                    maxLen = zeroCount + oneCount\n        return maxLen\n\n    \"\"\"\n    Idea:\n   while on a single pass what if we store the count in the hasmap with it's respective index\n    both count can be combined by having a single variable that increaments on one and decrements on 0\n    \n    when a count is encountered on Hashmap update the maxlen since the count resets to 0 on subarray with equal number of 1s and 0s \n    \n    Time Complexity: O(n)\n    Space Complexityt: O(n)\n    \"\"\"\n\n    def optimized(self, nums: List[int]) -> int:\n        Hashmap = {0: -1}\n        maxLen = 0\n        cnt = 0\n\n        for i in range(len(nums)):\n            cnt += 1 if nums[i] else -1\n            if cnt in Hashmap:\n                Len = i - Hashmap[cnt]\n                if Len > maxLen:\n                    maxLen = Len\n            else:\n                Hashmap[cnt] = i\n\n        return maxLen\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/525-contiguous-array/",
-      "datePublished": "2023-03-27T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

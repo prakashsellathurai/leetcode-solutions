@@ -53,7 +53,7 @@ class Solution:
     "text": "Given an integer array nums and an integer k, return the kth largest element in the array.\nNote that it is the kth largest element in the sorted order, not the kth distinct element.\n\u00a0\nExample 1:\nInput: nums = [3,2,1,5,6,4], k = 2\nOutput: 5\nExample 2:\nInput: nums = [3,2,3,1,2,4,5,5,6], k = 4\nOutput: 4\n\n\u00a0\nConstraints:\n\n1 <= k <= nums.length <= 104\n-104 <= nums[i] <= 104\n\n",
     "url": "https://leetcode.com/problems/215-kth-largest-element-in-an-array",
     "answerCount": 1,
-    "datePublished": "2025-06-21T00:00:00Z",
+    "datePublished": "2022-06-22T18:43:26+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -63,7 +63,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        heap = []\n        heapq.heapify(heap)\n        for i in range(n):\n            if len(heap) < k:\n                heapq.heappush(heap, nums[i])\n            else:\n                heapq.heappushpop(heap, nums[i])\n        return heap[0]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/215-kth-largest-element-in-an-array/",
-      "datePublished": "2025-06-21T00:00:00Z",
+      "datePublished": "2022-06-22T18:43:26+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

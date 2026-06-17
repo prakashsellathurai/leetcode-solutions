@@ -88,7 +88,7 @@ class FooBar:
     "text": "Suppose you are given the following code:\nclass FooBar {\n  public void foo() {\n    for (int i = 0; i < n; i++) {\n      print(\"foo\");\n    }\n  }\n\n  public void bar() {\n    for (int i = 0; i < n; i++) {\n      print(\"bar\");\n    }\n  }\n}\n\nThe same instance of FooBar will be passed to two different threads:\n\nthread A will call foo(), while\nthread B will call bar().\n\nModify the given program to output \"foobar\" n times.\n\u00a0\nExample 1:\nInput: n = 1\nOutput: \"foobar\"\nExplanation: There are two threads being fired asynchronously. One of them calls foo(), while the other calls bar().\n\"foobar\" is being output 1 time.\n\nExample 2:\nInput: n = 2\nOutput: \"foobarfoobar\"\nExplanation: \"foobar\" is being output 2 times.\n\n\u00a0\nConstraints:\n\n1 <= n <= 1000\n\n",
     "url": "https://leetcode.com/problems/1115-print-foobar-alternately",
     "answerCount": 1,
-    "datePublished": "2024-01-22T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -98,7 +98,7 @@ class FooBar:
       "@type": "Answer",
       "text": "from threading import Barrier\n\n\nclass FooBar:\n    def __init__(self, n):\n        self.n = n\n        self.barrier = Barrier(2)\n\n    def foo(self, printFoo):\n        for i in range(self.n):\n            printFoo()\n            self.barrier.wait()\n\n    def bar(self, printBar):\n        for i in range(self.n):\n            self.barrier.wait()\n            printBar()\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1115-print-foobar-alternately/",
-      "datePublished": "2024-01-22T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

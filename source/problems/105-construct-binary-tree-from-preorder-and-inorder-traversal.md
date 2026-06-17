@@ -71,7 +71,7 @@ class Solution:
     "text": "Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.\n\u00a0\nExample 1:\n\nInput: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]\nOutput: [3,9,20,null,null,15,7]\n\nExample 2:\nInput: preorder = [-1], inorder = [-1]\nOutput: [-1]\n\n\u00a0\nConstraints:\n\n1 <= preorder.length <= 3000\ninorder.length == preorder.length\n-3000 <= preorder[i], inorder[i] <= 3000\npreorder and inorder consist of unique values.\nEach value of inorder also appears in preorder.\npreorder is guaranteed to be the preorder traversal of the tree.\ninorder is guaranteed to be the inorder traversal of the tree.\n\n",
     "url": "https://leetcode.com/problems/105-construct-binary-tree-from-preorder-and-inorder-traversal",
     "answerCount": 1,
-    "datePublished": "2024-04-26T00:00:00Z",
+    "datePublished": "2022-07-14T22:25:01+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:\n        preorder_index = 0\n        def array_to_tree(l, r):\n            nonlocal preorder_index\n            if l > r:\n                return None\n            n_value = preorder[preorder_index]\n            node = TreeNode( preorder[preorder_index])\n            preorder_index += 1\n            node.left = array_to_tree(l,inorde_index[n_value]-1 )\n            node.right = array_to_tree(inorde_index[n_value]+1, r )\n            return node\n        \n        inorde_index = { val:i for i,val in enumerate(inorder)}\n        return array_to_tree(0, len(preorder)-1)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/105-construct-binary-tree-from-preorder-and-inorder-traversal/",
-      "datePublished": "2024-04-26T00:00:00Z",
+      "datePublished": "2022-07-14T22:25:01+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

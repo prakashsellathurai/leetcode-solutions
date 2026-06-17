@@ -81,7 +81,7 @@ class Solution:
     "text": "Given a binary string s and an integer k, return true if every binary code of length k is a substring of s. Otherwise, return false.\n\u00a0\nExample 1:\nInput: s = \"00110110\", k = 2\nOutput: true\nExplanation: The binary codes of length 2 are \"00\", \"01\", \"10\" and \"11\". They can be all found as substrings at indices 0, 1, 3 and 2 respectively.\n\nExample 2:\nInput: s = \"0110\", k = 1\nOutput: true\nExplanation: The binary codes of length 1 are \"0\" and \"1\", it is clear that both exist as a substring. \n\nExample 3:\nInput: s = \"0110\", k = 2\nOutput: false\nExplanation: The binary code \"00\" is of length 2 and does not exist in the array.\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 5 * 105\ns[i] is either '0' or '1'.\n1 <= k <= 20\n\n",
     "url": "https://leetcode.com/problems/1461-check-if-a-string-contains-all-binary-codes-of-size-k",
     "answerCount": 1,
-    "datePublished": "2024-07-04T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -91,7 +91,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def hasAllCodes(self, s: str, k: int) -> bool:\n        return self.optimal(s, k)\n\n    # Time Complexity: O(n*k)\n    # Space Complexity: O(n*k)\n    def bruteforce(self, s: str, k: int) -> bool:\n        subsets = {s[i: i + k] for i in range(len(s) - k + 1)}\n        return len(subsets) == 1 << k\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(2^k)\n    def optimal(self, s: str, k: int) -> bool:\n        need = 1 << k\n        got = [False] * need\n        all_one = need - 1\n        hash_val = 0\n\n        for i in range(len(s)):\n            hash_val = ((hash_val << 1) & all_one) | int(s[i])\n            if i >= k - 1 and got[hash_val] is False:\n                got[hash_val] = True\n                need -= 1\n                if need == 0:\n                    return True\n        return False\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1461-check-if-a-string-contains-all-binary-codes-of-size-k/",
-      "datePublished": "2024-07-04T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

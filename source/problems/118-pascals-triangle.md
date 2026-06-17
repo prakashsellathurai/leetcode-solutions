@@ -49,7 +49,7 @@ class Solution:
     "text": "Given an integer numRows, return the first numRows of Pascal's triangle.\nIn Pascal's triangle, each number is the sum of the two numbers directly above it as shown:\n\n\u00a0\nExample 1:\nInput: numRows = 5\nOutput: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]\nExample 2:\nInput: numRows = 1\nOutput: [[1]]\n\n\u00a0\nConstraints:\n\n1 <= numRows <= 30\n\n",
     "url": "https://leetcode.com/problems/118-pascals-triangle",
     "answerCount": 1,
-    "datePublished": "2024-01-20T00:00:00Z",
+    "datePublished": "2022-07-19T19:41:13+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -59,7 +59,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def generate(self, numRows: int) -> List[List[int]]:\n        dp = [[1 for j in range(i + 1)] for i in range(numRows)]\n\n        for i in range(2, numRows):\n            for j in range(1, i):\n                dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1]\n        return dp\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/118-pascals-triangle/",
-      "datePublished": "2024-01-20T00:00:00Z",
+      "datePublished": "2022-07-19T19:41:13+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

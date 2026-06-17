@@ -75,7 +75,7 @@ class Solution:
     "text": "Given the root of a binary search tree and the lowest and highest boundaries as low and high, trim the tree so that all its elements lies in [low, high]. Trimming the tree should not change the relative structure of the elements that will remain in the tree (i.e., any node's descendant should remain a descendant). It can be proven that there is a unique answer.\nReturn the root of the trimmed binary search tree. Note that the root may change depending on the given bounds.\n\u00a0\nExample 1:\n\nInput: root = [1,0,2], low = 1, high = 2\nOutput: [1,null,2]\n\nExample 2:\n\nInput: root = [3,0,4,null,2,null,null,1], low = 1, high = 3\nOutput: [3,2,null,1]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree in the range [1, 104].\n0 <= Node.val <= 104\nThe value of each node in the tree is unique.\nroot is guaranteed to be a valid binary search tree.\n0 <= low <= high <= 104\n\n",
     "url": "https://leetcode.com/problems/669-trim-a-binary-search-tree",
     "answerCount": 1,
-    "datePublished": "2025-01-30T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -85,7 +85,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def trimBST(\n        self, root: Optional[TreeNode], low: int, high: int\n    ) -> Optional[TreeNode]:\n        return self.recursive(root, low, high)\n\n    def recursive(\n        self, node: Optional[TreeNode], low: int, high: int\n    ) -> Optional[TreeNode]:\n        if not node:\n            return None\n        elif node.val > high:\n            return self.recursive(node.left, low, high)\n        elif node.val < low:\n            return self.recursive(node.right, low, high)\n        else:\n            node.left = self.recursive(node.left, low, high)\n            node.right = self.recursive(node.right, low, high)\n            return node\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/669-trim-a-binary-search-tree/",
-      "datePublished": "2025-01-30T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

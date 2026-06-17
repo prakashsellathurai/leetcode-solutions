@@ -87,7 +87,7 @@ class Solution:
     "text": "Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be returned as a list of the node values, not node references.\nA root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.\n\u00a0\nExample 1:\n\nInput: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22\nOutput: [[5,4,11,2],[5,8,4,5]]\nExplanation: There are two paths whose sum equals targetSum:\n5 + 4 + 11 + 2 = 22\n5 + 8 + 4 + 5 = 22\n\nExample 2:\n\nInput: root = [1,2,3], targetSum = 5\nOutput: []\n\nExample 3:\nInput: root = [1,2], targetSum = 0\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 5000].\n-1000 <= Node.val <= 1000\n-1000 <= targetSum <= 1000\n\n",
     "url": "https://leetcode.com/problems/path-sum-ii",
     "answerCount": 1,
-    "datePublished": "2024-10-03T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -97,7 +97,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:\n        paths = []\n        path = []\n\n        def preorder(curr_node, sum_so_far):\n            nonlocal path\n            if not curr_node:\n                return\n            sum_so_far += curr_node.val\n            path.append(curr_node.val)\n\n            if not curr_node.left and not curr_node.right:\n                if sum_so_far == targetSum:\n                    paths.append(path[:])\n            if curr_node.left:\n                preorder(curr_node.left, sum_so_far)\n            if curr_node.right:\n                preorder(curr_node.right, sum_so_far)\n\n            path.pop()\n\n        preorder(root, 0)\n        return paths\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/path-sum-ii/",
-      "datePublished": "2024-10-03T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -72,7 +72,7 @@ class Solution:
     "text": "Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.\nA subarray is a contiguous part of an array.\n\u00a0\nExample 1:\nInput: nums = [-2,1,-3,4,-1,2,1,-5,4]\nOutput: 6\nExplanation: [4,-1,2,1] has the largest sum = 6.\n\nExample 2:\nInput: nums = [1]\nOutput: 1\n\nExample 3:\nInput: nums = [5,4,-1,7,8]\nOutput: 23\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n\u00a0\nFollow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.\n",
     "url": "https://leetcode.com/problems/53-maximum-subarray",
     "answerCount": 1,
-    "datePublished": "2025-08-21T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -82,7 +82,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxSubArray(self, nums: List[int]) -> int:\n        max_sum = float(\"-inf\")\n        cur_sum = 0\n\n        for num in nums:\n            if cur_sum + num > num:\n                cur_sum = cur_sum + num\n            else:\n                cur_sum = num\n\n            if cur_sum > max_sum:\n                max_sum = cur_sum\n\n        return max_sum\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/53-maximum-subarray/",
-      "datePublished": "2025-08-21T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

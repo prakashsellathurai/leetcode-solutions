@@ -86,7 +86,7 @@ class Solution:
     "text": "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.\nGiven a string s, return true if it is a palindrome, or false otherwise.\n\u00a0\nExample 1:\n\nInput: s = \"A man, a plan, a canal: Panama\"\nOutput: true\nExplanation: \"amanaplanacanalpanama\" is a palindrome.\n\nExample 2:\n\nInput: s = \"race a car\"\nOutput: false\nExplanation: \"raceacar\" is not a palindrome.\n\nExample 3:\n\nInput: s = \" \"\nOutput: true\nExplanation: s is an empty string \"\" after removing non-alphanumeric characters.\nSince an empty string reads the same forward and backward, it is a palindrome.\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 2 * 105\ns consists only of printable ASCII characters.\n\n",
     "url": "https://leetcode.com/problems/0125-valid-palindrome",
     "answerCount": 1,
-    "datePublished": "2023-03-17T00:00:00Z",
+    "datePublished": "2025-09-28T18:13:28+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -96,7 +96,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def isPalindrome(self, s: str) -> bool:\n        return self.two_pointers(s)\n    # Time Complexity: O(n)\n    # Space complexity: O(n)\n    def simulation(self, s):\n        filtyered_char = filter(lambda ch:ch.isalnum(), s)\n        lowercase_chars = map(lambda ch: ch.lower(),s )\n\n        return lowercase_chars == lowercase_chars[::-1]\n\n    # Time Complexity: O(n)\n    # Space complexity: O(1)\n    def two_pointers(self, s):\n        i,j = 0, len(s) - 1\n        while i<j:\n            while i<j and not s[i].isalnum():\n                i+=1\n\n            while j>i and not s[j].isalnum():\n                j-=1\n            if s[i].lower() != s[j].lower():\n                return False\n            i+=1\n            j-=1\n        return True\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0125-valid-palindrome/",
-      "datePublished": "2023-03-17T00:00:00Z",
+      "datePublished": "2025-09-28T18:13:28+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

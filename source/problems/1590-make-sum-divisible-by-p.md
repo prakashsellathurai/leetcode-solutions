@@ -86,7 +86,7 @@ class Solution:
     "text": "Given an array of positive integers nums, remove the smallest subarray (possibly empty) such that the sum of the remaining elements is divisible by p. It is not allowed to remove the whole array.\nReturn the length of the smallest subarray that you need to remove, or -1 if it's impossible.\nA subarray is defined as a contiguous block of elements in the array.\n\u00a0\nExample 1:\n\nInput: nums = [3,1,4,2], p = 6\nOutput: 1\nExplanation: The sum of the elements in nums is 10, which is not divisible by 6. We can remove the subarray [4], and the sum of the remaining elements is 6, which is divisible by 6.\n\nExample 2:\n\nInput: nums = [6,3,5,2], p = 9\nOutput: 2\nExplanation: We cannot remove a single element to get a sum divisible by 9. The best way is to remove the subarray [5,2], leaving us with [6,3] with sum 9.\n\nExample 3:\n\nInput: nums = [1,2,3], p = 3\nOutput: 0\nExplanation: Here the sum is 6. which is already divisible by 3. Thus we do not need to remove anything.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n1 <= nums[i] <= 109\n1 <= p <= 109\n\n",
     "url": "https://leetcode.com/problems/1590-make-sum-divisible-by-p",
     "answerCount": 1,
-    "datePublished": "2023-03-25T00:00:00Z",
+    "datePublished": "2026-02-28T19:41:43+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -96,7 +96,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minSubarray(self, nums: List[int], p: int) -> int:\n        # 3 1 4 2\n        #  3\n        #   3 1 4\n        #   total Sum = 10\n        #  cursubarray = i: j 8 \n        n = len(nums)\n        total_sum = sum(nums)\n        total_sum_modulo = total_sum % p\n\n        if total_sum_modulo == 0:\n            return 0\n\n        last_index = {0: -1}\n        min_length = n\n        cur_pre_sum = 0\n        for i in range(n):\n            cur_pre_sum = (cur_pre_sum + nums[i]) % p\n            target_prefix_sum  = (cur_pre_sum - total_sum_modulo + p) % p\n            if target_prefix_sum  in last_index:\n                sub_array_length  = i - last_index[target_prefix_sum]\n                min_length = min(min_length, sub_array_length)\n            last_index[cur_pre_sum] = i\n        return -1 if min_length == len(nums) else min_length",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1590-make-sum-divisible-by-p/",
-      "datePublished": "2023-03-25T00:00:00Z",
+      "datePublished": "2026-02-28T19:41:43+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

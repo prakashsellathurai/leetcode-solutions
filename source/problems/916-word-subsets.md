@@ -74,7 +74,7 @@ class Solution(object):
     "text": "You are given two string arrays words1 and words2.\nA string b is a subset of string a if every letter in b occurs in a including multiplicity.\n\nFor example, \"wrr\" is a subset of \"warrior\" but is not a subset of \"world\".\n\nA string a from words1 is universal if for every string b in words2, b is a subset of a.\nReturn an array of all the universal strings in words1. You may return the answer in any order.\n\u00a0\nExample 1:\nInput: words1 = [\"amazon\",\"apple\",\"facebook\",\"google\",\"leetcode\"], words2 = [\"e\",\"o\"]\nOutput: [\"facebook\",\"google\",\"leetcode\"]\n\nExample 2:\nInput: words1 = [\"amazon\",\"apple\",\"facebook\",\"google\",\"leetcode\"], words2 = [\"l\",\"e\"]\nOutput: [\"apple\",\"google\",\"leetcode\"]\n\n\u00a0\nConstraints:\n\n1 <= words1.length, words2.length <= 104\n1 <= words1[i].length, words2[i].length <= 10\nwords1[i] and words2[i] consist only of lowercase English letters.\nAll the strings of words1 are unique.\n\n",
     "url": "https://leetcode.com/problems/916-word-subsets",
     "answerCount": 1,
-    "datePublished": "2026-05-16T00:00:00Z",
+    "datePublished": "2022-07-30T23:56:54+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -84,7 +84,7 @@ class Solution(object):
       "@type": "Answer",
       "text": "class Solution(object):\n    def wordSubsets(self, A, B):\n        def count(word):\n            ans = [0] * 26\n            for letter in word:\n                ans[ord(letter) - ord('a')] += 1\n            return ans\n\n        bmax = [0] * 26\n        for b in B:\n            for i, c in enumerate(count(b)):\n                bmax[i] = max(bmax[i], c)\n\n        ans = []\n        for a in A:\n            if all(x >= y for x, y in zip(count(a), bmax)):\n                ans.append(a)\n        return ans",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/916-word-subsets/",
-      "datePublished": "2026-05-16T00:00:00Z",
+      "datePublished": "2022-07-30T23:56:54+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

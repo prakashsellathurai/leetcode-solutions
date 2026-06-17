@@ -71,7 +71,7 @@ class Solution:
     "text": "",
     "url": "https://leetcode.com/problems/104-maximum-depth-of-binary-tree",
     "answerCount": 1,
-    "datePublished": "2025-12-01T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def maxDepth(self, root: Optional[TreeNode]) -> int:\n        return self.morrisinorder(root)\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def dfs(self, root: Optional[TreeNode]) -> int:\n        if not root:\n            return 0\n        left = self.maxDepth(root.left)\n        right = self.maxDepth(root.right)\n        return max(left, right) + 1\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(1)\n    def morrisinorder(self, root: Optional[TreeNode]) -> int:\n        if not root:\n            return 0\n        depth = 1\n        maxdepth = depth\n        while root:\n            if not root.left:\n                maxdepth = max(maxdepth, depth)\n                root = root.right\n            else:\n                pre = root.left\n                preDepth = 1\n\n                while pre.right and pre.right is not root:\n                    preDepth += 1\n                    pre = pre.right\n\n                if pre.right is root:\n                    pre.right = None\n                    depth -= preDepth + 1\n                    maxdepth = max(maxdepth, depth)\n                    root = root.right\n                else:\n                    pre.right = root\n                    root = root.left\n            depth += 1\n        return maxdepth\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/104-maximum-depth-of-binary-tree/",
-      "datePublished": "2025-12-01T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

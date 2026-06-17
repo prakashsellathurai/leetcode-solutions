@@ -68,7 +68,7 @@ class Solution:
     "text": "Given an integer array nums, return the length of the longest strictly increasing subsequence.\nA subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].\n\u00a0\nExample 1:\nInput: nums = [10,9,2,5,3,7,101,18]\nOutput: 4\nExplanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.\n\nExample 2:\nInput: nums = [0,1,0,3,2,3]\nOutput: 4\n\nExample 3:\nInput: nums = [7,7,7,7,7,7,7]\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 2500\n-104 <= nums[i] <= 104\n\n\u00a0\nFollow up:\u00a0Can you come up with an algorithm that runs in\u00a0O(n log(n)) time complexity?\n",
     "url": "https://leetcode.com/problems/300-longest-increasing-subsequence",
     "answerCount": 1,
-    "datePublished": "2025-09-25T00:00:00Z",
+    "datePublished": "2022-07-07T09:12:55+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -78,7 +78,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def lengthOfLIS(self, nums: List[int]) -> int:\n        LIS = []\n        for num in nums:\n            if not LIS or LIS[-1] < num:\n                LIS.append(num)\n            else:\n                pos = bisect_left(LIS,num)\n                LIS[pos] = num\n\n        return len(LIS)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/300-longest-increasing-subsequence/",
-      "datePublished": "2025-09-25T00:00:00Z",
+      "datePublished": "2022-07-07T09:12:55+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

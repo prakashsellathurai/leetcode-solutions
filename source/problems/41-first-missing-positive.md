@@ -54,7 +54,7 @@ class Solution:
     "text": "Given an unsorted integer array nums, return the smallest missing positive integer.\nYou must implement an algorithm that runs in O(n) time and uses constant extra space.\n\u00a0\nExample 1:\nInput: nums = [1,2,0]\nOutput: 3\nExample 2:\nInput: nums = [3,4,-1,1]\nOutput: 2\nExample 3:\nInput: nums = [7,8,9,11,12]\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 5 * 105\n-231 <= nums[i] <= 231 - 1\n\n",
     "url": "https://leetcode.com/problems/41-first-missing-positive",
     "answerCount": 1,
-    "datePublished": "2022-08-11T00:00:00Z",
+    "datePublished": "2022-07-06T20:29:46+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -64,7 +64,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def firstMissingPositive(self, nums: List[int]) -> int:\n        for i in range(len(nums)):\n            while 0 <= nums[i]-1 < len(nums) and nums[nums[i]-1] != nums[i]:\n                tmp = nums[i]-1\n                nums[i], nums[tmp] = nums[tmp], nums[i]\n        for i in range(len(nums)):\n            if nums[i] != i+1:\n                return i+1\n        return len(nums)+1",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/41-first-missing-positive/",
-      "datePublished": "2022-08-11T00:00:00Z",
+      "datePublished": "2022-07-06T20:29:46+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

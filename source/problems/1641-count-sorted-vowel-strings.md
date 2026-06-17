@@ -97,7 +97,7 @@ class Solution:
     "text": "Given an integer n, return the number of strings of length n that consist only of vowels (a, e, i, o, u) and are lexicographically sorted.\nA string s is lexicographically sorted if for all valid i, s[i] is the same as or comes before s[i+1] in the alphabet.\n\u00a0\nExample 1:\nInput: n = 1\nOutput: 5\nExplanation: The 5 sorted strings that consist of vowels only are [\"a\",\"e\",\"i\",\"o\",\"u\"].\n\nExample 2:\nInput: n = 2\nOutput: 15\nExplanation: The 15 sorted strings that consist of vowels only are\n[\"aa\",\"ae\",\"ai\",\"ao\",\"au\",\"ee\",\"ei\",\"eo\",\"eu\",\"ii\",\"io\",\"iu\",\"oo\",\"ou\",\"uu\"].\nNote that \"ea\" is not a valid string since 'e' comes after 'a' in the alphabet.\n\nExample 3:\nInput: n = 33\nOutput: 66045\n\n\u00a0\nConstraints:\n\n1 <= n <= 50\u00a0\n\n",
     "url": "https://leetcode.com/problems/1641-count-sorted-vowel-strings",
     "answerCount": 1,
-    "datePublished": "2024-08-23T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -107,7 +107,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def countVowelStrings(self, n: int) -> int:\n        return self.math(n)\n\n    # Time Complexity: O(5^n)\n    def backtrack(self, n, last=0):\n        if n == 0:\n            return 1\n        else:\n            nb = 0\n            for vowel in [\"a\", \"e\", \"i\", \"o\", \"u\"]:\n                if last == \"\" or str(last) <= str(vowel):\n                    nb += self.backtrack(n - 1, vowel)\n            return nb\n\n    # Time Complexity: O(n)\n    @cache\n    def topdowndp(self, n, last=0):\n        if n == 0:\n            return 1\n        else:\n            nb = 0\n            for vowel in [\"a\", \"e\", \"i\", \"o\", \"u\"]:\n                if last == \"\" or str(last) <= str(vowel):\n                    nb += self.backtrack(n - 1, vowel)\n            return nb\n\n    # Time Complexity: O(n)\n    def bottomup(self, n):\n        dp = [[0] * 5 for _ in range(n)]\n        dp[0] = [1] * 5\n\n        for i in range(1, n):\n            for j in range(5):\n                for k in range(j, 5):\n                    dp[i][j] += dp[i - 1][k]\n        return sum(dp[-1])\n\n    # Time Complexity: O(1)\n    def math(self, n):\n        return (n + 4) * (n + 3) * (n + 2) * (n + 1) // 24\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1641-count-sorted-vowel-strings/",
-      "datePublished": "2024-08-23T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -58,7 +58,7 @@ class Solution:
     "text": "Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.\n\u00a0\nExample 1:\n\nInput: n = 3\nOutput: [[1,2,3],[8,9,4],[7,6,5]]\n\nExample 2:\nInput: n = 1\nOutput: [[1]]\n\n\u00a0\nConstraints:\n\n1 <= n <= 20\n\n",
     "url": "https://leetcode.com/problems/59-spiral-matrix-ii",
     "answerCount": 1,
-    "datePublished": "2023-01-07T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -68,7 +68,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def generateMatrix(self, n):\n        matrix = [[0] * n for _ in range(n)]\n        x, y, dx, dy = 0, 0, 1, 0\n        for i in range(n * n):\n            matrix[y][x] = i + 1\n            if (\n                not 0 <= x + dx < n\n                or not 0 <= y + dy < n\n                or matrix[y + dy][x + dx] != 0\n            ):\n                dx, dy = -dy, dx\n            x, y = x + dx, y + dy\n        return matrix\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/59-spiral-matrix-ii/",
-      "datePublished": "2023-01-07T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

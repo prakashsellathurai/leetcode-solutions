@@ -112,7 +112,7 @@ class Solution:
     "text": "Given an array of\u00a0integers arr, you are initially positioned at the first index of the array.\nIn one step you can jump from index i to index:\n\ni + 1 where:\u00a0i + 1 < arr.length.\ni - 1 where:\u00a0i - 1 >= 0.\nj where: arr[i] == arr[j] and i != j.\n\nReturn the minimum number of steps to reach the last index of the array.\nNotice that you can not jump outside of the array at any time.\n\u00a0\nExample 1:\nInput: arr = [100,-23,-23,404,100,23,23,23,3,404]\nOutput: 3\nExplanation: You need three jumps from index 0 --> 4 --> 3 --> 9. Note that index 9 is the last index of the array.\n\nExample 2:\nInput: arr = [7]\nOutput: 0\nExplanation: Start index is the last index. You do not need to jump.\n\nExample 3:\nInput: arr = [7,6,9,6,9,6,9,7]\nOutput: 1\nExplanation: You can jump directly from index 0 to index 7 which is last index of the array.\n\n\u00a0\nConstraints:\n\n1 <= arr.length <= 5 * 104\n-108 <= arr[i] <= 108\n\n",
     "url": "https://leetcode.com/problems/1345-jump-game-iv",
     "answerCount": 1,
-    "datePublished": "2022-05-06T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -122,7 +122,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def minJumps(self, arr: List[int]) -> int:\n        n = len(arr)\n        if n <= 1:\n            return 0\n\n        graph = {}\n        for i in range(n):\n            if arr[i] in graph:\n                graph[arr[i]].append(i)\n            else:\n                graph[arr[i]] = [i]\n\n        curs = [0]  # store current layers\n        visited = {0}\n        step = 0\n\n        # when current layer exists\n        while curs:\n            nex = []\n\n            # iterate the layer\n            for node in curs:\n                # check if reached end\n                if node == n - 1:\n                    return step\n\n                # check same value\n                for child in graph[arr[node]]:\n                    if child not in visited:\n                        visited.add(child)\n                        nex.append(child)\n\n                # clear the list to prevent redundant search\n                graph[arr[node]].clear()\n\n                # check neighbors\n                for child in [node - 1, node + 1]:\n                    if 0 <= child < len(arr) and child not in visited:\n                        visited.add(child)\n                        nex.append(child)\n\n            curs = nex\n            step += 1\n\n        return -1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1345-jump-game-iv/",
-      "datePublished": "2022-05-06T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

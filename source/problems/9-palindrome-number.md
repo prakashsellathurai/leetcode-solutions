@@ -74,7 +74,7 @@ class Solution:
     "text": "Given an integer x, return true if x is palindrome integer.\nAn integer is a palindrome when it reads the same backward as forward.\n\nFor example, 121 is a palindrome while 123 is not.\n\n\u00a0\nExample 1:\nInput: x = 121\nOutput: true\nExplanation: 121 reads as 121 from left to right and from right to left.\n\nExample 2:\nInput: x = -121\nOutput: false\nExplanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.\n\nExample 3:\nInput: x = 10\nOutput: false\nExplanation: Reads 01 from right to left. Therefore it is not a palindrome.\n\n\u00a0\nConstraints:\n\n-231\u00a0<= x <= 231\u00a0- 1\n\n\u00a0\nFollow up: Could you solve it without converting the integer to a string?",
     "url": "https://leetcode.com/problems/9-palindrome-number",
     "answerCount": 1,
-    "datePublished": "2025-08-15T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -84,7 +84,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def isPalindrome(self, x: int) -> bool:\n        if x < 0 or (\n            x > 0 and x % 10 == 0\n        ):  # if x is negative, return False. if x is positive and last digit is 0, that also cannot form a palindrome, return False.\n            return False\n\n        result = 0\n        while x > result:\n            result = result * 10 + x % 10\n            x = x // 10\n\n        return True if (x == result or x == result // 10) else False\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/9-palindrome-number/",
-      "datePublished": "2025-08-15T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

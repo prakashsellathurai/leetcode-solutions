@@ -66,7 +66,7 @@ class Solution:
     "text": "Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.\n\u00a0\nExample 1:\nInput: nums = [-4,-1,0,3,10]\nOutput: [0,1,9,16,100]\nExplanation: After squaring, the array becomes [16,1,0,9,100].\nAfter sorting, it becomes [0,1,9,16,100].\n\nExample 2:\nInput: nums = [-7,-3,2,3,11]\nOutput: [4,9,9,49,121]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 104\n-104 <= nums[i] <= 104\nnums is sorted in non-decreasing order.\n\n\u00a0\nFollow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?",
     "url": "https://leetcode.com/problems/squares-of-a-sorted-array",
     "answerCount": 1,
-    "datePublished": "2023-05-15T00:00:00Z",
+    "datePublished": "2025-02-10T20:50:51+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -76,7 +76,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def sortedSquares(self, nums: List[int]) -> List[int]:\n        n =len(nums)\n        left = 0\n        right = n-1\n        square = 0\n        result = [0] * n\n        for i in range(n-1, -1, -1):\n            if abs(nums[left]) < abs(nums[right]):\n                square = nums[right]\n                right -= 1\n            else:\n                square = nums[left]\n                left += 1\n            result[i] = square * square\n        return result\n    ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/squares-of-a-sorted-array/",
-      "datePublished": "2023-05-15T00:00:00Z",
+      "datePublished": "2025-02-10T20:50:51+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

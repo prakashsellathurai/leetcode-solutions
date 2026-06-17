@@ -83,7 +83,7 @@ class Solution:
     "text": "Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.\nA leaf is a node with no children.\n\u00a0\nExample 1:\n\nInput: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22\nOutput: true\nExplanation: The root-to-leaf path with the target sum is shown.\n\nExample 2:\n\nInput: root = [1,2,3], targetSum = 5\nOutput: false\nExplanation: There two root-to-leaf paths in the tree:\n(1 --> 2): The sum is 3.\n(1 --> 3): The sum is 4.\nThere is no root-to-leaf path with sum = 5.\n\nExample 3:\nInput: root = [], targetSum = 0\nOutput: false\nExplanation: Since the tree is empty, there are no root-to-leaf paths.\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 5000].\n-1000 <= Node.val <= 1000\n-1000 <= targetSum <= 1000\n\n",
     "url": "https://leetcode.com/problems/path-sum",
     "answerCount": 1,
-    "datePublished": "2025-11-25T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -93,7 +93,7 @@ class Solution:
       "@type": "Answer",
       "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:\n        ans = 0\n        subSum = targetSum - (root.val if root is not None else 0)\n\n        # If we reach a leaf node and sum becomes 0, then\n        # return True\n        if root and subSum == 0 and root.left == None and root.right == None:\n            return True\n\n        # Otherwise check both subtrees\n        if root and root.left is not None:\n            ans = ans or self.hasPathSum(root.left, subSum)\n        if root and root.right is not None:\n            ans = ans or self.hasPathSum(root.right, subSum)\n\n        return ans\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/path-sum/",
-      "datePublished": "2025-11-25T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

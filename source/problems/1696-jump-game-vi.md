@@ -112,7 +112,7 @@ class Solution:
     "text": "You are given a 0-indexed integer array nums and an integer k.\nYou are initially standing at index 0. In one move, you can jump at most k steps forward without going outside the boundaries of the array. That is, you can jump from index i to any index in the range [i + 1, min(n - 1, i + k)] inclusive.\nYou want to reach the last index of the array (index n - 1). Your score is the sum of all nums[j] for each index j you visited in the array.\nReturn the maximum score you can get.\n\u00a0\nExample 1:\nInput: nums = [1,-1,-2,4,-7,3], k = 2\nOutput: 7\nExplanation: You can choose your jumps forming the subsequence [1,-1,4,3] (underlined above). The sum is 7.\n\nExample 2:\nInput: nums = [10,-5,-2,4,0,3], k = 3\nOutput: 17\nExplanation: You can choose your jumps forming the subsequence [10,4,3] (underlined above). The sum is 17.\n\nExample 3:\nInput: nums = [1,-5,-20,4,-1,3,-6,-3], k = 2\nOutput: 0\n\n\u00a0\nConstraints:\n\n1 <= nums.length, k <= 105\n-104 <= nums[i] <= 104\n\n",
     "url": "https://leetcode.com/problems/1696-jump-game-vi",
     "answerCount": 1,
-    "datePublished": "2023-05-17T00:00:00Z",
+    "datePublished": "2022-07-09T20:28:13+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -122,7 +122,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxResult(self, nums: List[int], k: int) -> int:\n        return self.optimal(nums, k)\n    \n    # Time Complexity: O(n*k)\n    # Space Complexity: O(n*k)\n    def naive(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        @cache\n        def dfs(i):\n            if  i >= n-1:\n                return nums[i]\n            \n            res = float('-inf')\n            for j in range(i+1,min(n-1,i+k)+1):\n                include = dfs(j)\n                res = max(res,nums[i]+include)\n            return res if res != float('-inf') else 0\n                \n        return dfs(0)\n    \n    \n    # Time Complexity: O(nlogk)\n    # Space Complexity: O(n)\n    def better(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        dp = [0] * (n+1)\n        q = []\n        heapq.heapify(q)\n        for i in range(n-1, -1, -1):\n            sum_so_far = float('-inf')\n            while q and q[0][1] > min(n-1,i+k):\n                heapq.heappop(q)\n            if q:\n                sum_so_far = max(sum_so_far, -q[0][0])\n            dp[i] = nums[i] + (sum_so_far if sum_so_far != float('-inf') else 0)\n            heapq.heappush(q,(-dp[i],i))\n        return dp[0]\n    \n    \n        \n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def optimal(self, nums: List[int], k: int) -> int:\n        deq, n = deque([0]), len(nums)\n\n        for i in range(1, n):\n            while deq and deq[0] < i - k: deq.popleft()\n            nums[i] += nums[deq[0]]   \n            while deq and nums[i] >= nums[deq[-1]]: deq.pop()\n            deq.append(i)\n            \n        return nums[-1]\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1696-jump-game-vi/",
-      "datePublished": "2023-05-17T00:00:00Z",
+      "datePublished": "2022-07-09T20:28:13+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

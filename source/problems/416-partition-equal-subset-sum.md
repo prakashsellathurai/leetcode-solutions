@@ -103,7 +103,7 @@ class Solution:
     "text": "Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.\n\u00a0\nExample 1:\nInput: nums = [1,5,11,5]\nOutput: true\nExplanation: The array can be partitioned as [1, 5, 5] and [11].\n\nExample 2:\nInput: nums = [1,2,3,5]\nOutput: false\nExplanation: The array cannot be partitioned into equal sum subsets.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 200\n1 <= nums[i] <= 100\n\n",
     "url": "https://leetcode.com/problems/416-partition-equal-subset-sum",
     "answerCount": 1,
-    "datePublished": "2025-04-29T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -113,7 +113,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def canPartition(self, nums: List[int]) -> bool:\n        return self.dynamicprogramming(nums)\n\n    \"\"\"\n    Time complexity: O(2^n)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def bruteforce(self, nums: List[int]) -> bool:\n        n = len(nums)\n\n        def recur(s1, s2, i):\n            if i == n:\n                return sum(s1) == sum(s2)\n\n            left = recur(s1 + [nums[i]], s2, i + 1)\n            right = recur(s1, s2 + [nums[i]], i + 1)\n\n            return left or right\n\n        return recur([], [], 0)\n\n    \"\"\"\n    \n    dp[i][j] = dp[i-1][j] || dp[i][j-nums[i]] if i th coin is used adding to j \n                    ^\n                    |\n                    if ith coin not used and considering i-1th coins \n    Time complexity: O(n*w)\n    Space Complexity: O(w)\n    \"\"\"\n\n    def dynamicprogramming(self, nums: List[int]) -> bool:\n        if sum(nums) & 1:\n            return False\n        total = sum(nums) // 2\n        n = len(nums)\n        memo = {}\n\n        def dfs(t, index):\n            if t in memo:\n                return memo[t]\n            if t < 0:\n                return 0\n            elif t == 0:\n                return 1\n            for i in range(index, n):\n                if dfs(t - nums[i], i + 1):\n                    memo[t] = 1\n                    return memo[t]\n            memo[t] = 0\n            return memo[t]\n\n        ans = dfs(total, 0)\n        return ans\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/416-partition-equal-subset-sum/",
-      "datePublished": "2025-04-29T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

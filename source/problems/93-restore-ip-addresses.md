@@ -79,7 +79,7 @@ class Solution:
     "text": "A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.\n\nFor example, \"0.1.2.201\" and \"192.168.1.1\" are valid IP addresses, but \"0.011.255.245\", \"192.168.1.312\" and \"192.168@1.1\" are invalid IP addresses.\n\nGiven a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.\n\u00a0\nExample 1:\nInput: s = \"25525511135\"\nOutput: [\"255.255.11.135\",\"255.255.111.35\"]\n\nExample 2:\nInput: s = \"0000\"\nOutput: [\"0.0.0.0\"]\n\nExample 3:\nInput: s = \"101023\"\nOutput: [\"1.0.10.23\",\"1.0.102.3\",\"10.1.0.23\",\"10.10.2.3\",\"101.0.2.3\"]\n\n\u00a0\nConstraints:\n\n0 <= s.length <= 20\ns consists of digits only.\n\n",
     "url": "https://leetcode.com/problems/93-restore-ip-addresses",
     "answerCount": 1,
-    "datePublished": "2025-07-28T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -89,7 +89,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def restoreIpAddresses(self, s: str) -> List[str]:\n        res = []\n\n        def backtrack(s, count, path, res):\n            if count == 4:\n                if not s:\n                    res.append(path[:-1])\n                return\n\n            for i in range(1, 4):\n                if i > len(s):\n                    continue\n                if i > 1 and s[0] == \"0\":\n                    continue\n\n                if i > 2 and int(s[:3]) > 255:\n                    continue\n                backtrack(s[i:], count + 1, path + s[:i] + \".\", res)\n\n        backtrack(s, 0, \"\", res)\n        return res\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/93-restore-ip-addresses/",
-      "datePublished": "2025-07-28T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

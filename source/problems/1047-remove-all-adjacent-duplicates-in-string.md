@@ -60,7 +60,7 @@ class Solution:
     "text": "You are given a string s consisting of lowercase English letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.\nWe repeatedly make duplicate removals on s until we no longer can.\nReturn the final string after all such duplicate removals have been made. It can be proven that the answer is unique.\n\u00a0\nExample 1:\nInput: s = \"abbaca\"\nOutput: \"ca\"\nExplanation: \nFor example, in \"abbaca\" we could remove \"bb\" since the letters are adjacent and equal, and this is the only possible move.  The result of this move is that the string is \"aaca\", of which only \"aa\" is possible, so the final string is \"ca\".\n\nExample 2:\nInput: s = \"azxxzy\"\nOutput: \"ay\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns consists of lowercase English letters.\n\n",
     "url": "https://leetcode.com/problems/1047-remove-all-adjacent-duplicates-in-string",
     "answerCount": 1,
-    "datePublished": "2024-11-27T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -70,7 +70,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def removeDuplicates(self, s: str) -> str:\n        res = []\n        for c in s:\n            if res and res[-1] == c:\n                res.pop()\n            else:\n                res.append(c)\n        return \"\".join(res)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1047-remove-all-adjacent-duplicates-in-string/",
-      "datePublished": "2024-11-27T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

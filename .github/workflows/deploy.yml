@@ -30,15 +30,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r ./requirements.txt
 
+      - name: Fetch full submodule history
+        run: git -C leetcode-submissions fetch --unshallow 2>/dev/null || true
+
       - name: Update .md files
         run: python ./scripts/createdocs.py
-
-      - name: Persist problem dates
-        uses: EndBug/add-and-commit@v7
-        with:
-          default_author: github_actions
-          message: "Update problem_dates.json"
-          add: "source/problem_dates.json"
 
       - name: Generate Docs
         run: sphinx-build -b dirhtml ./source/ ./docs

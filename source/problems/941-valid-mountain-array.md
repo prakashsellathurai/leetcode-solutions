@@ -71,7 +71,7 @@ class Solution:
     "text": "Given an array of integers arr, return true if and only if it is a valid mountain array.\nRecall that arr is a mountain array if and only if:\n\narr.length >= 3\nThere exists some i with 0 < i < arr.length - 1 such that:\n\t\narr[0] < arr[1] < ... < arr[i - 1] < arr[i] \narr[i] > arr[i + 1] > ... > arr[arr.length - 1]\n\n\n\n\n\u00a0\nExample 1:\nInput: arr = [2,1]\nOutput: false\nExample 2:\nInput: arr = [3,5,5]\nOutput: false\nExample 3:\nInput: arr = [0,3,2,1]\nOutput: true\n\n\u00a0\nConstraints:\n\n1 <= arr.length <= 104\n0 <= arr[i] <= 104\n\n",
     "url": "https://leetcode.com/problems/941-valid-mountain-array",
     "answerCount": 1,
-    "datePublished": "2025-08-06T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def validMountainArray(self, arr: List[int]) -> bool:\n        n = len(arr)\n        if n < 3:\n            return False\n        i = 0\n\n        while i < n - 1 and arr[i] < arr[i + 1]:\n            i += 1\n\n        if i == 0 or i == n - 1:\n            return False\n\n        while i < n - 1 and arr[i] > arr[i + 1]:\n            i += 1\n        return i == n - 1\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/941-valid-mountain-array/",
-      "datePublished": "2025-08-06T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

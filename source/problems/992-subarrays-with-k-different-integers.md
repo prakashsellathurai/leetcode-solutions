@@ -98,7 +98,7 @@ class Solution:
     "text": "Given an integer array nums and an integer k, return the number of good subarrays of nums.\nA good array is an array where the number of different integers in that array is exactly k.\n\nFor example, [1,2,3,1,2] has 3 different integers: 1, 2, and 3.\n\nA subarray is a contiguous part of an array.\n\u00a0\nExample 1:\nInput: nums = [1,2,1,2,3], k = 2\nOutput: 7\nExplanation: Subarrays formed with exactly 2 different integers: [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2]\n\nExample 2:\nInput: nums = [1,2,1,3,4], k = 3\nOutput: 3\nExplanation: Subarrays formed with exactly 3 different integers: [1,2,1,3], [2,1,3], [1,3,4].\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 2 * 104\n1 <= nums[i], k <= nums.length\n\n",
     "url": "https://leetcode.com/problems/992-subarrays-with-k-different-integers",
     "answerCount": 1,
-    "datePublished": "2022-08-19T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -108,7 +108,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:\n        return self.subarraysWithAtmostKDistinct(\n            nums, k\n        ) - self.subarraysWithAtmostKDistinct(nums, k - 1)\n\n    def subarraysWithAtmostKDistinct(self, nums: List[int], k: int) -> int:\n        cnt = 0\n        n = len(nums)\n\n        # for left in range(n):\n        #     hashmap = set()\n        #     for right in range(left,n):\n        #         hashmap.add(nums[right])\n        #         if len(hashmap) > k:\n        #             break\n        #         cnt +=1\n        #\n        # Time Complexity : O(n^2)\n\n        left, right = 0, 0\n        size = 0\n        hashmap = {}\n        while right < n:\n            if nums[right] not in hashmap:\n                hashmap[nums[right]] = 1\n            else:\n                hashmap[nums[right]] += 1\n\n            if hashmap[nums[right]] == 1:\n                size += 1\n\n            while size > k:\n                hashmap[nums[left]] -= 1\n                if hashmap[nums[left]] == 0:\n                    size -= 1\n                left += 1\n\n            cnt += right - left + 1\n            right += 1\n\n        return cnt\n        # Time complexity : O(N)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/992-subarrays-with-k-different-integers/",
-      "datePublished": "2022-08-19T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

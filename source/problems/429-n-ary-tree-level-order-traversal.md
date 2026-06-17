@@ -77,7 +77,7 @@ class Solution:
     "text": "Given an n-ary tree, return the level order traversal of its nodes' values.\nNary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).\n\u00a0\nExample 1:\n\nInput: root = [1,null,3,2,4,null,5,6]\nOutput: [[1],[3,2,4],[5,6]]\n\nExample 2:\n\nInput: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]\nOutput: [[1],[2,3,4,5],[6,7,8,9,10],[11,12,13],[14]]\n\n\u00a0\nConstraints:\n\nThe height of the n-ary tree is less than or equal to 1000\nThe total number of nodes is between [0, 104]\n\n",
     "url": "https://leetcode.com/problems/429-n-ary-tree-level-order-traversal",
     "answerCount": 1,
-    "datePublished": "2022-03-19T00:00:00Z",
+    "datePublished": "2022-07-13T10:54:40+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -87,7 +87,7 @@ class Solution:
       "@type": "Answer",
       "text": "\"\"\"\n# Definition for a Node.\nclass Node:\n    def __init__(self, val=None, children=None):\n        self.val = val\n        self.children = children\n\"\"\"\n\nclass Solution:\n    def levelOrder(self, root: 'Node') -> List[List[int]]:\n        if not root:\n            return []\n        \n        q = deque([root])\n        res = []\n        while q:\n            n = len(q)\n            cur_level = []\n            for _ in range(n):\n                node = q.popleft()\n                if node:\n                    cur_level.append(node.val)\n                    for child in node.children:\n                        q.append(child)\n            res.append(cur_level)\n        return res\n                    ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/429-n-ary-tree-level-order-traversal/",
-      "datePublished": "2022-03-19T00:00:00Z",
+      "datePublished": "2022-07-13T10:54:40+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

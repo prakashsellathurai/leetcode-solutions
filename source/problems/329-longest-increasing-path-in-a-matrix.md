@@ -86,7 +86,7 @@ class Solution:
     "text": "Given an m x n integers matrix, return the length of the longest increasing path in matrix.\nFrom each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n\u00a0\nExample 1:\n\nInput: matrix = [[9,9,4],[6,6,8],[2,1,1]]\nOutput: 4\nExplanation: The longest increasing path is [1, 2, 6, 9].\n\nExample 2:\n\nInput: matrix = [[3,4,5],[3,2,6],[2,2,1]]\nOutput: 4\nExplanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.\n\nExample 3:\nInput: matrix = [[1]]\nOutput: 1\n\n\u00a0\nConstraints:\n\nm == matrix.length\nn == matrix[i].length\n1 <= m, n <= 200\n0 <= matrix[i][j] <= 231 - 1\n\n",
     "url": "https://leetcode.com/problems/329-longest-increasing-path-in-a-matrix",
     "answerCount": 1,
-    "datePublished": "2025-06-28T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -96,7 +96,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def __init__(self):\n        self.neighbours = [(1, 0), (-1, 0), (0, 1), (0, -1)]\n\n    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:\n        return self.topdown(matrix)\n\n    # Time Complexity: O(m*n)\n    # Space Complexity: O(m*n)\n    def topdown(self, matrix: List[List[int]]) -> int:\n        # determine m,n\n        self.m, self.n = len(matrix), len(matrix[0])\n        self.max_len = 0\n        self.matrix = matrix\n\n        return max(self.dfs(i, j) for j in range(self.n) for i in range(self.m))\n\n    @cache\n    def dfs(self, i, j):\n\n        val = self.matrix[i][j]\n        return 1 + max(\n            self.dfs(i - 1, j) if i and val > self.matrix[i - 1][j] else 0,\n            self.dfs(i + 1, j) if i < self.m -\n            1 and val > self.matrix[i + 1][j] else 0,\n            self.dfs(i, j - 1) if j and val > self.matrix[i][j - 1] else 0,\n            self.dfs(i, j + 1) if j < self.n -\n            1 and val > self.matrix[i][j + 1] else 0,\n        )\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/329-longest-increasing-path-in-a-matrix/",
-      "datePublished": "2025-06-28T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

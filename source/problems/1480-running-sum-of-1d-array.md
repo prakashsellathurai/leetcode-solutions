@@ -85,7 +85,7 @@ class Solution:
     "text": "Given an array nums. We define a running sum of an array as\u00a0runningSum[i] = sum(nums[0]\u2026nums[i]).\nReturn the running sum of nums.\n\u00a0\nExample 1:\nInput: nums = [1,2,3,4]\nOutput: [1,3,6,10]\nExplanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].\nExample 2:\nInput: nums = [1,1,1,1,1]\nOutput: [1,2,3,4,5]\nExplanation: Running sum is obtained as follows: [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1].\nExample 3:\nInput: nums = [3,1,2,10,1]\nOutput: [3,4,6,16,17]\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 1000\n-10^6\u00a0<= nums[i] <=\u00a010^6\n",
     "url": "https://leetcode.com/problems/1480-running-sum-of-1d-array",
     "answerCount": 1,
-    "datePublished": "2024-06-21T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -95,7 +95,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def runningSum(self, nums: List[int]) -> List[int]:\n        return self.inline(nums)\n\n    # Time Complexity: O(n^2)\n    def naive(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        res = [0] * n\n        for i in range(n):\n            res[i] = sum(nums[j] for j in range(i + 1))\n        return res\n\n    # Time Complexity: O(n)\n    def better(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        res = [0] * n\n        for i in range(n):\n            if i == 0:\n                res[i] = nums[i]\n            else:\n                res[i] = res[i - 1] + nums[i]\n        return res\n\n    # Time Complexity: O(n)\n    def builtinfunc(self, nums: List[int]) -> List[int]:\n        return accumulate(nums)\n\n    # Time Complexity: O(n)\n    def inline(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        for i in range(1, n):\n            nums[i] += nums[i - 1]\n        return nums\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1480-running-sum-of-1d-array/",
-      "datePublished": "2024-06-21T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

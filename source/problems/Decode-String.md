@@ -73,7 +73,7 @@ class Solution:
     "text": "Given an encoded string, return its decoded string.\nThe encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.\nYou may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.\nFurthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there won't be input like 3a or 2[4].\n\u00a0\nExample 1:\nInput: s = \"3[a]2[bc]\"\nOutput: \"aaabcbc\"\nExample 2:\nInput: s = \"3[a2[c]]\"\nOutput: \"accaccacc\"\nExample 3:\nInput: s = \"2[abc]3[cd]ef\"\nOutput: \"abcabccdcdcdef\"\nExample 4:\nInput: s = \"abc3[cd]xyz\"\nOutput: \"abccdcdcdxyz\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 30\ns consists of lowercase English letters, digits, and square brackets '[]'.\ns is guaranteed to be a valid input.\nAll the integers in s are in the range [1, 300].\n\n",
     "url": "https://leetcode.com/problems/decode-string",
     "answerCount": 1,
-    "datePublished": "2025-03-01T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -83,7 +83,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def decodeString(self, s):\n        it, num, stack = 0, 0, [\"\"]\n        while it < len(s):\n            if s[it].isdigit():\n                num = num * 10 + int(s[it])\n            elif s[it] == \"[\":\n                stack.append(num)\n                num = 0\n                stack.append(\"\")\n            elif s[it] == \"]\":\n                str1 = stack.pop()\n                rep = stack.pop()\n                str2 = stack.pop()\n                stack.append(str2 + str1 * rep)\n            else:\n                stack[-1] += s[it]\n            it += 1\n        return \"\".join(stack)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/decode-string/",
-      "datePublished": "2025-03-01T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

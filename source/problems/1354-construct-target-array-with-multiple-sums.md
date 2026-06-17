@@ -99,7 +99,7 @@ class Solution:
     "text": "You are given an array target of n integers. From a starting array arr consisting of n 1's, you may perform the following procedure :\n\nlet x be the sum of all elements currently in your array.\nchoose index i, such that 0 <= i < n and set the value of arr at index i to x.\nYou may repeat this procedure as many times as needed.\n\nReturn true if it is possible to construct the target array from arr, otherwise, return false.\n\u00a0\nExample 1:\n\nInput: target = [9,3,5]\nOutput: true\nExplanation: Start with arr = [1, 1, 1] \n[1, 1, 1], sum = 3 choose index 1\n[1, 3, 1], sum = 5 choose index 2\n[1, 3, 5], sum = 9 choose index 0\n[9, 3, 5] Done\n\nExample 2:\n\nInput: target = [1,1,1,2]\nOutput: false\nExplanation: Impossible to create target array from [1,1,1,1].\n\nExample 3:\n\nInput: target = [8,5]\nOutput: true\n\n\u00a0\nConstraints:\n\nn == target.length\n1 <= n <= 5 * 104\n1 <= target[i] <= 109\n\n",
     "url": "https://leetcode.com/problems/1354-construct-target-array-with-multiple-sums",
     "answerCount": 1,
-    "datePublished": "2022-01-05T00:00:00Z",
+    "datePublished": "2022-06-24T11:30:04+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -109,7 +109,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def isPossible(self, target: List[int]) -> bool:\n        if len(target) == 1:\n            return target[0] == 1\n\n        total_sum = sum(target)\n        # Use a min-heap by pushing negative values to simulate a max-heap\n        max_heap = [-num for num in target]\n        heapq.heapify(max_heap)\n\n        while -max_heap[0] > 1:\n            max_val = -heapq.heappop(max_heap)\n            rest_sum = total_sum - max_val\n\n            # Edge cases and impossibility checks\n            if rest_sum == 1:\n                return True\n            if rest_sum == 0 or max_val <= rest_sum:\n                return False\n\n            # Calculate the previous value using modulo\n            prev_val = max_val% rest_sum\n            \n            # If prev_val is 0, it indicates an impossible state\n            if prev_val == 0:\n                return False\n\n            total_sum = rest_sum + prev_val\n            heapq.heappush(max_heap, -prev_val)\n\n        return True",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1354-construct-target-array-with-multiple-sums/",
-      "datePublished": "2022-01-05T00:00:00Z",
+      "datePublished": "2022-06-24T11:30:04+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

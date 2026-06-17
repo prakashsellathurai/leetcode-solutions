@@ -96,7 +96,7 @@ class Solution:
     "text": "You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.\nEvaluate the expression. Return an integer that represents the value of the expression.\nNote that:\n\nThe valid operators are '+', '-', '*', and '/'.\nEach operand may be an integer or another expression.\nThe division between two integers always truncates toward zero.\nThere will not be any division by zero.\nThe input represents a valid arithmetic expression in a reverse polish notation.\nThe answer and all the intermediate calculations can be represented in a 32-bit integer.\n\n\u00a0\nExample 1:\n\nInput: tokens = [\"2\",\"1\",\"+\",\"3\",\"*\"]\nOutput: 9\nExplanation: ((2 + 1) * 3) = 9\n\nExample 2:\n\nInput: tokens = [\"4\",\"13\",\"5\",\"/\",\"+\"]\nOutput: 6\nExplanation: (4 + (13 / 5)) = 6\n\nExample 3:\n\nInput: tokens = [\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]\nOutput: 22\nExplanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5\n= ((10 * (6 / (12 * -11))) + 17) + 5\n= ((10 * (6 / -132)) + 17) + 5\n= ((10 * 0) + 17) + 5\n= (0 + 17) + 5\n= 17 + 5\n= 22\n\n\u00a0\nConstraints:\n\n1 <= tokens.length <= 104\ntokens[i] is either an operator: \"+\", \"-\", \"*\", or \"/\", or an integer in the range [-200, 200].\n\n",
     "url": "https://leetcode.com/problems/0150-evaluate-reverse-polish-notation",
     "answerCount": 1,
-    "datePublished": "2025-03-28T00:00:00Z",
+    "datePublished": "2026-01-09T20:44:06+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -106,7 +106,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    # Time complexity: O(n)\n    # Space complexity: O(n)\n    def evalRPN(self, tokens: List[str]) -> int:\n        operations = {\n            \"+\": lambda a,b: a+b,\n            \"-\": lambda a,b: a-b,\n            \"*\": lambda a,b: a*b,\n            \"/\": lambda a,b: int(a/b),\n        }\n        stack = []\n\n        for token in tokens:\n            if token in operations:\n                num2 = stack.pop()\n                num1 = stack.pop()\n                operation = operations[token]\n                stack.append(operation(num1, num2))\n            else:\n                stack.append(int(token))\n        return stack.pop()",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0150-evaluate-reverse-polish-notation/",
-      "datePublished": "2025-03-28T00:00:00Z",
+      "datePublished": "2026-01-09T20:44:06+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

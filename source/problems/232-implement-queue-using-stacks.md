@@ -103,7 +103,7 @@ class MyQueue:
     "text": "Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).\nImplement the MyQueue class:\n\nvoid push(int x) Pushes element x to the back of the queue.\nint pop() Removes the element from the front of the queue and returns it.\nint peek() Returns the element at the front of the queue.\nboolean empty() Returns true if the queue is empty, false otherwise.\n\nNotes:\n\nYou must use only standard operations of a stack, which means only push to top, peek/pop from top, size, and is empty operations are valid.\nDepending on your language, the stack may not be supported natively. You may simulate a stack using a list or deque (double-ended queue) as long as you use only a stack's standard operations.\n\n\u00a0\nExample 1:\nInput\n[\"MyQueue\", \"push\", \"push\", \"peek\", \"pop\", \"empty\"]\n[[], [1], [2], [], [], []]\nOutput\n[null, null, null, 1, 1, false]\n\nExplanation\nMyQueue myQueue = new MyQueue();\nmyQueue.push(1); // queue is: [1]\nmyQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)\nmyQueue.peek(); // return 1\nmyQueue.pop(); // return 1, queue is [2]\nmyQueue.empty(); // return false\n\n\u00a0\nConstraints:\n\n1 <= x <= 9\nAt most 100\u00a0calls will be made to push, pop, peek, and empty.\nAll the calls to pop and peek are valid.\n\n\u00a0\nFollow-up: Can you implement the queue such that each operation is amortized O(1) time complexity? In other words, performing n operations will take overall O(n) time even if one of those operations may take longer.\n",
     "url": "https://leetcode.com/problems/232-implement-queue-using-stacks",
     "answerCount": 1,
-    "datePublished": "2023-08-14T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -113,7 +113,7 @@ class MyQueue:
       "@type": "Answer",
       "text": "class MyQueue:\n    def __init__(self):\n        self.stack = []\n        self.queue = []\n\n    def push(self, x: int) -> None:\n        self.stack.append(x)\n\n    def pop(self) -> int:\n        self.move()\n        if self.queue:\n            popped = self.queue.pop()\n        return popped\n\n    def peek(self) -> int:\n        self.move()\n        return self.queue[-1]\n\n    def empty(self) -> bool:\n        return not self.stack and not self.queue\n\n    def move(self) -> None:\n        if not self.queue:\n            while self.stack:\n                self.queue.append(self.stack.pop())\n\n\n# Your MyQueue object will be instantiated and called as such:\n# obj = MyQueue()\n# obj.push(x)\n# param_2 = obj.pop()\n# param_3 = obj.peek()\n# param_4 = obj.empty()\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/232-implement-queue-using-stacks/",
-      "datePublished": "2023-08-14T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

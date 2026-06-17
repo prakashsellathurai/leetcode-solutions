@@ -71,7 +71,7 @@ class Solution:
     "text": "Given an integer array nums, find the subarray with the largest sum, and return its sum.\n\u00a0\nExample 1:\n\nInput: nums = [-2,1,-3,4,-1,2,1,-5,4]\nOutput: 6\nExplanation: The subarray [4,-1,2,1] has the largest sum 6.\n\nExample 2:\n\nInput: nums = [1]\nOutput: 1\nExplanation: The subarray [1] has the largest sum 1.\n\nExample 3:\n\nInput: nums = [5,4,-1,7,8]\nOutput: 23\nExplanation: The subarray [5,4,-1,7,8] has the largest sum 23.\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-104 <= nums[i] <= 104\n\n\u00a0\nFollow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.\n",
     "url": "https://leetcode.com/problems/0053-maximum-subarray",
     "answerCount": 1,
-    "datePublished": "2022-04-13T00:00:00Z",
+    "datePublished": "2025-10-09T22:04:52+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -81,7 +81,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def maxSubArray(self, nums: List[int]) -> int:\n                # Initialize our variables using the first element.\n        current_subarray = max_subarray = nums[0]\n\n        # Start with the 2nd element since we already used the first one.\n        for num in nums[1:]:\n            # If current_subarray is negative, throw it away. Otherwise, keep adding to it.\n            current_subarray = max(num, current_subarray + num)\n            max_subarray = max(max_subarray, current_subarray)\n\n        return max_subarray",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0053-maximum-subarray/",
-      "datePublished": "2022-04-13T00:00:00Z",
+      "datePublished": "2025-10-09T22:04:52+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

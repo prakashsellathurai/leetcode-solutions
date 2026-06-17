@@ -133,7 +133,7 @@ class Solution:
     "text": "Given an array of integers nums and an integer k, return the number of unique k-diff pairs in the array.\nA k-diff pair is an integer pair (nums[i], nums[j]), where the following are true:\n\n0 <= i < j < nums.length\n|nums[i] - nums[j]| == k\n\nNotice that |val| denotes the absolute value of val.\n\u00a0\nExample 1:\nInput: nums = [3,1,4,1,5], k = 2\nOutput: 2\nExplanation: There are two 2-diff pairs in the array, (1, 3) and (3, 5).\nAlthough we have two 1s in the input, we should only return the number of unique pairs.\n\nExample 2:\nInput: nums = [1,2,3,4,5], k = 1\nOutput: 4\nExplanation: There are four 1-diff pairs in the array, (1, 2), (2, 3), (3, 4) and (4, 5).\n\nExample 3:\nInput: nums = [1,3,1,5,4], k = 0\nOutput: 1\nExplanation: There is one 0-diff pair in the array, (1, 1).\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 104\n-107 <= nums[i] <= 107\n0 <= k <= 107\n\n",
     "url": "https://leetcode.com/problems/532-k-diff-pairs-in-an-array",
     "answerCount": 1,
-    "datePublished": "2024-10-29T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -143,7 +143,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findPairs(self, nums: List[int], k: int) -> int:\n        return self.HashingSolution(nums, k)\n\n    \"\"\"\n    bruteforce solution is to try all possible n(n-1)/2 pairs from the array of size n\n    keep a set with unique difference of value == k\n    \n    \n    Time Complexity: O(n^2)\n    Space Complexity: O(n)\n    \"\"\"\n\n    def bruteforceSolution(self, nums: List[int], k: int) -> int:\n        seen = set()\n        n = len(nums)\n        for i in range(n):\n            for j in range(i + 1, n):\n                if abs(nums[i] - nums[j]) == k:\n                    seen.add((nums[i], nums[j]))\n\n        return len(seen)\n\n    \"\"\"\n    Time Complexity: O(n^2)\n    Space Complexity: O(1)\n    \"\"\"\n\n    def bruteforceConstantSpaceSolution(self, nums: List[int], k: int) -> int:\n        kdiff = 0\n        n = len(nums)\n        for i in range(n):\n            for j in range(i + 1, n):\n                if abs(nums[i] - nums[j]) == k:\n                    kdiff += 1\n\n        return kdiff\n\n    \"\"\"\n    similar to two sum problem if we hash num1  in hashmap and look for num2+k for the second time we could increment the kidff counter\n    \n    \n    Time Complexity: O(n)\n    Space Complexity: O(n)\n    \n    \"\"\"\n\n    def HashingSolution(self, nums: List[int], k: int) -> int:\n        hashmap = {}\n\n        for num in nums:\n            if num not in hashmap:\n                hashmap[num] = 1\n            else:\n                hashmap[num] += 1\n\n        kdiff = 0\n        if k == 0:\n            for key in hashmap:\n                if hashmap[key] > 1:\n                    kdiff += 1\n        else:\n\n            for num in set(nums):\n                if num + k in hashmap:\n                    kdiff += 1\n\n        return kdiff\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/532-k-diff-pairs-in-an-array/",
-      "datePublished": "2024-10-29T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -58,7 +58,7 @@ class Solution:
     "text": "Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. The result should also be sorted in ascending order.\nAn integer a is closer to x than an integer b if:\n\n|a - x| < |b - x|, or\n|a - x| == |b - x| and a < b\n\n\u00a0\nExample 1:\nInput: arr = [1,2,3,4,5], k = 4, x = 3\nOutput: [1,2,3,4]\nExample 2:\nInput: arr = [1,2,3,4,5], k = 4, x = -1\nOutput: [1,2,3,4]\n\n\u00a0\nConstraints:\n\n1 <= k <= arr.length\n1 <= arr.length <= 104\narr is sorted in ascending order.\n-104 <= arr[i], x <= 104\n\n",
     "url": "https://leetcode.com/problems/658-find-k-closest-elements",
     "answerCount": 1,
-    "datePublished": "2024-04-20T00:00:00Z",
+    "datePublished": "2022-07-04T21:05:58+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -68,7 +68,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:\n        left, right = 0, len(arr) - k\n        while left < right:\n            mid = (left + right) // 2\n            if x - arr[mid] > arr[mid + k] - x:\n                left = mid + 1\n            else:\n                right = mid\n        return arr[left:left + k]",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/658-find-k-closest-elements/",
-      "datePublished": "2024-04-20T00:00:00Z",
+      "datePublished": "2022-07-04T21:05:58+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",

@@ -73,7 +73,7 @@ class Solution:
     "text": "You are given a string s and an integer k, a k duplicate removal consists of choosing k adjacent and equal letters from s and removing them, causing the left and the right side of the deleted substring to concatenate together.\nWe repeatedly make k duplicate removals on s until we no longer can.\nReturn the final string after all such duplicate removals have been made. It is guaranteed that the answer is unique.\n\u00a0\nExample 1:\nInput: s = \"abcd\", k = 2\nOutput: \"abcd\"\nExplanation: There's nothing to delete.\nExample 2:\nInput: s = \"deeedbbcccbdaa\", k = 3\nOutput: \"aa\"\nExplanation: \nFirst delete \"eee\" and \"ccc\", get \"ddbbbdaa\"\nThen delete \"bbb\", get \"dddaa\"\nFinally delete \"ddd\", get \"aa\"\nExample 3:\nInput: s = \"pbbcggttciiippooaais\", k = 2\nOutput: \"ps\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\n2 <= k <= 104\ns only contains lower case English letters.\n\n",
     "url": "https://leetcode.com/problems/1209-remove-all-adjacent-duplicates-in-string-ii",
     "answerCount": 1,
-    "datePublished": "2025-11-03T00:00:00Z",
+    "datePublished": "2022-06-19T23:02:59+05:30",
     "author": {
       "@type": "Organization",
       "name": "LeetCode",
@@ -83,7 +83,7 @@ class Solution:
       "@type": "Answer",
       "text": "class Solution:\n    def removeDuplicates(self, s: str, k: int) -> str:\n        stack = []\n\n        for c in s:\n            if stack and c == stack[-1][0]:\n                stack[-1][1] += 1\n            else:\n                stack.append([c, 1])\n\n            if stack[-1][1] == k:\n                stack.pop()\n\n        return \"\".join(i * j for i, j in stack)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1209-remove-all-adjacent-duplicates-in-string-ii/",
-      "datePublished": "2025-11-03T00:00:00Z",
+      "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
       "author": {
         "@type": "Person",
