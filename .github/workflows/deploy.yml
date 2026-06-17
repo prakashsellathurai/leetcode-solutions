@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r ./requirements.txt
 
+      - name: Fetch full submodule history
+        run: git -C leetcode-submissions fetch --unshallow 2>/dev/null || true
+
       - name: Update .md files
         run: python ./scripts/createdocs.py
 
