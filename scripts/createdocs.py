@@ -29,7 +29,7 @@ DOCS_PATH = os.path.join(os.getcwd(), DOCS_FOLDER)
 PROBLEMS_FOLDER_PATH = os.path.join(os.getcwd(), "./source/problems/")
 INDEX_FILE_PATH = os.path.join(os.getcwd(), "./source/_static/index.html")
 IGNORED_PATHS = [".git", ".github",".deepsource.toml"]
-STATE_FILE_PATH = os.path.join(os.getcwd(), "./scripts/problem_dates.json")
+STATE_FILE_PATH = os.path.join(os.getcwd(), "./source/problem_dates.json")
 
 
 def load_dates():
@@ -54,7 +54,7 @@ def to_doc(problem):
     Returns:
         str: doc string
     """
-    site_base = "https://prakashsellathurai.com/leetcode-solutions/"
+    site_base = "https://prakashsellathurai.com/leetcode-solutions/problems"
     json_ld = {
         "@context": "https://schema.org",
         "@type": "QAPage",

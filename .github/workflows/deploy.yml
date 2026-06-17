@@ -38,7 +38,7 @@ jobs:
         with:
           default_author: github_actions
           message: "Update problem_dates.json"
-          add: "scripts/problem_dates.json"
+          add: "source/problem_dates.json"
 
       - name: Generate Docs
         run: sphinx-build -b dirhtml ./source/ ./docs
