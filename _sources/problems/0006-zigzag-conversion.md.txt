@@ -1,0 +1,135 @@
+# 0006-zigzag-conversion
+
+
+Try it on <a href='https://leetcode.com/problems/0006-zigzag-conversion'>leetcode</a>
+
+## Description
+<div class="description">
+<p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+
+<pre>
+P   A   H   N
+A P L S I I G
+Y   I   R
+</pre>
+
+<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
+
+<p>Write the code that will take a string and make this conversion given a number of rows:</p>
+
+<pre>
+string convert(string s, int numRows);
+</pre>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;PAYPALISHIRING&quot;, numRows = 3
+<strong>Output:</strong> &quot;PAHNAPLSIIGYIR&quot;
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;PAYPALISHIRING&quot;, numRows = 4
+<strong>Output:</strong> &quot;PINALSIGYAHRPI&quot;
+<strong>Explanation:</strong>
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;A&quot;, numRows = 1
+<strong>Output:</strong> &quot;A&quot;
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 1000</code></li>
+	<li><code>s</code> consists of English letters (lower-case and upper-case), <code>&#39;,&#39;</code> and <code>&#39;.&#39;</code>.</li>
+	<li><code>1 &lt;= numRows &lt;= 1000</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import defaultdict
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        #
+        # 
+        # "PAYPALISHIRING"
+        #
+        #  s , numRows=3
+        #   
+        #  trace the rwos
+        #  0 1 2 1 0 1 2 1
+        #  cyclcical
+        #  pattern follows each cycle is detreminded by number of rows
+        #  if m is number of rows
+        #  0...m then m - 1,m-2....0 and cycle continues
+        # 
+        #  You iterate through the string and assign each character to a row
+# Then you need to output all characters from row 0, then all from row 1, then all from row 2, etc.
+# 
+        if numRows == 1:
+            return s
+        row = 0
+        direction = 1
+        hashmap =  defaultdict(list)
+        for i,char in enumerate(s):
+            hashmap[row].append(char)
+            
+            next_row =  row + direction
+            if next_row >= numRows  or next_row < 0:
+                direction *= -1 
+            row += direction
+        
+        result = ""
+
+        for rows_idx in range(numRows):
+            result += "".join(hashmap[rows_idx])
+        return result
+        
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "6. Zigzag Conversion",
+    "text": "The string \"PAYPALISHIRING\" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)\n\nP   A   H   N\nA P L S I I G\nY   I   R\n\nAnd then read line by line: \"PAHNAPLSIIGYIR\"\nWrite the code that will take a string and make this conversion given a number of rows:\n\nstring convert(string s, int numRows);\n\n\u00a0\nExample 1:\n\nInput: s = \"PAYPALISHIRING\", numRows = 3\nOutput: \"PAHNAPLSIIGYIR\"\n\nExample 2:\n\nInput: s = \"PAYPALISHIRING\", numRows = 4\nOutput: \"PINALSIGYAHRPI\"\nExplanation:\nP     I    N\nA   L S  I G\nY A   H R\nP     I\n\nExample 3:\n\nInput: s = \"A\", numRows = 1\nOutput: \"A\"\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 1000\ns consists of English letters (lower-case and upper-case), ',' and '.'.\n1 <= numRows <= 1000\n\n",
+    "url": "https://leetcode.com/problems/0006-zigzag-conversion",
+    "answerCount": 1,
+    "datePublished": "2026-06-20T15:59:22+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import defaultdict\nclass Solution:\n    def convert(self, s: str, numRows: int) -> str:\n        #\n        # \n        # \"PAYPALISHIRING\"\n        #\n        #  s , numRows=3\n        #   \n        #  trace the rwos\n        #  0 1 2 1 0 1 2 1\n        #  cyclcical\n        #  pattern follows each cycle is detreminded by number of rows\n        #  if m is number of rows\n        #  0...m then m - 1,m-2....0 and cycle continues\n        # \n        #  You iterate through the string and assign each character to a row\n# Then you need to output all characters from row 0, then all from row 1, then all from row 2, etc.\n# \n        if numRows == 1:\n            return s\n        row = 0\n        direction = 1\n        hashmap =  defaultdict(list)\n        for i,char in enumerate(s):\n            hashmap[row].append(char)\n            \n            next_row =  row + direction\n            if next_row >= numRows  or next_row < 0:\n                direction *= -1 \n            row += direction\n        \n        result = \"\"\n\n        for rows_idx in range(numRows):\n            result += \"\".join(hashmap[rows_idx])\n        return result\n        \n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0006-zigzag-conversion/",
+      "datePublished": "2026-06-20T15:59:22+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

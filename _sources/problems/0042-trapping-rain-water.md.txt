@@ -1,0 +1,101 @@
+# 0042-trapping-rain-water
+
+
+Try it on <a href='https://leetcode.com/problems/0042-trapping-rain-water'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given <code>n</code> non-negative integers representing an elevation map where the width of each bar is <code>1</code>, compute how much water it can trap after raining.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img src="https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png" style="width: 412px; height: 161px;" />
+<pre>
+<strong>Input:</strong> height = [0,1,0,2,1,0,1,3,2,1,2,1]
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> height = [4,2,0,3,2,5]
+<strong>Output:</strong> 9
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>n == height.length</code></li>
+	<li><code>1 &lt;= n &lt;= 2 * 10<sup>4</sup></code></li>
+	<li><code>0 &lt;= height[i] &lt;= 10<sup>5</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        #
+        #  At position i
+        #     left_max = tallest bar to the left of i
+        #      right_max = tallest bar to right of i
+        #    water levle at i = min(left_max, right_max)
+        #   net water trapped = water level - height[i]
+        # 4,2,0,3,2,5]
+        #  trapped = 0
+        #  
+        trapped = 0
+        n = len(height)
+        left = 0
+        right = n - 1
+        left_max = height[left]
+        right_max =  height[right]
+
+        while left <= right: 
+            if left_max < right_max:
+                left_max = max(left_max, height[left])
+                trapped += left_max - height[left]
+                left += 1
+            else:
+                right_max = max(right_max, height[right])
+                trapped += right_max - height[right]
+                right -= 1
+        return trapped
+
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "42. Trapping Rain Water",
+    "text": "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.\n\u00a0\nExample 1:\n\n\nInput: height = [0,1,0,2,1,0,1,3,2,1,2,1]\nOutput: 6\nExplanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.\n\nExample 2:\n\nInput: height = [4,2,0,3,2,5]\nOutput: 9\n\n\u00a0\nConstraints:\n\nn == height.length\n1 <= n <= 2 * 104\n0 <= height[i] <= 105\n\n",
+    "url": "https://leetcode.com/problems/0042-trapping-rain-water",
+    "answerCount": 1,
+    "datePublished": "2026-06-18T23:16:43+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def trap(self, height: List[int]) -> int:\n        #\n        #  At position i\n        #     left_max = tallest bar to the left of i\n        #      right_max = tallest bar to right of i\n        #    water levle at i = min(left_max, right_max)\n        #   net water trapped = water level - height[i]\n        # 4,2,0,3,2,5]\n        #  trapped = 0\n        #  \n        trapped = 0\n        n = len(height)\n        left = 0\n        right = n - 1\n        left_max = height[left]\n        right_max =  height[right]\n\n        while left <= right: \n            if left_max < right_max:\n                left_max = max(left_max, height[left])\n                trapped += left_max - height[left]\n                left += 1\n            else:\n                right_max = max(right_max, height[right])\n                trapped += right_max - height[right]\n                right -= 1\n        return trapped\n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0042-trapping-rain-water/",
+      "datePublished": "2026-06-18T23:16:43+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

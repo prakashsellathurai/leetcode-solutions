@@ -1,0 +1,99 @@
+# 0058-length-of-last-word
+
+
+Try it on <a href='https://leetcode.com/problems/0058-length-of-last-word'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given a string <code>s</code> consisting of words and spaces, return <em>the length of the <strong>last</strong> word in the string.</em></p>
+
+<p>A <strong>word</strong> is a maximal <span data-keyword="substring-nonempty">substring</span> consisting of non-space characters only.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;Hello World&quot;
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> The last word is &quot;World&quot; with length 5.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;   fly me   to   the moon  &quot;
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> The last word is &quot;moon&quot; with length 4.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;luffy is still joyboy&quot;
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> The last word is &quot;joyboy&quot; with length 6.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>s</code> consists of only English letters and spaces <code>&#39; &#39;</code>.</li>
+	<li>There will be at least one word in <code>s</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        # read from back of the string until char == whitespace  s[i] == whitespace
+        # start ounting run loop until we reach spaces[i] != whitespace
+        n = len(s)
+        i = n - 1
+        if n == 1:
+            return 1
+
+        while i >= 0 and s[i] == ' ':
+            i -= 1
+        j = i
+        while i >= 0 and s[i] != ' ':
+            i -= 1
+
+        return j - i
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "58. Length of Last Word",
+    "text": "Given a string s consisting of words and spaces, return the length of the last word in the string.\nA word is a maximal substring consisting of non-space characters only.\n\u00a0\nExample 1:\n\nInput: s = \"Hello World\"\nOutput: 5\nExplanation: The last word is \"World\" with length 5.\n\nExample 2:\n\nInput: s = \"   fly me   to   the moon  \"\nOutput: 4\nExplanation: The last word is \"moon\" with length 4.\n\nExample 3:\n\nInput: s = \"luffy is still joyboy\"\nOutput: 6\nExplanation: The last word is \"joyboy\" with length 6.\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 104\ns consists of only English letters and spaces ' '.\nThere will be at least one word in s.\n\n",
+    "url": "https://leetcode.com/problems/0058-length-of-last-word",
+    "answerCount": 1,
+    "datePublished": "2026-06-19T23:20:19+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def lengthOfLastWord(self, s: str) -> int:\n        # read from back of the string until char == whitespace  s[i] == whitespace\n        # start ounting run loop until we reach spaces[i] != whitespace\n        n = len(s)\n        i = n - 1\n        if n == 1:\n            return 1\n\n        while i >= 0 and s[i] == ' ':\n            i -= 1\n        j = i\n        while i >= 0 and s[i] != ' ':\n            i -= 1\n\n        return j - i\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0058-length-of-last-word/",
+      "datePublished": "2026-06-19T23:20:19+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

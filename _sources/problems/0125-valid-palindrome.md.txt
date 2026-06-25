@@ -49,31 +49,19 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 ```Python
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        return self.two_pointers(s)
-    # Time Complexity: O(n)
-    # Space complexity: O(n)
-    def simulation(self, s):
-        filtyered_char = filter(lambda ch:ch.isalnum(), s)
-        lowercase_chars = map(lambda ch: ch.lower(),s )
+        i = 0
+        j = len(s) - 1
 
-        return lowercase_chars == lowercase_chars[::-1]
-
-    # Time Complexity: O(n)
-    # Space complexity: O(1)
-    def two_pointers(self, s):
-        i,j = 0, len(s) - 1
-        while i<j:
-            while i<j and not s[i].isalnum():
-                i+=1
-
-            while j>i and not s[j].isalnum():
-                j-=1
+        while  i<j:
+            while i < j  and not s[i].isalnum():
+                i += 1
+            while i < j  and not s[j].isalnum():
+                j -= 1   
             if s[i].lower() != s[j].lower():
                 return False
-            i+=1
-            j-=1
+            i += 1
+            j -=1
         return True
-
 ```
 
 <script type="application/ld+json">
@@ -94,7 +82,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def isPalindrome(self, s: str) -> bool:\n        return self.two_pointers(s)\n    # Time Complexity: O(n)\n    # Space complexity: O(n)\n    def simulation(self, s):\n        filtyered_char = filter(lambda ch:ch.isalnum(), s)\n        lowercase_chars = map(lambda ch: ch.lower(),s )\n\n        return lowercase_chars == lowercase_chars[::-1]\n\n    # Time Complexity: O(n)\n    # Space complexity: O(1)\n    def two_pointers(self, s):\n        i,j = 0, len(s) - 1\n        while i<j:\n            while i<j and not s[i].isalnum():\n                i+=1\n\n            while j>i and not s[j].isalnum():\n                j-=1\n            if s[i].lower() != s[j].lower():\n                return False\n            i+=1\n            j-=1\n        return True\n",
+      "text": "class Solution:\n    def isPalindrome(self, s: str) -> bool:\n        i = 0\n        j = len(s) - 1\n\n        while  i<j:\n            while i < j  and not s[i].isalnum():\n                i += 1\n            while i < j  and not s[j].isalnum():\n                j -= 1   \n            if s[i].lower() != s[j].lower():\n                return False\n            i += 1\n            j -=1\n        return True",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0125-valid-palindrome/",
       "datePublished": "2025-09-28T18:13:28+05:30",
       "upvoteCount": 0,

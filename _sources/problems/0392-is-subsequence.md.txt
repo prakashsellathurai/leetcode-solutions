@@ -1,0 +1,90 @@
+# 0392-is-subsequence
+
+
+Try it on <a href='https://leetcode.com/problems/0392-is-subsequence'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code><em> if </em><code>s</code><em> is a <strong>subsequence</strong> of </em><code>t</code><em>, or </em><code>false</code><em> otherwise</em>.</p>
+
+<p>A <strong>subsequence</strong> of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., <code>&quot;ace&quot;</code> is a subsequence of <code>&quot;<u>a</u>b<u>c</u>d<u>e</u>&quot;</code> while <code>&quot;aec&quot;</code> is not).</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> s = "abc", t = "ahbgdc"
+<strong>Output:</strong> true
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> s = "axc", t = "ahbgdc"
+<strong>Output:</strong> false
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= s.length &lt;= 100</code></li>
+	<li><code>0 &lt;= t.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>s</code> and <code>t</code> consist only of lowercase English letters.</li>
+</ul>
+
+<p>&nbsp;</p>
+<strong>Follow up:</strong> Suppose there are lots of incoming <code>s</code>, say <code>s<sub>1</sub>, s<sub>2</sub>, ..., s<sub>k</sub></code> where <code>k &gt;= 10<sup>9</sup></code>, and you want to check one by one to see if <code>t</code> has its subsequence. In this scenario, how would you change your code?
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        #  s = "abc", t = "ahbgdc"
+        #  count = 0
+        #  i ..t -> loop
+        #   j .. s
+        #   if  char at i matches j
+        #      j += 1
+        #  return j == len(s)
+        #  
+        #  i = 0 ; j= 0 match  j += 1
+        #  i =1 ; f
+        #  i =2 ; t j =2
+        #  i =3 ; f
+        #  i =4 ; f
+        #  i =5 l; t  j = 3
+        cnt = 0
+        for text  in t:
+            if cnt < len(s) and text  == s[cnt]:
+                cnt += 1
+        return cnt == len(s)
+
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "392. Is Subsequence",
+    "text": "Given two strings s and t, return true if s is a subsequence of t, or false otherwise.\nA subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., \"ace\" is a subsequence of \"abcde\" while \"aec\" is not).\n\u00a0\nExample 1:\nInput: s = \"abc\", t = \"ahbgdc\"\nOutput: true\nExample 2:\nInput: s = \"axc\", t = \"ahbgdc\"\nOutput: false\n\n\u00a0\nConstraints:\n\n0 <= s.length <= 100\n0 <= t.length <= 104\ns and t consist only of lowercase English letters.\n\n\u00a0\nFollow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 109, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?",
+    "url": "https://leetcode.com/problems/0392-is-subsequence",
+    "answerCount": 1,
+    "datePublished": "2026-06-25T13:14:12+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isSubsequence(self, s: str, t: str) -> bool:\n        #  s = \"abc\", t = \"ahbgdc\"\n        #  count = 0\n        #  i ..t -> loop\n        #   j .. s\n        #   if  char at i matches j\n        #      j += 1\n        #  return j == len(s)\n        #  \n        #  i = 0 ; j= 0 match  j += 1\n        #  i =1 ; f\n        #  i =2 ; t j =2\n        #  i =3 ; f\n        #  i =4 ; f\n        #  i =5 l; t  j = 3\n        cnt = 0\n        for text  in t:\n            if cnt < len(s) and text  == s[cnt]:\n                cnt += 1\n        return cnt == len(s)\n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0392-is-subsequence/",
+      "datePublished": "2026-06-25T13:14:12+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,104 @@
+# 0028-find-the-index-of-the-first-occurrence-in-a-string
+
+
+Try it on <a href='https://leetcode.com/problems/0028-find-the-index-of-the-first-occurrence-in-a-string'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two strings <code>needle</code> and <code>haystack</code>, return the index of the first occurrence of <code>needle</code> in <code>haystack</code>, or <code>-1</code> if <code>needle</code> is not part of <code>haystack</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> haystack = &quot;sadbutsad&quot;, needle = &quot;sad&quot;
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> &quot;sad&quot; occurs at index 0 and 6.
+The first occurrence is at index 0, so we return 0.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> haystack = &quot;leetcode&quot;, needle = &quot;leeto&quot;
+<strong>Output:</strong> -1
+<strong>Explanation:</strong> &quot;leeto&quot; did not occur in &quot;leetcode&quot;, so we return -1.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= haystack.length, needle.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>haystack</code> and <code>needle</code> consist of only lowercase English characters.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        # take two pointers i  and j one at haystack and one at needle
+        #  iterate i...h
+        #     if match found i == needle[0]
+        #         j = 1...n
+        #           exit early on mismatch
+        #         if j == n
+        #            return j
+        #   return -1
+        # dryrun
+        #  haystack = "sadbutsad", needle = "sad"
+        #  h = 9 n = 3
+        #  needle[0] = s
+        #  i = 0:  s == s true
+        #       j = 1 k = 1 a == a
+        #       j = 2 k = 2 d == d
+        #      j == n-1
+        #          return i
+        h = len(haystack)
+        n = len(needle)
+        for i in range(h):
+            if haystack[i] == needle[0]:
+                j =  1 
+                k = i + 1
+                while j < n and k < h and haystack[k] == needle[j]:
+                    j += 1
+                    k+=1
+                if j == n:
+                    return i
+        return -1
+        
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "28. Find the Index of the First Occurrence in a String",
+    "text": "Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.\n\u00a0\nExample 1:\n\nInput: haystack = \"sadbutsad\", needle = \"sad\"\nOutput: 0\nExplanation: \"sad\" occurs at index 0 and 6.\nThe first occurrence is at index 0, so we return 0.\n\nExample 2:\n\nInput: haystack = \"leetcode\", needle = \"leeto\"\nOutput: -1\nExplanation: \"leeto\" did not occur in \"leetcode\", so we return -1.\n\n\u00a0\nConstraints:\n\n1 <= haystack.length, needle.length <= 104\nhaystack and needle consist of only lowercase English characters.\n\n",
+    "url": "https://leetcode.com/problems/0028-find-the-index-of-the-first-occurrence-in-a-string",
+    "answerCount": 1,
+    "datePublished": "2026-06-20T16:34:09+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def strStr(self, haystack: str, needle: str) -> int:\n        # take two pointers i  and j one at haystack and one at needle\n        #  iterate i...h\n        #     if match found i == needle[0]\n        #         j = 1...n\n        #           exit early on mismatch\n        #         if j == n\n        #            return j\n        #   return -1\n        # dryrun\n        #  haystack = \"sadbutsad\", needle = \"sad\"\n        #  h = 9 n = 3\n        #  needle[0] = s\n        #  i = 0:  s == s true\n        #       j = 1 k = 1 a == a\n        #       j = 2 k = 2 d == d\n        #      j == n-1\n        #          return i\n        h = len(haystack)\n        n = len(needle)\n        for i in range(h):\n            if haystack[i] == needle[0]:\n                j =  1 \n                k = i + 1\n                while j < n and k < h and haystack[k] == needle[j]:\n                    j += 1\n                    k+=1\n                if j == n:\n                    return i\n        return -1\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0028-find-the-index-of-the-first-occurrence-in-a-string/",
+      "datePublished": "2026-06-20T16:34:09+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

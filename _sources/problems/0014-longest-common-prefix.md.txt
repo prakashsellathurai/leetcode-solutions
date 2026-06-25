@@ -1,0 +1,97 @@
+# 0014-longest-common-prefix
+
+
+Try it on <a href='https://leetcode.com/problems/0014-longest-common-prefix'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+
+<p>If there is no common prefix, return an empty string <code>&quot;&quot;</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> strs = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+<strong>Output:</strong> &quot;fl&quot;
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> strs = [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+<strong>Output:</strong> &quot;&quot;
+<strong>Explanation:</strong> There is no common prefix among the input strings.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= strs.length &lt;= 200</code></li>
+	<li><code>0 &lt;= strs[i].length &lt;= 200</code></li>
+	<li><code>strs[i]</code> consists of only lowercase English letters if it is non-empty.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        # 
+        # 1. Find the shortest string length (this is your loop limit)
+# 2. For each position from 0 to shortest_length:
+#    - Compare character at that position across ALL strings
+#    - If any mismatch or out of bounds: STOP and return prefix so far
+#    - Otherwise: add this character to the result
+# 3. Return the result
+#  
+        if not strs:
+            return ""
+
+        min_len = min(len(s) for s in strs)
+        prefix = ""
+
+        for pos in range(min_len):
+            char = strs[0][pos]
+            for s in strs[1:]:
+                if s[pos] != char:
+                    return prefix
+            prefix += char
+        return prefix
+
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "14. Longest Common Prefix",
+    "text": "Write a function to find the longest common prefix string amongst an array of strings.\nIf there is no common prefix, return an empty string \"\".\n\u00a0\nExample 1:\n\nInput: strs = [\"flower\",\"flow\",\"flight\"]\nOutput: \"fl\"\n\nExample 2:\n\nInput: strs = [\"dog\",\"racecar\",\"car\"]\nOutput: \"\"\nExplanation: There is no common prefix among the input strings.\n\n\u00a0\nConstraints:\n\n1 <= strs.length <= 200\n0 <= strs[i].length <= 200\nstrs[i] consists of only lowercase English letters if it is non-empty.\n\n",
+    "url": "https://leetcode.com/problems/0014-longest-common-prefix",
+    "answerCount": 1,
+    "datePublished": "2026-06-19T23:30:11+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def longestCommonPrefix(self, strs: List[str]) -> str:\n        # \n        # 1. Find the shortest string length (this is your loop limit)\n# 2. For each position from 0 to shortest_length:\n#    - Compare character at that position across ALL strings\n#    - If any mismatch or out of bounds: STOP and return prefix so far\n#    - Otherwise: add this character to the result\n# 3. Return the result\n#  \n        if not strs:\n            return \"\"\n\n        min_len = min(len(s) for s in strs)\n        prefix = \"\"\n\n        for pos in range(min_len):\n            char = strs[0][pos]\n            for s in strs[1:]:\n                if s[pos] != char:\n                    return prefix\n            prefix += char\n        return prefix\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0014-longest-common-prefix/",
+      "datePublished": "2026-06-19T23:30:11+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="0026-remove-duplicates-from-sorted-array" href="../0026-remove-duplicates-from-sorted-array/" /><link rel="prev" title="0005-longest-palindromic-substring" href="../0005-longest-palindromic-substring/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="0014-longest-common-prefix" href="../0014-longest-common-prefix/" /><link rel="prev" title="0012-integer-to-roman" href="../0012-integer-to-roman/" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.01.02"/>
         <title>0013-roman-to-integer - Leetcode Solutions</title>
@@ -158,22 +158,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../0002-add-two-numbers/">0002-add-two-numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0003-longest-substring-without-repeating-characters/">0003-longest-substring-without-repeating-characters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0005-longest-palindromic-substring/">0005-longest-palindromic-substring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0006-zigzag-conversion/">0006-zigzag-conversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0011-container-with-most-water/">0011-container-with-most-water</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">0013-roman-to-integer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0033-search-in-rotated-sorted-array/">0033-search-in-rotated-sorted-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0042-trapping-rain-water/">0042-trapping-rain-water</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0045-jump-game-ii/">0045-jump-game-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0053-maximum-subarray/">0053-maximum-subarray</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0055-jump-game/">0055-jump-game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0058-length-of-last-word/">0058-length-of-last-word</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0068-text-justification/">0068-text-justification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0080-remove-duplicates-from-sorted-array-ii/">0080-remove-duplicates-from-sorted-array-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0084-largest-rectangle-in-histogram/">0084-largest-rectangle-in-histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0088-merge-sorted-array/">0088-merge-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0121-best-time-to-buy-and-sell-stock/">0121-best-time-to-buy-and-sell-stock</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0122-best-time-to-buy-and-sell-stock-ii/">0122-best-time-to-buy-and-sell-stock-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0125-valid-palindrome/">0125-valid-palindrome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0134-gas-station/">0134-gas-station</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0135-candy/">0135-candy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0146-lru-cache/">0146-lru-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0147-insertion-sort-list/">0147-insertion-sort-list</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0150-evaluate-reverse-polish-notation/">0150-evaluate-reverse-polish-notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0151-reverse-words-in-a-string/">0151-reverse-words-in-a-string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0167-two-sum-ii-input-array-is-sorted/">0167-two-sum-ii-input-array-is-sorted</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
@@ -184,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0459-repeated-substring-pattern/">0459-repeated-substring-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0460-lfu-cache/">0460-lfu-cache</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0482-license-key-formatting/">0482-license-key-formatting</a></li>
@@ -341,6 +354,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../29-divide-two-integers/">29-divide-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../290-word-pattern/">290-word-pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../295-find-median-from-data-stream/">295-find-median-from-data-stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2965-find-missing-and-repeated-values/">2965-find-missing-and-repeated-values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../297-serialize-and-deserialize-binary-tree/">297-serialize-and-deserialize-binary-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3-longest-substring-without-repeating-characters/">3-longest-substring-without-repeating-characters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../300-longest-increasing-subsequence/">300-longest-increasing-subsequence</a></li>
@@ -591,31 +605,44 @@ M             1000</pre><p>For example, <code>2</code> is written as <code>II</
 </ul></div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"I"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"V"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">"X"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">"L"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-    <span class="s2">"C"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"D"</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="s2">"M"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-<span class="p">}</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">'I'</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">'V'</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s1">'X'</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s1">'L'</span> <span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="s1">'C'</span> <span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s1">'D'</span> <span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+            <span class="s1">'M'</span> <span class="p">:</span> <span class="mi">1000</span>
+        <span class="p">}</span>
 
-
-<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-            <span class="c1"># If this is the subtractive case.</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="n">values</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">values</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
-                <span class="n">total</span> <span class="o">+=</span> <span class="n">values</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="n">values</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-                <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
-            <span class="c1"># Else this is NOT the subtractive case.</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">total</span> <span class="o">+=</span> <span class="n">values</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">total</span>
+        <span class="c1"># initialize number = 0</span>
+        <span class="c1">#</span>
+        <span class="c1"># itearte from back for id</span>
+        <span class="c1">#  if id + 1 &lt; id</span>
+        <span class="c1">#      reduce 1 from number</span>
+        <span class="c1">#  if num in hash</span>
+        <span class="c1">#     number += number at hash id</span>
+        
+        <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span> <span class="mi">1</span>
+       <span class="c1"># "MCMXCIV"  n = 7  i = 6</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#    i = 4, X C</span>
+            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">cur_element</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># C</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">[</span><span class="n">cur_element</span><span class="p">]:</span> <span class="c1"># I  &lt; V</span>
+                <span class="n">number</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span> <span class="c1"># 3</span>
+                <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># 3</span>
+            
+            <span class="n">number</span>  <span class="o">+=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">[</span><span class="n">cur_element</span><span class="p">]</span> <span class="c1">#  number = </span>
+            <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span> <span class="c1"># 4</span>
+
+        <span class="k">return</span> <span class="n">number</span>
 </pre></div>
 </div>
 <script type="application/ld+json">
@@ -636,7 +663,7 @@ M             1000</pre><p>For example, <code>2</code> is written as <code>II</
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "values = {\n    \"I\": 1,\n    \"V\": 5,\n    \"X\": 10,\n    \"L\": 50,\n    \"C\": 100,\n    \"D\": 500,\n    \"M\": 1000,\n}\n\n\nclass Solution:\n    def romanToInt(self, s: str) -> int:\n        total = 0\n        i = 0\n        while i < len(s):\n            # If this is the subtractive case.\n            if i + 1 < len(s) and values[s[i]] < values[s[i + 1]]:\n                total += values[s[i + 1]] - values[s[i]]\n                i += 2\n            # Else this is NOT the subtractive case.\n            else:\n                total += values[s[i]]\n                i += 1\n        return total",
+      "text": "class Solution:\n    def __init__(self):\n        self.hashmap = {\n            'I' : 1,\n            'V' : 5,\n            'X' : 10,\n            'L' : 50,\n            'C' : 100,\n            'D' : 500,\n            'M' : 1000\n        }\n\n    def romanToInt(self, s: str) -> int:\n        # initialize number = 0\n        #\n        # itearte from back for id\n        #  if id + 1 < id\n        #      reduce 1 from number\n        #  if num in hash\n        #     number += number at hash id\n        \n        number = 0\n        n = len(s)\n        i = n- 1\n       # \"MCMXCIV\"  n = 7  i = 6\n        while i >= 0: #    i = 4, X C\n            if s[i] not in self.hashmap:\n                return -1\n            cur_element = s[i] # C\n\n            if i - 1 >= 0 and self.hashmap[s[i - 1]] < self.hashmap[cur_element]: # I  < V\n                number -= self.hashmap[s[i - 1]] # 3\n                i -= 1  # 3\n            \n            number  +=  self.hashmap[cur_element] #  number = \n            i -= 1 # 4\n\n        return number",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0013-roman-to-integer/",
       "datePublished": "2025-10-09T21:57:17+05:30",
       "upvoteCount": 0,
@@ -656,23 +683,23 @@ M             1000</pre><p>For example, <code>2</code> is written as <code>II</
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../0026-remove-duplicates-from-sorted-array/">
+          <a class="next-page" href="../0014-longest-common-prefix/">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">0026-remove-duplicates-from-sorted-array</div>
+                <div class="title">0014-longest-common-prefix</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../0005-longest-palindromic-substring/">
+          <a class="prev-page" href="../0012-integer-to-roman/">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">0005-longest-palindromic-substring</div>
+                <div class="title">0012-integer-to-roman</div>
                 
               </div>
             </a>

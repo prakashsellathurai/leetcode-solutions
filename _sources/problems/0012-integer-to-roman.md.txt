@@ -1,0 +1,219 @@
+# 0012-integer-to-roman
+
+
+Try it on <a href='https://leetcode.com/problems/0012-integer-to-roman'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Seven different symbols represent Roman numerals with the following values:</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Symbol</th>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>I</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>V</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>X</td>
+			<td>10</td>
+		</tr>
+		<tr>
+			<td>L</td>
+			<td>50</td>
+		</tr>
+		<tr>
+			<td>C</td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td>D</td>
+			<td>500</td>
+		</tr>
+		<tr>
+			<td>M</td>
+			<td>1000</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Roman numerals are formed by appending&nbsp;the conversions of&nbsp;decimal place values&nbsp;from highest to lowest. Converting a decimal place value into a Roman numeral has the following rules:</p>
+
+<ul>
+	<li>If the value does not start with 4 or&nbsp;9, select the symbol of the maximal value that can be subtracted from the input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.</li>
+	<li>If the value starts with 4 or 9 use the&nbsp;<strong>subtractive form</strong>&nbsp;representing&nbsp;one symbol subtracted from the following symbol, for example,&nbsp;4 is 1 (<code>I</code>) less than 5 (<code>V</code>): <code>IV</code>&nbsp;and 9 is 1 (<code>I</code>) less than 10 (<code>X</code>): <code>IX</code>.&nbsp;Only the following subtractive forms are used: 4 (<code>IV</code>), 9 (<code>IX</code>),&nbsp;40 (<code>XL</code>), 90 (<code>XC</code>), 400 (<code>CD</code>) and 900 (<code>CM</code>).</li>
+	<li>Only powers of 10 (<code>I</code>, <code>X</code>, <code>C</code>, <code>M</code>) can be appended consecutively at most 3 times to represent multiples of 10. You cannot append 5&nbsp;(<code>V</code>), 50 (<code>L</code>), or 500 (<code>D</code>) multiple times. If you need to append a symbol&nbsp;4 times&nbsp;use the <strong>subtractive form</strong>.</li>
+</ul>
+
+<p>Given an integer, convert it to a Roman numeral.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">num = 3749</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">&quot;MMMDCCXLIX&quot;</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<pre>
+3000 = MMM as 1000 (M) + 1000 (M) + 1000 (M)
+ 700 = DCC as 500 (D) + 100 (C) + 100 (C)
+  40 = XL as 10 (X) less of 50 (L)
+   9 = IX as 1 (I) less of 10 (X)
+Note: 49 is not 1 (I) less of 50 (L) because the conversion is based on decimal places
+</pre>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">num = 58</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">&quot;LVIII&quot;</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<pre>
+50 = L
+ 8 = VIII
+</pre>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">num = 1994</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">&quot;MCMXCIV&quot;</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<pre>
+1000 = M
+ 900 = CM
+  90 = XC
+   4 = IV
+</pre>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= num &lt;= 3999</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.mapping = [(1000, 'M'), 
+        (900, 'CM'), 
+        (500, 'D'), 
+        (400, 'CD'), 
+        (100, 'C'), 
+        (90, 'XC'), 
+        (50, 'L'), 
+        (40,'XL'),
+        (10, 'X'),
+        (9, 'IX'),
+        (5,'V'),
+        (4,"IV"),
+        (1, 'I') ]
+
+    def intToRoman(self, num: int) -> str:
+        # num = 3749
+        # 3000 =?  MMM
+        # 700 = 500 + 100 + 100 = DCC
+        # 40 = XL = 50  - 10
+        # 9 = IX = 10 - 9
+        # 
+        # create hashmap of all values
+        # orderelsist = largest to smallest
+        # 
+        # res 
+        # num = 3748
+        #  condition: num >0
+        #    loop  ordered element
+        #       condition num > orderedelement
+        #         break
+        #   num = 3748  [(1000 , m )  () (500, D)....]
+        #  res = ""
+        #   3748 > 0
+        #     -> loop
+        #      3748 >= 1000 
+        
+        #     -> while 3748 > 1000 
+        #           3748 - 1000 = 3
+        #         res += M
+        #      num = 3728 % 1000 = 728
+        #   748 > 0
+        #     -> loop
+        #       748 > 1000 f
+        #       748 > 500 t
+        #      while 748 >= 500
+        #       748 - 500 = 248
+        #
+        #       res += 3*D
+        #       num = 748 % 500 = 
+        #  simple algorith m
+        #   while num >= mapped value:
+        #       append the reuslt
+        #        num -= mapped value
+
+        roman = ''
+        while num > 0: # 2749
+            for (value, symbol) in self.mapping: 
+                while num >= value: # 2749 > 1000
+                    roman += symbol # MM
+                    num -= value # 2749
+
+        return roman 
+
+         
+```
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "12. Integer to Roman",
+    "text": "Seven different symbols represent Roman numerals with the following values:\n\n\n\nSymbol\nValue\n\n\n\n\nI\n1\n\n\nV\n5\n\n\nX\n10\n\n\nL\n50\n\n\nC\n100\n\n\nD\n500\n\n\nM\n1000\n\n\n\nRoman numerals are formed by appending\u00a0the conversions of\u00a0decimal place values\u00a0from highest to lowest. Converting a decimal place value into a Roman numeral has the following rules:\n\nIf the value does not start with 4 or\u00a09, select the symbol of the maximal value that can be subtracted from the input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.\nIf the value starts with 4 or 9 use the\u00a0subtractive form\u00a0representing\u00a0one symbol subtracted from the following symbol, for example,\u00a04 is 1 (I) less than 5 (V): IV\u00a0and 9 is 1 (I) less than 10 (X): IX.\u00a0Only the following subtractive forms are used: 4 (IV), 9 (IX),\u00a040 (XL), 90 (XC), 400 (CD) and 900 (CM).\nOnly powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to represent multiples of 10. You cannot append 5\u00a0(V), 50 (L), or 500 (D) multiple times. If you need to append a symbol\u00a04 times\u00a0use the subtractive form.\n\nGiven an integer, convert it to a Roman numeral.\n\u00a0\nExample 1:\n\nInput: num = 3749\nOutput: \"MMMDCCXLIX\"\nExplanation:\n\n3000 = MMM as 1000 (M) + 1000 (M) + 1000 (M)\n 700 = DCC as 500 (D) + 100 (C) + 100 (C)\n  40 = XL as 10 (X) less of 50 (L)\n   9 = IX as 1 (I) less of 10 (X)\nNote: 49 is not 1 (I) less of 50 (L) because the conversion is based on decimal places\n\n\nExample 2:\n\nInput: num = 58\nOutput: \"LVIII\"\nExplanation:\n\n50 = L\n 8 = VIII\n\n\nExample 3:\n\nInput: num = 1994\nOutput: \"MCMXCIV\"\nExplanation:\n\n1000 = M\n 900 = CM\n  90 = XC\n   4 = IV\n\n\n\u00a0\nConstraints:\n\n1 <= num <= 3999\n\n",
+    "url": "https://leetcode.com/problems/0012-integer-to-roman",
+    "answerCount": 1,
+    "datePublished": "2026-06-19T23:06:37+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def __init__(self):\n        self.mapping = [(1000, 'M'), \n        (900, 'CM'), \n        (500, 'D'), \n        (400, 'CD'), \n        (100, 'C'), \n        (90, 'XC'), \n        (50, 'L'), \n        (40,'XL'),\n        (10, 'X'),\n        (9, 'IX'),\n        (5,'V'),\n        (4,\"IV\"),\n        (1, 'I') ]\n\n    def intToRoman(self, num: int) -> str:\n        # num = 3749\n        # 3000 =?  MMM\n        # 700 = 500 + 100 + 100 = DCC\n        # 40 = XL = 50  - 10\n        # 9 = IX = 10 - 9\n        # \n        # create hashmap of all values\n        # orderelsist = largest to smallest\n        # \n        # res \n        # num = 3748\n        #  condition: num >0\n        #    loop  ordered element\n        #       condition num > orderedelement\n        #         break\n        #   num = 3748  [(1000 , m )  () (500, D)....]\n        #  res = \"\"\n        #   3748 > 0\n        #     -> loop\n        #      3748 >= 1000 \n        \n        #     -> while 3748 > 1000 \n        #           3748 - 1000 = 3\n        #         res += M\n        #      num = 3728 % 1000 = 728\n        #   748 > 0\n        #     -> loop\n        #       748 > 1000 f\n        #       748 > 500 t\n        #      while 748 >= 500\n        #       748 - 500 = 248\n        #\n        #       res += 3*D\n        #       num = 748 % 500 = \n        #  simple algorith m\n        #   while num >= mapped value:\n        #       append the reuslt\n        #        num -= mapped value\n\n        roman = ''\n        while num > 0: # 2749\n            for (value, symbol) in self.mapping: \n                while num >= value: # 2749 > 1000\n                    roman += symbol # MM\n                    num -= value # 2749\n\n        return roman \n\n         ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0012-integer-to-roman/",
+      "datePublished": "2026-06-19T23:06:37+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
