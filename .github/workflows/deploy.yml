@@ -22,19 +22,22 @@ jobs:
           token: ${{ secrets.LT_SUB }}
           submodules: recursive
           
-      - name: Setup Python
-        uses: actions/setup-python@v2
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.12'
+          enable-cache: true
 
       - name: Install dependencies
-        run: pip install -r ./requirements.txt
+        run: uv sync --locked --all-extras
+
+      - name: Install dependencies
+        run: uv pip install -r ./requirements.txt
 
       - name: Fetch full submodule history
         run: git -C leetcode-submissions fetch --unshallow 2>/dev/null || true
 
       - name: Update .md files
-        run: python ./scripts/createdocs.py
+        run: uv run ./scripts/createdocs.py
 
       - name: Generate Docs
         run: sphinx-build -b dirhtml ./source/ ./docs
