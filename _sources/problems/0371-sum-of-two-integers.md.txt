@@ -1,0 +1,76 @@
+# 0371-sum-of-two-integers
+
+
+Try it on <a href='https://leetcode.com/problems/0371-sum-of-two-integers'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two integers <code>a</code> and <code>b</code>, return <em>the sum of the two integers without using the operators</em> <code>+</code> <em>and</em> <code>-</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> a = 1, b = 2
+<strong>Output:</strong> 3
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> a = 2, b = 3
+<strong>Output:</strong> 5
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>-1000 &lt;= a, b &lt;= 1000</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        mask = 0xFFFFFFFF
+        
+        while b != 0:
+            a, b = (a ^ b) & mask, ((a & b) << 1) & mask
+        
+        max_int = 0x7FFFFFFF
+        return a if a < max_int else ~(a ^ mask)
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "371. Sum of Two Integers",
+    "text": "Given two integers a and b, return the sum of the two integers without using the operators + and -.\n\u00a0\nExample 1:\nInput: a = 1, b = 2\nOutput: 3\nExample 2:\nInput: a = 2, b = 3\nOutput: 5\n\n\u00a0\nConstraints:\n\n-1000 <= a, b <= 1000\n\n",
+    "url": "https://leetcode.com/problems/0371-sum-of-two-integers",
+    "answerCount": 1,
+    "datePublished": "2026-07-01T12:23:31+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def getSum(self, a: int, b: int) -> int:\n        mask = 0xFFFFFFFF\n        \n        while b != 0:\n            a, b = (a ^ b) & mask, ((a & b) << 1) & mask\n        \n        max_int = 0x7FFFFFFF\n        return a if a < max_int else ~(a ^ mask)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0371-sum-of-two-integers/",
+      "datePublished": "2026-07-01T12:23:31+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -73,7 +73,6 @@ class Solution:
                     and candies[i] <= candies[i - 1]
                 ):
                     candies[i] = candies[i - 1] + 1
-                    hashChanged = True
         return sum(candies)
 
     # Time Complexity:O(n)
@@ -134,6 +133,12 @@ class Solution:
 
 ```
 
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -152,7 +157,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def candy(self, ratings: List[int]) -> int:\n        return self.SinglePassConstantSpace(ratings)\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n)\n    def bruteforce(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n        hasChanged = True\n\n        while hasChanged:\n            hasChanged = False\n\n            for i in range(n):\n                if (\n                    i != n - 1\n                    and ratings[i] > ratings[i + 1]\n                    and candies[i] <= candies[i + 1]\n                ):\n                    candies[i] = candies[i + 1] + 1\n                    hasChanged = True\n                if (\n                    i >= 0\n                    and ratings[i] > ratings[i - 1]\n                    and candies[i] <= candies[i - 1]\n                ):\n                    candies[i] = candies[i - 1] + 1\n                    hashChanged = True\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(n)\n    def presum(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n\n        for i in range(1, n):\n            if ratings[i] > ratings[i - 1]:\n                candies[i] = candies[i - 1] + 1\n\n        for i in range(n - 2, -1, -1):\n            if ratings[i] > ratings[i + 1]:\n                candies[i] = max(candies[i + 1] + 1, candies[i])\n\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(1)\n    def SinglePassConstantSpace(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        if n <= 1:\n            return n\n\n        def summateN(n):\n            return (n * (n + 1)) // 2\n\n        candies = 0\n        up = 0\n        down = 0\n        oldSlope = 0\n\n        for i in range(1, n):\n            newSlope = (\n                1\n                if ratings[i] > ratings[i - 1]\n                else -1\n                if ratings[i] < ratings[i - 1]\n                else 0\n            )\n\n            if oldSlope > 0 and newSlope == 0 or (oldSlope < 0 and newSlope >= 0):\n                candies += summateN(up) + summateN(down) + max(up, down)\n                up = 0\n                down = 0\n\n            if newSlope > 0:\n                up += 1\n            elif newSlope < 0:\n                down += 1\n            else:\n                candies += 1\n            oldSlope = newSlope\n\n        candies += summateN(up) + summateN(down) + max(up, down) + 1\n        return candies\n",
+      "text": "class Solution:\n    def candy(self, ratings: List[int]) -> int:\n        return self.SinglePassConstantSpace(ratings)\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n)\n    def bruteforce(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n        hasChanged = True\n\n        while hasChanged:\n            hasChanged = False\n\n            for i in range(n):\n                if (\n                    i != n - 1\n                    and ratings[i] > ratings[i + 1]\n                    and candies[i] <= candies[i + 1]\n                ):\n                    candies[i] = candies[i + 1] + 1\n                    hasChanged = True\n                if (\n                    i >= 0\n                    and ratings[i] > ratings[i - 1]\n                    and candies[i] <= candies[i - 1]\n                ):\n                    candies[i] = candies[i - 1] + 1\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(n)\n    def presum(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n\n        for i in range(1, n):\n            if ratings[i] > ratings[i - 1]:\n                candies[i] = candies[i - 1] + 1\n\n        for i in range(n - 2, -1, -1):\n            if ratings[i] > ratings[i + 1]:\n                candies[i] = max(candies[i + 1] + 1, candies[i])\n\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(1)\n    def SinglePassConstantSpace(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        if n <= 1:\n            return n\n\n        def summateN(n):\n            return (n * (n + 1)) // 2\n\n        candies = 0\n        up = 0\n        down = 0\n        oldSlope = 0\n\n        for i in range(1, n):\n            newSlope = (\n                1\n                if ratings[i] > ratings[i - 1]\n                else -1\n                if ratings[i] < ratings[i - 1]\n                else 0\n            )\n\n            if oldSlope > 0 and newSlope == 0 or (oldSlope < 0 and newSlope >= 0):\n                candies += summateN(up) + summateN(down) + max(up, down)\n                up = 0\n                down = 0\n\n            if newSlope > 0:\n                up += 1\n            elif newSlope < 0:\n                down += 1\n            else:\n                candies += 1\n            oldSlope = newSlope\n\n        candies += summateN(up) + summateN(down) + max(up, down) + 1\n        return candies\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/135-candy/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

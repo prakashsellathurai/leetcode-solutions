@@ -35,6 +35,9 @@ Try it on <a href='https://leetcode.com/problems/47-permutations-ii'>leetcode</a
 
 ## Solution(Python)
 ```Python
+from collections import Counter
+
+
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         res = []
@@ -57,6 +60,8 @@ class Solution:
 
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -75,7 +80,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def permuteUnique(self, nums: List[int]) -> List[List[int]]:\n        res = []\n\n        def backtrack(comb, counter):\n            if len(comb) == len(nums):\n                res.append(list(comb))\n                return\n\n            for num in counter:\n                if counter[num] > 0:\n                    comb.append(num)\n                    counter[num] -= 1\n                    backtrack(comb, counter)\n                    counter[num] += 1\n                    comb.pop()\n\n        backtrack([], Counter(nums))\n        return res\n",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def permuteUnique(self, nums: List[int]) -> List[List[int]]:\n        res = []\n\n        def backtrack(comb, counter):\n            if len(comb) == len(nums):\n                res.append(list(comb))\n                return\n\n            for num in counter:\n                if counter[num] > 0:\n                    comb.append(num)\n                    counter[num] -= 1\n                    backtrack(comb, counter)\n                    counter[num] += 1\n                    comb.pop()\n\n        backtrack([], Counter(nums))\n        return res\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/47-permutations-ii/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

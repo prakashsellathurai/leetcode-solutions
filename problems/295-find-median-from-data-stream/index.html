@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -607,7 +614,7 @@ medianFinder.findMedian(); // return 2.0
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span><span class="p">,</span> <span class="n">heapify</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span>
 
 
 <span class="k">class</span> <span class="nc">MedianFinder</span><span class="p">:</span>
@@ -673,7 +680,7 @@ medianFinder.findMedian(); // return 2.0
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "from heapq import heappush, heappop, heapify\n\n\nclass MedianFinder:\n    def __init__(self):\n        self.minHeap = []\n        self.maxHeap = []\n\n    def addNum(self, num: int) -> None:\n        if len(self.minHeap) != len(self.maxHeap):\n            heappush(self.minHeap, -heappushpop(self.maxHeap, -num))\n        else:\n            heappush(self.maxHeap, -heappushpop(self.minHeap, num))\n\n    def findMedian(self) -> float:\n        if len(self.minHeap) != len(self.maxHeap):\n            return -self.maxHeap[0]\n        else:\n            return (self.minHeap[0] - self.maxHeap[0]) / 2\n\n\n# Your MedianFinder object will be instantiated and called as such:\n# obj = MedianFinder()\n# obj.addNum(num)\n# param_2 = obj.findMedian()\n\n\n#\n#\n# bruteforce:\n#  we need to maintain the sorted list of n integers\n#  in addnum we do  insertion sort  O(nlog n)\n#  find median is O(1)\n#\n# Augumented self-balanced binary search tree\n# every node of BST have numbers of arr\n# left side or numbers less than current nide right side for numbers greater than node\n# only problem is bst gives us sorted data which is extra info not needed\n#\n# Heaps:\n# since the problem needs an online algorithm and median is the essential info\n# we can use max heap on the left side to represent values less than effective mean\n# right heap to maintain values greater than effective mea\n# after incoming input when bot heaps have same number of values take averahe=ge of heap root\n# when they are not balanced we take take effective mean from largest heap\n# Time Complexity: O(logn) for insertion and O(1) for get median\n",
+      "text": "from heapq import heappush\n\n\nclass MedianFinder:\n    def __init__(self):\n        self.minHeap = []\n        self.maxHeap = []\n\n    def addNum(self, num: int) -> None:\n        if len(self.minHeap) != len(self.maxHeap):\n            heappush(self.minHeap, -heappushpop(self.maxHeap, -num))\n        else:\n            heappush(self.maxHeap, -heappushpop(self.minHeap, num))\n\n    def findMedian(self) -> float:\n        if len(self.minHeap) != len(self.maxHeap):\n            return -self.maxHeap[0]\n        else:\n            return (self.minHeap[0] - self.maxHeap[0]) / 2\n\n\n# Your MedianFinder object will be instantiated and called as such:\n# obj = MedianFinder()\n# obj.addNum(num)\n# param_2 = obj.findMedian()\n\n\n#\n#\n# bruteforce:\n#  we need to maintain the sorted list of n integers\n#  in addnum we do  insertion sort  O(nlog n)\n#  find median is O(1)\n#\n# Augumented self-balanced binary search tree\n# every node of BST have numbers of arr\n# left side or numbers less than current nide right side for numbers greater than node\n# only problem is bst gives us sorted data which is extra info not needed\n#\n# Heaps:\n# since the problem needs an online algorithm and median is the essential info\n# we can use max heap on the left side to represent values less than effective mean\n# right heap to maintain values greater than effective mea\n# after incoming input when bot heaps have same number of values take averahe=ge of heap root\n# when they are not balanced we take take effective mean from largest heap\n# Time Complexity: O(logn) for insertion and O(1) for get median\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/295-find-median-from-data-stream/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -593,7 +600,10 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
 
@@ -686,7 +696,7 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def __init__(self):\n        self.a = ord(\"a\")\n\n    def findAnagrams(self, s: str, p: str) -> List[int]:\n        return self.windowsliding(s, p)\n\n    \"\"\"\n    create Counter Dict of p\n    for all substrings in s:\n        check if it's anagram if s \n             \n            \n    Time Complexty: O(n^2)\n    Space Complexity: O(1)\n    \n    \"\"\"\n\n    def bruteforce(self, s, p):\n\n        n = len(s)\n        cnts = Counter(p)\n        res = []\n        for i in range(n):\n            for j in range(i, n):\n                sub_s = s[i: j + 1]\n                if Counter(sub_s) == cnts:\n                    res.append(i)\n\n        return res\n\n    \"\"\"\n    create Frequency counter table  of p (atmost 26 letters)\n    \n    create Frequency counter table for current window of size m on s\n    \n    slide over the s:\n        if two frequency table matches:\n            add start index to the solution\n        increment end of the slider \n        decrement the start of the slider\n    \n    finally check for substring at the end of the s\n            \n    Time Complexty: O(n)\n    Space Complexity: O(1)          \n    \"\"\"\n\n    def windowsliding(self, s, p):\n        n = len(s)\n        m = len(p)\n\n        if m > n:\n            return []\n        res = []\n\n        countP = [0] * 26\n        countCW = [0] * 26\n\n        for i in range(m):\n            countP[ord(p[i]) - self.a] += 1\n            countCW[ord(s[i]) - self.a] += 1\n\n        for i in range(m, n):\n            if countP == countCW:\n                res.append(i - m)\n\n            countCW[ord(s[i]) - self.a] += 1\n            countCW[ord(s[i - m]) - self.a] -= 1\n\n        if countP == countCW:\n            res.append(n - m)\n        return res\n",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def __init__(self):\n        self.a = ord(\"a\")\n\n    def findAnagrams(self, s: str, p: str) -> List[int]:\n        return self.windowsliding(s, p)\n\n    \"\"\"\n    create Counter Dict of p\n    for all substrings in s:\n        check if it's anagram if s \n             \n            \n    Time Complexty: O(n^2)\n    Space Complexity: O(1)\n    \n    \"\"\"\n\n    def bruteforce(self, s, p):\n\n        n = len(s)\n        cnts = Counter(p)\n        res = []\n        for i in range(n):\n            for j in range(i, n):\n                sub_s = s[i: j + 1]\n                if Counter(sub_s) == cnts:\n                    res.append(i)\n\n        return res\n\n    \"\"\"\n    create Frequency counter table  of p (atmost 26 letters)\n    \n    create Frequency counter table for current window of size m on s\n    \n    slide over the s:\n        if two frequency table matches:\n            add start index to the solution\n        increment end of the slider \n        decrement the start of the slider\n    \n    finally check for substring at the end of the s\n            \n    Time Complexty: O(n)\n    Space Complexity: O(1)          \n    \"\"\"\n\n    def windowsliding(self, s, p):\n        n = len(s)\n        m = len(p)\n\n        if m > n:\n            return []\n        res = []\n\n        countP = [0] * 26\n        countCW = [0] * 26\n\n        for i in range(m):\n            countP[ord(p[i]) - self.a] += 1\n            countCW[ord(s[i]) - self.a] += 1\n\n        for i in range(m, n):\n            if countP == countCW:\n                res.append(i - m)\n\n            countCW[ord(s[i]) - self.a] += 1\n            countCW[ord(s[i - m]) - self.a] -= 1\n\n        if countP == countCW:\n            res.append(n - m)\n        return res\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/438-find-all-anagrams-in-a-string/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

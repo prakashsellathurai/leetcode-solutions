@@ -66,9 +66,11 @@ class PeekingIterator:
         return tmp
 
     def hasNext(self):
-        return self.buffer != None
+        return self.buffer is not None
 
 ```
+
+
 
 <script type="application/ld+json">
 {
@@ -88,7 +90,7 @@ class PeekingIterator:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class PeekingIterator:\n    def __init__(self, iterator):\n        self.iterator = iterator\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n\n    def peek(self):\n        return self.buffer\n\n    def next(self):\n        tmp = self.buffer\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n        return tmp\n\n    def hasNext(self):\n        return self.buffer != None\n",
+      "text": "class PeekingIterator:\n    def __init__(self, iterator):\n        self.iterator = iterator\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n\n    def peek(self):\n        return self.buffer\n\n    def next(self):\n        tmp = self.buffer\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n        return tmp\n\n    def hasNext(self):\n        return self.buffer is not None\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/284-peeking-iterator/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

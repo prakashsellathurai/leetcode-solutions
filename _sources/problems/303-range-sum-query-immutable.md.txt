@@ -62,6 +62,8 @@ class NumArray:
 # param_1 = obj.sumRange(left,right)
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

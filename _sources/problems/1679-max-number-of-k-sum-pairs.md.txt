@@ -42,6 +42,9 @@ There are no more pairs that sum up to 6, hence a total of 1 operation.</pre>
 
 ## Solution(Python)
 ```Python
+from collections import Counter
+
+
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
         return self.hashing(nums, k)
@@ -110,6 +113,8 @@ class Solution:
 
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -128,7 +133,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def maxOperations(self, nums: List[int], k: int) -> int:\n        return self.hashing(nums, k)\n\n    # Time Complexity: O(n^2*OP)\n    # Space Comeplxity: O(n)\n    def bruteforce(self, nums, k):\n        s = Counter(nums)\n        cnt = 0\n        print(s)\n        while True:\n            change = 0\n            for key in list(s):\n                if change:\n                    break\n                if k - key in s:\n                    s[key] -= 1\n                    s[k - key] -= 1\n                    if s[key] <= 0:\n                        del s[key]\n                    if s[k - key] <= 0:\n                        del s[k - key]\n                    change += 1\n            print(s, cnt)\n            if change > 0:\n                cnt += change\n            else:\n                return cnt\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(1)\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort()\n        i, j = 0, len(nums) - 1\n\n        cnt = 0\n\n        while i < j:\n            if nums[i] + nums[j] == k:\n                cnt += 1\n                i += 1\n                j -= 1\n\n            elif nums[i] + nums[j] > k:\n                j -= 1\n            else:\n                i += 1\n        return cnt\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def hashing(self, nums: List[int], k: int) -> int:\n        hash = defaultdict(int)\n        cnt = 0\n\n        for num in nums:\n            target = k - num\n\n            if hash[target] > 0:\n                hash[target] -= 1\n                cnt += 1\n            else:\n                hash[num] += 1\n\n        return cnt\n",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def maxOperations(self, nums: List[int], k: int) -> int:\n        return self.hashing(nums, k)\n\n    # Time Complexity: O(n^2*OP)\n    # Space Comeplxity: O(n)\n    def bruteforce(self, nums, k):\n        s = Counter(nums)\n        cnt = 0\n        print(s)\n        while True:\n            change = 0\n            for key in list(s):\n                if change:\n                    break\n                if k - key in s:\n                    s[key] -= 1\n                    s[k - key] -= 1\n                    if s[key] <= 0:\n                        del s[key]\n                    if s[k - key] <= 0:\n                        del s[k - key]\n                    change += 1\n            print(s, cnt)\n            if change > 0:\n                cnt += change\n            else:\n                return cnt\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(1)\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort()\n        i, j = 0, len(nums) - 1\n\n        cnt = 0\n\n        while i < j:\n            if nums[i] + nums[j] == k:\n                cnt += 1\n                i += 1\n                j -= 1\n\n            elif nums[i] + nums[j] > k:\n                j -= 1\n            else:\n                i += 1\n        return cnt\n\n    # Time Complexity: O(n)\n    # Space Complexity: O(n)\n    def hashing(self, nums: List[int], k: int) -> int:\n        hash = defaultdict(int)\n        cnt = 0\n\n        for num in nums:\n            target = k - num\n\n            if hash[target] > 0:\n                hash[target] -= 1\n                cnt += 1\n            else:\n                hash[num] += 1\n\n        return cnt\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1679-max-number-of-k-sum-pairs/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

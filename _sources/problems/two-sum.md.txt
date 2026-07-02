@@ -59,6 +59,12 @@ class Solution:
 
 ```
 
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

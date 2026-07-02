@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -616,7 +623,7 @@ peekingIterator.hasNext(); // return False
         <span class="k">return</span> <span class="n">tmp</span>
 
     <span class="k">def</span> <span class="nf">hasNext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">!=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <script type="application/ld+json">
@@ -637,7 +644,7 @@ peekingIterator.hasNext(); // return False
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class PeekingIterator:\n    def __init__(self, iterator):\n        self.iterator = iterator\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n\n    def peek(self):\n        return self.buffer\n\n    def next(self):\n        tmp = self.buffer\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n        return tmp\n\n    def hasNext(self):\n        return self.buffer != None\n",
+      "text": "class PeekingIterator:\n    def __init__(self, iterator):\n        self.iterator = iterator\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n\n    def peek(self):\n        return self.buffer\n\n    def next(self):\n        tmp = self.buffer\n        self.buffer = self.iterator.next() if self.iterator.hasNext() else None\n        return tmp\n\n    def hasNext(self):\n        return self.buffer is not None\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/284-peeking-iterator/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

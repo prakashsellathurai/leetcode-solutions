@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -614,6 +621,8 @@ lRUCache.get(4);    // return 4
 <span class="c1">#    eveict if exceeded capacity</span>
 <span class="c1">#    put value</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+
 <span class="k">class</span> <span class="nc">LRUCache</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
@@ -659,7 +668,7 @@ lRUCache.get(4);    // return 4
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "#  \n#  get\n#   return -1 not found\n#   accessed node -> put in back of the queue\n#   return node value\n#  put\n#    put in back\n#    eveict if exceeded capacity\n#    put value\nfrom collections import OrderedDict\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.cache = OrderedDict()\n        self.cap = capacity\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False) # Evict oldest\n        \n\n\n# Your LRUCache object will be instantiated and called as such:\n# obj = LRUCache(capacity)\n# param_1 = obj.get(key)\n# obj.put(key,value)",
+      "text": "#  \n#  get\n#   return -1 not found\n#   accessed node -> put in back of the queue\n#   return node value\n#  put\n#    put in back\n#    eveict if exceeded capacity\n#    put value\nfrom collections import OrderedDict\n\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.cache = OrderedDict()\n        self.cap = capacity\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False) # Evict oldest\n        \n\n\n# Your LRUCache object will be instantiated and called as such:\n# obj = LRUCache(capacity)\n# param_1 = obj.get(key)\n# obj.put(key,value)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0146-lru-cache/",
       "datePublished": "2025-10-09T21:55:58+05:30",
       "upvoteCount": 0,

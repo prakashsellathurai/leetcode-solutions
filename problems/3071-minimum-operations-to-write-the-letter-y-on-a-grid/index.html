@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -603,7 +610,10 @@ It can be shown that 12 is the minimum number of operations needed to write Y on
 </ul></div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">minimumOperationsToWriteY</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
         <span class="n">y_cells_counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
@@ -649,7 +659,7 @@ It can be shown that 12 is the minimum number of operations needed to write Y on
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        y_cells_counter = Counter()\n        non_y_cells_counter = Counter()\n        for row_idx, row in enumerate(grid):\n            for col_idx, cell_value in enumerate(row):\n\n                is_left_diagnol = (row_idx == col_idx) and row_idx <= n//2 \n                is_right_diagnol = (row_idx + col_idx == n-1) and row_idx <= n//2 \n                is_center_stem = ( col_idx == n//2) and row_idx >= n//2 \n\n                if is_left_diagnol or is_right_diagnol or is_center_stem:\n                    y_cells_counter[cell_value] +=1\n                else:\n                    non_y_cells_counter[cell_value] +=1\n        total_cells = n*n\n\n        min_ops = min(\n            total_cells -  y_cells_counter[y_color] -  non_y_cells_counter[non_y_color]\n            for y_color in range(3)\n            for non_y_color in range(3)\n            if y_color != non_y_color\n        )\n\n        return min_ops",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        y_cells_counter = Counter()\n        non_y_cells_counter = Counter()\n        for row_idx, row in enumerate(grid):\n            for col_idx, cell_value in enumerate(row):\n\n                is_left_diagnol = (row_idx == col_idx) and row_idx <= n//2 \n                is_right_diagnol = (row_idx + col_idx == n-1) and row_idx <= n//2 \n                is_center_stem = ( col_idx == n//2) and row_idx >= n//2 \n\n                if is_left_diagnol or is_right_diagnol or is_center_stem:\n                    y_cells_counter[cell_value] +=1\n                else:\n                    non_y_cells_counter[cell_value] +=1\n        total_cells = n*n\n\n        min_ops = min(\n            total_cells -  y_cells_counter[y_color] -  non_y_cells_counter[non_y_color]\n            for y_color in range(3)\n            for non_y_color in range(3)\n            if y_color != non_y_color\n        )\n\n        return min_ops",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/3071-minimum-operations-to-write-the-letter-y-on-a-grid/",
       "datePublished": "2026-02-17T22:37:47+05:30",
       "upvoteCount": 0,

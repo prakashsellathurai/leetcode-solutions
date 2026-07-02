@@ -75,6 +75,8 @@ kthLargest.add(9); // return 8</div>
 #  edge case if n < k return top 
 #  
 import heapq
+
+
 class KthLargest:
 
     def __init__(self, k: int, nums: List[int]): # 3,  [4, 5, 8, 2]
@@ -115,6 +117,8 @@ class KthLargest:
 # param_1 = obj.add(val)
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -133,7 +137,7 @@ class KthLargest:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# k -> [2.3.4] k =2\n# 1 2 3 4 5 \n# add (6) -> 4 [1 2 3 4 5 6]\n# add(1) -> 5 [1 1 2 3 4 5 6]\n#  > heap of size k  min heap top of heap is kths largest element every add operation is O(1)\n#  edge case if n < k return top \n#  \nimport heapq\nclass KthLargest:\n\n    def __init__(self, k: int, nums: List[int]): # 3,  [4, 5, 8, 2]\n        self.heap = []\n        self.k = k\n        heapq.heapify(self.heap)\n        for num in nums: # 4 , 5, 8, 2\n            heapq.heappush(self.heap, num) # [2, 4, 5, 8]\n            if len(self.heap) > k:\n                heapq.heappop(self.heap) # [4, 5, 8]\n    \n    # invariant make sure \n    def add(self, val: int) -> int: #[4, 5, 8] val = 10\n       # val = heap[0]\n       # val > heap[0]\n       #    heappush and pop\n       # return val\n        if len(self.heap) < self.k:\n            heapq.heappush(self.heap, val)\n        elif self.heap and val >= self.heap[0]:\n            heapq.heappush(self.heap, val) # [4,5,8, 10]\n            heapq.heappop(self.heap) # [5,8, 10]\n        return self.heap[0]\n\n# Problem:\n# Kth Largest Stream\n\n# Invariant:\n# Heap contains k largest elements.\n\n# Failed assumption:\n# Always pop before push.\n\n# Final insight:\n# Only remove an element if the new value belongs in top k.\n# Your KthLargest object will be instantiated and called as such:\n# obj = KthLargest(k, nums)\n# param_1 = obj.add(val)",
+      "text": "# k -> [2.3.4] k =2\n# 1 2 3 4 5 \n# add (6) -> 4 [1 2 3 4 5 6]\n# add(1) -> 5 [1 1 2 3 4 5 6]\n#  > heap of size k  min heap top of heap is kths largest element every add operation is O(1)\n#  edge case if n < k return top \n#  \nimport heapq\n\n\nclass KthLargest:\n\n    def __init__(self, k: int, nums: List[int]): # 3,  [4, 5, 8, 2]\n        self.heap = []\n        self.k = k\n        heapq.heapify(self.heap)\n        for num in nums: # 4 , 5, 8, 2\n            heapq.heappush(self.heap, num) # [2, 4, 5, 8]\n            if len(self.heap) > k:\n                heapq.heappop(self.heap) # [4, 5, 8]\n    \n    # invariant make sure \n    def add(self, val: int) -> int: #[4, 5, 8] val = 10\n       # val = heap[0]\n       # val > heap[0]\n       #    heappush and pop\n       # return val\n        if len(self.heap) < self.k:\n            heapq.heappush(self.heap, val)\n        elif self.heap and val >= self.heap[0]:\n            heapq.heappush(self.heap, val) # [4,5,8, 10]\n            heapq.heappop(self.heap) # [5,8, 10]\n        return self.heap[0]\n\n# Problem:\n# Kth Largest Stream\n\n# Invariant:\n# Heap contains k largest elements.\n\n# Failed assumption:\n# Always pop before push.\n\n# Final insight:\n# Only remove an element if the new value belongs in top k.\n# Your KthLargest object will be instantiated and called as such:\n# obj = KthLargest(k, nums)\n# param_1 = obj.add(val)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0703-kth-largest-element-in-a-stream/",
       "datePublished": "2026-06-12T12:38:12+05:30",
       "upvoteCount": 0,

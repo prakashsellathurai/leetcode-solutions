@@ -31,6 +31,10 @@ Try it on <a href='https://leetcode.com/problems/0kth-largest-element-in-an-arra
 
 ## Solution(Python)
 ```Python
+import heapq
+from typing import List
+
+
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         return self.HeapMethod(nums, k)
@@ -56,6 +60,12 @@ class Solution:
 
 ```
 
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -74,7 +84,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        return self.HeapMethod(nums, k)\n\n    # Sorting method\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort(reverse=true)\n        return nums[k - 1]\n\n    # Heap Method\n    # Time Complexity : O(nlogk)\n    # Space Complexity: O(k)\n    def HeapMethod(self, nums: List[int], k: int) -> int:\n        heap = []\n        for num in nums:\n            heapq.heappush(heap, num)\n            if len(heap) > k:\n                heapq.heappop(heap)\n        return heap[0]\n",
+      "text": "import heapq\nfrom typing import List\n\n\nclass Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        return self.HeapMethod(nums, k)\n\n    # Sorting method\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n\n    def sorting(self, nums: List[int], k: int) -> int:\n        nums.sort(reverse=true)\n        return nums[k - 1]\n\n    # Heap Method\n    # Time Complexity : O(nlogk)\n    # Space Complexity: O(k)\n    def HeapMethod(self, nums: List[int], k: int) -> int:\n        heap = []\n        for num in nums:\n            heapq.heappush(heap, num)\n            if len(heap) > k:\n                heapq.heappop(heap)\n        return heap[0]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0kth-largest-element-in-an-array/",
       "datePublished": "2025-02-12T03:14:25+05:30",
       "upvoteCount": 0,

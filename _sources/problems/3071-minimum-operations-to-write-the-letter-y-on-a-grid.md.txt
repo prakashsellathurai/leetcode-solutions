@@ -57,6 +57,9 @@ It can be shown that 12 is the minimum number of operations needed to write Y on
 
 ## Solution(Python)
 ```Python
+from collections import Counter
+
+
 class Solution:
     def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:
         n = len(grid)
@@ -85,6 +88,8 @@ class Solution:
         return min_ops
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -103,7 +108,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        y_cells_counter = Counter()\n        non_y_cells_counter = Counter()\n        for row_idx, row in enumerate(grid):\n            for col_idx, cell_value in enumerate(row):\n\n                is_left_diagnol = (row_idx == col_idx) and row_idx <= n//2 \n                is_right_diagnol = (row_idx + col_idx == n-1) and row_idx <= n//2 \n                is_center_stem = ( col_idx == n//2) and row_idx >= n//2 \n\n                if is_left_diagnol or is_right_diagnol or is_center_stem:\n                    y_cells_counter[cell_value] +=1\n                else:\n                    non_y_cells_counter[cell_value] +=1\n        total_cells = n*n\n\n        min_ops = min(\n            total_cells -  y_cells_counter[y_color] -  non_y_cells_counter[non_y_color]\n            for y_color in range(3)\n            for non_y_color in range(3)\n            if y_color != non_y_color\n        )\n\n        return min_ops",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:\n        n = len(grid)\n        y_cells_counter = Counter()\n        non_y_cells_counter = Counter()\n        for row_idx, row in enumerate(grid):\n            for col_idx, cell_value in enumerate(row):\n\n                is_left_diagnol = (row_idx == col_idx) and row_idx <= n//2 \n                is_right_diagnol = (row_idx + col_idx == n-1) and row_idx <= n//2 \n                is_center_stem = ( col_idx == n//2) and row_idx >= n//2 \n\n                if is_left_diagnol or is_right_diagnol or is_center_stem:\n                    y_cells_counter[cell_value] +=1\n                else:\n                    non_y_cells_counter[cell_value] +=1\n        total_cells = n*n\n\n        min_ops = min(\n            total_cells -  y_cells_counter[y_color] -  non_y_cells_counter[non_y_color]\n            for y_color in range(3)\n            for non_y_color in range(3)\n            if y_color != non_y_color\n        )\n\n        return min_ops",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/3071-minimum-operations-to-write-the-letter-y-on-a-grid/",
       "datePublished": "2026-02-17T22:37:47+05:30",
       "upvoteCount": 0,

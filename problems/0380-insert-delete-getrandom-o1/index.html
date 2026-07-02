@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -609,6 +616,8 @@ randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom()
 <span class="c1">#    hahsmap -&gt; key -&gt; index at array</span>
 <span class="c1">#    array  -&gt; list of keys</span>
 <span class="kn">import</span> <span class="nn">random</span>
+
+
 <span class="k">class</span> <span class="nc">RandomizedSet</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -670,7 +679,7 @@ randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom()
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# Data structure\n#     for O(1) access -> hashmap\n#     for random access -> array\n#    use combination of array and hashmap\n#    hahsmap -> key -> index at array\n#    array  -> list of keys\nimport random\nclass RandomizedSet:\n\n    def __init__(self):\n        self.hash = {}\n        self.array = []\n\n    def insert(self, val: int) -> bool:\n        if val  in self.hash:\n            return False\n        self.array.append(val)\n        self.hash[val] = len(self.array) - 1\n        return True\n        \n\n    def remove(self, val: int) -> bool:\n        if val not in self.hash:\n            return False\n        \n        idx = self.hash[val]\n        last_idx = len(self.array) - 1\n\n        last_index_element = self.array[last_idx]\n        \n        self.array[idx] =  self.array[last_idx]\n        self.hash[last_index_element] = idx\n\n        del self.hash[val]\n        self.array.pop()\n        return True\n        \n\n    def getRandom(self) -> int:\n        return random.choice(self.array)\n        \n\n\n# Your RandomizedSet object will be instantiated and called as such:\n# obj = RandomizedSet()\n# param_1 = obj.insert(val)\n# param_2 = obj.remove(val)\n# param_3 = obj.getRandom()",
+      "text": "# Data structure\n#     for O(1) access -> hashmap\n#     for random access -> array\n#    use combination of array and hashmap\n#    hahsmap -> key -> index at array\n#    array  -> list of keys\nimport random\n\n\nclass RandomizedSet:\n\n    def __init__(self):\n        self.hash = {}\n        self.array = []\n\n    def insert(self, val: int) -> bool:\n        if val  in self.hash:\n            return False\n        self.array.append(val)\n        self.hash[val] = len(self.array) - 1\n        return True\n        \n\n    def remove(self, val: int) -> bool:\n        if val not in self.hash:\n            return False\n        \n        idx = self.hash[val]\n        last_idx = len(self.array) - 1\n\n        last_index_element = self.array[last_idx]\n        \n        self.array[idx] =  self.array[last_idx]\n        self.hash[last_index_element] = idx\n\n        del self.hash[val]\n        self.array.pop()\n        return True\n        \n\n    def getRandom(self) -> int:\n        return random.choice(self.array)\n        \n\n\n# Your RandomizedSet object will be instantiated and called as such:\n# obj = RandomizedSet()\n# param_1 = obj.insert(val)\n# param_2 = obj.remove(val)\n# param_3 = obj.getRandom()",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0380-insert-delete-getrandom-o1/",
       "datePublished": "2026-06-16T12:23:25+05:30",
       "upvoteCount": 0,

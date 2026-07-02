@@ -1,0 +1,150 @@
+# 0190-reverse-bits
+
+
+Try it on <a href='https://leetcode.com/problems/0190-reverse-bits'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Reverse bits of a given 32 bits signed integer.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 43261596</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">964176192</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Integer</th>
+			<th>Binary</th>
+		</tr>
+		<tr>
+			<td>43261596</td>
+			<td>00000010100101000001111010011100</td>
+		</tr>
+		<tr>
+			<td>964176192</td>
+			<td>00111001011110000010100101000000</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 2147483644</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">1073741822</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<table>
+	<tbody>
+		<tr>
+			<th>Integer</th>
+			<th>Binary</th>
+		</tr>
+		<tr>
+			<td>2147483644</td>
+			<td>01111111111111111111111111111100</td>
+		</tr>
+		<tr>
+			<td>1073741822</td>
+			<td>00111111111111111111111111111110</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= n &lt;= 2<sup>31</sup> - 2</code></li>
+	<li><code>n</code> is even.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong> If this function is called many times, how would you optimize it?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        # 10110010
+        # 01001101
+        # bruteforce
+        #  bits = format(n, '032b')
+        # bits = bits[::-1]
+        # return int(bits, 2)
+        return self.optimised(n)
+
+    # O(32)
+    def bruteforce(self, n: int) -> int:
+        bits = format(n, '032b')
+        bits = bits[::-1]
+        return int(bits, 2)
+
+    # Get last bit n& 1
+    # answer = 0
+
+    # Take last bit
+    # Shift answer left
+    # Append bit
+    def optimised(self, n: int) -> int:
+        ans = 0
+        for _  in range(32):
+            ans <<= 1
+            ans |= n&1
+            n >>=1
+        return ans
+
+
+        
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "190. Reverse Bits",
+    "text": "Reverse bits of a given 32 bits signed integer.\n\u00a0\nExample 1:\n\nInput: n = 43261596\nOutput: 964176192\nExplanation:\n\n\n\nInteger\nBinary\n\n\n43261596\n00000010100101000001111010011100\n\n\n964176192\n00111001011110000010100101000000\n\n\n\n\nExample 2:\n\nInput: n = 2147483644\nOutput: 1073741822\nExplanation:\n\n\n\nInteger\nBinary\n\n\n2147483644\n01111111111111111111111111111100\n\n\n1073741822\n00111111111111111111111111111110\n\n\n\n\n\u00a0\nConstraints:\n\n0 <= n <= 231 - 2\nn is even.\n\n\u00a0\nFollow up: If this function is called many times, how would you optimize it?\n",
+    "url": "https://leetcode.com/problems/0190-reverse-bits",
+    "answerCount": 1,
+    "datePublished": "2026-06-25T17:33:24+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def reverseBits(self, n: int) -> int:\n        # 10110010\n        # 01001101\n        # bruteforce\n        #  bits = format(n, '032b')\n        # bits = bits[::-1]\n        # return int(bits, 2)\n        return self.optimised(n)\n\n    # O(32)\n    def bruteforce(self, n: int) -> int:\n        bits = format(n, '032b')\n        bits = bits[::-1]\n        return int(bits, 2)\n\n    # Get last bit n& 1\n    # answer = 0\n\n    # Take last bit\n    # Shift answer left\n    # Append bit\n    def optimised(self, n: int) -> int:\n        ans = 0\n        for _  in range(32):\n            ans <<= 1\n            ans |= n&1\n            n >>=1\n        return ans\n\n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0190-reverse-bits/",
+      "datePublished": "2026-06-25T17:33:24+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

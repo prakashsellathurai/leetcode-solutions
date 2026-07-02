@@ -61,7 +61,6 @@ class Solution:
         result = []
         min_diff = inf
         for i in range(n):
-            pair = (i, i)
             for j in range(i+1, n):
                 if i == j:
                     continue
@@ -122,6 +121,8 @@ class Solution:
     
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -140,7 +141,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:\n        return self.CountingsortedSolution(arr)\n        \n        \n    # Time Complexity: O(n^2)\n    # Space COmplexity: O(1)\n    def naiveSolution(self, arr: List[int]) -> List[List[int]]:\n        n = len(arr)\n        result = []\n        min_diff = inf\n        for i in range(n):\n            pair = (i, i)\n            for j in range(i+1, n):\n                if i == j:\n                    continue\n                if arr[j]-arr[i] < min_diff:\n                    min_diff = arr[j]-arr[i]\n        for i in range(n):\n            for j in range(i+1, n):\n                if i == j:\n                    continue\n                if arr[j]-arr[i] == min_diff:  \n                    result.append((arr[i], arr[j]))\n        return result\n    \n    # Time Complexity: O(n^logn)\n    # Space COmplexity: O(1)\n    def sortedSolution(self, arr: List[int]) -> List[List[int]]:\n        arr.sort()\n        result = []\n        mindiff = inf\n        n = len(arr)\n        for i in range(1, n):\n            curdiff =  arr[i] - arr[i-1]\n\n            if curdiff < mindiff:\n                mindiff = curdiff\n                result = [[arr[i-1], arr[i]]]\n            elif curdiff == mindiff:\n                result.append([arr[i-1], arr[i]])\n        return result\n    \n    # Time Complexity: O(n+M)\n    # Space COmplexity: O(M)\n    def CountingsortedSolution(self, arr: List[int]) -> List[List[int]]:\n        arr = self.countingSort(arr)\n        result = []\n        mindiff = inf\n        n = len(arr)\n        for i in range(1, n):\n            curdiff =  arr[i] - arr[i-1]\n            \n            if curdiff < mindiff:\n                mindiff = curdiff\n                result = [[arr[i-1], arr[i]]]\n            elif curdiff == mindiff:\n                result.append([arr[i-1], arr[i]])\n        return result\n    \n    def countingSort(self, nums):\n        min_, max_ = min(nums), max(nums)\n        count = [0] * (max_-min_+1)\n        for num in nums:\n            count[num-min_] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i+min_]*c)\n        return result\n        \n    ",
+      "text": "class Solution:\n    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:\n        return self.CountingsortedSolution(arr)\n        \n        \n    # Time Complexity: O(n^2)\n    # Space COmplexity: O(1)\n    def naiveSolution(self, arr: List[int]) -> List[List[int]]:\n        n = len(arr)\n        result = []\n        min_diff = inf\n        for i in range(n):\n            for j in range(i+1, n):\n                if i == j:\n                    continue\n                if arr[j]-arr[i] < min_diff:\n                    min_diff = arr[j]-arr[i]\n        for i in range(n):\n            for j in range(i+1, n):\n                if i == j:\n                    continue\n                if arr[j]-arr[i] == min_diff:  \n                    result.append((arr[i], arr[j]))\n        return result\n    \n    # Time Complexity: O(n^logn)\n    # Space COmplexity: O(1)\n    def sortedSolution(self, arr: List[int]) -> List[List[int]]:\n        arr.sort()\n        result = []\n        mindiff = inf\n        n = len(arr)\n        for i in range(1, n):\n            curdiff =  arr[i] - arr[i-1]\n\n            if curdiff < mindiff:\n                mindiff = curdiff\n                result = [[arr[i-1], arr[i]]]\n            elif curdiff == mindiff:\n                result.append([arr[i-1], arr[i]])\n        return result\n    \n    # Time Complexity: O(n+M)\n    # Space COmplexity: O(M)\n    def CountingsortedSolution(self, arr: List[int]) -> List[List[int]]:\n        arr = self.countingSort(arr)\n        result = []\n        mindiff = inf\n        n = len(arr)\n        for i in range(1, n):\n            curdiff =  arr[i] - arr[i-1]\n            \n            if curdiff < mindiff:\n                mindiff = curdiff\n                result = [[arr[i-1], arr[i]]]\n            elif curdiff == mindiff:\n                result.append([arr[i-1], arr[i]])\n        return result\n    \n    def countingSort(self, nums):\n        min_, max_ = min(nums), max(nums)\n        count = [0] * (max_-min_+1)\n        for num in nums:\n            count[num-min_] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i+min_]*c)\n        return result\n        \n    ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1200-minimum-absolute-difference/",
       "datePublished": "2026-03-01T16:15:16+05:30",
       "upvoteCount": 0,

@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -590,7 +597,10 @@
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">isAnagram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_by_unique_primeHash</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
       
@@ -650,7 +660,7 @@
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def isAnagram(self, s: str, t: str) -> bool:\n        return self.match_by_unique_primeHash(s,t)\n      \n    # Time Complexity: O(n)\n    # space complexity: O(n)\n    def sort_and_match(self, s: str, t: str) -> bool:\n        s = list(s)\n        t = list(t)\n        s.sort()\n        t.sort()\n        \n        return len(s) == len(t) and s == t \n    \n    # Time Complexity: O(n)\n    # space complexity: O(k)\n    def match_by_frequencyTable(self, s: str, t: str) -> bool:\n        return Counter(s) == Counter(t)\n    \n    # Time Complexity: O(n)\n    # space complexity: O(k)\n    def match_by_unique_primeHash(self, s: str, t: str) -> bool:\n        def primes(n):\n            from itertools import count, islice\n            primes = (n for n in count(2) if all(n % d for d in range(2, n)))\n            return islice(primes, 0, n)\n        def letters():\n            return list(map(chr, range(97, 123)))\n        def Uniqueprimehash(s):\n            prime_hash = {\n                key: val for key, val in zip(letters(), primes(26))\n            }\n            hash = 1\n            for c in s:\n                hash *= prime_hash[c]\n            return hash\n                \n            \n        return Uniqueprimehash(s) == Uniqueprimehash(t)\n            ",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def isAnagram(self, s: str, t: str) -> bool:\n        return self.match_by_unique_primeHash(s,t)\n      \n    # Time Complexity: O(n)\n    # space complexity: O(n)\n    def sort_and_match(self, s: str, t: str) -> bool:\n        s = list(s)\n        t = list(t)\n        s.sort()\n        t.sort()\n        \n        return len(s) == len(t) and s == t \n    \n    # Time Complexity: O(n)\n    # space complexity: O(k)\n    def match_by_frequencyTable(self, s: str, t: str) -> bool:\n        return Counter(s) == Counter(t)\n    \n    # Time Complexity: O(n)\n    # space complexity: O(k)\n    def match_by_unique_primeHash(self, s: str, t: str) -> bool:\n        def primes(n):\n            from itertools import count, islice\n            primes = (n for n in count(2) if all(n % d for d in range(2, n)))\n            return islice(primes, 0, n)\n        def letters():\n            return list(map(chr, range(97, 123)))\n        def Uniqueprimehash(s):\n            prime_hash = {\n                key: val for key, val in zip(letters(), primes(26))\n            }\n            hash = 1\n            for c in s:\n                hash *= prime_hash[c]\n            return hash\n                \n            \n        return Uniqueprimehash(s) == Uniqueprimehash(t)\n            ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/242-valid-anagram/",
       "datePublished": "2022-07-28T19:37:44+05:30",
       "upvoteCount": 0,

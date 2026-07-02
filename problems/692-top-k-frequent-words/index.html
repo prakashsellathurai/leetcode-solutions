@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -592,7 +599,10 @@ Note that "i" comes before "love" due to a lower alphabetical order.
 </div></section>
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Comparator</span><span class="p">:</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="k">class</span> <span class="nc">Comparator</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
@@ -652,7 +662,7 @@ Note that "i" comes before "love" due to a lower alphabetical order.
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Comparator:\n    def __init__(self, count, word):\n        self.count = count\n        self.word = word\n\n    def __lt__(self, other):\n        if self.count == other.count:\n            return self.word > other.word\n        return self.count < other.count\n\n    def __eq__(self, other):\n        return self.count == other.count and self.word == other.word\n\n\nclass Solution:\n    def topKFrequent(self, words: List[str], k: int) -> List[str]:\n        return self.priorityqueue(words, k)\n\n    # Time Complexity: O(nmlogn)\n    # Space Compexlity: O(n*m)\n    def sorting(self, words: List[str], k: int) -> List[str]:\n        counter = Counter(words)\n        counter = sorted(counter.keys(), key=counter.get, reverse=True)\n        return counter[:k]\n\n    # Time Complexity: O(nmlogk)\n    # Space Compexlity: O(k)\n    def priorityqueue(self, words: List[str], k: int) -> List[str]:\n        heap = []\n        counter = Counter(words)\n        heapq.heapify(heap)\n        for word in counter:\n            heapq.heappush(heap, (Comparator(counter[word], word), word))\n            if len(heap) > k:\n                heapq.heappop(heap)\n\n        res = []\n        for _ in range(k):\n            res.append(heapq.heappop(heap)[1])\n        return res[::-1]\n",
+      "text": "from collections import Counter\n\n\nclass Comparator:\n    def __init__(self, count, word):\n        self.count = count\n        self.word = word\n\n    def __lt__(self, other):\n        if self.count == other.count:\n            return self.word > other.word\n        return self.count < other.count\n\n    def __eq__(self, other):\n        return self.count == other.count and self.word == other.word\n\n\nclass Solution:\n    def topKFrequent(self, words: List[str], k: int) -> List[str]:\n        return self.priorityqueue(words, k)\n\n    # Time Complexity: O(nmlogn)\n    # Space Compexlity: O(n*m)\n    def sorting(self, words: List[str], k: int) -> List[str]:\n        counter = Counter(words)\n        counter = sorted(counter.keys(), key=counter.get, reverse=True)\n        return counter[:k]\n\n    # Time Complexity: O(nmlogk)\n    # Space Compexlity: O(k)\n    def priorityqueue(self, words: List[str], k: int) -> List[str]:\n        heap = []\n        counter = Counter(words)\n        heapq.heapify(heap)\n        for word in counter:\n            heapq.heappush(heap, (Comparator(counter[word], word), word))\n            if len(heap) > k:\n                heapq.heappop(heap)\n\n        res = []\n        for _ in range(k):\n            res.append(heapq.heappop(heap)[1])\n        return res[::-1]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/692-top-k-frequent-words/",
       "datePublished": "2022-06-23T18:37:40+05:30",
       "upvoteCount": 0,

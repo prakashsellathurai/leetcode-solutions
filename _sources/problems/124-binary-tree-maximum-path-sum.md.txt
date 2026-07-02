@@ -48,7 +48,7 @@ class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         res = float('-inf')
         def dfs(node):
-            nonlocal res;
+            nonlocal res
             if not node:
                 return 0
             
@@ -61,6 +61,8 @@ class Solution:
         dfs(root)
         return res
 ```
+
+
 
 <script type="application/ld+json">
 {
@@ -80,7 +82,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def maxPathSum(self, root: Optional[TreeNode]) -> int:\n        res = float('-inf')\n        def dfs(node):\n            nonlocal res;\n            if not node:\n                return 0\n            \n            left = max(dfs(node.left),0)\n            right = max(dfs(node.right),0)\n            \n            cur_gain = node.val + max(left, right)\n            res = max(res, node.val + left + right)\n            return cur_gain\n        dfs(root)\n        return res",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def maxPathSum(self, root: Optional[TreeNode]) -> int:\n        res = float('-inf')\n        def dfs(node):\n            nonlocal res\n            if not node:\n                return 0\n            \n            left = max(dfs(node.left),0)\n            right = max(dfs(node.right),0)\n            \n            cur_gain = node.val + max(left, right)\n            res = max(res, node.val + left + right)\n            return cur_gain\n        dfs(root)\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/124-binary-tree-maximum-path-sum/",
       "datePublished": "2022-07-07T11:01:56+05:30",
       "upvoteCount": 0,

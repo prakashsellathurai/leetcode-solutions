@@ -31,6 +31,9 @@ Try it on <a href='https://leetcode.com/problems/347-top-k-frequent-elements'>le
 
 ## Solution(Python)
 ```Python
+from collections import Counter
+
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         return self.prioirtyQueue(nums, k)
@@ -54,6 +57,8 @@ class Solution:
 
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -72,7 +77,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\n        return self.prioirtyQueue(nums, k)\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n    def naive(self, nums: List[int], k: int) -> List[int]:\n        freqmap = Counter(nums)\n        freqmap = sorted(freqmap, key=freqmap.get, reverse=True)\n        return freqmap[:k]\n\n    # Time Complexity: O(nlogk)\n    # Space Complexity: O(n)\n    def prioirtyQueue(self, nums: List[int], k: int) -> List[int]:\n        if k == len(nums):\n            return nums\n\n        count = Counter(nums)\n\n        return heapq.nlargest(k, count.keys(), key=count.get)\n",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\n        return self.prioirtyQueue(nums, k)\n\n    # Time Complexity: O(nlogn)\n    # Space Complexity: O(n)\n    def naive(self, nums: List[int], k: int) -> List[int]:\n        freqmap = Counter(nums)\n        freqmap = sorted(freqmap, key=freqmap.get, reverse=True)\n        return freqmap[:k]\n\n    # Time Complexity: O(nlogk)\n    # Space Complexity: O(n)\n    def prioirtyQueue(self, nums: List[int], k: int) -> List[int]:\n        if k == len(nums):\n            return nums\n\n        count = Counter(nums)\n\n        return heapq.nlargest(k, count.keys(), key=count.get)\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/347-top-k-frequent-elements/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

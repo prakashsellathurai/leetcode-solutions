@@ -44,6 +44,8 @@ Try it on <a href='https://leetcode.com/problems/0373-find-k-pairs-with-smallest
 ## Solution(Python)
 ```Python
 import heapq
+
+
 class Solution:
     def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
         m = len(nums1)
@@ -74,6 +76,12 @@ class Solution:
         return res
 ```
 
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -92,7 +100,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "import heapq\nclass Solution:\n    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:\n        m = len(nums1)\n        n = len(nums2)\n\n        minHeap = [(nums1[0]+nums2[0] , (0,0))]\n        heapq.heapify(minHeap)\n        visited = set()\n        visited.add((0,0))\n        res = []\n        while k > 0:\n            cur_sum, (i,j) = heapq.heappop(minHeap)\n            res.append([nums1[i],nums2[j]])\n            \n\n            if i + 1 < m and (i+1,j) not in visited:\n                heapq.heappush(minHeap, ( nums1[i+1]+nums2[j],(i+1,j)))\n                visited.add((i+1,j))\n            if j+ 1 < n and (i,j + 1) not in visited:\n                heapq.heappush(minHeap,( nums1[i]+nums2[j+1],(i,j+1)))\n                visited.add((i,j+1))\n\n            if i + 1 < m and j+ 1 < n and (i+1,j+1) not in visited:\n                heapq.heappush(minHeap,( nums1[i+1]+nums2[j+1],(i+1,j+1)))\n                visited.add((i+1,1+j))\n            k-=1\n\n        return res",
+      "text": "import heapq\n\n\nclass Solution:\n    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:\n        m = len(nums1)\n        n = len(nums2)\n\n        minHeap = [(nums1[0]+nums2[0] , (0,0))]\n        heapq.heapify(minHeap)\n        visited = set()\n        visited.add((0,0))\n        res = []\n        while k > 0:\n            cur_sum, (i,j) = heapq.heappop(minHeap)\n            res.append([nums1[i],nums2[j]])\n            \n\n            if i + 1 < m and (i+1,j) not in visited:\n                heapq.heappush(minHeap, ( nums1[i+1]+nums2[j],(i+1,j)))\n                visited.add((i+1,j))\n            if j+ 1 < n and (i,j + 1) not in visited:\n                heapq.heappush(minHeap,( nums1[i]+nums2[j+1],(i,j+1)))\n                visited.add((i,j+1))\n\n            if i + 1 < m and j+ 1 < n and (i+1,j+1) not in visited:\n                heapq.heappush(minHeap,( nums1[i+1]+nums2[j+1],(i+1,j+1)))\n                visited.add((i+1,1+j))\n            k-=1\n\n        return res",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0373-find-k-pairs-with-smallest-sums/",
       "datePublished": "2026-01-23T23:18:11+05:30",
       "upvoteCount": 0,

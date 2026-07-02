@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -631,7 +638,7 @@
         <span class="n">second_half_start</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">second_half_start</span><span class="p">)</span>
         
         <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">head1</span><span class="p">,</span> <span class="n">head2</span><span class="p">):</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
             
             <span class="k">while</span> <span class="n">head1</span> <span class="ow">or</span> <span class="n">head2</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">head1</span><span class="p">:</span>
@@ -677,7 +684,7 @@
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reorderList(self, head: Optional[ListNode]) -> None:\n        \"\"\"\n        Do not return anything, modify head in-place instead.\n        \"\"\"\n        def findmiddle(head):\n            slow = head\n            fast = head\n            \n            while fast and fast.next:\n                slow = slow.next\n                fast = fast.next.next\n            return slow.next, slow\n        \n        first = head\n        second_half_start,first_end = findmiddle(first)\n        \n        def reverse(head):\n            cur = head\n            prev = None\n            while cur:\n                nxt = cur.next\n                cur.next = prev\n                prev = cur\n                cur = nxt\n            return prev\n        \n        if first_end is None:\n            return head\n        first_end.next = None\n        \n        second_half_start = reverse(second_half_start)\n        \n        def merge(head1, head2):\n            res = cur = ListNode(None)\n            \n            while head1 or head2:\n                if head1:\n                    res.next = head1\n                    head1 = head1.next\n                    res = res.next\n                if head2:\n                    res.next = head2\n                    head2 = head2.next\n                    res = res.next\n                \n            while head1:\n                res.next = head1\n                head1 = head1.next\n                res = res.next\n            while head2:\n                res.next = head2\n                head2 = head2.next\n                res = res.next\n            \n            return res.next\n            \n            \n        head = merge(first, second_half_start)\n        ",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reorderList(self, head: Optional[ListNode]) -> None:\n        \"\"\"\n        Do not return anything, modify head in-place instead.\n        \"\"\"\n        def findmiddle(head):\n            slow = head\n            fast = head\n            \n            while fast and fast.next:\n                slow = slow.next\n                fast = fast.next.next\n            return slow.next, slow\n        \n        first = head\n        second_half_start,first_end = findmiddle(first)\n        \n        def reverse(head):\n            cur = head\n            prev = None\n            while cur:\n                nxt = cur.next\n                cur.next = prev\n                prev = cur\n                cur = nxt\n            return prev\n        \n        if first_end is None:\n            return head\n        first_end.next = None\n        \n        second_half_start = reverse(second_half_start)\n        \n        def merge(head1, head2):\n            res = ListNode(None)\n            \n            while head1 or head2:\n                if head1:\n                    res.next = head1\n                    head1 = head1.next\n                    res = res.next\n                if head2:\n                    res.next = head2\n                    head2 = head2.next\n                    res = res.next\n                \n            while head1:\n                res.next = head1\n                head1 = head1.next\n                res = res.next\n            while head2:\n                res.next = head2\n                head2 = head2.next\n                res = res.next\n            \n            return res.next\n            \n            \n        head = merge(first, second_half_start)\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/143-reorder-list/",
       "datePublished": "2022-07-06T23:03:44+05:30",
       "upvoteCount": 0,

@@ -73,7 +73,7 @@ class Solution:
 
             for currChar in email:
                 if currChar == "+" or currChar == "@":
-                    break;
+                    break
                 
                 if currChar != '.':
                     cleanEmail.append(currChar)
@@ -104,6 +104,12 @@ class Solution:
         return len(unique_emails)
 ```
 
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -122,7 +128,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def numUniqueEmails(self, emails: List[str]) -> int:\n        return self.stringSplitmethod(emails)\n\n    # Time Complexity: O(N * M)\n    # Space Complexity: O(N*M) \n    def linearIteration(self, emails: List[str]) -> int:\n        unique_emails = set()\n        \n        for email in emails:\n            cleanEmail = []\n\n            for currChar in email:\n                if currChar == \"+\" or currChar == \"@\":\n                    break;\n                \n                if currChar != '.':\n                    cleanEmail.append(currChar)\n            domainName = []\n\n            for currChar in reversed(email):\n                domainName.append(currChar)\n                if currChar == \"@\":\n                    break\n\n            domainName  = ''.join(domainName[::-1])\n            cleanEmail = ''.join(cleanEmail)\n            unique_emails.add(cleanEmail+domainName)\n        return len(unique_emails)\n\n\n\n    # Time Complexity: O(N * M)\n    # Space Complexity: O(N*M) \n    def stringSplitmethod(self, emails: List[str]) -> int:\n        unique_emails = set()\n        \n        for email in emails:\n            localName, domainName = email.split('@')\n            localName = localName.split('+')[0].replace('.','')\n            uniqueEmail = localName + \"@\" +domainName\n            unique_emails.add(uniqueEmail)\n        return len(unique_emails)",
+      "text": "class Solution:\n    def numUniqueEmails(self, emails: List[str]) -> int:\n        return self.stringSplitmethod(emails)\n\n    # Time Complexity: O(N * M)\n    # Space Complexity: O(N*M) \n    def linearIteration(self, emails: List[str]) -> int:\n        unique_emails = set()\n        \n        for email in emails:\n            cleanEmail = []\n\n            for currChar in email:\n                if currChar == \"+\" or currChar == \"@\":\n                    break\n                \n                if currChar != '.':\n                    cleanEmail.append(currChar)\n            domainName = []\n\n            for currChar in reversed(email):\n                domainName.append(currChar)\n                if currChar == \"@\":\n                    break\n\n            domainName  = ''.join(domainName[::-1])\n            cleanEmail = ''.join(cleanEmail)\n            unique_emails.add(cleanEmail+domainName)\n        return len(unique_emails)\n\n\n\n    # Time Complexity: O(N * M)\n    # Space Complexity: O(N*M) \n    def stringSplitmethod(self, emails: List[str]) -> int:\n        unique_emails = set()\n        \n        for email in emails:\n            localName, domainName = email.split('@')\n            localName = localName.split('+')[0].replace('.','')\n            uniqueEmail = localName + \"@\" +domainName\n            unique_emails.add(uniqueEmail)\n        return len(unique_emails)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/unique-email-addresses/",
       "datePublished": "2025-07-01T17:31:33+05:30",
       "upvoteCount": 0,

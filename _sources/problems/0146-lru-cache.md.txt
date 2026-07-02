@@ -64,6 +64,8 @@ lRUCache.get(4);    // return 4
 #    eveict if exceeded capacity
 #    put value
 from collections import OrderedDict
+
+
 class LRUCache:
 
     def __init__(self, capacity: int):
@@ -91,6 +93,8 @@ class LRUCache:
 # obj.put(key,value)
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -109,7 +113,7 @@ class LRUCache:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "#  \n#  get\n#   return -1 not found\n#   accessed node -> put in back of the queue\n#   return node value\n#  put\n#    put in back\n#    eveict if exceeded capacity\n#    put value\nfrom collections import OrderedDict\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.cache = OrderedDict()\n        self.cap = capacity\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False) # Evict oldest\n        \n\n\n# Your LRUCache object will be instantiated and called as such:\n# obj = LRUCache(capacity)\n# param_1 = obj.get(key)\n# obj.put(key,value)",
+      "text": "#  \n#  get\n#   return -1 not found\n#   accessed node -> put in back of the queue\n#   return node value\n#  put\n#    put in back\n#    eveict if exceeded capacity\n#    put value\nfrom collections import OrderedDict\n\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.cache = OrderedDict()\n        self.cap = capacity\n\n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False) # Evict oldest\n        \n\n\n# Your LRUCache object will be instantiated and called as such:\n# obj = LRUCache(capacity)\n# param_1 = obj.get(key)\n# obj.put(key,value)",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0146-lru-cache/",
       "datePublished": "2025-10-09T21:55:58+05:30",
       "upvoteCount": 0,

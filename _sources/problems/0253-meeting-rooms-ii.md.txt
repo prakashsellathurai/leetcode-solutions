@@ -1,0 +1,117 @@
+# 0253-meeting-rooms-ii
+
+
+Try it on <a href='https://leetcode.com/problems/0253-meeting-rooms-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an array of meeting time intervals <code>intervals</code> where <code>intervals[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>, return <em>the minimum number of conference rooms required</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> intervals = [[0,30],[5,10],[15,20]]
+<strong>Output:</strong> 2
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> intervals = [[7,10],[2,4]]
+<strong>Output:</strong> 1
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;=&nbsp;intervals.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>0 &lt;= start<sub>i</sub> &lt; end<sub>i</sub> &lt;= 10<sup>6</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        # 
+        #  intervals = [[0,30],[5,10],[15,20]]
+        #  0 - 30 room = 1
+        #    5 10 room  = 2
+        #        15 - 20 = 1
+        #   sort by start
+        #         build heap of end times
+        #         if s < heap[-1]
+        #             add heap
+        #        else:
+        #             heap pop
+        # i = 0; heap = [30]; room = 1
+        # i =1 ; 0 < 30 ; heap = [10, 30]; room = 2
+        # i =2 ; 10 < 15; heap =  [15, 30]; room = 2
+        # 
+        #  alteenatuve way process start and end arrays
+        #    start = [0, 5, 15]
+        #    end = [30, 10 ,20]
+        #   process chroonogoligcal order
+        #  start < end
+        #       increase room count
+        #  else:
+        #        decrease room count
+        #  start = 0; end = 30; o < 30; room = 1
+        #     s = 5; e = 30; room = 2
+        #    s = 15; e = 20; room = 3
+        #  
+        start = sorted([interval[0] for interval in intervals])
+        end =  sorted([interval[1] for interval in intervals])
+
+        n = len(start)
+        i = 0
+        j = 0
+        rooms = 0
+        min_rooms = 0
+        while i < n:
+            if start[i] < end[j]:
+                rooms += 1
+                i += 1
+            else:
+                rooms -= 1
+                j+=1
+            min_rooms = max(min_rooms, rooms)
+        return min_rooms
+            
+
+
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "253. Meeting Rooms II",
+    "text": "Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.\n\u00a0\nExample 1:\nInput: intervals = [[0,30],[5,10],[15,20]]\nOutput: 2\nExample 2:\nInput: intervals = [[7,10],[2,4]]\nOutput: 1\n\n\u00a0\nConstraints:\n\n1 <=\u00a0intervals.length <= 104\n0 <= starti < endi <= 106\n\n",
+    "url": "https://leetcode.com/problems/0253-meeting-rooms-ii",
+    "answerCount": 1,
+    "datePublished": "2026-06-26T16:48:06+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minMeetingRooms(self, intervals: List[List[int]]) -> int:\n        # \n        #  intervals = [[0,30],[5,10],[15,20]]\n        #  0 - 30 room = 1\n        #    5 10 room  = 2\n        #        15 - 20 = 1\n        #   sort by start\n        #         build heap of end times\n        #         if s < heap[-1]\n        #             add heap\n        #        else:\n        #             heap pop\n        # i = 0; heap = [30]; room = 1\n        # i =1 ; 0 < 30 ; heap = [10, 30]; room = 2\n        # i =2 ; 10 < 15; heap =  [15, 30]; room = 2\n        # \n        #  alteenatuve way process start and end arrays\n        #    start = [0, 5, 15]\n        #    end = [30, 10 ,20]\n        #   process chroonogoligcal order\n        #  start < end\n        #       increase room count\n        #  else:\n        #        decrease room count\n        #  start = 0; end = 30; o < 30; room = 1\n        #     s = 5; e = 30; room = 2\n        #    s = 15; e = 20; room = 3\n        #  \n        start = sorted([interval[0] for interval in intervals])\n        end =  sorted([interval[1] for interval in intervals])\n\n        n = len(start)\n        i = 0\n        j = 0\n        rooms = 0\n        min_rooms = 0\n        while i < n:\n            if start[i] < end[j]:\n                rooms += 1\n                i += 1\n            else:\n                rooms -= 1\n                j+=1\n            min_rooms = max(min_rooms, rooms)\n        return min_rooms\n            \n\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0253-meeting-rooms-ii/",
+      "datePublished": "2026-06-26T16:48:06+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

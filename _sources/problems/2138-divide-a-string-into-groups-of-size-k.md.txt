@@ -57,7 +57,7 @@ class Solution:
     def divideString(self, s: str, k: int, fill: str) -> List[str]:
         res = []
         n = len(s)
-        group = n // k
+        n // k
         lastgroup = n % k
         lastgroupIndex = n - (lastgroup)
         lastword_filler = "".join([fill] * (k - lastgroup))
@@ -72,6 +72,12 @@ class Solution:
         return res
 
 ```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
 
 <script type="application/ld+json">
 {
@@ -91,7 +97,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def divideString(self, s: str, k: int, fill: str) -> List[str]:\n        res = []\n        n = len(s)\n        group = n // k\n        lastgroup = n % k\n        lastgroupIndex = n - (lastgroup)\n        lastword_filler = \"\".join([fill] * (k - lastgroup))\n\n        for i in range(0, n - k + 1, k):\n            res.append(s[i: i + k])\n\n        if lastgroup > 0:\n            filler_word = s[lastgroupIndex:] + lastword_filler\n            res.append(filler_word)\n\n        return res\n",
+      "text": "class Solution:\n    def divideString(self, s: str, k: int, fill: str) -> List[str]:\n        res = []\n        n = len(s)\n        n // k\n        lastgroup = n % k\n        lastgroupIndex = n - (lastgroup)\n        lastword_filler = \"\".join([fill] * (k - lastgroup))\n\n        for i in range(0, n - k + 1, k):\n            res.append(s[i: i + k])\n\n        if lastgroup > 0:\n            filler_word = s[lastgroupIndex:] + lastword_filler\n            res.append(filler_word)\n\n        return res\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/2138-divide-a-string-into-groups-of-size-k/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,

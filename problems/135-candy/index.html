@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -621,7 +628,6 @@ The third child gets 1 candy because it satisfies the above two conditions.
                     <span class="ow">and</span> <span class="n">candies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">candies</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
                 <span class="p">):</span>
                     <span class="n">candies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">candies</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="n">hashChanged</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">candies</span><span class="p">)</span>
 
     <span class="c1"># Time Complexity:O(n)</span>
@@ -681,7 +687,10 @@ The third child gets 1 candy because it satisfies the above two conditions.
         <span class="k">return</span> <span class="n">candies</span>
 </pre></div>
 </div>
-<script type="application/ld+json">
+</section>
+<section id="dry-run">
+<h2>Dry Run<a class="headerlink" href="#dry-run" title="Permalink to this headline">¶</a></h2>
+<iframe loading="lazy" sandbox="allow-scripts" src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" title="Interactive Dry Run"></iframe><script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "QAPage",
@@ -699,7 +708,7 @@ The third child gets 1 candy because it satisfies the above two conditions.
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def candy(self, ratings: List[int]) -> int:\n        return self.SinglePassConstantSpace(ratings)\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n)\n    def bruteforce(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n        hasChanged = True\n\n        while hasChanged:\n            hasChanged = False\n\n            for i in range(n):\n                if (\n                    i != n - 1\n                    and ratings[i] > ratings[i + 1]\n                    and candies[i] <= candies[i + 1]\n                ):\n                    candies[i] = candies[i + 1] + 1\n                    hasChanged = True\n                if (\n                    i >= 0\n                    and ratings[i] > ratings[i - 1]\n                    and candies[i] <= candies[i - 1]\n                ):\n                    candies[i] = candies[i - 1] + 1\n                    hashChanged = True\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(n)\n    def presum(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n\n        for i in range(1, n):\n            if ratings[i] > ratings[i - 1]:\n                candies[i] = candies[i - 1] + 1\n\n        for i in range(n - 2, -1, -1):\n            if ratings[i] > ratings[i + 1]:\n                candies[i] = max(candies[i + 1] + 1, candies[i])\n\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(1)\n    def SinglePassConstantSpace(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        if n <= 1:\n            return n\n\n        def summateN(n):\n            return (n * (n + 1)) // 2\n\n        candies = 0\n        up = 0\n        down = 0\n        oldSlope = 0\n\n        for i in range(1, n):\n            newSlope = (\n                1\n                if ratings[i] > ratings[i - 1]\n                else -1\n                if ratings[i] < ratings[i - 1]\n                else 0\n            )\n\n            if oldSlope > 0 and newSlope == 0 or (oldSlope < 0 and newSlope >= 0):\n                candies += summateN(up) + summateN(down) + max(up, down)\n                up = 0\n                down = 0\n\n            if newSlope > 0:\n                up += 1\n            elif newSlope < 0:\n                down += 1\n            else:\n                candies += 1\n            oldSlope = newSlope\n\n        candies += summateN(up) + summateN(down) + max(up, down) + 1\n        return candies\n",
+      "text": "class Solution:\n    def candy(self, ratings: List[int]) -> int:\n        return self.SinglePassConstantSpace(ratings)\n\n    # Time Complexity: O(n^2)\n    # Space Complexity: O(n)\n    def bruteforce(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n        hasChanged = True\n\n        while hasChanged:\n            hasChanged = False\n\n            for i in range(n):\n                if (\n                    i != n - 1\n                    and ratings[i] > ratings[i + 1]\n                    and candies[i] <= candies[i + 1]\n                ):\n                    candies[i] = candies[i + 1] + 1\n                    hasChanged = True\n                if (\n                    i >= 0\n                    and ratings[i] > ratings[i - 1]\n                    and candies[i] <= candies[i - 1]\n                ):\n                    candies[i] = candies[i - 1] + 1\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(n)\n    def presum(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        candies = [1] * n\n\n        for i in range(1, n):\n            if ratings[i] > ratings[i - 1]:\n                candies[i] = candies[i - 1] + 1\n\n        for i in range(n - 2, -1, -1):\n            if ratings[i] > ratings[i + 1]:\n                candies[i] = max(candies[i + 1] + 1, candies[i])\n\n        return sum(candies)\n\n    # Time Complexity:O(n)\n    # Space Complexity: O(1)\n    def SinglePassConstantSpace(self, ratings: List[int]) -> int:\n        n = len(ratings)\n        if n <= 1:\n            return n\n\n        def summateN(n):\n            return (n * (n + 1)) // 2\n\n        candies = 0\n        up = 0\n        down = 0\n        oldSlope = 0\n\n        for i in range(1, n):\n            newSlope = (\n                1\n                if ratings[i] > ratings[i - 1]\n                else -1\n                if ratings[i] < ratings[i - 1]\n                else 0\n            )\n\n            if oldSlope > 0 and newSlope == 0 or (oldSlope < 0 and newSlope >= 0):\n                candies += summateN(up) + summateN(down) + max(up, down)\n                up = 0\n                down = 0\n\n            if newSlope > 0:\n                up += 1\n            elif newSlope < 0:\n                down += 1\n            else:\n                candies += 1\n            oldSlope = newSlope\n\n        candies += summateN(up) + summateN(down) + max(up, down) + 1\n        return candies\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/135-candy/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
@@ -768,6 +777,7 @@ The third child gets 1 candy because it satisfies the above two conditions.
 <li><a class="reference internal" href="#">135-candy</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
+<li><a class="reference internal" href="#dry-run">Dry Run</a></li>
 </ul>
 </li>
 </ul>

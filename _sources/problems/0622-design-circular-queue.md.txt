@@ -78,7 +78,7 @@ class MyCircularQueue:
     def deQueue(self) -> bool:
         if self.size == 0:
             return False
-        res = self.arr[self.front]
+        self.arr[self.front]
         self.front = (self.front + 1) % self.capsize
         self.size -= 1
         return True
@@ -112,6 +112,8 @@ class MyCircularQueue:
 # param_6 = obj.isFull()
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -130,7 +132,7 @@ class MyCircularQueue:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class MyCircularQueue:\n\n    def __init__(self, k: int):\n        self.front = 0\n        self.arr = [-1] * k \n        self.capsize = k \n        self.size = 0\n\n    def enQueue(self, value: int) -> bool:\n        if self.size >= self.capsize:\n            return False\n        rear = (self.front + self.size) % self.capsize\n        self.arr[rear] = value\n        self.size += 1\n        return True\n\n    def deQueue(self) -> bool:\n        if self.size == 0:\n            return False\n        res = self.arr[self.front]\n        self.front = (self.front + 1) % self.capsize\n        self.size -= 1\n        return True\n\n    def Front(self) -> int:\n        if self.size == 0:\n            return -1\n        return self.arr[self.front]\n\n    def Rear(self) -> int:\n        if self.size == 0:\n            return -1\n        rear = (self.front + self.size - 1) % self.capsize\n        return self.arr[rear]\n\n    def isEmpty(self) -> bool:\n        return self.size == 0\n\n    def isFull(self) -> bool:\n        return self.size == self.capsize\n        \n\n\n# Your MyCircularQueue object will be instantiated and called as such:\n# obj = MyCircularQueue(k)\n# param_1 = obj.enQueue(value)\n# param_2 = obj.deQueue()\n# param_3 = obj.Front()\n# param_4 = obj.Rear()\n# param_5 = obj.isEmpty()\n# param_6 = obj.isFull()",
+      "text": "class MyCircularQueue:\n\n    def __init__(self, k: int):\n        self.front = 0\n        self.arr = [-1] * k \n        self.capsize = k \n        self.size = 0\n\n    def enQueue(self, value: int) -> bool:\n        if self.size >= self.capsize:\n            return False\n        rear = (self.front + self.size) % self.capsize\n        self.arr[rear] = value\n        self.size += 1\n        return True\n\n    def deQueue(self) -> bool:\n        if self.size == 0:\n            return False\n        self.arr[self.front]\n        self.front = (self.front + 1) % self.capsize\n        self.size -= 1\n        return True\n\n    def Front(self) -> int:\n        if self.size == 0:\n            return -1\n        return self.arr[self.front]\n\n    def Rear(self) -> int:\n        if self.size == 0:\n            return -1\n        rear = (self.front + self.size - 1) % self.capsize\n        return self.arr[rear]\n\n    def isEmpty(self) -> bool:\n        return self.size == 0\n\n    def isFull(self) -> bool:\n        return self.size == self.capsize\n        \n\n\n# Your MyCircularQueue object will be instantiated and called as such:\n# obj = MyCircularQueue(k)\n# param_1 = obj.enQueue(value)\n# param_2 = obj.deQueue()\n# param_3 = obj.Front()\n# param_4 = obj.Rear()\n# param_5 = obj.isEmpty()\n# param_6 = obj.isFull()",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0622-design-circular-queue/",
       "datePublished": "2026-05-19T13:15:53+05:30",
       "upvoteCount": 0,

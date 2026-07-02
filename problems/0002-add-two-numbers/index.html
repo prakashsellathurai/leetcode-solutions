@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -605,7 +612,7 @@
         <span class="n">dummyHead</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">curr</span> <span class="o">=</span> <span class="n">dummyHead</span>
         <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">l1</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">l2</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">carry</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">l1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">l2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">carry</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">l1Val</span> <span class="o">=</span> <span class="n">l1</span><span class="o">.</span><span class="n">val</span> <span class="k">if</span> <span class="n">l1</span> <span class="k">else</span> <span class="mi">0</span>
             <span class="n">l2Val</span> <span class="o">=</span> <span class="n">l2</span><span class="o">.</span><span class="n">val</span> <span class="k">if</span> <span class="n">l2</span> <span class="k">else</span> <span class="mi">0</span>
             <span class="n">columnSum</span> <span class="o">=</span> <span class="n">l1Val</span> <span class="o">+</span> <span class="n">l2Val</span> <span class="o">+</span> <span class="n">carry</span>
@@ -637,7 +644,7 @@
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def addTwoNumbers(\n        self, l1: Optional[ListNode], l2: Optional[ListNode]\n    ) -> Optional[ListNode]:\n        dummyHead = ListNode(0)\n        curr = dummyHead\n        carry = 0\n        while l1 != None or l2 != None or carry != 0:\n            l1Val = l1.val if l1 else 0\n            l2Val = l2.val if l2 else 0\n            columnSum = l1Val + l2Val + carry\n            carry = columnSum // 10\n            newNode = ListNode(columnSum % 10)\n            curr.next = newNode\n            curr = newNode\n            l1 = l1.next if l1 else None\n            l2 = l2.next if l2 else None\n        return dummyHead.next\n            ",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def addTwoNumbers(\n        self, l1: Optional[ListNode], l2: Optional[ListNode]\n    ) -> Optional[ListNode]:\n        dummyHead = ListNode(0)\n        curr = dummyHead\n        carry = 0\n        while l1 is not None or l2 is not None or carry != 0:\n            l1Val = l1.val if l1 else 0\n            l2Val = l2.val if l2 else 0\n            columnSum = l1Val + l2Val + carry\n            carry = columnSum // 10\n            newNode = ListNode(columnSum % 10)\n            curr.next = newNode\n            curr = newNode\n            l1 = l1.next if l1 else None\n            l2 = l2.next if l2 else None\n        return dummyHead.next\n            ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0002-add-two-numbers/",
       "datePublished": "2025-10-09T21:42:52+05:30",
       "upvoteCount": 0,

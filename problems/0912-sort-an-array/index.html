@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -589,6 +596,8 @@
 <section id="solution-python">
 <h2>Solution(Python)<a class="headerlink" href="#solution-python" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">sortArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quicksort</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
@@ -673,7 +682,10 @@
         <span class="k">return</span> <span class="n">nums</span>      
 </pre></div>
 </div>
-<script type="application/ld+json">
+</section>
+<section id="dry-run">
+<h2>Dry Run<a class="headerlink" href="#dry-run" title="Permalink to this headline">¶</a></h2>
+<iframe loading="lazy" sandbox="allow-scripts" src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" title="Interactive Dry Run"></iframe><script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "QAPage",
@@ -691,7 +703,7 @@
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "from random import randint\nclass Solution:\n    def sortArray(self, nums: List[int]) -> List[int]:\n        return self.quicksort(nums)\n    # merge two sorted arrays\n    # O(n LOGN) time complexity\n    # O(n) space complexity\n    def mergeSort(self, nums: List[int]) -> List[int]:\n        if len(nums) <= 1:\n            return nums\n        mid = len(nums) // 2\n        left = self.mergeSort(nums[:mid])\n        right = self.mergeSort(nums[mid:])\n        return self.merge(left, right)\n\n\n    # Heap sort\n    # O(nlogn) time complexity\n    # O(n) space complexity\n    def heapSort(self, nums: List[int]) -> List[int]:\n        heapq.heapify(nums)\n        return [heapq.heappop(nums) for _ in range(len(nums))]\n\n    # Counting Sort\n    # Time Complexity: O(n + k)\n    # SpaceComplexity : O(k)\n    def countingSort(self, nums: List[int]) -> List[int]:\n        min_num, max_num = min(nums), max(nums)\n        count = [0] * (max_num - min_num + 1)\n        for num in nums:\n            count[num - min_num] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i + min_num] * c)\n        return result\n        \n    def merge(self, left: List[int], right: List[int]) -> List[int]:\n        result = []\n        i = j = 0\n        while i < len(left) and j < len(right):\n            if left[i] < right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    # Counting Sort\n    # Time Complexity: O(n ^ 2)\n    # SpaceComplexity : O(logn)\n    def quicksort(self, nums: List[int]) -> List[int]:\n        def quick_sort(left ,right):\n            if left >= right:\n                return\n            pivot = nums[randint(left,right)]\n            i = left -1\n            j = right + 1\n            k = left\n\n            while k < j:\n                if nums[k] < pivot:\n                    i += 1\n                    nums[i], nums[k] = nums[k], nums[i]\n                    k += 1\n                elif nums[k] > pivot:\n                    # Move element to the \"greater than\" region\n                    j -= 1\n                    nums[j], nums[k] = nums[k], nums[j]\n                    # Don't increment k as we need to examine the swapped element\n                else:\n                    # Element equals pivot, just move to next element\n                    k += 1\n            # Recursively sort the \"less than\" and \"greater than\" regions\n            # Elements equal to pivot are already in correct position\n            quick_sort(left, i)      # Sort elements < pivot\n            quick_sort(j, right)     # Sort elements > pivot\n      \n        # Sort the entire array in-place\n        quick_sort(0, len(nums) - 1)\n        return nums      \n",
+      "text": "from random import randint\n\n\nclass Solution:\n    def sortArray(self, nums: List[int]) -> List[int]:\n        return self.quicksort(nums)\n    # merge two sorted arrays\n    # O(n LOGN) time complexity\n    # O(n) space complexity\n    def mergeSort(self, nums: List[int]) -> List[int]:\n        if len(nums) <= 1:\n            return nums\n        mid = len(nums) // 2\n        left = self.mergeSort(nums[:mid])\n        right = self.mergeSort(nums[mid:])\n        return self.merge(left, right)\n\n\n    # Heap sort\n    # O(nlogn) time complexity\n    # O(n) space complexity\n    def heapSort(self, nums: List[int]) -> List[int]:\n        heapq.heapify(nums)\n        return [heapq.heappop(nums) for _ in range(len(nums))]\n\n    # Counting Sort\n    # Time Complexity: O(n + k)\n    # SpaceComplexity : O(k)\n    def countingSort(self, nums: List[int]) -> List[int]:\n        min_num, max_num = min(nums), max(nums)\n        count = [0] * (max_num - min_num + 1)\n        for num in nums:\n            count[num - min_num] += 1\n        result = []\n        for i, c in enumerate(count):\n            result.extend([i + min_num] * c)\n        return result\n        \n    def merge(self, left: List[int], right: List[int]) -> List[int]:\n        result = []\n        i = j = 0\n        while i < len(left) and j < len(right):\n            if left[i] < right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    # Counting Sort\n    # Time Complexity: O(n ^ 2)\n    # SpaceComplexity : O(logn)\n    def quicksort(self, nums: List[int]) -> List[int]:\n        def quick_sort(left ,right):\n            if left >= right:\n                return\n            pivot = nums[randint(left,right)]\n            i = left -1\n            j = right + 1\n            k = left\n\n            while k < j:\n                if nums[k] < pivot:\n                    i += 1\n                    nums[i], nums[k] = nums[k], nums[i]\n                    k += 1\n                elif nums[k] > pivot:\n                    # Move element to the \"greater than\" region\n                    j -= 1\n                    nums[j], nums[k] = nums[k], nums[j]\n                    # Don't increment k as we need to examine the swapped element\n                else:\n                    # Element equals pivot, just move to next element\n                    k += 1\n            # Recursively sort the \"less than\" and \"greater than\" regions\n            # Elements equal to pivot are already in correct position\n            quick_sort(left, i)      # Sort elements < pivot\n            quick_sort(j, right)     # Sort elements > pivot\n      \n        # Sort the entire array in-place\n        quick_sort(0, len(nums) - 1)\n        return nums      \n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0912-sort-an-array/",
       "datePublished": "2026-03-03T19:43:47+05:30",
       "upvoteCount": 0,
@@ -760,6 +772,7 @@
 <li><a class="reference internal" href="#">0912-sort-an-array</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
+<li><a class="reference internal" href="#dry-run">Dry Run</a></li>
 </ul>
 </li>
 </ul>

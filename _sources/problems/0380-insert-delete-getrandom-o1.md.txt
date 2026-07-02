@@ -57,6 +57,8 @@ randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom()
 #    hahsmap -> key -> index at array
 #    array  -> list of keys
 import random
+
+
 class RandomizedSet:
 
     def __init__(self):
@@ -100,6 +102,8 @@ class RandomizedSet:
 # param_3 = obj.getRandom()
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -118,7 +122,7 @@ class RandomizedSet:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# Data structure\n#     for O(1) access -> hashmap\n#     for random access -> array\n#    use combination of array and hashmap\n#    hahsmap -> key -> index at array\n#    array  -> list of keys\nimport random\nclass RandomizedSet:\n\n    def __init__(self):\n        self.hash = {}\n        self.array = []\n\n    def insert(self, val: int) -> bool:\n        if val  in self.hash:\n            return False\n        self.array.append(val)\n        self.hash[val] = len(self.array) - 1\n        return True\n        \n\n    def remove(self, val: int) -> bool:\n        if val not in self.hash:\n            return False\n        \n        idx = self.hash[val]\n        last_idx = len(self.array) - 1\n\n        last_index_element = self.array[last_idx]\n        \n        self.array[idx] =  self.array[last_idx]\n        self.hash[last_index_element] = idx\n\n        del self.hash[val]\n        self.array.pop()\n        return True\n        \n\n    def getRandom(self) -> int:\n        return random.choice(self.array)\n        \n\n\n# Your RandomizedSet object will be instantiated and called as such:\n# obj = RandomizedSet()\n# param_1 = obj.insert(val)\n# param_2 = obj.remove(val)\n# param_3 = obj.getRandom()",
+      "text": "# Data structure\n#     for O(1) access -> hashmap\n#     for random access -> array\n#    use combination of array and hashmap\n#    hahsmap -> key -> index at array\n#    array  -> list of keys\nimport random\n\n\nclass RandomizedSet:\n\n    def __init__(self):\n        self.hash = {}\n        self.array = []\n\n    def insert(self, val: int) -> bool:\n        if val  in self.hash:\n            return False\n        self.array.append(val)\n        self.hash[val] = len(self.array) - 1\n        return True\n        \n\n    def remove(self, val: int) -> bool:\n        if val not in self.hash:\n            return False\n        \n        idx = self.hash[val]\n        last_idx = len(self.array) - 1\n\n        last_index_element = self.array[last_idx]\n        \n        self.array[idx] =  self.array[last_idx]\n        self.hash[last_index_element] = idx\n\n        del self.hash[val]\n        self.array.pop()\n        return True\n        \n\n    def getRandom(self) -> int:\n        return random.choice(self.array)\n        \n\n\n# Your RandomizedSet object will be instantiated and called as such:\n# obj = RandomizedSet()\n# param_1 = obj.insert(val)\n# param_2 = obj.remove(val)\n# param_3 = obj.getRandom()",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0380-insert-delete-getrandom-o1/",
       "datePublished": "2026-06-16T12:23:25+05:30",
       "upvoteCount": 0,

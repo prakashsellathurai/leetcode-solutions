@@ -1,0 +1,197 @@
+# 0207-course-schedule
+
+
+Try it on <a href='https://leetcode.com/problems/0207-course-schedule'>leetcode</a>
+
+## Description
+<div class="description">
+<p>There are a total of <code>numCourses</code> courses you have to take, labeled from <code>0</code> to <code>numCourses - 1</code>. You are given an array <code>prerequisites</code> where <code>prerequisites[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> indicates that you <strong>must</strong> take course <code>b<sub>i</sub></code> first if you want to take course <code>a<sub>i</sub></code>.</p>
+
+<ul>
+	<li>For example, the pair <code>[0, 1]</code>, indicates that to take course <code>0</code> you have to first take course <code>1</code>.</li>
+</ul>
+
+<p>Return <code>true</code> if you can finish all courses. Otherwise, return <code>false</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> numCourses = 2, prerequisites = [[1,0]]
+<strong>Output:</strong> true
+<strong>Explanation:</strong> There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0. So it is possible.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> numCourses = 2, prerequisites = [[1,0],[0,1]]
+<strong>Output:</strong> false
+<strong>Explanation:</strong> There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= numCourses &lt;= 2000</code></li>
+	<li><code>0 &lt;= prerequisites.length &lt;= 5000</code></li>
+	<li><code>prerequisites[i].length == 2</code></li>
+	<li><code>0 &lt;= a<sub>i</sub>, b<sub>i</sub> &lt; numCourses</code></li>
+	<li>All the pairs prerequisites[i] are <strong>unique</strong>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import defaultdict, deque
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # numCourses = 2, prerequisites = [[1,0]]
+        #  0 -> 1: t
+        # numCourses = 2, prerequisites = [[1,0],[0,1]]
+        #  0 -> 1 -> 0
+        #  0 -> 1  -> 2 ,3 -> 4
+        #    base case node == None
+        #    recursive case
+        #      neighbour
+        #   add node to list 
+        # # 
+        #        #  adjacency list
+        #  0 -> 1
+        #  1  -> 2 ,3
+        #  2  -> None
+        #  3  -> 4
+        #  4 -> None
+        #  seen = {}
+        #  res = []
+        #  dfs 0 
+        #      seen = {0}
+        #      dfs (1)
+        #         seen = {1}
+        #         dfs(2)
+        #           seen = {0 1 2} base case
+        #         dfs(3)
+        #           seen = {0 1 2 3}
+        #           dfs(4)
+        #            seen = {0 1 2 3 4}
+        #            base case
+        #            res = [4]
+        #        res = [4, 3, 2]
+        #       res = [4, 3, 2, 1]
+        #   res = [4, 3, 2 ,1 ,0]
+        #  res =  reverse(res) 
+        #  len(Res) == n else -1
+        # Time Complexity:(n * n)
+        # Space Complexity: (n)
+
+        # graph
+        return self.dfs(numCourses, prerequisites)
+    
+    # Time Complexity: O(m + n)
+    # Space Complexity : O(m+ n)
+    def kahn_algorithm(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        indegree = [0] * numCourses
+        adjList = defaultdict(list)
+
+        for course, prereq in prerequisites:
+            adjList[prereq].append(course)
+            indegree[course] += 1
+        
+        queue = deque()
+
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+        nodeVisited = 0
+
+        while queue:
+            node = queue.popleft()
+            nodeVisited += 1
+
+            for neighbour in adjList[node]:
+                indegree[neighbour] -= 1
+                if indegree[neighbour] == 0:
+                    queue.append(neighbour)
+        
+        return nodeVisited == numCourses
+
+    # Time Complexity: O(m + n)
+    # Space Complexity : O(m+ n)
+    def dfs(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        adjList = defaultdict(list)
+
+        for course, prereq in prerequisites:
+            adjList[prereq].append(course)
+        
+        visit = [False]  * numCourses
+        inStack = [False] * numCourses
+
+        def dfs(node):
+            if inStack[node]:
+                return True
+            if visit[node]:
+                return False
+            
+            visit[node] = True
+            inStack[node] = True
+
+            for neighbor in adjList[node]:
+                if dfs(neighbor):
+                    return True
+            
+            inStack[node] = False
+            return False
+
+        for i in range(numCourses):
+            if dfs(i):
+                return False
+        return True
+
+        
+
+        
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "207. Course Schedule",
+    "text": "There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.\n\nFor example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.\n\nReturn true if you can finish all courses. Otherwise, return false.\n\u00a0\nExample 1:\n\nInput: numCourses = 2, prerequisites = [[1,0]]\nOutput: true\nExplanation: There are a total of 2 courses to take. \nTo take course 1 you should have finished course 0. So it is possible.\n\nExample 2:\n\nInput: numCourses = 2, prerequisites = [[1,0],[0,1]]\nOutput: false\nExplanation: There are a total of 2 courses to take. \nTo take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.\n\n\u00a0\nConstraints:\n\n1 <= numCourses <= 2000\n0 <= prerequisites.length <= 5000\nprerequisites[i].length == 2\n0 <= ai, bi < numCourses\nAll the pairs prerequisites[i] are unique.\n\n",
+    "url": "https://leetcode.com/problems/0207-course-schedule",
+    "answerCount": 1,
+    "datePublished": "2026-06-29T11:48:45+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import defaultdict, deque\n\n\nclass Solution:\n    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\n        # numCourses = 2, prerequisites = [[1,0]]\n        #  0 -> 1: t\n        # numCourses = 2, prerequisites = [[1,0],[0,1]]\n        #  0 -> 1 -> 0\n        #  0 -> 1  -> 2 ,3 -> 4\n        #    base case node == None\n        #    recursive case\n        #      neighbour\n        #   add node to list \n        # # \n        #        #  adjacency list\n        #  0 -> 1\n        #  1  -> 2 ,3\n        #  2  -> None\n        #  3  -> 4\n        #  4 -> None\n        #  seen = {}\n        #  res = []\n        #  dfs 0 \n        #      seen = {0}\n        #      dfs (1)\n        #         seen = {1}\n        #         dfs(2)\n        #           seen = {0 1 2} base case\n        #         dfs(3)\n        #           seen = {0 1 2 3}\n        #           dfs(4)\n        #            seen = {0 1 2 3 4}\n        #            base case\n        #            res = [4]\n        #        res = [4, 3, 2]\n        #       res = [4, 3, 2, 1]\n        #   res = [4, 3, 2 ,1 ,0]\n        #  res =  reverse(res) \n        #  len(Res) == n else -1\n        # Time Complexity:(n * n)\n        # Space Complexity: (n)\n\n        # graph\n        return self.dfs(numCourses, prerequisites)\n    \n    # Time Complexity: O(m + n)\n    # Space Complexity : O(m+ n)\n    def kahn_algorithm(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\n        indegree = [0] * numCourses\n        adjList = defaultdict(list)\n\n        for course, prereq in prerequisites:\n            adjList[prereq].append(course)\n            indegree[course] += 1\n        \n        queue = deque()\n\n        for i in range(numCourses):\n            if indegree[i] == 0:\n                queue.append(i)\n        nodeVisited = 0\n\n        while queue:\n            node = queue.popleft()\n            nodeVisited += 1\n\n            for neighbour in adjList[node]:\n                indegree[neighbour] -= 1\n                if indegree[neighbour] == 0:\n                    queue.append(neighbour)\n        \n        return nodeVisited == numCourses\n\n    # Time Complexity: O(m + n)\n    # Space Complexity : O(m+ n)\n    def dfs(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\n        adjList = defaultdict(list)\n\n        for course, prereq in prerequisites:\n            adjList[prereq].append(course)\n        \n        visit = [False]  * numCourses\n        inStack = [False] * numCourses\n\n        def dfs(node):\n            if inStack[node]:\n                return True\n            if visit[node]:\n                return False\n            \n            visit[node] = True\n            inStack[node] = True\n\n            for neighbor in adjList[node]:\n                if dfs(neighbor):\n                    return True\n            \n            inStack[node] = False\n            return False\n\n        for i in range(numCourses):\n            if dfs(i):\n                return False\n        return True\n\n        \n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0207-course-schedule/",
+      "datePublished": "2026-06-29T11:48:45+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

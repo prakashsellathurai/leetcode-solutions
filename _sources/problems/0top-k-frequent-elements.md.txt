@@ -32,6 +32,9 @@ Try it on <a href='https://leetcode.com/problems/0top-k-frequent-elements'>leetc
 
 ## Solution(Python)
 ```Python
+from collections import Counter
+
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         return self.bucketsort(nums, k)
@@ -64,6 +67,8 @@ class Solution:
         return buckets[-k:]
 ```
 
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -82,7 +87,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\n        return self.bucketsort(nums, k)\n    \n    # Time Complexity: O(nlogn)    \n    def naive(self, nums: List[int], k: int) -> List[int]:\n        freqmap = Counter(nums)\n        sorted_freq = sorted(freqmap.keys(),key=freqmap.get,reverse=True)\n        return sorted_freq[:k]\n    \n    # Time Complexity: O(nlogk)   \n    def better(self, nums: List[int], k: int) -> List[int]:\n        n = len(nums)\n        \n        if k == n:\n            return nums\n        freq_map = Counter(nums)\n        return heapq.nlargest(k, freq_map.keys(),key=freq_map.get)\n    \n    # Time Complexity: O(n)  \n    def bucketsort(self, nums: List[int], k: int) -> List[int]:\n        n = len(nums)\n        buckets = [[] for _ in range(n+1)]\n        freq_map = Counter(nums)\n        \n        for num in freq_map:\n            buckets[freq_map[num]].append(num)\n            \n        buckets = [val for bucket in buckets for val in bucket]\n        return buckets[-k:]",
+      "text": "from collections import Counter\n\n\nclass Solution:\n    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\n        return self.bucketsort(nums, k)\n    \n    # Time Complexity: O(nlogn)    \n    def naive(self, nums: List[int], k: int) -> List[int]:\n        freqmap = Counter(nums)\n        sorted_freq = sorted(freqmap.keys(),key=freqmap.get,reverse=True)\n        return sorted_freq[:k]\n    \n    # Time Complexity: O(nlogk)   \n    def better(self, nums: List[int], k: int) -> List[int]:\n        n = len(nums)\n        \n        if k == n:\n            return nums\n        freq_map = Counter(nums)\n        return heapq.nlargest(k, freq_map.keys(),key=freq_map.get)\n    \n    # Time Complexity: O(n)  \n    def bucketsort(self, nums: List[int], k: int) -> List[int]:\n        n = len(nums)\n        buckets = [[] for _ in range(n+1)]\n        freq_map = Counter(nums)\n        \n        for num in freq_map:\n            buckets[freq_map[num]].append(num)\n            \n        buckets = [val for bucket in buckets for val in bucket]\n        return buckets[-k:]",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0top-k-frequent-elements/",
       "datePublished": "2025-03-11T18:38:55+05:30",
       "upvoteCount": 0,

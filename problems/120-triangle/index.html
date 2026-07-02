@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -603,7 +610,6 @@ The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above)
     <span class="k">def</span> <span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triangle</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">triangle</span><span class="p">)</span>
 
-        <span class="n">min_sum</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">sum_so_far</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
@@ -663,7 +669,10 @@ The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above)
         <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-<script type="application/ld+json">
+</section>
+<section id="dry-run">
+<h2>Dry Run<a class="headerlink" href="#dry-run" title="Permalink to this headline">¶</a></h2>
+<iframe loading="lazy" sandbox="allow-scripts" src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" title="Interactive Dry Run"></iframe><script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "QAPage",
@@ -681,7 +690,7 @@ The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above)
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def minimumTotal(self, triangle: List[List[int]]) -> int:\n        return self.bottomupdplessspace(triangle)\n\n    # Time complexity: O(2^n)\n    # space Complexity: O(n)\n    def bruteforce(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        min_sum = 0\n\n        def dfs(i, j, sum_so_far):\n            if i == n:\n                return sum_so_far\n\n            return min(\n                dfs(i + 1, j, sum_so_far + triangle[i][j]),\n                dfs(i + 1, j + 1, sum_so_far + triangle[i][j]),\n            )\n\n        return dfs(0, 0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def topdowndp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        @cache\n        def dfs(i, j):\n            if i == n - 1:\n                return triangle[i][j]\n\n            return triangle[i][j] + min(dfs(i + 1, j), dfs(i + 1, j + 1))\n\n        return dfs(0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def bottomupdp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n        dp = [[float(\"inf\")] * (i) for i in range(1, n + 1)]\n        dp[n - 1] = triangle[n - 1]\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[i][j] = triangle[i][j] + min(dp[i + 1][j], dp[i + 1][j + 1])\n        return dp[0][0]\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n)\n    def bottomupdplessspace(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        if not n:\n            return 0\n\n        if n == 1:\n            return triangle[0][0]\n\n        dp = [float(\"inf\")] * (n - 1)\n        prev_state = triangle[n - 1]\n\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[j] = triangle[i][j] + min(prev_state[j], prev_state[j + 1])\n            prev_state = dp\n\n        return dp[0]\n",
+      "text": "class Solution:\n    def minimumTotal(self, triangle: List[List[int]]) -> int:\n        return self.bottomupdplessspace(triangle)\n\n    # Time complexity: O(2^n)\n    # space Complexity: O(n)\n    def bruteforce(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n\n        def dfs(i, j, sum_so_far):\n            if i == n:\n                return sum_so_far\n\n            return min(\n                dfs(i + 1, j, sum_so_far + triangle[i][j]),\n                dfs(i + 1, j + 1, sum_so_far + triangle[i][j]),\n            )\n\n        return dfs(0, 0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def topdowndp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        @cache\n        def dfs(i, j):\n            if i == n - 1:\n                return triangle[i][j]\n\n            return triangle[i][j] + min(dfs(i + 1, j), dfs(i + 1, j + 1))\n\n        return dfs(0, 0)\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n^2)\n    def bottomupdp(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n        dp = [[float(\"inf\")] * (i) for i in range(1, n + 1)]\n        dp[n - 1] = triangle[n - 1]\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[i][j] = triangle[i][j] + min(dp[i + 1][j], dp[i + 1][j + 1])\n        return dp[0][0]\n\n    # Time complexity: O(n^2)\n    # space Complexity: O(n)\n    def bottomupdplessspace(self, triangle: List[List[int]]) -> int:\n        n = len(triangle)\n\n        if not n:\n            return 0\n\n        if n == 1:\n            return triangle[0][0]\n\n        dp = [float(\"inf\")] * (n - 1)\n        prev_state = triangle[n - 1]\n\n        for i in range(n - 2, -1, -1):\n            for j in range(i + 1):\n                dp[j] = triangle[i][j] + min(prev_state[j], prev_state[j + 1])\n            prev_state = dp\n\n        return dp[0]\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/120-triangle/",
       "datePublished": "2022-06-19T23:02:59+05:30",
       "upvoteCount": 0,
@@ -750,6 +759,7 @@ The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above)
 <li><a class="reference internal" href="#">120-triangle</a><ul>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#solution-python">Solution(Python)</a></li>
+<li><a class="reference internal" href="#dry-run">Dry Run</a></li>
 </ul>
 </li>
 </ul>

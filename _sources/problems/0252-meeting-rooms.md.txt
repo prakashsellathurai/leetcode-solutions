@@ -1,0 +1,94 @@
+# 0252-meeting-rooms
+
+
+Try it on <a href='https://leetcode.com/problems/0252-meeting-rooms'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given an array of meeting times&nbsp;<code>intervals</code> where <code>intervals[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>.</p>
+
+<p>A person can attend all meetings if no two meeting intervals overlap. Meetings ending at time <code>t</code> and starting at time <code>t</code> <strong>do not</strong> overlap.</p>
+
+<p>​​​​​​​Return <code>true</code> if a person can attend all meetings. Otherwise, return <code>false</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> intervals = [[0,30],[5,10],[15,20]]
+<strong>Output:</strong> false
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> intervals = [[7,10],[2,4]]
+<strong>Output:</strong> true
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= intervals.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>intervals[i].length == 2</code></li>
+	<li><code>0 &lt;= start<sub>i</sub> &lt;&nbsp;end<sub>i</sub> &lt;= 10<sup>6</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
+        #  intervals = [[0,30],[5,10],[15,20]]
+        # 
+        #  0                 30
+        #       5  10
+        #             15 20
+        #  sort -> end
+        #      s1,e1  s2,e2
+        #      overlap : s2 < e1 or s1 < e2
+             
+        intervals.sort()
+        for i in range(1, len(intervals)):
+            s2, e2 = intervals[i]
+            s1,e1 = intervals[i - 1]
+
+            if s2 < e1:
+                return False
+        return True
+
+        # sort the meetings by their start time. After sorting, each meeting can only overlap with the meeting immediately before it. Therefore, I only need to check whether the current meeting's start time is less than the previous meeting's end time."
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "252. Meeting Rooms",
+    "text": "You are given an array of meeting times\u00a0intervals where intervals[i] = [starti, endi].\nA person can attend all meetings if no two meeting intervals overlap. Meetings ending at time t and starting at time t do not overlap.\n\u200b\u200b\u200b\u200b\u200b\u200b\u200bReturn true if a person can attend all meetings. Otherwise, return false.\n\u00a0\nExample 1:\nInput: intervals = [[0,30],[5,10],[15,20]]\nOutput: false\nExample 2:\nInput: intervals = [[7,10],[2,4]]\nOutput: true\n\n\u00a0\nConstraints:\n\n0 <= intervals.length <= 104\nintervals[i].length == 2\n0 <= starti <\u00a0endi <= 106\n\n",
+    "url": "https://leetcode.com/problems/0252-meeting-rooms",
+    "answerCount": 1,
+    "datePublished": "2026-06-25T17:48:00+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def canAttendMeetings(self, intervals: List[List[int]]) -> bool:\n        #  intervals = [[0,30],[5,10],[15,20]]\n        # \n        #  0                 30\n        #       5  10\n        #             15 20\n        #  sort -> end\n        #      s1,e1  s2,e2\n        #      overlap : s2 < e1 or s1 < e2\n             \n        intervals.sort()\n        for i in range(1, len(intervals)):\n            s2, e2 = intervals[i]\n            s1,e1 = intervals[i - 1]\n\n            if s2 < e1:\n                return False\n        return True\n\n        # sort the meetings by their start time. After sorting, each meeting can only overlap with the meeting immediately before it. Therefore, I only need to check whether the current meeting's start time is less than the previous meeting's end time.\"",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0252-meeting-rooms/",
+      "datePublished": "2026-06-25T17:48:00+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

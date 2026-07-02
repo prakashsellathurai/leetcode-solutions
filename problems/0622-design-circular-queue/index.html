@@ -163,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../0012-integer-to-roman/">0012-integer-to-roman</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0013-roman-to-integer/">0013-roman-to-integer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0014-longest-common-prefix/">0014-longest-common-prefix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0015-3sum/">0015-3sum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0026-remove-duplicates-from-sorted-array/">0026-remove-duplicates-from-sorted-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0027-remove-element/">0027-remove-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0028-find-the-index-of-the-first-occurrence-in-a-string/">0028-find-the-index-of-the-first-occurrence-in-a-string</a></li>
@@ -189,11 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../0169-majority-element/">0169-majority-element</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0186-reverse-words-in-a-string-ii/">0186-reverse-words-in-a-string-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0189-rotate-array/">0189-rotate-array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0190-reverse-bits/">0190-reverse-bits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0206-reverse-linked-list/">0206-reverse-linked-list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0207-course-schedule/">0207-course-schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0212-word-search-ii/">0212-word-search-ii</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0215-kth-largest-element-in-an-array/">0215-kth-largest-element-in-an-array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0238-product-of-array-except-self/">0238-product-of-array-except-self</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0252-meeting-rooms/">0252-meeting-rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0253-meeting-rooms-ii/">0253-meeting-rooms-ii</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0261-graph-valid-tree/">0261-graph-valid-tree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0274-h-index/">0274-h-index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0371-sum-of-two-integers/">0371-sum-of-two-integers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0373-find-k-pairs-with-smallest-sums/">0373-find-k-pairs-with-smallest-sums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0380-insert-delete-getrandom-o1/">0380-insert-delete-getrandom-o1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../0392-is-subsequence/">0392-is-subsequence</a></li>
@@ -626,7 +633,7 @@ myCircularQueue.Rear();     // return 4
     <span class="k">def</span> <span class="nf">deQueue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">front</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">capsize</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="kc">True</span>
@@ -678,7 +685,7 @@ myCircularQueue.Rear();     // return 4
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class MyCircularQueue:\n\n    def __init__(self, k: int):\n        self.front = 0\n        self.arr = [-1] * k \n        self.capsize = k \n        self.size = 0\n\n    def enQueue(self, value: int) -> bool:\n        if self.size >= self.capsize:\n            return False\n        rear = (self.front + self.size) % self.capsize\n        self.arr[rear] = value\n        self.size += 1\n        return True\n\n    def deQueue(self) -> bool:\n        if self.size == 0:\n            return False\n        res = self.arr[self.front]\n        self.front = (self.front + 1) % self.capsize\n        self.size -= 1\n        return True\n\n    def Front(self) -> int:\n        if self.size == 0:\n            return -1\n        return self.arr[self.front]\n\n    def Rear(self) -> int:\n        if self.size == 0:\n            return -1\n        rear = (self.front + self.size - 1) % self.capsize\n        return self.arr[rear]\n\n    def isEmpty(self) -> bool:\n        return self.size == 0\n\n    def isFull(self) -> bool:\n        return self.size == self.capsize\n        \n\n\n# Your MyCircularQueue object will be instantiated and called as such:\n# obj = MyCircularQueue(k)\n# param_1 = obj.enQueue(value)\n# param_2 = obj.deQueue()\n# param_3 = obj.Front()\n# param_4 = obj.Rear()\n# param_5 = obj.isEmpty()\n# param_6 = obj.isFull()",
+      "text": "class MyCircularQueue:\n\n    def __init__(self, k: int):\n        self.front = 0\n        self.arr = [-1] * k \n        self.capsize = k \n        self.size = 0\n\n    def enQueue(self, value: int) -> bool:\n        if self.size >= self.capsize:\n            return False\n        rear = (self.front + self.size) % self.capsize\n        self.arr[rear] = value\n        self.size += 1\n        return True\n\n    def deQueue(self) -> bool:\n        if self.size == 0:\n            return False\n        self.arr[self.front]\n        self.front = (self.front + 1) % self.capsize\n        self.size -= 1\n        return True\n\n    def Front(self) -> int:\n        if self.size == 0:\n            return -1\n        return self.arr[self.front]\n\n    def Rear(self) -> int:\n        if self.size == 0:\n            return -1\n        rear = (self.front + self.size - 1) % self.capsize\n        return self.arr[rear]\n\n    def isEmpty(self) -> bool:\n        return self.size == 0\n\n    def isFull(self) -> bool:\n        return self.size == self.capsize\n        \n\n\n# Your MyCircularQueue object will be instantiated and called as such:\n# obj = MyCircularQueue(k)\n# param_1 = obj.enQueue(value)\n# param_2 = obj.deQueue()\n# param_3 = obj.Front()\n# param_4 = obj.Rear()\n# param_5 = obj.isEmpty()\n# param_6 = obj.isFull()",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0622-design-circular-queue/",
       "datePublished": "2026-05-19T13:15:53+05:30",
       "upvoteCount": 0,
