@@ -282,11 +282,16 @@ def main():
     for file_name in os.listdir(PROBLEMS_FOLDER_PATH):
         os.remove(os.path.join(PROBLEMS_FOLDER_PATH, file_name))
 
+    dryruns_count = {True: 0, False: 0}
     # Generate dry-run animations
     for i, problem in enumerate(problems):
         dryrun_path = generate_dryrun(problem)
+        dryruns_count[dryrun_path != None] += 1
         problem["dryrun_path"] = dryrun_path
         update_progress(i + 1, len(problems), message="Generating dry-runs")
+
+    print("total Dryruns : ", dryruns_count[True] + dryruns_count[False])
+    print("Failed : ",dryruns_count[False])
 
     for i,problem in enumerate(problems):
         filename = problem["title_slug"] + ".md"
