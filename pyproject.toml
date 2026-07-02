@@ -30,6 +30,7 @@ dependencies = [
     "pytz==2021.3",
     "recommonmark==0.7.1",
     "requests==2.32.2",
+    "setuptools<70",
     "six==1.16.0",
     "slough>=0.2.1",
     "snowballstemmer==2.2.0",

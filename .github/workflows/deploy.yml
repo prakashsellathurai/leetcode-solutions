@@ -26,12 +26,10 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
+          python-version: '3.12'
 
       - name: Install dependencies
-        run: uv sync --locked --all-extras
-
-      - name: Install dependencies
-        run: uv pip install -r ./requirements.txt
+        run: uv sync --locked
 
       - name: Fetch full submodule history
         run: git -C leetcode-submissions fetch --unshallow 2>/dev/null || true
@@ -40,7 +38,7 @@ jobs:
         run: uv run ./scripts/createdocs.py
 
       - name: Generate Docs
-        run: sphinx-build -b dirhtml ./source/ ./docs
+        run: uv run sphinx-build -b dirhtml ./source/ ./docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
