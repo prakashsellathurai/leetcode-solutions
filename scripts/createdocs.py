@@ -19,6 +19,9 @@ import subprocess
 
 from string import Template
 from bs4 import BeautifulSoup
+from slough.runner import run_test_cases
+from slough.html_animation import generate_html_animation
+from slough.parser import parse_md_examples
 
 
 SUBMISSION_FOLDER = "./leetcode-submissions"
@@ -28,6 +31,7 @@ PROBLEM_TEMPLATE_PATH = "./scripts/ProblemTemplate.txt"
 
 SUBMISSION_FOLDER_PATH = os.path.join(os.getcwd(), SUBMISSION_FOLDER)
 DOCS_PATH = os.path.join(os.getcwd(), DOCS_FOLDER)
+DATE_CACHE_PATH = os.path.join(os.getcwd(), "source", ".submission_dates_cache.json")
 PROBLEMS_FOLDER_PATH = os.path.join(os.getcwd(), "./source/problems/")
 INDEX_FILE_PATH = os.path.join(os.getcwd(), "./source/_static/index.html")
 IGNORED_PATHS = [".git", ".github",".deepsource.toml"]
@@ -73,6 +77,18 @@ def to_doc(problem):
         }
     }
 
+    dryrun_path = problem.get("dryrun_path")
+    if dryrun_path:
+        dryrun_section = (
+            "\n## Dry Run\n\n"
+            '<p><a href="' + dryrun_path + '" target="_blank" '
+            'style="display:inline-block;padding:8px 16px;background:#1a56db;'
+            'color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">'
+            "▶ Run the code step-by-step</a></p>\n"
+        )
+    else:
+        dryrun_section = ""
+
     file_buffer = open(PROBLEM_TEMPLATE_PATH, "r")
     template_string = file_buffer.read()
     file_buffer.close()
@@ -85,6 +101,7 @@ def to_doc(problem):
             "lang": problem["lang"],
             "code": problem["code"],
             "structured_data": json.dumps(json_ld, indent=2),
+            "dryrun_section": dryrun_section,
         }
     )
 
@@ -121,6 +138,49 @@ def get_git_date(submodule_path, file_path):
     except Exception:
         pass
     return None
+
+
+def generate_dryrun(problem: dict) -> str | None:
+    """Generate a dry-run HTML animation for a LeetCode solution.
+
+    Returns the relative path to the dry-run page, or None on failure.
+    """
+    codefilename = problem.get("codefilename")
+    readme_filename = getReadme(
+        os.path.join(os.getcwd(), SUBMISSION_FOLDER),
+        problem["title_slug"],
+    )
+
+    if not codefilename or not os.path.isfile(codefilename):
+        return None
+    if not readme_filename or not os.path.isfile(readme_filename):
+        return None
+
+    try:
+        with open(codefilename) as f:
+            source_lines = f.readlines()
+
+        with open(readme_filename, encoding="utf-8") as f:
+            md_content = f.read()
+
+        test_cases = parse_md_examples(md_content)
+        if not test_cases:
+            return None
+
+        results = run_test_cases(codefilename, test_cases)
+
+        slug = problem["title_slug"]
+        dryrun_dir = os.path.join(DOCS_PATH, "problems", slug, "dryrun")
+        os.makedirs(dryrun_dir, exist_ok=True)
+
+        output_path = os.path.join(dryrun_dir, "index.html")
+
+        generate_html_animation(results, source_lines, output_path)
+
+        return "dryrun/"
+    except Exception as e:
+        print(f"  Warning: Could not generate dry-run for {problem['title_slug']}: {e}")
+        return None
 
 
 def main():
@@ -191,11 +251,28 @@ def main():
         update_progress(i + 1, total_items, message="Collecting problems")
         
     problems.sort(key=lambda x: x["id"])
+    date_cache = {}
+    if os.path.isfile(DATE_CACHE_PATH):
+        try:
+            with open(DATE_CACHE_PATH) as f:
+                date_cache = json.load(f)
+        except Exception:
+            date_cache = {}
     today = datetime.date.today().isoformat()
     for i, problem in enumerate(problems):
-        git_date = get_git_date(SUBMISSION_FOLDER_PATH, problem["codefilename"])
-        problem["datePublished"] = git_date if git_date else today
+        slug = problem["title_slug"]
+        if slug in date_cache:
+            problem["datePublished"] = date_cache[slug]
+        else:
+            git_date = get_git_date(SUBMISSION_FOLDER_PATH, problem["codefilename"])
+            problem["datePublished"] = git_date if git_date else today
+            date_cache[slug] = problem["datePublished"]
         update_progress(i + 1, len(problems), message="Fetching submission dates")
+    try:
+        with open(DATE_CACHE_PATH, "w") as f:
+            json.dump(date_cache, f, indent=2)
+    except Exception as e:
+        print(f"Warning: Could not write date cache: {e}")
 
     print("total Problems : ", len(cache))
     print("ignored : ", len(os.listdir(SUBMISSION_FOLDER_PATH)) - len(cache))
@@ -205,6 +282,11 @@ def main():
     for file_name in os.listdir(PROBLEMS_FOLDER_PATH):
         os.remove(os.path.join(PROBLEMS_FOLDER_PATH, file_name))
 
+    # Generate dry-run animations
+    for i, problem in enumerate(problems):
+        dryrun_path = generate_dryrun(problem)
+        problem["dryrun_path"] = dryrun_path
+        update_progress(i + 1, len(problems), message="Generating dry-runs")
 
     for i,problem in enumerate(problems):
         filename = problem["title_slug"] + ".md"
