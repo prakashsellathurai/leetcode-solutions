@@ -81,10 +81,18 @@ def to_doc(problem):
     if dryrun_path:
         dryrun_section = (
             "\n## Dry Run\n\n"
-            '<p><a href="' + dryrun_path + '" target="_blank" '
-            'style="display:inline-block;padding:8px 16px;background:#1a56db;'
-            'color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;">'
-            "▶ Run the code step-by-step</a></p>\n"
+            '<iframe src="' + dryrun_path + '" '
+'style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" '
+'loading="lazy" sandbox="allow-scripts" '
+'title="Interactive Dry Run"></iframe>\n'
+'<script>\n'
+'window.addEventListener(\'blur\', () => {\n'
+'  if (document.activeElement?.tagName === \'IFRAME\') {\n'
+'    document.activeElement.blur();\n'
+'    window.focus();\n'
+'  }\n'
+'});\n'
+'</script>\n'
         )
     else:
         dryrun_section = ""
