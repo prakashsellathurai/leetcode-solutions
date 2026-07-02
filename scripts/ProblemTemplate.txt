@@ -13,6 +13,8 @@ $content
 $code
 ```
 
+$dryrun_section
+
 <script type="application/ld+json">
 $structured_data
 </script>
