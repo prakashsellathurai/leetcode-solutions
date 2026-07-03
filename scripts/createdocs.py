@@ -178,8 +178,7 @@ def generate_dryrun(problem: dict) -> str | None:
         generate_html_animation(results, source_lines, output_path)
 
         return "dryrun/"
-    except Exception as e:
-        print(f"  Warning: Could not generate dry-run for {problem['title_slug']}: {e}")
+    except Exception:
         return None
 
 
