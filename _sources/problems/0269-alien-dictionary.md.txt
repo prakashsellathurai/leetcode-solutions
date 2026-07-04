@@ -1,0 +1,154 @@
+# 0269-alien-dictionary
+
+
+Try it on <a href='https://leetcode.com/problems/0269-alien-dictionary'>leetcode</a>
+
+## Description
+<div class="description">
+<p>There is a new alien language that uses the English alphabet. However, the order of the letters is unknown to you.</p>
+
+<p>You are given a list of strings <code>words</code> from the alien language&#39;s dictionary. Now it is claimed that the strings in <code>words</code> are <span data-keyword="lexicographically-smaller-string-alien"><strong>sorted lexicographically</strong></span> by the rules of this new language.</p>
+
+<p>If this claim is incorrect, and the given arrangement of string in&nbsp;<code>words</code>&nbsp;cannot correspond to any order of letters,&nbsp;return&nbsp;<code>&quot;&quot;.</code></p>
+
+<p>Otherwise, return <em>a string of the unique letters in the new alien language sorted in <strong>lexicographically increasing order</strong> by the new language&#39;s rules</em><em>. </em>If there are multiple solutions, return<em> <strong>any of them</strong></em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> words = [&quot;wrt&quot;,&quot;wrf&quot;,&quot;er&quot;,&quot;ett&quot;,&quot;rftt&quot;]
+<strong>Output:</strong> &quot;wertf&quot;
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> words = [&quot;z&quot;,&quot;x&quot;]
+<strong>Output:</strong> &quot;zx&quot;
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> words = [&quot;z&quot;,&quot;x&quot;,&quot;z&quot;]
+<strong>Output:</strong> &quot;&quot;
+<strong>Explanation:</strong> The order is invalid, so return <code>&quot;&quot;</code>.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= words.length &lt;= 100</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 100</code></li>
+	<li><code>words[i]</code> consists of only lowercase English letters.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import defaultdict
+class Solution:
+    def alienOrder(self, words: List[str]) -> str:
+        #  words = ["wrt","wrf","er","ett","rftt"]
+        #  output  = "wertf"
+        # 
+        #  w -> r -> t
+        #         -> f
+        #   e-> r
+        #   e       t  t
+        #       r f t t
+        #  w -> r f t
+        #    e    
+        #  if we create directed words with charcters and top sort gives the result
+        #
+        # Q1 how do i make directed graph
+        #     since words are lexicograohically sorted 
+        #    Compare two adjacent words until the first different character.
+        #    compare adjacent words and create cnnection
+        #  case 0 wrt wrf equal length or length of second words is longer
+        #   w == w
+        #   r == r
+        #    t != f
+        #    t -> f since t < f
+        #    
+        #  case 1 er  iterate until first word
+        #  
+        # Q1 finding top sort
+        #    bfs use zero order first and then choose next order
+        # Create graph with every unique character
+        graph = {c: set() for word in words for c in word}
+        indegree = {c: 0 for c in graph}
+
+        # Build graph
+        for i in range(len(words) - 1):
+            word1 = words[i]
+            word2 = words[i + 1]
+
+            # Invalid prefix case
+            if len(word1) > len(word2) and word1.startswith(word2):
+                return ""
+
+            for c1, c2 in zip(word1, word2):
+                if c1 != c2:
+                    if c2 not in graph[c1]:
+                        graph[c1].add(c2)
+                        indegree[c2] += 1
+                    break
+
+        # Topological Sort
+        queue = deque([c for c in indegree if indegree[c] == 0])
+
+        order = []
+
+        while queue:
+            node = queue.popleft()
+            order.append(node)
+
+            for nei in graph[node]:
+                indegree[nei] -= 1
+                if indegree[nei] == 0:
+                    queue.append(nei)
+
+        if len(order) != len(graph):
+            return ""
+
+        return "".join(order)
+
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "269. Alien Dictionary",
+    "text": "There is a new alien language that uses the English alphabet. However, the order of the letters is unknown to you.\nYou are given a list of strings words from the alien language's dictionary. Now it is claimed that the strings in words are sorted lexicographically by the rules of this new language.\nIf this claim is incorrect, and the given arrangement of string in\u00a0words\u00a0cannot correspond to any order of letters,\u00a0return\u00a0\"\".\nOtherwise, return a string of the unique letters in the new alien language sorted in lexicographically increasing order by the new language's rules. If there are multiple solutions, return any of them.\n\u00a0\nExample 1:\n\nInput: words = [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]\nOutput: \"wertf\"\n\nExample 2:\n\nInput: words = [\"z\",\"x\"]\nOutput: \"zx\"\n\nExample 3:\n\nInput: words = [\"z\",\"x\",\"z\"]\nOutput: \"\"\nExplanation: The order is invalid, so return \"\".\n\n\u00a0\nConstraints:\n\n1 <= words.length <= 100\n1 <= words[i].length <= 100\nwords[i] consists of only lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/0269-alien-dictionary",
+    "answerCount": 1,
+    "datePublished": "2026-07-03T19:55:00+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import defaultdict\nclass Solution:\n    def alienOrder(self, words: List[str]) -> str:\n        #  words = [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]\n        #  output  = \"wertf\"\n        # \n        #  w -> r -> t\n        #         -> f\n        #   e-> r\n        #   e       t  t\n        #       r f t t\n        #  w -> r f t\n        #    e    \n        #  if we create directed words with charcters and top sort gives the result\n        #\n        # Q1 how do i make directed graph\n        #     since words are lexicograohically sorted \n        #    Compare two adjacent words until the first different character.\n        #    compare adjacent words and create cnnection\n        #  case 0 wrt wrf equal length or length of second words is longer\n        #   w == w\n        #   r == r\n        #    t != f\n        #    t -> f since t < f\n        #    \n        #  case 1 er  iterate until first word\n        #  \n        # Q1 finding top sort\n        #    bfs use zero order first and then choose next order\n        # Create graph with every unique character\n        graph = {c: set() for word in words for c in word}\n        indegree = {c: 0 for c in graph}\n\n        # Build graph\n        for i in range(len(words) - 1):\n            word1 = words[i]\n            word2 = words[i + 1]\n\n            # Invalid prefix case\n            if len(word1) > len(word2) and word1.startswith(word2):\n                return \"\"\n\n            for c1, c2 in zip(word1, word2):\n                if c1 != c2:\n                    if c2 not in graph[c1]:\n                        graph[c1].add(c2)\n                        indegree[c2] += 1\n                    break\n\n        # Topological Sort\n        queue = deque([c for c in indegree if indegree[c] == 0])\n\n        order = []\n\n        while queue:\n            node = queue.popleft()\n            order.append(node)\n\n            for nei in graph[node]:\n                indegree[nei] -= 1\n                if indegree[nei] == 0:\n                    queue.append(nei)\n\n        if len(order) != len(graph):\n            return \"\"\n\n        return \"\".join(order)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0269-alien-dictionary/",
+      "datePublished": "2026-07-03T19:55:00+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
