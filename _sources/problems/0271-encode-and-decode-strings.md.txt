@@ -1,0 +1,220 @@
+# 0271-encode-and-decode-strings
+
+
+Try it on <a href='https://leetcode.com/problems/0271-encode-and-decode-strings'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Design an algorithm to encode <b>a list of strings</b> to <b>a string</b>. The encoded string is then sent over the network and is decoded back to the original list of strings.</p>
+
+<p>Machine 1 (sender) has the function:</p>
+
+<pre>
+string encode(vector&lt;string&gt; strs) {
+  // ... your code
+  return encoded_string;
+}</pre>
+Machine 2 (receiver) has the function:
+
+<pre>
+vector&lt;string&gt; decode(string s) {
+  //... your code
+  return strs;
+}
+</pre>
+
+<p>So Machine 1 does:</p>
+
+<pre>
+string encoded_string = encode(strs);
+</pre>
+
+<p>and Machine 2 does:</p>
+
+<pre>
+vector&lt;string&gt; strs2 = decode(encoded_string);
+</pre>
+
+<p><code>strs2</code> in Machine 2 should be the same as <code>strs</code> in Machine 1.</p>
+
+<p>Implement the <code>encode</code> and <code>decode</code> methods.</p>
+
+<p>You are not allowed to&nbsp;solve the problem using any serialize methods (such as <code>eval</code>).</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> dummy_input = [&quot;Hello&quot;,&quot;World&quot;]
+<strong>Output:</strong> [&quot;Hello&quot;,&quot;World&quot;]
+<strong>Explanation:</strong>
+Machine 1:
+Codec encoder = new Codec();
+String msg = encoder.encode(strs);
+Machine 1 ---msg---&gt; Machine 2
+
+Machine 2:
+Codec decoder = new Codec();
+String[] strs = decoder.decode(msg);
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> dummy_input = [&quot;&quot;]
+<strong>Output:</strong> [&quot;&quot;]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= strs.length &lt;= 200</code></li>
+	<li><code>0 &lt;= strs[i].length &lt;= 200</code></li>
+	<li><code>strs[i]</code> contains any possible characters out of <code>256</code> valid ASCII characters.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up: </strong>Could you write a generalized algorithm to work on any possible set of characters?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+class Codec:
+    def encode(self, strs: List[str]) -> str:
+        """Encodes a list of strings to a single string.
+        """
+        return ChunkedTransferencoding().encode(strs)
+
+    def decode(self, s: str) -> List[str]:
+        """Decodes a single string to a list of strings.
+        """
+        return  ChunkedTransferencoding().decode(s)
+
+
+class DelimiterCodec(Codec):
+    def encode(self, strs: List[str]) -> str:
+        """Encodes a list of strings to a single string.
+        """
+        return "¶".join(strs)
+
+    def decode(self, s: str) -> List[str]:
+        """Decodes a single string to a list of strings.
+        """
+        return s.split("¶")
+
+
+class EscapedDelimiterCodec(Codec):
+    def encode(self, strs: List[str]) -> str:
+        """Encodes a list of strings to a single string.
+        """
+        encoded_string = ''
+        # Iterate over each string in the input list
+        for s in strs:
+            # Replace each occurrence of '/' with '//'
+            # This is our way of "escaping" the slash character
+            # Then add our delimiter '/:' to the end
+            encoded_string += s.replace('/', '//') + '/:'
+        
+        return encoded_string
+
+    def decode(self, s: str) -> List[str]:
+        """Decodes a single string to a list of strings.
+        """
+        decoded_strings = []
+        cur_string = ''
+        i = 0
+        while i < len(s):
+            if s[i:i+2] == '/:':
+                decoded_strings.append(cur_string)
+                cur_string = ''
+                i +=2
+            elif s[i:i+2] == '//':
+                cur_string += '/'
+                i +=2
+            else:
+                cur_string += s[i]
+                i += 1
+        return decoded_strings
+
+
+class ChunkedTransferencoding(Codec):
+    def encode(self, strs: List[str]) -> str:
+        """Encodes a list of strings to a single string.
+        """
+        # 5/:Hello5/:World11/:/:Example/:
+        # append length /: + string
+        encoded_string = ''
+        for s in strs:
+            # Append the length, the delimiter, and the string itself.
+            encoded_string += str(len(s)) + '/:' + s
+        return encoded_string
+
+
+
+    def decode(self, s: str) -> List[str]:
+        """Decodes a single string to a list of strings.
+        """
+        #  5/:Hello5/:World11/:/:Example/:
+        # i < n
+        #   read until next /:
+        #   curl_len = i
+        #   get cur_word form = i + 2 -> i + 2 + cur_len
+        decoded_strings = []
+        i = 0
+        while i < len(s):
+            # Find the delimiter.
+            delim = s.find('/:', i)
+            # Get the length, which is before the delimiter.
+            length = int(s[i:delim])
+            # Get the string, which is of 'length' length after the delimiter.
+            str_ = s[delim+2 : delim+2+length]
+            # Add the string to the list.
+            decoded_strings.append(str_)
+            # Move the index to the start of the next length.
+            i = delim + 2 + length
+        return decoded_strings
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.decode(codec.encode(strs))
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "271. Encode and Decode Strings",
+    "text": "Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.\nMachine 1 (sender) has the function:\n\nstring encode(vector<string> strs) {\n  // ... your code\n  return encoded_string;\n}\nMachine 2 (receiver) has the function:\n\n\nvector<string> decode(string s) {\n  //... your code\n  return strs;\n}\n\nSo Machine 1 does:\n\nstring encoded_string = encode(strs);\n\nand Machine 2 does:\n\nvector<string> strs2 = decode(encoded_string);\n\nstrs2 in Machine 2 should be the same as strs in Machine 1.\nImplement the encode and decode methods.\nYou are not allowed to\u00a0solve the problem using any serialize methods (such as eval).\n\u00a0\nExample 1:\n\nInput: dummy_input = [\"Hello\",\"World\"]\nOutput: [\"Hello\",\"World\"]\nExplanation:\nMachine 1:\nCodec encoder = new Codec();\nString msg = encoder.encode(strs);\nMachine 1 ---msg---> Machine 2\n\nMachine 2:\nCodec decoder = new Codec();\nString[] strs = decoder.decode(msg);\n\nExample 2:\n\nInput: dummy_input = [\"\"]\nOutput: [\"\"]\n\n\u00a0\nConstraints:\n\n1 <= strs.length <= 200\n0 <= strs[i].length <= 200\nstrs[i] contains any possible characters out of 256 valid ASCII characters.\n\n\u00a0\nFollow up: Could you write a generalized algorithm to work on any possible set of characters?\n",
+    "url": "https://leetcode.com/problems/0271-encode-and-decode-strings",
+    "answerCount": 1,
+    "datePublished": "2026-07-04T12:56:10+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Codec:\n    def encode(self, strs: List[str]) -> str:\n        \"\"\"Encodes a list of strings to a single string.\n        \"\"\"\n        return ChunkedTransferencoding().encode(strs)\n\n    def decode(self, s: str) -> List[str]:\n        \"\"\"Decodes a single string to a list of strings.\n        \"\"\"\n        return  ChunkedTransferencoding().decode(s)\n\n\nclass DelimiterCodec(Codec):\n    def encode(self, strs: List[str]) -> str:\n        \"\"\"Encodes a list of strings to a single string.\n        \"\"\"\n        return \"\u00b6\".join(strs)\n\n    def decode(self, s: str) -> List[str]:\n        \"\"\"Decodes a single string to a list of strings.\n        \"\"\"\n        return s.split(\"\u00b6\")\n\n\nclass EscapedDelimiterCodec(Codec):\n    def encode(self, strs: List[str]) -> str:\n        \"\"\"Encodes a list of strings to a single string.\n        \"\"\"\n        encoded_string = ''\n        # Iterate over each string in the input list\n        for s in strs:\n            # Replace each occurrence of '/' with '//'\n            # This is our way of \"escaping\" the slash character\n            # Then add our delimiter '/:' to the end\n            encoded_string += s.replace('/', '//') + '/:'\n        \n        return encoded_string\n\n    def decode(self, s: str) -> List[str]:\n        \"\"\"Decodes a single string to a list of strings.\n        \"\"\"\n        decoded_strings = []\n        cur_string = ''\n        i = 0\n        while i < len(s):\n            if s[i:i+2] == '/:':\n                decoded_strings.append(cur_string)\n                cur_string = ''\n                i +=2\n            elif s[i:i+2] == '//':\n                cur_string += '/'\n                i +=2\n            else:\n                cur_string += s[i]\n                i += 1\n        return decoded_strings\n\n\nclass ChunkedTransferencoding(Codec):\n    def encode(self, strs: List[str]) -> str:\n        \"\"\"Encodes a list of strings to a single string.\n        \"\"\"\n        # 5/:Hello5/:World11/:/:Example/:\n        # append length /: + string\n        encoded_string = ''\n        for s in strs:\n            # Append the length, the delimiter, and the string itself.\n            encoded_string += str(len(s)) + '/:' + s\n        return encoded_string\n\n\n\n    def decode(self, s: str) -> List[str]:\n        \"\"\"Decodes a single string to a list of strings.\n        \"\"\"\n        #  5/:Hello5/:World11/:/:Example/:\n        # i < n\n        #   read until next /:\n        #   curl_len = i\n        #   get cur_word form = i + 2 -> i + 2 + cur_len\n        decoded_strings = []\n        i = 0\n        while i < len(s):\n            # Find the delimiter.\n            delim = s.find('/:', i)\n            # Get the length, which is before the delimiter.\n            length = int(s[i:delim])\n            # Get the string, which is of 'length' length after the delimiter.\n            str_ = s[delim+2 : delim+2+length]\n            # Add the string to the list.\n            decoded_strings.append(str_)\n            # Move the index to the start of the next length.\n            i = delim + 2 + length\n        return decoded_strings\n\n# Your Codec object will be instantiated and called as such:\n# codec = Codec()\n# codec.decode(codec.encode(strs))",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0271-encode-and-decode-strings/",
+      "datePublished": "2026-07-04T12:56:10+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

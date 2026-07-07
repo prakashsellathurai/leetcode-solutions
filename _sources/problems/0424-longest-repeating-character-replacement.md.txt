@@ -1,0 +1,132 @@
+# 0424-longest-repeating-character-replacement
+
+
+Try it on <a href='https://leetcode.com/problems/0424-longest-repeating-character-replacement'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given a string <code>s</code> and an integer <code>k</code>. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most <code>k</code> times.</p>
+
+<p>Return <em>the length of the longest substring containing the same letter you can get after performing the above operations</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;ABAB&quot;, k = 2
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> Replace the two &#39;A&#39;s with two &#39;B&#39;s or vice versa.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;AABABBA&quot;, k = 1
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> Replace the one &#39;A&#39; in the middle with &#39;B&#39; and form &quot;AABBBBA&quot;.
+The substring &quot;BBBB&quot; has the longest repeating letters, which is 4.
+There may exists other ways to achieve this answer too.</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>s</code> consists of only uppercase English letters.</li>
+	<li><code>0 &lt;= k &lt;= s.length</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        # s = "ABAB", k = 2   4
+        #  s = "AABABBA", k = 1  4
+        #  
+        # l  r  = 0 0
+        #  cur A
+        #  cnt  = 0
+        #   i = 0 cnt = 1
+        #   i =2 B != A; j > 0;  cnt +=1
+        #   i =3 ; Cnt = 3
+        #    i =4 B != A; j > 0;  cnt 4
+        # 
+        # s = "AABABBA", k = 1  4
+        # 
+        # r =0 l = 0
+        #   cur = A
+        #   
+        # r  =1  A == A
+        #   
+        # r  =2 A!=B ; 1 > 0; k = 0
+        #  
+        # r  =3 A ==A 
+        #  r = 4 A! B 1 == 0 
+        #     ans r - l
+        #     l = 4
+        #     k =k
+        #     cur = None
+        #  l= 5
+        #    cur = B
+        #     Time complexity: O(n
+        # Space complexity: O(m)
+        
+        start = 0
+        frequency_map = {}
+        max_frequency = 0
+        longest_substring_length = 0
+        for end in range(len(s)):
+            frequency_map[s[end]] = frequency_map.get(s[end], 0) + 1
+            max_frequency = max(max_frequency, frequency_map[s[end]])
+
+            is_valid = (end + 1 - start - max_frequency <= k)
+            if not is_valid:
+                frequency_map[s[start]] -= 1
+                start += 1
+
+            longest_substring_length = end + 1 - start
+
+
+
+        return longest_substring_length
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "424. Longest Repeating Character Replacement",
+    "text": "You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most k times.\nReturn the length of the longest substring containing the same letter you can get after performing the above operations.\n\u00a0\nExample 1:\n\nInput: s = \"ABAB\", k = 2\nOutput: 4\nExplanation: Replace the two 'A's with two 'B's or vice versa.\n\nExample 2:\n\nInput: s = \"AABABBA\", k = 1\nOutput: 4\nExplanation: Replace the one 'A' in the middle with 'B' and form \"AABBBBA\".\nThe substring \"BBBB\" has the longest repeating letters, which is 4.\nThere may exists other ways to achieve this answer too.\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns consists of only uppercase English letters.\n0 <= k <= s.length\n\n",
+    "url": "https://leetcode.com/problems/0424-longest-repeating-character-replacement",
+    "answerCount": 1,
+    "datePublished": "2026-07-07T16:12:12+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def characterReplacement(self, s: str, k: int) -> int:\n        # s = \"ABAB\", k = 2   4\n        #  s = \"AABABBA\", k = 1  4\n        #  \n        # l  r  = 0 0\n        #  cur A\n        #  cnt  = 0\n        #   i = 0 cnt = 1\n        #   i =2 B != A; j > 0;  cnt +=1\n        #   i =3 ; Cnt = 3\n        #    i =4 B != A; j > 0;  cnt 4\n        # \n        # s = \"AABABBA\", k = 1  4\n        # \n        # r =0 l = 0\n        #   cur = A\n        #   \n        # r  =1  A == A\n        #   \n        # r  =2 A!=B ; 1 > 0; k = 0\n        #  \n        # r  =3 A ==A \n        #  r = 4 A! B 1 == 0 \n        #     ans r - l\n        #     l = 4\n        #     k =k\n        #     cur = None\n        #  l= 5\n        #    cur = B\n        #     Time complexity: O(n\n        # Space complexity: O(m)\n        \n        start = 0\n        frequency_map = {}\n        max_frequency = 0\n        longest_substring_length = 0\n        for end in range(len(s)):\n            frequency_map[s[end]] = frequency_map.get(s[end], 0) + 1\n            max_frequency = max(max_frequency, frequency_map[s[end]])\n\n            is_valid = (end + 1 - start - max_frequency <= k)\n            if not is_valid:\n                frequency_map[s[start]] -= 1\n                start += 1\n\n            longest_substring_length = end + 1 - start\n\n\n\n        return longest_substring_length",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0424-longest-repeating-character-replacement/",
+      "datePublished": "2026-07-07T16:12:12+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
