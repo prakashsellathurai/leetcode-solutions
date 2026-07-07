@@ -391,5 +391,9 @@
   "0371-sum-of-two-integers": "2026-07-01T12:23:31+05:30",
   "0392-is-subsequence": "2026-06-25T13:14:12+05:30",
   "2965-find-missing-and-repeated-values": "2026-06-20T16:55:20+05:30",
-  "0269-alien-dictionary": "2026-07-03T19:55:00+05:30"
+  "0269-alien-dictionary": "2026-07-03T19:55:00+05:30",
+  "0054-spiral-matrix": "2026-07-07T16:35:57+05:30",
+  "0076-minimum-window-substring": "2026-07-07T12:14:56+05:30",
+  "0271-encode-and-decode-strings": "2026-07-04T12:56:10+05:30",
+  "0424-longest-repeating-character-replacement": "2026-07-07T16:12:12+05:30"
 }
