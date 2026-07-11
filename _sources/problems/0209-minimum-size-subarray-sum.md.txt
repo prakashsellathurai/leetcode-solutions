@@ -1,0 +1,132 @@
+# 0209-minimum-size-subarray-sum
+
+
+Try it on <a href='https://leetcode.com/problems/0209-minimum-size-subarray-sum'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an array of positive integers <code>nums</code> and a positive integer <code>target</code>, return <em>the <strong>minimal length</strong> of a </em><span data-keyword="subarray-nonempty"><em>subarray</em></span><em> whose sum is greater than or equal to</em> <code>target</code>. If there is no such subarray, return <code>0</code> instead.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> target = 7, nums = [2,3,1,2,4,3]
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> The subarray [4,3] has the minimal length under the problem constraint.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> target = 4, nums = [1,4,4]
+<strong>Output:</strong> 1
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> target = 11, nums = [1,1,1,1,1,1,1,1]
+<strong>Output:</strong> 0
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= target &lt;= 10<sup>9</sup></code></li>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
+</ul>
+
+<p>&nbsp;</p>
+<strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution of which the time complexity is <code>O(n log(n))</code>.
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        #  target = 7, nums = [2,3,1,2,4,3]
+        # minimal length of subarray int   sum(subarray) >= target
+        # 
+        #  valid window -> 7
+        #  2 3 1 2 4 3
+        #  
+        #  nums = [3] k = 3 ; 1
+        # nums = [1,2,3] k =100; 0
+        #
+        # left ..right
+        # sum = 8
+        # target = 7
+        # sum >= target  left += 1
+        #       sum -= nums[left]
+
+        #  expand right
+        #    sum +=nums[right]
+        #    while sum >= k
+        #        update answer
+        #        remove nums[left]
+        #        left ++
+        # 
+        # target = 7
+        #   2 3 1 2 4 3
+        # left =0
+        # sum = 0
+        # ans= float(inf)
+        # right =0 sum  2
+        # right = 1 sum 5
+        # right = 2 ans = 2 sum 8 - 2 = 6  left = 1
+        # 
+        # coorect condition cur_sum >= target remove left 
+        l = 0
+        cur_sum = 0
+        ans = float('inf')
+        for r in range(len(nums)):
+            cur_sum += nums[r]
+            while cur_sum >= target and l < len(nums):
+                ans= min(ans, r - l + 1)
+                cur_sum -= nums[l]
+                l+=1
+                
+        return ans if ans != float('inf') else 0
+
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "209. Minimum Size Subarray Sum",
+    "text": "Given an array of positive integers nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.\n\u00a0\nExample 1:\n\nInput: target = 7, nums = [2,3,1,2,4,3]\nOutput: 2\nExplanation: The subarray [4,3] has the minimal length under the problem constraint.\n\nExample 2:\n\nInput: target = 4, nums = [1,4,4]\nOutput: 1\n\nExample 3:\n\nInput: target = 11, nums = [1,1,1,1,1,1,1,1]\nOutput: 0\n\n\u00a0\nConstraints:\n\n1 <= target <= 109\n1 <= nums.length <= 105\n1 <= nums[i] <= 104\n\n\u00a0\nFollow up: If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log(n)).",
+    "url": "https://leetcode.com/problems/0209-minimum-size-subarray-sum",
+    "answerCount": 1,
+    "datePublished": "2026-07-11T12:42:26+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def minSubArrayLen(self, target: int, nums: List[int]) -> int:\n        #  target = 7, nums = [2,3,1,2,4,3]\n        # minimal length of subarray int   sum(subarray) >= target\n        # \n        #  valid window -> 7\n        #  2 3 1 2 4 3\n        #  \n        #  nums = [3] k = 3 ; 1\n        # nums = [1,2,3] k =100; 0\n        #\n        # left ..right\n        # sum = 8\n        # target = 7\n        # sum >= target  left += 1\n        #       sum -= nums[left]\n\n        #  expand right\n        #    sum +=nums[right]\n        #    while sum >= k\n        #        update answer\n        #        remove nums[left]\n        #        left ++\n        # \n        # target = 7\n        #   2 3 1 2 4 3\n        # left =0\n        # sum = 0\n        # ans= float(inf)\n        # right =0 sum  2\n        # right = 1 sum 5\n        # right = 2 ans = 2 sum 8 - 2 = 6  left = 1\n        # \n        # coorect condition cur_sum >= target remove left \n        l = 0\n        cur_sum = 0\n        ans = float('inf')\n        for r in range(len(nums)):\n            cur_sum += nums[r]\n            while cur_sum >= target and l < len(nums):\n                ans= min(ans, r - l + 1)\n                cur_sum -= nums[l]\n                l+=1\n                \n        return ans if ans != float('inf') else 0\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0209-minimum-size-subarray-sum/",
+      "datePublished": "2026-07-11T12:42:26+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

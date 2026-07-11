@@ -47,61 +47,36 @@ Notice that the answer must be a substring, &quot;pwke&quot; is a subsequence an
 ```Python
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        return self.optimal(s)
+        # abcabcbb
+        # 
+        # i<j < n
+        # 0 -> n
+        # lookup ->
+        # j -? n
+        #    invlaid shrink left end
+        #        updare answer 
+        #   valid no duplicates
+        #   
+        # abcad
+        # l = 0
+        # r = 0
+        # cur_length = 0
+        # max_legth = 0
+        # 
+        # l = 0
+        # r=1
         
-    # Time Complexity: O(n^3)
-    # Space Complexity: O(n)
-    def bruteforce(self, s: str) -> int:
-        n = len(s)
-        long_sub_len = 0
+        l = 0
+        lookup = set()
+        maxx_len = 0
+        for r in range(len(s)):
+            while lookup and s[r] in lookup:
+                lookup.remove(s[l])
+                l+=1
+            maxx_len = max(maxx_len, r -l + 1)
+            lookup.add(s[r])
+        return maxx_len
         
-        def isUnique(st):
-            return len(st) == len(set(st))
-        
-        for i in range(n):
-            for j in range(i,n):
-                if isUnique(s[i:j]):
-                    cur_len = j-i
-                    if cur_len > long_sub_len:
-                        long_sub_len = cur_len
-        return long_sub_len
-    
-    # Time Complexity: O(n)
-    # Space Complexity: O(min(m,n))
-    def better(self, s: str) -> int:
-        n = len(s)
-        left = right = 0
-        hashmap = defaultdict(lambda : 0)
-        res = 0
-        
-        while right < n:
-            hashmap[s[right]] += 1
-            
-            while hashmap[s[right]]  > 1:
-                hashmap[s[left]] -= 1
-                left += 1
-                
-            cur_width = right - left + 1 
-            
-            if cur_width > res:
-                res = cur_width
-            
-            right += 1
-            
-        return res
-    
-    # Time Complexity: O(n)
-    # Space Complexity: O(m)
-    def optimal(self, s: str) -> int:
-        seen = {}
-        start = 0
-        res = 0
-        for end,c in enumerate(s):
-            if c in seen:
-                start = max(start,seen[c]+1)
-            seen[c] = end
-            res = max(res ,end-start+1)
-        return res
 ```
 
 
@@ -128,7 +103,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        return self.optimal(s)\n        \n    # Time Complexity: O(n^3)\n    # Space Complexity: O(n)\n    def bruteforce(self, s: str) -> int:\n        n = len(s)\n        long_sub_len = 0\n        \n        def isUnique(st):\n            return len(st) == len(set(st))\n        \n        for i in range(n):\n            for j in range(i,n):\n                if isUnique(s[i:j]):\n                    cur_len = j-i\n                    if cur_len > long_sub_len:\n                        long_sub_len = cur_len\n        return long_sub_len\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(min(m,n))\n    def better(self, s: str) -> int:\n        n = len(s)\n        left = right = 0\n        hashmap = defaultdict(lambda : 0)\n        res = 0\n        \n        while right < n:\n            hashmap[s[right]] += 1\n            \n            while hashmap[s[right]]  > 1:\n                hashmap[s[left]] -= 1\n                left += 1\n                \n            cur_width = right - left + 1 \n            \n            if cur_width > res:\n                res = cur_width\n            \n            right += 1\n            \n        return res\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(m)\n    def optimal(self, s: str) -> int:\n        seen = {}\n        start = 0\n        res = 0\n        for end,c in enumerate(s):\n            if c in seen:\n                start = max(start,seen[c]+1)\n            seen[c] = end\n            res = max(res ,end-start+1)\n        return res",
+      "text": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        # abcabcbb\n        # \n        # i<j < n\n        # 0 -> n\n        # lookup ->\n        # j -? n\n        #    invlaid shrink left end\n        #        updare answer \n        #   valid no duplicates\n        #   \n        # abcad\n        # l = 0\n        # r = 0\n        # cur_length = 0\n        # max_legth = 0\n        # \n        # l = 0\n        # r=1\n        \n        l = 0\n        lookup = set()\n        maxx_len = 0\n        for r in range(len(s)):\n            while lookup and s[r] in lookup:\n                lookup.remove(s[l])\n                l+=1\n            maxx_len = max(maxx_len, r -l + 1)\n            lookup.add(s[r])\n        return maxx_len\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0003-longest-substring-without-repeating-characters/",
       "datePublished": "2025-10-09T23:18:06+05:30",
       "upvoteCount": 0,

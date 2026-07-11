@@ -545,6 +545,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../0030-substring-with-concatenation-of-all-words/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0030-<wbr>substring-<wbr>with-<wbr>concatenation-<wbr>of-<wbr>all-<wbr>words</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../0033-search-in-rotated-sorted-array/" class="md-nav__link">
         
   
@@ -1189,6 +1212,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../0209-minimum-size-subarray-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0209-<wbr>minimum-<wbr>size-<wbr>subarray-<wbr>sum</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../0212-word-search-ii/" class="md-nav__link">
         
   
@@ -1396,6 +1442,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../0323-number-of-connected-components-in-an-undirected-graph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0323-<wbr>number-<wbr>of-<wbr>connected-<wbr>components-<wbr>in-<wbr>an-<wbr>undirected-<wbr>graph</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../0371-sum-of-two-integers/" class="md-nav__link">
         
   
@@ -1471,6 +1540,29 @@
   
   <span class="md-ellipsis">
     <span>0392-<wbr>is-<wbr>subsequence</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0417-pacific-atlantic-water-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0417-<wbr>pacific-<wbr>atlantic-<wbr>water-<wbr>flow</span>
     
   </span>
   
@@ -4852,6 +4944,29 @@
   
   <span class="md-ellipsis">
     <span>240-<wbr>search-<wbr>a-<wbr>2d-<wbr>matrix-<wbr>ii</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2405-optimal-partition-of-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>2405-<wbr>optimal-<wbr>partition-<wbr>of-<wbr>string</span>
     
   </span>
   
@@ -9474,61 +9589,36 @@ Notice that the answer must be a substring, &quot;pwke&quot; is a subsequence an
 <h2 id="solution-python">Solution(Python)<a class="headerlink" href="#solution-python" title="Link to this heading">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">lengthOfLongestSubstring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimal</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="c1"># abcabcbb</span>
+        <span class="c1"># </span>
+        <span class="c1"># i&lt;j &lt; n</span>
+        <span class="c1"># 0 -&gt; n</span>
+        <span class="c1"># lookup -&gt;</span>
+        <span class="c1"># j -? n</span>
+        <span class="c1">#    invlaid shrink left end</span>
+        <span class="c1">#        updare answer </span>
+        <span class="c1">#   valid no duplicates</span>
+        <span class="c1">#   </span>
+        <span class="c1"># abcad</span>
+        <span class="c1"># l = 0</span>
+        <span class="c1"># r = 0</span>
+        <span class="c1"># cur_length = 0</span>
+        <span class="c1"># max_legth = 0</span>
+        <span class="c1"># </span>
+        <span class="c1"># l = 0</span>
+        <span class="c1"># r=1</span>
         
-    <span class="c1"># Time Complexity: O(n^3)</span>
-    <span class="c1"># Space Complexity: O(n)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">bruteforce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="n">long_sub_len</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lookup</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">maxx_len</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+            <span class="k">while</span> <span class="n">lookup</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="ow">in</span> <span class="n">lookup</span><span class="p">:</span>
+                <span class="n">lookup</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+                <span class="n">l</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">maxx_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxx_len</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">lookup</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">maxx_len</span>
         
-        <span class="k">def</span><span class="w"> </span><span class="nf">isUnique</span><span class="p">(</span><span class="n">st</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">st</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">st</span><span class="p">))</span>
-        
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">isUnique</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]):</span>
-                    <span class="n">cur_len</span> <span class="o">=</span> <span class="n">j</span><span class="o">-</span><span class="n">i</span>
-                    <span class="k">if</span> <span class="n">cur_len</span> <span class="o">&gt;</span> <span class="n">long_sub_len</span><span class="p">:</span>
-                        <span class="n">long_sub_len</span> <span class="o">=</span> <span class="n">cur_len</span>
-        <span class="k">return</span> <span class="n">long_sub_len</span>
-    
-    <span class="c1"># Time Complexity: O(n)</span>
-    <span class="c1"># Space Complexity: O(min(m,n))</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">better</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="n">left</span> <span class="o">=</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">hashmap</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span> <span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-        
-        <span class="k">while</span> <span class="n">right</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-            <span class="n">hashmap</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-            <span class="k">while</span> <span class="n">hashmap</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="p">]]</span>  <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">hashmap</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">left</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
-                
-            <span class="n">cur_width</span> <span class="o">=</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span> 
-            
-            <span class="k">if</span> <span class="n">cur_width</span> <span class="o">&gt;</span> <span class="n">res</span><span class="p">:</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="n">cur_width</span>
-            
-            <span class="n">right</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-        <span class="k">return</span> <span class="n">res</span>
-    
-    <span class="c1"># Time Complexity: O(n)</span>
-    <span class="c1"># Space Complexity: O(m)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">optimal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">end</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-                <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">seen</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">seen</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">end</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">res</span> <span class="p">,</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">res</span>
 </code></pre></div>
 </div>
 <h2 id="dry-run">Dry Run<a class="headerlink" href="#dry-run" title="Link to this heading">¶</a></h2>
@@ -9551,7 +9641,7 @@ Notice that the answer must be a substring, &quot;pwke&quot; is a subsequence an
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        return self.optimal(s)\n        \n    # Time Complexity: O(n^3)\n    # Space Complexity: O(n)\n    def bruteforce(self, s: str) -> int:\n        n = len(s)\n        long_sub_len = 0\n        \n        def isUnique(st):\n            return len(st) == len(set(st))\n        \n        for i in range(n):\n            for j in range(i,n):\n                if isUnique(s[i:j]):\n                    cur_len = j-i\n                    if cur_len > long_sub_len:\n                        long_sub_len = cur_len\n        return long_sub_len\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(min(m,n))\n    def better(self, s: str) -> int:\n        n = len(s)\n        left = right = 0\n        hashmap = defaultdict(lambda : 0)\n        res = 0\n        \n        while right < n:\n            hashmap[s[right]] += 1\n            \n            while hashmap[s[right]]  > 1:\n                hashmap[s[left]] -= 1\n                left += 1\n                \n            cur_width = right - left + 1 \n            \n            if cur_width > res:\n                res = cur_width\n            \n            right += 1\n            \n        return res\n    \n    # Time Complexity: O(n)\n    # Space Complexity: O(m)\n    def optimal(self, s: str) -> int:\n        seen = {}\n        start = 0\n        res = 0\n        for end,c in enumerate(s):\n            if c in seen:\n                start = max(start,seen[c]+1)\n            seen[c] = end\n            res = max(res ,end-start+1)\n        return res",
+      "text": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        # abcabcbb\n        # \n        # i<j < n\n        # 0 -> n\n        # lookup ->\n        # j -? n\n        #    invlaid shrink left end\n        #        updare answer \n        #   valid no duplicates\n        #   \n        # abcad\n        # l = 0\n        # r = 0\n        # cur_length = 0\n        # max_legth = 0\n        # \n        # l = 0\n        # r=1\n        \n        l = 0\n        lookup = set()\n        maxx_len = 0\n        for r in range(len(s)):\n            while lookup and s[r] in lookup:\n                lookup.remove(s[l])\n                l+=1\n            maxx_len = max(maxx_len, r -l + 1)\n            lookup.add(s[r])\n        return maxx_len\n        ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0003-longest-substring-without-repeating-characters/",
       "datePublished": "2025-10-09T23:18:06+05:30",
       "upvoteCount": 0,

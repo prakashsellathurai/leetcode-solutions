@@ -1,0 +1,105 @@
+# 2405-optimal-partition-of-string
+
+
+Try it on <a href='https://leetcode.com/problems/2405-optimal-partition-of-string'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given a string <code>s</code>, partition the string into one or more <strong>substrings</strong> such that the characters in each substring are <strong>unique</strong>. That is, no letter appears in a single substring more than <strong>once</strong>.</p>
+
+<p>Return <em>the <strong>minimum</strong> number of substrings in such a partition.</em></p>
+
+<p>Note that each character should belong to exactly one substring in a partition.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;abacaba&quot;
+<strong>Output:</strong> 4
+<strong>Explanation:</strong>
+Two possible partitions are (&quot;a&quot;,&quot;ba&quot;,&quot;cab&quot;,&quot;a&quot;) and (&quot;ab&quot;,&quot;a&quot;,&quot;ca&quot;,&quot;ba&quot;).
+It can be shown that 4 is the minimum number of substrings needed.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> s = &quot;ssssss&quot;
+<strong>Output:</strong> 6
+<strong>Explanation:
+</strong>The only valid partition is (&quot;s&quot;,&quot;s&quot;,&quot;s&quot;,&quot;s&quot;,&quot;s&quot;,&quot;s&quot;).
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>s</code> consists of only English lowercase letters.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def partitionString(self, s: str) -> int:
+        #  s = "abacaba"
+        #  4
+        # a ba  cab a  ab a ca ba
+        # seen 
+        #  starting index = 2
+        #  
+        #  cnt =2
+        #  
+        lastSeen = [-1]*26
+        count = 1
+        substringStarting = 0
+
+        for i in range(len(s)):
+            if lastSeen[ord(s[i]) - ord('a')] >= substringStarting:
+                count += 1
+                substringStarting = i
+            lastSeen[ord(s[i]) - ord('a')] = i
+
+        return count
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "2405. Optimal Partition of String",
+    "text": "Given a string s, partition the string into one or more substrings such that the characters in each substring are unique. That is, no letter appears in a single substring more than once.\nReturn the minimum number of substrings in such a partition.\nNote that each character should belong to exactly one substring in a partition.\n\u00a0\nExample 1:\n\nInput: s = \"abacaba\"\nOutput: 4\nExplanation:\nTwo possible partitions are (\"a\",\"ba\",\"cab\",\"a\") and (\"ab\",\"a\",\"ca\",\"ba\").\nIt can be shown that 4 is the minimum number of substrings needed.\n\nExample 2:\n\nInput: s = \"ssssss\"\nOutput: 6\nExplanation:\nThe only valid partition is (\"s\",\"s\",\"s\",\"s\",\"s\",\"s\").\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 105\ns consists of only English lowercase letters.\n\n",
+    "url": "https://leetcode.com/problems/2405-optimal-partition-of-string",
+    "answerCount": 1,
+    "datePublished": "2026-07-10T19:39:33+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def partitionString(self, s: str) -> int:\n        #  s = \"abacaba\"\n        #  4\n        # a ba  cab a  ab a ca ba\n        # seen \n        #  starting index = 2\n        #  \n        #  cnt =2\n        #  \n        lastSeen = [-1]*26\n        count = 1\n        substringStarting = 0\n\n        for i in range(len(s)):\n            if lastSeen[ord(s[i]) - ord('a')] >= substringStarting:\n                count += 1\n                substringStarting = i\n            lastSeen[ord(s[i]) - ord('a')] = i\n\n        return count",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/2405-optimal-partition-of-string/",
+      "datePublished": "2026-07-10T19:39:33+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
