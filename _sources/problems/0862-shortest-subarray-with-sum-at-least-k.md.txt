@@ -1,0 +1,147 @@
+# 0862-shortest-subarray-with-sum-at-least-k
+
+
+Try it on <a href='https://leetcode.com/problems/0862-shortest-subarray-with-sum-at-least-k'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <em>the length of the shortest non-empty <strong>subarray</strong> of </em><code>nums</code><em> with a sum of at least </em><code>k</code>. If there is no such <strong>subarray</strong>, return <code>-1</code>.</p>
+
+<p>A <strong>subarray</strong> is a <strong>contiguous</strong> part of an array.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> nums = [1], k = 1
+<strong>Output:</strong> 1
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> nums = [1,2], k = 4
+<strong>Output:</strong> -1
+</pre><p><strong class="example">Example 3:</strong></p>
+<pre><strong>Input:</strong> nums = [2,-1,2], k = 3
+<strong>Output:</strong> 3
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= k &lt;= 10<sup>9</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from heapq import heappush, heappop
+from collections import deque
+
+class Solution:
+    def shortestSubarray(self, nums: List[int], k: int) -> int:
+        #  nums = [2,-1,2], k = 3
+        # 
+        #  l = 0
+        #  r = 0
+        #  cur_Sum = 0
+        #  shortest_length = float('inf')
+        # r= 0  s
+        #   cur_sum = 2  < 3
+        # r = 0 -1
+        #   cur_sum
+        return self.deque(nums, k)
+
+    def pq(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        shortest_subarray_length = float('inf')
+        cumulative_sum = 0
+        prefixSumHeap = []
+
+        for i, num in enumerate(nums):
+            cumulative_sum += num
+
+            if cumulative_sum >= k:
+                shortest_subarray_length = min(shortest_subarray_length, i + 1)
+            while prefixSumHeap and cumulative_sum - prefixSumHeap[0][0] >= k:
+                shortest_subarray_length = min(
+                    shortest_subarray_length, i - heappop(prefixSumHeap)[1]
+                )
+        
+            # Add current cumulative sum and index to heap
+            heappush(prefixSumHeap, (cumulative_sum, i))
+
+        # Return -1 if no valid subarray found
+        return (
+            -1
+            if shortest_subarray_length == float("inf")
+            else shortest_subarray_length
+        )  
+
+    def deque(self, nums: List[int], k: int) -> int:
+        #  res = inf
+        #  prefix sum array
+        # maintain monotonicty in deque
+        #    while cur - dq >= k
+        #           i - dq
+        #    pop back of deque if dq[-1] >= pre[i]
+        # nums = [2,-1,2], k = 3
+        res = float('inf')
+        n = len(nums)
+        prefix_sum = [0] * (n+1)  # [0 0 0 0]
+        queue = deque()
+
+        for i in range(1, n+1):
+            prefix_sum[i] = prefix_sum[i-1] + nums[i -1] # 0 2 1 4
+        
+        for i in range(n + 1):
+            while queue and prefix_sum[i] - prefix_sum[queue[0]] >= k :
+                res = min(res, i - queue.popleft())
+            
+            while queue and prefix_sum[i] <= prefix_sum[queue[-1]]:
+                queue.pop()
+            queue.append(i) # 0 
+        
+        return res if res != float('inf') else -1
+
+
+        
+
+
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "862. Shortest Subarray with Sum at Least K",
+    "text": "Given an integer array nums and an integer k, return the length of the shortest non-empty subarray of nums with a sum of at least k. If there is no such subarray, return -1.\nA subarray is a contiguous part of an array.\n\u00a0\nExample 1:\nInput: nums = [1], k = 1\nOutput: 1\nExample 2:\nInput: nums = [1,2], k = 4\nOutput: -1\nExample 3:\nInput: nums = [2,-1,2], k = 3\nOutput: 3\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-105 <= nums[i] <= 105\n1 <= k <= 109\n\n",
+    "url": "https://leetcode.com/problems/0862-shortest-subarray-with-sum-at-least-k",
+    "answerCount": 1,
+    "datePublished": "2026-07-14T12:21:53+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from heapq import heappush, heappop\nfrom collections import deque\n\nclass Solution:\n    def shortestSubarray(self, nums: List[int], k: int) -> int:\n        #  nums = [2,-1,2], k = 3\n        # \n        #  l = 0\n        #  r = 0\n        #  cur_Sum = 0\n        #  shortest_length = float('inf')\n        # r= 0  s\n        #   cur_sum = 2  < 3\n        # r = 0 -1\n        #   cur_sum\n        return self.deque(nums, k)\n\n    def pq(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        shortest_subarray_length = float('inf')\n        cumulative_sum = 0\n        prefixSumHeap = []\n\n        for i, num in enumerate(nums):\n            cumulative_sum += num\n\n            if cumulative_sum >= k:\n                shortest_subarray_length = min(shortest_subarray_length, i + 1)\n            while prefixSumHeap and cumulative_sum - prefixSumHeap[0][0] >= k:\n                shortest_subarray_length = min(\n                    shortest_subarray_length, i - heappop(prefixSumHeap)[1]\n                )\n        \n            # Add current cumulative sum and index to heap\n            heappush(prefixSumHeap, (cumulative_sum, i))\n\n        # Return -1 if no valid subarray found\n        return (\n            -1\n            if shortest_subarray_length == float(\"inf\")\n            else shortest_subarray_length\n        )  \n\n    def deque(self, nums: List[int], k: int) -> int:\n        #  res = inf\n        #  prefix sum array\n        # maintain monotonicty in deque\n        #    while cur - dq >= k\n        #           i - dq\n        #    pop back of deque if dq[-1] >= pre[i]\n        # nums = [2,-1,2], k = 3\n        res = float('inf')\n        n = len(nums)\n        prefix_sum = [0] * (n+1)  # [0 0 0 0]\n        queue = deque()\n\n        for i in range(1, n+1):\n            prefix_sum[i] = prefix_sum[i-1] + nums[i -1] # 0 2 1 4\n        \n        for i in range(n + 1):\n            while queue and prefix_sum[i] - prefix_sum[queue[0]] >= k :\n                res = min(res, i - queue.popleft())\n            \n            while queue and prefix_sum[i] <= prefix_sum[queue[-1]]:\n                queue.pop()\n            queue.append(i) # 0 \n        \n        return res if res != float('inf') else -1\n\n\n        \n\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0862-shortest-subarray-with-sum-at-least-k/",
+      "datePublished": "2026-07-14T12:21:53+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
