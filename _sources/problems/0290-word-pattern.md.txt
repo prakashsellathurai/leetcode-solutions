@@ -1,0 +1,119 @@
+# 0290-word-pattern
+
+
+Try it on <a href='https://leetcode.com/problems/0290-word-pattern'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given a <code>pattern</code> and a string <code>s</code>, find if <code>s</code>&nbsp;follows the same pattern.</p>
+
+<p>Here <b>follow</b> means a full match, such that there is a bijection between a letter in <code>pattern</code> and a <b>non-empty</b> word in <code>s</code>. Specifically:</p>
+
+<ul>
+	<li>Each letter in <code>pattern</code> maps to <strong>exactly</strong> one unique word in <code>s</code>.</li>
+	<li>Each unique word in <code>s</code> maps to <strong>exactly</strong> one letter in <code>pattern</code>.</li>
+	<li>No two letters map to the same word, and no two words map to the same letter.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pattern = &quot;abba&quot;, s = &quot;dog cat cat dog&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The bijection can be established as:</p>
+
+<ul>
+	<li><code>&#39;a&#39;</code> maps to <code>&quot;dog&quot;</code>.</li>
+	<li><code>&#39;b&#39;</code> maps to <code>&quot;cat&quot;</code>.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pattern = &quot;abba&quot;, s = &quot;dog cat cat fish&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pattern = &quot;aaaa&quot;, s = &quot;dog cat cat dog&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= pattern.length &lt;= 300</code></li>
+	<li><code>pattern</code> contains only lower-case English letters.</li>
+	<li><code>1 &lt;= s.length &lt;= 3000</code></li>
+	<li><code>s</code> contains only lowercase English letters and spaces <code>&#39; &#39;</code>.</li>
+	<li><code>s</code> <strong>does not contain</strong> any leading or trailing spaces.</li>
+	<li>All the words in <code>s</code> are separated by a <strong>single space</strong>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        return self.transformarr(pattern) == self.transformarr(s.split()) 
+    def transformarr(self, arr) -> str:
+        index_mapping = {}
+        new_str = []
+
+        for i, c in enumerate(arr):
+            if c not in index_mapping:
+                index_mapping[c] = hash(i)
+            new_str.append(str(index_mapping[c]))
+
+        return " ".join(new_str)
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "290. Word Pattern",
+    "text": "Given a pattern and a string s, find if s\u00a0follows the same pattern.\nHere follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s. Specifically:\n\nEach letter in pattern maps to exactly one unique word in s.\nEach unique word in s maps to exactly one letter in pattern.\nNo two letters map to the same word, and no two words map to the same letter.\n\n\u00a0\nExample 1:\n\nInput: pattern = \"abba\", s = \"dog cat cat dog\"\nOutput: true\nExplanation:\nThe bijection can be established as:\n\n'a' maps to \"dog\".\n'b' maps to \"cat\".\n\n\nExample 2:\n\nInput: pattern = \"abba\", s = \"dog cat cat fish\"\nOutput: false\n\nExample 3:\n\nInput: pattern = \"aaaa\", s = \"dog cat cat dog\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= pattern.length <= 300\npattern contains only lower-case English letters.\n1 <= s.length <= 3000\ns contains only lowercase English letters and spaces ' '.\ns does not contain any leading or trailing spaces.\nAll the words in s are separated by a single space.\n\n",
+    "url": "https://leetcode.com/problems/0290-word-pattern",
+    "answerCount": 1,
+    "datePublished": "2026-07-14T17:12:14+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def wordPattern(self, pattern: str, s: str) -> bool:\n        return self.transformarr(pattern) == self.transformarr(s.split()) \n    def transformarr(self, arr) -> str:\n        index_mapping = {}\n        new_str = []\n\n        for i, c in enumerate(arr):\n            if c not in index_mapping:\n                index_mapping[c] = hash(i)\n            new_str.append(str(index_mapping[c]))\n\n        return \" \".join(new_str)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0290-word-pattern/",
+      "datePublished": "2026-07-14T17:12:14+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

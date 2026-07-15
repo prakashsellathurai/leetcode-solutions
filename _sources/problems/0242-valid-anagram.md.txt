@@ -1,0 +1,119 @@
+# 0242-valid-anagram
+
+
+Try it on <a href='https://leetcode.com/problems/0242-valid-anagram'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code> if <code>t</code> is an <span data-keyword="anagram">anagram</span> of <code>s</code>, and <code>false</code> otherwise.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;anagram&quot;, t = &quot;nagaram&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;rat&quot;, t = &quot;car&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length, t.length &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>s</code> and <code>t</code> consist of lowercase English letters.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong> What if the inputs contain Unicode characters? How would you adapt your solution to such a case?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+import string
+from collections import defaultdict
+class Solution:
+    def __init__(self):
+                # 1. Generate the first 26 prime numbers
+        primes = []
+        num = 2
+        while len(primes) < 26:
+            if all(num % i != 0 for i in range(2, int(num**0.5) + 1)):
+                primes.append(num)
+            num += 1
+
+        # 2. Get the lowercase alphabet letters (a-z)
+        alphabet = string.ascii_lowercase
+
+        # 3. Combine them into a dictionary
+        self.letter_to_prime = dict(zip(alphabet, primes))
+
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        counter = defaultdict(int)
+        for i in range(len(s)):
+            counter[s[i]] += 1
+            counter[t[i]] -= 1
+        for _,count in counter.items():
+            if count < 0:
+                return False
+        return True
+    def hashit(self, s: str, t: str) -> bool:
+        return len(s) == len(t) and self.hash(s) == self.hash(t)
+        
+    def hash(self,s):
+        hash_number = 1
+
+        for c in s:
+            hash_number *= self.letter_to_prime[c]
+        return hash_number
+        
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "242. Valid Anagram",
+    "text": "Given two strings s and t, return true if t is an anagram of s, and false otherwise.\n\u00a0\nExample 1:\n\nInput: s = \"anagram\", t = \"nagaram\"\nOutput: true\n\nExample 2:\n\nInput: s = \"rat\", t = \"car\"\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= s.length, t.length <= 5 * 104\ns and t consist of lowercase English letters.\n\n\u00a0\nFollow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?\n",
+    "url": "https://leetcode.com/problems/0242-valid-anagram",
+    "answerCount": 1,
+    "datePublished": "2026-07-14T17:18:17+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "import string\nfrom collections import defaultdict\nclass Solution:\n    def __init__(self):\n                # 1. Generate the first 26 prime numbers\n        primes = []\n        num = 2\n        while len(primes) < 26:\n            if all(num % i != 0 for i in range(2, int(num**0.5) + 1)):\n                primes.append(num)\n            num += 1\n\n        # 2. Get the lowercase alphabet letters (a-z)\n        alphabet = string.ascii_lowercase\n\n        # 3. Combine them into a dictionary\n        self.letter_to_prime = dict(zip(alphabet, primes))\n\n    def isAnagram(self, s: str, t: str) -> bool:\n        if len(s) != len(t):\n            return False\n        counter = defaultdict(int)\n        for i in range(len(s)):\n            counter[s[i]] += 1\n            counter[t[i]] -= 1\n        for _,count in counter.items():\n            if count < 0:\n                return False\n        return True\n    def hashit(self, s: str, t: str) -> bool:\n        return len(s) == len(t) and self.hash(s) == self.hash(t)\n        \n    def hash(self,s):\n        hash_number = 1\n\n        for c in s:\n            hash_number *= self.letter_to_prime[c]\n        return hash_number\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0242-valid-anagram/",
+      "datePublished": "2026-07-14T17:18:17+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

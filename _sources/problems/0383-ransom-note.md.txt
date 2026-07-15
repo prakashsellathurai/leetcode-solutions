@@ -1,0 +1,87 @@
+# 0383-ransom-note
+
+
+Try it on <a href='https://leetcode.com/problems/0383-ransom-note'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two strings <code>ransomNote</code> and <code>magazine</code>, return <code>true</code><em> if </em><code>ransomNote</code><em> can be constructed by using the letters from </em><code>magazine</code><em> and </em><code>false</code><em> otherwise</em>.</p>
+
+<p>Each letter in <code>magazine</code> can only be used once in <code>ransomNote</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<pre><strong>Input:</strong> ransomNote = "a", magazine = "b"
+<strong>Output:</strong> false
+</pre><p><strong class="example">Example 2:</strong></p>
+<pre><strong>Input:</strong> ransomNote = "aa", magazine = "ab"
+<strong>Output:</strong> false
+</pre><p><strong class="example">Example 3:</strong></p>
+<pre><strong>Input:</strong> ransomNote = "aa", magazine = "aab"
+<strong>Output:</strong> true
+</pre>
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= ransomNote.length, magazine.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>ransomNote</code> and <code>magazine</code> consist of lowercase English letters.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import Counter
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        # ansomNote = "aa", magazine = "ab" False
+        #
+        # ransomNote = "aa", magazine = "aab" True
+        # cccccccc
+        if len(ransomNote) > len(magazine): return False
+
+        magazine_set = Counter(magazine)
+        for c in ransomNote:
+            if magazine_set[c] == 0:
+                return False
+            magazine_set[c] -= 1
+
+        return True
+
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "383. Ransom Note",
+    "text": "Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.\nEach letter in magazine can only be used once in ransomNote.\n\u00a0\nExample 1:\nInput: ransomNote = \"a\", magazine = \"b\"\nOutput: false\nExample 2:\nInput: ransomNote = \"aa\", magazine = \"ab\"\nOutput: false\nExample 3:\nInput: ransomNote = \"aa\", magazine = \"aab\"\nOutput: true\n\n\u00a0\nConstraints:\n\n1 <= ransomNote.length, magazine.length <= 105\nransomNote and magazine consist of lowercase English letters.\n\n",
+    "url": "https://leetcode.com/problems/0383-ransom-note",
+    "answerCount": 1,
+    "datePublished": "2026-07-14T16:42:31+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import Counter\nclass Solution:\n    def canConstruct(self, ransomNote: str, magazine: str) -> bool:\n        # ansomNote = \"aa\", magazine = \"ab\" False\n        #\n        # ransomNote = \"aa\", magazine = \"aab\" True\n        # cccccccc\n        if len(ransomNote) > len(magazine): return False\n\n        magazine_set = Counter(magazine)\n        for c in ransomNote:\n            if magazine_set[c] == 0:\n                return False\n            magazine_set[c] -= 1\n\n        return True\n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0383-ransom-note/",
+      "datePublished": "2026-07-14T16:42:31+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

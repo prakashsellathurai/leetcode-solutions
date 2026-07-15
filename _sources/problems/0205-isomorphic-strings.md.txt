@@ -1,0 +1,136 @@
+# 0205-isomorphic-strings
+
+
+Try it on <a href='https://leetcode.com/problems/0205-isomorphic-strings'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two strings <code>s</code> and <code>t</code>, <em>determine if they are isomorphic</em>.</p>
+
+<p>Two strings <code>s</code> and <code>t</code> are isomorphic if the characters in <code>s</code> can be replaced to get <code>t</code>.</p>
+
+<p>All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;egg&quot;, t = &quot;add&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The strings <code>s</code> and <code>t</code> can be made identical by:</p>
+
+<ul>
+	<li>Mapping <code>&#39;e&#39;</code> to <code>&#39;a&#39;</code>.</li>
+	<li>Mapping <code>&#39;g&#39;</code> to <code>&#39;d&#39;</code>.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;f11&quot;, t = &quot;b23&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The strings <code>s</code> and <code>t</code> can not be made identical as <code>&#39;1&#39;</code> needs to be mapped to both <code>&#39;2&#39;</code> and <code>&#39;3&#39;</code>.</p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;paper&quot;, t = &quot;title&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= s.length &lt;= 5 * 10<sup>4</sup></code></li>
+	<li><code>t.length == s.length</code></li>
+	<li><code>s</code> and <code>t</code> consist of any valid ascii character.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        # not same length false
+        # mapping s -> t
+        # in s
+        #    if s already in mapping amd mapping s != t false 
+        #    s -> t
+        # if len(s) != len(t):
+        #     return False
+        # mapping = {}
+        # reverse_mapping = {}
+        # n = len(s)
+        # for i in range(n):
+        #     if (s[i] in mapping and  mapping[s[i]] != t[i]) or (t[i] in reverse_mapping and  reverse_mapping[t[i]] != s[i]):
+        #         return False
+        #     mapping[s[i]] = t[i]
+        #     reverse_mapping[t[i]] = s[i]
+        # return True
+
+        return self.transformString(s) == self.transformString(t)
+
+        
+    def transformString(self, s: str) -> str:
+        index_mapping = {}
+        new_str = []
+
+        for i, c in enumerate(s):
+            if c not in index_mapping:
+                index_mapping[c] = hash(i)
+            new_str.append(str(index_mapping[c]))
+
+        return " ".join(new_str)
+
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "205. Isomorphic Strings",
+    "text": "Given two strings s and t, determine if they are isomorphic.\nTwo strings s and t are isomorphic if the characters in s can be replaced to get t.\nAll occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.\n\u00a0\nExample 1:\n\nInput: s = \"egg\", t = \"add\"\nOutput: true\nExplanation:\nThe strings s and t can be made identical by:\n\nMapping 'e' to 'a'.\nMapping 'g' to 'd'.\n\n\nExample 2:\n\nInput: s = \"f11\", t = \"b23\"\nOutput: false\nExplanation:\nThe strings s and t can not be made identical as '1' needs to be mapped to both '2' and '3'.\n\nExample 3:\n\nInput: s = \"paper\", t = \"title\"\nOutput: true\n\n\u00a0\nConstraints:\n\n1 <= s.length <= 5 * 104\nt.length == s.length\ns and t consist of any valid ascii character.\n\n",
+    "url": "https://leetcode.com/problems/0205-isomorphic-strings",
+    "answerCount": 1,
+    "datePublished": "2026-07-14T17:04:52+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isIsomorphic(self, s: str, t: str) -> bool:\n        # not same length false\n        # mapping s -> t\n        # in s\n        #    if s already in mapping amd mapping s != t false \n        #    s -> t\n        # if len(s) != len(t):\n        #     return False\n        # mapping = {}\n        # reverse_mapping = {}\n        # n = len(s)\n        # for i in range(n):\n        #     if (s[i] in mapping and  mapping[s[i]] != t[i]) or (t[i] in reverse_mapping and  reverse_mapping[t[i]] != s[i]):\n        #         return False\n        #     mapping[s[i]] = t[i]\n        #     reverse_mapping[t[i]] = s[i]\n        # return True\n\n        return self.transformString(s) == self.transformString(t)\n\n        \n    def transformString(self, s: str) -> str:\n        index_mapping = {}\n        new_str = []\n\n        for i, c in enumerate(s):\n            if c not in index_mapping:\n                index_mapping[c] = hash(i)\n            new_str.append(str(index_mapping[c]))\n\n        return \" \".join(new_str)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0205-isomorphic-strings/",
+      "datePublished": "2026-07-14T17:04:52+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

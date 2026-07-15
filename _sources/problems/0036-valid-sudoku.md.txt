@@ -1,0 +1,188 @@
+# 0036-valid-sudoku
+
+
+Try it on <a href='https://leetcode.com/problems/0036-valid-sudoku'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Determine if a&nbsp;<code>9 x 9</code> Sudoku board&nbsp;is valid.&nbsp;Only the filled cells need to be validated&nbsp;<strong>according to the following rules</strong>:</p>
+
+<ol>
+	<li>Each row&nbsp;must contain the&nbsp;digits&nbsp;<code>1-9</code> without repetition.</li>
+	<li>Each column must contain the digits&nbsp;<code>1-9</code>&nbsp;without repetition.</li>
+	<li>Each of the nine&nbsp;<code>3 x 3</code> sub-boxes of the grid must contain the digits&nbsp;<code>1-9</code>&nbsp;without repetition.</li>
+</ol>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+	<li>A Sudoku board (partially filled) could be valid but is not necessarily solvable.</li>
+	<li>Only the filled cells need to be validated according to the mentioned&nbsp;rules.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png" style="height:250px; width:250px" />
+<pre>
+<strong>Input:</strong> board = 
+[[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]
+,[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]
+,[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;]
+,[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;]
+,[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;]
+,[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;]
+,[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;]
+,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;]
+,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]]
+<strong>Output:</strong> true
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> board = 
+[[&quot;8&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]
+,[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]
+,[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;]
+,[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;]
+,[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;]
+,[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;]
+,[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;]
+,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;]
+,[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]]
+<strong>Output:</strong> false
+<strong>Explanation:</strong> Same as Example 1, except with the <strong>5</strong> in the top left corner being modified to <strong>8</strong>. Since there are two 8&#39;s in the top left 3x3 sub-box, it is invalid.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>board.length == 9</code></li>
+	<li><code>board[i].length == 9</code></li>
+	<li><code>board[i][j]</code> is a digit <code>1-9</code> or <code>&#39;.&#39;</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        # 
+        # 
+        # validate row  takes row check for duplicate return false if duplicate;  row index
+        # validate column ; colum index
+        # validate grid ; sub matrix 
+        # fail early
+        return self.short(board)
+
+    def obviousversion(self, board: List[List[str]]) -> bool:
+        DIMENSION = 9
+
+        def  validate_row(row):
+             seen = set()
+
+             for i in range(DIMENSION):
+                cell = board[row][i]
+                if cell == '.':
+                    continue
+                if cell in seen:
+                    return False
+                seen.add(cell)
+             return True
+        
+        def  validate_column(col):
+             seen = set()
+
+             for i in range(DIMENSION):
+                cell = board[i][col]
+                if cell == '.':
+                    continue
+                if cell in seen:
+                    return False
+                seen.add(cell)
+             return True
+
+        def  validate_grid(split_x, split_y):
+             seen = set()
+
+             for i in range(split_x, split_x + 3):
+                for j in range(split_y, split_y + 3):
+
+                    cell = board[i][j]
+                    if cell == '.':
+                        continue
+                    if cell in seen:
+                        return False
+                    seen.add(cell)
+             return True
+
+        for row in range(DIMENSION):
+            if not validate_row(row):
+                return False
+        
+        for col in range(DIMENSION):
+            if not validate_column(col):
+                return False
+        
+        #   
+        for split_x in range(0, DIMENSION, 3):
+                for split_y in range(0, DIMENSION, 3):
+                    if not validate_grid(split_x, split_y):
+                        return False
+        return True
+
+    def short(self, board: List[List[str]]) -> bool:
+        rows = [set() for _ in range(9)]
+        cols = [set() for _ in range(9)]
+        boxes = [set() for _ in range(9)]
+
+        for r in range(9):
+            for c in range(9):
+                val = board[r][c]
+                if val == '.':
+                    continue
+                b = (r // 3) * 3 + c // 3
+                if val in rows[r] or val in cols[c] or val in boxes[b]:
+                    return False
+                rows[r].add(val)
+                cols[c].add(val)
+                boxes[b].add(val)
+        return True
+
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "36. Valid Sudoku",
+    "text": "Determine if a\u00a09 x 9 Sudoku board\u00a0is valid.\u00a0Only the filled cells need to be validated\u00a0according to the following rules:\n\nEach row\u00a0must contain the\u00a0digits\u00a01-9 without repetition.\nEach column must contain the digits\u00a01-9\u00a0without repetition.\nEach of the nine\u00a03 x 3 sub-boxes of the grid must contain the digits\u00a01-9\u00a0without repetition.\n\nNote:\n\nA Sudoku board (partially filled) could be valid but is not necessarily solvable.\nOnly the filled cells need to be validated according to the mentioned\u00a0rules.\n\n\u00a0\nExample 1:\n\n\nInput: board = \n[[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"]\n,[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"]\n,[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"]\n,[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"]\n,[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"]\n,[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"]\n,[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"]\n,[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"]\n,[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\nOutput: true\n\nExample 2:\n\nInput: board = \n[[\"8\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"]\n,[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"]\n,[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"]\n,[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"]\n,[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"]\n,[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"]\n,[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"]\n,[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"]\n,[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]\nOutput: false\nExplanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.\n\n\u00a0\nConstraints:\n\nboard.length == 9\nboard[i].length == 9\nboard[i][j] is a digit 1-9 or '.'.\n\n",
+    "url": "https://leetcode.com/problems/0036-valid-sudoku",
+    "answerCount": 1,
+    "datePublished": "2026-07-14T12:52:28+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isValidSudoku(self, board: List[List[str]]) -> bool:\n        # \n        # \n        # validate row  takes row check for duplicate return false if duplicate;  row index\n        # validate column ; colum index\n        # validate grid ; sub matrix \n        # fail early\n        return self.short(board)\n\n    def obviousversion(self, board: List[List[str]]) -> bool:\n        DIMENSION = 9\n\n        def  validate_row(row):\n             seen = set()\n\n             for i in range(DIMENSION):\n                cell = board[row][i]\n                if cell == '.':\n                    continue\n                if cell in seen:\n                    return False\n                seen.add(cell)\n             return True\n        \n        def  validate_column(col):\n             seen = set()\n\n             for i in range(DIMENSION):\n                cell = board[i][col]\n                if cell == '.':\n                    continue\n                if cell in seen:\n                    return False\n                seen.add(cell)\n             return True\n\n        def  validate_grid(split_x, split_y):\n             seen = set()\n\n             for i in range(split_x, split_x + 3):\n                for j in range(split_y, split_y + 3):\n\n                    cell = board[i][j]\n                    if cell == '.':\n                        continue\n                    if cell in seen:\n                        return False\n                    seen.add(cell)\n             return True\n\n        for row in range(DIMENSION):\n            if not validate_row(row):\n                return False\n        \n        for col in range(DIMENSION):\n            if not validate_column(col):\n                return False\n        \n        #   \n        for split_x in range(0, DIMENSION, 3):\n                for split_y in range(0, DIMENSION, 3):\n                    if not validate_grid(split_x, split_y):\n                        return False\n        return True\n\n    def short(self, board: List[List[str]]) -> bool:\n        rows = [set() for _ in range(9)]\n        cols = [set() for _ in range(9)]\n        boxes = [set() for _ in range(9)]\n\n        for r in range(9):\n            for c in range(9):\n                val = board[r][c]\n                if val == '.':\n                    continue\n                b = (r // 3) * 3 + c // 3\n                if val in rows[r] or val in cols[c] or val in boxes[b]:\n                    return False\n                rows[r].add(val)\n                cols[c].add(val)\n                boxes[b].add(val)\n        return True\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0036-valid-sudoku/",
+      "datePublished": "2026-07-14T12:52:28+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
