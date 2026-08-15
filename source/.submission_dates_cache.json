@@ -411,5 +411,21 @@
   "0242-valid-anagram": "2026-07-14T17:18:17+05:30",
   "0289-game-of-life": "2026-07-14T16:38:44+05:30",
   "0290-word-pattern": "2026-07-14T17:12:14+05:30",
-  "0383-ransom-note": "2026-07-14T16:42:31+05:30"
+  "0383-ransom-note": "2026-07-14T16:42:31+05:30",
+  "0020-valid-parentheses": "2026-07-20T11:36:02+05:30",
+  "0021-merge-two-sorted-lists": "2026-07-30T17:22:06+05:30",
+  "0056-merge-intervals": "2026-07-19T19:06:00+05:30",
+  "0057-insert-interval": "2026-07-20T11:05:08+05:30",
+  "0071-simplify-path": "2026-07-21T13:16:23+05:30",
+  "0092-reverse-linked-list-ii": "2026-08-14T12:43:52+05:30",
+  "0128-longest-consecutive-sequence": "2026-07-16T19:36:52+05:30",
+  "0138-copy-list-with-random-pointer": "2026-07-30T17:38:10+05:30",
+  "0141-linked-list-cycle": "2026-07-30T17:10:05+05:30",
+  "0155-min-stack": "2026-07-21T13:24:43+05:30",
+  "0202-happy-number": "2026-07-15T14:24:21+05:30",
+  "0219-contains-duplicate-ii": "2026-07-16T14:50:44+05:30",
+  "0224-basic-calculator": "2026-07-29T18:59:40+05:30",
+  "0228-summary-ranges": "2026-07-18T14:09:55+05:30",
+  "0452-minimum-number-of-arrows-to-burst-balloons": "2026-07-20T11:23:43+05:30",
+  "0621-task-scheduler": "2026-07-29T19:18:15+05:30"
 }
