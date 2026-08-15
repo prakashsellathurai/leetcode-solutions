@@ -1,0 +1,163 @@
+# 0621-task-scheduler
+
+
+Try it on <a href='https://leetcode.com/problems/0621-task-scheduler'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given an array of CPU <code>tasks</code>, each labeled with a letter from A to Z, and a number <code>n</code>. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order, but there&#39;s a constraint: there has to be a gap of <strong>at least</strong> <code>n</code> intervals between two tasks with the same label.</p>
+
+<p>Return the <strong>minimum</strong> number of CPU intervals required to complete all tasks.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block" style="
+    border-color: var(--border-tertiary);
+    border-left-width: 2px;
+    color: var(--text-secondary);
+    font-size: .875rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    overflow: visible;
+    padding-left: 1rem;
+">
+<p><strong>Input:</strong> <span class="example-io" style="
+    font-family: Menlo,sans-serif;
+    font-size: 0.85rem;
+">tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;], n = 2</span></p>
+
+<p><strong>Output:</strong> <span class="example-io" style="
+font-family: Menlo,sans-serif;
+font-size: 0.85rem;
+">8</span></p>
+
+<p><strong>Explanation:</strong> A possible sequence is: A -&gt; B -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; A -&gt; B.</p>
+
+<p>After completing task A, you must wait two intervals before doing A again. The same applies to task B. In the 3<sup>rd</sup> interval, neither A nor B can be done, so you idle. By the 4<sup>th</sup> interval, you can do A again as 2 intervals have passed.</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block" style="
+    border-color: var(--border-tertiary);
+    border-left-width: 2px;
+    color: var(--text-secondary);
+    font-size: .875rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    overflow: visible;
+    padding-left: 1rem;
+">
+<p><strong>Input:</strong> <span class="example-io" style="
+    font-family: Menlo,sans-serif;
+    font-size: 0.85rem;
+">tasks = [&quot;A&quot;,&quot;C&quot;,&quot;A&quot;,&quot;B&quot;,&quot;D&quot;,&quot;B&quot;], n = 1</span></p>
+
+<p><strong>Output:</strong> <span class="example-io" style="
+    font-family: Menlo,sans-serif;
+    font-size: 0.85rem;
+">6</span></p>
+
+<p><strong>Explanation:</strong> A possible sequence is: A -&gt; B -&gt; C -&gt; D -&gt; A -&gt; B.</p>
+
+<p>With a cooling interval of 1, you can repeat a task after just one other task.</p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block" style="
+    border-color: var(--border-tertiary);
+    border-left-width: 2px;
+    color: var(--text-secondary);
+    font-size: .875rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    overflow: visible;
+    padding-left: 1rem;
+">
+<p><strong>Input:</strong> <span class="example-io" style="
+    font-family: Menlo,sans-serif;
+    font-size: 0.85rem;
+">tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;, &quot;B&quot;,&quot;B&quot;,&quot;B&quot;], n = 3</span></p>
+
+<p><strong>Output:</strong> <span class="example-io" style="
+    font-family: Menlo,sans-serif;
+    font-size: 0.85rem;
+">10</span></p>
+
+<p><strong>Explanation:</strong> A possible sequence is: A -&gt; B -&gt; idle -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; idle -&gt; A -&gt; B.</p>
+
+<p>There are only two types of tasks, A and B, which need to be separated by 3 intervals. This leads to idling twice between repetitions of these tasks.</p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= tasks.length &lt;= 10<sup>4</sup></code></li>
+	<li><code>tasks[i]</code> is an uppercase English letter.</li>
+	<li><code>0 &lt;= n &lt;= 100</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        # Step 1: Count the frequency of each task
+        frequencies = [0] * 26
+        for task in tasks:
+            frequencies[ord(task) - ord('A')] += 1
+            
+        # Step 2: Identify max frequency
+        max_freq = max(frequencies)
+        
+        # Step 3: Count how many tasks have the maximum frequency
+        max_freq_count = frequencies.count(max_freq)
+        
+        # Step 4: Apply the greedy interval formula
+        minimum_intervals = (max_freq - 1) * (n + 1) + max_freq_count
+        
+        # Step 5: Return upper bound against the total number of tasks
+        return max(len(tasks), minimum_intervals)
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "621. Task Scheduler",
+    "text": "You are given an array of CPU tasks, each labeled with a letter from A to Z, and a number n. Each CPU interval can be idle or allow the completion of one task. Tasks can be completed in any order, but there's a constraint: there has to be a gap of at least n intervals between two tasks with the same label.\nReturn the minimum number of CPU intervals required to complete all tasks.\n\u00a0\nExample 1:\n\nInput: tasks = [\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"], n = 2\nOutput: 8\nExplanation: A possible sequence is: A -> B -> idle -> A -> B -> idle -> A -> B.\nAfter completing task A, you must wait two intervals before doing A again. The same applies to task B. In the 3rd interval, neither A nor B can be done, so you idle. By the 4th interval, you can do A again as 2 intervals have passed.\n\nExample 2:\n\nInput: tasks = [\"A\",\"C\",\"A\",\"B\",\"D\",\"B\"], n = 1\nOutput: 6\nExplanation: A possible sequence is: A -> B -> C -> D -> A -> B.\nWith a cooling interval of 1, you can repeat a task after just one other task.\n\nExample 3:\n\nInput: tasks = [\"A\",\"A\",\"A\", \"B\",\"B\",\"B\"], n = 3\nOutput: 10\nExplanation: A possible sequence is: A -> B -> idle -> idle -> A -> B -> idle -> idle -> A -> B.\nThere are only two types of tasks, A and B, which need to be separated by 3 intervals. This leads to idling twice between repetitions of these tasks.\n\n\u00a0\nConstraints:\n\n1 <= tasks.length <= 104\ntasks[i] is an uppercase English letter.\n0 <= n <= 100\n\n",
+    "url": "https://leetcode.com/problems/0621-task-scheduler",
+    "answerCount": 1,
+    "datePublished": "2026-07-29T19:18:15+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def leastInterval(self, tasks: List[str], n: int) -> int:\n        # Step 1: Count the frequency of each task\n        frequencies = [0] * 26\n        for task in tasks:\n            frequencies[ord(task) - ord('A')] += 1\n            \n        # Step 2: Identify max frequency\n        max_freq = max(frequencies)\n        \n        # Step 3: Count how many tasks have the maximum frequency\n        max_freq_count = frequencies.count(max_freq)\n        \n        # Step 4: Apply the greedy interval formula\n        minimum_intervals = (max_freq - 1) * (n + 1) + max_freq_count\n        \n        # Step 5: Return upper bound against the total number of tasks\n        return max(len(tasks), minimum_intervals)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0621-task-scheduler/",
+      "datePublished": "2026-07-29T19:18:15+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

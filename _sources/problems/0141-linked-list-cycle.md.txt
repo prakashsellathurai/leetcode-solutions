@@ -1,0 +1,109 @@
+# 0141-linked-list-cycle
+
+
+Try it on <a href='https://leetcode.com/problems/0141-linked-list-cycle'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given <code>head</code>, the head of a linked list, determine if the linked list has a cycle in it.</p>
+
+<p>There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the&nbsp;<code>next</code>&nbsp;pointer. Internally, <code>pos</code>&nbsp;is used to denote the index of the node that&nbsp;tail&#39;s&nbsp;<code>next</code>&nbsp;pointer is connected to.&nbsp;<strong>Note that&nbsp;<code>pos</code>&nbsp;is not passed as a parameter</strong>.</p>
+
+<p>Return&nbsp;<code>true</code><em> if there is a cycle in the linked list</em>. Otherwise, return <code>false</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png" style="width: 300px; height: 97px; margin-top: 8px; margin-bottom: 8px;" />
+<pre>
+<strong>Input:</strong> head = [3,2,0,-4], pos = 1
+<strong>Output:</strong> true
+<strong>Explanation:</strong> There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png" style="width: 141px; height: 74px;" />
+<pre>
+<strong>Input:</strong> head = [1,2], pos = 0
+<strong>Output:</strong> true
+<strong>Explanation:</strong> There is a cycle in the linked list, where the tail connects to the 0th node.
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png" style="width: 45px; height: 45px;" />
+<pre>
+<strong>Input:</strong> head = [1], pos = -1
+<strong>Output:</strong> false
+<strong>Explanation:</strong> There is no cycle in the linked list.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of the nodes in the list is in the range <code>[0, 10<sup>4</sup>]</code>.</li>
+	<li><code>-10<sup>5</sup> &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
+	<li><code>pos</code> is <code>-1</code> or a <strong>valid index</strong> in the linked-list.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong> Can you solve it using <code>O(1)</code> (i.e. constant) memory?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow = head
+        fast = head
+
+        while fast and fast.next:
+
+            slow = slow.next
+            fast = fast.next.next
+            if fast == slow:
+                return True
+        return False
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "141. Linked List Cycle",
+    "text": "Given head, the head of a linked list, determine if the linked list has a cycle in it.\nThere is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the\u00a0next\u00a0pointer. Internally, pos\u00a0is used to denote the index of the node that\u00a0tail's\u00a0next\u00a0pointer is connected to.\u00a0Note that\u00a0pos\u00a0is not passed as a parameter.\nReturn\u00a0true if there is a cycle in the linked list. Otherwise, return false.\n\u00a0\nExample 1:\n\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: true\nExplanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).\n\nExample 2:\n\n\nInput: head = [1,2], pos = 0\nOutput: true\nExplanation: There is a cycle in the linked list, where the tail connects to the 0th node.\n\nExample 3:\n\n\nInput: head = [1], pos = -1\nOutput: false\nExplanation: There is no cycle in the linked list.\n\n\u00a0\nConstraints:\n\nThe number of the nodes in the list is in the range [0, 104].\n-105 <= Node.val <= 105\npos is -1 or a valid index in the linked-list.\n\n\u00a0\nFollow up: Can you solve it using O(1) (i.e. constant) memory?\n",
+    "url": "https://leetcode.com/problems/0141-linked-list-cycle",
+    "answerCount": 1,
+    "datePublished": "2026-07-30T17:10:05+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, x):\n#         self.val = x\n\n#         self.next = None\n\nclass Solution:\n    def hasCycle(self, head: Optional[ListNode]) -> bool:\n        slow = head\n        fast = head\n\n        while fast and fast.next:\n\n            slow = slow.next\n            fast = fast.next.next\n            if fast == slow:\n                return True\n        return False\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0141-linked-list-cycle/",
+      "datePublished": "2026-07-30T17:10:05+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

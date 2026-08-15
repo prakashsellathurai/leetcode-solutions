@@ -1,0 +1,124 @@
+# 0128-longest-consecutive-sequence
+
+
+Try it on <a href='https://leetcode.com/problems/0128-longest-consecutive-sequence'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an unsorted array of integers <code>nums</code>, return <em>the length of the longest consecutive elements sequence.</em></p>
+
+<p>You must write an algorithm that runs in&nbsp;<code>O(n)</code>&nbsp;time.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [100,4,200,1,3,2]
+<strong>Output:</strong> 4
+<strong>Explanation:</strong> The longest consecutive elements sequence is <code>[1, 2, 3, 4]</code>. Therefore its length is 4.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [0,3,7,2,5,8,4,6,0,1]
+<strong>Output:</strong> 9
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [1,0,1,2]
+<strong>Output:</strong> 3
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        #  nums = [100,4,200,1,3,2]
+        #   1 2 3 4  100 200 sort
+        # 
+        #   cur_lenth = 0
+        #   longest_length = 0
+        #   i,i + 1  : 0 , n-2
+        #     if nums[i+1] - nums[i] == 1:
+        #        cur_lenth += 1
+        #     else:
+        #        update longest_length
+        #        cur_lenth = 0
+        # 
+        # [0,3,7,2,5,8,4,6,0,1]
+        #  0 0 1 2 3 4 5 6 7 8
+        #  cur_lenth = 0
+        #   longest_length = 0
+        #   i = 0  0 != 0  
+        #   
+
+        if not nums:
+            return 0
+
+        nums.sort()
+
+        longest_streak = 1
+        current_streak = 1
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1]:
+                if nums[i] == nums[i - 1] + 1:
+                    current_streak += 1
+                else:
+                    longest_streak = max(longest_streak, current_streak)
+                    current_streak = 1
+
+        return max(longest_streak, current_streak)
+        
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "128. Longest Consecutive Sequence",
+    "text": "Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.\nYou must write an algorithm that runs in\u00a0O(n)\u00a0time.\n\u00a0\nExample 1:\n\nInput: nums = [100,4,200,1,3,2]\nOutput: 4\nExplanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.\n\nExample 2:\n\nInput: nums = [0,3,7,2,5,8,4,6,0,1]\nOutput: 9\n\nExample 3:\n\nInput: nums = [1,0,1,2]\nOutput: 3\n\n\u00a0\nConstraints:\n\n0 <= nums.length <= 105\n-109 <= nums[i] <= 109\n\n",
+    "url": "https://leetcode.com/problems/0128-longest-consecutive-sequence",
+    "answerCount": 1,
+    "datePublished": "2026-07-16T19:36:52+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def longestConsecutive(self, nums: List[int]) -> int:\n        #  nums = [100,4,200,1,3,2]\n        #   1 2 3 4  100 200 sort\n        # \n        #   cur_lenth = 0\n        #   longest_length = 0\n        #   i,i + 1  : 0 , n-2\n        #     if nums[i+1] - nums[i] == 1:\n        #        cur_lenth += 1\n        #     else:\n        #        update longest_length\n        #        cur_lenth = 0\n        # \n        # [0,3,7,2,5,8,4,6,0,1]\n        #  0 0 1 2 3 4 5 6 7 8\n        #  cur_lenth = 0\n        #   longest_length = 0\n        #   i = 0  0 != 0  \n        #   \n\n        if not nums:\n            return 0\n\n        nums.sort()\n\n        longest_streak = 1\n        current_streak = 1\n\n        for i in range(1, len(nums)):\n            if nums[i] != nums[i - 1]:\n                if nums[i] == nums[i - 1] + 1:\n                    current_streak += 1\n                else:\n                    longest_streak = max(longest_streak, current_streak)\n                    current_streak = 1\n\n        return max(longest_streak, current_streak)\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0128-longest-consecutive-sequence/",
+      "datePublished": "2026-07-16T19:36:52+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

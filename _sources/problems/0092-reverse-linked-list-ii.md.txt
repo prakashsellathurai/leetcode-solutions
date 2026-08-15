@@ -1,0 +1,126 @@
+# 0092-reverse-linked-list-ii
+
+
+Try it on <a href='https://leetcode.com/problems/0092-reverse-linked-list-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>head</code> of a singly linked list and two integers <code>left</code> and <code>right</code> where <code>left &lt;= right</code>, reverse the nodes of the list from position <code>left</code> to position <code>right</code>, and return <em>the reversed list</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/rev2ex2.jpg" style="width: 542px; height: 222px;" />
+<pre>
+<strong>Input:</strong> head = [1,2,3,4,5], left = 2, right = 4
+<strong>Output:</strong> [1,4,3,2,5]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> head = [5], left = 1, right = 1
+<strong>Output:</strong> [5]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is <code>n</code>.</li>
+	<li><code>1 &lt;= n &lt;= 500</code></li>
+	<li><code>-500 &lt;= Node.val &lt;= 500</code></li>
+	<li><code>1 &lt;= left &lt;= right &lt;= n</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<strong>Follow up:</strong> Could you do it in one pass?
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        # head = [1,2,3,4,5], left = 2, right = 4
+        # [1,4,3,2,5]
+        #    reverse start reverse each step    prev -> cur -> next  -->  prev ->  next -> cur
+        #   cnt = 0 
+        #    till left - 1 inc cnt 
+        #    from left till right reverse elements
+        #  
+        # cnt < left ; prev = dummy
+        # cnt = 0 ; prev = dummy  1,2,3,4,5
+        # cnt = 1 ; prev = 0  ...
+        #  cnt =  2  ; prev = 1 ;  1 -> 3   3 -> 2  2-> 4  1 3 2 4 5
+        #    cnt =  3; prev = 2; cur = 4  2   
+        #
+        # cur_idx = 0
+        # tille left - 1 inc cur_idx
+        # from left to right
+        #     PREV  CUR 
+        #    
+        # 0..n-1 -> [] 1 2 3 4 5
+        #            [] <- 1  2  3 4 5
+        #                     -<2
+        #           next
+        #           prev  -> cur  -> next
+        #           cur -> prev
+        #           prev -> next
+        #           cur -> prev -> next
+        if not head or left == right:
+                return head
+        sentinel = ListNode()
+        sentinel.next = head
+        prev = sentinel
+
+        for _ in range(left - 1):
+            prev = prev.next
+        cur =  prev.next
+        for _ in range(left, right):
+            next_ = cur.next
+
+            cur.next = next_.next
+            next_.next = prev.next 
+            prev.next  = next_
+
+
+        return sentinel.next
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "92. Reverse Linked List II",
+    "text": "Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.\n\u00a0\nExample 1:\n\n\nInput: head = [1,2,3,4,5], left = 2, right = 4\nOutput: [1,4,3,2,5]\n\nExample 2:\n\nInput: head = [5], left = 1, right = 1\nOutput: [5]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is n.\n1 <= n <= 500\n-500 <= Node.val <= 500\n1 <= left <= right <= n\n\n\u00a0\nFollow up: Could you do it in one pass?",
+    "url": "https://leetcode.com/problems/0092-reverse-linked-list-ii",
+    "answerCount": 1,
+    "datePublished": "2026-08-14T12:43:52+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\nclass Solution:\n    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:\n        # head = [1,2,3,4,5], left = 2, right = 4\n        # [1,4,3,2,5]\n        #    reverse start reverse each step    prev -> cur -> next  -->  prev ->  next -> cur\n        #   cnt = 0 \n        #    till left - 1 inc cnt \n        #    from left till right reverse elements\n        #  \n        # cnt < left ; prev = dummy\n        # cnt = 0 ; prev = dummy  1,2,3,4,5\n        # cnt = 1 ; prev = 0  ...\n        #  cnt =  2  ; prev = 1 ;  1 -> 3   3 -> 2  2-> 4  1 3 2 4 5\n        #    cnt =  3; prev = 2; cur = 4  2   \n        #\n        # cur_idx = 0\n        # tille left - 1 inc cur_idx\n        # from left to right\n        #     PREV  CUR \n        #    \n        # 0..n-1 -> [] 1 2 3 4 5\n        #            [] <- 1  2  3 4 5\n        #                     -<2\n        #           next\n        #           prev  -> cur  -> next\n        #           cur -> prev\n        #           prev -> next\n        #           cur -> prev -> next\n        if not head or left == right:\n                return head\n        sentinel = ListNode()\n        sentinel.next = head\n        prev = sentinel\n\n        for _ in range(left - 1):\n            prev = prev.next\n        cur =  prev.next\n        for _ in range(left, right):\n            next_ = cur.next\n\n            cur.next = next_.next\n            next_.next = prev.next \n            prev.next  = next_\n\n\n        return sentinel.next",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0092-reverse-linked-list-ii/",
+      "datePublished": "2026-08-14T12:43:52+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

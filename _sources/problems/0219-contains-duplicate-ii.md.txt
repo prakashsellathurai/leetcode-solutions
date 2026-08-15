@@ -1,0 +1,106 @@
+# 0219-contains-duplicate-ii
+
+
+Try it on <a href='https://leetcode.com/problems/0219-contains-duplicate-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> <em>if there are two <strong>distinct indices</strong> </em><code>i</code><em> and </em><code>j</code><em> in the array such that </em><code>nums[i] == nums[j]</code><em> and </em><code>abs(i - j) &lt;= k</code>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [1,2,3,1], k = 3
+<strong>Output:</strong> true
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [1,0,1,1], k = 1
+<strong>Output:</strong> true
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> nums = [1,2,3,1,2,3], k = 2
+<strong>Output:</strong> false
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
+	<li><code>0 &lt;= k &lt;= 10<sup>5</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        #  0 .. n- 1
+        # abs(i-j) <= k
+        # 
+        # valid nums[i] == nums[j] and abs(i-j) <= k
+        # 
+        # invalid nums[i] != nums[j] 
+        # 
+        # if abs(i-j) <= k true
+        # 
+        # l =0 
+        # r = 0
+        # r -> n-1
+        #   nums[l] != nums[r]  loop  l +=1
+        #   if abs(i-j) <= k return True
+        #   
+        hashset = {}
+        for i,num in enumerate(nums):
+            if num in hashset and abs(i - hashset[num]) <= k:
+                return True
+            hashset[num] = i
+        return False
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "219. Contains Duplicate II",
+    "text": "Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.\n\u00a0\nExample 1:\n\nInput: nums = [1,2,3,1], k = 3\nOutput: true\n\nExample 2:\n\nInput: nums = [1,0,1,1], k = 1\nOutput: true\n\nExample 3:\n\nInput: nums = [1,2,3,1,2,3], k = 2\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= nums.length <= 105\n-109 <= nums[i] <= 109\n0 <= k <= 105\n\n",
+    "url": "https://leetcode.com/problems/0219-contains-duplicate-ii",
+    "answerCount": 1,
+    "datePublished": "2026-07-16T14:50:44+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:\n        #  0 .. n- 1\n        # abs(i-j) <= k\n        # \n        # valid nums[i] == nums[j] and abs(i-j) <= k\n        # \n        # invalid nums[i] != nums[j] \n        # \n        # if abs(i-j) <= k true\n        # \n        # l =0 \n        # r = 0\n        # r -> n-1\n        #   nums[l] != nums[r]  loop  l +=1\n        #   if abs(i-j) <= k return True\n        #   \n        hashset = {}\n        for i,num in enumerate(nums):\n            if num in hashset and abs(i - hashset[num]) <= k:\n                return True\n            hashset[num] = i\n        return False",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0219-contains-duplicate-ii/",
+      "datePublished": "2026-07-16T14:50:44+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

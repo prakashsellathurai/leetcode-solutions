@@ -1,0 +1,112 @@
+# 0202-happy-number
+
+
+Try it on <a href='https://leetcode.com/problems/0202-happy-number'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Write an algorithm to determine if a number <code>n</code> is happy.</p>
+
+<p>A <strong>happy number</strong> is a number defined by the following process:</p>
+
+<ul>
+	<li>Starting with any positive integer, replace the number by the sum of the squares of its digits.</li>
+	<li>Repeat the process until the number equals 1 (where it will stay), or it <strong>loops endlessly in a cycle</strong> which does not include 1.</li>
+	<li>Those numbers for which this process <strong>ends in 1</strong> are happy.</li>
+</ul>
+
+<p>Return <code>true</code> <em>if</em> <code>n</code> <em>is a happy number, and</em> <code>false</code> <em>if not</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = 19
+<strong>Output:</strong> true
+<strong>Explanation:</strong>
+1<sup>2</sup> + 9<sup>2</sup> = 82
+8<sup>2</sup> + 2<sup>2</sup> = 68
+6<sup>2</sup> + 8<sup>2</sup> = 100
+1<sup>2</sup> + 0<sup>2</sup> + 0<sup>2</sup> = 1
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> n = 2
+<strong>Output:</strong> false
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 2<sup>31</sup> - 1</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        # base 10 converges to 1
+        #
+        # case 1 converge to 1
+        # case 2 cycle
+        # case 3 infinity
+        #
+
+        def get_next(num):
+            total_sum = 0
+            while num > 0:
+                num,digit = divmod(num, 10)
+                total_sum += digit **2
+            return total_sum
+
+        slow = n
+        fast = get_next(n)
+        while slow!= 1 and slow != fast:
+            slow = get_next(slow)
+            fast = get_next(get_next(fast))
+        return fast == 1
+        
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "202. Happy Number",
+    "text": "Write an algorithm to determine if a number n is happy.\nA happy number is a number defined by the following process:\n\nStarting with any positive integer, replace the number by the sum of the squares of its digits.\nRepeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.\nThose numbers for which this process ends in 1 are happy.\n\nReturn true if n is a happy number, and false if not.\n\u00a0\nExample 1:\n\nInput: n = 19\nOutput: true\nExplanation:\n12 + 92 = 82\n82 + 22 = 68\n62 + 82 = 100\n12 + 02 + 02 = 1\n\nExample 2:\n\nInput: n = 2\nOutput: false\n\n\u00a0\nConstraints:\n\n1 <= n <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/0202-happy-number",
+    "answerCount": 1,
+    "datePublished": "2026-07-15T14:24:21+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def isHappy(self, n: int) -> bool:\n        # base 10 converges to 1\n        #\n        # case 1 converge to 1\n        # case 2 cycle\n        # case 3 infinity\n        #\n\n        def get_next(num):\n            total_sum = 0\n            while num > 0:\n                num,digit = divmod(num, 10)\n                total_sum += digit **2\n            return total_sum\n\n        slow = n\n        fast = get_next(n)\n        while slow!= 1 and slow != fast:\n            slow = get_next(slow)\n            fast = get_next(get_next(fast))\n        return fast == 1\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0202-happy-number/",
+      "datePublished": "2026-07-15T14:24:21+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
