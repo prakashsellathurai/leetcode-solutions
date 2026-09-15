@@ -537,6 +537,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../0025-reverse-nodes-in-k-group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0025-<wbr>reverse-<wbr>nodes-<wbr>in-<wbr>k-<wbr>group</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../0026-remove-duplicates-from-sorted-array/" class="md-nav__link">
         
   
@@ -5513,6 +5536,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../2365-task-scheduler-ii/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>2365-<wbr>task-<wbr>scheduler-<wbr>ii</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../2385-amount-of-time-for-binary-tree-to-be-infected/" class="md-nav__link">
         
   
@@ -10237,6 +10283,10 @@
         <span class="c1">#           cur -&gt; prev</span>
         <span class="c1">#           prev -&gt; next</span>
         <span class="c1">#           cur -&gt; prev -&gt; next</span>
+        <span class="c1">#</span>
+        <span class="c1">#  </span>
+        <span class="c1">#    </span>
+         
         <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span> <span class="ow">or</span> <span class="n">left</span> <span class="o">==</span> <span class="n">right</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">head</span>
         <span class="n">sentinel</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">()</span>
@@ -10245,15 +10295,18 @@
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">next</span>
-        <span class="n">cur</span> <span class="o">=</span>  <span class="n">prev</span><span class="o">.</span><span class="n">next</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+        <span class="n">before_sub_list</span> <span class="o">=</span> <span class="n">prev</span>
+        <span class="n">cur</span> <span class="o">=</span>  <span class="n">prev</span><span class="o">.</span><span class="n">next</span> <span class="c1"># 2 prev = 1</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">sub_list_start</span> <span class="o">=</span> <span class="n">cur</span> <span class="c1"># 1 </span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="c1"># 2 3</span>
             <span class="n">next_</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
 
-            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">next_</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">next_</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">next</span> 
-            <span class="n">prev</span><span class="o">.</span><span class="n">next</span>  <span class="o">=</span> <span class="n">next_</span>
-
-
+            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">next_</span>
+        <span class="n">before_sub_list</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span>
+        <span class="n">sub_list_start</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cur</span>
         <span class="k">return</span> <span class="n">sentinel</span><span class="o">.</span><span class="n">next</span>
 </code></pre></div>
 </div>
@@ -10275,7 +10328,7 @@
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "# Definition for singly-linked list.\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\nclass Solution:\n    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:\n        # head = [1,2,3,4,5], left = 2, right = 4\n        # [1,4,3,2,5]\n        #    reverse start reverse each step    prev -> cur -> next  -->  prev ->  next -> cur\n        #   cnt = 0 \n        #    till left - 1 inc cnt \n        #    from left till right reverse elements\n        #  \n        # cnt < left ; prev = dummy\n        # cnt = 0 ; prev = dummy  1,2,3,4,5\n        # cnt = 1 ; prev = 0  ...\n        #  cnt =  2  ; prev = 1 ;  1 -> 3   3 -> 2  2-> 4  1 3 2 4 5\n        #    cnt =  3; prev = 2; cur = 4  2   \n        #\n        # cur_idx = 0\n        # tille left - 1 inc cur_idx\n        # from left to right\n        #     PREV  CUR \n        #    \n        # 0..n-1 -> [] 1 2 3 4 5\n        #            [] <- 1  2  3 4 5\n        #                     -<2\n        #           next\n        #           prev  -> cur  -> next\n        #           cur -> prev\n        #           prev -> next\n        #           cur -> prev -> next\n        if not head or left == right:\n                return head\n        sentinel = ListNode()\n        sentinel.next = head\n        prev = sentinel\n\n        for _ in range(left - 1):\n            prev = prev.next\n        cur =  prev.next\n        for _ in range(left, right):\n            next_ = cur.next\n\n            cur.next = next_.next\n            next_.next = prev.next \n            prev.next  = next_\n\n\n        return sentinel.next",
+      "text": "# Definition for singly-linked list.\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\nclass Solution:\n    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:\n        # head = [1,2,3,4,5], left = 2, right = 4\n        # [1,4,3,2,5]\n        #    reverse start reverse each step    prev -> cur -> next  -->  prev ->  next -> cur\n        #   cnt = 0 \n        #    till left - 1 inc cnt \n        #    from left till right reverse elements\n        #  \n        # cnt < left ; prev = dummy\n        # cnt = 0 ; prev = dummy  1,2,3,4,5\n        # cnt = 1 ; prev = 0  ...\n        #  cnt =  2  ; prev = 1 ;  1 -> 3   3 -> 2  2-> 4  1 3 2 4 5\n        #    cnt =  3; prev = 2; cur = 4  2   \n        #\n        # cur_idx = 0\n        # tille left - 1 inc cur_idx\n        # from left to right\n        #     PREV  CUR \n        #    \n        # 0..n-1 -> [] 1 2 3 4 5\n        #            [] <- 1  2  3 4 5\n        #                     -<2\n        #           next\n        #           prev  -> cur  -> next\n        #           cur -> prev\n        #           prev -> next\n        #           cur -> prev -> next\n        #\n        #  \n        #    \n         \n        if not head or left == right:\n                return head\n        sentinel = ListNode()\n        sentinel.next = head\n        prev = sentinel\n\n        for _ in range(left - 1):\n            prev = prev.next\n        before_sub_list = prev\n        cur =  prev.next # 2 prev = 1\n        prev = None\n        sub_list_start = cur # 1 \n        for _ in range(right - left + 1): # 2 3\n            next_ = cur.next\n\n            cur.next = prev\n            prev = cur\n            cur = next_\n        before_sub_list.next = prev\n        sub_list_start.next = cur\n        return sentinel.next\n",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0092-reverse-linked-list-ii/",
       "datePublished": "2026-08-14T12:43:52+05:30",
       "upvoteCount": 0,

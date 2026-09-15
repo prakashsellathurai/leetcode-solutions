@@ -1,0 +1,168 @@
+# 0025-reverse-nodes-in-k-group
+
+
+Try it on <a href='https://leetcode.com/problems/0025-reverse-nodes-in-k-group'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>head</code> of a linked list, reverse the nodes of the list <code>k</code> at a time, and return <em>the modified list</em>.</p>
+
+<p><code>k</code> is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of <code>k</code> then left-out nodes, in the end, should remain as it is.</p>
+
+<p>You may not alter the values in the list&#39;s nodes, only nodes themselves may be changed.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/03/reverse_ex1.jpg" style="width: 542px; height: 222px;" />
+<pre>
+<strong>Input:</strong> head = [1,2,3,4,5], k = 2
+<strong>Output:</strong> [2,1,4,3,5]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/03/reverse_ex2.jpg" style="width: 542px; height: 222px;" />
+<pre>
+<strong>Input:</strong> head = [1,2,3,4,5], k = 3
+<strong>Output:</strong> [3,2,1,4,5]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is <code>n</code>.</li>
+	<li><code>1 &lt;= k &lt;= n &lt;= 5000</code></li>
+	<li><code>0 &lt;= Node.val &lt;= 1000</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow-up:</strong> Can you solve the problem in <code>O(1)</code> extra memory space?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        # case k < n
+        #       leftover = n%k   
+        #       multiple m//k
+        #   total = multiple * k + leftover 
+        #   1.1   index < leftover  reverse 
+        #            sublist 1 start  ....sublist 1 end ....  sublist 2 start  ....sublist 2 end
+        #             
+        #            sublist 1 end ........sublist 1 start ... sublist 2 end .........sublist 2 start 
+        #           prevstart .next = curend
+        #    1.2    index > leftover  keep it as it is
+        #    
+        #     
+        # case k >= n 
+        #      reverse whole list
+        #  for isolated segment
+        #  1 2 3
+        #    k =3 
+        # prev = None
+        # cur = head 
+        # for _ in range(k):
+        #    nct = cur.next
+        #    cur.next = prev 
+        #    prev = cur
+        #    cur = nxt
+        #  prev = new head 
+        #  cur = end
+        # 1 2 3 
+        # prev = None cur =1
+        # nxt = 2 ; 1 -> None 
+        # prev = 1, cur = 2
+        # nxt = 3 ; 2 -> 1 -> None
+        # prev = 2 , cur = 3
+        # nxt = None
+        # 3 -> 2 -> 1 ->None
+        # prev = 3
+        # cur = None
+        # stitiching
+        #  before reverseing group save group_prev , group_start 
+        # 
+        # ---- Phase 1: count nodes ----
+            # length ← count of nodes in the list
+        length = 0
+        node = head
+        while node:
+            length += 1
+            node = node.next
+
+    # # ---- Phase 2: setup ----
+    # create dummy node pointing to head
+    # previous_group_end ← dummy
+        dummy = ListNode(0, head)
+        previous_group_end  = dummy
+
+
+    # ---- Phase 3: process each full group ----
+        for _ in range(length//k):
+             # 3a. locate the end of this group
+            group_end  = previous_group_end 
+            for _ in range(k):
+                group_end  = group_end.next
+            
+            # node_after_group ← group_end.next
+            node_after_group  = group_end.next
+            new_next = node_after_group 
+            current = previous_group_end.next
+
+            #  # 3b. reverse this group in place
+
+            while current != node_after_group:
+                next_node = current.next
+                current.next = new_next
+                new_next = current
+                current = next_node
+            # 3c. reconnect this group to the previous one
+            old_group_head = previous_group_end.next
+            previous_group_end.next = group_end 
+            previous_group_end = old_group_head 
+
+
+        return dummy.next
+
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "25. Reverse Nodes in k-Group",
+    "text": "Given the head of a linked list, reverse the nodes of the list k at a time, and return the modified list.\nk is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.\nYou may not alter the values in the list's nodes, only nodes themselves may be changed.\n\u00a0\nExample 1:\n\n\nInput: head = [1,2,3,4,5], k = 2\nOutput: [2,1,4,3,5]\n\nExample 2:\n\n\nInput: head = [1,2,3,4,5], k = 3\nOutput: [3,2,1,4,5]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is n.\n1 <= k <= n <= 5000\n0 <= Node.val <= 1000\n\n\u00a0\nFollow-up: Can you solve the problem in O(1) extra memory space?\n",
+    "url": "https://leetcode.com/problems/0025-reverse-nodes-in-k-group",
+    "answerCount": 1,
+    "datePublished": "2026-09-11T13:03:28+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\nclass Solution:\n    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:\n        # case k < n\n        #       leftover = n%k   \n        #       multiple m//k\n        #   total = multiple * k + leftover \n        #   1.1   index < leftover  reverse \n        #            sublist 1 start  ....sublist 1 end ....  sublist 2 start  ....sublist 2 end\n        #             \n        #            sublist 1 end ........sublist 1 start ... sublist 2 end .........sublist 2 start \n        #           prevstart .next = curend\n        #    1.2    index > leftover  keep it as it is\n        #    \n        #     \n        # case k >= n \n        #      reverse whole list\n        #  for isolated segment\n        #  1 2 3\n        #    k =3 \n        # prev = None\n        # cur = head \n        # for _ in range(k):\n        #    nct = cur.next\n        #    cur.next = prev \n        #    prev = cur\n        #    cur = nxt\n        #  prev = new head \n        #  cur = end\n        # 1 2 3 \n        # prev = None cur =1\n        # nxt = 2 ; 1 -> None \n        # prev = 1, cur = 2\n        # nxt = 3 ; 2 -> 1 -> None\n        # prev = 2 , cur = 3\n        # nxt = None\n        # 3 -> 2 -> 1 ->None\n        # prev = 3\n        # cur = None\n        # stitiching\n        #  before reverseing group save group_prev , group_start \n        # \n        # ---- Phase 1: count nodes ----\n            # length \u2190 count of nodes in the list\n        length = 0\n        node = head\n        while node:\n            length += 1\n            node = node.next\n\n    # # ---- Phase 2: setup ----\n    # create dummy node pointing to head\n    # previous_group_end \u2190 dummy\n        dummy = ListNode(0, head)\n        previous_group_end  = dummy\n\n\n    # ---- Phase 3: process each full group ----\n        for _ in range(length//k):\n             # 3a. locate the end of this group\n            group_end  = previous_group_end \n            for _ in range(k):\n                group_end  = group_end.next\n            \n            # node_after_group \u2190 group_end.next\n            node_after_group  = group_end.next\n            new_next = node_after_group \n            current = previous_group_end.next\n\n            #  # 3b. reverse this group in place\n\n            while current != node_after_group:\n                next_node = current.next\n                current.next = new_next\n                new_next = current\n                current = next_node\n            # 3c. reconnect this group to the previous one\n            old_group_head = previous_group_end.next\n            previous_group_end.next = group_end \n            previous_group_end = old_group_head \n\n\n        return dummy.next\n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0025-reverse-nodes-in-k-group/",
+      "datePublished": "2026-09-11T13:03:28+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

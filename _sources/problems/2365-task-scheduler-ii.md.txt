@@ -1,0 +1,126 @@
+# 2365-task-scheduler-ii
+
+
+Try it on <a href='https://leetcode.com/problems/2365-task-scheduler-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given a <strong>0-indexed</strong> array of positive integers <code>tasks</code>, representing tasks that need to be completed <strong>in order</strong>, where <code>tasks[i]</code> represents the <strong>type</strong> of the <code>i<sup>th</sup></code> task.</p>
+
+<p>You are also given a positive integer <code>space</code>, which represents the <strong>minimum</strong> number of days that must pass <strong>after</strong> the completion of a task before another task of the <strong>same</strong> type can be performed.</p>
+
+<p>Each day, until all tasks have been completed, you must either:</p>
+
+<ul>
+	<li>Complete the next task from <code>tasks</code>, or</li>
+	<li>Take a break.</li>
+</ul>
+
+<p>Return<em> the <strong>minimum</strong> number of days needed to complete all tasks</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> tasks = [1,2,1,2,3,1], space = 3
+<strong>Output:</strong> 9
+<strong>Explanation:</strong>
+One way to complete all tasks in 9 days is as follows:
+Day 1: Complete the 0th task.
+Day 2: Complete the 1st task.
+Day 3: Take a break.
+Day 4: Take a break.
+Day 5: Complete the 2nd task.
+Day 6: Complete the 3rd task.
+Day 7: Take a break.
+Day 8: Complete the 4th task.
+Day 9: Complete the 5th task.
+It can be shown that the tasks cannot be completed in less than 9 days.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> tasks = [5,8,8,5], space = 2
+<strong>Output:</strong> 6
+<strong>Explanation:</strong>
+One way to complete all tasks in 6 days is as follows:
+Day 1: Complete the 0th task.
+Day 2: Complete the 1st task.
+Day 3: Take a break.
+Day 4: Take a break.
+Day 5: Complete the 2nd task.
+Day 6: Complete the 3rd task.
+It can be shown that the tasks cannot be completed in less than 6 days.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= tasks.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= tasks[i] &lt;= 10<sup>9</sup></code></li>
+	<li><code>1 &lt;= space &lt;= tasks.length</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def taskSchedulerII(self, tasks: List[int], space: int) -> int:
+        # tasks = [1,2,1,2,3,1], space = 3
+        #  1  2 _ _ 1 2 _ 3 1
+        # 
+        #  
+        last_done = {}
+        current_day = 0
+        
+        for task in tasks:
+            current_day += 1
+            if task in last_done:
+                next_available_day = last_done[task] + space + 1
+                current_day = max(current_day, next_available_day)
+            
+            last_done[task] = current_day
+            
+        return current_day
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "2365. Task Scheduler II",
+    "text": "You are given a 0-indexed array of positive integers tasks, representing tasks that need to be completed in order, where tasks[i] represents the type of the ith task.\nYou are also given a positive integer space, which represents the minimum number of days that must pass after the completion of a task before another task of the same type can be performed.\nEach day, until all tasks have been completed, you must either:\n\nComplete the next task from tasks, or\nTake a break.\n\nReturn the minimum number of days needed to complete all tasks.\n\u00a0\nExample 1:\n\nInput: tasks = [1,2,1,2,3,1], space = 3\nOutput: 9\nExplanation:\nOne way to complete all tasks in 9 days is as follows:\nDay 1: Complete the 0th task.\nDay 2: Complete the 1st task.\nDay 3: Take a break.\nDay 4: Take a break.\nDay 5: Complete the 2nd task.\nDay 6: Complete the 3rd task.\nDay 7: Take a break.\nDay 8: Complete the 4th task.\nDay 9: Complete the 5th task.\nIt can be shown that the tasks cannot be completed in less than 9 days.\n\nExample 2:\n\nInput: tasks = [5,8,8,5], space = 2\nOutput: 6\nExplanation:\nOne way to complete all tasks in 6 days is as follows:\nDay 1: Complete the 0th task.\nDay 2: Complete the 1st task.\nDay 3: Take a break.\nDay 4: Take a break.\nDay 5: Complete the 2nd task.\nDay 6: Complete the 3rd task.\nIt can be shown that the tasks cannot be completed in less than 6 days.\n\n\u00a0\nConstraints:\n\n1 <= tasks.length <= 105\n1 <= tasks[i] <= 109\n1 <= space <= tasks.length\n\n",
+    "url": "https://leetcode.com/problems/2365-task-scheduler-ii",
+    "answerCount": 1,
+    "datePublished": "2026-09-01T12:10:13+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def taskSchedulerII(self, tasks: List[int], space: int) -> int:\n        # tasks = [1,2,1,2,3,1], space = 3\n        #  1  2 _ _ 1 2 _ 3 1\n        # \n        #  \n        last_done = {}\n        current_day = 0\n        \n        for task in tasks:\n            current_day += 1\n            if task in last_done:\n                next_available_day = last_done[task] + space + 1\n                current_day = max(current_day, next_available_day)\n            \n            last_done[task] = current_day\n            \n        return current_day",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/2365-task-scheduler-ii/",
+      "datePublished": "2026-09-01T12:10:13+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
