@@ -1,0 +1,97 @@
+# 0082-remove-duplicates-from-sorted-list-ii
+
+
+Try it on <a href='https://leetcode.com/problems/0082-remove-duplicates-from-sorted-list-ii'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given the <code>head</code> of a <strong>sorted</strong> linked list.</p>
+
+<p>Delete all nodes that have <strong>duplicate</strong> numbers, leaving only <strong>distinct</strong> numbers from the original list.</p>
+
+<p>Return the linked list <strong>sorted</strong> as well.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg" style="width: 500px; height: 142px;" />
+<pre>
+<strong>Input:</strong> head = [1,2,3,3,4,4,5]
+<strong>Output:</strong> [1,2,5]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist2.jpg" style="width: 500px; height: 205px;" />
+<pre>
+<strong>Input:</strong> head = [1,1,1,2,3]
+<strong>Output:</strong> [2,3]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is in the range <code>[0, 300]</code>.</li>
+	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+	<li>The list is guaranteed to be <strong>sorted</strong> in ascending order.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def deleteDuplicates(self, head: ListNode | None) -> ListNode | None:
+        # 
+        sentinel = ListNode(0)
+        sentinel.next = head
+        cur = head
+        prev = sentinel
+        while cur:
+            if cur.next and cur.val == cur.next.val:
+                while cur.next and  cur.val == cur.next.val:
+                     cur  =cur.next
+                prev.next = cur.next
+            else:
+                prev = prev.next
+            cur = cur.next
+        return sentinel.next
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "82. Remove Duplicates from Sorted List II",
+    "text": "You are given the head of a sorted linked list.\nDelete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.\nReturn the linked list sorted as well.\n\u00a0\nExample 1:\n\n\nInput: head = [1,2,3,3,4,4,5]\nOutput: [1,2,5]\n\nExample 2:\n\n\nInput: head = [1,1,1,2,3]\nOutput: [2,3]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [0, 300].\n-100 <= Node.val <= 100\nThe list is guaranteed to be sorted in ascending order.\n\n",
+    "url": "https://leetcode.com/problems/0082-remove-duplicates-from-sorted-list-ii",
+    "answerCount": 1,
+    "datePublished": "2026-09-17T17:22:17+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\nclass Solution:\n    def deleteDuplicates(self, head: ListNode | None) -> ListNode | None:\n        # \n        sentinel = ListNode(0)\n        sentinel.next = head\n        cur = head\n        prev = sentinel\n        while cur:\n            if cur.next and cur.val == cur.next.val:\n                while cur.next and  cur.val == cur.next.val:\n                     cur  =cur.next\n                prev.next = cur.next\n            else:\n                prev = prev.next\n            cur = cur.next\n        return sentinel.next",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0082-remove-duplicates-from-sorted-list-ii/",
+      "datePublished": "2026-09-17T17:22:17+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

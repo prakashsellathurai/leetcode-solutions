@@ -1,0 +1,132 @@
+# 0019-remove-nth-node-from-end-of-list
+
+
+Try it on <a href='https://leetcode.com/problems/0019-remove-nth-node-from-end-of-list'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>head</code> of a linked list, remove the <code>n<sup>th</sup></code> node from the end of the list and return its head.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg" style="width: 542px; height: 222px;" />
+<pre>
+<strong>Input:</strong> head = [1,2,3,4,5], n = 2
+<strong>Output:</strong> [1,2,3,5]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> head = [1], n = 1
+<strong>Output:</strong> []
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> head = [1,2], n = 1
+<strong>Output:</strong> [1]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is <code>sz</code>.</li>
+	<li><code>1 &lt;= sz &lt;= 30</code></li>
+	<li><code>0 &lt;= Node.val &lt;= 100</code></li>
+	<li><code>1 &lt;= n &lt;= sz</code></li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong> Could you do this in one pass?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: ListNode | None, n: int) -> ListNode | None:
+        # 1 2 3 4 5 
+        # k =2 
+        #  n- k - 1 = 5 - 2 = 3
+        # i = 0 1 2 
+        #  
+        return self.onepass(head,n)
+    def twopass(self, head: ListNode | None, n: int) -> ListNode | None:
+        total = 0
+        cur= head 
+        while cur:
+            cur = cur.next
+            total += 1
+        if total == n:
+            return head.next
+
+        required = total - n - 1
+
+        
+        cur= head
+        for _ in range(required):
+            if cur.next:
+                cur = cur.next
+        if cur.next:
+            cur.next =  cur.next.next
+        return head
+
+    def onepass(self, head: ListNode | None, n: int) -> ListNode | None:
+        sentinel = ListNode(0)
+
+        sentinel.next = head
+        fast = sentinel
+        slow = sentinel
+
+        for i in range(n + 1):
+            fast = fast.next
+        
+        while fast is not None:
+            slow = slow.next
+            fast = fast.next
+        slow.next = slow.next.next
+        return sentinel.next
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "19. Remove Nth Node From End of List",
+    "text": "Given the head of a linked list, remove the nth node from the end of the list and return its head.\n\u00a0\nExample 1:\n\n\nInput: head = [1,2,3,4,5], n = 2\nOutput: [1,2,3,5]\n\nExample 2:\n\nInput: head = [1], n = 1\nOutput: []\n\nExample 3:\n\nInput: head = [1,2], n = 1\nOutput: [1]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is sz.\n1 <= sz <= 30\n0 <= Node.val <= 100\n1 <= n <= sz\n\n\u00a0\nFollow up: Could you do this in one pass?\n",
+    "url": "https://leetcode.com/problems/0019-remove-nth-node-from-end-of-list",
+    "answerCount": 1,
+    "datePublished": "2026-09-17T17:08:27+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\nclass ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\nclass Solution:\n    def removeNthFromEnd(self, head: ListNode | None, n: int) -> ListNode | None:\n        # 1 2 3 4 5 \n        # k =2 \n        #  n- k - 1 = 5 - 2 = 3\n        # i = 0 1 2 \n        #  \n        return self.onepass(head,n)\n    def twopass(self, head: ListNode | None, n: int) -> ListNode | None:\n        total = 0\n        cur= head \n        while cur:\n            cur = cur.next\n            total += 1\n        if total == n:\n            return head.next\n\n        required = total - n - 1\n\n        \n        cur= head\n        for _ in range(required):\n            if cur.next:\n                cur = cur.next\n        if cur.next:\n            cur.next =  cur.next.next\n        return head\n\n    def onepass(self, head: ListNode | None, n: int) -> ListNode | None:\n        sentinel = ListNode(0)\n\n        sentinel.next = head\n        fast = sentinel\n        slow = sentinel\n\n        for i in range(n + 1):\n            fast = fast.next\n        \n        while fast is not None:\n            slow = slow.next\n            fast = fast.next\n        slow.next = slow.next.next\n        return sentinel.next\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0019-remove-nth-node-from-end-of-list/",
+      "datePublished": "2026-09-17T17:08:27+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

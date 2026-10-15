@@ -1,0 +1,109 @@
+# 0061-rotate-list
+
+
+Try it on <a href='https://leetcode.com/problems/0061-rotate-list'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>head</code> of a linked&nbsp;list, rotate the list to the right by <code>k</code> places.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/11/13/rotate1.jpg" style="width: 450px; height: 191px;" />
+<pre>
+<strong>Input:</strong> head = [1,2,3,4,5], k = 2
+<strong>Output:</strong> [4,5,1,2,3]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/11/13/roate2.jpg" style="width: 305px; height: 350px;" />
+<pre>
+<strong>Input:</strong> head = [0,1,2], k = 4
+<strong>Output:</strong> [2,0,1]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is in the range <code>[0, 500]</code>.</li>
+	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+	<li><code>0 &lt;= k &lt;= 2 * 10<sup>9</sup></code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: ListNode | None, k: int) -> ListNode | None:
+        # 1 2 3 4 5
+        # 5 -> 1 ... 4
+        # 4..5 -> 1 ..3 
+        # n -> length of linkedlist 5
+        # k = 2
+        # n- k = 3
+        #  00....n-k  n-k + 1 ...n
+        # 1 2 3 4 5
+        # 1 2 3
+        # new head => n-k+1 
+        #  1......n
+        #  0......n-1
+        #  0....n-k-1 
+        if not head or k == 0:
+            return head
+        n,tail = 1, head
+        while tail.next:
+            tail = tail.next
+            n+=1
+        k %= n
+        tail.next = head
+        cur= head
+        for _ in range(n-k - 1):
+            cur = cur.next
+        newhead = cur.next
+        cur.next  = None
+        return newhead
+        
+
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "61. Rotate List",
+    "text": "Given the head of a linked\u00a0list, rotate the list to the right by k places.\n\u00a0\nExample 1:\n\n\nInput: head = [1,2,3,4,5], k = 2\nOutput: [4,5,1,2,3]\n\nExample 2:\n\n\nInput: head = [0,1,2], k = 4\nOutput: [2,0,1]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [0, 500].\n-100 <= Node.val <= 100\n0 <= k <= 2 * 109\n\n",
+    "url": "https://leetcode.com/problems/0061-rotate-list",
+    "answerCount": 1,
+    "datePublished": "2026-09-30T20:45:14+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def rotateRight(self, head: ListNode | None, k: int) -> ListNode | None:\n        # 1 2 3 4 5\n        # 5 -> 1 ... 4\n        # 4..5 -> 1 ..3 \n        # n -> length of linkedlist 5\n        # k = 2\n        # n- k = 3\n        #  00....n-k  n-k + 1 ...n\n        # 1 2 3 4 5\n        # 1 2 3\n        # new head => n-k+1 \n        #  1......n\n        #  0......n-1\n        #  0....n-k-1 \n        if not head or k == 0:\n            return head\n        n,tail = 1, head\n        while tail.next:\n            tail = tail.next\n            n+=1\n        k %= n\n        tail.next = head\n        cur= head\n        for _ in range(n-k - 1):\n            cur = cur.next\n        newhead = cur.next\n        cur.next  = None\n        return newhead\n        \n\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0061-rotate-list/",
+      "datePublished": "2026-09-30T20:45:14+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
