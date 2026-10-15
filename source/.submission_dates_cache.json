@@ -429,5 +429,8 @@
   "0452-minimum-number-of-arrows-to-burst-balloons": "2026-07-20T11:23:43+05:30",
   "0621-task-scheduler": "2026-07-29T19:18:15+05:30",
   "0025-reverse-nodes-in-k-group": "2026-09-11T13:03:28+05:30",
-  "2365-task-scheduler-ii": "2026-09-01T12:10:13+05:30"
+  "2365-task-scheduler-ii": "2026-09-01T12:10:13+05:30",
+  "0019-remove-nth-node-from-end-of-list": "2026-09-17T17:08:27+05:30",
+  "0061-rotate-list": "2026-09-30T20:45:14+05:30",
+  "0082-remove-duplicates-from-sorted-list-ii": "2026-09-17T17:22:17+05:30"
 }
