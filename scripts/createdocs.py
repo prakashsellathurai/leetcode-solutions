@@ -177,6 +177,13 @@ def generate_dryrun(problem: dict) -> str | None:
 
         generate_html_animation(results, source_lines, output_path)
 
+        canonical_url = f"https://prakashsellathurai.com/leetcode-solutions/problems/{slug}/"
+        with open(output_path, 'r') as f:
+            html = f.read()
+        html = html.replace('<head>', f'<head>\n  <link rel="canonical" href="{canonical_url}">')
+        with open(output_path, 'w') as f:
+            f.write(html)
+
         return "dryrun/"
     except Exception:
         return None
