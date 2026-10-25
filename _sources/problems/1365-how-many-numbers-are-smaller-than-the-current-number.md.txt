@@ -50,24 +50,32 @@ For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
 ## Solution(Python)
 ```Python
 class Solution:
-    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
-        return  self.sorting(nums)
-    def sorting(self, nums: List[int]) -> List[int]:
-        res  = []
-        # sort the array using bucket sort
-        bucket = [0] * (max(nums) + 1)
+    def smallerNumbersThanCurrent(self, nums: list[int]) -> list[int]:
+        # nums 8 1 2 2 3
+        # 2 -> 1
+        # x > nums[j]
+        # i -> left .... i...right
+        # greatest_from_left = 0 0 0 0 0
+        #                      8 1 2 2 3 
+        #                      8 > 1
+        #                      0 1 0 0 0
+        #                      2 
+        # greatest_from_right = 0 0 0 0 0
+        # [4,0,1,1,3]
+        # 
+        # 8 1 2 2 3
+        # [0 1 2 1 0 0 0 0 1]
+        # [0 1 3 4 4 4 4 4 5]
+        # since strictly smaller look cum[num-1]
+        n = max(nums) + 1
+        count_sum = [0] * n
         for num in nums:
-            bucket[num] += 1 # [0 1 2 1 0 0 0 0 1]
-        for i in range(1, len(bucket)):
-            bucket[i] += bucket[i-1] # [0 1 3 4 4 4 4 4 5]
-        for num in nums:
-            if num == 0:
-                res.append(0)
-            else:
-                res.append(bucket[num-1])
-        return res
-            
+            count_sum[num] += 1
         
+        for i in range(1, n):
+            count_sum[i] += count_sum[i-1]
+
+        return [0 if num == 0  else count_sum[num-1]  for num in nums] 
 ```
 
 
@@ -94,7 +102,7 @@ class Solution:
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:\n        return  self.sorting(nums)\n    def sorting(self, nums: List[int]) -> List[int]:\n        res  = []\n        # sort the array using bucket sort\n        bucket = [0] * (max(nums) + 1)\n        for num in nums:\n            bucket[num] += 1 # [0 1 2 1 0 0 0 0 1]\n        for i in range(1, len(bucket)):\n            bucket[i] += bucket[i-1] # [0 1 3 4 4 4 4 4 5]\n        for num in nums:\n            if num == 0:\n                res.append(0)\n            else:\n                res.append(bucket[num-1])\n        return res\n            \n        ",
+      "text": "class Solution:\n    def smallerNumbersThanCurrent(self, nums: list[int]) -> list[int]:\n        # nums 8 1 2 2 3\n        # 2 -> 1\n        # x > nums[j]\n        # i -> left .... i...right\n        # greatest_from_left = 0 0 0 0 0\n        #                      8 1 2 2 3 \n        #                      8 > 1\n        #                      0 1 0 0 0\n        #                      2 \n        # greatest_from_right = 0 0 0 0 0\n        # [4,0,1,1,3]\n        # \n        # 8 1 2 2 3\n        # [0 1 2 1 0 0 0 0 1]\n        # [0 1 3 4 4 4 4 4 5]\n        # since strictly smaller look cum[num-1]\n        n = max(nums) + 1\n        count_sum = [0] * n\n        for num in nums:\n            count_sum[num] += 1\n        \n        for i in range(1, n):\n            count_sum[i] += count_sum[i-1]\n\n        return [0 if num == 0  else count_sum[num-1]  for num in nums] ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1365-how-many-numbers-are-smaller-than-the-current-number/",
       "datePublished": "2026-01-06T16:42:57+05:30",
       "upvoteCount": 0,

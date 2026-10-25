@@ -1181,6 +1181,75 @@
   
   
     <li class="md-nav__item">
+      <a href="../0100-same-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0100-<wbr>same-<wbr>tree</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0101-symmetric-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0101-<wbr>symmetric-<wbr>tree</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0104-maximum-depth-of-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0104-<wbr>maximum-<wbr>depth-<wbr>of-<wbr>binary-<wbr>tree</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../0121-best-time-to-buy-and-sell-stock/" class="md-nav__link">
         
   
@@ -1785,6 +1854,29 @@
   
   <span class="md-ellipsis">
     <span>0224-<wbr>basic-<wbr>calculator</span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0226-invert-binary-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>0226-<wbr>invert-<wbr>binary-<wbr>tree</span>
     
   </span>
   
@@ -10327,24 +10419,32 @@ For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
 </div>
 <h2 id="solution-python">Solution(Python)<a class="headerlink" href="#solution-python" title="Link to this heading">¶</a></h2>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">smallerNumbersThanCurrent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="n">res</span>  <span class="o">=</span> <span class="p">[]</span>
-        <span class="c1"># sort the array using bucket sort</span>
-        <span class="n">bucket</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">smallerNumbersThanCurrent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="c1"># nums 8 1 2 2 3</span>
+        <span class="c1"># 2 -&gt; 1</span>
+        <span class="c1"># x &gt; nums[j]</span>
+        <span class="c1"># i -&gt; left .... i...right</span>
+        <span class="c1"># greatest_from_left = 0 0 0 0 0</span>
+        <span class="c1">#                      8 1 2 2 3 </span>
+        <span class="c1">#                      8 &gt; 1</span>
+        <span class="c1">#                      0 1 0 0 0</span>
+        <span class="c1">#                      2 </span>
+        <span class="c1"># greatest_from_right = 0 0 0 0 0</span>
+        <span class="c1"># [4,0,1,1,3]</span>
+        <span class="c1"># </span>
+        <span class="c1"># 8 1 2 2 3</span>
+        <span class="c1"># [0 1 2 1 0 0 0 0 1]</span>
+        <span class="c1"># [0 1 3 4 4 4 4 4 5]</span>
+        <span class="c1"># since strictly smaller look cum[num-1]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">count_sum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
         <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-            <span class="n">bucket</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># [0 1 2 1 0 0 0 0 1]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bucket</span><span class="p">)):</span>
-            <span class="n">bucket</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">bucket</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># [0 1 3 4 4 4 4 4 5]</span>
-        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bucket</span><span class="p">[</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">res</span>
-            
+            <span class="n">count_sum</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">count_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">count_sum</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span>  <span class="k">else</span> <span class="n">count_sum</span><span class="p">[</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span> 
 </code></pre></div>
 </div>
 <h2 id="dry-run">Dry Run<a class="headerlink" href="#dry-run" title="Link to this heading">¶</a></h2>
@@ -10367,7 +10467,7 @@ For nums[4]=3 there exist three smaller numbers than it (1, 2 and 2).
     },
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "class Solution:\n    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:\n        return  self.sorting(nums)\n    def sorting(self, nums: List[int]) -> List[int]:\n        res  = []\n        # sort the array using bucket sort\n        bucket = [0] * (max(nums) + 1)\n        for num in nums:\n            bucket[num] += 1 # [0 1 2 1 0 0 0 0 1]\n        for i in range(1, len(bucket)):\n            bucket[i] += bucket[i-1] # [0 1 3 4 4 4 4 4 5]\n        for num in nums:\n            if num == 0:\n                res.append(0)\n            else:\n                res.append(bucket[num-1])\n        return res\n            \n        ",
+      "text": "class Solution:\n    def smallerNumbersThanCurrent(self, nums: list[int]) -> list[int]:\n        # nums 8 1 2 2 3\n        # 2 -> 1\n        # x > nums[j]\n        # i -> left .... i...right\n        # greatest_from_left = 0 0 0 0 0\n        #                      8 1 2 2 3 \n        #                      8 > 1\n        #                      0 1 0 0 0\n        #                      2 \n        # greatest_from_right = 0 0 0 0 0\n        # [4,0,1,1,3]\n        # \n        # 8 1 2 2 3\n        # [0 1 2 1 0 0 0 0 1]\n        # [0 1 3 4 4 4 4 4 5]\n        # since strictly smaller look cum[num-1]\n        n = max(nums) + 1\n        count_sum = [0] * n\n        for num in nums:\n            count_sum[num] += 1\n        \n        for i in range(1, n):\n            count_sum[i] += count_sum[i-1]\n\n        return [0 if num == 0  else count_sum[num-1]  for num in nums] ",
       "url": "https://prakashsellathurai.com/leetcode-solutions/problems/1365-how-many-numbers-are-smaller-than-the-current-number/",
       "datePublished": "2026-01-06T16:42:57+05:30",
       "upvoteCount": 0,
