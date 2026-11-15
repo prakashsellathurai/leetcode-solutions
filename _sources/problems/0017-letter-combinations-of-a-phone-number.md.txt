@@ -1,0 +1,146 @@
+# 0017-letter-combinations-of-a-phone-number
+
+
+Try it on <a href='https://leetcode.com/problems/0017-letter-combinations-of-a-phone-number'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent. Return the answer in <strong>any order</strong>.</p>
+
+<p>A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
+<img alt="" src="https://assets.leetcode.com/uploads/2022/03/15/1200px-telephone-keypad2svg.png" style="width: 300px; height: 243px;" />
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> digits = &quot;23&quot;
+<strong>Output:</strong> [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> digits = &quot;2&quot;
+<strong>Output:</strong> [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= digits.length &lt;= 4</code></li>
+	<li><code>digits[i]</code> is a digit in the range <code>[&#39;2&#39;, &#39;9&#39;]</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def __init__(self):
+        self.hashTable = {
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz'
+        }
+        self.hashList =  [
+            "abc", 
+            "def", 
+            "ghi", 
+            "jkl",
+            "mno", 
+            "pqrs", 
+            "tuv", 
+            "wxyz"
+        ]
+        
+
+    def letterCombinations(self, digits: str) -> List[str]:
+        return self.dfs(digits)
+   
+    # Time Complexity: O(4^n)
+    # Space Complexity: O(4^n)
+    def bfs(self, digits: str) -> List[str]:
+        n = len(digits)
+        if n == 0:
+            return []
+        res = []
+        queue = deque([""])
+        
+        while queue:
+            s = queue.popleft()
+            
+            if len(s) == n:
+                res.append(s)
+            else:
+                for letter in self.hashList[int(digits[len(s)])]:
+                    queue.append(s+letter)
+        
+        return res
+   
+    # Time Complexity: O(4^n*n)
+    # Space Complexity: O(n)
+    def dfs(self, digits: str) -> List[str]:
+        n = len(digits)
+        if n == 0:
+            return []
+        res = []
+        
+        def backtrack(candidate,i):
+            if len(candidate) == n:
+                res.append("".join(candidate))
+                return
+            letters = self.hashTable[digits[i]]
+            for letter in letters:
+                candidate.append(letter)
+                backtrack(candidate,i+1)
+                candidate.pop()
+        backtrack([],0)
+        return res
+    
+    
+        
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "17. Letter Combinations of a Phone Number",
+    "text": "Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.\nA mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.\n\n\u00a0\nExample 1:\n\nInput: digits = \"23\"\nOutput: [\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]\n\nExample 2:\n\nInput: digits = \"2\"\nOutput: [\"a\",\"b\",\"c\"]\n\n\u00a0\nConstraints:\n\n1 <= digits.length <= 4\ndigits[i] is a digit in the range ['2', '9'].\n\n",
+    "url": "https://leetcode.com/problems/0017-letter-combinations-of-a-phone-number",
+    "answerCount": 1,
+    "datePublished": "2026-11-03T09:39:30+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def __init__(self):\n        self.hashTable = {\n            '2': 'abc',\n            '3': 'def',\n            '4': 'ghi',\n            '5': 'jkl',\n            '6': 'mno',\n            '7': 'pqrs',\n            '8': 'tuv',\n            '9': 'wxyz'\n        }\n        self.hashList =  [\n            \"abc\", \n            \"def\", \n            \"ghi\", \n            \"jkl\",\n            \"mno\", \n            \"pqrs\", \n            \"tuv\", \n            \"wxyz\"\n        ]\n        \n\n    def letterCombinations(self, digits: str) -> List[str]:\n        return self.dfs(digits)\n   \n    # Time Complexity: O(4^n)\n    # Space Complexity: O(4^n)\n    def bfs(self, digits: str) -> List[str]:\n        n = len(digits)\n        if n == 0:\n            return []\n        res = []\n        queue = deque([\"\"])\n        \n        while queue:\n            s = queue.popleft()\n            \n            if len(s) == n:\n                res.append(s)\n            else:\n                for letter in self.hashList[int(digits[len(s)])]:\n                    queue.append(s+letter)\n        \n        return res\n   \n    # Time Complexity: O(4^n*n)\n    # Space Complexity: O(n)\n    def dfs(self, digits: str) -> List[str]:\n        n = len(digits)\n        if n == 0:\n            return []\n        res = []\n        \n        def backtrack(candidate,i):\n            if len(candidate) == n:\n                res.append(\"\".join(candidate))\n                return\n            letters = self.hashTable[digits[i]]\n            for letter in letters:\n                candidate.append(letter)\n                backtrack(candidate,i+1)\n                candidate.pop()\n        backtrack([],0)\n        return res\n    \n    \n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0017-letter-combinations-of-a-phone-number/",
+      "datePublished": "2026-11-03T09:39:30+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

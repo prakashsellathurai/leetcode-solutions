@@ -1,0 +1,122 @@
+# 0105-construct-binary-tree-from-preorder-and-inorder-traversal
+
+
+Try it on <a href='https://leetcode.com/problems/0105-construct-binary-tree-from-preorder-and-inorder-traversal'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return <em>the binary tree</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/tree.jpg" style="width: 277px; height: 302px;" />
+<pre>
+<strong>Input:</strong> preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+<strong>Output:</strong> [3,9,20,null,null,15,7]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> preorder = [-1], inorder = [-1]
+<strong>Output:</strong> [-1]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= preorder.length &lt;= 3000</code></li>
+	<li><code>inorder.length == preorder.length</code></li>
+	<li><code>-3000 &lt;= preorder[i], inorder[i] &lt;= 3000</code></li>
+	<li><code>preorder</code> and <code>inorder</code> consist of <strong>unique</strong> values.</li>
+	<li>Each value of <code>inorder</code> also appears in <code>preorder</code>.</li>
+	<li><code>preorder</code> is <strong>guaranteed</strong> to be the preorder traversal of the tree.</li>
+	<li><code>inorder</code> is <strong>guaranteed</strong> to be the inorder traversal of the tree.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+from typing import List, Optional
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        """
+        Construct a binary tree from preorder and inorder traversal arrays.
+      
+        Args:
+            preorder: List of node values in preorder traversal
+            inorder: List of node values in inorder traversal
+          
+        Returns:
+            Root node of the constructed binary tree
+        """
+      
+        inorder_idx = {val: i for i, val in enumerate(inorder)}
+        pre_idx = 0
+
+        def build(left: int, right: int) -> TreeNode | None:
+            nonlocal pre_idx
+
+            if left > right:
+                return None
+
+            # Preorder: root comes first
+            node_val = preorder[pre_idx]
+            pre_idx += 1
+
+            node = TreeNode(node_val)
+            mid = inorder_idx[node_val]
+
+            # Build left subtree first
+            node.left = build(left, mid - 1)
+            node.right = build(mid + 1, right)
+
+            return node
+
+        return build(0, len(inorder) - 1)
+
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "105. Construct Binary Tree from Preorder and Inorder Traversal",
+    "text": "Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.\n\u00a0\nExample 1:\n\n\nInput: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]\nOutput: [3,9,20,null,null,15,7]\n\nExample 2:\n\nInput: preorder = [-1], inorder = [-1]\nOutput: [-1]\n\n\u00a0\nConstraints:\n\n1 <= preorder.length <= 3000\ninorder.length == preorder.length\n-3000 <= preorder[i], inorder[i] <= 3000\npreorder and inorder consist of unique values.\nEach value of inorder also appears in preorder.\npreorder is guaranteed to be the preorder traversal of the tree.\ninorder is guaranteed to be the inorder traversal of the tree.\n\n",
+    "url": "https://leetcode.com/problems/0105-construct-binary-tree-from-preorder-and-inorder-traversal",
+    "answerCount": 1,
+    "datePublished": "2026-10-26T11:15:20+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\n\nfrom typing import List, Optional\n\nclass Solution:\n    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:\n        \"\"\"\n        Construct a binary tree from preorder and inorder traversal arrays.\n      \n        Args:\n            preorder: List of node values in preorder traversal\n            inorder: List of node values in inorder traversal\n          \n        Returns:\n            Root node of the constructed binary tree\n        \"\"\"\n      \n        inorder_idx = {val: i for i, val in enumerate(inorder)}\n        pre_idx = 0\n\n        def build(left: int, right: int) -> TreeNode | None:\n            nonlocal pre_idx\n\n            if left > right:\n                return None\n\n            # Preorder: root comes first\n            node_val = preorder[pre_idx]\n            pre_idx += 1\n\n            node = TreeNode(node_val)\n            mid = inorder_idx[node_val]\n\n            # Build left subtree first\n            node.left = build(left, mid - 1)\n            node.right = build(mid + 1, right)\n\n            return node\n\n        return build(0, len(inorder) - 1)\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0105-construct-binary-tree-from-preorder-and-inorder-traversal/",
+      "datePublished": "2026-10-26T11:15:20+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

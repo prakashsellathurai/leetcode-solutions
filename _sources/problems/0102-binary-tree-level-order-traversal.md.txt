@@ -1,0 +1,98 @@
+# 0102-binary-tree-level-order-traversal
+
+
+Try it on <a href='https://leetcode.com/problems/0102-binary-tree-level-order-traversal'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>root</code> of a binary tree, return <em>the level order traversal of its nodes&#39; values</em>. (i.e., from left to right, level by level).</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg" style="width: 277px; height: 302px;" />
+<pre>
+<strong>Input:</strong> root = [3,9,20,null,null,15,7]
+<strong>Output:</strong> [[3],[9,20],[15,7]]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> root = [1]
+<strong>Output:</strong> [[1]]
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> root = []
+<strong>Output:</strong> []
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.</li>
+	<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+from collections import defaultdict
+class Solution:
+    def levelOrder(self, root: TreeNode | None) -> list[list[int]]:
+        levels = defaultdict(list)
+        def dfs(node, depth):
+            if not node:
+                return
+            levels[depth].append(node.val)
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+        dfs(root, 0)
+        res = [value for value in levels.values()]
+        return res
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "102. Binary Tree Level Order Traversal",
+    "text": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).\n\u00a0\nExample 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[3],[9,20],[15,7]]\n\nExample 2:\n\nInput: root = [1]\nOutput: [[1]]\n\nExample 3:\n\nInput: root = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 2000].\n-1000 <= Node.val <= 1000\n\n",
+    "url": "https://leetcode.com/problems/0102-binary-tree-level-order-traversal",
+    "answerCount": 1,
+    "datePublished": "2026-10-28T11:54:42+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\nclass TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\nfrom collections import defaultdict\nclass Solution:\n    def levelOrder(self, root: TreeNode | None) -> list[list[int]]:\n        levels = defaultdict(list)\n        def dfs(node, depth):\n            if not node:\n                return\n            levels[depth].append(node.val)\n            dfs(node.left, depth + 1)\n            dfs(node.right, depth + 1)\n        dfs(root, 0)\n        res = [value for value in levels.values()]\n        return res\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0102-binary-tree-level-order-traversal/",
+      "datePublished": "2026-10-28T11:54:42+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

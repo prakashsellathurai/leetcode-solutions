@@ -1,0 +1,136 @@
+# 0127-word-ladder
+
+
+Try it on <a href='https://leetcode.com/problems/0127-word-ladder'>leetcode</a>
+
+## Description
+<div class="description">
+<p>A <strong>transformation sequence</strong> from word <code>beginWord</code> to word <code>endWord</code> using a dictionary <code>wordList</code> is a sequence of words <code>beginWord -&gt; s<sub>1</sub> -&gt; s<sub>2</sub> -&gt; ... -&gt; s<sub>k</sub></code> such that:</p>
+
+<ul>
+	<li>Every adjacent pair of words differs by a single letter.</li>
+	<li>Every <code>s<sub>i</sub></code> for <code>1 &lt;= i &lt;= k</code> is in <code>wordList</code>. Note that <code>beginWord</code> does not need to be in <code>wordList</code>.</li>
+	<li><code>s<sub>k</sub> == endWord</code></li>
+</ul>
+
+<p>Given two words, <code>beginWord</code> and <code>endWord</code>, and a dictionary <code>wordList</code>, return <em>the <strong>number of words</strong> in the <strong>shortest transformation sequence</strong> from</em> <code>beginWord</code> <em>to</em> <code>endWord</code><em>, or </em><code>0</code><em> if no such sequence exists.</em></p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> beginWord = &quot;hit&quot;, endWord = &quot;cog&quot;, wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> One shortest transformation sequence is &quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; cog&quot;, which is 5 words long.
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> beginWord = &quot;hit&quot;, endWord = &quot;cog&quot;, wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> The endWord &quot;cog&quot; is not in wordList, therefore there is no valid transformation sequence.
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= beginWord.length &lt;= 10</code></li>
+	<li><code>endWord.length == beginWord.length</code></li>
+	<li><code>1 &lt;= wordList.length &lt;= 5000</code></li>
+	<li><code>wordList[i].length == beginWord.length</code></li>
+	<li><code>beginWord</code>, <code>endWord</code>, and <code>wordList[i]</code> consist of lowercase English letters.</li>
+	<li><code>beginWord != endWord</code></li>
+	<li>All the words in <code>wordList</code> are <strong>unique</strong>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import deque
+import string
+
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: list[str]) -> int:
+        word_set = set(wordList)
+        if endWord not in word_set:
+            return 0
+        
+        # Initialize queues and visited sets with word and its step distance
+        forward_q = deque([(beginWord, 1)])
+        backward_q = deque([(endWord, 1)])
+        
+        forward_visited = {beginWord: 1}
+        backward_visited = {endWord: 1}
+        
+        alphabet = string.ascii_lowercase
+        
+        while forward_q and backward_q:
+            # Always expand the smaller queue to minimize search space
+            if len(forward_q) <= len(backward_q):
+                q, current_visited, opposite_visited = forward_q, forward_visited, backward_visited
+            else:
+                q, current_visited, opposite_visited = backward_q, backward_visited, forward_visited
+            
+            # Process the ENTIRE current level of the selected queue
+            for _ in range(len(q)):
+                word, transform = q.popleft()
+                
+                for i in range(len(word)):
+                    for c in alphabet:
+                        if c == word[i]:
+                            continue
+                        
+                        transformed = word[:i] + c + word[i+1:]
+                        
+                        # Connection found! The two search fronts met.
+                        if transformed in opposite_visited:
+                            return transform + opposite_visited[transformed]
+                        
+                        if transformed in word_set and transformed not in current_visited:
+                            current_visited[transformed] = transform + 1
+                            q.append((transformed, transform + 1))
+                            
+        return 0
+
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "127. Word Ladder",
+    "text": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that:\n\nEvery adjacent pair of words differs by a single letter.\nEvery si for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.\nsk == endWord\n\nGiven two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.\n\u00a0\nExample 1:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\nOutput: 5\nExplanation: One shortest transformation sequence is \"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> cog\", which is 5 words long.\n\nExample 2:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\nOutput: 0\nExplanation: The endWord \"cog\" is not in wordList, therefore there is no valid transformation sequence.\n\n\u00a0\nConstraints:\n\n1 <= beginWord.length <= 10\nendWord.length == beginWord.length\n1 <= wordList.length <= 5000\nwordList[i].length == beginWord.length\nbeginWord, endWord, and wordList[i] consist of lowercase English letters.\nbeginWord != endWord\nAll the words in wordList are unique.\n\n",
+    "url": "https://leetcode.com/problems/0127-word-ladder",
+    "answerCount": 1,
+    "datePublished": "2026-10-31T16:37:59+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import deque\nimport string\n\nclass Solution:\n    def ladderLength(self, beginWord: str, endWord: str, wordList: list[str]) -> int:\n        word_set = set(wordList)\n        if endWord not in word_set:\n            return 0\n        \n        # Initialize queues and visited sets with word and its step distance\n        forward_q = deque([(beginWord, 1)])\n        backward_q = deque([(endWord, 1)])\n        \n        forward_visited = {beginWord: 1}\n        backward_visited = {endWord: 1}\n        \n        alphabet = string.ascii_lowercase\n        \n        while forward_q and backward_q:\n            # Always expand the smaller queue to minimize search space\n            if len(forward_q) <= len(backward_q):\n                q, current_visited, opposite_visited = forward_q, forward_visited, backward_visited\n            else:\n                q, current_visited, opposite_visited = backward_q, backward_visited, forward_visited\n            \n            # Process the ENTIRE current level of the selected queue\n            for _ in range(len(q)):\n                word, transform = q.popleft()\n                \n                for i in range(len(word)):\n                    for c in alphabet:\n                        if c == word[i]:\n                            continue\n                        \n                        transformed = word[:i] + c + word[i+1:]\n                        \n                        # Connection found! The two search fronts met.\n                        if transformed in opposite_visited:\n                            return transform + opposite_visited[transformed]\n                        \n                        if transformed in word_set and transformed not in current_visited:\n                            current_visited[transformed] = transform + 1\n                            q.append((transformed, transform + 1))\n                            \n        return 0\n",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0127-word-ladder/",
+      "datePublished": "2026-10-31T16:37:59+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

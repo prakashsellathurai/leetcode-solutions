@@ -1,0 +1,109 @@
+# 0103-binary-tree-zigzag-level-order-traversal
+
+
+Try it on <a href='https://leetcode.com/problems/0103-binary-tree-zigzag-level-order-traversal'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>root</code> of a binary tree, return <em>the zigzag level order traversal of its nodes&#39; values</em>. (i.e., from left to right, then right to left for the next level and alternate between).</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg" style="width: 277px; height: 302px;" />
+<pre>
+<strong>Input:</strong> root = [3,9,20,null,null,15,7]
+<strong>Output:</strong> [[3],[20,9],[15,7]]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> root = [1]
+<strong>Output:</strong> [[1]]
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> root = []
+<strong>Output:</strong> []
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[0, 2000]</code>.</li>
+	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+from collections import deque
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode | None) -> list[list[int]]:
+        if not root:
+            return []
+        levels = []
+        q = deque([root])
+        invert = False
+        while q:
+            level = []
+            level_size = len(q)
+
+            for _ in range(level_size):
+                node = q.popleft()
+
+                for child in [node.left, node.right]:
+                    if child:
+                        q.append(child)
+                level.append(node.val)
+            if invert:
+                level.reverse()
+            invert = not invert
+            levels.append(level)
+        return levels
+        
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "103. Binary Tree Zigzag Level Order Traversal",
+    "text": "Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).\n\u00a0\nExample 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[3],[20,9],[15,7]]\n\nExample 2:\n\nInput: root = [1]\nOutput: [[1]]\n\nExample 3:\n\nInput: root = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [0, 2000].\n-100 <= Node.val <= 100\n\n",
+    "url": "https://leetcode.com/problems/0103-binary-tree-zigzag-level-order-traversal",
+    "answerCount": 1,
+    "datePublished": "2026-10-28T12:01:18+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\nfrom collections import deque\nclass TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\nclass Solution:\n    def zigzagLevelOrder(self, root: TreeNode | None) -> list[list[int]]:\n        if not root:\n            return []\n        levels = []\n        q = deque([root])\n        invert = False\n        while q:\n            level = []\n            level_size = len(q)\n\n            for _ in range(level_size):\n                node = q.popleft()\n\n                for child in [node.left, node.right]:\n                    if child:\n                        q.append(child)\n                level.append(node.val)\n            if invert:\n                level.reverse()\n            invert = not invert\n            levels.append(level)\n        return levels\n        ",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0103-binary-tree-zigzag-level-order-traversal/",
+      "datePublished": "2026-10-28T12:01:18+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

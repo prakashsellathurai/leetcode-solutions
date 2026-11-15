@@ -1,0 +1,123 @@
+# 0130-surrounded-regions
+
+
+Try it on <a href='https://leetcode.com/problems/0130-surrounded-regions'>leetcode</a>
+
+## Description
+<div class="description">
+<p>You are given an <code>m x n</code> matrix <code>board</code> containing <strong>letters</strong> <code>&#39;X&#39;</code> and <code>&#39;O&#39;</code>, <strong>capture regions</strong> that are <strong>surrounded</strong>:</p>
+
+<ul>
+	<li><strong>Connect</strong>: A cell is connected to adjacent cells horizontally or vertically.</li>
+	<li><strong>Region</strong>: To form a region <strong>connect every</strong> <code>&#39;O&#39;</code> cell.</li>
+	<li><strong>Surround</strong>: A region is surrounded if none of the <code>&#39;O&#39;</code> cells in that region are on the edge of the board. Such regions are <strong>completely enclosed </strong>by <code>&#39;X&#39;</code> cells.</li>
+</ul>
+
+<p>To capture a <strong>surrounded region</strong>, replace all <code>&#39;O&#39;</code>s with <code>&#39;X&#39;</code>s <strong>in-place</strong> within the original board. You do not need to return anything.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">board = [[&quot;X&quot;,&quot;X&quot;,&quot;X&quot;,&quot;X&quot;],[&quot;X&quot;,&quot;O&quot;,&quot;O&quot;,&quot;X&quot;],[&quot;X&quot;,&quot;X&quot;,&quot;O&quot;,&quot;X&quot;],[&quot;X&quot;,&quot;O&quot;,&quot;X&quot;,&quot;X&quot;]]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[[&quot;X&quot;,&quot;X&quot;,&quot;X&quot;,&quot;X&quot;],[&quot;X&quot;,&quot;X&quot;,&quot;X&quot;,&quot;X&quot;],[&quot;X&quot;,&quot;X&quot;,&quot;X&quot;,&quot;X&quot;],[&quot;X&quot;,&quot;O&quot;,&quot;X&quot;,&quot;X&quot;]]</span></p>
+
+<p><strong>Explanation:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/xogrid.jpg" style="width: 367px; height: 158px;" />
+<p>In the above diagram, the bottom region is not captured because it is on the edge of the board and cannot be surrounded.</p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">board = [[&quot;X&quot;]]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[[&quot;X&quot;]]</span></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>m == board.length</code></li>
+	<li><code>n == board[i].length</code></li>
+	<li><code>1 &lt;= m, n &lt;= 200</code></li>
+	<li><code>board[i][j]</code> is <code>&#39;X&#39;</code> or <code>&#39;O&#39;</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+class Solution:
+    def solve(self, board: list[list[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        m = len(board)
+        n = len(board[0])
+        def dfs(i, j):
+            if  (not(0 <= i <= m-1) or not (0<= j <= n-1) or not board[i][j] == "O"):
+                return
+            board[i][j] = "#"
+            dfs(i+1, j)
+            dfs(i-1, j)
+            dfs(i, j+1)
+            dfs(i,j-1)
+        
+        for i in range(n):
+            if board[0][i] == "O":
+                dfs(0,i)
+            if board[m-1][i] == "O":
+                dfs(m-1, i)
+        for i in range(m):
+            if board[i][0] == "O":
+                dfs(i, 0)
+            if board[i][n-1] == "O":
+                dfs(i, n-1)
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == "O":
+                    board[i][j] = "X"
+                elif board[i][j] == "#":
+                    board[i][j] = "O"
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "130. Surrounded Regions",
+    "text": "You are given an m x n matrix board containing letters 'X' and 'O', capture regions that are surrounded:\n\nConnect: A cell is connected to adjacent cells horizontally or vertically.\nRegion: To form a region connect every 'O' cell.\nSurround: A region is surrounded if none of the 'O' cells in that region are on the edge of the board. Such regions are completely enclosed by 'X' cells.\n\nTo capture a surrounded region, replace all 'O's with 'X's in-place within the original board. You do not need to return anything.\n\u00a0\nExample 1:\n\nInput: board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]\nOutput: [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]\nExplanation:\n\nIn the above diagram, the bottom region is not captured because it is on the edge of the board and cannot be surrounded.\n\nExample 2:\n\nInput: board = [[\"X\"]]\nOutput: [[\"X\"]]\n\n\u00a0\nConstraints:\n\nm == board.length\nn == board[i].length\n1 <= m, n <= 200\nboard[i][j] is 'X' or 'O'.\n\n",
+    "url": "https://leetcode.com/problems/0130-surrounded-regions",
+    "answerCount": 1,
+    "datePublished": "2026-10-29T17:27:51+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "class Solution:\n    def solve(self, board: list[list[str]]) -> None:\n        \"\"\"\n        Do not return anything, modify board in-place instead.\n        \"\"\"\n        m = len(board)\n        n = len(board[0])\n        def dfs(i, j):\n            if  (not(0 <= i <= m-1) or not (0<= j <= n-1) or not board[i][j] == \"O\"):\n                return\n            board[i][j] = \"#\"\n            dfs(i+1, j)\n            dfs(i-1, j)\n            dfs(i, j+1)\n            dfs(i,j-1)\n        \n        for i in range(n):\n            if board[0][i] == \"O\":\n                dfs(0,i)\n            if board[m-1][i] == \"O\":\n                dfs(m-1, i)\n        for i in range(m):\n            if board[i][0] == \"O\":\n                dfs(i, 0)\n            if board[i][n-1] == \"O\":\n                dfs(i, n-1)\n        for i in range(m):\n            for j in range(n):\n                if board[i][j] == \"O\":\n                    board[i][j] = \"X\"\n                elif board[i][j] == \"#\":\n                    board[i][j] = \"O\"",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0130-surrounded-regions/",
+      "datePublished": "2026-10-29T17:27:51+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

@@ -1,0 +1,182 @@
+# 0148-sort-list
+
+
+Try it on <a href='https://leetcode.com/problems/0148-sort-list'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given the <code>head</code> of a linked list, return <em>the list after sorting it in <strong>ascending order</strong></em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg" style="width: 450px; height: 194px;" />
+<pre>
+<strong>Input:</strong> head = [4,2,1,3]
+<strong>Output:</strong> [1,2,3,4]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg" style="width: 550px; height: 184px;" />
+<pre>
+<strong>Input:</strong> head = [-1,5,3,4,0]
+<strong>Output:</strong> [-1,0,3,4,5]
+</pre>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<pre>
+<strong>Input:</strong> head = []
+<strong>Output:</strong> []
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the list is in the range <code>[0, 5 * 10<sup>4</sup>]</code>.</li>
+	<li><code>-10<sup>5</sup> &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong>Follow up:</strong> Can you sort the linked list in <code>O(n logn)</code> time and <code>O(1)</code> memory (i.e. constant space)?</p>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def sortList(self, head: ListNode | None) -> ListNode | None:
+        return self.bottomup(head)
+
+    def mergesort(self, head: ListNode | None) -> ListNode | None:
+        # split
+        # process left and right
+        # merge
+        if not head or not head.next:
+            return head
+        slow = head
+        fast = head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        mid = slow.next
+        slow.next = None
+
+        left = self.sortList(head)
+        right = self.sortList(mid)
+
+        mergedHead = ListNode()
+        cur = mergedHead
+        while left and right:
+            if left.val <= right.val:
+                cur.next = left
+                left = left.next
+            else:
+                cur.next = right
+                right = right.next
+            cur = cur.next
+        
+        cur.next = left or right
+        return mergedHead.next
+
+    def bottomup(self, head: ListNode | None) -> ListNode | None:
+        # get n
+        # start size = 1
+        # size < n size*2 < n
+        #  left cur
+        #  split left,size
+        # cur split right,size
+        # merge eft and right
+        #
+        
+        if not head or not head.next:
+            return head
+
+        n = 0
+
+        cur = head
+        while cur: # 1 -> 2 -> 3  : n= 3  cur = None
+            n += 1 
+            cur = cur.next
+
+        size = 1
+        sortHead = ListNode(0, head)
+        while size < n:
+            tail =  sortHead
+            cur = tail.next
+            while cur:
+                left = cur
+                right = self.split(left, size)
+                cur = self.split(right, size)
+                tail = self.merge(left, right, tail)
+            size *= 2
+
+        return sortHead.next
+
+    def split(self, node, size):
+        cur = node
+        for _ in range(size - 1):
+            if not node:
+                return None
+            node = node.next
+        if not node:
+            return None
+        tail = node.next
+        node.next = None
+        return tail
+
+    def merge(self, left, right, tail):
+        cur = tail
+        while left and right:
+            if left.val <= right.val:
+                cur.next= left
+                left = left.next
+            else:
+                cur.next = right
+                right = right.next
+            cur = cur.next
+        cur.next = left or right
+        while cur.next:
+            cur = cur.next
+        return cur
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "148. Sort List",
+    "text": "Given the head of a linked list, return the list after sorting it in ascending order.\n\u00a0\nExample 1:\n\n\nInput: head = [4,2,1,3]\nOutput: [1,2,3,4]\n\nExample 2:\n\n\nInput: head = [-1,5,3,4,0]\nOutput: [-1,0,3,4,5]\n\nExample 3:\n\nInput: head = []\nOutput: []\n\n\u00a0\nConstraints:\n\nThe number of nodes in the list is in the range [0, 5 * 104].\n-105 <= Node.val <= 105\n\n\u00a0\nFollow up: Can you sort the linked list in O(n logn) time and O(1) memory (i.e. constant space)?\n",
+    "url": "https://leetcode.com/problems/0148-sort-list",
+    "answerCount": 1,
+    "datePublished": "2026-11-12T19:13:10+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def sortList(self, head: ListNode | None) -> ListNode | None:\n        return self.bottomup(head)\n\n    def mergesort(self, head: ListNode | None) -> ListNode | None:\n        # split\n        # process left and right\n        # merge\n        if not head or not head.next:\n            return head\n        slow = head\n        fast = head.next\n        while fast and fast.next:\n            slow = slow.next\n            fast = fast.next.next\n\n        mid = slow.next\n        slow.next = None\n\n        left = self.sortList(head)\n        right = self.sortList(mid)\n\n        mergedHead = ListNode()\n        cur = mergedHead\n        while left and right:\n            if left.val <= right.val:\n                cur.next = left\n                left = left.next\n            else:\n                cur.next = right\n                right = right.next\n            cur = cur.next\n        \n        cur.next = left or right\n        return mergedHead.next\n\n    def bottomup(self, head: ListNode | None) -> ListNode | None:\n        # get n\n        # start size = 1\n        # size < n size*2 < n\n        #  left cur\n        #  split left,size\n        # cur split right,size\n        # merge eft and right\n        #\n        \n        if not head or not head.next:\n            return head\n\n        n = 0\n\n        cur = head\n        while cur: # 1 -> 2 -> 3  : n= 3  cur = None\n            n += 1 \n            cur = cur.next\n\n        size = 1\n        sortHead = ListNode(0, head)\n        while size < n:\n            tail =  sortHead\n            cur = tail.next\n            while cur:\n                left = cur\n                right = self.split(left, size)\n                cur = self.split(right, size)\n                tail = self.merge(left, right, tail)\n            size *= 2\n\n        return sortHead.next\n\n    def split(self, node, size):\n        cur = node\n        for _ in range(size - 1):\n            if not node:\n                return None\n            node = node.next\n        if not node:\n            return None\n        tail = node.next\n        node.next = None\n        return tail\n\n    def merge(self, left, right, tail):\n        cur = tail\n        while left and right:\n            if left.val <= right.val:\n                cur.next= left\n                left = left.next\n            else:\n                cur.next = right\n                right = right.next\n            cur = cur.next\n        cur.next = left or right\n        while cur.next:\n            cur = cur.next\n        return cur",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0148-sort-list/",
+      "datePublished": "2026-11-12T19:13:10+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

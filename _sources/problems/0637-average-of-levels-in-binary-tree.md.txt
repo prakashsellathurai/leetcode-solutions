@@ -1,0 +1,121 @@
+# 0637-average-of-levels-in-binary-tree
+
+
+Try it on <a href='https://leetcode.com/problems/0637-average-of-levels-in-binary-tree'>leetcode</a>
+
+## Description
+<div class="description">
+Given the <code>root</code> of a binary tree, return <em>the average value of the nodes on each level in the form of an array</em>. Answers within <code>10<sup>-5</sup></code> of the actual answer will be accepted.
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/03/09/avg1-tree.jpg" style="width: 277px; height: 302px;" />
+<pre>
+<strong>Input:</strong> root = [3,9,20,null,null,15,7]
+<strong>Output:</strong> [3.00000,14.50000,11.00000]
+Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+Hence return [3, 14.5, 11].
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/03/09/avg2-tree.jpg" style="width: 292px; height: 302px;" />
+<pre>
+<strong>Input:</strong> root = [3,9,20,15,7]
+<strong>Output:</strong> [3.00000,14.50000,11.00000]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>The number of nodes in the tree is in the range <code>[1, 10<sup>4</sup>]</code>.</li>
+	<li><code>-2<sup>31</sup> &lt;= Node.val &lt;= 2<sup>31</sup> - 1</code></li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+from collections import deque,defaultdict
+class Solution:
+    def averageOfLevels(self, root: TreeNode | None) -> list[float]:
+        # runningSUm = 0
+        #  add root.val
+        #   average = running_sum // count_of nodes
+        # level 0 running_sum 0 count_nodes 0
+        #   3 l 1 ; s = 3 c = 1 
+        #    avg = 3.00
+        #  
+        return self.dfs(root)
+
+    def dfs(self, root: TreeNode | None) -> list[float]:
+        levels = defaultdict(lambda: [0.0, 0])
+        def dfs(node, depth):
+            if not node:
+                return 
+            levels[depth][0] += node.val
+            levels[depth][1] += 1
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+        dfs(root, 0)
+        return [levels[i][0] / levels[i][1] for i in range(len(levels))]
+    # TIme xoplexity: O(n)
+    # Sapce Compleity: O(M) N/2
+    def bfs(self, root: TreeNode | None) -> list[float]:
+        res = []
+        q= deque([root])
+
+        while q:
+            level_size = len(q)
+            running_sum = 0
+            for _ in range(level_size):
+                node = q.popleft()
+                running_sum += node.val
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+
+            avg = running_sum/level_size
+            res.append(avg)
+        return res
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "637. Average of Levels in Binary Tree",
+    "text": "Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.\n\u00a0\nExample 1:\n\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [3.00000,14.50000,11.00000]\nExplanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.\nHence return [3, 14.5, 11].\n\nExample 2:\n\n\nInput: root = [3,9,20,15,7]\nOutput: [3.00000,14.50000,11.00000]\n\n\u00a0\nConstraints:\n\nThe number of nodes in the tree is in the range [1, 104].\n-231 <= Node.val <= 231 - 1\n\n",
+    "url": "https://leetcode.com/problems/0637-average-of-levels-in-binary-tree",
+    "answerCount": 1,
+    "datePublished": "2026-10-28T11:32:43+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\nclass TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\nfrom collections import deque,defaultdict\nclass Solution:\n    def averageOfLevels(self, root: TreeNode | None) -> list[float]:\n        # runningSUm = 0\n        #  add root.val\n        #   average = running_sum // count_of nodes\n        # level 0 running_sum 0 count_nodes 0\n        #   3 l 1 ; s = 3 c = 1 \n        #    avg = 3.00\n        #  \n        return self.dfs(root)\n\n    def dfs(self, root: TreeNode | None) -> list[float]:\n        levels = defaultdict(lambda: [0.0, 0])\n        def dfs(node, depth):\n            if not node:\n                return \n            levels[depth][0] += node.val\n            levels[depth][1] += 1\n            dfs(node.left, depth + 1)\n            dfs(node.right, depth + 1)\n        dfs(root, 0)\n        return [levels[i][0] / levels[i][1] for i in range(len(levels))]\n    # TIme xoplexity: O(n)\n    # Sapce Compleity: O(M) N/2\n    def bfs(self, root: TreeNode | None) -> list[float]:\n        res = []\n        q= deque([root])\n\n        while q:\n            level_size = len(q)\n            running_sum = 0\n            for _ in range(level_size):\n                node = q.popleft()\n                running_sum += node.val\n                if node.left:\n                    q.append(node.left)\n                if node.right:\n                    q.append(node.right)\n\n            avg = running_sum/level_size\n            res.append(avg)\n        return res",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0637-average-of-levels-in-binary-tree/",
+      "datePublished": "2026-10-28T11:32:43+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

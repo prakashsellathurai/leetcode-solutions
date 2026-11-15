@@ -1,0 +1,123 @@
+# 0433-minimum-genetic-mutation
+
+
+Try it on <a href='https://leetcode.com/problems/0433-minimum-genetic-mutation'>leetcode</a>
+
+## Description
+<div class="description">
+<p>A gene string can be represented by an 8-character long string, with choices from <code>&#39;A&#39;</code>, <code>&#39;C&#39;</code>, <code>&#39;G&#39;</code>, and <code>&#39;T&#39;</code>.</p>
+
+<p>Suppose we need to investigate a mutation from a gene string <code>startGene</code> to a gene string <code>endGene</code> where one mutation is defined as one single character changed in the gene string.</p>
+
+<ul>
+	<li>For example, <code>&quot;AACCGGTT&quot; --&gt; &quot;AACCGGTA&quot;</code> is one mutation.</li>
+</ul>
+
+<p>There is also a gene bank <code>bank</code> that records all the valid gene mutations. A gene must be in <code>bank</code> to make it a valid gene string.</p>
+
+<p>Given the two gene strings <code>startGene</code> and <code>endGene</code> and the gene bank <code>bank</code>, return <em>the minimum number of mutations needed to mutate from </em><code>startGene</code><em> to </em><code>endGene</code>. If there is no such a mutation, return <code>-1</code>.</p>
+
+<p>Note that the starting point is assumed to be valid, so it might not be included in the bank.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong> startGene = &quot;AACCGGTT&quot;, endGene = &quot;AACCGGTA&quot;, bank = [&quot;AACCGGTA&quot;]
+<strong>Output:</strong> 1
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> startGene = &quot;AACCGGTT&quot;, endGene = &quot;AAACGGTA&quot;, bank = [&quot;AACCGGTA&quot;,&quot;AACCGCTA&quot;,&quot;AAACGGTA&quot;]
+<strong>Output:</strong> 2
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>0 &lt;= bank.length &lt;= 10</code></li>
+	<li><code>startGene.length == endGene.length == bank[i].length == 8</code></li>
+	<li><code>startGene</code>, <code>endGene</code>, and <code>bank[i]</code> consist of only the characters <code>[&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;]</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from collections import deque
+class Solution:
+    def minMutation(self, startGene: str, endGene: str, bank: list[str]) -> int:
+        # gene string 8 charcater acgtacgt
+        # if each string is node and mutations is a edge 
+        # build graph from bank
+        #   how to do build raph 
+        #   only have list of all gene
+        # run bfs to shortest path
+        # sub problem 1 converting to graph
+        #  approach a explicitly compre all pairs 
+        #  approach b build dynamically
+        # take current gene chnage each charcter
+        #  chek cwhether it ecistsoiin bank
+        # if it exists and han't been visited add it to bfs queue
+
+        bank_set = set(bank)
+
+        if endGene not in bank_set:
+            return  -1
+        genes = ['A','C','G','T']
+
+        q = deque([(startGene, 0)])
+        visited = {startGene}
+        while q:
+            gene, mutation = q.popleft()
+            if gene == endGene:
+                return mutation 
+            for i in range(8):
+                for char in genes:
+                    mutated = gene[:i] + char + gene[i+1:]
+                    if mutated in bank_set and mutated not in visited:
+                        visited.add(mutated)
+                        q.append((mutated, mutation + 1))
+        return -1
+```
+
+
+## Dry Run
+
+<iframe src="dryrun/" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;overflow:hidden;" loading="lazy" sandbox="allow-scripts" title="Interactive Dry Run"></iframe>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "433. Minimum Genetic Mutation",
+    "text": "A gene string can be represented by an 8-character long string, with choices from 'A', 'C', 'G', and 'T'.\nSuppose we need to investigate a mutation from a gene string startGene to a gene string endGene where one mutation is defined as one single character changed in the gene string.\n\nFor example, \"AACCGGTT\" --> \"AACCGGTA\" is one mutation.\n\nThere is also a gene bank bank that records all the valid gene mutations. A gene must be in bank to make it a valid gene string.\nGiven the two gene strings startGene and endGene and the gene bank bank, return the minimum number of mutations needed to mutate from startGene to endGene. If there is no such a mutation, return -1.\nNote that the starting point is assumed to be valid, so it might not be included in the bank.\n\u00a0\nExample 1:\n\nInput: startGene = \"AACCGGTT\", endGene = \"AACCGGTA\", bank = [\"AACCGGTA\"]\nOutput: 1\n\nExample 2:\n\nInput: startGene = \"AACCGGTT\", endGene = \"AAACGGTA\", bank = [\"AACCGGTA\",\"AACCGCTA\",\"AAACGGTA\"]\nOutput: 2\n\n\u00a0\nConstraints:\n\n0 <= bank.length <= 10\nstartGene.length == endGene.length == bank[i].length == 8\nstartGene, endGene, and bank[i] consist of only the characters ['A', 'C', 'G', 'T'].\n\n",
+    "url": "https://leetcode.com/problems/0433-minimum-genetic-mutation",
+    "answerCount": 1,
+    "datePublished": "2026-10-31T16:23:19+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from collections import deque\nclass Solution:\n    def minMutation(self, startGene: str, endGene: str, bank: list[str]) -> int:\n        # gene string 8 charcater acgtacgt\n        # if each string is node and mutations is a edge \n        # build graph from bank\n        #   how to do build raph \n        #   only have list of all gene\n        # run bfs to shortest path\n        # sub problem 1 converting to graph\n        #  approach a explicitly compre all pairs \n        #  approach b build dynamically\n        # take current gene chnage each charcter\n        #  chek cwhether it ecistsoiin bank\n        # if it exists and han't been visited add it to bfs queue\n\n        bank_set = set(bank)\n\n        if endGene not in bank_set:\n            return  -1\n        genes = ['A','C','G','T']\n\n        q = deque([(startGene, 0)])\n        visited = {startGene}\n        while q:\n            gene, mutation = q.popleft()\n            if gene == endGene:\n                return mutation \n            for i in range(8):\n                for char in genes:\n                    mutated = gene[:i] + char + gene[i+1:]\n                    if mutated in bank_set and mutated not in visited:\n                        visited.add(mutated)\n                        q.append((mutated, mutation + 1))\n        return -1",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0433-minimum-genetic-mutation/",
+      "datePublished": "2026-10-31T16:23:19+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

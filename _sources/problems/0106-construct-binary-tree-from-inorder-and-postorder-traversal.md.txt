@@ -1,0 +1,112 @@
+# 0106-construct-binary-tree-from-inorder-and-postorder-traversal
+
+
+Try it on <a href='https://leetcode.com/problems/0106-construct-binary-tree-from-inorder-and-postorder-traversal'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Given two integer arrays <code>inorder</code> and <code>postorder</code> where <code>inorder</code> is the inorder traversal of a binary tree and <code>postorder</code> is the postorder traversal of the same tree, construct and return <em>the binary tree</em>.</p>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
+<img alt="" src="https://assets.leetcode.com/uploads/2021/02/19/tree.jpg" style="width: 277px; height: 302px;" />
+<pre>
+<strong>Input:</strong> inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+<strong>Output:</strong> [3,9,20,null,null,15,7]
+</pre>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong> inorder = [-1], postorder = [-1]
+<strong>Output:</strong> [-1]
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= inorder.length &lt;= 3000</code></li>
+	<li><code>postorder.length == inorder.length</code></li>
+	<li><code>-3000 &lt;= inorder[i], postorder[i] &lt;= 3000</code></li>
+	<li><code>inorder</code> and <code>postorder</code> consist of <strong>unique</strong> values.</li>
+	<li>Each value of <code>postorder</code> also appears in <code>inorder</code>.</li>
+	<li><code>inorder</code> is <strong>guaranteed</strong> to be the inorder traversal of the tree.</li>
+	<li><code>postorder</code> is <strong>guaranteed</strong> to be the postorder traversal of the tree.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, inorder: list[int], postorder: list[int]) -> TreeNode | None:
+        # inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+        # inroderStart_val = 3
+        # cur_root_idx = 4
+        # [ left .. is_dx - 1 ] 9
+        # [is_dx + 1 ... n] 15 20 7
+        # Node(3) 
+        #  left -> inroderStart_val = value @ inroderStart_val_idx - 1 9
+        #  right -> cur_root_idx = value @ cur_root_idx  -1  20
+        #  
+        # 
+        inorder_idx = {val: i for i, val in enumerate(inorder)}
+        n = len(postorder)
+        post_idx = n - 1
+        def build(left, right):
+            nonlocal post_idx
+            if left > right:
+                return None
+
+            node_val = postorder[post_idx]
+            post_idx -= 1
+            node = TreeNode(node_val)
+            mid = inorder_idx[node_val]
+            node.right = build(mid + 1, right)
+            node.left =  build(left, mid -1)
+
+            return node
+
+        return build(0, n-1)
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "106. Construct Binary Tree from Inorder and Postorder Traversal",
+    "text": "Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.\n\u00a0\nExample 1:\n\n\nInput: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]\nOutput: [3,9,20,null,null,15,7]\n\nExample 2:\n\nInput: inorder = [-1], postorder = [-1]\nOutput: [-1]\n\n\u00a0\nConstraints:\n\n1 <= inorder.length <= 3000\npostorder.length == inorder.length\n-3000 <= inorder[i], postorder[i] <= 3000\ninorder and postorder consist of unique values.\nEach value of postorder also appears in inorder.\ninorder is guaranteed to be the inorder traversal of the tree.\npostorder is guaranteed to be the postorder traversal of the tree.\n\n",
+    "url": "https://leetcode.com/problems/0106-construct-binary-tree-from-inorder-and-postorder-traversal",
+    "answerCount": 1,
+    "datePublished": "2026-10-26T11:10:20+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def buildTree(self, inorder: list[int], postorder: list[int]) -> TreeNode | None:\n        # inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]\n        # inroderStart_val = 3\n        # cur_root_idx = 4\n        # [ left .. is_dx - 1 ] 9\n        # [is_dx + 1 ... n] 15 20 7\n        # Node(3) \n        #  left -> inroderStart_val = value @ inroderStart_val_idx - 1 9\n        #  right -> cur_root_idx = value @ cur_root_idx  -1  20\n        #  \n        # \n        inorder_idx = {val: i for i, val in enumerate(inorder)}\n        n = len(postorder)\n        post_idx = n - 1\n        def build(left, right):\n            nonlocal post_idx\n            if left > right:\n                return None\n\n            node_val = postorder[post_idx]\n            post_idx -= 1\n            node = TreeNode(node_val)\n            mid = inorder_idx[node_val]\n            node.right = build(mid + 1, right)\n            node.left =  build(left, mid -1)\n\n            return node\n\n        return build(0, n-1)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0106-construct-binary-tree-from-inorder-and-postorder-traversal/",
+      "datePublished": "2026-10-26T11:10:20+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>

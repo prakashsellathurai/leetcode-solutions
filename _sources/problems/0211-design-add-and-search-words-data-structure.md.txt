@@ -1,0 +1,135 @@
+# 0211-design-add-and-search-words-data-structure
+
+
+Try it on <a href='https://leetcode.com/problems/0211-design-add-and-search-words-data-structure'>leetcode</a>
+
+## Description
+<div class="description">
+<p>Design a data structure that supports adding new words and finding if a string matches any previously added string.</p>
+
+<p>Implement the <code>WordDictionary</code> class:</p>
+
+<ul>
+	<li><code>WordDictionary()</code>&nbsp;Initializes the object.</li>
+	<li><code>void addWord(word)</code> Adds <code>word</code> to the data structure, it can be matched later.</li>
+	<li><code>bool search(word)</code>&nbsp;Returns <code>true</code> if there is any string in the data structure that matches <code>word</code>&nbsp;or <code>false</code> otherwise. <code>word</code> may contain dots <code>&#39;.&#39;</code> where dots can be matched with any letter.</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><strong class="example">Example:</strong></p>
+
+<pre>
+<strong>Input</strong>
+[&quot;WordDictionary&quot;,&quot;addWord&quot;,&quot;addWord&quot;,&quot;addWord&quot;,&quot;search&quot;,&quot;search&quot;,&quot;search&quot;,&quot;search&quot;]
+[[],[&quot;bad&quot;],[&quot;dad&quot;],[&quot;mad&quot;],[&quot;pad&quot;],[&quot;bad&quot;],[&quot;.ad&quot;],[&quot;b..&quot;]]
+<strong>Output</strong>
+[null,null,null,null,false,true,true,true]
+
+<strong>Explanation</strong>
+WordDictionary wordDictionary = new WordDictionary();
+wordDictionary.addWord(&quot;bad&quot;);
+wordDictionary.addWord(&quot;dad&quot;);
+wordDictionary.addWord(&quot;mad&quot;);
+wordDictionary.search(&quot;pad&quot;); // return False
+wordDictionary.search(&quot;bad&quot;); // return True
+wordDictionary.search(&quot;.ad&quot;); // return True
+wordDictionary.search(&quot;b..&quot;); // return True
+</pre>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= word.length &lt;= 25</code></li>
+	<li><code>word</code> in <code>addWord</code> consists of lowercase English letters.</li>
+	<li><code>word</code> in <code>search</code> consist of <code>&#39;.&#39;</code> or lowercase English letters.</li>
+	<li>There will be at most <code>2</code> dots in <code>word</code> for <code>search</code> queries.</li>
+	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>addWord</code> and <code>search</code>.</li>
+</ul>
+
+</div>
+
+## Solution(Python)
+```Python
+from dataclasses import dataclass, field
+from typing import Dict
+@dataclass
+class TrieNode:
+    val: str = ""
+    children: Dict[str, 'TrieNode'] = field(default_factory= dict)
+    isEnd: bool = False
+class WordDictionary:
+
+    def __init__(self):
+        self.root = TrieNode()
+
+    def addWord(self, word: str) -> None:
+        cur_node = self.root
+        for ch in word:
+            if ch not in cur_node.children:
+                cur_node.children[ch] = TrieNode(ch)
+            cur_node = cur_node.children[ch]
+        cur_node.isEnd = True
+
+    def search(self, word: str) -> bool: # 
+        return self.dfs(0, self.root, word)
+
+    def dfs(self, index, node, word):
+        cur_node = node
+        for i in range(index, len(word)):
+            ch = word[i]
+            if ch == '.':
+                return self.wildcardmatch(cur_node, i, word)
+            elif ch not in cur_node.children:
+                return False
+            else:
+                cur_node = cur_node.children[ch]
+        return cur_node.isEnd
+
+    def wildcardmatch(self, cur_node, i, word):
+        for child in cur_node.children.values():
+            if self.dfs(i+1, child, word):
+                return True
+        return False
+
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
+```
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "211. Design Add and Search Words Data Structure",
+    "text": "Design a data structure that supports adding new words and finding if a string matches any previously added string.\nImplement the WordDictionary class:\n\nWordDictionary()\u00a0Initializes the object.\nvoid addWord(word) Adds word to the data structure, it can be matched later.\nbool search(word)\u00a0Returns true if there is any string in the data structure that matches word\u00a0or false otherwise. word may contain dots '.' where dots can be matched with any letter.\n\n\u00a0\nExample:\n\nInput\n[\"WordDictionary\",\"addWord\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\",\"search\"]\n[[],[\"bad\"],[\"dad\"],[\"mad\"],[\"pad\"],[\"bad\"],[\".ad\"],[\"b..\"]]\nOutput\n[null,null,null,null,false,true,true,true]\n\nExplanation\nWordDictionary wordDictionary = new WordDictionary();\nwordDictionary.addWord(\"bad\");\nwordDictionary.addWord(\"dad\");\nwordDictionary.addWord(\"mad\");\nwordDictionary.search(\"pad\"); // return False\nwordDictionary.search(\"bad\"); // return True\nwordDictionary.search(\".ad\"); // return True\nwordDictionary.search(\"b..\"); // return True\n\n\u00a0\nConstraints:\n\n1 <= word.length <= 25\nword in addWord consists of lowercase English letters.\nword in search consist of '.' or lowercase English letters.\nThere will be at most 2 dots in word for search queries.\nAt most 104 calls will be made to addWord and search.\n\n",
+    "url": "https://leetcode.com/problems/0211-design-add-and-search-words-data-structure",
+    "answerCount": 1,
+    "datePublished": "2026-11-01T21:01:24+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "LeetCode",
+      "url": "https://leetcode.com"
+    },
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "from dataclasses import dataclass, field\nfrom typing import Dict\n@dataclass\nclass TrieNode:\n    val: str = \"\"\n    children: Dict[str, 'TrieNode'] = field(default_factory= dict)\n    isEnd: bool = False\nclass WordDictionary:\n\n    def __init__(self):\n        self.root = TrieNode()\n\n    def addWord(self, word: str) -> None:\n        cur_node = self.root\n        for ch in word:\n            if ch not in cur_node.children:\n                cur_node.children[ch] = TrieNode(ch)\n            cur_node = cur_node.children[ch]\n        cur_node.isEnd = True\n\n    def search(self, word: str) -> bool: # \n        return self.dfs(0, self.root, word)\n\n    def dfs(self, index, node, word):\n        cur_node = node\n        for i in range(index, len(word)):\n            ch = word[i]\n            if ch == '.':\n                return self.wildcardmatch(cur_node, i, word)\n            elif ch not in cur_node.children:\n                return False\n            else:\n                cur_node = cur_node.children[ch]\n        return cur_node.isEnd\n\n    def wildcardmatch(self, cur_node, i, word):\n        for child in cur_node.children.values():\n            if self.dfs(i+1, child, word):\n                return True\n        return False\n\n\n\n# Your WordDictionary object will be instantiated and called as such:\n# obj = WordDictionary()\n# obj.addWord(word)\n# param_2 = obj.search(word)",
+      "url": "https://prakashsellathurai.com/leetcode-solutions/problems/0211-design-add-and-search-words-data-structure/",
+      "datePublished": "2026-11-01T21:01:24+05:30",
+      "upvoteCount": 0,
+      "author": {
+        "@type": "Person",
+        "name": "Prakash Sellathurai",
+        "url": "https://github.com/prakashsellathurai"
+      }
+    }
+  }
+}
+</script>
